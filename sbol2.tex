@@ -46,6 +46,36 @@
 
 \lstdefinestyle{latex}{language=mylatex}
 
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor} 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{light-gray}{gray}{0.97}
+\lstdefinelanguage{sbol}
+    {morekeywords={xmlns:sbol,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection },
+     basicstyle=\fontsize{7}{9}\selectfont\ttfamily,
+     backgroundcolor=\color{light-gray},
+     keywordstyle=\color{blue},
+     commentstyle=\color{gray},
+     stringstyle=\color{dkgreen},
+     tabsize=2,
+     showspaces=false,
+     showstringspaces=false,
+     breaklines=true,                           % wrap text
+     sensitive=true,                            % keywords are case sensitive
+     %morecomment=[l][commentstyle]{\#},         % comment format
+     morestring=[b]",                           % string format
+     alsoletter=:
+}
+
+\newcommand{\lstsetsbol}{
+ \lstset{language=sbol,
+        tabsize=2
+ }
+}
+
 % -----------------------------------------------------------------------------
 % Start of document
 % -----------------------------------------------------------------------------
@@ -100,6 +130,24 @@ This is some test text.
 % -----------------------------------------------------------------------------
 \section{SBOL Data Model}
 % -----------------------------------------------------------------------------
+In this section we describe the major entities of an SBOL document and the relationships between these entities. Complete SBOL examples and best practices when using SBOL can be found in Section \ref{sec:examples} and Section \ref{sec:bestpractices} respectively. 
+
+
+\subsection {SBOL Document}
+Each SBOL document is also a valid RDF/XML document and starts with an XML declaration with the XML version set to "1.0". The top most rdf:RDF XML element includes the SBOL namespace declaration, as shown in the example below. This namespace is used to identify SBOL defined entities and their properties.
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
+...
+</rdf:RDF>
+\end{lstlisting}
+
+An SBOL document can also include custom namespace declarations which are used to embed application specific data as explained in section \ref{sec:annotations}.
+
+
+\subsection {Identified}
 
 \begin{figure}[h]
 \begin{center}
@@ -109,16 +157,36 @@ This is some test text.
 \end{center}
 \end{figure}
 
+SBOL-defined classes are all directly or indirectly derived from the Identified abstract class. This inheritance allows SBOL objects to be identified using unique URIs that may refer to relative locations within an SBOL document or permanent URLs from the World Wide Web. This class includes the following properties: \verb|identity|, \verb|persistentIdentity|, \verb|version| and \verb|timeStamp| (\ref{uml:identified_documented_annotation}).
+%TODO: Is there any example SBOL entity that does not derive from Identified?
 
-\subsection{The Identified, Documented, and TopLevel Base Classes}
+\subsubsection{The \texttt{identity} property}
+This property is required in all \texttt{Identified} objects and has a datatype of \texttt{URI}. As before in SBOL Version 1.1, this \texttt{URI} serves to uniquely identify a SBOL object. The \texttt{identity} attribute can be used to point to other objects from the same SBOL document or resources on the Web. Although all SBOL-defined properties are controlled using the SBOL namespace, this property is represented using the \texttt{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about} term (see \ref{ser:Collection}).
 
-The Identified and Documented classes separate out data fields that are common to many classes in the SBOL data model. Nearly every other SBOL class inherits from the Identified class, which has five data fields. The first data field, “identity,” is a URI. As before in SBOL Version 1.1, this URI serves to uniquely identify a SBOL object across the World Wide Web. 
+\subsubsection{The \texttt{persistentIdentity} property}
+The \texttt{persistentIdentity} property is optional and also has a datatype of \texttt{URI}. This property is used to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI). This persistent URI is ideally used to return the most up-to-date version of a SBOL object.
 
-The next three data fields enable more sophisticated versioning of SBOL objects. Currently, if a developer wishes to change a SBOL object that has been published to the Web, then as a best practice they should create a copy of the SBOL object that incorporates the change, but has a new URI. This practice, however, does not inherently involve a standardized declaration that the second object is a version of the first. Consequently, the ``persistentIdentity'', ``version'', and ``timeStamp'' data fields have been created to provide developers with the means to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI) and label these objects with version Strings and times of creation.
+\subsubsection{The \texttt{version} property}
+This property has a datatype of \texttt{String} and is used along with the persistentIdentity property to indicate the current version of an SBOL object.
 
-The Documented class extends Identified with three additional data fields: ``displayId'', ``name'', and ``description''. The contents of these data fields are identical to those of the same name on a DnaComponent object in SBOL Version 1.1. In addition, displayId is now an optional field. If a Documented object lacks a displayId, it is expected that software tools will instead display the object's name or identity as a last resort.
+\subsubsection{The \texttt{timeStamp} property}
+This property has a datatype of \texttt{TimeStamp} and is used to indicate the creation time of a SBOL object.
 
-\begin{figure}[h]
+
+\subsection {Documented}
+The Documented abstract class in SBOL represents objects that can be decorated with human-readable properties, such as name and description. This class extends \texttt{Identified} with three additional data properties: \texttt{displayId}, \texttt{name}, and \texttt{description}. 
+
+\subsubsection{The \texttt{displayId} property}
+An optional display ID, with a data type of \texttt{String}. It is intended to be used when visualising SBOL objects.
+
+\subsubsection{The \texttt{name} property}
+An optional, human readable name property, with a data type of \texttt{String}. If a \text{Documented} object lacks a \texttt{displayId}, it is expected that software tools will instead display the entity's texttt{name} or texttt{identity} as a last resort.
+
+\subsubsection{The \texttt{description} property}
+An optional, free text description property with the data type of \texttt{String}.
+
+
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[width=0.75\textwidth]{uml/toplevel_collection}
 \caption[]{TopLevel class}
@@ -126,9 +194,30 @@ The Documented class extends Identified with three additional data fields: ``dis
 \end{center}
 \end{figure}
 
-TopLevel is a class that is extended by any Documented object that can be found at the top level of a SBOL file, that is any SBOL object that is not nested inside another object when written to a file. Instead of nesting, composite TopLevel objects link to their subordinate TopLevel objects via URIs when written to a file. For example, a composite Component object A would link to its sub-Component object B using B’s URI.
 
-The first TopLevel class presented in this report is the Collection class, which groups together TopLevel objects that have something in common. For example, a Collection object could be the result of a query to find all Component objects that function as promoters or all Module objects that function as inverters in a given repository. 
+\subsection {TopLevel}
+TopLevel is an abstract class that is extended by any Documented object that can be found at the top level of a SBOL file, that is any SBOL object that is not nested inside another object when written to a file. Instead of nesting, composite TopLevel objects link to their subordinate TopLevel objects via URIs when written to a file. For example, a composite Component object A would link to its sub-Component object B using B’s URI.
+
+
+\subsection {Collection}
+The first TopLevel class presented in this report is the Collection class, which groups together TopLevel objects that have something in common. For example, a Collection object could be the result of a query to find all Component objects that function as promoters or all Module objects that function as inverters in a given repository. An example below shows the serialisation of a Collection object. 
+
+\begin{figure} [ht]
+\lstsetsbol
+\begin{lstlisting}
+  <sbol:Collection rdf:about="http://sbols.org/v2#col1">
+    <sbol:timeStamp>2015-02-16 16:37:54.381</sbol:timeStamp>
+    <sbol:displayId>col1</sbol:displayId>
+    <sbol:name>Collection 1</sbol:name>
+    <sbol:description>A colleciton of DNA components</sbol:description>
+    <sbol:member rdf:resource="http://sbols.org/v2#com2"/>
+    <sbol:member rdf:resource="http://sbols.org/v2#com1"/>
+    ...
+</sbol:Collection>
+\end{lstlisting}
+\label{ser:Collection}
+\end{figure}
+
 
 \begin{figure}[h]
 \begin{center}
@@ -297,6 +386,7 @@ The MapsTo class serves as a means of linking between Component objects (both St
 In addition to specifying a link, each MapsTo object must also specify a “refinement” relationship between its local and remote Components. Under this data model, there are four types of refinement: “verifyIdentical” requires that the Component objects link to the same ComponentDefinition object, “useLocal” indicates that the local Component object overrides the remote Component object, “useRemote” indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
 
 \subsection{Application Specific Data - Annotations}
+\label{sec:annotations}
 SBOL allows embedding application specific data that are not captured by the SBOL standard. Such data are optional, can be computationally generated and exchanged via SBOL documents without getting lost. These custom data are stored in the form of annotations, providing informative metadata about entities in an SBOL document.
 
 Each Identified object may have a number of annotations in the form of name/value property pairs. Property names are specified by qualified names as IRIs, each formed of a namespace and a local name. Values can be IRIs or literals (for example, string, integer, double, boolean) or custom Identity entities initialized with application specific types. These custom Identity entities can further be annotated with the scheme described here. These custom entities are either serialized within an SBOL entity being annotated, or referenced using an IRI annotation and embedded within the the annotated entity's parent. 
@@ -323,6 +413,7 @@ SBOL documents can also be annotated at the top level. SBOL's GenericTopLevel is
 
 % -----------------------------------------------------------------------------
 \section{Examples of Data Model}
+\label{sec:examples}
 % -----------------------------------------------------------------------------
 
 
@@ -333,7 +424,10 @@ SBOL documents can also be annotated at the top level. SBOL's GenericTopLevel is
 
 % -----------------------------------------------------------------------------
 \section{Best Practices}
+\label{sec:bestpractices}
 % -----------------------------------------------------------------------------
+Currently, if a developer wishes to change a SBOL object that has been published to the Web, then as a best practice they should create a copy of the SBOL object that incorporates the change, but has a new URI. This practice, however, does not inherently involve a standardized declaration that the second object is a version of the first. Consequently, the ``persistentIdentity'', ``version'', and ``timeStamp'' data fields have been created to provide developers with the means to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI) and label these objects with version Strings and times of creation.
+
 
 
 
