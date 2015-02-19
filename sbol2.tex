@@ -238,21 +238,6 @@ An optional, free text description property with the data type of \external{Stri
 
 
 
-\subsection{Sequence}
-\label{sec:Sequence}
-The Sequence class is used to encode the primary structure of a ComponentDefinition object using a String of characters. Sequence objects identify their type of encoding with a URI. For example, a Sequence object that encodes a DNA sequence would have an IUPAC DNA encoding, while a Sequence object that encodes the chemical structure of glucose might have a simplified molecular-input line-entry system (SMILES) encoding. 
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/sequence}
-\caption[]{Sequence class}
-\label{uml:sequence}
-\end{center}
-\end{figure}
-
-
-
-
 \subsection{ComponentDefinition}
 \label{sec:ComponentDefinition}
 The proposed Version 2.0 data model generalizes the DnaComponent class of SBOL Version 1.1 to a Component class in order to support an increased range of structural representation. Components can represent genetic components such as DNA, but also RNA and proteins which were unrepresented in Version 1.1.  Additionally, the generalized Component class can even represent non-genetic components, such as non-biological polymers, small molecules, molecular complexes, and even light.
@@ -359,6 +344,57 @@ Composition of the structural layer of SBOL designs is accomplished using Struct
 Composition of the functional layer of SBOL designs, on the other hand, is accomplished using FunctionalComponent objects. Each FunctionalComponent object is owned by a Module object and serves as an explicit usage of a ComponentInstance object for the purpose of fulfilling some function. In addition, each FunctionalInstantiation must specify via the “direction” field whether it serves as an  input, output, both, or neither for its parent Module object. 
 
 
+
+
+\subsection{Sequence}
+\label{sec:Sequence}
+The \sbol{Sequence} class is used to encode the primary structure of a \sbol{ComponentDefinition} object and the encoding used to capture this information.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/sequence}
+\caption[]{Sequence class}
+\label{uml:sequence}
+\end{center}
+\end{figure}
+
+
+\subsubsection{The \sbolheading{elements} property}
+\label{sec:elements}
+Required. A \external{String} of characters that represent the constituents of biological molecule, for example   nucleic acid symbols for DNA molecules. 
+
+\subsubsection{The \sbolheading{encoding} property}
+\label{sec:encoding}
+Required. \sbol{Sequence} objects identify their type of encoding with a \external{URI}. For example, a \sbol{Sequence} object that encodes a DNA sequence would have an \external{IUPAC DNA} encoding, while a \sbol{Sequence} object that encodes the chemical structure of glucose might have a \external{simplified molecular-input line-entry system (SMILES)} encoding (\ref{tbl:sequence_encodings}).
+
+%A Summary of letters for nucleic acids and aminoacids
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{ComponentDefinition Type} & \textbf{Encoding} \\
+    \midrule
+    DnaRegion,RnaRegion  & \url{http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html}\\
+    Protein		 & \url{http://www.chem.qmul.ac.uk/iupac/AminoAcid/}\\
+    SmallMolecule    & \url{http://www.opensmiles.org/opensmiles.html}\\
+    \bottomrule
+  \end{edtable}
+  \caption{URIs for the encoding property and the corresponding ComponentDefiniton types, which are BioPAX terms.}
+  \label{tbl:sequence_encodings}
+\end{table}
+
+
+The example below shows the serialization of a \sbol{Sequence} object for a promoter. Nucleotide sequences are represented with the \sbol{elements} property and the encoding is serialized as a URI resource. 
+
+\begin{figure} [ht]
+\lstsetsbol
+\begin{lstlisting}
+  <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_J23119:Design">
+    <sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+\end{lstlisting}
+\label{ser:sequence}
+\end{figure}
 
 
 \subsection{ModuleDefinition}
