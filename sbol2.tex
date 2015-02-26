@@ -55,7 +55,7 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{light-gray}{gray}{0.97}
 \lstdefinelanguage{sbol}
-    {morekeywords={xmlns:sbol,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type, sbol:role, sbol:ComponentDefinition },
+    {morekeywords={xmlns:sbol,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type, sbol:role, sbol:ComponentDefinition, sbol:sequence,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation, sbol:component,sbol:location, sbol:sequenceAnnotation },
      basicstyle=\fontsize{7}{9}\selectfont\ttfamily,
      backgroundcolor=\color{light-gray},
      keywordstyle=\color{blue},
@@ -68,6 +68,7 @@
      sensitive=true,                            % keywords are case sensitive
      %morecomment=[l][commentstyle]{\#},         % comment format
      morestring=[b]",                           % string format
+     escapeinside={[}{]},
      alsoletter=:
 }
 
@@ -240,7 +241,7 @@ An optional, free text description property with the data type of \external{Stri
 
 \subsection{ComponentDefinition}
 \label{sec:ComponentDefinition}
-The proposed Version 2.0 data model generalizes the DnaComponent class of SBOL Version 1.1 to a Component class in order to support an increased range of structural representation. Components can represent genetic components such as DNA, but also RNA and proteins which were unrepresented in Version 1.1.  Additionally, the generalized Component class can even represent non-genetic components, such as non-biological polymers, small molecules, molecular complexes, and even light.
+The proposed Version 2.0 data model generalizes the DnaComponent class of SBOL Version 1.1 to a \sbol{ComponentDefinition} class in order to support an increased range of structural representation. A  \sbol{ComponentDefinition} can represent genetic components such as DNA, but also RNA and proteins which were unrepresented in Version 1.1.  Additionally, the generalized \sbol{ComponentDefinition} class can even represent non-genetic components, such as non-biological polymers, small molecules, molecular complexes, and even light.
 
 % Figure has some classes named incorrectly
 \begin{figure}[ht]
@@ -251,20 +252,92 @@ The proposed Version 2.0 data model generalizes the DnaComponent class of SBOL V
 \end{center}
 \end{figure}
 
-Another significant change is that a layer of design abstraction has been added to the Component class.  The ComponentDefinition base class is analagous to a blueprint or parts specification sheet for a biological part.  In contrast, the Component class represents specific occurrences of a part within a design.  Thus the new version of SBOL supports biological designs that re-use the same component more than once. 
+
 
 % Examples of ontologies for non-molecular type ComponentDefinitions (eg, light)...?
-A ComponentDefinition which contains the blueprint for a molecular component must have at least one type URI that identifies a term from an appropriate ontology, such as the ontology of Chemical Entities of Biological Interest (ChEBI) and the BioPAX ontology. A type URI documents the basic sort of biochemical or physical entity (for example DNA, protein, or RNA) that a Component object abstracts for the purpose of engineering design. If a Component object has multiple type URIs, then they must identify synonymous terms.
+\subsubsection*{The \sbolheading{types} property}
+\label{sec:types}
+
+In order to specify the blueprint for a molecular component, a \sbol{ComponentDefinition} must have at least one types \external{URI} that identifies a term from an appropriate ontology, such as the ontology of Chemical Entities of Biological Interest (ChEBI) and the BioPAX ontology (\ref{tbl:componentdefinition_types}). A type URI documents the basic sort of biochemical or physical entity (for example DNA, protein, or RNA) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. If a \sbol{ComponentDefinition} object has multiple type URIs, then they must identify synonymous terms.
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Entity Type} & \textbf{BioPAX Term} \\
+    \midrule
+    DNA  & \url{http://www.biopax.org/release/biopax-level3.owl#DnaRegion}\\
+    RNA  & \url{http://www.biopax.org/release/biopax-level3.owl#RnaRegion}\\
+    Protein  & \url{http://www.biopax.org/release/biopax-level3.owl#Protein}\\
+    Small Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#SmallMolecule}\\  
+    \bottomrule
+  \end{edtable}
+  \caption{BioPAX terms to specify the types of ComponentDefinition objects.}
+  \label{tbl:componentdefinition_types}
+\end{table}
+
+
 \textcolor{red}{Examples of ontologies for non-molecular type ComponentDefinitions (eg, light)...?}
 
-The roles of a ComponentDefinition object, on the other hand, are analogous to the type of a DnaComponent object in SBOL Version 1.1 and the sequence types of a SequenceComponent in the ACS Synthetic Biology paper. Role URIs are expected to identify ontology terms that clarify a Component object’s potential function in a biological context. For example, a ComponentDefinition object of type “DNA” may have a role of “promoter” or “terminator,” terms taken from the Sequence Ontology (SO). A ComponentDefinition object of type “protein,” on the other hand, may have a role of “transcription factor” or “protease.” 
+\subsubsection*{The \sbolheading{roles} property}
+\label{sec:roles}
 
-% Are the class names listed here correct, taking recent name changes into account?
-\textcolor{red}{Finally, a ComponentDefinition object can define its structure by linking to objects that belong to the StructuralInstance, Sequence, SequenceAnnotation, and SequenceConstraint classes. These classes are described below.}
+The \sbol{roles} of a ComponentDefinition object, on the other hand, are analogous to the type of a DnaComponent object in SBOL Version 1.1. Role URIs are expected to identify ontology terms that clarify a \sbol{ComponentDefinition} object's potential function in a biological context. For example, a \sbol{ComponentDefinition} object of type ``DNA'' may have a role of ``promoter'' or ``terminator,'' terms taken from the Sequence Ontology (SO). A ComponentDefinition object of type ``protein,'' on the other hand, may have a role of ``transcription factor'' or ``protease.'' 
 
+
+\subsubsection*{The \sbolheading{subComponents} property}
+\label{sec:subComponents}
+Another significant change from SBOL version 1.1 is that a layer of design abstraction has been added to the \sbol{ComponentDefinition} class.  The \sbol{ComponentDefinition} class is analagous to a blueprint or parts specification sheet for a biological part.  In contrast, the \sbol{Component} class represents specific occurrences of parts within a design.  Thus the new version of SBOL supports biological designs that re-use the same component more than once. 
+
+\subsubsection*{The \sbolheading{sequence} property}
+\label{sec:sequence}
+The sequence property is optional and includes the URI a corresponding \sbol{Sequence} object.
+
+\subsubsection*{The \sbolheading{sequenceConstraints} property}
+\label{sec:sequenceConstraints}
+
+\subsubsection*{The \sbolheading{sequenceAnnotations} property}
+\label{sec:sequenceAnnotations}
+Finally, a ComponentDefinition object can define its structure by linking to objects that belong to the StructuralComponent, Sequence, SequenceAnnotation, and SequenceConstraint classes. These classes are described below.
+
+\subsubsection*{Serialization}
+Parent classes of the \sbol{ComponentDefinition} class includes \sbol{TopLevel}, \sbol{Documented} and \sbol{Identified}. As a result, inherited properties are serialised as explained for these parent classes. The sequence property of a \sbol{ComponentDefinition} object includes a URI to a \sbol{Sequence} object and this URI is serialized as an rdf:resource. The \sbol{types} property may include a collection of type URIs and is serialized as an implicit collection, ignoring the property name ``types''. The \sbol{roles} property is also similarly serialized as an implicit collection of sbol:role properties.
+
+%Todo:Add the serialization descriptions to parent classes.
+\lstsetsbol
+\begin{lstlisting}
+<sbol:ComponentDefinition rdf:about="...">
+    [\emph{optional}] <sbol:timeStamp>...</sbol:timeStamp> [\emph{element}]
+    [\emph{optional}]<sbol:name>...</sbol:name>[\emph{element}]
+    [\emph{optional}]<sbol:description>...</sbol:description>[\emph{element}]
+    [\emph{optional}]<sbol:sequence rdf:resource="..."/>[\emph{element}]
+    [\emph{one or more}]  <sbol:type rdf:resource="..."/>  [\emph{elements}]
+    [\emph{one or more}]  <sbol:role rdf:resource="..."/>  [\emph{elements}]    
+    [\emph{zero or more}] <sbol:subComponent><sbol:Component rdf:about="...">...</sbol:Component></sbol:subComponent> [\emph{elements}]
+    [\emph{zero or more}] <sbol:sequenceAnnotation><sbol:SequenceAnnotation rdf:about="...">...</sbol:SequenceAnnotation></sbol:sequenceAnnotation> [\emph{elements}]
+        
+  </sbol:ComponentDefinition>
+\end{lstlisting}
+
+The example below shows the serialization of a simple \sbol{ComponentDefinition} object. The \external{DnaRegion} from BioPAX and \external{CHEBI:4705} from CHEBI are used to indicate the type of the biological entity as a DNA molecule. Its role is specified via the generic \external{SO:0000167} (\external{promoter}) and more specific \external{SO:0000613} (\external{bacterial\_RNApol\_promoter}) terms.
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_J23119">
+    <sbol:timeStamp>2015-02-26 11:28:18.396</sbol:timeStamp>
+    <sbol:name>J23119 promoter</sbol:name>
+    <sbol:description>Constitutive promoter</sbol:description>
+    <sbol:type rdf:resource="http://identifiers.org/chebi/CHEBI:4705"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000613"/>
+    <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_J23119:Design"/>
+  </sbol:ComponentDefinition>
+\end{lstlisting}
+
+  
 \subsubsection{SequenceAnnotation}
 \label{sec:SequenceAnnotation}
-The SequenceAnnotation class describes a location of interest on the Sequence object linked by its parent ComponentDefinition object and may optionally associate this location with a StructuralComponent object. SequenceAnnotation objects pecify their location using a Location object. As explained below, the Location class is extended by several different classes, some of which assert locations other than simple ranges with start and end positions.
+The \sbol{SequenceAnnotation} class describes a location of interest on the \sbol{Sequence} object linked by its parent \sbol{ComponentDefinition} object and may optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object. As explained below, the \sbol{Location} class is extended by several different classes, some of which assert locations other than simple ranges with start and end positions.
 
 \begin{figure}[ht]
 \begin{center}
@@ -273,6 +346,61 @@ The SequenceAnnotation class describes a location of interest on the Sequence ob
 \label{uml:sequence_annotation}
 \end{center}
 \end{figure}
+
+\paragraph{The \sbolheading{location} property}
+Every \sbol{SequenceAnnotation} must have a location property. The value of this property is a nested \sbol{Location} object.
+
+\paragraph{The \sbolheading{component} property}
+\sbol{SequenceAnnotation} objects may have this property to link location information to a \sbol{Component} object. The value of this property is a \sbol{Component} URI.
+
+
+The serialization of SequenceAnnotation objects can be carried out according to the example below. A\_LOCATION\_SUBCLASS represents one of the Location subclasses. 
+\lstsetsbol
+\begin{lstlisting}
+<sbol:SequenceAnnotation rdf:about="...">
+   <sbol:timeStamp>...</sbol:timeStamp>
+   [\emph{one}]        <sbol:location><sbol:A_LOCATION_SUBCLASS rdf:about="...">...</sbol:A_LOCATION_SUBCLASS> </sbol:location> [\emph{element}] 
+   [\emph{zero or one}]<sbol:component rdf:resource="..."/> [\emph{element}] 
+</sbol:SequenceAnnotation>
+\end{lstlisting}
+
+
+\subsubsection{Location}
+\label{sec:Location}
+The Location class is extended by the \sbol{Range}, \sbol{MultiRange}, and \sbol{Cut} classes.
+
+\paragraph{Range}
+\label{sec:Range}
+A \sbol{Range} object specifies inclusive start and end positions. These properties are required in \sbol{Range} objects and they can have \external{integer} values greater than zero. A \sbol{Range} object also includes an  ``orientation'' property, for example to to specify directionality on a potentially double-stranded \sbol{Component} object.
+
+\paragraph{The Range \sbolheading{start} property}
+Specifies the start of a \sbol{Range}. This property is required and can have \external{integer} values greater than zero.
+
+\paragraph{The Range \sbolheading{end} property}
+Specifies the end of a \sbol{Range}. This property is required and can have \external{integer} values greater than zero.
+
+\paragraph{The Range \sbolheading{orientation} property}
+This property is optional. However, for \sbol{ComponentDefinition} objects representing DNA molecules, it is recommended that one of the orientation values are chosen. 
+
+
+
+
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/location}
+\caption[]{Location class}
+\label{uml:location}
+\end{center}
+\end{figure}
+
+\paragraph{MultiRange}
+\label{sec:MultiRange}
+A MultiRange object represents a location that is specified by multiple Range objects. For example, this capability can be used to specify a ComponentDefinition object that represents the introns or exons of a eukaryotic gene.
+
+Third, the Cut class has been introduced to enable the specification of a location between two indices. Each Cut object has a single integer data field, “at,” that specifies the index just before the location represented by the Cut object. Even though there is no zero index on Structure objects in SBOL, a Cut object with “at” equal to zero represents the location just before index one. The OrientedCut class extends the Cut class with an orientation in the same way that the OrientedRange class extends the Range class.
+
+Finally, while the Range and Cut classes are best suited to describing locations on sequential structures, the Location class can be extended in the future to better describe locations on Component Objects with non-sequential structure (see unspecified Moeity class as potential means for specifying locations in more than one dimension).
 
 
 
@@ -292,58 +420,6 @@ In SBOL Version 1.1 partial designs are made possible by means of SequenceAnnota
 
 
 
-\subsubsection{Location}
-\label{sec:Location}
-The Location class is extended by the Range, MultiRange, and Cut classes, and the Range and Cut classes are further extended by the OrientedRange and OrientedCut classes. First, a Range object specifies inclusive start and end positions greater than zero, while an OrientedRange object includes an “orientation” data field suitable for specifying locations on a potentially double-stranded Component object.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/location}
-\caption[]{Location class}
-\label{uml:location}
-\end{center}
-\end{figure}
-
-Second, A MultiRange object represents a location that is specified by multiple Range objects. For example, this capability can be used to specify a ComponentDefinition object that represents the introns or exons of a eukaryotic gene.
-
-Third, the Cut class has been introduced to enable the specification of a location between two indices. Each Cut object has a single integer data field, “at,” that specifies the index just before the location represented by the Cut object. Even though there is no zero index on Structure objects in SBOL, a Cut object with “at” equal to zero represents the location just before index one. The OrientedCut class extends the Cut class with an orientation in the same way that the OrientedRange class extends the Range class.
-
-Finally, while the Range and Cut classes are best suited to describing locations on sequential structures, the Location class can be extended in the future to better describe locations on Component Objects with non-sequential structure (see unspecified Moeity class as potential means for specifying locations in more than one dimension).
-
-
-
-
-\subsubsection{ComponentInstance}
-\label{sec:ComponentInstance}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/component_instance}
-\caption[]{Component}
-\label{uml:component}
-\end{center}
-\end{figure}
-
-% The second sentence is confusing.
-Hierarchical compositions of structure and function is enabled via the ComponentInstance class. Each ComponentInstance object has three data fields. \textcolor{red}{The first data field, “definition”, links to the Component object that is effectively a part of the Component or Module object that owns the ComponentInstantiation object.} The second data field, “access,” defines whether the ComponentInstance object can be referred to by ComponentInstance objects that are higher in the design hierarchy (yes if access is set to “public”). The third data field, "mappings", is a set of MapsTo objects that link between other ComponentInstance objects at the same level of the design hierarchy as well as other ComponentInstance objects that are lower in the design hierarchy, thereby composing these objects with greater specificity (see first module example).
-
-There are two subclasses of the ComponentInstance class: the StructuralComponent and FunctionalComponent classes.
-
-
-
-
-\subsubsection{Component}
-\label{sec:Component}
-Composition of the structural layer of SBOL designs is accomplished using StructuralInstance objects. Each StructuralComponent object is owned by a ComponentInstance object and serves as an explicit usage of a \textcolor{red}{sub-Component} object for the purpose of physical composition.
-
-
-
-
-\subsubsection{FunctionalComponent}
-\label{sec:FunctionalComponent}
-Composition of the functional layer of SBOL designs, on the other hand, is accomplished using FunctionalComponent objects. Each FunctionalComponent object is owned by a Module object and serves as an explicit usage of a ComponentInstance object for the purpose of fulfilling some function. In addition, each FunctionalInstantiation must specify via the “direction” field whether it serves as an  input, output, both, or neither for its parent Module object. 
-
-
 
 
 \subsection{Sequence}
@@ -359,11 +435,11 @@ The \sbol{Sequence} class is used to encode the primary structure of a \sbol{Com
 \end{figure}
 
 
-\subsubsection{The \sbolheading{elements} property}
+\subsubsection*{The \sbolheading{elements} property}
 \label{sec:elements}
 Required. A \external{String} of characters that represent the constituents of biological molecule, for example   nucleic acid symbols for DNA molecules. 
 
-\subsubsection{The \sbolheading{encoding} property}
+\subsubsection*{The \sbolheading{encoding} property}
 \label{sec:encoding}
 Required. \sbol{Sequence} objects identify their type of encoding with a \external{URI}. For example, a \sbol{Sequence} object that encodes a DNA sequence would have an \external{IUPAC DNA} encoding, while a \sbol{Sequence} object that encodes the chemical structure of glucose might have a \external{simplified molecular-input line-entry system (SMILES)} encoding (\ref{tbl:sequence_encodings}).
 
@@ -385,7 +461,6 @@ Required. \sbol{Sequence} objects identify their type of encoding with a \extern
 
 The example below shows the serialization of a \sbol{Sequence} object for a promoter. Nucleotide sequences are represented with the \sbol{elements} property and the encoding is serialized as a URI resource. 
 
-\begin{figure} [ht]
 \lstsetsbol
 \begin{lstlisting}
   <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_J23119:Design">
@@ -393,9 +468,39 @@ The example below shows the serialization of a \sbol{Sequence} object for a prom
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
 \end{lstlisting}
-\label{ser:sequence}
+
+
+
+
+\subsection{ComponentInstance}
+\label{sec:ComponentInstance}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/component}
+\caption[]{Component}
+\label{uml:component}
+\end{center}
 \end{figure}
 
+% The second sentence is confusing.
+Hierarchical compositions of structure and function is enabled via the ComponentInstance class. Each ComponentInstance object has three data fields. \textcolor{red}{The first data field, ``definition'', links to the Component object that is effectively a part of the Component or Module object that owns the ComponentInstantiation object.} The second data field, ''access'', defines whether the ComponentInstance object can be referred to by ComponentInstance objects that are higher in the design hierarchy (yes if access is set to ''public''). The third data field, ``mappings'', is a set of MapsTo objects that link between other ComponentInstance objects at the same level of the design hierarchy as well as other ComponentInstance objects that are lower in the design hierarchy, thereby composing these objects with greater specificity (see first module example).
+
+There are two subclasses of the ComponentInstance class: the StructuralComponent and FunctionalComponent classes.
+
+
+
+
+\subsection{Component}
+\label{sec:Component}
+Composition of the structural layer of SBOL designs is accomplished using \sbol{Component} objects. Each \sbol{Component} object is owned by a ComponentDefinition object and serves as an explicit usage of a \textcolor{red}{sub-Component} object for the purpose of physical composition.
+
+
+
+
+\subsection{FunctionalComponent}
+\label{sec:FunctionalComponent}
+Composition of the functional layer of SBOL designs, on the other hand, is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a Module object and serves as an explicit usage of a ComponentInstance object for the purpose of fulfilling some function. In addition, each FunctionalInstantiation must specify via the ``direction'' field whether it serves as an  input, output, both, or neither for its parent Module object. 
 
 \subsection{ModuleDefinition}
 \label{sec:ModuleDefinition}
@@ -408,9 +513,9 @@ The example below shows the serialization of a \sbol{Sequence} object for a prom
 \end{center}
 \end{figure}
 
-The ModuleDefinition class forms the hub for functional description of genetic designs. A Module object is composed from zero or more FunctionalComponent, Module, and Interaction objects, and links to zero or more Model objects. A Module object relies on the “direction” data fields of its FunctionalComponent objects to specify whether they serve as its inputs or outputs.
+The ModuleDefinition class forms the hub for functional description of genetic designs. A Module object is composed from zero or more FunctionalComponent, Module, and Interaction objects, and links to zero or more Model objects. A Module object relies on the ``direction'' data fields of its FunctionalComponent objects to specify whether they serve as its inputs or outputs.
 
-In addition, each ModuleDefinition object must now have at least one of potentially several roles to indicate its intended usages. For example, the role URIs on a ModuleDefinition object may identify terms for abstract module roles, such as “inverter” or “AND gate,” or they may identify terms for biological module roles, such as “metabolic pathway” and “signaling cascade.”
+In addition, each ModuleDefinition object must now have at least one of potentially several roles to indicate its intended usages. For example, the role URIs on a ModuleDefinition object may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for biological module roles, such as ``metabolic pathway'' and ``signaling cascade''.
 
 
 
@@ -426,8 +531,7 @@ In addition, each ModuleDefinition object must now have at least one of potentia
 \end{center}
 \end{figure}
 
-The Module class enables the composition of Module objects from other sub-Module objects. \textcolor{red}{The first data field, “definition”, links to the ModuleDefinition object that is effectively a part of the Module object that owns the Module object.} The second data field, “mappings”, is a set of MapsTo objects that link between the Component objects at the same level of the design hierarchy as the Module object and the Component objects that are lower in the design hierarchy, thereby composing these objects with greater specificity.
-
+The Module class enables the composition of Module objects from other sub-Module objects. \textcolor{red}{The first data field, ``definition'', links to the ModuleDefinition object that is effectively a part of the Module object that owns the Module object.} The second data field, ``mappings'', is a set of MapsTo objects that link between the Component objects at the same level of the design hierarchy as the Module object and the Component objects that are lower in the design hierarchy, thereby composing these objects with greater specificity.
 
 
 
@@ -441,9 +545,9 @@ The Module class enables the composition of Module objects from other sub-Module
 \label{uml:maps_to}
 \end{center}
 \end{figure}
-The MapsTo class serves as a means of linking between Component objects (both StructuralComponents and FunctionalComponents) at different levels of the design hierarchy. For example, when a Module object is instantiated inside another Module object, a MapsTo object on the appropriate Module  object can be used to link between a FunctionalComponent object in the parent Module (as specified by the “local” data field) and a FunctionalComponent object in the child module (as specified by the “remote” data field). This linking can perhaps be most easily understood via the examples in the next section.
+The MapsTo class serves as a means of linking between Component objects (both StructuralComponents and FunctionalComponents) at different levels of the design hierarchy. For example, when a Module object is instantiated inside another Module object, a MapsTo object on the appropriate Module  object can be used to link between a FunctionalComponent object in the parent Module (as specified by the ``local'' data field) and a FunctionalComponent object in the child module (as specified by the ``remote'' data field). This linking can perhaps be most easily understood via the examples in the next section.
 
-In addition to specifying a link, each MapsTo object must also specify a “refinement” relationship between its local and remote Components. Under this data model, there are four types of refinement: “verifyIdentical” requires that the Component objects link to the same ComponentDefinition object, “useLocal” indicates that the local Component object overrides the remote Component object, “useRemote” indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
+In addition to specifying a link, each MapsTo object must also specify a ``refinement'' relationship between its local and remote Components. Under this data model, there are four types of refinement: ``verifyIdentical'' requires that the Component objects link to the same ComponentDefinition object, ``useLocal'' indicates that the local Component object overrides the remote Component object, “useRemote” indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
 
 
 \subsubsection{Interaction}
@@ -626,6 +730,195 @@ The example below shows adding a datasheet object to a SBOL document using the \
 % -----------------------------------------------------------------------------
 \section{Examples of Serialization}
 % -----------------------------------------------------------------------------
+This example shows the serialization of the PoPS Receiver device designed by Canton and co-workers. Details of the device can be found at http://parts.igem.org/Part:BBa\_F2620.
+
+%todo: Add more description and ref
+
+\label{ser:F2620}
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pr="http://www.partsregistry.org/" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_R0040">
+    <sbol:timeStamp>2015-02-26 14:26:55.692</sbol:timeStamp>
+    <sbol:name>BBa_R0040</sbol:name>
+    <sbol:description>TetR repressible promoter</sbol:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_F2620:Design"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_C0062">
+    <sbol:timeStamp>2015-02-26 14:26:55.692</sbol:timeStamp>
+    <sbol:name>BBa_C0062</sbol:name>
+    <sbol:description>luxR coding sequence</sbol:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_C0062:Design"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_B0015">
+    <sbol:timeStamp>2015-02-26 14:26:55.692</sbol:timeStamp>
+    <sbol:name>BBa_B0015</sbol:name>
+    <sbol:description>Double terminator</sbol:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_B0015:Design"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_R0062">
+    <sbol:timeStamp>2015-02-26 14:26:55.693</sbol:timeStamp>
+    <sbol:name>BBa_R0062</sbol:name>
+    <sbol:description>LuxR inducible promoter</sbol:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_R0062:Design"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_F2620">
+    <sbol:timeStamp>2015-02-26 14:26:55.693</sbol:timeStamp>
+    <sbol:name>BBa_F2620</sbol:name>
+    <sbol:description>3OC6HSL -&gt; PoPS Receiver</sbol:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:00001411"/>
+    <sbol:subComponent>
+      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/luxR">
+        <sbol:timeStamp>2015-02-26 14:26:55.694</sbol:timeStamp>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_B0034"/>
+      </sbol:Component>
+    </sbol:subComponent>
+    <sbol:subComponent>
+      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/rbs">
+        <sbol:timeStamp>2015-02-26 14:26:55.694</sbol:timeStamp>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_C0062"/>
+      </sbol:Component>
+    </sbol:subComponent>
+    <sbol:subComponent>
+      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/pLuxR">
+        <sbol:timeStamp>2015-02-26 14:26:55.695</sbol:timeStamp>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_R0062"/>
+      </sbol:Component>
+    </sbol:subComponent>
+    <sbol:subComponent>
+      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/pTetR">
+        <sbol:timeStamp>2015-02-26 14:26:55.694</sbol:timeStamp>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_R0040"/>
+      </sbol:Component>
+    </sbol:subComponent>
+    <sbol:subComponent>
+      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/ter">
+        <sbol:timeStamp>2015-02-26 14:26:55.695</sbol:timeStamp>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_B0015"/>
+      </sbol:Component>
+    </sbol:subComponent>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno5">
+        <sbol:timeStamp>2015-02-26 14:26:55.697</sbol:timeStamp>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno5/range">
+            <sbol:timeStamp>2015-02-26 14:26:55.697</sbol:timeStamp>
+            <sbol:start>901</sbol:start>
+            <sbol:end>956</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/pLuxR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno3">
+        <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno3/range">
+            <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
+            <sbol:start>69</sbol:start>
+            <sbol:end>770</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/luxR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2">
+        <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2/range">
+            <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
+            <sbol:start>56</sbol:start>
+            <sbol:end>68</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/rbs"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno1">
+        <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno1/range">
+            <sbol:timeStamp>2015-02-26 14:26:55.695</sbol:timeStamp>
+            <sbol:start>1</sbol:start>
+            <sbol:end>55</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/pTetR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno4">
+        <sbol:timeStamp>2015-02-26 14:26:55.697</sbol:timeStamp>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno4/range">
+            <sbol:timeStamp>2015-02-26 14:26:55.697</sbol:timeStamp>
+            <sbol:start>771</sbol:start>
+            <sbol:end>900</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/ter"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_R0040:Design"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_B0034">
+    <sbol:timeStamp>2015-02-26 14:26:55.692</sbol:timeStamp>
+    <sbol:name>BBa_B0034</sbol:name>
+    <sbol:description>RBS based on Elowitz repressilator</sbol:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_B0034:Design"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_B0015:Design">
+    <sbol:timeStamp>2015-02-26 14:26:55.69</sbol:timeStamp>
+    <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_B0034:Design">
+    <sbol:timeStamp>2015-02-26 14:26:55.69</sbol:timeStamp>
+    <sbol:elements>aaagaggagaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_C0062:Design">
+    <sbol:timeStamp>2015-02-26 14:26:55.69</sbol:timeStamp>
+    <sbol:elements>atgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_R0040:Design">
+    <sbol:timeStamp>2015-02-26 14:26:55.689</sbol:timeStamp>
+    <sbol:elements></sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_R0062:Design">
+    <sbol:timeStamp>2015-02-26 14:26:55.691</sbol:timeStamp>
+    <sbol:elements>acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_F2620:Design">
+    <sbol:timeStamp>2015-02-26 14:26:55.69</sbol:timeStamp>
+    <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>
+\end{lstlisting}
 
 % -----------------------------------------------------------------------------
 \section{Best Practices}
