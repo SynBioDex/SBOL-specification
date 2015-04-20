@@ -56,7 +56,7 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{light-gray}{gray}{0.97}
 \lstdefinelanguage{sbol}
-    {morekeywords={xmlns:sbol,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type, sbol:role, sbol:ComponentDefinition, sbol:sequence,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation, sbol:component,sbol:location, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework},
+    {morekeywords={xmlns:sbol,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type, sbol:role, sbol:ComponentDefinition, sbol:sequence,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework},
      basicstyle=\fontsize{7}{9}\selectfont\ttfamily,
      backgroundcolor=\color{light-gray},
      keywordstyle=\color{blue},
@@ -71,6 +71,8 @@
      morestring=[b]",                           % string format
      escapeinside={[}{]},
      alsoletter=:
+     %breakatwhitespace=true, 
+     %literate={\-}{}{0\discretionary{a}{\\}{}}
 }
 
 %Command to format the listings containing SBOL RDF/XML serialization examples
@@ -117,10 +119,16 @@
 
 
 \author{\begin{tabular}{l>{\hspace*{15pt}}r}
+Bryan Bartley		& \emph{University of Washington, US}\\
+Jacob Beal			& \emph{Raytheon BBN Technologies, US}\\
+Kevin Clancy		& \emph{ThermoFischer Scientific, US}\\
+Goksel Misirli		& \emph{Newcastle University, GB}\\
 Nicholas Roehner	& \emph{Boston University, US}\\
 Matthew Pocock  	& \emph{Newcastle University, GB}\\
-Goksel Misirli		& \emph{Newcastle University, GB}\\
-Anil Wipat			& \emph{Newcastle University, GB}\\[8pt]
+lots of other community members & all over the world\\
+Chris Myers			& \emph{University of Utah, US}\\
+Anil Wipat			& \emph{Newcastle University, GB}\\
+Herbert Sauro		& \emph{University of Washington, US}\\[8pt]
 \end{tabular}\\
 \href{mailto:editors@sbolstandard.org}{\sffamily editors@sbolstandard.org}}
 
@@ -164,31 +172,30 @@ To address the need for functional descriptions in SBOL, the proposed data model
 % -----------------------------------------------------------------------------
 
 % -----------------------------------------------------------------------------
-\section{Copyright Statement}
+\section{Copyright and License Statement}
 % -----------------------------------------------------------------------------
 
 %% Variation from BBF RFC 0 specs confirmed in email communication with BBF by Jake Beal, 3/21/15
 
-Copyright (C) The BioBricks Foundation (2015) and all of the individuals listed under "Acknowledgements" below. All Rights Reserved.
-
-This work is licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International License (CC-BY 4.0)}.
+Copyright (C) The BioBricks Foundation and all authors listed on this BBF RFC. This work is made available under the Creative Commons Attribution 4.0 International Public License. To view a copy of this license visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/}.
 
 % -----------------------------------------------------------------------------
 \section{History and Acknowledgements}
 % -----------------------------------------------------------------------------
-\todo[inline]{Add yourself if you have helped and aren't on the list}
+%Add yourself if you have helped and aren't on the list
 
-SBOL originated in discussions between participants in the Synthetic Biology Open Language Workshops held in Blacksburg, Virginia on January 7-10, 2011, San Diego, California on June 8, 2011, and Seattle, Washington January 5-6, 2012. Its further development is carried out at a series of subsequent open invitation workshops and through email exchanges on the SBOL Developers mailing list. 
+SBOL originated in discussions between participants in the Synthetic Biology Open Language Workshops held in Blacksburg, Virginia on January 7-10, 2011, and its further development has continued at a series of subsequent open invitation workshops and through email exchanges on the SBOL Developers mailing list. 
 
-Contributors to this work include: Eduardo Abeliuk (Teselagen), Laura Adam (Virginia Bioinformatics Institute), Aaron Adler (BBN Technologies), J. Christopher Anderson (University of California, Berkeley), David A. Ball (Virginia Bioinformatics Institute), Bryan Bartley (University of Washington), Jacob Beal (BBN Technologies), Swapnil Bhatia (Boston University), Michael Bissell (Amyris, Inc.), Matthieu Bultelle (Imperial College London), Yizhi Cai (Johns Hopkins University), Deepak Chandran (University of Washington), Joanna Chen (Lawrence Berkeley National Lab), Kevin Clancy (Life Technologies), Kendall G. Clark (Clark \& Parsia, LLC.), Daniel Cook (University of Washington), Wilbert Copeland (University of Washington), Douglas Densmore (Boston University), Omri A. Drory (Genome Compiler, corp.), Drew Endy (BIOFAB and Stanford University), Michal Galdzicki (University of Washington), John H Gennari (University of Washington), Raik Gruenberg (IRIC, University of Montreal), Jennifer Hallinan (Newcastle University), Timothy Ham (Joint BioEnergy Institute), Nathan J. Hillson (Lawrence Berkeley National Lab), Cassie Huang (Boston University), Jeffrey D. Johnson (University of Washington), Marc Juul Christoffersen (BIOFAB), Kyung H. Kim (University of Washington), Richard Kitney (Imperial College London), Allan Kuchinsky (Agilent Technologies), Sung Won Lim (Genspace), Matthew W. Lux (Virginia Bioinformatics Institute), Curtis Madsen (University of Utah), Akshay Maheshwari (BIOFAB), Goksel Misirli (Newcastle University), Barry Moore (University of Utah), Chris J. Myers (University of Utah), Josh Natarajan (Autodesk Research), Ernst Oberortner (Boston University), Carlos Olguin (Autodesk Research), Jean Peccoud (Virginia Bioinformatics Institute), Josh Perfetto (Cofactor Bio, LLC.), Hector Plahar (Joint BioEnergy Institute), Darren Platt (Amyris, Inc.), Matthew Pocock (Newcastle University and Turing Ate My Hamster LTD), Jackie Quinn (Harvard University), Sridhar Ranganathan (Life Technologies), Cesar A. Rodriguez (Genome Compiler, corp.), Nicholas Roehner (University of Utah), Vincent Rouilly (University of Basel), Herbert M. Sauro (University of Washington), Evren Sirin (Clark \& Parsia, LLC.), Trevor F. Smith (Agilent Technologies), Lucian P. Smith (University of Washington), Guy-Bart Stan (Imperial College London), Jason Stevens (University of Utah), Vinod Tek (Imperial College London), Alan Villalobos (DNA 2.0, Inc.), Mandy Wilson (Virginia Bioinformatics Institute), Chris Winstead (Utah State University), Anil Wipat (Newcastle University), and Fusun Yaman Sirin (BBN Technologies).
+Contributors to this work include: Bryan Bartley (University of Washington), Jacob Beal (BBN Technologies), Goksel Misirli (Newcastle University), Chris J. Myers (University of Utah), Matthew Pocock (Newcastle University and Turing Ate My Hamster LTD), Nicholas Roehner (Boston University), Herbert M. Sauro (University of Washington), Anil Wipat (Newcastle University).
 
+% Removed as redundant:
+%-----------------------------------------------------------------------------
+%\section{Introduction}
 % -----------------------------------------------------------------------------
-\section{Introduction}
-% -----------------------------------------------------------------------------
-While the first version of the Synthetic Biology Open Language (SBOL) has been adopted by several academic and commercial genetic design automation (GDA) software tools, it only covers a limited range of the requirements for a standardized exchange format for synthetic biology. The SBOL 2.0 specification revises version 1.1, enabling the representation of a wider range of components with and without sequences, including RNA components, protein components, small molecules, and molecular complexes. Additionally, the latest SBOL can be used to convey the intended function of a design, as well as its structural composition. 
-This dichotomous representation of the structural and functional features of a design is a paradigm applied to great success in electrical and computer engineering, and is essential for the development of design automation software in synthetic biology.
-
-The goal of this specification is to define the terminology and relationships used to describe biological designs. In order to provide a shared understanding between engineers seeking to exchange biological designs, SBOL provides a common definition of the concepts needed. As much as possible, we attempt to make explicit the meaning of all terminology and data structures.
+%While the first version of the Synthetic Biology Open Language (SBOL) has been adopted by several academic and commercial genetic design automation (GDA) software tools, it only covers a limited range of the requirements for a standardized exchange format for synthetic biology. The SBOL 2.0 specification revises version 1.1, enabling the representation of a wider range of components with and without sequences, including RNA components, protein components, small molecules, and molecular complexes. Additionally, the latest SBOL can be used to convey the intended function of a design, as well as its structural composition. 
+%This dichotomous representation of the structural and functional features of a design is a paradigm applied to great success in electrical and computer engineering, and is essential for the development of design automation software in synthetic biology.
+%
+%The goal of this specification is to define the terminology and relationships used to describe biological designs. In order to provide a shared understanding between engineers seeking to exchange biological designs, SBOL provides a common definition of the concepts needed. As much as possible, we attempt to make explicit the meaning of all terminology and data structures.
 
 
 % -----------------------------------------------------------------------------
@@ -225,7 +232,7 @@ In the figure below, a simple toggle switch system is displayed, in which LacI a
 \end{center}
 \end{figure}
 
-SBOL includes different entities to describe such genetic circuits. Genetic elements such as promoters, RBS, CDSs and terminators are defined with the \sbol{ComponentDefinition} entity. Their instances are reused in different designs via the \sbol{Component}s that refer to corresponding \sbol{ComponentDefinition}s. \sbol{ComponentDefinition}s can also represent proteins, RNAs or small molecules. They are associated with sequence information such as nucleotides aminoacids or chemical structure. A full description of a genetic circuit is then represented using  \sbol{Module}s which contains information about molecular interactions and their participating components. Modules can be associated with quantitative or qualitative models using the \sbol{Model} entity, which is used to point to the actual location of a model.
+SBOL includes different entities to describe such genetic circuits. Genetic elements such as promoters, RBS, CDSs and terminators are defined with the \sbol{ComponentDefinition} entity. Their instances are reused in different designs via the \sbol{Component}s that refer to corresponding \sbol{ComponentDefinition}s. \sbol{ComponentDefinition}s can also represent proteins, RNAs or small molecules. They are associated with sequence information such as nucleotides aminoacids or chemical structure. A full description of a genetic circuit is then represented using  \sbol{ModuleDefinition}s which contains information about molecular interactions and their participating components. Modules can be associated with quantitative or qualitative models using the \sbol{Model} entity, which is used to point to the actual location of a model.
 
 
 SBOL facilitates the design of complex systems using hierarchical composition. In addition to using simple genetic elements modularly, modules that are composed of different components can also be reused. Such modules can expose some of the design components as inputs and outputs, which can be connected to components from other modules using \sbol{MapsTo} entities.
@@ -265,74 +272,76 @@ In addition to these top level entities, a SBOL document may include addiitonal 
 \item \emph{\sbol{ComponentDefinition}}: Represents biological molecules such as DNA, proteins, RNA and small molecules.
 
 \item \emph{\sbol{Component}}:
-
+Represents a specific occurrence of a component within a larger design.  For a given component definition, there may be several instances of components specified at different locations within the larger design.
 \item \emph{\sbol{SequenceAnnotation}}:
-
+A sequence annotation describes the position and strand orientation (in the case of DNA molecules) of a notable sub-sequence found within the Component being
+described. Annotations provide the link which describes 
+sequence of a component in terms of other components,
+subComponents.
 \item \emph{\sbol{Location}}:
-
+A Location specifies the coordinates of a genetic locus on a DNA molecule or a residue or site on other sequential macromolecules such as proteins.
 \item \emph{\sbol{SequenceConstraint}}:
-
+A Sequence Constraint describes the relative spatial orientation of Components which are assembled together into a biological structure.
 \item \emph{\sbol{Sequence}}:
-
+A sequence is a contiguous sequence of monomers in a macromoleculer polymer such as DNA, RNA, and protein. The
+sequence is a fundamental information object for synthetic biology and is needed to reuse components, replicate synthetic biology work, and to assemble new synthetic biological systems. Therefore, both experimental work and theoretical sequence composition research depend heavily on the sequence associated with component definitions.
 \item \emph{\sbol{ModuleDefinition}}:
-
+A Module Definition desribes an abstract functional module that may be composed of many functional interactions between biological components.
 \item \emph{\sbol{FunctionalComponent}}:
-
+An occurrence of a component that is intended to have a biological function inside a design, as opposed to a component whose purpose is simply to compose a biological structure. 
 \item \emph{\sbol{Module}}:
-
+Represents a specific occurrence of a functional module within a larger design.  For a given module definition, there may be several instances of modules that specify the overall function of a biological design.
 \item \emph{\sbol{MapsTo}}:
 
 \item \emph{\sbol{Interaction}}:
-
+Interactions describe a functional relationship between biological effectors, such as regulatory activation or repression.  Interactions also describe processes from the central dogma of biology, such as transcription and translation.
 \item \emph{\sbol{Participation}}:
-
+Describes the role that a component plays in a functional interaction.  For example, a transcription factor may participate in an interaction either as a repressor or activator.
 \item \emph{\sbol{Model}}:
-
+Links an SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.
 \item \emph{\sbol{Collection}}:
-
+A Collection is an organizational container for Components, a group defined by the user for convenience.
 \item \emph{\sbol{GenericTopLevel}}:
-
+This is a data container that can contain custom data added by user applications.
 \end{description}
 
 
 % -----------------------------------------------------------------------------
 \section{SBOL Data Model}
 % -----------------------------------------------------------------------------
-In this section, we describe the major entities of an SBOL document and the relationships between these entities.  The data model is specified using a Unified Modeling Language (UML) 2.0 diagram \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}.   
+In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}.   
 
 Complete SBOL examples and best practices when using SBOL can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
 \subsection{Understanding the UML Diagrams}
 
-The biological design concepts modeled by SBOL are commonly referred to as classes which are represented in UML diagrams as rectangles with the class name at the top.  Classes may be connected with other classes by associations (arrows). The data properties for each class are listed in a compartment under the name, with the corresponding data types and cardinality (explained below) specified for each property.
+The types of biological design data modeled by SBOL are commonly referred to as classes, especially when discussing the details of software implementation. Classes are represented in UML diagrams as rectangles labeled at the top with class names. Classes may be connected to other classes by association properties, which are represented in UML as arrows labeled with data cardinalities. Finally, the remaining class properties are listed below class names inside the rectangles and are labeled with their data types and cardinalities (explained below). 
 
-All SBOL properties and assertions are named. In the UML diagrams, these are named with a mixture of singular and plural forms, to aid in comprehensibility of the diagrams. The singular and plural forms follow the usual rules of grammar, so for example, \sbol{sequenceAnnotation} is the singular form of \sbol{sequenceAnnotations}.
+Association properties between SBOL classes are directional. An arrowhead indicates the direction in which an association can be traversed, while a diamond at the beginning of an arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, which means that objects of the class at the end of the arrow exist independently of any objects of the class that has the association property. In contrast, filled diamonds indicate composite aggregation or a part-whole relationship, in which objects of the class at the end of the arrow cannot exist independently and must be associated with at most one object of the class that has the association property. For example, it will later be shown how objects of the \sbol{SequenceAnnotation} class must associated with an object of the \sbol{ComponentDefinition} class (and only that object).
 
-Within the RDF serialization, each value for a property is individually asserted. So if a property has 5 values, there will be 5 RDF triples, one for each value assertion. The SBOL serialization does not use RDF collections to represent multiple values. It follows that in the RDF serializaiton, the RDF predicates will always use the singular form of the name.
-
-Within an implementing API, properties and associations will be mapped to member accessors. The API should use the idiomatic representation of optional, single and multiple-valued members.
-
-For example, a Java implementation would use common Java idioms. For example, an optional value may be represented as a Java Bean property that returns either the value or null. A multi-valued property may return a Java collection. If the API exposes a collection for multiple-valued properties and associations, it should use the plural form of the property/association, and the value of the collection should not ever be null.
-
-As another example, a relational implementation of the SBOL API would store the properties and associations a mixture of data fields and references via foreign keys. The fields in individual tables will correspond to the `arrowhead' end of an association (in reverse to the direction in the RDF and OO representations), and the name may be modified to reflect this change in directionality. For example, the \sbol{sequence} association between a \sbol{ComponentDefinition} and \sbol{Sequence} would be represented by a foreign key field on the \sbol{Sequence} table that references a row in the \sbol{ComponentDefinition} table, and it may be named \sbol{sequenceOf}.
-
-The properties and associations within SBOL are annotated with cardinality restrictions. These are:
+All SBOL properties are labeled with data cardinality restrictions. These are:
 
 \begin{itemize}
 
-\item $1$ - required, zero or one: there must be exactly one value for this property.
+\item $1$ - required, one: there must be exactly one value for this property.
 
-\item $0 \ldots 1$ - optional: there may be a value for this property or a value may be absent.
+\item $0 \ldots 1$ - optional: there may be a single value for this property or it may be absent.
 
-\item $0 \ldots \infty$ - unbounded: there may be any number of values for this property, including none.
+\item $0 \ldots *$ - unbounded: there may be any number of values for this property, including none.
 
-\item $1 \ldots \infty$ - required, unbounded: there may be any number of values for this property, as long as there is at least one.
+\item $1 \ldots *$ - required, unbounded: there may be any number of values for this property, as long as there is at least one.
 
-\item $n \ldots \infty$ - at least: there must be at least $n$ values for this property.
+\item $n \ldots *$ - at least: there must be at least $n$ values for this property.
 
 \end{itemize}
 
-Associations between SBOL objects are directional.  An arrowhead indicates the direction in which an association can be traversed. Diamonds indicate the type of association. Open-faced diamonds are shared aggregation, meaning the object at the end of the arrow can exist independently of the source object.  In contrast, filled diamonds indicate composite aggregation, or a part-whole relationship, which means that a part instance must be included in at most one whole and cannot exist independently.
+Within the SBOL data model, all properties are given a singular or plural name in accordance with their data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{sequenceAnnotation} is the singular form of \sbol{sequenceAnnotation}s.
+
+Within the RDF serialization of SBOL, however, SBOL properties are always given singular names. The serialization does not use RDF collections to represent multiple values of an SBOL property. Hence, if a SBOL property has five values, then its serialization contains five RDF triples with singular predicate names.
+
+Within an implementing Object-Oriented (OO) API, SBOL properties should be mapped to member accessors that are similarly named and that return idiomatic representations of these properties. For example, a Java implementation would use common Java idioms. In this case, the member accessor for an optional SBOL property could return a Java primitive value, Java object, or null, while the accessor for a multi-valued SBOL property could return a Java \external{Collection}. In general, OO member accessors for multi-valued SBOL properties should never return null.
+
+As another example, a relational implementation of the SBOL API would store the properties and associations a mixture of data fields and references via foreign keys. The fields in individual tables will correspond to the `arrowhead' end of an association (in reverse to the direction in the RDF and OO representations), and the name may be modified to reflect this change in directionality. For example, the \sbol{sequence} association between a \sbol{ComponentDefinition} and \sbol{Sequence} would be represented by a foreign key field on the \sbol{Sequence} table that references a row in the \sbol{ComponentDefinition} table, and it may be named \external{sequenceOf}.
 
 \subsection {SBOL Document}
 An SBOL document is a valid RDF/XML document. Accordingly, each SBOL document starts with an XML declaration that has its XML version set to ``1.0.'' As shown in the example below, this declaration is then followed by a rdf:RDF XML element that includes the namespace declarations for RDF and SBOL. The latter namespace is used to indicate which entities and properties in the SBOL document are defined by SBOL.
@@ -365,21 +374,17 @@ All SBOL-defined classes are directly or indirectly derived from the Identified 
 
 \subsubsection*{The \sbolheading{identity} property}
 \label{sec:identity}
-This property is required by all \sbol{Identified} objects and has a datatype of \external{URI}. As before in SBOL Version 1.1, this \external{URI} serves to uniquely identify a SBOL object. The \sbol{identity} property can be used to point to other objects in the same SBOL document or resources on the Web. Although most properties of SBOL entities are defined under the SBOL namespace, this property is defined under the RDF namespace using the term below.
+This property is required by all \sbol{Identified} objects and has a datatype of \external{URI}. As before in SBOL Version 1.1, this \external{URI} serves to uniquely identify an SBOL object. The \sbol{identity} property can be used to point to other objects in the same SBOL document or resources on the Web. Although most SBOL properties are defined under the SBOL namespace, this property is defined under the RDF namespace using the term below.
 
 \external{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about}.
 
 \subsubsection*{The \sbolheading{persistentIdentity} property}
 \label{sec:persistentIdentity}
-The \sbol{persistentIdentity} property is optional and also has a datatype of \external{URI}. This property is used to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI). This persistent URI is ideally used to return the most up-to-date version of a SBOL object.
+The \sbol{persistentIdentity} property is optional and also has a datatype of \external{URI}. This property is used to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent identity). This persistent identity can be used to return the most up-to-date version of a SBOL object.
 
 \subsubsection*{The \sbolheading{version} property}
 \label{sec:version}
-This property has a datatype of \external{String} and is used along with the \sbol{persistentIdentity} property to indicate the current version of an SBOL object.
-
-% \subsubsection*{The \sbolheading{timeStamp} property}
-% \label{sec:timeStamp}
-% This property has a datatype of \external{TimeStamp} and is used to indicate the creation time of a SBOL object.
+This property has a datatype of \external{String} and is used along with the \sbol{persistentIdentity} property to indicate the version of an SBOL object for comparison with other SBOL objects with the same persistent identity.
 
 \subsection {Documented}
 \label{sec:Documented}
@@ -425,7 +430,7 @@ An optional, free text description property with the data type of \external{Stri
 
 \subsection{ComponentDefinition}
 \label{sec:ComponentDefinition}
-The proposed Version 2.0 data model generalizes the DnaComponent class of SBOL Version 1.1 to a \sbol{ComponentDefinition} class in order to support an increased range of structural representation. A  \sbol{ComponentDefinition} can represent genetic components such as DNA, but also RNA and proteins which were unrepresented in Version 1.1.  Additionally, the generalized \sbol{ComponentDefinition} class can even represent non-genetic components, such as non-biological polymers, small molecules, molecular complexes, and even light.
+The proposed Version 2.0 data model generalizes the DnaComponent class of SBOL Version 1.1 to a \sbol{ComponentDefinition} class in order to support an increased range of structural representation. A \sbol{ComponentDefinition} can represent genetic components such as DNA, but also RNA and proteins which were unrepresented in Version 1.1. Additionally, the generalized \sbol{ComponentDefinition} class can even represent non-genetic components, such as non-biological polymers, small molecules, molecular complexes, and even light.
 
 % Figure has some classes named incorrectly
 \begin{figure}[ht]
@@ -438,7 +443,7 @@ The proposed Version 2.0 data model generalizes the DnaComponent class of SBOL V
 
 
 
-% Examples of ontologies for non-molecular type ComponentDefinitions (eg, light)...?
+% Examples of ontologies for non-molecular type gs (eg, light)...?
 \subsubsection*{The \sbolheading{type} property}
 \label{sec:type}
 In order to specify the blueprint for a molecular component, a \sbol{ComponentDefinition} must have at least one types \external{URI} that identifies a term from an appropriate ontology, such as the ontology of Chemical Entities of Biological Interest (ChEBI) and the BioPAX ontology (\ref{tbl:componentdefinition_types}). A type URI documents the basic sort of biochemical or physical entity (for example DNA, protein, or RNA) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. If a \sbol{ComponentDefinition} object has multiple type URIs, then they must identify synonymous terms.
@@ -490,7 +495,6 @@ Parent classes of the \sbol{ComponentDefinition} class includes \sbol{TopLevel},
 \begin{lstlisting}
 <sbol:ComponentDefinition rdf:about="...">
                ...
-  [\emph{zero or one}]  <sbol:timeStamp>...</sbol:timeStamp> [\emph{element}]
   [\emph{zero or one}]  <sbol:name>...</sbol:name>[\emph{element}]
   [\emph{zero or one}]  <sbol:description>...</sbol:description>[\emph{element}]
   [\emph{zero or one}]  <sbol:sequence rdf:resource="..."/>[\emph{element}]
@@ -510,7 +514,6 @@ The example below shows the serialization of a simple \sbol{ComponentDefinition}
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_J23119">
-  <sbol:timeStamp>2015-02-26 11:28:18.396</sbol:timeStamp>
   <sbol:name>J23119 promoter</sbol:name>
   <sbol:description>Constitutive promoter</sbol:description>
   <sbol:type rdf:resource="http://identifiers.org/chebi/CHEBI:4705"/>
@@ -638,7 +641,6 @@ The example below shows the serialization of a \sbol{Range} object. It specifies
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2/range">
-  <sbol:timeStamp>2015-02-26 17:11:21.884</sbol:timeStamp>
   <sbol:start>56</sbol:start>
   <sbol:end>68</sbol:end>
   <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
@@ -942,10 +944,6 @@ The serialization of \sbol{Model} objects has the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Collection rdf:about="...">
-              ...
-  [\emph{one or more}] <sbol:member rdf:resource="..."/> [\emph{element}]
-</sbol:Collection>
 <sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
   ...
   [\emph{one}]         <sbol:source rdf:resource="..."/> [\emph{element}]
@@ -1003,7 +1001,6 @@ The example below shows the serialization of a \sbol{Collection} object. Promote
 <?xml version="1.0" ?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
   <sbol:Collection rdf:about="http://parts.igem.org/Promoters/Catalog/Anderson">
-    <sbol:timeStamp>2015-03-05 14:11:59.491</sbol:timeStamp>
     <sbol:displayId>Anderson</sbol:displayId>
     <sbol:name>Anderson promoters</sbol:name>
     <sbol:description> The Anderson promoter collection</sbol:description>
@@ -1116,23 +1113,62 @@ The example below shows adding a datasheet object to a SBOL document using the \
 \label{sec:examples}
 % -----------------------------------------------------------------------------
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.4]{uml/example_annotated_gene}
-\caption[]{In this example the C0040 tetR protein is used twice in the same design. The SBOL data model supports designs that re-uses multiple instances of a component. In this case, the re-used parts are represented by Components which share the same ComponentDefinition.}
-\label{uml:example_annotated_gene}
-\end{center}
-\end{figure}
+\subsection{LacI/TetR Toggle Switch}
 
+As an example of structural representation under the SBOL 2.0 data model, \ref{uml:ex_comp_defs} specifies the component definitions for one half of a LacI/TetR toggle switch in a UML object diagram. These include DNA component definitions based on parts from the iGEM Registry, the RNA and protein component definitions derived from them, and the small molecule component definition for IPTG. With the exception of the latter, all component definitions in this example are associated with a sequence, though a SMILES encoding could be provided for IPTG if that level of detail is required.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.4]{uml/example_laci_inverter}
-\caption[]{This example illustrates the functional specification of an inverter circuit using the SBOL data model.}
-\label{uml:example_laci_inverter}
+\includegraphics[width=\textwidth]{uml/example_component_definitions}
+\caption[]{Examples of component definitions for one half of a LacI/TetR toggle switch.}
+\label{uml:ex_comp_defs}
 \end{center}
 \end{figure}
 
+As an example of structural composition, \ref{uml:ex_comp_def_compo} specifies the composite component definitions for the IPTG-LacI complex and TetR gene. In the case of the gene, its subcomponents are located as ranges along its sequence using sequence annotations. The complex, however, has no sequence and its subcomponents are aggregated without any data about their relative locations.
+
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\textwidth]{uml/example_component_definition_composition}
+\caption[]{Example of composite component definitions for one half of a LacI/TetR toggle switch.}
+\label{uml:ex_comp_def_compo}
+\end{center}
+\end{figure}
+
+As an example of functional representation, \ref{uml:ex_mod_def} specifies the module definition for a LacI inverter. This module definition aggregates and instantiates the component definitions for the TetR gene as functional components that participate in interactions. Note that the transcription and translation of TetR is represented using a single genetic production interaction that abstracts away the presence of the intermediate TetR mRNA. If this additional detail becomes necessary, then a new module could be created that includes both transcription and translation interactions and a TetR mRNA functional component. Finally, the module definition is also associated with a continuous SBML model from source file LacI\_Inverter.xml.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\textwidth]{uml/example_module_definition}
+\caption[]{Example of module definition for a LacI inverter.}
+\label{uml:ex_mod_def}
+\end{center}
+\end{figure}
+
+As an example of functional composition, \ref{uml:ex_mod_def_compo} specifies the composite module definition for the LacI/TetR toggle switch. This module definition aggregates and instantiates the LacI and TetR inverter module definitions as submodules. It also instantiates the LacI and TetR component definitions as the functional component inputs and/or outputs to both the toggle switch and inverter module definitions. To complete the functional composition of the toggle switch, mappings are made between these functional components to indicate that the output of the LacI inverter is the input to the TetR inverter and vice versa.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\textwidth]{uml/example_module_definition_composition}
+\caption[]{Example of composing the module definitions for a LacI inverter and TetR inverter into a module definition for a LacI/TetR toggle switch.}
+\label{uml:ex_mod_def_compo}
+\end{center}
+\end{figure}
+
+Lastly, as an example of further detailing the connection between structure and function, \ref{uml:ex_comp_mapping} specifies a mapping between the composite component defintion for the TetR gene
+
+%  The first use case is to indicate with greater fidelity how a module describes the function of a composite component, namely by asserting that particular component instantiations within the module correspond to particular component instantiations within the component. 
+
+% As an example of this use case, one might compose the structure and function of the LacI-repressible gene of the genetic toggle switch. In this example, the LacI-repressible gene and two of its subcomponents, the pLac promoter and cTetR CDS, are to be composed with the LacI inverter module. In order to compose these components with the LacI inverter module and indicate that it describes their behavior, they are instantiated inside the module. In addition, port maps are placed on the instantiation of the LacI-repressible gene to connect between its pLac plus cTetR subcomponent instantiations and the corresponding component instantiations in the module. Doing so makes it clear which subcomponent instantiations in the gene are being described by which component instantiations in the module. In this way, GDA tools for sequence editing and biochemical modeling can guarantee that their users are handling corresponding elements of a given genetic design, while GDA tools for genetic technology mapping can make explicit connections between the structural and functional elements of a design.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\textwidth]{uml/example_component_mapping}
+\caption[]{Example of mapping between the structural and functional components of a LacI inverter.}
+\label{uml:ex_comp_mapping}
+\end{center}
+\end{figure}
 
 
 % -----------------------------------------------------------------------------
@@ -1146,182 +1182,160 @@ This example shows the serialization of the PoPS Receiver device designed by Can
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pr="http://www.partsregistry.org/" xmlns:sbol="http://sbols.org/v2#">
+<rdf:RDF xmlns:pr="http://www.partsregistry.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:sbol="http://sbols.org/v2#">
   <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_R0040">
-    <sbol:timeStamp>2015-02-26 14:26:55.692</sbol:timeStamp>
-    <sbol:name>BBa_R0040</sbol:name>
-    <sbol:description>TetR repressible promoter</sbol:description>
+    <dcterms:title>BBa_R0040</dcterms:title>
+    <dcterms:description>TetR repressible promoter</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
     <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_F2620:Design"/>
   </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_C0062">
-    <sbol:timeStamp>2015-02-26 14:26:55.692</sbol:timeStamp>
-    <sbol:name>BBa_C0062</sbol:name>
-    <sbol:description>luxR coding sequence</sbol:description>
+    <dcterms:title>BBa_C0062</dcterms:title>
+    <dcterms:description>luxR coding sequence</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
     <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_C0062:Design"/>
   </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_B0015">
-    <sbol:timeStamp>2015-02-26 14:26:55.692</sbol:timeStamp>
-    <sbol:name>BBa_B0015</sbol:name>
-    <sbol:description>Double terminator</sbol:description>
+    <dcterms:title>BBa_B0015</dcterms:title>
+    <dcterms:description>Double terminator</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
     <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_B0015:Design"/>
   </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_R0062">
-    <sbol:timeStamp>2015-02-26 14:26:55.693</sbol:timeStamp>
-    <sbol:name>BBa_R0062</sbol:name>
-    <sbol:description>LuxR inducible promoter</sbol:description>
+    <dcterms:title>BBa_R0062</dcterms:title>
+    <dcterms:description>LuxR inducible promoter</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
     <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_R0062:Design"/>
   </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_F2620">
-    <sbol:timeStamp>2015-02-26 14:26:55.693</sbol:timeStamp>
-    <sbol:name>BBa_F2620</sbol:name>
-    <sbol:description>3OC6HSL -&gt; PoPS Receiver</sbol:description>
+    <dcterms:title>BBa_F2620</dcterms:title>
+    <dcterms:description>3OC6HSL -&gt; PoPS Receiver</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:00001411"/>
     <sbol:subComponent>
-      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/luxR">
-        <sbol:timeStamp>2015-02-26 14:26:55.694</sbol:timeStamp>
-        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_B0034"/>
-      </sbol:Component>
-    </sbol:subComponent>
-    <sbol:subComponent>
-      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/rbs">
-        <sbol:timeStamp>2015-02-26 14:26:55.694</sbol:timeStamp>
-        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_C0062"/>
-      </sbol:Component>
-    </sbol:subComponent>
-    <sbol:subComponent>
       <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/pLuxR">
-        <sbol:timeStamp>2015-02-26 14:26:55.695</sbol:timeStamp>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
         <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_R0062"/>
       </sbol:Component>
     </sbol:subComponent>
     <sbol:subComponent>
       <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/pTetR">
-        <sbol:timeStamp>2015-02-26 14:26:55.694</sbol:timeStamp>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
         <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_R0040"/>
       </sbol:Component>
     </sbol:subComponent>
     <sbol:subComponent>
       <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/ter">
-        <sbol:timeStamp>2015-02-26 14:26:55.695</sbol:timeStamp>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
         <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_B0015"/>
       </sbol:Component>
     </sbol:subComponent>
-    <sbol:sequenceAnnotation>
-      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno5">
-        <sbol:timeStamp>2015-02-26 14:26:55.697</sbol:timeStamp>
-        <sbol:location>
-          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno5/range">
-            <sbol:timeStamp>2015-02-26 14:26:55.697</sbol:timeStamp>
-            <sbol:start>901</sbol:start>
-            <sbol:end>956</sbol:end>
-          </sbol:Range>
-        </sbol:location>
-        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/pLuxR"/>
-      </sbol:SequenceAnnotation>
-    </sbol:sequenceAnnotation>
-    <sbol:sequenceAnnotation>
-      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno3">
-        <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
-        <sbol:location>
-          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno3/range">
-            <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
-            <sbol:start>69</sbol:start>
-            <sbol:end>770</sbol:end>
-          </sbol:Range>
-        </sbol:location>
-        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/luxR"/>
-      </sbol:SequenceAnnotation>
-    </sbol:sequenceAnnotation>
+    <sbol:subComponent>
+      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/luxR">
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_B0034"/>
+      </sbol:Component>
+    </sbol:subComponent>
+    <sbol:subComponent>
+      <sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/rbs">
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_C0062"/>
+      </sbol:Component>
+    </sbol:subComponent>
     <sbol:sequenceAnnotation>
       <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2">
-        <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
         <sbol:location>
           <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2/range">
-            <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
             <sbol:start>56</sbol:start>
             <sbol:end>68</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
           </sbol:Range>
         </sbol:location>
-        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/rbs"/>
-      </sbol:SequenceAnnotation>
-    </sbol:sequenceAnnotation>
-    <sbol:sequenceAnnotation>
-      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno1">
-        <sbol:timeStamp>2015-02-26 14:26:55.696</sbol:timeStamp>
-        <sbol:location>
-          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno1/range">
-            <sbol:timeStamp>2015-02-26 14:26:55.695</sbol:timeStamp>
-            <sbol:start>1</sbol:start>
-            <sbol:end>55</sbol:end>
-          </sbol:Range>
-        </sbol:location>
-        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/pTetR"/>
+        <sbol:component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/rbs"/>
       </sbol:SequenceAnnotation>
     </sbol:sequenceAnnotation>
     <sbol:sequenceAnnotation>
       <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno4">
-        <sbol:timeStamp>2015-02-26 14:26:55.697</sbol:timeStamp>
         <sbol:location>
           <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno4/range">
-            <sbol:timeStamp>2015-02-26 14:26:55.697</sbol:timeStamp>
             <sbol:start>771</sbol:start>
             <sbol:end>900</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
           </sbol:Range>
         </sbol:location>
-        <sbol:Component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/ter"/>
+        <sbol:component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/ter"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno1">
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno1/range">
+            <sbol:start>1</sbol:start>
+            <sbol:end>55</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/pTetR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno3">
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno3/range">
+            <sbol:start>69</sbol:start>
+            <sbol:end>770</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/luxR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno5">
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno5/range">
+            <sbol:start>901</sbol:start>
+            <sbol:end>956</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/pLuxR"/>
       </sbol:SequenceAnnotation>
     </sbol:sequenceAnnotation>
     <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_R0040:Design"/>
   </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_B0034">
-    <sbol:timeStamp>2015-02-26 14:26:55.692</sbol:timeStamp>
-    <sbol:name>BBa_B0034</sbol:name>
-    <sbol:description>RBS based on Elowitz repressilator</sbol:description>
+    <dcterms:title>BBa_B0034</dcterms:title>
+    <dcterms:description>RBS based on Elowitz repressilator</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
     <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_B0034:Design"/>
   </sbol:ComponentDefinition>
   <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_B0015:Design">
-    <sbol:timeStamp>2015-02-26 14:26:55.69</sbol:timeStamp>
     <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_B0034:Design">
-    <sbol:timeStamp>2015-02-26 14:26:55.69</sbol:timeStamp>
     <sbol:elements>aaagaggagaaa</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_C0062:Design">
-    <sbol:timeStamp>2015-02-26 14:26:55.69</sbol:timeStamp>
     <sbol:elements>atgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_R0040:Design">
-    <sbol:timeStamp>2015-02-26 14:26:55.689</sbol:timeStamp>
     <sbol:elements></sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_R0062:Design">
-    <sbol:timeStamp>2015-02-26 14:26:55.691</sbol:timeStamp>
     <sbol:elements>acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_F2620:Design">
-    <sbol:timeStamp>2015-02-26 14:26:55.69</sbol:timeStamp>
     <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
@@ -1332,7 +1346,32 @@ This example shows the serialization of the PoPS Receiver device designed by Can
 \section{Best Practices}
 \label{sec:bestpractices}
 % -----------------------------------------------------------------------------
-Currently, if a developer wishes to change a SBOL object that has been published to the Web, then as a best practice they should create a copy of the SBOL object that incorporates the change, but has a new URI. This practice, however, does not inherently involve a standardized declaration that the second object is a version of the first. Consequently, the ``persistentIdentity'', ``version'', and ``timeStamp'' data fields have been created to provide developers with the means to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI) and label these objects with version Strings and times of creation.
+\subsection{Versioning}
+Currently, if a developer wishes to change a SBOL object that has been published to the Web, then as a best practice they should create a copy of the SBOL object that incorporates the change, but has a new URI. This practice, however, does not inherently involve a standardized declaration that the second object is a version of the first. Consequently, the \sbol{persistentIdentity}, and \sbol{version} data fields have been created to provide developers with the means to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI) and label these objects with version Strings.
+
+\subsection{Using External Terms}
+External ontologies and controlled vocabularies are integral part of SBOL. Through these resources SBOL utilises existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, the types of components whether they are DNA or protein based are indicated using BioPAX. Similarly,  the functionality of a DNA component is determined via the SO terms. Although preferred ontologies have been explained in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
+
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{p{3cm}p{3cm}p{4cm}}
+    \toprule
+    \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}\\
+    \midrule
+    \textbf{ComponentDefinition}  & type & BioPAX \\
+    						   	  & role & SO (if type is \textit{DNA} or \textit{RNA})    \\
+    						   	  & role & CHEBI (if type is \textit{small molecule})    \\
+    						   	  & role & UniProt (if type is \textit{protein}??)    \\%TODO What is the external resource for proteins, diccuss it.                                  
+    \textbf{Interaction}	      & type & SBO      \\
+    \textbf{Participation}	      & type & SBO      \\
+    \textbf{Model}	      		  & language & EDAM      \\
+    				      		  & framework & SBO      \\
+    \bottomrule
+  \end{edtable}
+  \caption{SBOL properties and preferred external resources to choose values from.}
+  \label{tbl:preferred_external_resources}
+\end{table}
+
 
 %TODO: Annotations: Annotating with created and modified dates, and how to add them.
 
