@@ -1,0 +1,72 @@
+% -----------------------------------------------------------------------------
+\section{SBOL Specification Vocabulary}
+% -----------------------------------------------------------------------------
+
+This document indicates requirement levels using the controlled vocabulary specified in IETF RFC 2119 and reiterated in BBF RFC 0.
+In particular, the key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
+
+\begin{itemize}
+\item The words "MUST", "REQUIRED", or "SHALL" mean that the item is an absolute requirement.
+\item The phrases "MUST NOT" or "SHALL NOT" mean that the item is an absolute prohibition.
+\item The word "SHOULD" or the adjective "RECOMMENDED" mean that there may exist valid reasons in particular circumstances to ignore a particular item, but the full implications must be understood and carefully weighed before choosing a different course.
+\item The phrases "SHOULD NOT" or "NOT RECOMMENDED" mean that there may exist valid reasons in particular circumstances when the particular behavior is acceptable or even useful, but the full implications should be understood and the case carefully weighed before implementing any behavior described with this label.
+\item The word "MAY" or the adjective "OPTIONAL" mean that an item is truly optional.
+\end{itemize}
+
+\subsection{SBOL-specific Vocabulary}
+
+SBOL defines several entity types in order to explicitly define different types of information. At the top level, a SBOL document includes these entities:
+
+\vspace*{2ex}
+\begin{center}
+  \begin{edtable}{tabular}{>{\hspace*{10pt}\slshape}l>{\hspace*{40pt}}l}
+    list of component definitions(optional)	& (\sec*{sec:ComponentDefinition}) \\
+    list of sequences (optional)		& (\sec*{sec:Sequence}) \\
+    list of module definitions (optional)	 	& (\sec*{sec:ModuleDefinition}) \\
+    list of models (optional)			& (\sec*{sec:Model}) \\
+    list of collections (optional)		& (\sec*{sec:Collection}) \\
+    list of generic top level entities (optional)	& (\sec*{sec:GenericTopLevel}) \\
+  \end{edtable}
+\end{center}
+\vspace*{2ex}
+\todo[inline]{WTF is this table?}
+
+In addition to these top level entities, a SBOL document may include additional entities that are nested within the top level entities. Short descriptions of all SBOL entities are given below:
+
+\begin{description}
+  
+\item \emph{\sbol{ComponentDefinition}}: Represents biological molecules such as DNA, proteins, RNA, and small molecules.
+
+\item \emph{\sbol{Component}}:
+Represents a specific occurrence of a component within a larger design.  For a given component definition, there may be several instances of components specified at different locations within the larger design.
+\item \emph{\sbol{SequenceAnnotation}}:
+Describes the position and strand orientation (in the case of DNA molecules) of a notable sub-sequence found within the Component being
+described. Annotations provide the link which describes the 
+sequence of a component in terms of other components (i.e.,
+subComponents).
+\item \emph{\sbol{Location}}:
+Specifies the coordinates of a genetic locus on a DNA molecule or a residue or site on other sequential macromolecules such as proteins.
+\item \emph{\sbol{SequenceConstraint}}:
+Describes the relative spatial orientation of Components which are assembled together into a biological structure.
+\item \emph{\sbol{Sequence}}:
+Represents a contiguous sequence of monomers in a macromoleculer polymer such as DNA, RNA, or protein. The
+sequence is a fundamental information object for synthetic biology and is needed to reuse components, to replicate synthetic biology work, and to assemble new synthetic biological systems. Therefore, both experimental work and theoretical sequence composition research depend heavily on the sequence associated with component definitions.
+\item \emph{\sbol{ModuleDefinition}}:
+Desribes an abstract functional module that may be composed of many functional interactions between biological components.
+\item \emph{\sbol{FunctionalComponent}}:
+Specifies an occurrence of a component that is intended to have a biological function inside a design, as opposed to a component whose purpose is simply to compose a biological structure. 
+\item \emph{\sbol{Module}}:
+Represents a specific occurrence of a functional module within a larger design.  For a given module definition, there may be several instances of modules that specify the overall function of a biological design.
+\item \emph{\sbol{MapsTo}}:
+Links Component objects (both Components and FunctionalComponents) from potentially different levels of hierarchy in a design.
+\item \emph{\sbol{Interaction}}:
+Describes a functional relationship between biological effectors, such as regulatory activation or repression.  Interactions can also be used to describe processes from the central dogma of biology, such as transcription and translation.
+\item \emph{\sbol{Participation}}:
+Describes the role that a component plays in a functional interaction.  For example, a transcription factor may participate in an interaction either as a repressor or activator.
+\item \emph{\sbol{Model}}:
+Links a SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.
+\item \emph{\sbol{Collection}}:
+Represents a user defined organizational container for Components.
+\item \emph{\sbol{GenericTopLevel}}:
+Represents a data container that can contain custom data added by user applications.
+\end{description}

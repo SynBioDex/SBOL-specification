@@ -1,0 +1,34 @@
+% -----------------------------------------------------------------------------
+\section{Best Practices}
+\label{sec:bestpractices}
+% -----------------------------------------------------------------------------
+\subsection{Versioning}
+Currently, if a developer wishes to change a SBOL object that has been published to the Web, then as a best practice they should create a copy of the SBOL object that incorporates the change, but has a new URI. This practice, however, does not inherently involve a standardized declaration that the second object is a version of the first. Consequently, the \sbol{persistentIdentity}, and \sbol{version} data fields have been created to provide developers with the means to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI) and label these objects with version Strings.
+
+\todo[inline]{try to target readers unfamiliar with RDF/XML.  -bder}
+%TODO[version]{maybe clarify what type of versioning is this object affecting? TN}
+
+\subsection{Using External Terms}
+External ontologies and controlled vocabularies are integral part of SBOL. Through these resources SBOL utilises existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, the types of components whether they are DNA or protein based are indicated using BioPAX. Similarly,  the functionality of a DNA component is determined via the SO terms. Although preferred ontologies have been explained in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
+
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{p{3cm}p{3cm}p{4cm}}
+    \toprule
+    \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}\\
+    \midrule
+    \textbf{ComponentDefinition}  & type & BioPAX \\
+    						   	  & role & SO (if type is \textit{DNA} or \textit{RNA})    \\
+    						   	  & role & CHEBI (if type is \textit{small molecule})    \\
+    						   	  & role & UniProt (if type is \textit{protein}??)    \\%TODO What is the external resource for proteins, diccuss it.  protein - GO instead of UnitProt
+\\%TODO Should there be an external listing for all Top Level? 
+                                  
+    \textbf{Interaction}	      & type & SBO      \\
+    \textbf{Participation}	      & type & SBO      \\
+    \textbf{Model}	      		  & language & EDAM      \\
+    				      		  & framework & SBO      \\
+    \bottomrule
+  \end{edtable}
+  \caption{SBOL properties and preferred external resources to choose values from.}
+  \label{tbl:preferred_external_resources}
+\end{table}
