@@ -26,51 +26,46 @@ Represents a user-defined container for organizing a group of SBOL objects.
 Represents a specific occurrence or instance of a single entity within the design of a more complex component.
 Each \sbol{Component} is associated with a \sbol{ComponentDefinition}, and there may be many different instances at different locations in a design that share the same definition.
 
-\item \emph{\sbol{ComponentDefinition}}: Represents designed entities, such as DNA, RNA, and proteins, as well as other entities they interact with, such as small molecules or environmental properties.
+\item \emph{\sbol{ComponentDefinition}}: Describes the structure of designed entities, such as DNA, RNA, and proteins, as well as other entities they interact with, such as small molecules or environmental properties.
 
 \item \emph{\sbol{FunctionalComponent}}:
-Represents a specific occurrence or instance of an entity within the design of a \sbol{ModuleDefinition}.
-Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a more complex \sbol{Component}.
-
-\item \emph{\sbol{FunctionalComponent}}:
-Specifies an occurrence of a component that is intended to have a biological function inside a design, as opposed to a component whose purpose is simply to compose a biological structure. 
+Represents a specific occurrence or instance of an entity within a \sbol{ModuleDefinition}.
+Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a containing \sbol{ComponentDefinition}.
 
 \item \emph{\sbol{GenericTopLevel}}:
 Represents a data container that can contain custom data added by user applications.
 
 \item \emph{\sbol{Interaction}}:
-Describes a functional relationship between biological effectors, such as regulatory activation or repression.  Interactions can also be used to describe processes from the central dogma of biology, such as transcription and translation.
+Describes a functional relationship between biological entities, such as regulatory activation or repression, or a biological processes such as transcription or translation.
 
 \item \emph{\sbol{Location}}:
-Specifies the base coordinates of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecules such as a protein.
+Specifies the base coordinates and orientation of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecule such as a protein.
 
 \item \emph{\sbol{MapsTo}}:
-Links \sbol{Component} objects (both Components and FunctionalComponents) together within a larger design, indicating that they refer to the same entity.
-For example, a \sbol{MapsTo} could be used to indicate that a promoter that is the target of a repressor in one \sbol{Module} is the same promoter that regulates expression of a reporter in another \sbol{Module}.
+When a design (\sbol{ComponentDefinition} or \sbol{ModuleDefinition}) includes another design as a substructure, the larger design may need to refer to a \sbol{ComponentInstance} from the sub-design.
+In this case, a copy of the referenced \sbol{ComponentInstance} needs to be created in the design and a \sbol{MapsTo} is added to the instance for the sub-design, which associates the original and the copy.
 
 \item \emph{\sbol{Model}}:
-Links a SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.
+Links an SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.
 
 \item \emph{\sbol{Module}}:
-Represents a specific occurrence or instance of a module within a larger design.  For a given module definition, there may be several instances of modules that specify the overall function of a biological design.
+Represents a specific occurrence or instance of a sub-system within a larger design.
+Each \sbol{Module} is associated with a \sbol{ModuleDefinition}, and there may be many different instances at different locations in a design that share the same definition.
 
 \item \emph{\sbol{ModuleDefinition}}:
-Desribes an abstract functional module that may be composed of many functional interactions between biological components.
+Describes a ``system'' design as a collection of biological components and their functional relationships.
 
 \item \emph{\sbol{Participation}}:
-Describes the role that a component plays in a functional interaction.  For example, a transcription factor may participate in an interaction either as a repressor or activator.
+Describes the role that a \sbol{Component} plays in an \sbol{Interaction}.
+For example, a transcription factor might participate in an \sbol{Interaction} as a repressor or as an activator.
 
 \item \emph{\sbol{Sequence}}:
-Represents a contiguous sequence of monomers in a macromoleculer polymer such as DNA, RNA, or protein. The
-sequence is a fundamental information object for synthetic biology and is needed to reuse components, to replicate synthetic biology work, and to assemble new synthetic biological systems. Therefore, both experimental work and theoretical sequence composition research depend heavily on the sequence associated with component definitions.
+Represents a contiguous series of monomers in a macromoleculer polymer such as DNA, RNA, or protein. 
 
 \item \emph{\sbol{SequenceAnnotation}}:
-Describes the position and strand orientation (in the case of DNA molecules) of a notable sub-sequence found within the Component being
-described. Annotations provide the link which describes the 
-sequence of a component in terms of other components (i.e.,
-subComponents).
+Describes the \sbol{Location} of a notable sub-sequence found within a \sbol{ComponentDefinition}, optionally linking it to a \sbol{Component}.
 
 \item \emph{\sbol{SequenceConstraint}}:
-Describes the relative spatial orientation of Components which are assembled together into a biological structure.
+Describes the relative spatial position and orientation of two \sbol{Component} objects that are contained within the same \sbol{ComponentDefinition}.
 
 \end{description}
