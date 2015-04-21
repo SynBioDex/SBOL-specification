@@ -2,10 +2,9 @@
 \section{SBOL Data Model}
 % -----------------------------------------------------------------------------
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}.   
-This section begins with a review of UML diagrams, then each following subsection explains one of the ``top-level'' objects in the SBOL data model.
+This section begins with a review of UML diagrams and naming conventions, then each following subsection explains one of the ``top-level'' objects in the SBOL data model.
 
 Complete SBOL examples and best practices when using SBOL can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
-\todo[inline]{Sections 8 and 10 has a funny gap, makes me think we need to look at indexing in general --JSB}
 
 \subsection{Understanding the UML Diagrams}
 
@@ -31,6 +30,10 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 
 \end{itemize}
 
+\subsection{Naming Conventions}
+
+\todo[inline]{need to put in typography and upper case vs. camel case, etc}
+
 Within the SBOL data model, all properties are given a singular or plural name in accordance with their data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{sequenceAnnotation} is the singular form of \sbol{sequenceAnnotation}s.
 
 Within the RDF serialization of SBOL, however, SBOL properties are always given singular names. The serialization does not use RDF collections to represent multiple values of an SBOL property. Hence, if a SBOL property has five values, then its serialization contains five RDF triples with singular predicate names.
@@ -42,21 +45,10 @@ Within an implementing Object-Oriented (OO) API, SBOL properties should be mappe
 As another example, a relational implementation of the SBOL API would store the properties and associations a mixture of data fields and references via foreign keys. The fields in individual tables will correspond to the `arrowhead' end of an association (in reverse to the direction in the RDF and OO representations), and the name may be modified to reflect this change in directionality. For example, the \sbol{sequence} association between a \sbol{ComponentDefinition} and \sbol{Sequence} would be represented by a foreign key field on the \sbol{Sequence} table that references a row in the \sbol{ComponentDefinition} table, and it may be named \external{sequenceOf}.
 \todo[inline]{What is this even about?  Is it another best practice?}
 
-\subsection {SBOL Document}
-\todo[inline]{This feels like it belongs in the serialization section, not the data model section. 
-Goksel: How about extending a bit more about SBOLDocument first? We can say that all the SBOL entities are included in an SBOL Document. Then we can talk about how it is serialized.}
-An SBOL document is a valid RDF/XML document. Accordingly, each SBOL document starts with an XML declaration that has its XML version set to ``1.0.'' As shown in the example below, this declaration is then followed by a rdf:RDF XML element that includes the namespace declarations for RDF and SBOL. The latter namespace is used to indicate which entities and properties in the SBOL document are defined by SBOL.
+\subsection{Data Types}
 
-\lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
-...
-</rdf:RDF>
-\end{lstlisting}
-
-As explained in \ref{sec:annotations}, SBOL documents can also include custom namespace declarations for the purpose of embedding application-specific data.
-
+\todo[inline]{we use String, Integer, URI, Literal (these are from some W3C or XSD or whatever thing), and the classes below}
+\todo[inline]{Give a forward pointer to RECOMMENDED best-practices for compliant URIs}
 
 \todo[inline]{Need to consider the order in which the classes are presented}
 \subsection {Identified}
@@ -137,7 +129,65 @@ An OPTIONAL, free text property with the data type of \external{String}, intende
 \end{center}
 \end{figure}
 
+\todo[inline]{Make the left-right order in this figure match the order of the following sections}
 
+
+
+\subsection{Sequence}
+\label{sec:Sequence}
+The \sbol{Sequence} class is used to encode the primary structure of a \sbol{ComponentDefinition} object and the encoding used to capture this information.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/sequence}
+\caption[]{Sequence class}
+\label{uml:sequence}
+\end{center}
+\end{figure}
+
+
+\subsubsection*{The \sbolheading{elements} property}
+\label{sec:elements}
+Required. A \external{String} of characters that represent the constituents of biological molecule, for example   nucleic acid symbols for DNA molecules. 
+
+\subsubsection*{The \sbolheading{encoding} property}
+\label{sec:encoding}
+Required. \sbol{Sequence} objects identify their type of encoding with a \external{URI}. For example, a \sbol{Sequence} object that encodes a DNA sequence would have an \external{IUPAC DNA} encoding, while a \sbol{Sequence} object that encodes the chemical structure of glucose might have a \external{simplified molecular-input line-entry system (SMILES)} encoding (\ref{tbl:sequence_encodings}).
+
+%A Summary of letters for nucleic acids and aminoacids
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{ComponentDefinition Type} & \textbf{Encoding} \\
+    \midrule
+    DnaRegion,RnaRegion  & \url{http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html}\\
+    Protein		 & \url{http://www.chem.qmul.ac.uk/iupac/AminoAcid/}\\
+    SmallMolecule    & \url{http://www.opensmiles.org/opensmiles.html}\\
+    \bottomrule
+  \end{edtable}
+  \caption{URIs for the encoding property and the corresponding ComponentDefiniton types, which are BioPAX terms.}
+  \label{tbl:sequence_encodings}
+\end{table}
+
+The serialization of \sbol{Sequence} objects has the following form:
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Sequence rdf:about="...">
+      ...
+  [\emph{one}] <sbol:elements>...</sbol:elements> [\emph{element}]
+  [\emph{one}] <sbol:encoding rdf:resource="..."/> [\emph{element}]
+</sbol:Sequence>
+\end{lstlisting}
+
+The example below shows the serialization of a \sbol{Sequence} object for a promoter. Nucleotide sequences are represented with the \sbol{elements} property and the \sbol{encoding} is serialized as a URI value. 
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_J23119:Design">
+  <sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
+  <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+</sbol:Sequence>
+\end{lstlisting}
 
 
 \subsection{ComponentDefinition}
@@ -482,61 +532,102 @@ The example below shows the serialization of a \sbol{SequenceConstraint} object.
 \end{lstlisting}
       
       
-\subsection{Sequence}
-\label{sec:Sequence}
-The \sbol{Sequence} class is used to encode the primary structure of a \sbol{ComponentDefinition} object and the encoding used to capture this information.
+\subsection{Model}
+\label{sec:Model}
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.6]{uml/sequence}
-\caption[]{Sequence class}
-\label{uml:sequence}
+\includegraphics[scale=0.6]{uml/model}
+\caption[]{}
+\label{uml:model}
 \end{center}
 \end{figure}
+\todo[inline]{Move the link text to the section on Module}
+SBOL's \sbol{Model} objects are used to link genetic descriptions of biological parts and their interactions to computational models. Each \sbol{Model} object specify the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modelling framework and the model's role(s). In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of their ModuleDefinition objects in a well-developed language of their choice. A ModuleDefinition object can link to more than one model since each one can encode different levels of functional detail and play different roles in engineering design. 
 
+\subsubsection*{ The \sbolheading{source} property}
+This property has a data type of \external{URI}, and is required to specify the actual location of a qualitative or quantitative model.
 
-\subsubsection*{The \sbolheading{elements} property}
-\label{sec:elements}
-Required. A \external{String} of characters that represent the constituents of biological molecule, for example   nucleic acid symbols for DNA molecules. 
+\subsubsection*{ The \sbolheading{language} property}
+This property has a data type of \external{URI}, and is required to specify the language the model is implemented with. Values for the URIs should be chosen from the EMBRACE Data and Methods (EDAM) ontology where possible. Some of the model types and corresponding URI values are shown in \ref{tbl:model_types}.
 
-\subsubsection*{The \sbolheading{encoding} property}
-\label{sec:encoding}
-Required. \sbol{Sequence} objects identify their type of encoding with a \external{URI}. For example, a \sbol{Sequence} object that encodes a DNA sequence would have an \external{IUPAC DNA} encoding, while a \sbol{Sequence} object that encodes the chemical structure of glucose might have a \external{simplified molecular-input line-entry system (SMILES)} encoding (\ref{tbl:sequence_encodings}).
-
-%A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
     \toprule
-    \textbf{ComponentDefinition Type} & \textbf{Encoding} \\
+    \textbf{Model Language} & \textbf{URI} \\
     \midrule
-    DnaRegion,RnaRegion  & \url{http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html}\\
-    Protein		 & \url{http://www.chem.qmul.ac.uk/iupac/AminoAcid/}\\
-    SmallMolecule    & \url{http://www.opensmiles.org/opensmiles.html}\\
+    SBML  & \url{http://identifiers.org/edam/format_2585}\\
+    CellML		 & \url{http://identifiers.org/edam/format_3240}\\
+    BioPAX    & \url{http://identifiers.org/edam/format_3156}\\
     \bottomrule
   \end{edtable}
-  \caption{URIs for the encoding property and the corresponding ComponentDefiniton types, which are BioPAX terms.}
-  \label{tbl:sequence_encodings}
+  \caption{Commonly used model languages and their corresponding URIs.}
+  \label{tbl:model_types}
 \end{table}
 
-The serialization of \sbol{Sequence} objects has the following form:
+
+\subsubsection*{ The \sbolheading{framework} property}
+This property has a data type of \external{URI} and is required to specify the modelling framework a model is implemented with. Values for this property should be used from the SBO's modelling framework terms where possible (\ref{tbl:model_frameworks}).
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Framework} & \textbf{URI} \\
+    \midrule
+    Continuous  & \url{http://identifiers.org/biomodels.sbo/SBO:0000062}\\
+    Discrete & \url{http://identifiers.org/biomodels.sbo/SBO:0000063}\\
+    \bottomrule
+  \end{edtable}
+  \caption{Example modelling frameworks and corresponding SBO terms.}
+  \label{tbl:model_frameworks}
+\end{table}
+
+\subsubsection*{ The \sbolheading{role} property}
+This property has a data type of \external{URI} and is required to specify what the model is for, such as part or interaction model (\ref{tbl:model_roles}).
+
+\todo[inline]{Are we agreeing on this table? Do we want to give more flexibility?}
+\begin{table}[ht]
+  \begin{edtable}{tabular}{l}
+    \toprule
+    \textbf{Model Roles}  \\
+    \midrule
+    http://sbols.org/v2\#component\_model\\
+    http://sbols.org/v2\#interaction\_model\\
+    http://sbols.org/v2\#module\_model\\    
+    \bottomrule
+  \end{edtable}
+  \caption{URI constants for model roles}
+  \label{tbl:model_roles}
+\end{table}
+
+The serialization of \sbol{Model} objects has the following form:
+
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Sequence rdf:about="...">
-      ...
-  [\emph{one}] <sbol:elements>...</sbol:elements> [\emph{element}]
-  [\emph{one}] <sbol:encoding rdf:resource="..."/> [\emph{element}]
-</sbol:Sequence>
+<sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
+  ...
+  [\emph{one}]         <sbol:source rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]         <sbol:language rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]         <sbol:framework rdf:resource="..."/> [\emph{element}]
+  [\emph{one or more}] <sbol:role rdf:resource="..."/> [\emph{element}]
+</sbol:Model>
 \end{lstlisting}
 
-The example below shows the serialization of a \sbol{Sequence} object for a promoter. Nucleotide sequences are represented with the \sbol{elements} property and the \sbol{encoding} is serialized as a URI value. 
-
+The example below shows the serialization of a \sbol{Model} object. The model object includes information about the models of a toggle switch. The model is implemented in SBML using a continuous modelling framework. The source property shows the physical location of the SBML model, in a model repository. 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_J23119:Design">
-  <sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
-  <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
-</sbol:Sequence>
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
+    <sbol:source rdf:resource="http://virtualparts.org/part/pIKE_Toggle_1"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
+    <sbol:role rdf:resource="http://sbols.org/v2#module_model"/>
+  </sbol:Model>
+</rdf:RDF>
+
 \end{lstlisting}
+\label{ser:Model}
 
 
 
@@ -763,103 +854,6 @@ In the example below, the role of participating \sbol{FunctionalComponent} is de
 </sbol:Participation>
 \end{lstlisting}
 
-\subsection{Model}
-\label{sec:Model}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/model}
-\caption[]{}
-\label{uml:model}
-\end{center}
-\end{figure}
-SBOL's \sbol{Model} objects are used to link genetic descriptions of biological parts and their interactions to computational models. Each \sbol{Model} object specify the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modelling framework and the model's role(s). In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of their ModuleDefinition objects in a well-developed language of their choice. A ModuleDefinition object can link to more than one model since each one can encode different levels of functional detail and play different roles in engineering design. 
-
-\subsubsection*{ The \sbolheading{source} property}
-This property has a data type of \external{URI}, and is required to specify the actual location of a qualitative or quantitative model.
-
-\subsubsection*{ The \sbolheading{language} property}
-This property has a data type of \external{URI}, and is required to specify the language the model is implemented with. Values for the URIs should be chosen from the EMBRACE Data and Methods (EDAM) ontology where possible. Some of the model types and corresponding URI values are shown in \ref{tbl:model_types}.
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{ll}
-    \toprule
-    \textbf{Model Language} & \textbf{URI} \\
-    \midrule
-    SBML  & \url{http://identifiers.org/edam/format_2585}\\
-    CellML		 & \url{http://identifiers.org/edam/format_3240}\\
-    BioPAX    & \url{http://identifiers.org/edam/format_3156}\\
-    \bottomrule
-  \end{edtable}
-  \caption{Commonly used model languages and their corresponding URIs.}
-  \label{tbl:model_types}
-\end{table}
-
-
-\subsubsection*{ The \sbolheading{framework} property}
-This property has a data type of \external{URI} and is required to specify the modelling framework a model is implemented with. Values for this property should be used from the SBO's modelling framework terms where possible (\ref{tbl:model_frameworks}).
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{ll}
-    \toprule
-    \textbf{Framework} & \textbf{URI} \\
-    \midrule
-    Continuous  & \url{http://identifiers.org/biomodels.sbo/SBO:0000062}\\
-    Discrete & \url{http://identifiers.org/biomodels.sbo/SBO:0000063}\\
-    \bottomrule
-  \end{edtable}
-  \caption{Example modelling frameworks and corresponding SBO terms.}
-  \label{tbl:model_frameworks}
-\end{table}
-
-\subsubsection*{ The \sbolheading{role} property}
-This property has a data type of \external{URI} and is required to specify what the model is for, such as part or interaction model (\ref{tbl:model_roles}).
-
-\todo[inline]{Are we agreeing on this table? Do we want to give more flexibility?}
-\begin{table}[ht]
-  \begin{edtable}{tabular}{l}
-    \toprule
-    \textbf{Model Roles}  \\
-    \midrule
-    http://sbols.org/v2\#component\_model\\
-    http://sbols.org/v2\#interaction\_model\\
-    http://sbols.org/v2\#module\_model\\    
-    \bottomrule
-  \end{edtable}
-  \caption{URI constants for model roles}
-  \label{tbl:model_roles}
-\end{table}
-
-The serialization of \sbol{Model} objects has the following form:
-
-\lstsetsbol
-\begin{lstlisting}
-<sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
-  ...
-  [\emph{one}]         <sbol:source rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]         <sbol:language rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]         <sbol:framework rdf:resource="..."/> [\emph{element}]
-  [\emph{one or more}] <sbol:role rdf:resource="..."/> [\emph{element}]
-</sbol:Model>
-\end{lstlisting}
-
-The example below shows the serialization of a \sbol{Model} object. The model object includes information about the models of a toggle switch. The model is implemented in SBML using a continuous modelling framework. The source property shows the physical location of the SBML model, in a model repository. 
-\lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
-    <sbol:source rdf:resource="http://virtualparts.org/part/pIKE_Toggle_1"/>
-    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
-    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
-    <sbol:role rdf:resource="http://sbols.org/v2#module_model"/>
-  </sbol:Model>
-</rdf:RDF>
-
-\end{lstlisting}
-\label{ser:Model}
-
-
 \subsection {Collection}
 \label{sec:Collection}
 The \sbol{Collection} class is another top level class, which groups together \sbol{TopLevel} objects that have something in common. For example, a \sbol{Collection} object could be the result of a query to find all \sbol{Component} objects that function as promoters or all \sbol{Module} objects that function as inverters in a given repository. 
@@ -909,14 +903,12 @@ The example below shows the serialization of a \sbol{Collection} object. Promote
 \subsection{Application Specific Data - Annotations}
 \label{sec:annotations}
 
-
-
-\todo[inline]{example of custom annotation}
+\todo[inline]{Explain that the two types of annotation correspond to top-level vs. part/whole properties}
 
 \subsubsection{Annotating SBOL objects}
 SBOL allows embedding application specific data that are not captured by the SBOL standard. Such data are optional, can be computationally generated and exchanged via SBOL documents without getting lost. These custom data are stored in the form of annotations, providing informative metadata about entities in an SBOL document.
 
-Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. Property names are specified by qualified names as \external{IRI}s, each formed of a namespace and a local name. Values can be \external{IRI}s or \external{Literal}s (for example, \external{String}, \external{Integer}, \external{Double}, \external{Boolean}) or custom \sbol{identity} entities initialized with application specific types. These custom \sbol{identity} entities can further be annotated with the scheme described here. These custom entities are either serialized within an SBOL entity being annotated, or referenced using an \external{IRI} annotation and embedded within the the annotated entity's parent.%TODO Make sure if we have a choice here! 
+Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. Property names are specified by qualified names as \external{URI}s, each formed of a namespace and a local name. Values can be \external{URI}s or \external{Literal}s (for example, \external{String}, \external{Integer}, \external{Double}, \external{Boolean}) or custom \sbol{identity} entities initialized with application specific types. These custom \sbol{identity} entities can further be annotated with the scheme described here. These custom entities are either serialized within an SBOL entity being annotated, or referenced using an \external{URI} annotation and embedded within the the annotated entity's parent.%TODO Make sure if we have a choice here! 
 
 \begin{figure}[!ht]
 \begin{center}
