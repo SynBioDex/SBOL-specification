@@ -32,17 +32,32 @@ Each \sbol{Component} is associated with a \sbol{ComponentDefinition}, and there
 Represents a specific occurrence or instance of an entity within the design of a \sbol{ModuleDefinition}.
 Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a more complex \sbol{Component}.
 
+\item \emph{\sbol{FunctionalComponent}}:
+Specifies an occurrence of a component that is intended to have a biological function inside a design, as opposed to a component whose purpose is simply to compose a biological structure. 
+
+\item \emph{\sbol{GenericTopLevel}}:
+Represents a data container that can contain custom data added by user applications.
+
+\item \emph{\sbol{Interaction}}:
+Describes a functional relationship between biological effectors, such as regulatory activation or repression.  Interactions can also be used to describe processes from the central dogma of biology, such as transcription and translation.
+
 \item \emph{\sbol{Location}}:
 Specifies the base coordinates of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecules such as a protein.
 
 \item \emph{\sbol{MapsTo}}:
 Links \sbol{Component} objects (both Components and FunctionalComponents) from different levels of hierarchy in a design, indicating that they referto the same entity (e.g., a promoter that is the target of a repressor in one module is the same promoter that regulates expression of a reporter in another module).
 
+\item \emph{\sbol{Model}}:
+Links a SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.
+
 \item \emph{\sbol{Module}}:
 Represents a specific occurrence or instance of a module within a larger design.  For a given module definition, there may be several instances of modules that specify the overall function of a biological design.
 
 \item \emph{\sbol{ModuleDefinition}}:
 Desribes an abstract functional module that may be composed of many functional interactions between biological components.
+
+\item \emph{\sbol{Participation}}:
+Describes the role that a component plays in a functional interaction.  For example, a transcription factor may participate in an interaction either as a repressor or activator.
 
 \item \emph{\sbol{Sequence}}:
 Represents a contiguous sequence of monomers in a macromoleculer polymer such as DNA, RNA, or protein. The
@@ -57,18 +72,4 @@ subComponents).
 \item \emph{\sbol{SequenceConstraint}}:
 Describes the relative spatial orientation of Components which are assembled together into a biological structure.
 
-\item \emph{\sbol{FunctionalComponent}}:
-Specifies an occurrence of a component that is intended to have a biological function inside a design, as opposed to a component whose purpose is simply to compose a biological structure. 
-
-\item \emph{\sbol{Interaction}}:
-Describes a functional relationship between biological effectors, such as regulatory activation or repression.  Interactions can also be used to describe processes from the central dogma of biology, such as transcription and translation.
-
-\item \emph{\sbol{Participation}}:
-Describes the role that a component plays in a functional interaction.  For example, a transcription factor may participate in an interaction either as a repressor or activator.
-
-\item \emph{\sbol{Model}}:
-Links a SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.
-
-\item \emph{\sbol{GenericTopLevel}}:
-Represents a data container that can contain custom data added by user applications.
 \end{description}
