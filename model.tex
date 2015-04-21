@@ -42,7 +42,8 @@ As another example, a relational implementation of the SBOL API would store the 
 \todo[inline]{What is this even about?  Is it another best practice?}
 
 \subsection {SBOL Document}
-\todo[inline]{This feels like it belongs in the serialization section, not the data model section}
+\todo[inline]{This feels like it belongs in the serialization section, not the data model section. 
+Goksel: How about extending a bit more about SBOLDocument first? We can say that all the SBOL entities are included in an SBOL Document. Then we can talk about how it is serialized.}
 An SBOL document is a valid RDF/XML document. Accordingly, each SBOL document starts with an XML declaration that has its XML version set to ``1.0.'' As shown in the example below, this declaration is then followed by a rdf:RDF XML element that includes the namespace declarations for RDF and SBOL. The latter namespace is used to indicate which entities and properties in the SBOL document are defined by SBOL.
 
 \lstsetsbol
@@ -509,7 +510,7 @@ The example below shows the serialization of a \sbol{Sequence} object for a prom
 
 
 
-\todo[inline]{Add serialisation examples}
+\todo[inline]{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.}
 \subsection{ModuleDefinition}
 \label{sec:ModuleDefinition}
 
