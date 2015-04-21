@@ -20,7 +20,7 @@ In this section, we model the design of a LacI/TetR toggle switch similar to tho
 \end{center}
 \end{figure}
 
-The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of structure and function. \sbol{ComponentDefinition}s are used to define physical \sbol{Component}s at every level of the structural hierarchy of the toggle switch, including the functional DNA regions, TFs, and small molecules at the base of this hierarchy, and the genes and TFs bound to small molecules at the top of this hierarchy. As an example of these data, \ref{uml:ex_comp_defs} is a UML object diagram that specifies the base \sbol{ComponentDefinition}s for the LacI inverter, while \ref{uml:ex_comp_def_compo} similarly specifies the composite \sbol{ComponentDefinition}s for the IPTG-LacI complex and TetR gene. 
+The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of structure and function. In the first case, \sbol{ComponentDefinition}s are used to define physical \sbol{Component}s at every level of the structural hierarchy of the toggle switch, including the functional DNA regions, TFs, and small molecules at the base of this hierarchy, and the genes and TFs bound to small molecules at the top of this hierarchy. As an example of these data, \ref{uml:ex_comp_defs} is a UML object diagram that specifies the base \sbol{ComponentDefinition}s for the LacI inverter, while \ref{uml:ex_comp_def_compo} similarly specifies the composite \sbol{ComponentDefinition}s for the IPTG-LacI complex and TetR gene. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -38,7 +38,7 @@ The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of st
 \end{center}
 \end{figure}
 
-In the second case, \sbol{ModuleDefinition}s are used to define functional \sbol{Module}s at every level of the functional hierarchy of the toggle switch, with LacI-dependent repression of TetR expression (the LacI inverter \sbol{Module}) and TetR-dependent repression of LacI (the TetR inverter \sbol{Module}) forming the base of this hierarchy. Each \sbol{ModuleDefinition} also contains the \sbol{FunctionalComponent}s that participate in \sbol{Interaction}s and are defined by the same \sbol{ComponentDefinition}s as the parallel \sbol{Component}s in the structural hierarchy of the toggle switch. Finally, \sbol{MapsTo} entities are used to refine which \sbol{FunctionalComponent}s of the functional hierarchy are identical or map them to \sbol{Component}s in the structural hierarchy.
+Next, \sbol{ModuleDefinition}s are used to define functional \sbol{Module}s at every level of the functional hierarchy of the toggle switch, with LacI-dependent repression of TetR expression (the LacI inverter \sbol{Module}) and TetR-dependent repression of LacI (the TetR inverter \sbol{Module}) forming the base of this hierarchy. Each \sbol{ModuleDefinition} also contains the \sbol{FunctionalComponent}s that participate in \sbol{Interaction}s and are defined by the same \sbol{ComponentDefinition}s as the parallel \sbol{Component}s in the structural hierarchy of the toggle switch. Finally, \sbol{MapsTo} entities are used to refine which \sbol{FunctionalComponent}s of the functional hierarchy are identical or map them to \sbol{Component}s in the structural hierarchy.
 
 \todo[inline]{ComponentDefinition.types in the following figure are not consistent with the list of BioPax ontological terms described previously in the Data Model section}
 
