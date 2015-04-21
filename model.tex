@@ -767,6 +767,15 @@ The MapsTo class serves as a means of linking between Component objects (both Co
 
 In addition to specifying a link, each MapsTo object must also specify a ``refinement'' relationship between its local and remote Components. Under this data model, there are four types of refinement: ``verifyIdentical'' requires that the Component objects link to the same ComponentDefinition object, ``useLocal'' indicates that the local Component object overrides the remote Component object, ``useRemote'' indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{images/MapsTo_Diagram1}
+\caption{Linking Components using MapsTo entities. The parent ComponenDefinition entity includes three sub components. The first one is formed of the promoter and the RBS; the second one is the RBS; and third one is formed of the RBS and the CDS. All the RBSs refer to the same RBS.}
+\label{image:maps_to_diagram1}
+\end{center}
+\end{figure}
+
+
 \todo[inline]{Add a table for refinement values and represent the value when serialized using the rdf:resource property}
 The serialization of \sbol{MapsTo}s has the following form.
 \lstsetsbol
