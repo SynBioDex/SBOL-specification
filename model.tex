@@ -281,7 +281,6 @@ The \sbol{mapsTo} property links
 
 The third data field, ``mappings'', is a set of MapsTo objects that link between other ComponentInstance objects at the same level of the design hierarchy as well as other ComponentInstance objects that are lower in the design hierarchy, thereby composing these objects with greater specificity (see first module example).
 
-
 \pragraph{The \sbolheading{access} property}
 \label{sec:access}
 
@@ -555,9 +554,24 @@ The example below shows the serialization of a \sbol{Sequence} object for a prom
 
 The \sbol{ModuleDefinition} class forms the hub for functional description of genetic designs. A \sbol{ModuleDefinition} object is composed from zero or more \sbol{FunctionalComponent}, \sbol{Module}, and \sbol{Interaction} objects, and links to zero or more \sbol{Model} objects. A \sbol{ModuleDefinition} object relies on the ``direction'' data fields of its \sbol{FunctionalComponent} objects to specify whether they serve as its inputs or outputs.
 
-\subsubsection{The \sbolheading{roles} property}
-This property includes zero or more URIs in order to specify the intended use of a \sbol{ModuleDefinition} entity. 
- For example, the role URIs on a ModuleDefinition object may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for biological module roles, such as ``metabolic pathway'' and ``signaling cascade''.
+\subsubsection*{The \sbolheading{roles} property}
+This property is optional and may include  set of URIs in order to specify the intended use of a \sbol{ModuleDefinition} entity. These URIs may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for biological module roles, such as ``metabolic pathway'' and ``signaling cascade''.
+\todo[inline]{GM:inverter is also a biological module role. Would it make sense to rewrite the sentence above?}
+
+\subsubsection*{The \sbolheading{models} property}
+This property is optional and includes identities of associated \sbol{Model} entities.
+
+\todo[inline]{GM:Is the property called submodules or modules? libSBOLj serialises using the  subModule property.}
+
+\subsubsection*{The \sbolheading{subModules} property}
+This property is optional and includes a set of \sbol{Module} entities, which refer to \sbol{ModuleDefinition}s to be imported.
+
+\todo[inline]{GM: libSBOLj serialised the property names as component. Do we use functionalComponent ot component as the property name?}
+\subsubsection{The \sbolheading{functionalComponents} property}
+This property is optional and includes a set of \sbol{FunctionalComponent} entities. These entities are then used to describe biological interactions via \sbol{Participation} entities.
+
+\subsubsection*{The \sbolheading{interactions} property}
+This property is optional and includes a set of \sbol{Interaction} entities, which include \sbol{Participation} entities.
 
 The serialization of \sbol{ModuleDefinition}s has the following form.
 \lstsetsbol
@@ -583,10 +597,25 @@ The serialization of \sbol{ModuleDefinition}s has the following form.
 
 \subsubsection{FunctionalComponent}
 \label{sec:FunctionalComponent}
-Composition of the functional layer of SBOL designs, on the other hand, is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a Module object and serves as an explicit usage of a ComponentInstance object for the purpose of fulfilling some function. In addition, each FunctionalInstantiation must specify via the ``direction'' field whether it serves as an  input, output, both, or neither for its parent Module object. 
+Composition of the functional layer of SBOL designs, on the other hand, is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} or \sbol{Module} object and serves as an explicit usage of a \sbol{Component} object for the purpose of fulfilling some function. In addition, each \sbol{FunctionalComponent} must specify via the ``direction'' field (\ref{tbl:functionalcomponent_directions}) whether it serves as an  input, output, both, or neither for its parent \sbol{ModuleDefinition} object. 
 
-\todo[inline]{Add a table of direction types}
-\todo[inline]{Add a table of access types}
+\sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the definition and access properties. 
+
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Direction URI} & \textbf{Description} \\
+    \midrule
+    \url{http://sbols.org/v2#inout}  & To indicate a \sbol{FunctionalComponent} can be used as both input or output\\
+    \url{http://sbols.org/v2#in}  & To indicate a \sbol{FunctionalComponent} can be used as input\\
+    \url{http://sbols.org/v2#out}  & To indicate a \sbol{FunctionalComponent} can be used as output\\
+    \url{http://sbols.org/v2#none}  & To indicate a \sbol{FunctionalComponent} is neither input nor output\\
+    \bottomrule
+  \end{edtable}
+  \caption{URIs for the direction property.}
+  \label{tbl:functionalcomponent_directions}
+\end{table}
 
 The serialization of \sbol{FunctionalComponent}s has the following form.
 \lstsetsbol
