@@ -268,20 +268,20 @@ The \sbol{ComponentInstance} class is abstract, so every usage must be as one of
 \item \sbol{FunctionalComponent} is used for describing function in a \sbol{Module}, and can be linked to by the properties of parts of a \sbol{Module}.  It is described in the \sbol{Module} section.
 \end{itemize}
 
-\pragraph{The \sbolheading{componentDefinition} property}
+\paragraph{The \sbolheading{componentDefinition} property}
 \label{sec:componentDefinition}
 
 Every \sbol{ComponentInstance} MUST be associated with precisely one
 \sbol{ComponentDefinition}, which is the design that it is an instance of.
 
-\pragraph{The \sbolheading{mapsTo} property}
+\paragraph{The \sbolheading{mapsTo} property}
 \label{sec:mapsTo}
 
 The \sbol{mapsTo} property links \sbol{Component} objects (both Components and FunctionalComponents) together within a larger design, indicating that they refer to the same entity.
 
 The third data field, ``mappings'', is a set of MapsTo objects that link between other ComponentInstance objects at the same level of the design hierarchy as well as other ComponentInstance objects that are lower in the design hierarchy, thereby composing these objects with greater specificity (see first module example).
 
-\pragraph{The \sbolheading{access} property}
+\paragraph{The \sbolheading{access} property}
 \label{sec:access}
 
 The \sbol{access} determines whether a \sbol{ComponentInstance} 
