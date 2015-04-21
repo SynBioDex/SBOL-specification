@@ -527,8 +527,9 @@ The example below shows the serialization of a \sbol{Sequence} object for a prom
 
 The \sbol{ModuleDefinition} class forms the hub for functional description of genetic designs. A \sbol{ModuleDefinition} object is composed from zero or more \sbol{FunctionalComponent}, \sbol{Module}, and \sbol{Interaction} objects, and links to zero or more \sbol{Model} objects. A \sbol{ModuleDefinition} object relies on the ``direction'' data fields of its \sbol{FunctionalComponent} objects to specify whether they serve as its inputs or outputs.
 
-\subsubsection{The role property}
-In addition, each ModuleDefinition object must now have at least one of potentially several roles to indicate its intended usages. For example, the role URIs on a ModuleDefinition object may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for biological module roles, such as ``metabolic pathway'' and ``signaling cascade''.
+\subsubsection{The \sbolheading{roles} property}
+This property includes zero or more URIs in order to specify the intended use of a \sbol{ModuleDefinition} entity. 
+ For example, the role URIs on a ModuleDefinition object may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for biological module roles, such as ``metabolic pathway'' and ``signaling cascade''.
 
 The serialization of \sbol{ModuleDefinition}s has the following form.
 \lstsetsbol
