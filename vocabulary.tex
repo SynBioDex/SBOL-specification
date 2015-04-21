@@ -46,7 +46,7 @@ Describes a functional relationship between biological effectors, such as regula
 Specifies the base coordinates of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecules such as a protein.
 
 \item \emph{\sbol{MapsTo}}:
-Links \sbol{Component} objects (both Components and FunctionalComponents) from different levels of hierarchy in a design, indicating that they referto the same entity (e.g., a promoter that is the target of a repressor in one module is the same promoter that regulates expression of a reporter in another module).
+Links \sbol{Component} objects (both Components and FunctionalComponents) together within a larger design, indicating that they referto the same entity (e.g., a \sbol{MapsTo} could be used to indicate that a promoter that is the target of a repressor in one \sbol{Module} is the same promoter that regulates expression of a reporter in another \sbol{Module}).
 
 \item \emph{\sbol{Model}}:
 Links a SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.

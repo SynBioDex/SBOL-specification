@@ -252,22 +252,50 @@ The example below shows the serialization of a simple \sbol{ComponentDefinition}
 
 \subsubsection{ComponentInstance}
 \label{sec:ComponentInstance}
-\todo[inline]{This is completely impenetrable to me -JSB}
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/component_instance}
-\caption[]{Component}
+\caption[]{ComponentInstance}
 \label{uml:component}
 \end{center}
 \end{figure}
 
-% The second sentence is confusing.
-Hierarchical composition of structure and function is enabled via the ComponentInstance class. Each ComponentInstance object has three data fields. \textcolor{red}{The first data field, ``definition'', links to the Component object that is effectively a part of the Component or Module object that owns the ComponentInstantiation object.} The second data field, ''access'', defines whether the ComponentInstance object can be referred to by ComponentInstance objects that are higher in the design hierarchy (yes if access is set to ''public''). The third data field, ``mappings'', is a set of MapsTo objects that link between other ComponentInstance objects at the same level of the design hierarchy as well as other ComponentInstance objects that are lower in the design hierarchy, thereby composing these objects with greater specificity (see first module example).
+When a \sbol{ComponentDefinition} is used as an element of a larger design, each separate use is represented by a \sbol{ComponentInstance} object.  
+The \sbol{ComponentInstance} class is abstract, so every usage must be as one of its two subclasses:
+\begin{itemize}
+\item \sbol{Component} is used for specifying hierarchical structure, and can be linked to by the properties of parts of a \sbol{ComponentDefinition}.
+\item \sbol{FunctionalComponent} is used for describing function in a \sbol{Module}, and can be linked to by the properties of parts of a \sbol{Module}.  It is described in the \sbol{Module} section.
+\end{itemize}
 
-There are two subclasses of the ComponentInstance class: the Component and FunctionalComponent classes.
+\pragraph{The \sbolheading{componentDefinition} property}
+\label{sec:componentDefinition}
 
-\todo[inline]{We need to explain what FunctionalComponent is somewhere}
+Every \sbol{ComponentInstance} MUST be associated with precisely one
+\sbol{ComponentDefinition}, which is the design that it is an instance of.
+
+\pragraph{The \sbolheading{mapsTo} property}
+\label{sec:mapsTo}
+
+The \sbol{mapsTo} property links 
+
+The third data field, ``mappings'', is a set of MapsTo objects that link between other ComponentInstance objects at the same level of the design hierarchy as well as other ComponentInstance objects that are lower in the design hierarchy, thereby composing these objects with greater specificity (see first module example).
+
+
+\pragraph{The \sbolheading{access} property}
+\label{sec:access}
+
+The \sbol{access} determines whether a \sbol{ComponentInstance} 
+can be identified with a part in a larger design via \sbol{MapsTo}.
+The \sbol{access} property must be set to one of the following URIs:
+
+\begin{itemize}
+\item \url{http://sbols.org/v2#public}
+  If the access is public, the \sbol{ComponentInstance} MAY be linked to by \sbol{MapsTo} objects.
+
+\item \url{http://sbols.org/v2#private}
+  If the access is private, the \sbol{ComponentInstance} MUST NOT be linked by any \sbol{MapsTo} object.
+\end{itemize}
 
 
 \subsubsection{Component}
