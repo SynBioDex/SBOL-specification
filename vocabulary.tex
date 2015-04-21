@@ -15,28 +15,31 @@ In particular, the key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT
 
 \subsection{SBOL Class Names}
 
-SBOL defines several entity types in order to explicitly define different types of information. At the top level, a SBOL document includes the following entities:
+SBOL defines the following classes:
 
 \begin{description}
 
 \item \emph{\sbol{Collection}}:
-Represents a user defined organizational container for Components.
+Represents a user-defined container for organizing a group of SBOL objects.
 
 \item \emph{\sbol{Component}}:
-Represents a specific occurrence or instance of a component within a larger design.  For a given component definition, there may be several instances of components specified at different locations within the larger design.
+Represents a specific occurrence or instance of a single entity within the design of a more complex component.
+Each \sbol{Component} is associated with a \sbol{ComponentDefinition}, and there may be many different instances at different locations in a design that share the same definition.
 
-\item \emph{\sbol{ComponentDefinition}}: Represents biological molecules such as DNA, proteins, RNA, and small molecules.
+\item \emph{\sbol{ComponentDefinition}}: Represents designed entities, such as DNA, RNA, and proteins, as well as other entities they interact with, such as small molecules or environmental properties.
 
+\item \emph{\sbol{FunctionalComponent}}:
+Represents a specific occurrence or instance of an entity within the design of a \sbol{ModuleDefinition}.
+Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a more complex \sbol{Component}.
 
 \item \emph{\sbol{Location}}:
-Specifies the base coordinates of a genetic feature on a DNA molecule or a residue or site on other sequential macromolecules such as proteins.
+Specifies the base coordinates of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecules such as a protein.
 
 \item \emph{\sbol{MapsTo}}:
-Links Component objects (both Components and FunctionalComponents) from potentially different levels of hierarchy in a design.
+Links \sbol{Component} objects (both Components and FunctionalComponents) from different levels of hierarchy in a design, indicating that they referto the same entity (e.g., a promoter that is the target of a repressor in one module is the same promoter that regulates expression of a reporter in another module).
 
 \item \emph{\sbol{Module}}:
-Represents a specific occurrence of a functional module within a larger design.  For a given module definition, there may be several instances of modules that specify the overall function of a biological design.
-
+Represents a specific occurrence or instance of a module within a larger design.  For a given module definition, there may be several instances of modules that specify the overall function of a biological design.
 
 \item \emph{\sbol{ModuleDefinition}}:
 Desribes an abstract functional module that may be composed of many functional interactions between biological components.
