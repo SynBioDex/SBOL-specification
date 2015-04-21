@@ -9,7 +9,7 @@ Currently, if a developer wishes to change a SBOL object that has been published
 %TODO[version]{maybe clarify what type of versioning is this object affecting? TN}
 
 \subsection{Using External Terms}
-External ontologies and controlled vocabularies are integral part of SBOL. Through these resources SBOL utilises existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, the types of components whether they are DNA or protein based are indicated using BioPAX. Similarly,  the functionality of a DNA component is determined via the SO terms. Although preferred ontologies have been explained in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
+External ontologies and controlled vocabularies are integral part of SBOL. SBOL utilises these resources to access existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, types of components, such as DNA or protein, are indicated using BioPAX. Similarly, the role of a DNA component is indicated via the SO terms. Although preferred ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
 
 
 \begin{table}[ht]
@@ -20,7 +20,7 @@ External ontologies and controlled vocabularies are integral part of SBOL. Throu
     \textbf{ComponentDefinition}  & type & BioPAX \\
     						   	  & role & SO (if type is \textit{DNA} or \textit{RNA})    \\
     						   	  & role & CHEBI (if type is \textit{small molecule})    \\
-    						   	  & role & UniProt (if type is \textit{protein}??)    \\%TODO What is the external resource for proteins, diccuss it.  protein - GO instead of UnitProt
+    						   	  & role & UniProt (if type is \textit{protein}??)    \\%TODO What is the external resource for proteins, discuss it.  protein - GO instead of UniProt
 \\%TODO Should there be an external listing for all Top Level? 
                                   
     \textbf{Interaction}	      & type & SBO      \\

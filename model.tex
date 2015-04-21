@@ -10,6 +10,7 @@ Complete SBOL examples and best practices when using SBOL can be found in \ref{s
 \subsection{Understanding the UML Diagrams}
 
 The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Classes are represented in UML diagrams as rectangles labeled at the top with class names. Classes may be connected to other classes by association properties, which are represented in UML as arrows labeled with data cardinality (i.e., how many instances of that association can exist, as explained below). Finally, the remaining (non-association) properties of a class properties are listed below its name inside the rectangle, and each property is labeled with its data types and cardinality.
+\todo[inline]{Need to also explain inheritance arrows}
 
 An association property is a directional relationship between SBOL classes, represented by an arrow. The object at that the arrow comes from has the property, and the object that the arrow points to is the associated object. A diamond at the tail of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, which means that associated objects exist independently of objects of the class that has the association property (e.g., a parent and child). In contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which objects of the associated class cannot exist independently and must be associated with at most one object of the class that has the association property (e.g., the pattern on a piece of clothing). 
 %For example, it will later be shown how objects of the \sbol{SequenceAnnotation} class must associated with an object of the \sbol{ComponentDefinition} class (and only that object).
@@ -266,18 +267,20 @@ Hierarchical composition of structure and function is enabled via the ComponentI
 
 There are two subclasses of the ComponentInstance class: the Component and FunctionalComponent classes.
 
-
+\todo[inline]{We need to explain what FunctionalComponent is somewhere}
 
 
 \subsubsection{Component}
 \label{sec:Component}
-Composition of the structural layer of SBOL designs is accomplished using \sbol{Component} objects. Each \sbol{Component} object is owned by a ComponentDefinition object and serves as an explicit usage of a \textcolor{red}{sub-Component} object for the purpose of physical composition.
+Composition of the structural layer of SBOL designs is accomplished using \sbol{Component} objects. Each \sbol{Component} instance is part of a \sbol{ComponentDefinition} object, associated with it by the \sbol{components} property to represent  physical composition.  
 
+All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
 
 
 \subsubsection{SequenceAnnotation}
 \label{sec:SequenceAnnotation}
-The \sbol{SequenceAnnotation} class describes a location of interest on the \sbol{Sequence} object linked by its parent \sbol{ComponentDefinition} object and may optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object. As explained below, the \sbol{Location} class is extended by several different classes, some of which assert locations other than simple ranges with start and end positions.
+The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} object linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object, as described below.
+
 
 \begin{figure}[ht]
 \begin{center}
@@ -288,13 +291,13 @@ The \sbol{SequenceAnnotation} class describes a location of interest on the \sbo
 \end{figure}
 
 \paragraph{The \sbolheading{location} property}
-Every \sbol{SequenceAnnotation} must have a location property. The value of this property is a nested \sbol{Location} object.
+Every \sbol{SequenceAnnotation} MUST have a location property. The value of this property is a nested \sbol{Location} object.
 
 \paragraph{The \sbolheading{component} property}
-\sbol{SequenceAnnotation} objects may have this property to link location information to a \sbol{Component} object. The value of this property is a \sbol{Component} URI.
+\sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
 
 
-The serialization of SequenceAnnotation objects can be carried out according to the example below. A\_LOCATION\_SUBCLASS represents one of the Location subclasses.
+The serialization of SequenceAnnotation objects MUST be carried out according to the example below. A\_LOCATION\_SUBCLASS represents one of the Location subclasses.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:SequenceAnnotation rdf:about="...">
@@ -522,8 +525,9 @@ The example below shows the serialization of a \sbol{Sequence} object for a prom
 \end{center}
 \end{figure}
 
-The ModuleDefinition class forms the hub for functional description of genetic designs. A Module object is composed from zero or more FunctionalComponent, Module, and Interaction objects, and links to zero or more Model objects. A Module object relies on the ``direction'' data fields of its FunctionalComponent objects to specify whether they serve as its inputs or outputs.
+The \sbol{ModuleDefinition} class forms the hub for functional description of genetic designs. A \sbol{ModuleDefinition} object is composed from zero or more \sbol{FunctionalComponent}, \sbol{Module}, and \sbol{Interaction} objects, and links to zero or more \sbol{Model} objects. A \sbol{ModuleDefinition} object relies on the ``direction'' data fields of its \sbol{FunctionalComponent} objects to specify whether they serve as its inputs or outputs.
 
+\subsubsection{The role property}
 In addition, each ModuleDefinition object must now have at least one of potentially several roles to indicate its intended usages. For example, the role URIs on a ModuleDefinition object may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for biological module roles, such as ``metabolic pathway'' and ``signaling cascade''.
 
 The serialization of \sbol{ModuleDefinition}s has the following form.
