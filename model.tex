@@ -150,9 +150,13 @@ The \sbol{Sequence} class is used to encode the primary structure of a \sbol{Com
 \label{sec:elements}
 Required. A \external{String} of characters that represent the constituents of biological molecule, for example   nucleic acid symbols for DNA molecules. 
 
+\todo[inline]{use MUST language, give non-DNA example too -JSB}
+
 \subsubsection*{The \sbolheading{encoding} property}
 \label{sec:encoding}
 Required. \sbol{Sequence} objects identify their type of encoding with a \external{URI}. For example, a \sbol{Sequence} object that encodes a DNA sequence would have an \external{IUPAC DNA} encoding, while a \sbol{Sequence} object that encodes the chemical structure of glucose might have a \external{simplified molecular-input line-entry system (SMILES)} encoding (\ref{tbl:sequence_encodings}).
+
+\todo[inline]{Are these required or recommended?}
 
 %A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
@@ -168,6 +172,7 @@ Required. \sbol{Sequence} objects identify their type of encoding with a \extern
   \caption{URIs for the encoding property and the corresponding ComponentDefiniton types, which are BioPAX terms.}
   \label{tbl:sequence_encodings}
 \end{table}
+\todo[inline]{BioPAX terms unclear}
 
 The serialization of \sbol{Sequence} objects has the following form:
 \lstsetsbol
@@ -327,6 +332,7 @@ Every \sbol{ComponentInstance} MUST be associated with precisely one
 \paragraph{The \sbolheading{mapsTo} property}
 \label{sec:mapsTo}
 
+\todo[inline]{Need to make sure all MapsTo statements are correct}
 The \sbol{mapsTo} property links \sbol{Component} objects (both Components and FunctionalComponents) together within a larger design, indicating that they refer to the same entity.
 
 The third data field, ``mappings'', is a set of MapsTo objects that link between other ComponentInstance objects at the same level of the design hierarchy as well as other ComponentInstance objects that are lower in the design hierarchy, thereby composing these objects with greater specificity (see first module example).
@@ -374,7 +380,7 @@ Every \sbol{SequenceAnnotation} MUST have a location property. The value of this
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
 
 
-The serialization of SequenceAnnotation objects MUST be carried out according to the example below. A\_LOCATION\_SUBCLASS represents one of the Location subclasses.
+The serialization of SequenceAnnotation objects MUST be carried out according to the template below. In this template, A\_LOCATION\_SUBCLASS represents one of the Location subclasses.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:SequenceAnnotation rdf:about="...">
@@ -386,6 +392,7 @@ The serialization of SequenceAnnotation objects MUST be carried out according to
 </sbol:SequenceAnnotation>
 \end{lstlisting}
 
+\todo[inline]{Make sure it's clear these templates specify content, not order}
 
 
 
