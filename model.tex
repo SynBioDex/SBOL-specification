@@ -763,7 +763,33 @@ The serialization of \sbol{Module}s has the following form.
 \label{uml:maps_to}
 \end{center}
 \end{figure}
-The MapsTo class serves as a means of linking between Component objects (both Components and FunctionalComponents) at different levels of the design hierarchy. For example, when a Module object is instantiated inside another Module object, a MapsTo object on the appropriate Module  object can be used to link between a FunctionalComponent object in the parent Module (as specified by the ``local'' data field) and a FunctionalComponent object in the child module (as specified by the ``remote'' data field). This linking can perhaps be most easily understood via the examples in the next section.
+The \sbol{MapsTo} class serves as a means of linking between \sbol{ComponentInstance} objects (both \sbol{Component}s and \sbol{FunctionalComponent}s) at different levels of the design hierarchy. For example, when a child \sbol{ModuleDefinition} object is instantiated inside a parent \sbol{ModuleDefinition} object, a \sbol{MapsTo} object is used to link these two ModuleDefinitions. 
+
+\paragraph{The local property}
+This required property is used to specify the ComponentInstance from the parent entity.
+
+\paragraph{The remote property}
+This required property is used to specify the ComponentInstance from the child entity being imported by the parent.
+
+\paragraph{The refinement property}
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Refinement URI} & \textbf{Description} \\
+    \midrule
+    \url{http://sbols.org/v2#useremote}  & Indicates that ComTo indicate a \sbol{FunctionalComponent} can be used as both input or output\\
+    \url{http://sbols.org/v2#uselocal}  & To indicate a \sbol{FunctionalComponent} can be used as input\\
+    \url{http://sbols.org/v2#out}  & To indicate a \sbol{FunctionalComponent} can be used as output\\
+    \url{http://sbols.org/v2#none}  & To indicate a \sbol{FunctionalComponent} is neither input nor output\\
+    \bottomrule
+  \end{edtable}
+  \caption{URIs for the direction property.}
+  \label{tbl:functionalcomponent_directions}
+\end{table}
+
+
+on the former \sbol{ModuleDefinition}  object can be used to link between a FunctionalComponent object in the parent Module (as specified by the ``local'' data field) and a FunctionalComponent object in the child module (as specified by the ``remote'' data field). This linking can perhaps be most easily understood via the examples in the next section.
 
 In addition to specifying a link, each MapsTo object must also specify a ``refinement'' relationship between its local and remote Components. Under this data model, there are four types of refinement: ``verifyIdentical'' requires that the Component objects link to the same ComponentDefinition object, ``useLocal'' indicates that the local Component object overrides the remote Component object, ``useRemote'' indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
 
