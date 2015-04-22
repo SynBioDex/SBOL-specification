@@ -11,7 +11,9 @@ Synthetic biology builds upon the techniques and successes of genetics, molecula
 \todo[inline]{Maybe discuss more about how SBOL is a standard. Huge transition from what is Synethic Biology to SBOL}
 
 To help address these challenges, the Synthetic Biology Open Language (SBOL) introduces  a standardized file format for the electronic exchange of biological designs and a standardized data model for the reproducible description of essential design details. Ultimately, SBOL is intended to speed up the research and development of designed biological systems by enhancing the exchange and reproducibility of biological designs between different labs.   
+\todo[inline]{it's not about a file format, it's about a representation; the fact that this is a file format is incidental -JSB}
 
+\todo[inline]{Should the comparison with 1.1 really be there?  This needs revision to be stand-alone, and right now it's basically an extract of the SBOL2 paper -JSB}
 Version 1.1 of the SBOL standard focused on representing the structural aspects of genetic designs. To serve as an effective medium for the computational exchange of genetic designs, SBOL must be extended to capture more aspects of a designed system, including both structural and functional information, and the composition of complex structural and functional designs by combining simpler parts. The SBOL data model proposed in this specification provides for addressing the most pressing needs for expanding SBOL Version 1.1. 
 
 \begin{enumerate}
@@ -29,3 +31,5 @@ Version 1.1 of the SBOL standard focused on representing the structural aspects 
 Taken together, these capabilities allow SBOL sufficient expressivity to support the description and exchange of hierarchical, modular representations of both the intended structure and function of designed biological systems.
 
 To address the need for functional descriptions in SBOL, the proposed data model adds classes for modules, interactions, and models. These classes provide a firm basis for functional representation in SBOL without going so far as to create a new standard for mathematically modeling biology, as there already exist several established languages for doing so, from the Systems Biology Markup Language (SBML)~\cite{SBML} to CellML~\cite{CellML} and even MatLab~\cite{matlab}. Rather, these classes enable users of SBOL to group components that function together, describe the basic qualitative interactions between these components, and document references to standard mathematical models that are external to SBOL and that provide more detailed descriptions of component function. In other words, a module gathers together a set of component instantiations, a set of interactions between these component instantiations, and a set of references to external models that are expected to be consistent with the module's interactions.
+
+\todo[inline]{This just sort of stops.  Need a better end. --JSB}
