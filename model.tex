@@ -770,29 +770,30 @@ The serialization of \sbol{Module}s has the following form.
 \label{uml:maps_to}
 \end{center}
 \end{figure}
-The \sbol{MapsTo} class serves as a means of linking between \sbol{ComponentInstance} objects (both \sbol{Component}s and \sbol{FunctionalComponent}s) at different levels of the design hierarchy. For example, when a child \sbol{ModuleDefinition} object is instantiated inside a parent \sbol{ModuleDefinition} object, a \sbol{MapsTo} object is used to link these two ModuleDefinitions. 
+The \sbol{MapsTo} class serves as a means of linking between \sbol{ComponentInstance} objects (both \sbol{Component}s and \sbol{FunctionalComponent}s) at different levels of the design hierarchy. For example, when a child \sbol{ModuleDefinition} object is instantiated inside a parent \sbol{ModuleDefinition} object, a \sbol{MapsTo} object is used to link these two ModuleDefinitions. MapsTo has properties to specify components from the parent and child entities, and also to specify how these components are linked.
 
 \paragraph{The local property}
-This required property is used to specify the ComponentInstance from the parent entity.
+This required property is used to specify the \sbol{ComponentInstance} from the parent entity.
 
 \paragraph{The remote property}
-This required property is used to specify the ComponentInstance from the child entity being imported by the parent.
+This required property is used to specify the \sbol{ComponentInstance} from the child entity being imported by the parent.
 
 \paragraph{The refinement property}
+Each \sbol{MapsTo} entity must also specify the relationship between its local and remote components using the refinement property. The Table \ref{tbl:mapsto_refinement} lists the values 
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
     \toprule
     \textbf{Refinement URI} & \textbf{Description} \\
     \midrule
-    \url{http://sbols.org/v2#useremote}  & Indicates that ComTo indicate a \sbol{FunctionalComponent} can be used as both input or output\\
-    \url{http://sbols.org/v2#uselocal}  & To indicate a \sbol{FunctionalComponent} can be used as input\\
-    \url{http://sbols.org/v2#out}  & To indicate a \sbol{FunctionalComponent} can be used as output\\
-    \url{http://sbols.org/v2#none}  & To indicate a \sbol{FunctionalComponent} is neither input nor output\\
+    \url{http://sbols.org/v2#useremote}  & Indicates that \sbol{ComponentInstance} from the child entity is used in the parent, instead of the \sbol{ComponentInstance} specified in the parent entity.\\
+    \url{http://sbols.org/v2#uselocal}  & Indicates that \sbol{ComponentInstance} from the parent entity is used in the parent instead of the imported the \sbol{ComponentInstance} child entity.\\
+    \url{http://sbols.org/v2#verifyIdentical}  & \todo[inline]{Add description}\\
+        \url{http://sbols.org/v2#merge}  & \todo[inline]{Add description}\\
     \bottomrule
   \end{edtable}
-  \caption{URIs for the direction property.}
-  \label{tbl:functionalcomponent_directions}
+  \caption{URIs for the refinement property.}
+  \label{tbl:mapsto_refinement}
 \end{table}
 
 
