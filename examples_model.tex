@@ -1,21 +1,25 @@
 % -----------------------------------------------------------------------------
-\section{Examples of Data Model}
+\section{Example of Data Model}
 \label{sec:examples}
 % -----------------------------------------------------------------------------
 
-\subsection{LacI/TetR Toggle Switch}
+%\subsection{LacI/TetR Toggle Switch}
 
-In this section, we model the design of a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}. This design is visualized in \ref{images:toggleswitch_modular}. 
+This section illustrates how to use the SBOL data model by specifying the design of a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}. This design is visualized in \ref{images:toggleswitch_modular}. 
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.4]{images/toggleswitch_modular}
-\caption[]{Design of a LacI/TetR toggle switch. This design is composed of two inverter sub-designs, each containing a single gene. These genes mutually repress each other's expression via their encoded protein TFs, LacI and TetR. Furthermore, both LacI and TetR are bound by specific small molecules that sequester them and prevent them from acting as repressors. In this design, arrows represent different molecular interactions, including the repression of pLac via LacI, the non-covalent binding of IPTG to LacI, the transcription of TetR mRNA, and the translation of TetR. Dashed lines serve to map between TFs in the inverter sub-designs and those in the overall toggle switch design.}
+\caption[]{Design of a LacI/TetR toggle switch. This design is composed of two inverter sub-designs, each containing a single gene. These genes mutually repress each other's expression via their encoded protein transcription factors, LacI and TetR. Furthermore, both LacI and TetR are bound by specific small molecules that sequester them and prevent them from acting as repressors. In this design, arrows represent different molecular interactions, including the repression of pLac via LacI, the non-covalent binding of IPTG to LacI, the transcription of TetR mRNA, and the translation of TetR. Dashed lines serve to map between transcription factors in the inverter sub-designs and those in the overall toggle switch design.}
 \label{images:toggleswitch_modular}
 \end{center}
 \end{figure}
 
-The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of structure and function. In particular, \sbol{ComponentDefinition}s are used to define physical \sbol{Component}s at every level of the structural hierarchy of the toggle switch, including the functional DNA regions, TFs, and small molecules at the base of this hierarchy, and the genes and TF complexes at the top of this hierarchy. As examples of these objects,  \ref{uml:ex_comp_defs} is a UML object diagram that specifies the base \sbol{ComponentDefinition}s of the LacI inverter, while \ref{uml:ex_comp_def_compo} specifies the composite \sbol{ComponentDefinition}s of the IPTG-LacI complex and TetR gene. 
+The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of structure and function. Structurally, \sbol{ComponentDefinition} objects are used to hierarchically define the physical elements that comprise the toggle switch:
+\begin{itemize}
+\item The base elements of the hierarchy are genetic elements, transcription factor complexes, and small-molecules.  As examples, \ref{uml:ex_comp_defs} shows UML diagrams of a number of such \sbol{ComponentDefinition} objects.
+\item These are composed to form more complex structures such as multi-element genetic complexes and molecular complexes. As examples, \ref{uml:ex_comp_def_compo} shows UML diagrams of the composite \sbol{ComponentDefinition} for the DNA construct for regulated expression of TetR and for the IPTG-LacI complex.
+\end{itemize}
 
 \begin{figure}[ht]
 \begin{center}
@@ -33,11 +37,20 @@ The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of st
 \end{center}
 \end{figure}
 
-Next, \sbol{ModuleDefinition}s are used to define functional \sbol{Module}s at every level of the functional hierarchy of the toggle switch, with LacI-dependent repression of TetR expression (the LacI inverter \sbol{Module}) and TetR-dependent repression of LacI (the TetR inverter \sbol{Module}) forming the base of this hierarchy. Each \sbol{ModuleDefinition} also contains the \sbol{FunctionalComponent}s that participate in \sbol{Interaction}s and are defined by the same \sbol{ComponentDefinition}s as the parallel \sbol{Component}s in the structural hierarchy of the toggle switch. Finally, \sbol{MapsTo} entities are used to refine which \sbol{FunctionalComponent}s of the functional hierarchy are identical or map them to \sbol{Component}s in the structural hierarchy.
+The functional hierarchy of the toggle switch is specified using
+\sbol{ModuleDefinition} objects:
+\begin{itemize}
+\item The base elements of the hierarchy are LacI-dependent repression of TetR expression (the LacI inverter) and TetR-dependent repression of LacI (the TetR inverter).  As an example, \ref{uml:ex_mod_def} shows a UML diagram of the LacI inverter module.
+\item These are composed as \sbol{Module} objects within the \sbol{ModuleDefinition} for the entire toggle switch.  \ref{uml:ex_mod_def_compo} shows the UML diagram of this composition into the toggle switch.
+\end{itemize}
+
+Each \sbol{ModuleDefinition} also contains the \sbol{FunctionalComponent}s that participate in \sbol{Interaction}s and are defined by the same \sbol{ComponentDefinition}s as the parallel \sbol{Component}s in the structural hierarchy of the toggle switch. Finally, \sbol{MapsTo} entities are used to refine which \sbol{FunctionalComponent}s of the functional hierarchy are identical or map them to \sbol{Component}s in the structural hierarchy.
+\todo[inline]{Need to clarify this explanation -JSB}
 
 \todo[inline]{ComponentDefinition.types in the following figure are not consistent with the list of BioPax ontological terms described previously in the Data Model section}
 
 As an example of functional representation, \ref{uml:ex_mod_def} specifies the module definition for a LacI inverter. This module definition aggregates and instantiates the component definitions for the TetR gene as functional components that participate in interactions. Note that the transcription and translation of TetR is represented using a single genetic production interaction that abstracts away the presence of the intermediate TetR mRNA. If this additional detail becomes necessary, then a new module could be created that includes both transcription and translation interactions and a TetR mRNA functional component. Finally, the module definition is also associated with a continuous SBML model from source file LacI\_Inverter.xml.
+\todo[inline]{This paragraph and next one need better phrasing -JSB}
 
 \begin{figure}[ht]
 \begin{center}
