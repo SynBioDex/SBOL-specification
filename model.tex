@@ -767,14 +767,24 @@ The MapsTo class serves as a means of linking between Component objects (both Co
 
 In addition to specifying a link, each MapsTo object must also specify a ``refinement'' relationship between its local and remote Components. Under this data model, there are four types of refinement: ``verifyIdentical'' requires that the Component objects link to the same ComponentDefinition object, ``useLocal'' indicates that the local Component object overrides the remote Component object, ``useRemote'' indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
 
+
+%\begin{figure}[ht]
+%\begin{center}
+%\includegraphics[scale=0.6]{images/MapsTo_Diagram1}
+%\caption{Linking Components using MapsTo entities.}
+%\label{image:maps_to_diagram1}
+%\end{center}
+%\end{figure}
+
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.6]{images/MapsTo_Diagram1}
-\caption{Linking Components using MapsTo entities. The parent ComponenDefinition entity includes three sub components. The first one is formed of the promoter and the RBS; the second one is the RBS; and third one is formed of the RBS and the CDS. All the RBSs refer to the same RBS.}
-\label{image:maps_to_diagram1}
+\includegraphics[scale=1]{images/MapsTo_Diagram2}
+\caption{Linking Components using MapsTo entities. Boxed with the C label represent Component entities and boxes with the M label represent MapsTo entities.}
+\label{image:maps_to_diagram2}
 \end{center}
 \end{figure}
 
+An example design of a \sbol{ComponentDefinition} using \sbol{MapsTo} entities is shown at the left hand side of the Figure \ref{image:maps_to_diagram2}. The resulting entity is formed of a promoter, a RBS and a CDS. Three sub components to create the design includes: a promoter-RBS \sbol{ComponentDefinition} with a RBS placeholder without detailed definition; a RBS \sbol{ComponentDefinition} with full description; and a RBS-CDS \sbol{ComponentDefinition} with a RBS placeholder, which is also not defined in full detail. In the figure, boxes with the C label represent \sbol{Component} entities and boxes with the M label represent the \sbol{MapsTo} entities. In the design RBSs that are not fully defined are replaced with another RBS \sbol{ComponentDefinition} (displayed in green colour). \sbol{MapsTo} entities attached to sub components for promoter-RBS and RBS-CDS \sbol{ComponentDefinition}s include the ''use local'' refinement to replace RBSs with the fully defined version. In the second design at the right hand side of the figure, \sbol{MapsTo} entities are used to import the RBS from the promoter-RBS \sbol{ComponentDefinition} overwriting the RBS in RBS-CDS \sbol{ComponentDefinition}. 
 
 \todo[inline]{Add a table for refinement values and represent the value when serialized using the rdf:resource property}
 The serialization of \sbol{MapsTo}s has the following form.
