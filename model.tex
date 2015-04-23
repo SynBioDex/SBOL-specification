@@ -379,6 +379,7 @@ Every \sbol{SequenceAnnotation} MUST have a location property. The value of this
 \paragraph{The \sbolheading{component} property}
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
 
+\todo[inline]{Separate serialization better}
 
 The serialization of SequenceAnnotation objects MUST be carried out according to the template below. In this template, A\_LOCATION\_SUBCLASS represents one of the Location subclasses.
 \lstsetsbol
@@ -398,7 +399,7 @@ The serialization of SequenceAnnotation objects MUST be carried out according to
 
 \subsubsection{Location}
 \label{sec:Location}
-The Location class is extended by the \sbol{Range}, \sbol{MultiRange}, and \sbol{Cut} classes.
+The Location class is extended by the \sbol{Range}, \sbol{MultiRange}, \sbol{Cut}, and \sbol{GenericLocation} classes.
 
 
 \begin{figure}[ht]
@@ -416,14 +417,14 @@ The Location class is extended by the \sbol{Range}, \sbol{MultiRange}, and \sbol
 \label{sec:Range}
 A \sbol{Range} object specifies inclusive start and end positions. These properties are required in \sbol{Range} objects and they can have \external{integer} values greater than zero. A \sbol{Range} object also includes an  ``orientation'' property, for example to to specify directionality on a potentially double-stranded \sbol{Component} object.
 
-\paragraph{The \sbolheading{start} property}
-Specifies the start of a \sbol{Range}. This property is required and can have \external{integer} values greater than zero.
+\subparagraph{The \sbolheading{start} property}
+Specifies the start of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
 
-\paragraph{The \sbolheading{end} property}
-Specifies the end of a \sbol{Range}. This property is required and can have \external{integer} values greater than zero.
+\subparagraph{The \sbolheading{end} property}
+Specifies the end of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
 
-\paragraph{The \sbolheading{orientation} property}
-This property is optional has a \external{URI} value. However, for \sbol{ComponentDefinition} objects representing DNA molecules, it is recommended that one of the orientation values are chosen (\ref{tbl:orientation_types}). 
+\subparagraph{The \sbolheading{orientation} property}
+This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects representing DNA molecules, it is RECOMMENDED to use one of the values in \ref{tbl:orientation_types}. 
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{l}
@@ -453,9 +454,9 @@ The example below shows the serialization of a \sbol{Range} object. It specifies
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2/range">
+  <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
   <sbol:start>56</sbol:start>
   <sbol:end>68</sbol:end>
-  <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
 </sbol:Range>
 \end{lstlisting}
 
@@ -465,16 +466,35 @@ A MultiRange object represents a location that is specified by multiple Range ob
 
 \paragraph{Cut}
 \label{sec:Cut}
-The Cut class has been introduced to enable the specification of a location between two indices. Each Cut object has a single integer data field, ``at'', that specifies the index just before the location represented by the Cut object. Even though there is no zero index on Structure objects in SBOL, a Cut object with “at” equal to zero represents the location just before index one. The OrientedCut class extends the Cut class with an orientation in the same way that the OrientedRange class extends the Range class.
+The Cut class has been introduced to enable the specification of a location between two indices. 
+Each Cut object has properties, \sbol{at} and \sbol{orientation}.
 
-Finally, while the Range and Cut classes are best suited to describing locations on sequential structures, the Location class can be extended in the future to better describe locations on Component Objects with non-sequential structure (see unspecified Moeity class as potential means for specifying locations in more than one dimension).
+\subparagraph{The \sbolheading{at} property}
+
+The REQUIRED \sbol{at} property is an index greater than or equal to zero that specifies the index just before the location represented by the Cut object. 
+A Cut object with \sbol{at} equal to zero represents the location just before index one (even though there is no zero index on Structure objects in SBOL). 
+
+\subparagraph{The \sbolheading{orientation} property}
+This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects representing DNA molecules, it is RECOMMENDED to use one of the values in \ref{tbl:orientation_types} (above with \sbol{Range}).
 
 
+\paragraph{GenericLocation}
+\label{sec:GenericLocation}
 
+While the \sbol{Range} and \sbol{Cut} classes are best suited to
+describing locations on sequential structures, the
+\sbol{GenericLocation} is included as a hook for extensions, e.g., for
+describing locations in non-sequential structures.
+
+\todo[inline]{Need serialization examples for MultiRange, Cut, and GenericLocation}
+\todo[inline]{Make sure that every property has a section label so that it hyperlinks correctly}
 
 \subsubsection{SequenceConstraint}
 \label{sec:SequenceConstraint}
-A \sbol{ComponentDefinition} object can link to \sbol{SequenceConstraint} objects to assert different kinds of structural restrictions between two \sbol{Component} objects that are its subcomponents. A SequenceConstraint object requires \sbol{restriction}, \sbol{subject} and \sbol{object} properties to specify different constraints.
+A \sbol{ComponentDefinition} object can link to \sbol{SequenceConstraint} objects to assert various kinds of structural restrictions between two \sbol{Component} objects that are its subcomponents. 
+The purpose of \sbol{SequenceConstraint} is to allow partial designs to be specified when the precise identity, location, or ordering of \sbol{Component} objects is not yet fully determined.
+
+A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} and \sbol{object} properties to specify such constraints.
 
 \begin{figure}[ht]
 \begin{center}
@@ -486,36 +506,39 @@ A \sbol{ComponentDefinition} object can link to \sbol{SequenceConstraint} object
 
 \paragraph{The \sbolheading{subject} property}
 \label{sec:subject}
-This property is required to specify the component that a restriction is applied to, and includes the \external{URI} \sbol{identity} of this \sbol{Component} object. 
+This REQUIRED property specifies the URI \sbol{identity} of the first \sbol{Component} object in the relation.
+
+\todo[inline]{Check to make sure we say URI identity and not just URI everywhere that we mean an identity}
 
 \paragraph{The \sbolheading{object} property}
 \label{sec:object}
-This property includes the \external{URI} \sbol{identity} of a \sbol{Component} object that is the value of the restriction.
-
+This REQUIRED property specifies the URI \sbol{identity} of the second \sbol{Component} object in the relation.
 
 \paragraph{The \sbolheading{restriction} property}
 \label{sec:restriction}
 
-This property property qualifies the relationship between the \sbol{subject} and \sbol{object} \sbol{Component}s. It includes a \external{URI} value, indicating the restriction type. In SBOL Version 1.1 partial designs are made possible by means of SequenceAnnotation objects that can specify that their locations precede those of other SequenceAnnotation objects. In Version 2.0 the ``precedes'' data field has been generalized to the StructuralConstraint class. 
+This REQUIRED property specifies a URI that identifies the type of relationship between the \sbol{subject} and \sbol{object} \sbol{Component} objects. 
+The RECOMMENDED values for this property are given in \ref{tbl:restriction_types}.
 
-These restrictions could also include ``sameOrientationAs'' or ``oppositeOrientationAs'' to enable the relative orientation of Component objects whose ComponentDefinition objects lack associated Sequence objects in partial designs (\ref{tbl:restriction_types}).
+Note: With regards to SBOL Version 1.1., this is a generalization of former \sbol{SequenceAnnotation} property \external{precedes}.
 
 \begin{table}[ht]
-  \begin{edtable}{tabular}{l}
+  \begin{edtable}{tabular}{ll}
     \toprule
-    \textbf{Restriction Types}  \\
+    \textbf{Restriction Types} & Subject/Object Relation \\
     \midrule
-    http://sbols.org/v2\#precedes\\
-    http://sbols.org/v2\#sameOrientationAs\\
-    http://sbols.org/v2\#oppositeOrientationAs\\    
+    http://sbols.org/v2\#precedes & Subject location is strictly less than object location \\
+    http://sbols.org/v2\#sameOrientationAs & Subject and object have equal orientation URIs\\
+    http://sbols.org/v2\#oppositeOrientationAs & Object orientation is ``opposite'' of subject\\    
     \bottomrule
   \end{edtable}
   \caption{URI constants for restriction values}
   \label{tbl:restriction_types}
 \end{table}
 
+\Dtodo{Should we have nextTo?}
 
-
+\paragraph{Serialization}
 
 The serialization of \sbol{SequenceConstraint} objects has the following form:
 \lstsetsbol
@@ -532,13 +555,14 @@ The example below shows the serialization of a \sbol{SequenceConstraint} object.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:SequenceConstraint rdf:about="http://www.partsregistry.org/Part:BBa_K174004/r1">
-  <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
   <sbol:subject rdf:resource="http://www.partsregistry.org/Part:BBa_K174004#pspac"/>
   <sbol:object rdf:resource="http://www.partsregistry.org/Part:BBa_K174004#LacIoperator"/>
+  <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
 </sbol:SequenceConstraint>
 \end{lstlisting}
-      
-      
+
+\todo[inline]{In every serialization example, make sure something differs in order from the template, to more intuitively illustrate the unimportance of order}
+
 \subsection{Model}
 \label{sec:Model}
 
@@ -549,14 +573,20 @@ The example below shows the serialization of a \sbol{SequenceConstraint} object.
 \label{uml:model}
 \end{center}
 \end{figure}
-\todo[inline]{Move the link text to the section on Module}
-SBOL's \sbol{Model} objects are used to link genetic descriptions of biological parts and their interactions to computational models. Each \sbol{Model} object specify the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modelling framework and the model's role(s). In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of their ModuleDefinition objects in a well-developed language of their choice. A ModuleDefinition object can link to more than one model since each one can encode different levels of functional detail and play different roles in engineering design. 
+
+SBOL's \sbol{Model} objects are placeholders that point to some external modeling mechanism, with some additional meta-data to enable better reasoning about the contents of that external mechanism.
+In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of \sbol{ModuleDefinition} objects in a well-developed language of their choice. 
+
+Each \sbol{Model} object specifies the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modelling framework and the model's role(s). 
 
 \subsubsection*{ The \sbolheading{source} property}
-This property has a data type of \external{URI}, and is required to specify the actual location of a qualitative or quantitative model.
+This REQUIRED property is a URI that specifies the actual location of a qualitative or quantitative model.
 
 \subsubsection*{ The \sbolheading{language} property}
-This property has a data type of \external{URI}, and is required to specify the language the model is implemented with. Values for the URIs should be chosen from the EMBRACE Data and Methods (EDAM) ontology where possible. Some of the model types and corresponding URI values are shown in \ref{tbl:model_types}.
+This REQUIRED property is a URI that specifies the language the model is implemented with. 
+Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Methods (EDAM) ontology where possible. A few suggested model types and corresponding URI values are shown in \ref{tbl:model_types}.
+
+\todo[inline]{Made sure EDAM goes in ontology best-practices section}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -574,7 +604,8 @@ This property has a data type of \external{URI}, and is required to specify the 
 
 
 \subsubsection*{ The \sbolheading{framework} property}
-This property has a data type of \external{URI} and is required to specify the modelling framework a model is implemented with. Values for this property should be used from the SBO's modelling framework terms where possible (\ref{tbl:model_frameworks}).
+This REQUIRED property is a URI that specifies the modelling framework that a model is implemented within. 
+Values for this URI are RECOMMENDED to be chosen from the SBO's modelling framework terms where possible. A few suggested model frameworks and corresponding URI values are shown in \ref{tbl:model_frameworks}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -589,10 +620,14 @@ This property has a data type of \external{URI} and is required to specify the m
   \label{tbl:model_frameworks}
 \end{table}
 
-\subsubsection*{ The \sbolheading{role} property}
-This property has a data type of \external{URI} and is required to specify what the model is for, such as part or interaction model (\ref{tbl:model_roles}).
+\todo[inline]{Made sure SBO frameworks goes in ontology best-practices section}
 
-\todo[inline]{Are we agreeing on this table? Do we want to give more flexibility?}
+\subsubsection*{ The \sbolheading{role} property}
+This OPTIONAL property is a URI that specifies what the model is for, such as part or interaction model (\ref{tbl:model_roles}).
+\Dtodo{What does this actually mean? -JSB}
+
+\Dtodo{Are we agreeing on this table? Do we want to give more flexibility?}
+
 \begin{table}[ht]
   \begin{edtable}{tabular}{l}
     \toprule
@@ -606,6 +641,8 @@ This property has a data type of \external{URI} and is required to specify what 
   \caption{URI constants for model roles}
   \label{tbl:model_roles}
 \end{table}
+
+\subsubsection*{Serialization}
 
 The serialization of \sbol{Model} objects has the following form:
 
@@ -626,10 +663,10 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
 <?xml version="1.0" ?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
   <sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
-    <sbol:source rdf:resource="http://virtualparts.org/part/pIKE_Toggle_1"/>
-    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
-    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
     <sbol:role rdf:resource="http://sbols.org/v2#module_model"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:source rdf:resource="http://virtualparts.org/part/pIKE_Toggle_1"/>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
   </sbol:Model>
 </rdf:RDF>
 
@@ -658,6 +695,9 @@ This property is optional and may include  set of URIs in order to specify the i
 
 \subsubsection*{The \sbolheading{models} property}
 This property is optional and includes identities of associated \sbol{Model} entities.
+
+SBOL's \sbol{Model} objects are used to link genetic descriptions of biological parts and their interactions to computational models.
+A ModuleDefinition object can link to more than one model since each one can encode different levels of functional detail and play different roles in engineering design. 
 
 \todo[inline]{GM:Is the property called submodules or modules? libSBOLj serialises using the  subModule property.}
 
@@ -908,7 +948,8 @@ In the example below, the role of participating \sbol{FunctionalComponent} is de
 
 \subsection {Collection}
 \label{sec:Collection}
-The \sbol{Collection} class is another top level class, which groups together \sbol{TopLevel} objects that have something in common. For example, a \sbol{Collection} object could be the result of a query to find all \sbol{Component} objects that function as promoters or all \sbol{Module} objects that function as inverters in a given repository. 
+The \sbol{Collection} class is a class that groups together a set of \sbol{TopLevel} objects that have something in common. 
+For example, a \sbol{Collection} object might contain be the result of a query to find all \sbol{ComponentDefinition} objects that function as promoters,might be a collection \sbol{ModuleDefinition} objects that function as inverters in a given repository. 
 
 \begin{figure}[ht]
 \begin{center}
