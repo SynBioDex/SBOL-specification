@@ -949,7 +949,12 @@ In the example below, the role of participating \sbol{FunctionalComponent} is de
 \subsection {Collection}
 \label{sec:Collection}
 The \sbol{Collection} class is a class that groups together a set of \sbol{TopLevel} objects that have something in common. 
-For example, a \sbol{Collection} object might contain be the result of a query to find all \sbol{ComponentDefinition} objects that function as promoters,might be a collection \sbol{ModuleDefinition} objects that function as inverters in a given repository. 
+Some examples of \sbol{Collection} objects:
+\begin{itemize}
+\item Results of a query to find all \sbol{ComponentDefinition} objects that function as promoters in a repository.
+\item A set of \sbol{ModuleDefinition} objects representing a library of NAND gates.
+\item A \sbol{ModuleDefinition} for a complex design, and all of the \sbol{ModuleDefinition}, \sbol{ComponentDefinition}, \sbol{Sequence}, and \sbol{Model} objects used to provide its full specification.
+\end{itemize}
 
 \begin{figure}[ht]
 \begin{center}
@@ -960,7 +965,9 @@ For example, a \sbol{Collection} object might contain be the result of a query t
 \end{figure}
 
 \subsubsection*{The member property}
-The member property has a data type of \external{URI} and has the \sbol{identity} value of a \sbol{TopLevel} entity. Each collection must have at least one member.
+The member property has a data type of URI and has the \sbol{identity} value of a \sbol{TopLevel} entity.  A collection may have any number of members, including none.
+
+\subsubsection*{Serialization}
 
 The serialization of \sbol{Collection} objects has the following form:
 
@@ -972,18 +979,20 @@ The serialization of \sbol{Collection} objects has the following form:
 </sbol:Collection>
 \end{lstlisting}
 
-The example below shows the serialization of a \sbol{Collection} object. Promoters from a library of constitutive promoters are grouped using the collection example.
+\Dtodo{Should we make all of the example URIs compliant?}
+
+The example below shows the serialization of a \sbol{Collection} object grouping together a library of constitutive promoters.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
   <sbol:Collection rdf:about="http://parts.igem.org/Promoters/Catalog/Anderson">
-    <sbol:displayId>Anderson</sbol:displayId>
     <sbol:name>Anderson promoters</sbol:name>
-    <sbol:description> The Anderson promoter collection</sbol:description>
+    <sbol:displayId>Anderson</sbol:displayId>
     <sbol:member rdf:resource="http://parts.igem.org/wiki/index.php/Part:BBa_J23119"/>
     ...
     <sbol:member rdf:resource="http://parts.igem.org/wiki/index.php/Part:BBa_J23118"/>
+    <sbol:description> The Anderson promoter collection</sbol:description>
   </sbol:Collection>
 </rdf:RDF>
 
