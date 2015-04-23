@@ -676,31 +676,42 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
 \end{center}
 \end{figure}
 
-The \sbol{ModuleDefinition} class forms the hub for functional description of genetic designs. A \sbol{ModuleDefinition} object is composed from zero or more \sbol{FunctionalComponent}, \sbol{Module}, and \sbol{Interaction} objects, and links to zero or more \sbol{Model} objects. A \sbol{ModuleDefinition} object relies on the ``direction'' data fields of its \sbol{FunctionalComponent} objects to specify whether they serve as its inputs or outputs.
+The \sbol{ModuleDefinition} class is the hub where the structural and functional aspects of genetic designs come together to form a complete picture of the design. 
+A \sbol{ModuleDefinition} object is composed from zero or more \sbol{FunctionalComponent}, \sbol{Module}, and \sbol{Interaction} objects, and links to zero or more \sbol{Model} objects. 
+A \sbol{ModuleDefinition} object relies on the ``direction'' data fields of its \sbol{FunctionalComponent} objects to specify whether they serve as its inputs or outputs.
+\Ctodo{the direction bit needs to be said much more clearly}
 
 \subsubsection*{The \sbolheading{roles} property}
-This property is optional and may include  set of URIs in order to specify the intended use of a \sbol{ModuleDefinition} entity. These URIs may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for biological module roles, such as ``metabolic pathway'' and ``signaling cascade''.
-\todo[inline]{GM:inverter is also a biological module role. Would it make sense to rewrite the sentence above?}
+This property is OPTIONAL and may include a set of URIs that specifies the intended use of a \sbol{ModuleDefinition} entity. 
+These URIs may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for purely biological roles, such as ``metabolic pathway'' and ``signaling cascade''.
+\Ctodo{make this sentence clearer}
 
+\Ctodo{Make these more paralell to componentdefinition in the way that they are written}
 \subsubsection*{The \sbolheading{models} property}
-This property is optional and includes identities of associated \sbol{Model} entities.
+This property is OPTIONAL and includes identities of associated \sbol{Model} entities.
 
 SBOL's \sbol{Model} objects are used to link genetic descriptions of biological parts and their interactions to computational models.
 A ModuleDefinition object can link to more than one model since each one can encode different levels of functional detail and play different roles in engineering design. 
+\Ctodo{clarify this bit with a bit more explanation and better content}
 
-\todo[inline]{GM:Is the property called submodules or modules? libSBOLj serialises using the  subModule property.}
+\Dtodo{GM:Is the property called submodules or modules? libSBOLj serialises using the  subModule property.}
 
 \subsubsection*{The \sbolheading{subModules} property}
 This property is optional and includes a set of \sbol{Module} entities, which refer to \sbol{ModuleDefinition}s to be imported.
+\Ctodo{use better language, like in componentdefinition}
 
 \todo[inline]{GM: libSBOLj serialised the property names as component. Do we use functionalComponent ot component as the property name?}
 \subsubsection*{The \sbolheading{functionalComponents} property}
 This property is optional and includes a set of \sbol{FunctionalComponent} entities. These entities are then used to describe biological interactions via \sbol{Participation} entities.
 
+\Ctodo{use better language}
+
 \subsubsection*{The \sbolheading{interactions} property}
 This property is optional and includes a set of \sbol{Interaction} entities, which include \sbol{Participation} entities.
 
-The serialization of \sbol{ModuleDefinition}s has the following form.
+\subsubsection*{Serialization}
+
+The serialization of \sbol{ModuleDefinition}s has the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ModuleDefinition rdf:about="...">
@@ -721,10 +732,15 @@ The serialization of \sbol{ModuleDefinition}s has the following form.
 </sbol:ModuleDefinition>
 \end{lstlisting}
 
+\Ctodo{Add an example, like for all the rest}
+
 
 \subsubsection{FunctionalComponent}
 \label{sec:FunctionalComponent}
-Composition of the functional layer of SBOL designs, on the other hand, is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} or \sbol{Module} object and serves as an explicit usage of a \sbol{Component} object for the purpose of fulfilling some function. In addition, each \sbol{FunctionalComponent} must specify via the ``direction'' field (\ref{tbl:functionalcomponent_directions}) whether it serves as an  input, output, both, or neither for its parent \sbol{ModuleDefinition} object. 
+Composition of the functional layer of SBOL designs is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{Component} object for the purpose of fulfilling some function. In addition, each \sbol{FunctionalComponent} must specify via the ``direction'' field (\ref{tbl:functionalcomponent_directions}) whether it serves as an  input, output, both, or neither for its parent \sbol{ModuleDefinition} object. 
+\Dtodo{Previously said a Module could own a FunctionalComponet, which i'm pretty sure is false -JB}
+
+\LDtodo{Need to explain direction better.}
 
 \sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the definition and access properties. 
 
@@ -743,6 +759,8 @@ Composition of the functional layer of SBOL designs, on the other hand, is accom
   \caption{URIs for the direction property.}
   \label{tbl:functionalcomponent_directions}
 \end{table}
+
+\paragraph{Serialization}
 
 The serialization of \sbol{FunctionalComponent}s has the following form.
 \lstsetsbol
@@ -775,8 +793,11 @@ In the example below, the functional component is defined as public input or out
 \end{center}
 \end{figure}
 
-The Module class enables the composition of Module objects from other sub-Module objects. \textcolor{red}{The first data field, ``definition'', links to the ModuleDefinition object that is effectively a part of the Module object that owns the Module object.} The second data field, ``mappings'', is a set of MapsTo objects that link between the Component objects at the same level of the design hierarchy as the Module object and the Component objects that are lower in the design hierarchy, thereby composing these objects with greater specificity.
+The \sbol{Module} class enables the composition of \sbol{ModuleDefinition} objects from other, smaller \sbol{ModuleDefinition} objects. \textcolor{red}{The first data field, ``definition'', links to the ModuleDefinition object that is effectively a part of the Module object that owns the Module object.} The second data field, ``mappings'', is a set of MapsTo objects that link between the Component objects at the same level of the design hierarchy as the Module object and the Component objects that are lower in the design hierarchy, thereby composing these objects with greater specificity.
 
+\Dtodo{mappings or mapsTo?}
+\Ctodo{need to clean up this whole description}
+\Dtodo{Is the notion of ``level of design hierarchy'' real?  I think it doesn't need to be stated here, it's actually a best practice.}
 
 The serialization of \sbol{Module}s has the following form.
 \lstsetsbol
@@ -788,6 +809,8 @@ The serialization of \sbol{Module}s has the following form.
                </sbol:mapping> [\emph{element}]
 </sbol:Module>
 \end{lstlisting}
+
+\Ctodo{add an example}
 
 \subsubsection{MapsTo}
 \label{sec:MapsTo}
@@ -801,6 +824,8 @@ The serialization of \sbol{Module}s has the following form.
 \end{figure}
 The \sbol{MapsTo} class serves as a means of linking between \sbol{ComponentInstance} objects (both \sbol{Component}s and \sbol{FunctionalComponent}s) at different levels of the design hierarchy. For example, when a child \sbol{ModuleDefinition} object is instantiated inside a parent \sbol{ModuleDefinition} object, a \sbol{MapsTo} object is used to link these two ModuleDefinitions. MapsTo has properties to specify components from the parent and child entities, and also to specify how these components are linked.
 
+\Ctodo{need to explain the whole 3-way mapsto model and importation better}
+
 \paragraph{The local property}
 This required property is used to specify the \sbol{ComponentInstance} from the parent entity.
 
@@ -811,7 +836,7 @@ This required property is used to specify the \sbol{ComponentInstance} from the 
 Each \sbol{MapsTo} entity must also specify the relationship between its local and remote components using the refinement property. The Table \ref{tbl:mapsto_refinement} lists the values 
 
 \begin{table}[ht]
-  \begin{edtable}{tabular}{ll}
+  \begin{edtable}{tabular}{lp{4in}}
     \toprule
     \textbf{Refinement URI} & \textbf{Description} \\
     \midrule
@@ -825,6 +850,7 @@ Each \sbol{MapsTo} entity must also specify the relationship between its local a
   \label{tbl:mapsto_refinement}
 \end{table}
 
+\Dtodo{The notion of refinement is very unclear -JB}
 
 %GM: The paragraph below is now explained in the table above. Commented for now. Please remove the commented lines if you agree with the table description.
 %In addition to specifying a link, each MapsTo object must also specify a ``refinement'' relationship between its local and remote Components. Under this data model, there are four types of refinement: ``verifyIdentical'' requires that the Component objects link to the same ComponentDefinition object, ``useLocal'' indicates that the local Component object overrides the remote Component object, ``useRemote'' indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
@@ -845,11 +871,19 @@ Each \sbol{MapsTo} entity must also specify the relationship between its local a
 \label{image:maps_to_diagram2}
 \end{center}
 \end{figure}
+\Ctodo{Caption: why are some RBSs not filled in?}
 
-An example design of a \sbol{ComponentDefinition} using \sbol{MapsTo} entities is shown at the left hand side of the Figure \ref{image:maps_to_diagram2}. The resulting entity is formed of a promoter, a RBS and a CDS. Three sub components to create the design includes: a promoter-RBS \sbol{ComponentDefinition} with a RBS placeholder without detailed definition; a RBS \sbol{ComponentDefinition} with full description; and a RBS-CDS \sbol{ComponentDefinition} with a RBS placeholder, which is also not defined in full detail. In the figure, boxes with the C label represent \sbol{Component} entities and boxes with the M label represent the \sbol{MapsTo} entities. In the design RBSs that are not fully defined are replaced with another RBS \sbol{ComponentDefinition} (displayed in green colour). \sbol{MapsTo} entities attached to sub components for promoter-RBS and RBS-CDS \sbol{ComponentDefinition}s include the ``use local'' refinement to replace RBSs with the fully defined version. In the second design at the right hand side of the figure, \sbol{MapsTo} entities are used to import the RBS from the promoter-RBS \sbol{ComponentDefinition} overwriting the RBS in RBS-CDS \sbol{ComponentDefinition}. 
+An example design of a \sbol{ComponentDefinition} using \sbol{MapsTo} entities is shown at the left hand side of the Figure \ref{image:maps_to_diagram2}. The resulting entity is formed of a promoter, a RBS and a CDS. 
+Three sub components to create the design includes: a promoter-RBS \sbol{ComponentDefinition} with a RBS placeholder without detailed definition; a RBS \sbol{ComponentDefinition} with full description; and a RBS-CDS \sbol{ComponentDefinition} with a RBS placeholder, which is also not defined in full detail. 
+In the figure, boxes with the C label represent \sbol{Component} entities and boxes with the M label represent the \sbol{MapsTo} entities.
+In the design RBSs that are not fully defined are replaced with another RBS \sbol{ComponentDefinition} (displayed in green colour). \sbol{MapsTo} entities attached to sub components for promoter-RBS and RBS-CDS \sbol{ComponentDefinition}s include the ``use local'' refinement to replace RBSs with the fully defined version. In the second design at the right hand side of the figure, \sbol{MapsTo} entities are used to import the RBS from the promoter-RBS \sbol{ComponentDefinition} overwriting the RBS in RBS-CDS \sbol{ComponentDefinition}. 
 
-\todo[inline]{Add a table for refinement values and represent the value when serialized using the rdf:resource property}
-The serialization of \sbol{MapsTo}s has the following form.
+\Ctodo{Need to expand this explanation a bit more to drive home the points -JB}
+
+\Dtodo{Add a table for refinement values and represent the value when serialized using the rdf:resource property}
+
+\paragraph{Serialization}
+The serialization of \sbol{MapsTo} has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:MapsTo rdf:about="...">
@@ -859,7 +893,7 @@ The serialization of \sbol{MapsTo}s has the following form.
 </sbol:MapsTo>
 \end{lstlisting}
 
-\todo[inline]{The local and remote description in the MapsTo description is not same as the one below. Should not we use local for fcs in the submodules?}
+\Dtodo{The local and remote description in the MapsTo description is not same as the one below. Should not we use local for fcs in the submodules?}
 In the example below, a \sbol{FunctionalComponent} entity from the submodule is linked to a \sbol{FunctionalComponent} entity in a parent module. The former is described in the imported \sbol{ModuleDefinition} entity which is referred to by the definition property of the \sbol{Module} entity. The latter is defined in the parent \sbol{ModuleDefinition}, importing the sub module. The full example can be found in \ref{ser:toggleswitch}.
 \lstsetsbol
 \begin{lstlisting}
@@ -883,11 +917,16 @@ In the example below, a \sbol{FunctionalComponent} entity from the submodule is 
 \end{center}
 \end{figure}
 
+\Ctodo{Some of this description is incorrect or unclear}
 The Interaction class provides a qualitative basis for asserting the intended function of a given ModuleDefinition object. The proposed data model supports the representation of regulatory interactions, such as activation or repression, and processes from the central dogma of biology, such as transcription and translation. Other supported interaction types include non-covalent binding between a small molecule and TF, and phosphorylation of a TF by an enzyme. 
+\Dtodo{What does it mean for an interaction to be supported?}
 
 Each Interaction object must specify its type with at least one URI that identifies an appropriate ontology term, such as a term from the Systems Biology Ontology (SBO). If an Interaction object has multiple type URIs, then they must identify synonymous terms. 
 
+\Dtodo{Is SBO RECOMMENDED or just an example?}
+
 Furthermore, each Interaction object must specify its participating \sbol{FunctionalComponent} entities by linking to one or more objects of the Participation class.
+\LDtodo{I don't think this is really a MUST}
 
 The serialization of \sbol{Interaction}s has the following form.
 \lstsetsbol
@@ -913,9 +952,16 @@ The serialization of \sbol{Interaction}s has the following form.
 
 \subsubsection{Participation}
 \label{sec:Participation}
+
+\Ctodo{Fix the linking and clean grammar}
+
 Each object of the Participation class must specify the role of its participant FunctionalComponent object in its parent Interaction object with at least one URI that identifies an appropriate ontology term. If a Participation object has multiple role URIs, then they must identify synonymous terms. 
 
+\Dtodo{Do we have a RECOMMENDED ontology? SBO?}
+
 While the Interaction class provide a qualitative description of genetic function, quantitative descriptions are also needed for genetic design. Instead of introducing a new language for the specification of mathematical models of biology, the proposed data model leverages existing standards and links to them via the Model class. 
+
+\paragraph{Serialization}
 
 The serialization of \sbol{Participation}s has the following form.
 \lstsetsbol
