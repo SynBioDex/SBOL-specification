@@ -36,10 +36,10 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 Within the SBOL data model, all properties are given a singular or plural name in accordance with their data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{sequenceAnnotation} is the singular form of \sbol{sequenceAnnotation}s.
 
 
-\todo[inline]{has RDF been introduced yet?}
+\Ctodo{has RDF been introduced yet?}
 
-Within the RDF serialization of SBOL, however, SBOL properties are always given singular names. The serialization does not use RDF collections to represent multiple values of an SBOL property. Hence, if a SBOL property has five values, then its serialization contains five RDF triples with singular predicate names.
-\Dtodo{Why, why, why are these two different?}
+Within the RDF serialization of SBOL, however, SBOL properties are always given singular names. This is because the serialization writes each property element down individually, so if there are multiple values, they are represented as several entries of a single value each.
+For example, if a SBOL property has five values, then its serialization contains five RDF triples with singular predicate names.
 
 \subsection{Data Types}
 
@@ -71,8 +71,9 @@ This substitution is in keeping with the commitment of the SBOL community to the
 \label{sec:persistentIdentity}
 The \sbol{persistentIdentity} property is optional and also has a datatype of \external{URI}. This property is used to declare that a set of SBOL objects refer to the ``same'' thing (by virtue of having the same persistent identity), e.g., a sequence of improvements on a design. This persistent identity can then be used to return the most up-to-date version of a SBOL object.
 
-\Dtodo{consider not putting the toggle switch example at the end, but rather weaving references to the toggle switch into each subsection}
+\Ctodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
 
+\Ctodo{need to somehow explain stuff about Maven versioning}
 
 \subsubsection*{The \sbolheading{version} property}
 \label{sec:version}
@@ -91,18 +92,23 @@ The Documented class in SBOL represents objects that can be decorated with human
 \end{figure}
 \Ctodo{Reorder displayId and name}
 
-\subsubsection*{The \sbolheading{name} property}
-\label{sec:name}
-An optional, human readable name property, with a data type of \external{String}. It is intended to be displayed to a human when visualising SBOL objects.  
-If a \sbol{Documented} object lacks a name, it is expected that software tools will instead display the entity's \sbol{displayId} or \sbol{identity} as a last resort.
-
 \subsubsection*{The \sbolheading{displayId} property}
 \label{sec:displayId}
 An optional identifier, with a data type of \external{String}. It is intended to be an intermediate between \sbol{name} and \sbol{identity}: machine-friendly text that is not necessarily unique, and more human-friendly than the full URI of an \sbol{identity}.
 
 In particular, displayId string MUST be compliant with type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}
 
-\Dtodo{Confirm sanitized URIs; need to add sanitization to libSBOLj} 
+\subsubsection*{The \sbolheading{name} property}
+\label{sec:name}
+An optional, human readable name property, with a data type of \external{String}. It is intended to be displayed to a human when visualising SBOL objects.  
+If a \sbol{Documented} object lacks a name, it is expected that software tools will instead display the entity's \sbol{displayId} or \sbol{identity} as a last resort.
+
+\Ctodo{name is no longer the preferred, also we need to say that displayId should be to the best of one's ability locally unique.  And RECOMMEND that any software tool give people the ability to switch perspectives between looking at names (for human-friendliness) and looking at displayIds (for better uniqueness).}
+
+\Ctodo{Need to require use of DublinCore names and show examples of them: non-stanard mappings per Matt: Title vs. Name, descripton is dcterms:description}
+
+\Ctodo{SHOULD sanitize your displayId entries}
+\Ctodo{need to add sanitization to libSBOLj}
 
 \subsubsection*{The \sbolheading{description} property}
 \label{sec:description}
@@ -148,7 +154,7 @@ A REQUIRED \external{String} of characters that represent the constituents of bi
 \label{sec:encoding}
 Required. \sbol{Sequence} objects identify their type of encoding with a \external{URI}. For example, a \sbol{Sequence} object that encodes a DNA sequence would have an \external{IUPAC DNA} encoding, while a \sbol{Sequence} object that encodes the chemical structure of glucose might have a \external{simplified molecular-input line-entry system (SMILES)} encoding (\ref{tbl:sequence_encodings}).
 
-\Dtodo{Are these required or recommended?}
+\Ctodo{These are RECOMMENDED.}
 
 %A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
@@ -164,7 +170,8 @@ Required. \sbol{Sequence} objects identify their type of encoding with a \extern
   \caption{URIs for the encoding property and the corresponding ComponentDefiniton types, which are BioPAX terms.}
   \label{tbl:sequence_encodings}
 \end{table}
-\Dtodo{BioPAX terms unclear}
+\Ctodo{Need to fix the caption of table 1, and need to match the biopa terms and give a forward pointer to table 2}
+\Ctodo{Matthew Pocock is in charge of deciding whether any more ontologies should be listed.}
 
 The serialization of \sbol{Sequence} objects has the following form:
 \lstsetsbol
@@ -208,6 +215,8 @@ A \sbol{ComponentDefinition} is an entity in the biological system that is being
 \subsubsection*{The \sbolheading{types} property}
 \label{sec:types}
 Every \sbol{ComponentDefinition} MUST have at least one \sbol{types} \external{URI} that identifies a term from an appropriate ontology, such as the BioPAX ontology (some recommended examples are given in \ref{tbl:componentdefinition_types}) or the ontology of Chemical Entities of Biological Interest (ChEBI). A type URI documents the category of biochemical or physical entity (for example DNA, protein, or RNA) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. If a \sbol{ComponentDefinition} object has multiple type URIs, then they MUST identify synonymous terms.
+
+\Ctodo{It is REQUIRED that if your component fits a Table 2 term, that you MUST use that term as at least one of the terms.}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -277,7 +286,7 @@ The parents of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, tra
                </sbol:sequenceAnnotation> [\emph{elements}]        
   </sbol:ComponentDefinition>
 \end{lstlisting}
-\Dtodo{Have we explained anywhere how to interpret these template listings?}
+\Ctodo{We need to have an explanation of how to interpret these, and also have a pointer to it from each example.}
 
 The example below shows the serialization of a simple \sbol{ComponentDefinition} object. The \external{DnaRegion} from BioPAX and \external{CHEBI:4705} from CHEBI are used to indicate the type of the biological entity as a DNA molecule. Its role is specified via the generic \external{SO:0000167} (\external{promoter}) and more specific \external{SO:0000613} (\external{bacterial\_RNApol\_promoter}) terms.
 
@@ -496,9 +505,11 @@ A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} a
 
 \paragraph{The \sbolheading{subject} property}
 \label{sec:subject}
-This REQUIRED property specifies the URI \sbol{identity} of the first \sbol{Component} object in the relation.
+This REQUIRED property specifies the \sbol{identity} URI of the first \sbol{Component} object in the relation.
 
-\Dtodo{Check to make sure we say URI identity and not just URI everywhere that we mean an identity}
+\Ctodo{Need to document that you can reference a persistentIdentity or an identity when you reference a version.  Everywhere we say ``URI'' for an SBOL object, it means one of these two properties}
+
+\Ctodo{Remove ``identity'' for names of URIs everywhere}
 
 \paragraph{The \sbolheading{object} property}
 \label{sec:object}
@@ -526,7 +537,7 @@ Note: With regards to SBOL Version 1.1., this is a generalization of former \sbo
   \label{tbl:restriction_types}
 \end{table}
 
-\Dtodo{Should we have nextTo?}
+\Ctodo{We need things like nextTo and overlapping, and think we might be able to get it from region-connection-calculus ontology}
 
 \paragraph{Serialization}
 
@@ -551,7 +562,7 @@ The example below shows the serialization of a \sbol{SequenceConstraint} object.
 </sbol:SequenceConstraint>
 \end{lstlisting}
 
-\Dtodo{In every serialization example, make sure something differs in order from the template, to more intuitively illustrate the unimportance of order}
+\Ctodo{In every serialization example, make sure something differs in order from the template, to more intuitively illustrate the unimportance of order --> actually no, jake shoud put bac the examples he messed with}
 
 \subsection{Model}
 \label{sec:Model}
@@ -612,25 +623,7 @@ Values for this URI are RECOMMENDED to be chosen from the SBO's modelling framew
 
 \LDtodo{Made sure SBO frameworks goes in ontology best-practices section}
 
-\subsubsection*{ The \sbolheading{role} property}
-This OPTIONAL property is a URI that specifies what the model is for, such as part or interaction model (\ref{tbl:model_roles}).
-\Dtodo{What does this actually mean? -JSB}
-
-\Dtodo{Are we agreeing on this table? Do we want to give more flexibility?}
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{l}
-    \toprule
-    \textbf{Model Roles}  \\
-    \midrule
-    http://sbols.org/v2\#component\_model\\
-    http://sbols.org/v2\#interaction\_model\\
-    http://sbols.org/v2\#module\_model\\    
-    \bottomrule
-  \end{edtable}
-  \caption{URI constants for model roles}
-  \label{tbl:model_roles}
-\end{table}
+\Ctodo{We are dropping the role property entirely --- make sure it gets deleted}
 
 \subsubsection*{Serialization}
 
@@ -665,7 +658,7 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
 
 
 
-\Dtodo{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.}
+\Ctodo{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.}
 \subsection{ModuleDefinition}
 \label{sec:ModuleDefinition}
 
@@ -695,13 +688,13 @@ SBOL's \sbol{Model} objects are used to link genetic descriptions of biological 
 A ModuleDefinition object can link to more than one model since each one can encode different levels of functional detail and play different roles in engineering design. 
 \Ctodo{clarify this bit with a bit more explanation and better content}
 
-\Dtodo{GM:Is the property called submodules or modules? libSBOLj serialises using the  subModule property.}
+\Ctodo{make sure submodules --> modules}
 
-\subsubsection*{The \sbolheading{subModules} property}
+\subsubsection*{The \sbolheading{modules} property}
 This property is optional and includes a set of \sbol{Module} entities, which refer to \sbol{ModuleDefinition}s to be imported.
 \Ctodo{use better language, like in componentdefinition}
 
-\todo[inline]{GM: libSBOLj serialised the property names as component. Do we use functionalComponent ot component as the property name?}
+\Ctodo{component --> functionalComponent in examples}
 \subsubsection*{The \sbolheading{functionalComponents} property}
 This property is optional and includes a set of \sbol{FunctionalComponent} entities. These entities are then used to describe biological interactions via \sbol{Participation} entities.
 
@@ -739,7 +732,7 @@ The serialization of \sbol{ModuleDefinition}s has the following form:
 \subsubsection{FunctionalComponent}
 \label{sec:FunctionalComponent}
 Composition of the functional layer of SBOL designs is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{Component} object for the purpose of fulfilling some function. In addition, each \sbol{FunctionalComponent} must specify via the ``direction'' field (\ref{tbl:functionalcomponent_directions}) whether it serves as an  input, output, both, or neither for its parent \sbol{ModuleDefinition} object. 
-\Dtodo{Previously said a Module could own a FunctionalComponet, which i'm pretty sure is false -JB}
+\Ctodo{Previously said a Module could own a FunctionalComponet, which i'm pretty sure is false -JB  Yes, it's false, fix it}
 
 \LDtodo{Need to explain direction better.}
 
@@ -796,9 +789,9 @@ In the example below, the functional component is defined as public input or out
 
 The \sbol{Module} class enables the composition of \sbol{ModuleDefinition} objects from other, smaller \sbol{ModuleDefinition} objects. \textcolor{red}{The first data field, ``definition'', links to the ModuleDefinition object that is effectively a part of the Module object that owns the Module object.} The second data field, ``mappings'', is a set of MapsTo objects that link between the Component objects at the same level of the design hierarchy as the Module object and the Component objects that are lower in the design hierarchy, thereby composing these objects with greater specificity.
 
-\Dtodo{mappings or mapsTo?}
+\Ctodo{mappings or mapsTo? --> mapsTo} 
 \Ctodo{need to clean up this whole description}
-\Dtodo{Is the notion of ``level of design hierarchy'' real?  I think it doesn't need to be stated here, it's actually a best practice.}
+\Ctodo{Is the notion of ``level of design hierarchy'' real?  I think it doesn't need to be stated here, it's actually a best practice. -->  it's a best practice.  Nick will write this better.}
 
 The serialization of \sbol{Module}s has the following form.
 \lstsetsbol
@@ -851,7 +844,8 @@ Each \sbol{MapsTo} entity must also specify the relationship between its local a
   \label{tbl:mapsto_refinement}
 \end{table}
 
-\Dtodo{The notion of refinement is very unclear -JB}
+\Ctodo{libsbol and refinements types here need to agree on consistent capitalization}
+\Ctodo{The notion of refinement is very unclear -JB  Clean up the text}
 
 %GM: The paragraph below is now explained in the table above. Commented for now. Please remove the commented lines if you agree with the table description.
 %In addition to specifying a link, each MapsTo object must also specify a ``refinement'' relationship between its local and remote Components. Under this data model, there are four types of refinement: ``verifyIdentical'' requires that the Component objects link to the same ComponentDefinition object, ``useLocal'' indicates that the local Component object overrides the remote Component object, ``useRemote'' indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
@@ -894,7 +888,6 @@ The serialization of \sbol{MapsTo} has the following form.
 </sbol:MapsTo>
 \end{lstlisting}
 
-\Dtodo{The local and remote description in the MapsTo description is not same as the one below. Should not we use local for fcs in the submodules?}
 In the example below, a \sbol{FunctionalComponent} entity from the submodule is linked to a \sbol{FunctionalComponent} entity in a parent module. The former is described in the imported \sbol{ModuleDefinition} entity which is referred to by the definition property of the \sbol{Module} entity. The latter is defined in the parent \sbol{ModuleDefinition}, importing the sub module. The full example can be found in \ref{ser:toggleswitch}.
 \lstsetsbol
 \begin{lstlisting}
@@ -920,11 +913,11 @@ In the example below, a \sbol{FunctionalComponent} entity from the submodule is 
 
 \Ctodo{Some of this description is incorrect or unclear}
 The Interaction class provides a qualitative basis for asserting the intended function of a given ModuleDefinition object. The proposed data model supports the representation of regulatory interactions, such as activation or repression, and processes from the central dogma of biology, such as transcription and translation. Other supported interaction types include non-covalent binding between a small molecule and TF, and phosphorylation of a TF by an enzyme. 
-\Dtodo{What does it mean for an interaction to be supported?}
+\Ctodo{What does it mean for an interaction to be supported? --> nothing, pick a better word}
 
 Each Interaction object must specify its type with at least one URI that identifies an appropriate ontology term, such as a term from the Systems Biology Ontology (SBO). If an Interaction object has multiple type URIs, then they must identify synonymous terms. 
 
-\Dtodo{Is SBO RECOMMENDED or just an example?}
+\Ctodo{Like the others, SBO is REQUIRED if the term exists, and you can add other stuff.  We also need to explain this up front in the beginning of the section}
 
 Furthermore, each Interaction object must specify its participating \sbol{FunctionalComponent} entities by linking to one or more objects of the Participation class.
 \LDtodo{I don't think this is really a MUST}
@@ -941,8 +934,6 @@ The serialization of \sbol{Interaction}s has the following form.
 \end{lstlisting}
 
 
-\Dtodo{Can an interaction have serial participants?}
-
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/participation}
@@ -958,7 +949,9 @@ The serialization of \sbol{Interaction}s has the following form.
 
 Each object of the Participation class must specify the role of its participant FunctionalComponent object in its parent Interaction object with at least one URI that identifies an appropriate ontology term. If a Participation object has multiple role URIs, then they must identify synonymous terms. 
 
-\Dtodo{Do we have a RECOMMENDED ontology? SBO?}
+\Ctodo{SBO is our REQUIRED term if available, just as in the prior cases}
+
+\Ctodo{Goksel is going to check if there is a superset ontology that should displace SBO}
 
 While the Interaction class provide a qualitative description of genetic function, quantitative descriptions are also needed for genetic design. Instead of introducing a new language for the specification of mathematical models of biology, the proposed data model leverages existing standards and links to them via the Model class. 
 
@@ -1015,7 +1008,7 @@ The serialization of \sbol{Collection} objects has the following form:
 </sbol:Collection>
 \end{lstlisting}
 
-\Dtodo{Should we make all of the example URIs compliant?}
+\Ctodo{We should make all of the example URIs compliant}
 
 The example below shows the serialization of a \sbol{Collection} object grouping together a library of constitutive promoters.
 \lstsetsbol
@@ -1116,7 +1109,6 @@ SBOL's \sbol{GenericTopLevel} is a top-level entity whose only purpose is to inc
 Entities that have independent existence (i.e., would be another ``top level'' class) and are not recognised by the SBOL standard are loaded into these top level entities. 
 These \sbol{GenericTopLevel} entities can thus be safely used by tools to exchange non-SBOL data embedded separately within SBOL.
 As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{name}, \sbol{description}, \sbol{displayId} and so on. The type of data found in the generic entity is indicated using the standard \external{rdf:type} property.
-\Dtodo{Is it possible to have multiple types for GenericTopLevel elements? If so, update the diagram.}
 
 \begin{figure}[ht]
 \begin{center}
