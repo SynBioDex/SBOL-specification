@@ -49,6 +49,8 @@ For example, if a SBOL property has five values, then its serialization contains
 \subsection {Identified}
 \label{sec:Identified}
 
+\Ctodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/identified}
@@ -57,11 +59,11 @@ For example, if a SBOL property has five values, then its serialization contains
 \end{center}
 \end{figure}
 
-All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  class. This inheritance enables SBOL objects to be identified using unique \external{URI}s that may refer to relative locations within an SBOL document or URLs that refer to locations on the World Wide Web. As shown in \ref{uml:identified}, this class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, and \sbol{annotations}. The latter property is described separately in \ref{sec:annotations}.
+All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  class. This inheritance means that all SBOL objects are identified using \external{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web. As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, and \sbol{annotations}. The latter property is described separately in \ref{sec:annotations}.
 
 \subsubsection*{The \sbolheading{identity} property}
 \label{sec:identity}
-This property is required by all \sbol{Identified} objects and has a datatype of \external{URI}. This \external{URI} serves to uniquely identify an SBOL object. The \sbol{identity} property can be used to point to other objects in the same SBOL document or to resources on the Web. Although most SBOL properties are defined by SBOL and serialized with its namespace, the \sbol{identity} property is defined by the analogous RDF \external{about} property and is serialized with the RDF namespace as follows:
+The \sbol{identity} property is required by all \sbol{Identified} objects and has a data type of \external{URI}. This \external{URI} serves to uniquely identify an SBOL object. Although most SBOL properties are defined by SBOL and serialized with its namespace, the \sbol{identity} property is defined by the analogous RDF \external{about} property and is serialized with the RDF namespace as follows:
 
 \external{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about}.
 
@@ -69,15 +71,13 @@ This substitution is in keeping with the commitment of the SBOL community to the
 
 \subsubsection*{The \sbolheading{persistentIdentity} property}
 \label{sec:persistentIdentity}
-The \sbol{persistentIdentity} property is optional and also has a datatype of \external{URI}. This property is used to declare that a set of SBOL objects refer to the ``same'' thing (by virtue of having the same persistent identity), e.g., a sequence of improvements on a design. This persistent identity can then be used to return the most up-to-date version of a SBOL object.
-
-\Ctodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
-
-\Ctodo{need to somehow explain stuff about Maven versioning}
+The \sbol{persistentIdentity} property is optional and also has a data type of \external{URI}. This \external{URI} serves to uniquely refer to a set of SBOL objects that are different versions of each other. An SBOL object can referred to by either its \sbol{identity} \external{URI} or its \sbol{persistentIdentity} \external{URI}. In the latter case, this reference only holds if the SBOL object has the latest \sbol{version} property out of those objects with the same \sbol{persistentIdentity}.
 
 \subsubsection*{The \sbolheading{version} property}
 \label{sec:version}
-This property has a datatype of \external{String} and is used along with the \sbol{persistentIdentity} property to indicate the version of an SBOL object for comparison with other SBOL objects with the same persistent identity.
+
+\Ctodo{need to somehow explain stuff about Maven versioning}
+The \sbol{version} property is optional and has a data type of \external{String}. This property can be used to compare two SBOL objects with the same \sbol{persistentIdentity}.
 
 \subsection {Documented}
 \label{sec:Documented}
@@ -90,7 +90,6 @@ The Documented class in SBOL represents objects that can be decorated with human
 \label{uml:documented}
 \end{center}
 \end{figure}
-\Ctodo{Reorder displayId and name}
 
 \subsubsection*{The \sbolheading{displayId} property}
 \label{sec:displayId}
