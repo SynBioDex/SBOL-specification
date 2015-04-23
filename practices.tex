@@ -5,21 +5,25 @@
 \subsection{Versioning}
 Currently, if a developer wishes to change a SBOL object that has been published to the Web, then as a best practice they should create a copy of the SBOL object that incorporates the change, but has a new URI. This practice, however, does not inherently involve a standardized declaration that the second object is a version of the first. Consequently, the \sbol{persistentIdentity}, and \sbol{version} data fields have been created to provide developers with the means to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI) and label these objects with version Strings.
 
-\todo[inline]{try to target readers unfamiliar with RDF/XML.  -bder}
-%TODO[version]{maybe clarify what type of versioning is this object affecting? TN}
+\Ctodo{try to target readers unfamiliar with RDF/XML.  -bder}
+\Ctodo{maybe clarify what type of versioning is this object affecting? TN}
+
+\subsection{Creation and Modification Dates}
+
+\LDtodo{Annotations: Annotating with created and modified dates, and how to add them.}
 
 \subsection{Compliant URIs}
 
-\todo[inline]{Chris, add this section}
+\Ctodo{Chris, add this section}
 
-\subsection{Annotations: TopLevel, Embedded, and External References}
+\subsection{Annotations: Embedded Objects vs. External References}
 
-\todo[inline]{TopLevel for independent objects, embedded for dependent.  Don't drag your giant data files around in SBOL, put them as external links}
+\LDtodo{Don't drag your giant data files around in SBOL, put them as external links}
 
 \subsection{Recommended Ontologies for External Terms}
 External ontologies and controlled vocabularies are integral part of SBOL. SBOL utilises these resources to access existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, types of components, such as DNA or protein, are indicated using BioPAX. Similarly, the role of a DNA component is indicated via the SO terms. Although preferred ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
 
-\todo[inline]{It would be useful to add URLs to the resources - NeilW}
+\Ctodo{It would be useful to add URLs to the resources - NeilW}
 
 
 \begin{table}[ht]
@@ -30,9 +34,7 @@ External ontologies and controlled vocabularies are integral part of SBOL. SBOL 
     \textbf{ComponentDefinition}  & type & BioPAX \\
     						   	  & role & SO (if type is \textit{DNA} or \textit{RNA})    \\
     						   	  & role & CHEBI (if type is \textit{small molecule})    \\
-    						   	  & role & UniProt (if type is \textit{protein}??)    \\%TODO What is the external resource for proteins, discuss it.  protein - GO instead of UniProt
-\\%TODO Should there be an external listing for all Top Level? 
-                                  
+    						   	  & role & UniProt (if type is \textit{protein}??) \\   
     \textbf{Interaction}	      & type & SBO      \\
     \textbf{Participation}	      & type & SBO      \\
     \textbf{Model}	      		  & language & EDAM      \\
@@ -42,3 +44,14 @@ External ontologies and controlled vocabularies are integral part of SBOL. SBOL 
   \caption{SBOL properties and preferred external resources to choose values from.}
   \label{tbl:preferred_external_resources}
 \end{table}
+
+\Dtodo{?? --> What is the external resource for proteins, discuss it.  protein - GO instead of UniProt}
+\Dtodo{Should there be an external listing for all Top Level?}
+
+
+\subsection{Naming in Other Implementations}
+\Dtodo{Moved these from model, where they clearly didn't belong.  I'm not sure they should exist at all, though.  -JSB}
+
+Within an implementing Object-Oriented (OO) API, SBOL properties should be mapped to member accessors that are similarly named and that return idiomatic representations of these properties. For example, a Java implementation would use common Java idioms. In this case, the member accessor for an optional SBOL property could return a Java primitive value, Java object, or null, while the accessor for a multi-valued SBOL property could return a Java \external{Collection}. In general, OO member accessors for multi-valued SBOL properties should never return null.
+
+As another example, a relational implementation of the SBOL API would store the properties and associations a mixture of data fields and references via foreign keys. The fields in individual tables will correspond to the `arrowhead' end of an association (in reverse to the direction in the RDF and OO representations), and the name may be modified to reflect this change in directionality. For example, the \sbol{sequence} association between a \sbol{ComponentDefinition} and \sbol{Sequence} would be represented by a foreign key field on the \sbol{Sequence} table that references a row in the \sbol{ComponentDefinition} table, and it may be named \external{sequenceOf}.

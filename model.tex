@@ -31,25 +31,18 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 
 \subsection{Naming Conventions}
 
-\todo[inline]{need to put in typography and upper case vs. camel case, etc}
+\Ctodo{need to put in typography and upper case vs. camel case, etc.}
 
 Within the SBOL data model, all properties are given a singular or plural name in accordance with their data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{sequenceAnnotation} is the singular form of \sbol{sequenceAnnotation}s.
 
 Within the RDF serialization of SBOL, however, SBOL properties are always given singular names. The serialization does not use RDF collections to represent multiple values of an SBOL property. Hence, if a SBOL property has five values, then its serialization contains five RDF triples with singular predicate names.
-\todo[inline]{Why, why, why are these two different?}
-
-Within an implementing Object-Oriented (OO) API, SBOL properties should be mapped to member accessors that are similarly named and that return idiomatic representations of these properties. For example, a Java implementation would use common Java idioms. In this case, the member accessor for an optional SBOL property could return a Java primitive value, Java object, or null, while the accessor for a multi-valued SBOL property could return a Java \external{Collection}. In general, OO member accessors for multi-valued SBOL properties should never return null.
-\todo[inline]{I think this is a best practice, and not part of the data model.}
-
-As another example, a relational implementation of the SBOL API would store the properties and associations a mixture of data fields and references via foreign keys. The fields in individual tables will correspond to the `arrowhead' end of an association (in reverse to the direction in the RDF and OO representations), and the name may be modified to reflect this change in directionality. For example, the \sbol{sequence} association between a \sbol{ComponentDefinition} and \sbol{Sequence} would be represented by a foreign key field on the \sbol{Sequence} table that references a row in the \sbol{ComponentDefinition} table, and it may be named \external{sequenceOf}.
-\todo[inline]{What is this even about?  Is it another best practice?}
+\Dtodo{Why, why, why are these two different?}
 
 \subsection{Data Types}
 
-\todo[inline]{we use String, Integer, URI, Literal (these are from some W3C or XSD or whatever thing), and the classes below}
-\todo[inline]{Give a forward pointer to RECOMMENDED best-practices for compliant URIs}
+\Ctodo{we use String, Integer, URI, Literal (these are from some W3C or XSD or whatever thing), and the classes below}
+\Ctodo{Give a forward pointer to RECOMMENDED best-practices for compliant URIs}
 
-\todo[inline]{Need to consider the order in which the classes are presented}
 \subsection {Identified}
 \label{sec:Identified}
 
@@ -69,13 +62,11 @@ This property is required by all \sbol{Identified} objects and has a datatype of
 
 \external{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about}.
 
-\todo[inline]{Should compliant URIs, per the paper, be required or just recommended as a best practice?}
-
 \subsubsection*{The \sbolheading{persistentIdentity} property}
 \label{sec:persistentIdentity}
 The \sbol{persistentIdentity} property is optional and also has a datatype of \external{URI}. This property is used to declare that a set of SBOL objects refer to the ``same'' thing (by virtue of having the same persistent identity), e.g., a sequence of improvements on a design. This persistent identity can then be used to return the most up-to-date version of a SBOL object.
 
-\todo[inline]{consider not putting the toggle switch example at the end, but rather weaving references to the toggle switch into each subsection}
+\Dtodo{consider not putting the toggle switch example at the end, but rather weaving references to the toggle switch into each subsection}
 
 
 \subsubsection*{The \sbolheading{version} property}
@@ -93,7 +84,7 @@ The Documented class in SBOL represents objects that can be decorated with human
 \label{uml:documented}
 \end{center}
 \end{figure}
-\todo[inline]{Reorder displayId and name}
+\Ctodo{Reorder displayId and name}
 
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
@@ -106,7 +97,7 @@ An optional identifier, with a data type of \external{String}. It is intended to
 
 In particular, displayId string MUST be compliant with type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}
 
-\todo[inline]{Need to add sanitization to libSBOLj} 
+\Dtodo{Confirm sanitized URIs; need to add sanitization to libSBOLj} 
 
 \subsubsection*{The \sbolheading{description} property}
 \label{sec:description}
@@ -125,7 +116,7 @@ An OPTIONAL, free text property with the data type of \external{String}, intende
 \end{center}
 \end{figure}
 
-\todo[inline]{Make the left-right order in this figure match the order of the following sections}
+\Ctodo{Make the left-right order in this figure match the order of the following sections}
 
 
 
@@ -144,15 +135,15 @@ The \sbol{Sequence} class is used to encode the primary structure of a \sbol{Com
 
 \subsubsection*{The \sbolheading{elements} property}
 \label{sec:elements}
-Required. A \external{String} of characters that represent the constituents of biological molecule, for example   nucleic acid symbols for DNA molecules. 
+A REQUIRED \external{String} of characters that represent the constituents of biological molecule, for example   nucleic acid symbols for DNA molecules. 
 
-\todo[inline]{use MUST language, give non-DNA example too -JSB}
+\Ctodo{give non-DNA example too -JSB}
 
 \subsubsection*{The \sbolheading{encoding} property}
 \label{sec:encoding}
 Required. \sbol{Sequence} objects identify their type of encoding with a \external{URI}. For example, a \sbol{Sequence} object that encodes a DNA sequence would have an \external{IUPAC DNA} encoding, while a \sbol{Sequence} object that encodes the chemical structure of glucose might have a \external{simplified molecular-input line-entry system (SMILES)} encoding (\ref{tbl:sequence_encodings}).
 
-\todo[inline]{Are these required or recommended?}
+\Dtodo{Are these required or recommended?}
 
 %A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
@@ -168,7 +159,7 @@ Required. \sbol{Sequence} objects identify their type of encoding with a \extern
   \caption{URIs for the encoding property and the corresponding ComponentDefiniton types, which are BioPAX terms.}
   \label{tbl:sequence_encodings}
 \end{table}
-\todo[inline]{BioPAX terms unclear}
+\Dtodo{BioPAX terms unclear}
 
 The serialization of \sbol{Sequence} objects has the following form:
 \lstsetsbol
@@ -208,7 +199,7 @@ A \sbol{ComponentDefinition} is an entity in the biological system that is being
 
 
 
-\todo[inline]{Examples of ontologies for non-molecular type gs (eg, light)...?}
+\LDtodo{Examples of ontologies for non-molecular type gs (eg, light)...?}
 \subsubsection*{The \sbolheading{types} property}
 \label{sec:types}
 Every \sbol{ComponentDefinition} MUST have at least one \sbol{types} \external{URI} that identifies a term from an appropriate ontology, such as the BioPAX ontology (some recommended examples are given in \ref{tbl:componentdefinition_types}) or the ontology of Chemical Entities of Biological Interest (ChEBI). A type URI documents the category of biochemical or physical entity (for example DNA, protein, or RNA) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. If a \sbol{ComponentDefinition} object has multiple type URIs, then they MUST identify synonymous terms.
@@ -228,13 +219,11 @@ Every \sbol{ComponentDefinition} MUST have at least one \sbol{types} \external{U
   \label{tbl:componentdefinition_types}
 \end{table}
 
-
-\todo[inline]{Should roles and types be optional or required?}
 \subsubsection*{The \sbolheading{roles} property}
 \label{sec:roles}
 
 The \sbol{roles} of a ComponentDefinition object MUST contain at least one URI.  These identify ontology terms that clarify a \sbol{ComponentDefinition} object's potential function in a biological context. For example, a \sbol{ComponentDefinition} for a DNA component might have a role of ``promoter'' or ``terminator,'' terms taken from the Sequence Ontology (SO). A ComponentDefinition object for a protein, on the other hand, might have a role of ``transcription factor'' or ``protease.'' 
-\todo[inline]{Taken from what ontology?}
+\LDtodo{Taken from what ontology?}
 
 The \sbol{roles} are analogous to the \external{type} of a \external{DnaComponent} object in SBOL Version 1.1. 
 
@@ -253,19 +242,19 @@ The sequence property is optional and includes the URI for a corresponding \sbol
 \subsubsection*{The \sbolheading{sequenceConstraint} property}
 \label{sec:sequenceConstraint}
 
-\todo[inline]{This needs to be explained}
+\Ctodo{This needs to be explained}
 
 \subsubsection*{The \sbolheading{sequenceAnnotation} property}
 \label{sec:sequenceAnnotation}
 
-\todo[inline]{This appears to be completely obsolete.  Does this property even still exist? -JSB}
+\Ctodo{This needs to be better explained. -JSB}
 
 A \sbol{ComponentDefinition} object can define its structure by linking to objects that belong to the Component, Sequence, SequenceAnnotation, and SequenceConstraint classes. These classes are described below.
 
 \subsubsection*{Serialization}
 The parents of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Documented} and \sbol{Identified}. As a result, inherited properties are serialised as explained for these parent classes. The sequence property of a \sbol{ComponentDefinition} object includes a URI to a \sbol{Sequence} object and this URI is serialized as an \external{rdf:resource}. The \sbol{types} property may include a collection of type URIs and is serialized as an implicit collection, ignoring the property name ``types''. The \sbol{roles} property is also similarly serialized as an implicit collection of sbol:roles properties.
 
-\todo[inline]{Add the serialization descriptions to parent classes.}
+\Ctodo{Add the serialization descriptions to parent classes; make sure everything has its serialization}
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ComponentDefinition rdf:about="...">
@@ -283,7 +272,7 @@ The parents of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, tra
                </sbol:sequenceAnnotation> [\emph{elements}]        
   </sbol:ComponentDefinition>
 \end{lstlisting}
-\todo[inline]{what is this listing? -JSB}
+\Dtodo{Have we explained anywhere how to interpret these template listings?}
 
 The example below shows the serialization of a simple \sbol{ComponentDefinition} object. The \external{DnaRegion} from BioPAX and \external{CHEBI:4705} from CHEBI are used to indicate the type of the biological entity as a DNA molecule. Its role is specified via the generic \external{SO:0000167} (\external{promoter}) and more specific \external{SO:0000613} (\external{bacterial\_RNApol\_promoter}) terms.
 
@@ -328,7 +317,7 @@ Every \sbol{ComponentInstance} MUST be associated with precisely one
 \paragraph{The \sbolheading{mapsTo} property}
 \label{sec:mapsTo}
 
-\todo[inline]{Need to make sure all MapsTo statements are correct}
+\Ctodo{Need to make sure all MapsTo statements are correct}
 The \sbol{mapsTo} property links \sbol{Component} objects (both Components and FunctionalComponents) together within a larger design, indicating that they refer to the same entity.
 
 The third data field, ``mappings'', is a set of MapsTo objects that link between other ComponentInstance objects at the same level of the design hierarchy as well as other ComponentInstance objects that are lower in the design hierarchy, thereby composing these objects with greater specificity (see first module example).
@@ -375,7 +364,7 @@ Every \sbol{SequenceAnnotation} MUST have a location property. The value of this
 \paragraph{The \sbolheading{component} property}
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
 
-\todo[inline]{Separate serialization better}
+\Ctodo{Separate serialization better - give paragraph/subsubsec headers}
 
 The serialization of SequenceAnnotation objects MUST be carried out according to the template below. In this template, A\_LOCATION\_SUBCLASS represents one of the Location subclasses.
 \lstsetsbol
@@ -389,7 +378,7 @@ The serialization of SequenceAnnotation objects MUST be carried out according to
 </sbol:SequenceAnnotation>
 \end{lstlisting}
 
-\todo[inline]{Make sure it's clear these templates specify content, not order}
+\Ctodo{Make sure it's clear these templates specify content, not order}
 
 
 
@@ -482,8 +471,8 @@ describing locations on sequential structures, the
 \sbol{GenericLocation} is included as a hook for extensions, e.g., for
 describing locations in non-sequential structures.
 
-\todo[inline]{Need serialization examples for MultiRange, Cut, and GenericLocation}
-\todo[inline]{Make sure that every property has a section label so that it hyperlinks correctly}
+\Ctodo{Need serialization examples for MultiRange, Cut, and GenericLocation}
+\Ctodo{Make sure that every property has a section label so that it hyperlinks correctly}
 
 \subsubsection{SequenceConstraint}
 \label{sec:SequenceConstraint}
@@ -504,7 +493,7 @@ A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} a
 \label{sec:subject}
 This REQUIRED property specifies the URI \sbol{identity} of the first \sbol{Component} object in the relation.
 
-\todo[inline]{Check to make sure we say URI identity and not just URI everywhere that we mean an identity}
+\Dtodo{Check to make sure we say URI identity and not just URI everywhere that we mean an identity}
 
 \paragraph{The \sbolheading{object} property}
 \label{sec:object}
@@ -557,7 +546,7 @@ The example below shows the serialization of a \sbol{SequenceConstraint} object.
 </sbol:SequenceConstraint>
 \end{lstlisting}
 
-\todo[inline]{In every serialization example, make sure something differs in order from the template, to more intuitively illustrate the unimportance of order}
+\Dtodo{In every serialization example, make sure something differs in order from the template, to more intuitively illustrate the unimportance of order}
 
 \subsection{Model}
 \label{sec:Model}
@@ -582,7 +571,7 @@ This REQUIRED property is a URI that specifies the actual location of a qualitat
 This REQUIRED property is a URI that specifies the language the model is implemented with. 
 Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Methods (EDAM) ontology where possible. A few suggested model types and corresponding URI values are shown in \ref{tbl:model_types}.
 
-\todo[inline]{Made sure EDAM goes in ontology best-practices section}
+\LDtodo{Make sure EDAM goes in ontology best-practices section}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -616,7 +605,7 @@ Values for this URI are RECOMMENDED to be chosen from the SBO's modelling framew
   \label{tbl:model_frameworks}
 \end{table}
 
-\todo[inline]{Made sure SBO frameworks goes in ontology best-practices section}
+\LDtodo{Made sure SBO frameworks goes in ontology best-practices section}
 
 \subsubsection*{ The \sbolheading{role} property}
 This OPTIONAL property is a URI that specifies what the model is for, such as part or interaction model (\ref{tbl:model_roles}).
@@ -671,7 +660,7 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
 
 
 
-\todo[inline]{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.}
+\Dtodo{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.}
 \subsection{ModuleDefinition}
 \label{sec:ModuleDefinition}
 
@@ -908,7 +897,7 @@ The serialization of \sbol{Interaction}s has the following form.
 \end{lstlisting}
 
 
-\todo[inline]{Can an interaction have serial participants?}
+\Dtodo{Can an interaction have serial participants?}
 
 \begin{figure}[ht]
 \begin{center}
@@ -1013,11 +1002,11 @@ In particular, three models are supported for connecting the SBOL model with oth
 \item Conversely, rather than embedding external objects in SBOL, SBOL objects can also be linked from or embedded inside of other data models.  The only requirement is that some URI resolution mechanism must be available that allows the links between SBOL objects thus separated from one another to be followed when needed.
 \end{itemize}
 
-\todo[inline]{Make sure we explain about annotations up in the motivation and overview, since it's really, really important.}
+\Ctodo{Make sure we explain about annotations up in the motivation and overview, since it's really, really important.}
 
 \subsubsection{Annotating SBOL objects}
 
-\Dtodo{URI: plain or courier?}
+\LDtodo{URI: plain or courier?}
 
 Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. 
 Property names are specified by qualified names as \external{URI}s, each formed of a namespace and a local name. 

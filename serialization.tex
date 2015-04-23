@@ -3,31 +3,31 @@
 \label{sec:serialization}
 % -----------------------------------------------------------------------------
 
-\todo[inline]{try to target readers unfamiliar with RDF/XML.  -bder}
+\Ctodo{try to target readers unfamiliar with RDF/XML.  -bder}
 
 The SBOL serialization is designed to meet several competing requirements. Firstly, SBOL needs to support ad-hoc annotations and extensions. Secondly, SBOL needs to support processing by generic semantic web and database tools that have little or no knowledge of the SBOL data model. Thirdly, SBOL needs to support the generation of light-weight software clients so as to lower the barrier to entry for new API implementations within environments where community-maintained implementation(s) are not suitable.
 
 The canonical serialization of SBOL is to a strict dialect of RDF/XML. This serialization provides the base from which to meet further requirements. Any RDF/XML-aware tooling can consume and analyze a SBOL file. Where possible, we have re-used predicates from widely-used terminologies (such as Dublin Core~\cite{dcmi2012}) to expose as much of the data as practical to standard RDF tooling.
 
 Arbitrary RDF/XML provides a great deal of flexibility in how equivalent data can be serialized. This flexibility can result in different serializations when processing RDF/XML files using standard off-the-shelf XML tools, such as DOM-OO mappings. To address this problem, we define a canonical association between the nesting of data structures within the SBOL UML data model and the RDF/XML file. For all ownership associations (filled diamonds), the RDF/XML for the owned entity is embedded within the owner's RDF/XML. For all associations that are by reference (open diamonds), the RDF/XML for the referenced property is linked via a resource URI.
-\todo[inline]{Perhaps add or reference an example of ownership vs referencing. - cm}
+\Ctodo{Perhaps add or reference an example of ownership vs referencing. - cm}
 
 All first-class SBOL datatypes have an associated identity URI. In the RDF, this is the resource URI used by instances of that type. Properties and associations are asserted as nested RDF/XML assertions. Some datatypes are `top level,' which means that they always appear at the top level of the RDF/XML serialization. All other datatypes will always appear nested within their parent container.
-\todo[inline]{Perhaps add or reference an example of a top level entity vs a nested entity.  This may be very similar to the previous example. - cm}
+\Ctodo{Perhaps add or reference an example of a top level entity vs a nested entity.  This may be very similar to the previous example. - cm}
 
 Each instance of a first-class SBOL datatype may have annotations attached. These annotations are composed of a name and a value.  They are serialized to RDF as a triple with the subject being the identity of the instance they annotate, the predicate being the name of the annotation, and the object being the value of that annotation. Annotation values are always nested within the RDF/XML serialization of the instance that they annotate.
 
 SBOL supports top-level, user-defined annotations. This is to allow non-standardized but necessary information to be carried around as part of a design. For example, a particular sub-community may have an internal standard for genetic device characterization data sheets. 
 Individual data sheets can be represented as a generic top-level annotation with internal structured annotations. This annotation will be serialized into the RDF/XML in the usual way, as a RDF/XML block at the top level of the file. Other objects may refer to this entity through their annotations by reference, and this generic top-level entity may refer to other entities via references.
-\todo[inline]{Perhaps add or reference examples of different annotations. - cm}
+\Ctodo{Perhaps add or reference examples of different annotations. - cm}
 
 By adopting this paradigm of RDF/XML serialization, SBOL is able to adapt to future changes in the standard without requiring large-scale alterations to the RDF files. Since exactly the same scheme is used to serialize annotations as is used to serialize specification-defined properties and associations, it is possible to update the SBOL standard to recognize a different range of properties and associations. Those properties not recognized by the specification will always be available through the API as annotations. Similarly, by allowing arbitrary top-level entities in a SBOL file, we enable future specifications or extensions to ratify the structure of other top-level objects. These entities would then become part of the explicit data model, but the identical RDF serialization would be used. Applications lacking support for a given extension can safely round-trip the top-level data that is not understood, treating it as a top-level structured annotation, without data loss or corruption. The very regimented control of nesting versus referencing allows the XML structure to be very predictable, enabling XML/DOM-based tooling to work with SBOL RDF/XML files safely.
 
 \subsection {SBOL Documents}
-\todo[inline]{This needs to be integrated with the rest}
+\Ctodo{This needs to be integrated with the rest}
 An SBOL document is a valid RDF/XML document. Accordingly, each SBOL document starts with an XML declaration that has its XML version set to ``1.0.'' As shown in the example below, this declaration is then followed by a rdf:RDF XML element that includes the namespace declarations for RDF and SBOL. The latter namespace is used to indicate which entities and properties in the SBOL document are defined by SBOL.
 
-\todo[inline]{Need to state ``This is the SBOL2 namespace''}
+\Ctodo{Need to state ``This is the SBOL2 namespace''}
 
 \lstsetsbol
 \begin{lstlisting}
