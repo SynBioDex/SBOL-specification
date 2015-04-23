@@ -1002,30 +1002,49 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 
 
 
-\subsection{Application Specific Data - Annotations}
+\subsection{Extending the SBOL Representation:  Annotations}
 \label{sec:annotations}
 
-\todo[inline]{Explain that the two types of annotation correspond to top-level vs. part/whole properties}
+SBOL does not attempt to represent all information about a biological system, since many things do not yet have a clear ``right way'' to be represented, such as design intent, biological context, or performance data.
+Instead, SBOL allows the embedding of application specific data that are not captured by the SBOL standard. 
+Such data are optional, but can be computationally generated and exchanged via SBOL documents without getting lost. 
+
+To do this, SBOL provides an ``annotation'' mechanism for attaching arbitrary information to SBOL objects, which allows SBOL models to be connected with any other models in an extensible manner.
+In particular, three models are supported for connecting the SBOL model with other, possibly application-specific models:
+\begin{itemize}
+\item Information that is ``part'' of an SBOL object (i.e., a ``filled diamond'' relationship) is annotated simply by adding non-conflicting properties and custom identity entries to an SBOL object.  An example might be source information about the registry from which a \sbol{ComponentDefinition} was imported.
+\item Information that is an independent object is annotated by wrapping it inside of a \sbol{GenericTopLevel} object.  An example might be a data sheet describing the performance of a \sbol{ModuleDefinition} in some particular context.
+\item Conversely, rather than embedding external objects in SBOL, SBOL objects can also be linked from or embedded inside of other data models.  The only requirement is that some URI resolution mechanism must be available that allows the links between SBOL objects thus separated from one another to be followed when needed.
+\end{itemize}
+
+\todo[inline]{Make sure we explain about annotations up in the motivation and overview, since it's really, really important.}
 
 \subsubsection{Annotating SBOL objects}
-SBOL allows embedding application specific data that are not captured by the SBOL standard. Such data are optional, can be computationally generated and exchanged via SBOL documents without getting lost. These custom data are stored in the form of annotations, providing informative metadata about entities in an SBOL document.
 
-Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. Property names are specified by qualified names as \external{URI}s, each formed of a namespace and a local name. Values can be \external{URI}s or \external{Literal}s (for example, \external{String}, \external{Integer}, \external{Double}, \external{Boolean}) or custom \sbol{identity} entities initialized with application specific types. These custom \sbol{identity} entities can further be annotated with the scheme described here. These custom entities are either serialized within an SBOL entity being annotated, or referenced using an \external{URI} annotation and embedded within the the annotated entity's parent.%TODO Make sure if we have a choice here! 
+\Dtodo{URI: plain or courier?}
+
+Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. 
+Property names are specified by qualified names as \external{URI}s, each formed of a namespace and a local name. 
+Values can be \external{URI}s or \external{Literal} data (for example, \external{String}, \external{Integer}, \external{Double}, \external{Boolean}) or custom \sbol{Identified} entities initialized with application specific types. 
+These custom \sbol{Identified} entities can further be annotated with the scheme described here. These custom entities are either serialized within an SBOL entity being annotated, or referenced using an \external{URI} annotation and embedded within the the annotated entity's parent.
+\Dtodo{Make sure if we have a choice here!}
 
 \begin{figure}[!ht]
 \begin{center}
-
-%Consider putting Identified, uRI, and Literal on the bottom so that inheritance arrows point in the same direction as they do in other diagrams. Another consideration for maintaing consistency with the other diagrams is to add arrow heads to the opposite ends of the black diamond relations. - Nic
-
 \includegraphics[scale=0.6]{uml/identified_annotations}
 \caption[]{Annotating SBOL's Identified entities with application specific data.}
 \label{uml:identified_annotations}
 \end{center}
 \end{figure}
+\Dtodo{I think this should actually be: add any object here of your own custom class (which MUST NOT use the SBOL namespace), not ``make chains of identified''}
+\Dtodo{Is this figure how the annotations are actually handled in libSBOLj?}
+\Dtodo{Consider putting Identified, uRI, and Literal on the bottom so that inheritance arrows point in the same direction as they do in other diagrams. Another consideration for maintaing consistency with the other diagrams is to add arrow heads to the opposite ends of the black diamond relations. - Nic}
 
-  Each annotation is serialised as an RDF subject-property-object triplet in which the subject is the SBOL object being annotated, the property is the annotation name, and the object is the annotation value. Simple values URIs are serialised as RDF literals, and URI values are represented with the \external{\path{http://www.w3.org/1999/02/22-rdf-syntax-ns#resource}} RDF property. If the annotation value is another complex object then the object is embedded as an RDF resource, which can further be annotated similarly.%TODO If we allow URI reference of a custom object stored, then update this paragraph
+Each annotation is serialised as an RDF subject-property-object triplet in which the subject is the SBOL object being annotated, the property is the annotation name, and the object is the annotation value. Simple values URIs are serialised as RDF literals, and URI values are represented with the \external{\path{http://www.w3.org/1999/02/22-rdf-syntax-ns#resource}} RDF property. If the annotation value is another complex object then the object is embedded as an RDF resource, which can further be annotated similarly.
+\Dtodo{If we allow URI reference of a custom object stored, then update this paragraph}
 
-The ComponentDefinition example for a promoter below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \external{String} value. The second \external{pr:experience} annotation has a \external{URI} value and is serialised as an RDF resource pointing to the information Web page on the Parts Registry for the promoter. The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
+\paragraph{Serialization}
+The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \external{String} value. The second \external{pr:experience} annotation has a \external{URI} value and is serialised as an RDF resource pointing to the information Web page on the Parts Registry for the promoter. The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
 
 \begin{figure} [ht]
 \lstsetsbol
@@ -1056,8 +1075,12 @@ The ComponentDefinition example for a promoter below shows how annotations can b
 
 \subsubsection{GenericTopLevel}  
 \label{sec:GenericTopLevel}
-SBOL documents can also be annotated at the top level. SBOL's \sbol{GenericTopLevel} is a top-level entity that can include a set of annotations as described above. Entities that are at the top-level and are not recognised by the SBOL standard are loaded into these top level entities. These \sbol{GenericTopLevel} entities may have multiple type information and can be used safely by tools to exchange custom data. As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{name}, \sbol{description}, \sbol{displayId} and so on. The type of the generic entity is indicated using the RDF's \external{type} property.
-%TODO: Is it possible to have multiple types for GenericTopLevel elements? If so, update the diagram.
+SBOL documents can also be annotated at the top level. 
+SBOL's \sbol{GenericTopLevel} is a top-level entity whose only purpose is to include a set of annotations as described above. 
+Entities that have independent existence (i.e., would be another ``top level'' class) and are not recognised by the SBOL standard are loaded into these top level entities. 
+These \sbol{GenericTopLevel} entities can thus be safely used by tools to exchange non-SBOL data embedded separately within SBOL.
+As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{name}, \sbol{description}, \sbol{displayId} and so on. The type of data found in the generic entity is indicated using the standard \external{rdf:type} property.
+\Dtodo{Is it possible to have multiple types for GenericTopLevel elements? If so, update the diagram.}
 
 \begin{figure}[ht]
 \begin{center}
@@ -1067,7 +1090,11 @@ SBOL documents can also be annotated at the top level. SBOL's \sbol{GenericTopLe
 \end{center}
 \end{figure}
 
-The example below shows adding a datasheet object to a SBOL document using the \sbol{GenericTopLevel} class. The J23119 promoter example is annotated with the URI of a top Level Datasheet object. The annotation properties are defined using the custom \external{\path{http://www.myapp.org/}} namespace and the \external{myapp} prefix. The datasheet object, with the data type of \external{myapp:Datasheet}, is accessed using the \external{URI} value specified by the \external{myapp:characterizationData} property of the promoter component definition. The datasheet object is further annotated with the transcription rate and the URI for the actual characterization data using the \external{myapp:transcriptionRate} and \external{myapp:characterizationData} properties respectively.
+The example below shows how a datasheet object can be added to an SBOL document using the \sbol{GenericTopLevel} class. 
+The J23119 promoter example is annotated with the URI of a top Level Datasheet object, here defining the annotation properties using the custom \external{\path{http://www.myapp.org/}} namespace and the \external{myapp} prefix. 
+The datasheet object, with the data type of \external{myapp:Datasheet}, is accessed using the \external{URI} value specified by the \external{myapp:characterizationData} property of the promoter component definition. 
+The datasheet object is further annotated with the transcription rate and the URI for the actual characterization data using the \external{myapp:transcriptionRate} and \external{myapp:characterizationData} properties respectively.
+Finally, this data sheet is linked from the component is describes using an annotation with a \external{myapp:datasheet} property whose value is the data sheet's URI.
 
 \begin{figure}[ht]
 \lstsetsbol
