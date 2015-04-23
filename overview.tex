@@ -28,6 +28,18 @@ SBOL includes different entities to describe such genetic circuits. Genetic elem
 SBOL facilitates the design of complex systems using hierarchical composition. In addition to using simple genetic elements in a modular fashion, modules that are composed of multiple, different components can also be reused. Such modules can expose some of the design components as inputs and outputs, which can be connected to components from other modules using \sbol{MapsTo} entities.
 \todo[inline]{This needs to be clarified.  Do we really want to explain MapsTo here? -JSB}
 
+
+\todo[inline]{Why is it important to separate definitions from instantiations?}
+
+\todo[inline]{The motivation for separating structural and functional considerations is not explained.  Which class names are structural, which class names are functional, and how are the two connected?  Do all structural components require a functional counterpart?  If not, explain why only a subset of structural components would have functional definitions.}
+
+\todo[inline]{As a person reading about SBOL2 for the first time, I rank this as the most important section.  This is your chance to concisely tell someone who won't read the whole document about the take-home messages for the new data model.}
+
+\todo[inline]{Why are URI's needed for Components?  Why not just for ComponentDefinitions?  Is there anything in SBOL that does not require a URI?}
+
+
+\todo[inline]{where did the XML-RDF section go?}
+
 % \todo[inline]{I would suggest a more complete and more explicit mapping of vocabulary to the toggle switch example. -bder}
 
 % The same toggle switch is now displayed using two LacI and TetR inverter submodules in figure \ref{images:toggleswitch_modular}. The LacI inverter uses LacI as input and produces the TetR output, and the TetR inverter uses TetR as input and produces the LacI output. These inputs and outputs are mapped in a parent module.
