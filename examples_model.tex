@@ -9,6 +9,8 @@
 
 This section illustrates how to use the SBOL data model by specifying the design of a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}. This design is visualized in \ref{images:toggleswitch_modular}. 
 
+\Ctodo{Add a standard toggle switch diagram of two things repressing each other and a simple explanation for people who do not already know the toggle switch.}
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.4]{images/toggleswitch_modular}
@@ -65,7 +67,7 @@ The functional hierarchy of the toggle switch is represented using
 
 % Each \sbol{ModuleDefinition} also contains the \sbol{FunctionalComponent}s that participate in \sbol{Interaction}s and are defined by the same \sbol{ComponentDefinition}s as the parallel \sbol{Component}s in the structural hierarchy of the toggle switch. Finally, \sbol{MapsTo} entities are used to refine which \sbol{FunctionalComponent}s of the functional hierarchy are identical or map them to \sbol{Component}s in the structural hierarchy.
 
-\Dtodo{ComponentDefinition.types in the following figure are not consistent with the list of BioPax ontological terms described previously in the Data Model section}
+\Ctodo{ComponentDefinition.types in the following figure are not consistent with the list of BioPax ontological terms described previously in the Data Model section.  Nick will fix this.}
 
 %  The first use case is to indicate with greater fidelity how a module describes the function of a composite component, namely by asserting that particular component instantiations within the module correspond to particular component instantiations within the component. 
 
