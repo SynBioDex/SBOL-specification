@@ -4,14 +4,13 @@
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}.   
 This section begins with a review of UML diagrams and naming conventions, then each following subsection explains one of the ``top-level'' objects in the SBOL data model.
 
-Complete SBOL examples and best practices when using SBOL can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
+Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
 \subsection{Understanding the UML Diagrams}
 
-The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Classes are represented in UML diagrams as rectangles labeled at the top with class names. Classes may be connected to other classes by association properties, which are represented in UML as arrows labeled with data cardinality (i.e., how many instances of that association can exist, as explained below). Finally, the remaining (non-association) properties of a class properties are listed below its name inside the rectangle, and each property is labeled with its data types and cardinality.
-\todo[inline]{Need to also explain inheritance arrows}
+The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Classes are represented in UML diagrams as rectangles labeled at the top with class names. Classes may be connected to other classes by association properties, which are represented in UML as arrows labeled with data cardinality (i.e., how many instances of that association can exist, as explained below). The remaining (non-association) properties of a class are listed below its name inside the rectangle, and each property is labeled with its data type and cardinality. Finally, classes can inherit the properties of other classes. Inheritance is represented in UML as an arrow with an open-faced, triangular arrowhead that points from the inheriting class to the inherited class.
 
-An association property is a directional relationship between SBOL classes, represented by an arrow. The object at that the arrow comes from has the property, and the object that the arrow points to is the associated object. A diamond at the tail of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, which means that associated objects exist independently of objects of the class that has the association property (e.g., a parent and child). In contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which objects of the associated class cannot exist independently and must be associated with at most one object of the class that has the association property (e.g., the pattern on a piece of clothing). 
+An association property is a directional relationship between SBOL classes, represented by an arrow. The object that the arrow comes from has the property, and the object that the arrow points to is the associated object. A diamond at the tail of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, which means that associated objects exist independently of objects of the class that has the association property. In contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which objects of the associated class cannot exist independently and must be associated with at most one object of the class that has the association property. 
 %For example, it will later be shown how objects of the \sbol{SequenceAnnotation} class must associated with an object of the \sbol{ComponentDefinition} class (and only that object).
 
 All SBOL properties are labeled with one of several restrictions on data cardinality. These are:
@@ -61,15 +60,12 @@ As another example, a relational implementation of the SBOL API would store the 
 \label{uml:identified}
 \end{center}
 \end{figure}
-\todo[inline]{Diagram needs to include annotation}
 
-All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  class. This inheritance enables SBOL objects to be identified using unique URIs that may refer to relative locations within an SBOL document or URLs that refer to locations on the World Wide Web. This class includes the following properties: \sbol{identity}, \sbol{persistentIdentity}, and \sbol{version}.
-(\ref{uml:identified}), as well as annotations (described below in their own section).
-\todo[inline]{Is there any example SBOL entity that does not derive from Identified?}
+All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  class. This inheritance enables SBOL objects to be identified using unique \external{URI}s that may refer to relative locations within an SBOL document or URLs that refer to locations on the World Wide Web. As shown in \ref{uml:identified}, this class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, and \sbol{annotations}. The latter property is described separately in \ref{sec:annotations}.
 
 \subsubsection*{The \sbolheading{identity} property}
 \label{sec:identity}
-This property is required by all \sbol{Identified} objects and has a datatype of \external{URI}. This \external{URI} serves to uniquely identify an SBOL object (as in SBOL Version 1.1). The \sbol{identity} property can be used to point to other objects in the same SBOL document or resources on the Web. Although most SBOL properties are defined under the SBOL namespace, because unique identity interacts with the RDF specification, this property is defined under the RDF namespace using the following term:
+This property is required by all \sbol{Identified} objects and has a datatype of \external{URI}. This \external{URI} serves to uniquely identify an SBOL object. The \sbol{identity} property can be used to point to other objects in the same SBOL document or resources on the Web. Although most SBOL properties are defined under the SBOL namespace, because unique identity interacts with the RDF specification, this property is defined under the RDF namespace using the following term:
 
 \external{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about}.
 
