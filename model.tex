@@ -30,15 +30,20 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 \subsection{Naming Conventions}
 \label{sec:nameconventions}
 
-\Ctodo{need to put in typography and upper case vs. camel case, etc.}
+\Rtodo{need to put in typography and upper case vs. camel case, etc.}
 
-Within the SBOL data model, all properties are given a singular or plural name in accordance with their data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{sequenceAnnotation} is the singular form of \sbol{sequenceAnnotation}s.
+Within the SBOL data model, each property is given a singular or plural name in accordance with its data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{sequenceAnnotation} is the singular form of \sbol{sequenceAnnotation}s. 
+
+Within the \emph{Resource Description Framework} (RDF) serialization of SBOL (see \ref{sec:serialization}), however, SBOL properties are always given singular names. This is because the SBOL data model does not contain classes that correspond directly to the RDF elements that group elements into ordered or unordered sets. Consequently, if an SBOL property has multiple values, than it is serialized as multiple property entries, each with a singluar name and a single value.
+For example, if a SBOL property has five values, then its serialization contains five RDF triples, each with a singular predicate name and one of the five values as its object.
+
+In both the SBOL data model and RDF serialization, property names are written in lower camel case. That is, property names are written as compound words in which each word after the first is capitalized. Class names, however, are written in upper camel case, in which the first word is capitalized as well.
+
+Lastly, font color is used in the body text of this specification to indicate whether a class or property is defined externally or within the SBOL data model. In particular, if a class or property name is written in a blue font, then it is defined by SBOL. If it is written in a bold font, then it is defined externally.
+
+\Rtodo{has RDF been introduced yet? added ponter }
 
 
-\Ctodo{has RDF been introduced yet?}
-
-Within the RDF serialization of SBOL, however, SBOL properties are always given singular names. This is because the serialization writes each property element down individually, so if there are multiple values, they are represented as several entries of a single value each.
-For example, if a SBOL property has five values, then its serialization contains five RDF triples with singular predicate names.
 
 \subsection{Data Types}
 \label{sec:datatypes}
