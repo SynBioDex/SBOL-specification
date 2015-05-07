@@ -30,7 +30,7 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 \subsection{Naming Conventions}
 \label{sec:nameconventions}
 
-\Rtodo{need to put in typography and upper case vs. camel case, etc. / Done - Nic}
+\Rtodo{Need to put in typography and upper case vs. camel case, etc. / Done. - Nic}
 
 In this text, data objects are denoted by {\tt monospace font} and all SBOL objects and properties are designated by blue links.
 SBOL classes are generally given an upper case ``proper noun'' name, e.g. \sbol{Identified}.  
@@ -47,15 +47,11 @@ Lastly, font color is used in the body text of this specification to indicate wh
 
 \Rtodo{has RDF been introduced yet? / Added pointer to later section on RDF. - Nic}
 
-<<<<<<< HEAD
 \Rtodo{has RDF been introduced yet?}
 
 When SBOL objects are serialized to be exchanged (using RDF as described in \ref{sec:serialization}), however, SBOL properties are always given singular names.
 This is because the serialization writes each property element down individually, so if there are multiple values, they are represented as several entries of a single value each.
 For example, if a SBOL property has five values, then its serialization contains five RDF triples with singular predicate names.
-=======
-
->>>>>>> ebdca5d890593f7b52ccd5faa67990dded8ce914
 
 \subsection{Data Types}
 \label{sec:datatypes}
