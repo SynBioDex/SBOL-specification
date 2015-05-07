@@ -11,6 +11,7 @@ The canonical serialization of SBOL is to a strict dialect of RDF/XML. This seri
 
 Arbitrary RDF/XML provides a great deal of flexibility in how equivalent data can be serialized. This flexibility can result in different serializations when processing RDF/XML files using standard off-the-shelf XML tools, such as DOM-OO mappings. To address this problem, we define a canonical association between the nesting of data structures within the SBOL UML data model and the RDF/XML file. For all ownership associations (filled diamonds), the RDF/XML for the owned entity is embedded within the owner's RDF/XML. For all associations that are by reference (open diamonds), the RDF/XML for the referenced property is linked via a resource URI.
 \Ctodo{Perhaps add or reference an example of ownership vs referencing. - cm}
+\Ctodo{GM: Add a statement to indicate that the order of properties is not important.}
 
 All first-class SBOL datatypes have an associated identity URI. In the RDF, this is the resource URI used by instances of that type. Properties and associations are asserted as nested RDF/XML assertions. Some datatypes are `top level,' which means that they always appear at the top level of the RDF/XML serialization. All other datatypes will always appear nested within their parent container.
 \Ctodo{Perhaps add or reference an example of a top level entity vs a nested entity.  This may be very similar to the previous example. - cm}

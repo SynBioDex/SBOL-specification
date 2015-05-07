@@ -1,16 +1,14 @@
 % -----------------------------------------------------------------------------
 \section{SBOL Data Model}
 % -----------------------------------------------------------------------------
-In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}.   
-This section begins with a review of UML diagrams and naming conventions, then each following subsection explains one of the ``top-level'' objects in the SBOL data model.
-
-Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
+In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
 \subsection{Understanding the UML Diagrams}
+\label{sec:umldiagrams}
 
-The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Classes are represented in UML diagrams as rectangles labeled at the top with class names. Classes may be connected to other classes by association properties, which are represented in UML as arrows labeled with data cardinality (i.e., how many instances of that association can exist, as explained below). The remaining (non-association) properties of a class are listed below its name inside the rectangle, and each property is labeled with its data type and cardinality. Finally, classes can inherit the properties of other classes. Inheritance is represented in UML as an arrow with an open-faced, triangular arrowhead that points from the inheriting class to the inherited class.
+The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Classes are represented in UML diagrams as rectangles labeled at the top with class names. Classes may be connected to other classes by association properties, which are represented in UML diagrams as arrows. These arrows are labeled with data cardinalities in order to indicate how many values a given association property may possess (see below). The remaining (non-association) properties of a class are listed below its name. Each one of these properties is labeled with its data type and cardinality. Finally, classes can inherit the properties of other classes. Inheritance relationships are represented in UML diagrams as open-faced, triangular arrows that point from the inheriting class to the inherited class.
 
-An association property is a directional relationship between SBOL classes, represented by an arrow. The object that the arrow comes from has the property, and the object that the arrow points to is the associated object. A diamond at the tail of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, which means that associated objects exist independently of objects of the class that has the association property. In contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which objects of the associated class cannot exist independently and must be associated with at most one object of the class that has the association property. 
+As mentioned above, an association property is a directional relationship between two SBOL classes that is represented using an arrow. The class from which an arrow originates is the owner of the association property, while the class to which the arrow points is the value of the association property. A diamond at the origin of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, in which that the owner of the association property exists independently of its value. By contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which the value of the association property cannot exist independently of its owner. 
 %For example, it will later be shown how objects of the \sbol{SequenceAnnotation} class must associated with an object of the \sbol{ComponentDefinition} class (and only that object).
 
 All SBOL properties are labeled with one of several restrictions on data cardinality. These are:
@@ -30,6 +28,7 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 \end{itemize}
 
 \subsection{Naming Conventions}
+\label{sec:nameconventions}
 
 \Ctodo{need to put in typography and upper case vs. camel case, etc.}
 
@@ -42,6 +41,7 @@ Within the RDF serialization of SBOL, however, SBOL properties are always given 
 For example, if a SBOL property has five values, then its serialization contains five RDF triples with singular predicate names.
 
 \subsection{Data Types}
+\label{sec:datatypes}
 
 \Ctodo{we use String, Integer, URI, Literal (these are from some W3C or XSD or whatever thing), and the classes below}
 \Ctodo{Give a forward pointer to RECOMMENDED best-practices for compliant URIs}
@@ -73,6 +73,14 @@ This substitution is in keeping with the commitment of the SBOL community to the
 \label{sec:persistentIdentity}
 The \sbol{persistentIdentity} property is optional and also has a data type of \external{URI}. This \external{URI} serves to uniquely refer to a set of SBOL objects that are different versions of each other. An SBOL object can referred to by either its \sbol{identity} \external{URI} or its \sbol{persistentIdentity} \external{URI}. In the latter case, this reference only holds if the SBOL object has the latest \sbol{version} property out of those objects with the same \sbol{persistentIdentity}.
 
+\subsubsection*{The \sbolheading{displayId} property}
+\label{sec:displayId}
+An optional identifier, with a data type of \external{String}. It is intended to be an intermediate between \sbol{name} and \sbol{identity}: machine-friendly text that is not necessarily unique, and more human-friendly than the full URI of an \sbol{identity}.
+
+\Ctodo{This is the wrong syntax.  It allows "-" and "." which we do not allow.}
+
+In particular, displayId string MUST be compliant with type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}
+
 \subsubsection*{The \sbolheading{version} property}
 \label{sec:version}
 
@@ -90,12 +98,6 @@ The Documented class in SBOL represents objects that can be decorated with human
 \label{uml:documented}
 \end{center}
 \end{figure}
-
-\subsubsection*{The \sbolheading{displayId} property}
-\label{sec:displayId}
-An optional identifier, with a data type of \external{String}. It is intended to be an intermediate between \sbol{name} and \sbol{identity}: machine-friendly text that is not necessarily unique, and more human-friendly than the full URI of an \sbol{identity}.
-
-In particular, displayId string MUST be compliant with type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}
 
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
@@ -171,6 +173,8 @@ Required. \sbol{Sequence} objects identify their type of encoding with a \extern
 \end{table}
 \Ctodo{Need to fix the caption of table 1, and need to match the biopa terms and give a forward pointer to table 2}
 \Ctodo{Matthew Pocock is in charge of deciding whether any more ontologies should be listed.}
+\Ctodo{GM: Add the BioPax terms Dna and Rna in addition to DnaRegion and RnaRegion.}
+
 
 The serialization of \sbol{Sequence} objects has the following form:
 \lstsetsbol
@@ -272,11 +276,11 @@ The parents of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, tra
 \begin{lstlisting}
 <sbol:ComponentDefinition rdf:about="...">
                ...
-  [\emph{zero or one}]  <sbol:name>...</sbol:name>[\emph{element}]
-  [\emph{zero or one}]  <sbol:description>...</sbol:description>[\emph{element}]
-  [\emph{zero or one}]  <sbol:sequence rdf:resource="..."/>[\emph{element}]
-  [\emph{one or more}]  <sbol:type rdf:resource="..."/>  [\emph{elements}]
-  [\emph{one or more}]  <sbol:role rdf:resource="..."/>  [\emph{elements}]    
+  [\emph{zero or one}]  <dcterms:title>...</dcterms:title> [\emph{element}]
+  [\emph{zero or one}]  <dcterms:description>...</dcterms:description> [\emph{element}]
+  [\emph{zero or one}]  <sbol:sequence rdf:resource="..."/> [\emph{element}]
+  [\emph{one or more}]  <sbol:type rdf:resource="..."/> [\emph{elements}]
+  [\emph{one or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]    
   [\emph{zero or more}] <sbol:subComponent>
                  <sbol:Component rdf:about="...">...</sbol:Component>
                </sbol:subComponent> [\emph{elements}]
@@ -292,8 +296,8 @@ The example below shows the serialization of a simple \sbol{ComponentDefinition}
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_J23119">
-  <sbol:name>J23119 promoter</sbol:name>
-  <sbol:description>Constitutive promoter</sbol:description>
+  <dcterms:title>J23119 promoter</dcterms:title>
+  <dcterms:description>Constitutive promoter</dcterms:description>
   <sbol:type rdf:resource="http://identifiers.org/chebi/CHEBI:4705"/>
   <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
   <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
@@ -362,6 +366,7 @@ All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinit
 \label{sec:SequenceAnnotation}
 The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} object linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object, as described below.
 
+\Dtodo{Can we change location to locations (1..*) and eliminate MultiRange class?}
 
 \begin{figure}[ht]
 \begin{center}
@@ -422,6 +427,7 @@ Specifies the start of a \sbol{Range}. This property is REQUIRED and can have \e
 Specifies the end of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
 
 \subparagraph{The \sbolheading{orientation} property}
+\label{sec:orientation}
 This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects representing DNA molecules, it is RECOMMENDED to use one of the values in \ref{tbl:orientation_types}. 
 
 \begin{table}[ht]
@@ -460,15 +466,15 @@ The example below shows the serialization of a \sbol{Range} object. It specifies
 
 \paragraph{MultiRange}
 \label{sec:MultiRange}
-A MultiRange object represents a location that is specified by multiple Range objects. For example, this capability can be used to specify a ComponentDefinition object that represents the introns or exons of a eukaryotic gene.
+A \sbol{MultiRange} object represents a location that is specified by multiple \sbol{Range} objects. For example, this capability can be used to specify a \sbol{ComponentDefinition} object that represents the introns or exons of a eukaryotic gene.
 
 \paragraph{Cut}
 \label{sec:Cut}
-The Cut class has been introduced to enable the specification of a location between two indices. 
-Each Cut object has properties, \sbol{at} and \sbol{orientation}.
+The \sbol{Cut} class has been introduced to enable the specification of a location between two indices. 
+Each \sbol{Cut} object has properties, \sbol{at} and \sbol{orientation}.
 
 \subparagraph{The \sbolheading{at} property}
-
+\label{sec:at}
 The REQUIRED \sbol{at} property is an index greater than or equal to zero that specifies the index just before the location represented by the Cut object. 
 A Cut object with \sbol{at} equal to zero represents the location just before index one (even though there is no zero index on Structure objects in SBOL). 
 
@@ -493,6 +499,8 @@ A \sbol{ComponentDefinition} object can link to \sbol{SequenceConstraint} object
 The purpose of \sbol{SequenceConstraint} is to allow partial designs to be specified when the precise identity, location, or ordering of \sbol{Component} objects is not yet fully determined.
 
 A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} and \sbol{object} properties to specify such constraints.
+
+\Dtodo{Should SequenceConstraint be Documented?}
 
 \begin{figure}[ht]
 \begin{center}
@@ -709,10 +717,10 @@ The serialization of \sbol{ModuleDefinition}s has the following form:
 \begin{lstlisting}
 <sbol:ModuleDefinition rdf:about="...">
                ...
-  [\emph{zero or one}]   <sbol:name>...</sbol:name>[\emph{element}]
-  [\emph{zero or one}]   <sbol:description>...</sbol:description>[\emph{element}]
-  [\emph{zero or more}]  <sbol:role rdf:resource="..."/>[\emph{elements}]
-  [\emph{zero or more}]  <sbol:model rdf:resource="..."/>[\emph{elements}]
+  [\emph{zero or one}]   <dcterms:title>...</dcterms:title> [\emph{element}]
+  [\emph{zero or one}]   <dcterms:description>...</dcterms:description> [\emph{element}]
+  [\emph{zero or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]
+  [\emph{zero or more}]  <sbol:model rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}] <sbol:component>
                  <sbol:FunctionalComponent rdf:about="...">...</sbol:FunctionalComponent >
                </sbol:component> [\emph{elements}]
@@ -760,8 +768,8 @@ The serialization of \sbol{FunctionalComponent}s has the following form.
 \begin{lstlisting}
 <sbol:FunctionalComponent rdf:about="...">
   [\emph{zero or one}] <sbol:definition rdf:resource="..."/> [\emph{element}]
-  [\emph{one}] <sbol:access rdf:resource="..."/> [\emph{element}]
-  [\emph{one}] <sbol:direction rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]         <sbol:access rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]         <sbol:direction rdf:resource="..."/> [\emph{element}]
 </sbol:FunctionalComponent>
 \end{lstlisting}
 
@@ -843,7 +851,7 @@ Each \sbol{MapsTo} entity must also specify the relationship between its local a
   \label{tbl:mapsto_refinement}
 \end{table}
 
-\Ctodo{libsbol and refinements types here need to agree on consistent capitalization}
+\Ctodo{libsbol and refinements types here need to agree on consistent capitalization. GM: We agreed to start with lowercase and use the Capital for the next word.}
 \Ctodo{The notion of refinement is very unclear -JB  Clean up the text}
 
 %GM: The paragraph below is now explained in the table above. Commented for now. Please remove the commented lines if you agree with the table description.
@@ -932,6 +940,7 @@ The serialization of \sbol{Interaction}s has the following form.
 </sbol:Interaction>
 \end{lstlisting}
 
+\Dtodo{Should roles be required types instead?}
 
 \begin{figure}[ht]
 \begin{center}
@@ -1013,14 +1022,14 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:sbol="http://sbols.org/v2#">
   <sbol:Collection rdf:about="http://parts.igem.org/Promoters/Catalog/Anderson">
-    <sbol:name>Anderson promoters</sbol:name>
     <sbol:displayId>Anderson</sbol:displayId>
+    <dcterms:title>Anderson promoters</dcterms:title>
+    <dcterms:description> The Anderson promoter collection</dcterms:description>
     <sbol:member rdf:resource="http://parts.igem.org/wiki/index.php/Part:BBa_J23119"/>
     ...
     <sbol:member rdf:resource="http://parts.igem.org/wiki/index.php/Part:BBa_J23118"/>
-    <sbol:description> The Anderson promoter collection</sbol:description>
   </sbol:Collection>
 </rdf:RDF>
 
@@ -1078,7 +1087,7 @@ The ComponentDefinition example for a promoter serialized below shows how annota
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pr="http://www.partsregistry.org/" xmlns:sbol="http://sbols.org/v2#">
+<rdf:RDF xmlns:pr="http://www.partsregistry.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:sbol="http://sbols.org/v2#">
   <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_J23119">
     <pr:group>iGEM2006_Berkeley</pr:group>
     <pr:experience rdf:resource="http://www.partsregistry.org/Part:BBa_J23119:Experience"/>
@@ -1088,8 +1097,8 @@ The ComponentDefinition example for a promoter serialized below shows how annota
         <pr:regulation>//regulation/constitutive</pr:regulation>
       </pr:Information>
     </pr:information>
-    <sbol:name>J23119</sbol:name>
-    <sbol:description>Constitutive promoter</sbol:description>
+    <dcterms:title>J23119</dcterms:title>
+    <dcterms:description>Constitutive promoter</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://purl.org/obo/owl/SO#SO_0000167"/>
   </sbol:ComponentDefinition>
@@ -1109,6 +1118,8 @@ Entities that have independent existence (i.e., would be another ``top level'' c
 These \sbol{GenericTopLevel} entities can thus be safely used by tools to exchange non-SBOL data embedded separately within SBOL.
 As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{name}, \sbol{description}, \sbol{displayId} and so on. The type of data found in the generic entity is indicated using the standard \external{rdf:type} property.
 
+\Ctodo{rdf:type should be rdfType}
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/generictoplevel}
@@ -1127,18 +1138,18 @@ Finally, this data sheet is linked from the component is describes using an anno
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:myapp="http://www.myapp.org/" xmlns:sbol="http://sbols.org/v2#">
+<rdf:RDF xmlns:myapp="http://www.myapp.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:sbol="http://sbols.org/v2#">
   <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_J23119">
     <myapp:datasheet rdf:resource="http://www.myapp.org/datasheet/1"/>
-    <sbol:name>J23119</sbol:name>
-    <sbol:description>Constitutive promoter</sbol:description>
+    <dcterms:title>J23119</dcterms:title>
+    <dcterms:description>Constitutive promoter</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://purl.org/obo/owl/SO#SO_0000167"/>
   </sbol:ComponentDefinition>
   <myapp:Datasheet rdf:about="http://www.myapp.org/datasheet/1">
     <myapp:characterizationData rdf:resource="http://www.myapp.org/measurement/1"/>
     <myapp:transcriptionRate>1</myapp:transcriptionRate>
-    <sbol:name>Datasheet 1</sbol:name>
+    <dcterms:title>Datasheet 1</dcterms:title>
   </myapp:Datasheet>
 </rdf:RDF>
 

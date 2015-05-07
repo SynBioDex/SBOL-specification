@@ -1,0 +1,230 @@
+\newcounter{sbolCtr}
+\newcommand{\printValid}{\validRule{sbol-\arabic{sbolCtr}\addtocounter{sbolCtr}{1}}}
+\newcommand{\printModeling}{\modelingRule{sbol-\arabic{sbolCtr}\addtocounter{sbolCtr}{1}}}
+
+\section{Validation Rules}
+\label{validation}
+
+This section summarizes all the conditions that must (or in some cases,
+at least \emph{should}) be true of an SBOL Version~2 document.  
+There are different degrees of rule strictness.  Formally, the differences are expressed in the statement of a rule: either a rule states that a condition \emph{must} be true, or a rule states that it \emph{should} be true.  Rules of the former kind are strict SBOL validation rules---data encoded in SBOL must conform to
+all of them in order to be considered valid.  Rules of the latter kind
+are consistency rules.  To help highlight these differences, we use the
+following three symbols next to the rule numbers:
+
+\begin{description}
+
+\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
+  \emph{requirement} for SBOL conformance. If a SBOL document does not follow this rule, it does not conform to the SBOL
+  specification.  (Mnemonic intention behind the choice of symbol:
+  ``This must be checked.'')
+
+\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
+  \emph{recommendation} for consistency.  If a SBOL document does not
+  follow this rule, it is not considered strictly invalid as far as the
+  SBOL specification is concerned; however, it indicates that the model contains a physical or conceptual inconsistency.  (Mnemonic intention behind the choice of symbol:
+  ``This is a cause for warning.'')
+
+\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a strong
+  recommendation for best practice.  This rule is not strictly
+  a matter of SBOL encoding, but the recommendation comes from logical
+  reasoning.  As in the previous case, if a SBOL document does not follow this rule, it is not considered an invalid SBOL encoding.  (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
+
+\end{description}
+
+The validation rules listed in the following subsections are all stated
+or implied in the rest of this specification document.  They are
+enumerated here for convenience.  
+
+For \notice convenience and brievity, we use the shorthand
+``\token{sbol:x}'' to stand for an attribute or element name \token{x}
+in the namespace for the SBOL specification, using
+the namespace prefix \token{sbol}.  In reality, the prefix string may be different from the literal ``\token{sbol}'' used here (and indeed, it can be any valid XML namespace prefix that the software
+chooses).  We use ``\token{sbol:x}'' because it is shorter than to
+write a full explanation everywhere we refer to an attribute or element
+in the SBOL specification namespace.
+
+\subsubsection*{General rules about an SBOL document}
+\setcounter{sbolCtr}{10101} 
+
+\printValid{An SBOL document must declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://sbols.org/v2\#}}. (Reference:
+  \sec{xml-namespace}.)}
+
+\printValid{An SBOL document must declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}}. (Reference: \sec{xml-namespace}.)}
+
+\printValid{An SBOL document must declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://purl.org/dc/terms/}}. (Reference: \sec{xml-namespace}.)}
+
+\printModeling{An SBOL document should declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://www.w3.org/ns/prov\#}}. (Reference: \sec{xml-namespace}.)}
+
+\subsubsection*{Rules for the \class{Identified} class} 
+\setcounter{sbolCtr}{10201}
+
+\printValid{The \sbol{identity} is a required property for all \sbol{Identified} objects and has a data type of URI with a syntax defined by:\\
+\uri{http://www.w3.org/1999/02/22-rdf-syntax\#about} (Reference: \sec{sec:Identified})}
+
+\printValid{The \sbol{persistentIdentity} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of URI with a syntax defined by:\\ \uri{http://www.w3.org/1999/02/22-rdf-syntax\#about} (Reference: \sec{sec:Identified})}
+
+\printValid{The \sbol{displayId} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of String that is composed only of alphanumeric or underscore characters and must not begin with a digit. (Reference: \sec{sec:Identified})}
+
+\printValid{The \sbol{version} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of String that is composed only of alphanumeric characters, underscores, hyphens, and periods and must begin with a digit. (Reference: \sec{sec:Identified})}
+
+\printValid{The \sbol{annotations} field is an optional list of for all \sbol{Identified} objects and, if provided, includes references to \sbol{Annotation} objects. (Reference: \sec{sec:Identified})}
+
+\printModeling{The \sbol{identity} of a compliant object must either be equal to the \sbol{persistentIdentity} when no \sbol{version} is specified or equal to "\refObj{persistentIdentity}/\refObj{version}" when a \sbol{version} is provided. (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Collection} object is required and must end with "/col/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{ModuleDefinition} object is required and must end with "/md/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Model} object is required and must end with\\ "/mod/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{ComponentDefinition} object is required and must end with "/cd/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Sequence} object is required and must end with "/seq/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{GenericTopLevel} object is required and must end with "/gen/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant child object is required must begin with the\\ \sbol{persistentIdentity} of its parent object and be immediately followed by "/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{version} of a compliant child object is required to be equal to the \sbol{version} of its parent object. (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{displayId} of a compliant object is required.  (Reference: \sec{sec:compliant})}
+
+\subsubsection*{Rules for the \class{Documented} class} 
+\setcounter{sbolCtr}{10301}
+
+\printValid{A \sbol{Documented} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Documented})}
+
+\printValid{The \sbol{name} is an optional property for all \sbol{Documented} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Documented})}
+
+\printValid{The \sbol{description} is an optional property for all \sbol{Documented} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Documented})}
+
+\subsubsection*{Rules for the \class{TopLevel} class} 
+\setcounter{sbolCtr}{10401}
+
+\printValid{A \sbol{TopLevel} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:TopLevel})}
+
+\subsubsection*{Rules for the \class{Sequence} class} 
+\setcounter{sbolCtr}{10501}
+
+\printValid{A \sbol{Sequence} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Sequence})}
+
+\printValid{The \sbol{elements} is a required property for all \sbol{Sequence} objects and has a data type of String.  Its format must be consistent with its specified \sbol{encoding}. (Reference: \sec{sec:Sequence})}
+
+\printValid{The \sbol{encoding} is a required property for all \sbol{Sequence} objects and has a data type of URI. (Reference: \sec{sec:Sequence})}
+
+\Ctodo{add best practices about URIs to use for encoding}
+
+\subsubsection*{Rules for the \class{ComponentDefinition} class} 
+\setcounter{sbolCtr}{10601}
+
+\printValid{A \sbol{ComponentDefinition} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:ComponentDefinition})}
+
+\Ctodo{At least one type is required}
+
+\Ctodo{Need a rule for each optional list to indicate their required types.}
+
+\subsubsection*{Rules for the \class{ComponentInstance} class} 
+\setcounter{sbolCtr}{10701}
+
+\printValid{A \sbol{ComponentInstance} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:ComponentInstance})}
+
+\Ctodo{access, definition are required URIs, mapsTo is optional}
+
+\printValid{A \sbol{Component} object inherits all properties of a \sbol{ComponentInstance} object. (Reference: \sec{sec:ComponentInstance})}
+
+\printValid{A \sbol{FunctionalComponent} object inherits all properties of a \sbol{ComponentInstance} object. (Reference: \sec{sec:ComponentInstance})}
+
+\Ctodo{direction is required URI}
+
+\subsubsection*{Rules for the \class{SequenceAnnotation} class} 
+\setcounter{sbolCtr}{10801}
+
+\printValid{A \sbol{SequenceAnnotation} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:SequenceAnnotation})}
+
+\Ctodo{Required location and optional component.}
+
+\subsubsection*{Rules for the \class{Location} class} 
+\setcounter{sbolCtr}{10901}
+
+\printValid{A \sbol{Location} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Location})}
+
+\Ctodo{MultiRange, Range, Cut, GenericLocation inherit}
+
+\Ctodo{MultiRange must have 2 ranges}
+
+\Ctodo{Range must have start, end >0 with optional orientation URI}
+
+\Ctodo{Cut must have at >= 0 with optional orientation URI}
+
+\Ctodo{GenericLocation can have optional orientation URI}
+
+\subsubsection*{Rules for the \class{SequenceConstraint} class} 
+\setcounter{sbolCtr}{11001}
+
+\printValid{A \sbol{SequenceConstraint} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:SequenceConstraint})}
+
+\Ctodo{Required restriction URI, required subject/object URIs}
+
+\subsubsection*{Rules for the \class{Model} class} 
+\setcounter{sbolCtr}{11101}
+
+\printValid{A \sbol{Model} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Model})}
+
+\Ctodo{Required source, language, and framework URIs}
+
+\subsubsection*{Rules for the \class{ModuleDefinition} class} 
+\setcounter{sbolCtr}{11201}
+
+\printValid{A \sbol{ModuleDefinition} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:ModuleDefinition})}
+
+\Ctodo{Optional roles, modules, interactions, models, and functionalComponents}
+
+\subsubsection*{Rules for the \class{Module} class} 
+\setcounter{sbolCtr}{11301}
+
+\printValid{A \sbol{Module} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:Module})}
+
+\Ctodo{Required definition, optional mapsTos}
+
+\subsubsection*{Rules for the \class{MapsTo} class} 
+\setcounter{sbolCtr}{11401}
+
+\printValid{A \sbol{MapsTo} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:MapsTo})}
+
+\Ctodo{Required refinement URI, required local/remote URIs}
+
+\subsubsection*{Rules for the \class{Interaction} class} 
+\setcounter{sbolCtr}{11501}
+
+\printValid{A \sbol{Interaction} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:Interaction})}
+
+\Ctodo{Required type, optional participations}
+
+\subsubsection*{Rules for the \class{Participation} class} 
+\setcounter{sbolCtr}{11601}
+
+\printValid{A \sbol{Participation} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Participation})}
+
+\Ctodo{Optional roles, required participant}
+
+\subsubsection*{Rules for the \class{Collection} class} 
+\setcounter{sbolCtr}{11701}
+
+\printValid{A \sbol{Collection} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Collection})}
+
+\Ctodo{Optional members}
+
+\subsubsection*{Rules for the \class{Annotation} class} 
+\setcounter{sbolCtr}{11801}
+
+\Ctodo{Not sure what the rules are for this one}
+
+\subsubsection*{Rules for the \class{GenericTopLevel} class} 
+\setcounter{sbolCtr}{11701}
+
+\printValid{A \sbol{GenericTopLevel} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:GenericTopLevel})}
+
+\Ctodo{Required rdf type}
+
+
