@@ -2,11 +2,22 @@
 \section{Best Practices}
 \label{sec:bestpractices}
 % -----------------------------------------------------------------------------
-\subsection{Versioning}
-Currently, if a developer wishes to change a SBOL object that has been published to the Web, then as a best practice they should create a copy of the SBOL object that incorporates the change, but has a new URI. This practice, however, does not inherently involve a standardized declaration that the second object is a version of the first. Consequently, the \sbol{persistentIdentity}, and \sbol{version} data fields have been created to provide developers with the means to declare that a set of SBOL objects are versions of each other (by virtue of having the same persistent URI) and label these objects with version Strings.
+\subsection{Indicate Modification of Data with Version}
 
-\Ctodo{try to target readers unfamiliar with RDF/XML.  -bder}
-\Ctodo{maybe clarify what type of versioning is this object affecting? TN}
+Once an SBOL object has been published where others might have accessed it (e.g., to an online repository), it may be the case that others make copies of the object or else come to depend on the particular contents of the object.
+Thus, in order to avoid confusion, if a person wants to change the properties of a published object, the best practice is to do so by making a new copy that incorporates the change, with a new URI.
+
+The relationship between the old and new objects (i.e., that the new object was derived from the old object), however, is not visible unless it is explicitly declared.
+This is RECOMMENDED to be done using the \sbol{persistentIdentity}, and \sbol{version} properties.
+The preferred practice for declaring such a relationship is to use the same \sbol{persistentIdentity} for both objects, and label the newer one as being the newer version.
+Then, when the new object is published, it can be clear to both humans and machines that this object is intended to replace the one that was published previously.
+
+As stated in \ref{sec:version},  it is RECOMMENDED that version numbering should follow the conventions of semantic versioning (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).
+This convention represents versions as sequences of numbers and qualifiers separated by the characters {\tt .} and {\tt -} and compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).
+For a full explanation, see the linked resources.
+
+\Rtodo{try to target readers unfamiliar with RDF/XML.  -bder}
+\Rtodo{maybe clarify what type of versioning is this object affecting? TN}
 
 \subsection{Creation and Modification Dates}
 
@@ -35,7 +46,7 @@ Maintaining unique identity URIs for all SBOL objects is a very challenging impl
 
 \LDtodo{Don't drag your giant data files around in SBOL, put them as external links}
 
-Ctodo{Would be good to also talk about completeness checking here.  Namely, if all objects are in the file, should verify that links are all valid.  When they are not, need a scheme to validate external references.}
+\Ctodo{Would be good to also talk about completeness checking here.  Namely, if all objects are in the file, should verify that links are all valid.  When they are not, need a scheme to validate external references.}
 
 \subsection{Recommended Ontologies for External Terms}
 External ontologies and controlled vocabularies are integral part of SBOL. SBOL utilises these resources to access existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, types of components, such as DNA or protein, are indicated using BioPAX. Similarly, the role of a DNA component is indicated via the SO terms. Although preferred ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
