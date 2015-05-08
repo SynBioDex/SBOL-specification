@@ -130,7 +130,7 @@ The \sbol{Documented} abstract class is inherited by the classes of SBOL objects
 The \sbol{name} property is OPTIONAL and has a data type of \external{String}. This property is intended to be displayed to a human when visualizing an \sbol{Documented} object.
 
 If a \sbol{Documented} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or \sbol{identity}.
-It is RECOMMENDED that software tools give users the ability to switch perspectives between \sbol{name}s that are human-readable and \sbol{displayId}s that are less human-readable, but are more likely to be unique.
+It is RECOMMENDED that software tools give users the ability to switch perspectives between \sbol{name} properties that are human-readable and \sbol{displayId} properties that are less human-readable, but are more likely to be unique.
 
 \subsubsection*{The \sbolheading{description} property}
 \label{sec:description}
@@ -183,7 +183,7 @@ For example, a \sbol{Sequence} object that represents a DNA sequence would have 
    SMILES & \url{http://www.opensmiles.org/opensmiles.html} & SmallMolecule \\
     \bottomrule
   \end{edtable}
-  \caption{The RECOMMENDED \external{URI}s for encoding common types of sequences, organized by corresponding BioPAX \sbol{types} of \sbol{ComponentDefinition}s (see \ref{tbl:componentdefinition_types}). When a \sbol{ComponentDefinition} includes a \sbol{Sequence}, the \sbol{encoding} property of the \sbol{Sequence} SHOULD correspond to at least one of the BioPAX \sbol{types} of the \sbol{ComponentDefinition}.}
+  \caption{The RECOMMENDED \external{URI}s for encoding common types of sequences, organized by corresponding \sbol{types} of \sbol{ComponentDefinition}s (see \ref{tbl:componentdefinition_types}). When a \sbol{ComponentDefinition} includes a \sbol{Sequence}, the \sbol{encoding} property of the \sbol{Sequence} SHOULD correspond to at least one of the \sbol{types} of the \sbol{ComponentDefinition}.}
   \label{tbl:sequence_encodings}
 \end{table}
 
@@ -212,14 +212,16 @@ The example below shows the serialization of the \sbol{Sequence} object for the 
 \subsection{ComponentDefinition}
 \label{sec:ComponentDefinition}
 
-The \sbol{ComponentDefinition} class represents the structural entities of a biological system design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other object that is part of the design, such as small molecules, molecular complexes, and light.
-(this is a generalization from prior versions of SBOL, which only represented DNA). As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class is described by the properties \sbol{types}, \sbol{roles}, and \sbol{sequence}. In addition, the class includes properties for describing and organizing its substructure, including \sbol{components}, \sbol{sequenceConstraint}s, and  \sbol{sequenceAnnotation}s.
+The \sbol{ComponentDefinition} class represents the structural entities of a biological design. The primary usage of this class is to represent structural entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of the design, such as small molecules, molecular complexes, and light.
+(this is a generalization from prior versions of SBOL, which only represented DNA). 
+
+As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class describes a structural design entity using the following properties: \sbol{types}, \sbol{roles}, and \sbol{sequence}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{components}, \sbol{sequenceConstraints}, and  \sbol{sequenceAnnotations}.
 
 % Figure has some classes named incorrectly
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=0.95\textwidth]{uml/component_definition}
-\caption[]{ComponentDefinition}
+\caption[]{The \sbol{ComponentDefinition} class.}
 \label{uml:component_definition}
 \end{center}
 \end{figure}
@@ -230,16 +232,14 @@ The \sbol{ComponentDefinition} class represents the structural entities of a bio
 \subsubsection*{The \sbolheading{types} property}
 \label{sec:types}
 
-Every \sbol{ComponentDefinition} MUST have at least one  \external{URI} in its \sbol{types} property that identifies a term from an appropriate ontology, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). A type \external{URI} documents the category of biochemical or physical entity (for example DNA, protein, or RNA) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. If a \sbol{ComponentDefinition} object has multiple type URIs, then they MUST identify synonymous terms.
+The \sbol{types} property is a REQUIRED set of \external{URI}s that specifies the category of biochemical or physical entity (for example DNA, protein, or small molecule) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. 
 
-To maximize the compatibility of descriptions, any component that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its types.
-
-\Rtodo{It is REQUIRED that if your component fits a Table 2 term, that you MUST use that term as at least one of the terms.}
+The \sbol{types} property of every \sbol{ComponentDefinition} MUST contain at least one \external{URI} that identifies a term from an appropriate ontology, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). Furthermore, if the \sbol{types} property contains multiple URIs, then they MUST identify synonymous terms. Finally, in order to maximize the compatibility of descriptions, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its \sbol{types}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
     \toprule
-    \textbf{Entity Type} & \textbf{BioPAX Term} \\
+    \textbf{ComponentDefinition Type} & \textbf{URI for BioPAX Term} \\
     \midrule
     DNA  & \url{http://www.biopax.org/release/biopax-level3.owl#DnaRegion}\\
     RNA  & \url{http://www.biopax.org/release/biopax-level3.owl#RnaRegion}\\
@@ -247,17 +247,19 @@ To maximize the compatibility of descriptions, any component that can be well-de
     Small Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#SmallMolecule}\\  
     \bottomrule
   \end{edtable}
-  \caption{BioPAX terms to specify the types of ComponentDefinition objects.}
+  \caption{BioPAX terms to specify the \sbol{types} property of a \sbol{ComponentDefinition}.}
   \label{tbl:componentdefinition_types}
 \end{table}
 
 \subsubsection*{The \sbolheading{roles} property}
 \label{sec:roles}
 
-The \sbol{roles} of a ComponentDefinition object MUST contain at least one URI.  These identify ontology terms that clarify a \sbol{ComponentDefinition} object's potential function in a biological context. For example, a \sbol{ComponentDefinition} for a DNA component might have a role of ``promoter'' or ``terminator,'' terms taken from the Sequence Ontology (SO). A ComponentDefinition object for a protein, on the other hand, might have a role of ``transcription factor'' or ``protease.'' 
+The \sbol{roles} property is a REQUIRED set of \external{URI}s that clarifies the potential function of a \sbol{ComponentDefinition} object in a biological context.
+
+The \sbol{roles} property of every \sbol{ComponentDefinition} object MUST contain at least one \external{URI} that identifies a term from an ontology that is consistent with the type of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA \sbol{ComponentDefinition} component SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its \sbol{types}.
 \LDtodo{Taken from what ontology?}
 
-The \sbol{roles} are analogous to the \external{type} of a \external{DnaComponent} object in SBOL Version 1.1. 
+The \sbol{roles} property is analogous to the \external{type} of a \external{DnaComponent} in SBOL Version 1.1. 
 
 
 \subsubsection*{The \sbolheading{components} property}
@@ -271,15 +273,15 @@ The \sbol{components} property specifies a collection of such parts contained wi
 \label{sec:sequence}
 The sequence property is OPTIONAL and includes the URI for a corresponding \sbol{Sequence} object.
 
-\subsubsection*{The \sbolheading{sequenceConstraint} property}
-\label{sec:sequenceConstraint}
+\subsubsection*{The \sbolheading{sequenceConstraints} property}
+\label{sec:sequenceConstraints}
 
 This OPTIONAL property links to one or more \sbol{SequenceConstraint} objects describing structural restrictions on the placement of subcomponents with respect to the \sbol{Sequence} of a \sbol{ComponentDefinition}.
 
 \Rtodo{This needs to be explained}
 
-\subsubsection*{The \sbolheading{sequenceAnnotation} property}
-\label{sec:sequenceAnnotation}
+\subsubsection*{The \sbolheading{sequenceAnnotations} property}
+\label{sec:sequenceAnnotations}
 
 \Rtodo{This needs to be better explained. -JSB}
 
