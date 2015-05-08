@@ -230,7 +230,7 @@ The \sbol{ComponentDefinition} class represents the structural entities of a bio
 \subsubsection*{The \sbolheading{types} property}
 \label{sec:types}
 
-Every \sbol{ComponentDefinition} MUST have at least one  \external{URI} in its \sbol{types} property that identifies a term from an appropriate ontology, such as the BioPAX ontology or that of Chemical Entities of Biological Interest (ChEBI). A type URI documents the category of biochemical or physical entity (for example DNA, protein, or RNA) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. If a \sbol{ComponentDefinition} object has multiple type URIs, then they MUST identify synonymous terms.
+Every \sbol{ComponentDefinition} MUST have at least one  \external{URI} in its \sbol{types} property that identifies a term from an appropriate ontology, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). A type \external{URI} documents the category of biochemical or physical entity (for example DNA, protein, or RNA) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. If a \sbol{ComponentDefinition} object has multiple type URIs, then they MUST identify synonymous terms.
 
 To maximize the compatibility of descriptions, any component that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its types.
 
