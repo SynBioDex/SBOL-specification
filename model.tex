@@ -212,8 +212,7 @@ The example below shows the serialization of the \sbol{Sequence} object for the 
 \subsection{ComponentDefinition}
 \label{sec:ComponentDefinition}
 
-The \sbol{ComponentDefinition} class represents the structural entities of a biological design. The primary usage of this class is to represent structural entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of the design, such as small molecules, molecular complexes, and light.
-(this is a generalization from prior versions of SBOL, which only represented DNA). 
+The \sbol{ComponentDefinition} class represents the structural entities of a biological design. The primary usage of this class is to represent structural entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of the design, such as small molecules, molecular complexes, and light. 
 
 As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class describes a structural design entity using the following properties: \sbol{types}, \sbol{roles}, and \sbol{sequence}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{components}, \sbol{sequenceConstraints}, and  \sbol{sequenceAnnotations}.
 
@@ -256,11 +255,24 @@ The \sbol{types} property of every \sbol{ComponentDefinition} MUST contain at le
 
 The \sbol{roles} property is a REQUIRED set of \external{URI}s that clarifies the potential function of a \sbol{ComponentDefinition} object in a biological context.
 
-The \sbol{roles} property of every \sbol{ComponentDefinition} object MUST contain at least one \external{URI} that identifies a term from an ontology that is consistent with the type of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA \sbol{ComponentDefinition} component SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its \sbol{types}.
-\LDtodo{Taken from what ontology?}
+The \sbol{roles} property of every \sbol{ComponentDefinition} object MUST contain at least one \external{URI} that identifies a term from an ontology that is consistent with the type of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA \sbol{ComponentDefinition} component SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use that term as one of its \sbol{roles}.
 
-The \sbol{roles} property is analogous to the \external{type} of a \external{DnaComponent} in SBOL Version 1.1. 
+\begin{table}[ht]
+  \begin{edtable}{tabular}{lll}
+    \toprule
+    \textbf{ComponentDefinition Role} & \textbf{URI for Ontology Term} & \textbf{ComponentDefinition Type} \\
+    \midrule
+    & \\
+    & \\
+      & \\
+      & \\  
+    \bottomrule
+  \end{edtable}
+  \caption{Ontology terms to specify the \sbol{roles} property of a \sbol{ComponentDefinition}.}
+  \label{tbl:componentdefinition_roles}
+\end{table}
 
+\LDtodo{Taken from what ontology?} 
 
 \subsubsection*{The \sbolheading{components} property}
 \label{sec:components}
