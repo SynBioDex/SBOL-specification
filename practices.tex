@@ -44,9 +44,58 @@ Maintaining unique identity URIs for all SBOL objects is a very challenging impl
 
 \subsection{Annotations: Embedded Objects vs. External References}
 
-\LDtodo{Don't drag your giant data files around in SBOL, put them as external links}
+When annotating an SBOL model with additional information, there are
+two general methods that can be used:
+\begin{itemize}
+\item Embed the information in the SBOL model, either as non-SBOL
+  properties or wrapped in \sbol{GenericTopLevel} objects.
+\item Store the information separately and annotate the SBOL model
+  with URIs that point to it.
+\end{itemize}
 
-\Ctodo{Would be good to also talk about completeness checking here.  Namely, if all objects are in the file, should verify that links are all valid.  When they are not, need a scheme to validate external references.}
+In theory, either can be used in any case.  In practice, however,
+embedding massive amounts of non-SBOL data into SBOL models is likely
+to cause problems for people and software tools trying to manage and
+exchange such models.
+
+It is thus RECOMMENDED that small amounts of information (e.g., design
+notes, preferred graphical layout) be embedded in the SBOL model,
+while large amounts of information (e.g., the scientific publication
+from which a model was derived, flow cytometry data characterizing
+performance) be linked with URIs pointing to external resources.
+%
+The boundary between ``small'' and ``large'' is left deliberately
+vague, recognizing that it will likely depend on the particulars of a
+given SBOL application.
+
+\Rtodo{Don't drag your giant data files around in SBOL, put them as external links}
+
+\subsection{Completeness and Validation}
+
+RDF documents containing serialized SBOL objects may or may not be
+entirely self-contained.  A document is self-contained or ``complete''
+if every SBOL object referred to in the document is contained in the
+document.
+
+It is RECOMMENDED that serializations be complete whenever practical.
+In order words, when serializing an SBOL object, serialize all of the
+other objects that it points to, then serialize all of the additional
+objects that they point to, etc., until the document is complete.
+
+Complementarily, note that there is no guarantee that an RDF document
+contains valid SBOL. When an RDF document is de-serialized into SBOL
+objects, the program doing so SHOULD verify that all of the property
+values encoded therein have the right type (e.g., that the object
+pointed to by the \sbol{sequence} property of a
+\sbol{ComponentDefinition} really is a \sbol{Sequence} object).
+%
+For complete files, this can be carried out readily and entirely
+locally.  For files that are not complete, an implementation needs to
+either have a means of validating those external references (e.g., by
+retrieving them from various repositories) or else to mark them as
+being unverified and not depend on their correctness.
+
+\Rtodo{Would be good to also talk about completeness checking here.  Namely, if all objects are in the file, should verify that links are all valid.  When they are not, need a scheme to validate external references.}
 
 \subsection{Recommended Ontologies for External Terms}
 External ontologies and controlled vocabularies are integral part of SBOL. SBOL utilises these resources to access existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, types of components, such as DNA or protein, are indicated using BioPAX. Similarly, the role of a DNA component is indicated via the SO terms. Although preferred ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
@@ -74,9 +123,3 @@ External ontologies and controlled vocabularies are integral part of SBOL. SBOL 
 \end{table}
 
 \Ctodo{Goksel and Neil need to sort out GO vs. UniProt, and possibly just recommend both here.}
-
-\Ctodo{Somebody who cares about this should decide whether any of gets put on the JavaDocs, but it is getting deleted from this document
-
-Within an implementing Object-Oriented (OO) API, SBOL properties should be mapped to member accessors that are similarly named and that return idiomatic representations of these properties. For example, a Java implementation would use common Java idioms. In this case, the member accessor for an optional SBOL property could return a Java primitive value, Java object, or null, while the accessor for a multi-valued SBOL property could return a Java \external{Collection}. In general, OO member accessors for multi-valued SBOL properties should never return null.
-
-As another example, a relational implementation of the SBOL API would store the properties and associations a mixture of data fields and references via foreign keys. The fields in individual tables will correspond to the `arrowhead' end of an association (in reverse to the direction in the RDF and OO representations), and the name may be modified to reflect this change in directionality. For example, the \sbol{sequence} association between a \sbol{ComponentDefinition} and \sbol{Sequence} would be represented by a foreign key field on the \sbol{Sequence} table that references a row in the \sbol{ComponentDefinition} table, and it may be named \external{sequenceOf}.}
