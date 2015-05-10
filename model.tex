@@ -226,7 +226,7 @@ As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class
 \end{figure}
 
 
-\LDtodo{Examples of ontologies for non-molecular type gs (eg, light)...?}
+\Rtodo{Examples of ontologies for non-molecular type gs (eg, light)...?  JSB: I don't think we need it.}
 
 \subsubsection*{The \sbolheading{types} property}
 \label{sec:types}
@@ -290,12 +290,12 @@ The sequence property is OPTIONAL and includes the URI for a corresponding \sbol
 
 This OPTIONAL property links to one or more \sbol{SequenceConstraint} objects describing structural restrictions on the placement of subcomponents with respect to the \sbol{Sequence} of a \sbol{ComponentDefinition}.
 
-\Rtodo{This needs to be explained}
+\Rtodo{This needs to be explained.  JSB: done.}
 
 \subsubsection*{The \sbolheading{sequenceAnnotations} property}
 \label{sec:sequenceAnnotations}
 
-\Rtodo{This needs to be better explained. -JSB}
+\Rtodo{This needs to be better explained. -JSB; JSB: done.}
 
 This OPTIONAL property links to one or more \sbol{SequenceAnnotation} objects describing the precise locations of subcomponents with respect to the \sbol{Sequence} of a \sbol{ComponentDefinition}.
 
@@ -427,9 +427,26 @@ The serialization of SequenceAnnotation objects MUST be carried out according to
 </sbol:SequenceAnnotation>
 \end{lstlisting}
 
-\Ctodo{Need to give an example with this one}
+The example below shows the serialization of a \sbol{SequenceAnnotation} object. It specifies the location of a particular \sbol{Component} named BBa\_F2620.
+\lstsetsbol
+\begin{lstlisting}
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2">
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2/range">
+            <sbol:start>56</sbol:start>
+            <sbol:end>68</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/rbs"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+\end{lstlisting}
 
-\Ctodo{Make sure it's clear these templates specify content, not order}
+\Rtodo{Need to give an example with this one.  JSB: done.}
+
+\Rtodo{Make sure it's clear these templates specify content, not order.  JSB: put a note explaining ordering is flexible in the serialization section.}
 
 
 

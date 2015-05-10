@@ -9,7 +9,9 @@ The SBOL serialization is designed to meet several competing requirements. First
 
 The canonical serialization of SBOL is to a strict dialect of RDF/XML. This serialization provides the base from which to meet further requirements. Any RDF/XML-aware tooling can consume and analyze a SBOL file. Where possible, we have re-used predicates from widely-used terminologies (such as Dublin Core~\cite{dcmi2012}) to expose as much of the data as practical to standard RDF tooling.
 
-Arbitrary RDF/XML provides a great deal of flexibility in how equivalent data can be serialized. This flexibility can result in different serializations when processing RDF/XML files using standard off-the-shelf XML tools, such as DOM-OO mappings. To address this problem, we define a canonical association between the nesting of data structures within the SBOL UML data model and the RDF/XML file. For all ownership associations (filled diamonds), the RDF/XML for the owned entity is embedded within the owner's RDF/XML. For all associations that are by reference (open diamonds), the RDF/XML for the referenced property is linked via a resource URI.
+Arbitrary RDF/XML provides a great deal of flexibility in how equivalent data can be serialized. This flexibility can result in different serializations when processing RDF/XML files using standard off-the-shelf XML tools, such as DOM-OO mappings. 
+To address this problem, we define a canonical association between the nesting of data structures within the SBOL UML data model and the RDF/XML file. For all ownership associations (filled diamonds), the RDF/XML for the owned entity is embedded within the owner's RDF/XML (the set of property values, however, may still be listed in any order).
+For all associations that are by reference (open diamonds), the RDF/XML for the referenced property is linked via a resource URI.
 \Ctodo{Perhaps add or reference an example of ownership vs referencing. - cm}
 \Ctodo{GM: Add a statement to indicate that the order of properties is not important.}
 
