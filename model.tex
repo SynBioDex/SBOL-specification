@@ -768,6 +768,7 @@ The serialization of \sbol{ModuleDefinition}s has the following form:
 
 \Ctodo{Add an example, like for all the rest}
 
+\Ctodo{Should this be here or defined in ComponentInstance section?}
 
 \subsubsection{FunctionalComponent}
 \label{sec:FunctionalComponent}
@@ -1151,7 +1152,7 @@ Entities that have independent existence (i.e., would be another ``top level'' c
 These \sbol{GenericTopLevel} entities can thus be safely used by tools to exchange non-SBOL data embedded separately within SBOL.
 As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{name}, \sbol{description}, \sbol{displayId} and so on. The type of data found in the generic entity is indicated using the standard \external{rdf:type} property.
 
-\Ctodo{rdf:type should be rdfType}
+\Ctodo{rdf:type should be rdfType, and I believe its type is QName.}
 
 \begin{figure}[ht]
 \begin{center}
