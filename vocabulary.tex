@@ -15,59 +15,64 @@ In particular, the key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT
 
 \subsection{SBOL Class Names}
 
-SBOL defines the following classes:
+SBOL defines the following ``top-level'' and dependent classes:
 
-\LDtodo{Organize these functionally, not alphabetically. -bder}
+\Rtodo{Organize these functionally, not alphabetically. -bder.  Done by creating toplevel/dependent substructure -JSB}
 
 \begin{description}
 
 \item \emph{\sbol{Collection}}:
 Represents a user-defined container for organizing a group of SBOL objects.
 
+\item \emph{\sbol{ComponentDefinition}}: Describes the structure of designed entities, such as DNA, RNA, and proteins, as well as other entities they interact with, such as small molecules or environmental properties.
+
+\begin{itemize}
 \item \emph{\sbol{Component}}:
 Represents a specific occurrence or instance of a single entity within the design of a more complex component.
 Each \sbol{Component} is associated with a \sbol{ComponentDefinition}, and there may be many different instances at different locations in a design that share the same definition.
 
-\item \emph{\sbol{ComponentDefinition}}: Describes the structure of designed entities, such as DNA, RNA, and proteins, as well as other entities they interact with, such as small molecules or environmental properties.
-
-\item \emph{\sbol{FunctionalComponent}}:
-Represents a specific occurrence or instance of an entity within a \sbol{ModuleDefinition}.
-Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a containing \sbol{ComponentDefinition}.
-
-\item \emph{\sbol{GenericTopLevel}}:
-Represents a data container that can contain custom data added by user applications.
-
-\item \emph{\sbol{Interaction}}:
-Describes a functional relationship between biological entities, such as regulatory activation or repression, or a biological processes such as transcription or translation.
-
 \item \emph{\sbol{Location}}:
 Specifies the base coordinates and orientation of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecule such as a protein.
-
-\item \emph{\sbol{MapsTo}}:
-When a design (\sbol{ComponentDefinition} or \sbol{ModuleDefinition}) includes another design as a substructure, the larger design may need to refer to a \sbol{ComponentInstance} from the sub-design.
-In this case, a copy of the referenced \sbol{ComponentInstance} needs to be created in the design and a \sbol{MapsTo} is added to the instance for the sub-design, which associates the original and the copy.
-
-\item \emph{\sbol{Model}}:
-Links an SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.
-
-\item \emph{\sbol{Module}}:
-Represents a specific occurrence or instance of a sub-system within a larger design.
-Each \sbol{Module} is associated with a \sbol{ModuleDefinition}, and there may be many different instances at different locations in a design that share the same definition.
-
-\item \emph{\sbol{ModuleDefinition}}:
-Describes a ``system'' design as a collection of biological components and their functional relationships.
-
-\item \emph{\sbol{Participation}}:
-Describes the role that a \sbol{Component} plays in an \sbol{Interaction}.
-For example, a transcription factor might participate in an \sbol{Interaction} as a repressor or as an activator.
-
-\item \emph{\sbol{Sequence}}:
-Represents a contiguous series of monomers in a macromoleculer polymer such as DNA, RNA, or protein. 
 
 \item \emph{\sbol{SequenceAnnotation}}:
 Describes the \sbol{Location} of a notable sub-sequence found within a \sbol{ComponentDefinition}, optionally linking it to a \sbol{Component}.
 
 \item \emph{\sbol{SequenceConstraint}}:
 Describes the relative spatial position and orientation of two \sbol{Component} objects that are contained within the same \sbol{ComponentDefinition}.
+\end{itemize}
+
+\item \emph{\sbol{GenericTopLevel}}:
+Represents a data container that can contain custom data added by user applications.
+
+\item \emph{\sbol{Model}}:
+Links an SBOL representation of biological components and their interactions to quantitative, computational models that may be used to predict the functional behavior of a biological design.
+
+\item \emph{\sbol{ModuleDefinition}}:
+Describes a ``system'' design as a collection of biological components and their functional relationships.
+
+\begin{itemize}
+\item \emph{\sbol{FunctionalComponent}}:
+Represents a specific occurrence or instance of an entity within a \sbol{ModuleDefinition}.
+Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a containing \sbol{ComponentDefinition}.
+
+\item \emph{\sbol{Interaction}}:
+Describes a functional relationship between biological entities, such as regulatory activation or repression, or a biological processes such as transcription or translation.
+
+\item \emph{\sbol{MapsTo}}:
+When a design (\sbol{ComponentDefinition} or \sbol{ModuleDefinition}) includes another design as a substructure, the larger design may need to refer to a \sbol{ComponentInstance} from the sub-design.
+In this case, a copy of the referenced \sbol{ComponentInstance} needs to be created in the design and a \sbol{MapsTo} is added to the instance for the sub-design, which associates the original and the copy.
+
+\item \emph{\sbol{Module}}:
+Represents a specific occurrence or instance of a sub-system within a larger design.
+Each \sbol{Module} is associated with a \sbol{ModuleDefinition}, and there may be many different instances at different locations in a design that share the same definition.
+
+\item \emph{\sbol{Participation}}:
+Describes the role that a \sbol{Component} plays in an \sbol{Interaction}.
+For example, a transcription factor might participate in an \sbol{Interaction} as a repressor or as an activator.
+
+\end{itemize}
+
+\item \emph{\sbol{Sequence}}:
+Represents a contiguous series of monomers in a macromoleculer polymer such as DNA, RNA, or protein. 
 
 \end{description}
