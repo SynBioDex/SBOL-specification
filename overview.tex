@@ -9,22 +9,23 @@ Synthetic designs need to convey three types of information:
 \end{enumerate}
 Typically, information about a  designed genetic circuit includes the order of its constituents and their descriptions. The exact locations of these constituents and their sequences allow genetic circuits to be defined unambiguously, and reused in other designs. Interactions between these constituents are then used to construct biologically plausible designs. 
 
-Figure 1 illustrates a generic synthetic design, showing the connections between a defined component and its physical representation as defined in the Component Definition and its functional representation as defined in the Functional Component. The Functional Component is part of a Module Definition, defining the behaviour of the designed Component which can be represented both as the participating biological molecules the Functional Component interacts with or the model that defines the overall system. 
+Figure 1 illustrates the relationships between the main classes of information encoded by SBOL.  
+The physical structure of an element is represented with a \sbol{ComponentDefinition}, often corresponding to a particular \sbol{Sequence} (e.g., DNA, RNA, amino acids), and with its structure further described in terms of the smaller \sbol{Component} instances contained within, and their absolute and relative positions within the component.
+Functional relationships are represented with a \sbol{ModuleDefinition}, often also described by some \sbol{Model}, and with its structure further described in terms of the smaller \sbol{Module} instances contained within, as well as particular components (designated \sbol{FunctionalComponent} to indicate their use in defining a module), and their interactions.
 
-\Ctodo{reword for better clarity and coverage of the model -JSB}
-\Dtodo{reworded to talk to the figure below - KC}
+\Rtodo{reword for better clarity and coverage of the model -JSB
+reworded to talk to the figure below - KC Added some further tweaks -JSB}
 
 % In the figure below, a simple toggle switch system is displayed, in which LacI and TetR repress each other's genes transcriptionally. The toggling of the system  is controlled by adding IPTG to deactivate LacI, and ATC to deactivate TetR. The components of the system includes genetic elements, proteins, small molecules.
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=1.2]{images/SBOL2_2_revised.png}
-\caption[Generic representation of the SBOL standard]{Generic representation of the SBOL standard}
+\caption{Main classes of information represented by the SBOL standard, and their relationships.  Red boxes are ``top level'' classes, while blue classes are used in describing a top-level class; an arrow indicates that one class refers to another.}
 \label{images:overview}
 \end{center}
 \end{figure}
-\Ctodo{Put a caption on the figure -JSB}
-\Dtodo{added caption}
+\Rtodo{Put a caption on the figure -JSB  Done -KC Tweaked further -JSB}
 \LDtodo{Remove SBML from the figure -JSB}
 
 The \sbol{Sequence} is a fundamental information object for synthetic biology and is needed to reuse components, to replicate synthetic biology work, and to assemble new synthetic biological systems. 
