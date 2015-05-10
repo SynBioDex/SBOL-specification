@@ -134,7 +134,7 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{sequenceConstraints} property is an optional set of \sbol{SequenceConstraint} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequenceAnnotation} property is an optional set of \sbol{SequenceAnnotation} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{sequenceAnnotations} property is an optional set of \sbol{SequenceAnnotation} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{sequence} property is an optional URI reference to a \sbol{Sequence} object.  (Reference: \sec{sec:ComponentDefinition})}
 
@@ -183,6 +183,8 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{SequenceAnnotation} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:SequenceAnnotation})}
 
+\Ctodo{Rule below needs to change if becomes a set of locations}
+
 \printValid{The \sbol{location} is a required property for all \sbol{SequenceAnnotation} objects and is a \sbol{Location} class object. (Reference: \sec{sec:SequenceAnnotation})}
 
 \printValid{The \sbol{component} property is an optional URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceAnnotation})}
@@ -190,23 +192,27 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \subsubsection*{Rules for the \class{Location} class} 
 \setcounter{sbolCtr}{10901}
 
+\Ctodo{Written assuming change in Location class to remove MultiRange}
+
 \printValid{A \sbol{Location} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Location})}
-
-\Ctodo{MultiRange, Range, Cut, GenericLocation inherit}
-
-\Ctodo{MultiRange must have 2 ranges}
-
-\Ctodo{Range must have start, end >0 with optional orientation URI}
-
-\Ctodo{Cut must have at >= 0 with optional orientation URI}
-
-\Ctodo{GenericLocation can have optional orientation URI}
-
-\printValid{A \sbol{GenericLocation} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:GenericLocation})}
 
 \printValid{The \sbol{orientation} property is an optional URI which, if specified, must be one of the following: \url{http://sbols.org/v2\#inline}, 
 \url{http://sbols.org/v2\#reverseComplement}.
 (Reference: \sec{sec:GenericLocation})}
+
+\printValid{A \sbol{GenericLocation} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:GenericLocation})}
+
+\printValid{A \sbol{Range} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:Range})}
+
+\printValid{The \sbol{start} property is required for all \sbol{Range} objects, and it must be a positive integer.  (Reference: \sec{sec:Range})}
+
+\printValid{The \sbol{end} property is required for all \sbol{Range} objects, and it must be a positive integer.  (Reference: \sec{sec:Range})}
+
+\printValid{A \sbol{Cut} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:Cut})}
+
+\printValid{The \sbol{at} property is required for all \sbol{Cut} objects, and it must be a non-negative integer.  (Reference: \sec{sec:Cut})}
+
+% \Ctodo{MultiRange must have 2 ranges}
 
 \subsubsection*{Rules for the \class{SequenceConstraint} class} 
 \setcounter{sbolCtr}{11001}
@@ -261,7 +267,14 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{MapsTo} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:MapsTo})}
 
-\Ctodo{Required refinement URI, required local/remote URIs}
+\printValid{The \sbol{refinement} property is a required URI for \sbol{MapsTo} objects which must be one of the following:
+\url{http://sbols.org/v2\#useremote},
+\url{http://sbols.org/v2\#uselocal},
+\url{http://sbols.org/v2\#verifyIdentical}, and
+\url{http://sbols.org/v2\#merge}.
+(Reference: \sec{sec:MapsTo})}
+
+\Ctodo{required local/remote URIs}
 
 \Ctodo{Maps to must not reference private acesss components}
 
@@ -270,7 +283,9 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{Interaction} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:Interaction})}
 
-\Ctodo{Required type}
+\printValid{The \sbol{types} property is a set of URIs, and it is required to include at least entry. (Reference: \sec{sec:Interaction})}
+
+\printModeling{A least one type in the set of \sbol{types} should be a URI from the Systems Biology Ontology (SBO). (Reference: \sec{sec:Interaction})}
 
 \printValid{The \sbol{participations} property is an optional set of \sbol{Participation} objects.  (Reference: \sec{sec:Interaction})}
 
@@ -280,6 +295,8 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \printValid{A \sbol{Participation} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Participation})}
 
 \printValid{The \sbol{participant} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:Participation})}
+
+\Dtodo{Should this be required and changed to "types"?}
 
 \printValid{The \sbol{roles} property is an optional set of URIs.  (Reference: \sec{sec:Participation})}
 
