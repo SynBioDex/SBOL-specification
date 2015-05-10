@@ -446,9 +446,6 @@ The Location class is extended by the \sbol{Range}, \sbol{MultiRange}, \sbol{Cut
 \end{center}
 \end{figure}
 
-
-
-
 \paragraph{Range}
 \label{sec:Range}
 A \sbol{Range} object specifies inclusive start and end positions. These properties are required in \sbol{Range} objects and they can have \external{integer} values greater than zero. A \sbol{Range} object also includes an  ``orientation'' property, for example to to specify directionality on a potentially double-stranded \sbol{Component} object.
@@ -458,6 +455,8 @@ Specifies the start of a \sbol{Range}. This property is REQUIRED and can have \e
 
 \subparagraph{The \sbolheading{end} property}
 Specifies the end of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
+
+\Ctodo{If we remove MultiRange than Orientation can be moved to the Location class.}
 
 \subparagraph{The \sbolheading{orientation} property}
 \label{sec:orientation}
