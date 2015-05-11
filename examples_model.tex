@@ -5,9 +5,25 @@
 
 %\subsection{LacI/TetR Toggle Switch}
 
-This section illustrates how to use the SBOL data model by specifying the design of a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}. This design is visualized in \ref{images:toggleswitch_modular}. 
+This section illustrates how to use the SBOL data model by specifying the design of a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}. This design is visualized conceptually in \ref{images:toggle} and in detail in \ref{images:toggleswitch_modular}. 
 
-\Ctodo{Add a standard toggle switch diagram of two things repressing each other and a simple explanation for people who do not already know the toggle switch.}
+Conceptually, the toggle switch is constructed from two mutually repressing genes.  
+With strongly repressors LacI and TetR, this results in a bi-stable system that will tend to settle into a state where precisely one of the two repressors is strongly expressed, repressing the other.
+Each of these repressors can have its activity disrupted by a small molecule (IPTG for LacI, aTc for TetR), which allows the system to be ``toggled'' from one state to the other by dosing it with the appropriate small molecule.
+
+\Rtodo{Add a standard toggle switch diagram of two things repressing each other and a simple explanation for people who do not already know the toggle switch.}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=1.0]{images/toggle-highlevel.pdf}
+\caption[]{Conceptual diagram of LacI/TetR toggle switch: the LacI 
+  and TetR transcriptional factors are arranged to mutually repress, 
+  creating a bi-stable system.  Transition between the two states
+  is triggered by the small-molecule signals aTc (which disrupts TetR
+  repression) and IPTG (which disrupts LacI repression).}
+\label{images:toggle}
+\end{center}
+\end{figure}
 
 \begin{figure}[ht]
 \begin{center}
