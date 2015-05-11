@@ -212,7 +212,7 @@ The example below shows the serialization of the \sbol{Sequence} object for the 
 \subsection{ComponentDefinition}
 \label{sec:ComponentDefinition}
 
-The \sbol{ComponentDefinition} class represents the structural entities of a biological design. The primary usage of this class is to represent structural entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of the design, such as small molecules, molecular complexes, and light. 
+The \sbol{ComponentDefinition} class represents the structural entities of a biological design. The primary usage of this class is to represent structural entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as small molecules, molecular complexes, and light. 
 
 As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class describes a structural design entity using the following properties: \sbol{types}, \sbol{roles}, and \sbol{sequence}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{components}, \sbol{sequenceConstraints}, and  \sbol{sequenceAnnotations}.
 
@@ -225,15 +225,12 @@ As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class
 \end{center}
 \end{figure}
 
-
-\Rtodo{Examples of ontologies for non-molecular type gs (eg, light)...?  JSB: I don't think we need it.}
-
 \subsubsection*{The \sbolheading{types} property}
 \label{sec:types}
 
 The \sbol{types} property is a REQUIRED set of \external{URI}s that specifies the category of biochemical or physical entity (for example DNA, protein, or small molecule) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. 
 
-The \sbol{types} property of every \sbol{ComponentDefinition} MUST contain at least one \external{URI} that identifies a term from an appropriate ontology, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). Furthermore, if the \sbol{types} property contains multiple URIs, then they MUST identify synonymous terms. Finally, in order to maximize the compatibility of descriptions, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its \sbol{types}.
+The \sbol{types} property of every \sbol{ComponentDefinition} MUST contain at least one \external{URI} that identifies a term from an appropriate ontology, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). Furthermore, if the \sbol{types} property contains multiple URIs, then they MUST identify synonymous terms. In order to maximize the compatibility of descriptions, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its \sbol{types}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
