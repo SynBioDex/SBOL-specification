@@ -234,7 +234,15 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{Model} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Model})}
 
-\Ctodo{Required source, language, and framework URIs}
+\printValid{The \sbol{source} property is a required URI that MUST specify the location of the model source file.}
+
+\printValid{The \sbol{language} property is a required URI that specifies the language in which the model is encoded.}
+
+\printModeling{The \sbol{language} property should be a URI from the EMBRACE Data and Methods (EDAM) ontology.}
+
+\printValid{The \sbol{framework} property is a required URI that specifies the modeling framework.}
+
+\printModeling{The \sbol{framework} property should be a URI from the Systems Biology Ontology (SBO).}
 
 \subsubsection*{Rules for the \class{ModuleDefinition} class} 
 \setcounter{sbolCtr}{11201}
@@ -274,9 +282,13 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \url{http://sbols.org/v2\#merge}.
 (Reference: \sec{sec:MapsTo})}
 
-\Ctodo{required local/remote URIs}
+\printValid{The \sbol{local} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
 
-\Ctodo{Maps to must not reference private acesss components}
+\printValid{The \sbol{FunctionalComponent} referenced by the \sbol{local} property must have \sbol{public} access type.}
+
+\printValid{The \sbol{remote} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{definition} property of the \sbol{Module} that contains this \sbol{MapsTo} object. (Reference: \sec{sec:MapsTo})}
+
+\printValid{The \sbol{FunctionalComponent} referenced by the \sbol{remote} property must have \sbol{public} access type.}
 
 \subsubsection*{Rules for the \class{Interaction} class} 
 \setcounter{sbolCtr}{11501}
@@ -295,8 +307,6 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \printValid{A \sbol{Participation} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Participation})}
 
 \printValid{The \sbol{participant} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:Participation})}
-
-\Dtodo{Should this be required and changed to "types"?}
 
 \printValid{The \sbol{roles} property is an optional set of URIs.  (Reference: \sec{sec:Participation})}
 
