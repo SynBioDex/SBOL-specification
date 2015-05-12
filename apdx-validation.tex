@@ -242,7 +242,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{framework} property is a required URI that specifies the modeling framework.}
 
-\printModeling{The \sbol{framework} property should be a URI from the Systems Biology Ontology (SBO).}
+\printModeling{The \sbol{framework} property should be a URI from the  modeling framework branch of the Systems Biology Ontology (SBO).}
 
 \subsubsection*{Rules for the \class{ModuleDefinition} class} 
 \setcounter{sbolCtr}{11201}
@@ -297,7 +297,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{types} property is a set of URIs, and it is required to include at least entry. (Reference: \sec{sec:Interaction})}
 
-\printModeling{A least one type in the set of \sbol{types} should be a URI from the Systems Biology Ontology (SBO). (Reference: \sec{sec:Interaction})}
+\printModeling{A least one type in the set of \sbol{types} should be a URI from the occurring entity relationship branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Interaction})}
 
 \printValid{The \sbol{participations} property is an optional set of \sbol{Participation} objects.  (Reference: \sec{sec:Interaction})}
 
@@ -309,6 +309,8 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \printValid{The \sbol{participant} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:Participation})}
 
 \printValid{The \sbol{roles} property is an optional set of URIs.  (Reference: \sec{sec:Participation})}
+
+\printModeling{A least one role in the set of \sbol{roles} should be a URI from the participant role branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Participation})}
 
 \subsubsection*{Rules for the \class{Collection} class} 
 \setcounter{sbolCtr}{11701}
