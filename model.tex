@@ -59,7 +59,7 @@ When SBOL use simple ``primitive'' data types such as strings or integers, these
 \item Literal: \url{something goes here}
 \end{itemize}
 
-\subsection {Identified}
+\subsection{Identified}
 \label{sec:Identified}
 
 \Ctodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
@@ -109,8 +109,12 @@ If the \sbol{version} property is used, then it is RECOMMENDED that version numb
 This convention represents versions as sequences of numbers and qualifiers separated by the characters {\tt .} and {\tt -} and compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).
 For a full explanation, see the linked resources.
 
+\subsubsection*{Serialization}
 
-\subsection {Documented}
+No serialization is defined for \sbol{Identified}, since this class is 
+only used indirectly through its child classes.
+
+\subsection{Documented}
 \label{sec:Documented}
 The \sbol{Documented} abstract class is inherited by the classes of SBOL objects that can contain human-readable properties, such as name and description. This class extends \sbol{Identified} with two additional data properties: \sbol{name}, and \sbol{description} (\ref{uml:documented}). 
 
@@ -137,6 +141,11 @@ It is RECOMMENDED that software tools give users the ability to switch perspecti
 The \sbol{description} property is OPTIONAL and has a data type of \external{String}. This property is intended to contain a more thorough description of a \sbol{Documented} object.
 
 
+\subsubsection*{Serialization}
+
+No serialization is defined for \sbol{Documented}, since this class is 
+only used indirectly through its child classes.
+
 \subsection {TopLevel}
 \label{sec:TopLevel}
 \sbol{TopLevel} is an abstract class that is extended by any \sbol{Documented} class that can be found at the top level of an SBOL file. In other words, when an object that belongs to a \sbol{TopLevel} class is serialized to a file representation, it is not nested inside any other object. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their \sbol{identity} or \sbol{persistentIdentity} \external{URI}s. The \sbol{TopLevel} classes defined by this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, and \sbol{GenericTopLevel} (\ref{uml:toplevel}).
@@ -148,6 +157,11 @@ The \sbol{description} property is OPTIONAL and has a data type of \external{Str
 \label{uml:toplevel}
 \end{center}
 \end{figure}
+
+\subsubsection*{Serialization}
+
+No serialization is defined for \sbol{TopLevel}, since this class is 
+only used indirectly through its child classes.
 
 \subsection{Sequence}
 \label{sec:Sequence}
@@ -260,7 +274,7 @@ The \sbol{roles} property of every \sbol{ComponentDefinition} object MAY contain
     \textbf{ComponentDefinition Role} & \textbf{URI for Ontology Term} & \textbf{ComponentDefinition Type} \\
     \midrule
    Promoter & http://identifiers.org/so/SO:0000167 & DNA \\
-   RBS & http://identifiers.org/so/SO:0000139 & DNA \\
+   Ribosome Entry Site & http://identifiers.org/so/SO:0000139 & DNA \\
       CDS & http://identifiers.org/so/SO:0000316 & DNA \\
       Terminator & http://identifiers.org/so/SO:0000141 & DNA \\ 
       Gene & http://identifiers.org/so/SO:0000704 & DNA \\
@@ -272,8 +286,6 @@ The \sbol{roles} property of every \sbol{ComponentDefinition} object MAY contain
   \caption{Ontology terms to specify the \sbol{roles} property of a \sbol{ComponentDefinition}.}
   \label{tbl:componentdefinition_roles}
 \end{table}
-
-\Rtodo{Taken from what ontology?} 
 
 \subsubsection*{The \sbolheading{components} property}
 \label{sec:components}
@@ -345,10 +357,11 @@ The example below shows the serialization of a simple \sbol{ComponentDefinition}
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/component_instance}
-\caption[]{ComponentInstance}
+\caption[]{The \sbol{ComponentInstance} class}
 \label{uml:component}
 \end{center}
 \end{figure}
+\Ctodo{Make sure all captions are sane and similar -JSB}
 
 When a \sbol{ComponentDefinition} is used as an element of a larger design, each separate use is represented by a \sbol{ComponentInstance} object.  
 The \sbol{ComponentInstance} class is abstract, so every usage must be as one of its two subclasses:
@@ -386,12 +399,42 @@ The \sbol{access} property must be set to one of the following URIs:
   If the access is private, the \sbol{ComponentInstance} MUST NOT be linked by any \sbol{MapsTo} object.
 \end{itemize}
 
+\paragraph{Serialization}
+
+No serialization is defined for \sbol{ComponentInstance}, since this class is 
+only used indirectly through its child classes.
+
 
 \subsubsection{Component}
 \label{sec:Component}
 Composition of the structural layer of SBOL designs is accomplished using \sbol{Component} objects. Each \sbol{Component} instance is part of a \sbol{ComponentDefinition} object, associated with it by the \sbol{components} property to represent  physical composition.  
 
 All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
+
+\paragraph{Serialization}
+
+The serialization of a \sbol{ComponentInstance} object has the following form:
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Component rdf:about="...">
+               ...
+  [\emph{one}]           <sbol:access rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]           <sbol:definition rdf:resource="..."/> [\emph{elements}]    
+  [\emph{zero or more}]  <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
+</sbol:Component>
+\end{lstlisting}
+
+The example below shows the serialization of a \sbol{Component}
+representing an instance of promoter:
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/pLuxR">
+  <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+  <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_R0062"/>
+</sbol:Component>
+\end{lstlisting}
 
 
 \subsubsection{SequenceAnnotation}
@@ -415,6 +458,8 @@ Every \sbol{SequenceAnnotation} MUST have a location property. The value of this
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
 
 \Ctodo{Separate serialization better - give paragraph/subsubsec headers}
+
+\paragraph{Serialization}
 
 The serialization of SequenceAnnotation objects MUST be carried out according to the template below. In this template, A\_LOCATION\_SUBCLASS represents one of the Location subclasses.
 \lstsetsbol
@@ -493,6 +538,8 @@ This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects r
   \label{tbl:orientation_types}
 \end{table}
 
+\subparagraph{Serialization}
+
 The serialization of Range objects has the following form:
 \lstsetsbol
 \begin{lstlisting}
@@ -531,6 +578,27 @@ A Cut object with \sbol{at} equal to zero represents the location just before in
 \subparagraph{The \sbolheading{orientation} property}
 This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects representing DNA molecules, it is RECOMMENDED to use one of the values in \ref{tbl:orientation_types} (above with \sbol{Range}).
 
+\subparagraph{Serialization}
+
+The serialization of \sbol{Cut} objects has the following form:
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Cut rdf:about="...">
+               ...   
+  [\emph{one}]         <sbol:at>...</sbol:at> [\emph{element}] 
+  [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}] 
+</sbol:Cut>
+\end{lstlisting}
+
+The example below shows the serialization of a \sbol{Cut} object. It specifies the location after 27, and the orientation is given as \external{inline}.
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Cut rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno3/cut">
+  <sbol:at>27</sbol:at>
+  <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+</sbol:Cut>
+\end{lstlisting}
+
 
 \paragraph{GenericLocation}
 \label{sec:GenericLocation}
@@ -540,8 +608,28 @@ describing locations on sequential structures, the
 \sbol{GenericLocation} is included as a hook for extensions, e.g., for
 describing locations in non-sequential structures.
 
-\Ctodo{Need serialization examples for MultiRange, Cut, and GenericLocation}
+\Rtodo{Need serialization examples for MultiRange, Cut, and GenericLocation: JSB - done for Cut and GenericLocation; ignoring MultiRange as it is likely to be cut}
 \Ctodo{Make sure that every property has a section label so that it hyperlinks correctly}
+
+\subparagraph{Serialization}
+
+The serialization of \sbol{GenericLocation} objects has the following form:
+\lstsetsbol
+\begin{lstlisting}
+<sbol:GenericLocation rdf:about="...">
+               ...   
+  [\emph{one}]         <sbol:at>...</sbol:at> [\emph{element}] 
+  [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}] 
+</sbol:GenericLocation>
+\end{lstlisting}
+
+The example below shows the serialization of a \sbol{GenericLocation} object with a reverse orientation:
+\lstsetsbol
+\begin{lstlisting}
+<sbol:GenericLocation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno5/location">
+  <sbol:orientation rdf:resource="http://sbols.org/v2#reverseComplement"/>
+</sbol:GenericLocation>
+\end{lstlisting}
 
 \subsubsection{SequenceConstraint}
 \label{sec:SequenceConstraint}
@@ -818,9 +906,10 @@ The serialization of \sbol{FunctionalComponent}s has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:FunctionalComponent rdf:about="...">
-  [\emph{zero or one}] <sbol:definition rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]         <sbol:access rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]         <sbol:direction rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}]   <sbol:definition rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]           <sbol:access rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]           <sbol:direction rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}]  <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
 </sbol:FunctionalComponent>
 \end{lstlisting}
 
@@ -851,6 +940,7 @@ The \sbol{Module} class enables the composition of \sbol{ModuleDefinition} objec
 \Ctodo{need to clean up this whole description}
 \Ctodo{Is the notion of ``level of design hierarchy'' real?  I think it doesn't need to be stated here, it's actually a best practice. -->  it's a best practice.  Nick will write this better.}
 
+\paragraph{Serialization}
 The serialization of \sbol{Module}s has the following form.
 \lstsetsbol
 \begin{lstlisting}
@@ -862,7 +952,17 @@ The serialization of \sbol{Module}s has the following form.
 </sbol:Module>
 \end{lstlisting}
 
-\Ctodo{add an example}
+The example below specifies a TetR inverter that is being used as
+a part of a toggle switch:
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Module rdf:about="http://sbolstandard.org/example/toggle_switch/submodule/tetr_inverter">
+  <sbol:definition rdf:resource="http://sbolstandard.org/example/tetr_inverter"/>
+</sbol:Module>
+\end{lstlisting}
+
+\Rtodo{add an example; JSB: done}
 
 \subsubsection{MapsTo}
 \label{sec:MapsTo}
@@ -979,6 +1079,8 @@ Each Interaction object must specify its type with at least one URI that identif
 
 Furthermore, each Interaction object must specify its participating \sbol{FunctionalComponent} entities by linking to one or more objects of the Participation class.
 \LDtodo{I don't think this is really a MUST}
+
+\paragraph{Serialization}
 
 The serialization of \sbol{Interaction}s has the following form.
 \lstsetsbol
