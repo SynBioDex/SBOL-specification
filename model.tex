@@ -111,8 +111,13 @@ For a full explanation, see the linked resources.
 
 \subsubsection*{Serialization}
 
-No serialization is defined for \sbol{Identified}, since this class is 
-only used indirectly through its child classes.
+No complete serialization is defined for \sbol{Identified}, since this
+class is only used indirectly through its child classes.  Any such
+child class, however, has the following form for serializing
+properties inherited from \sbol{Identified}, where CLASS\_NAME is
+replaced by the name of the class:
+
+\Ctodo{Need to fill in template and example}
 
 \subsection{Documented}
 \label{sec:Documented}
@@ -143,8 +148,13 @@ The \sbol{description} property is OPTIONAL and has a data type of \external{Str
 
 \subsubsection*{Serialization}
 
-No serialization is defined for \sbol{Documented}, since this class is 
-only used indirectly through its child classes.
+No complete serialization is defined for \sbol{Documented}, since this
+class is only used indirectly through its child classes.  Any such
+child class, however, has the following form for serializing
+properties inherited from \sbol{Documented}, where CLASS\_NAME is
+replaced by the name of the class:
+
+\Ctodo{Need to fill in template and example}
 
 \subsection {TopLevel}
 \label{sec:TopLevel}
@@ -160,8 +170,9 @@ only used indirectly through its child classes.
 
 \subsubsection*{Serialization}
 
-No serialization is defined for \sbol{TopLevel}, since this class is 
-only used indirectly through its child classes.
+No serialization is defined for \sbol{TopLevel}, since this class has
+no properties of its own and is only used indirectly through its child
+classes.
 
 \subsection{Sequence}
 \label{sec:Sequence}
@@ -315,7 +326,7 @@ This OPTIONAL property links to one or more \sbol{SequenceAnnotation} objects de
 \subsubsection*{Serialization}
 The parents of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Documented} and \sbol{Identified}. As a result, inherited properties are serialised as explained for these parent classes. The sequence property of a \sbol{ComponentDefinition} object includes a URI to a \sbol{Sequence} object and this URI is serialized as an \external{rdf:resource}. The \sbol{types} property may include a collection of type URIs and is serialized as an implicit collection, ignoring the property name ``types''. The \sbol{roles} property is also similarly serialized as an implicit collection of sbol:roles properties.
 
-\Ctodo{Add the serialization descriptions to parent classes; make sure everything has its serialization}
+\Rtodo{Add the serialization descriptions to parent classes; make sure everything has its serialization. JSB: almost all done; marked the couple of places still to go. }
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ComponentDefinition rdf:about="...">
@@ -850,7 +861,7 @@ This property is optional and includes a set of \sbol{Interaction} entities, whi
 
 \subsubsection*{Serialization}
 
-The serialization of \sbol{ModuleDefinition}s has the following form:
+The serialization of \sbol{ModuleDefinition} has the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ModuleDefinition rdf:about="...">
@@ -870,10 +881,38 @@ The serialization of \sbol{ModuleDefinition}s has the following form:
                </sbol:interaction> [\emph{elements}]
 </sbol:ModuleDefinition>
 \end{lstlisting}
+\Ctodo{Is this template still correct, given ``subModule''?}
 
-\Ctodo{Add an example, like for all the rest}
+\Rtodo{Add an example, like for all the rest.  JSB: done, but needs to be sanity-checked since I created it by hand.}
 
-\Ctodo{Should this be here or defined in ComponentInstance section?}
+The example below shows a simple \sbol{ModuleDefinition} containing two components, a \sbol{FunctionalComponent} for a DNA sequence encoding constitutive expression of GFP and another for the GFP protein expressed from this sequence, plus an interaction describing that relation.
+
+\lstsetsbol
+\begin{lstlisting}
+  <sbol:ModuleDefinition rdf:about="http://sbolstandard.org/example/GFP_expression">
+    <sbol:component>
+      <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/Constitutive_GFP">
+        <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP_generator"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:component>
+    <sbol:component>
+      <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/GFP_protein">
+        <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#out"/>
+      </sbol:FunctionalComponent>
+    </sbol:component>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbolstandard.org/example/GPF_expression/interaction/express_GFP">
+         ...
+      </sbol:Interaction>
+    </sbol:interaction>
+  </sbol:ModuleDefinition>
+\end{lstlisting}
+
+\Rtodo{Should this be here or defined in ComponentInstance section?  JSB: here}
 
 \subsubsection{FunctionalComponent}
 \label{sec:FunctionalComponent}
