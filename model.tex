@@ -468,7 +468,7 @@ Every \sbol{SequenceAnnotation} MUST have a location property. The value of this
 \paragraph{The \sbolheading{component} property}
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
 
-\Ctodo{Separate serialization better - give paragraph/subsubsec headers}
+\Rtodo{Separate serialization better - give paragraph/subsubsec headers.  JSB: done.}
 
 \paragraph{Serialization}
 
@@ -1116,8 +1116,8 @@ Each Interaction object must specify its type with at least one URI that identif
 
 \Ctodo{Like the others, SBO is REQUIRED if the term exists, and you can add other stuff.  We also need to explain this up front in the beginning of the section}
 
-Furthermore, each Interaction object must specify its participating \sbol{FunctionalComponent} entities by linking to one or more objects of the Participation class.
-\LDtodo{I don't think this is really a MUST}
+Furthermore, an\sbol{Interaction} object can specify the set of \sbol{FunctionalComponent} entities that are interacting by linking to \sbol{Participation} objects that descibe how each one participates in the interaction.
+\Rtodo{I don't think this is really a MUST.  JSB: it wasn't; it is resolved.}
 
 \paragraph{Serialization}
 
