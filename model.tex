@@ -1217,6 +1217,7 @@ Values can be \external{URI}s or \external{Literal} data (for example, \external
 These custom \sbol{Identified} entities can further be annotated with the scheme described here. These custom entities are either serialized within an SBOL entity being annotated, or referenced using an \external{URI} annotation and embedded within the the annotated entity's parent.
 \Dtodo{Make sure if we have a choice here!}
 
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/identified_annotations}
@@ -1224,6 +1225,9 @@ These custom \sbol{Identified} entities can further be annotated with the scheme
 \label{uml:identified_annotations}
 \end{center}
 \end{figure}
+
+\Ctodo{CJM: I think the link from AnnotationValue from Identified should be removed.  Instead, there should be a new object that inherits from AnnotationValue called "ListOfAnnotations" which has properties nestedQName : QName, nestedURI : URI, and a 0..* annotations link to the Annotation class.  I think we should also change the type of name in the Annotation class to QName.}
+
 \Dtodo{I think this should actually be: add any object here of your own custom class (which MUST NOT use the SBOL namespace), not ``make chains of identified''}
 \Dtodo{Is this figure how the annotations are actually handled in libSBOLj?}
 \Dtodo{Consider putting Identified, uRI, and Literal on the bottom so that inheritance arrows point in the same direction as they do in other diagrams. Another consideration for maintaing consistency with the other diagrams is to add arrow heads to the opposite ends of the black diamond relations. - Nic}
