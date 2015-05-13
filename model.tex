@@ -1,6 +1,9 @@
 % -----------------------------------------------------------------------------
 \section{SBOL Data Model}
 % -----------------------------------------------------------------------------
+
+\Ctodo{All captions need full explanations.}
+
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
 \subsection{Understanding the UML Diagrams}
@@ -111,28 +114,6 @@ If the \sbol{version} property is used, then it is RECOMMENDED that version numb
 This convention represents versions as sequences of numbers and qualifiers separated by the characters {\tt .} and {\tt -} and compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).
 For a full explanation, see the linked resources.
 
-\subsubsection*{Serialization}
-
-No complete serialization is defined for \sbol{Identified}, since this
-class is only used indirectly through its child classes.  Any such
-child class, however, has the following form for serializing
-properties inherited from \sbol{Identified}, where CLASS\_NAME is
-replaced by the name of the class:
-
-\Ctodo{Need to fill in template and example}
-
-\subsection{Documented}
-\label{sec:Documented}
-The \sbol{Documented} abstract class is inherited by the classes of SBOL objects that can contain human-readable properties, such as name and description. This class extends \sbol{Identified} with two additional data properties: \sbol{name}, and \sbol{description} (\ref{uml:documented}). 
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/documented}
-\caption[]{The \sbol{Documented} abstract class.}
-\label{uml:documented}
-\end{center}
-\end{figure}
-
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
 
@@ -145,18 +126,40 @@ It is RECOMMENDED that software tools give users the ability to switch perspecti
 
 \subsubsection*{The \sbolheading{description} property}
 \label{sec:description}
-The \sbol{description} property is OPTIONAL and has a data type of \external{String}. This property is intended to contain a more thorough description of a \sbol{Documented} object.
 
+The \sbol{description} property is OPTIONAL and has a data type of \external{String}. This property is intended to contain a more thorough description of a \sbol{Documented} object.
 
 \subsubsection*{Serialization}
 
-No complete serialization is defined for \sbol{Documented}, since this
+No complete serialization is defined for \sbol{Identified}, since this
 class is only used indirectly through its child classes.  Any such
 child class, however, has the following form for serializing
-properties inherited from \sbol{Documented}, where CLASS\_NAME is
+properties inherited from \sbol{Identified}, where CLASS\_NAME is
 replaced by the name of the class:
 
 \Ctodo{Need to fill in template and example}
+
+% \subsection{Documented}
+% \label{sec:Documented}
+% The \sbol{Documented} abstract class is inherited by the classes of SBOL objects that can contain human-readable properties, such as name and description. This class extends \sbol{Identified} with two additional data properties: \sbol{name}, and \sbol{description} (\ref{uml:documented}). 
+
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[scale=0.6]{uml/documented}
+% \caption[]{The \sbol{Documented} abstract class.}
+% \label{uml:documented}
+% \end{center}
+% \end{figure}
+
+% \subsubsection*{Serialization}
+
+% No complete serialization is defined for \sbol{Documented}, since this
+% class is only used indirectly through its child classes.  Any such
+% child class, however, has the following form for serializing
+% properties inherited from \sbol{Documented}, where CLASS\_NAME is
+% replaced by the name of the class:
+
+% \Ctodo{Need to fill in template and example}
 
 \subsection {TopLevel}
 \label{sec:TopLevel}
@@ -1246,6 +1249,8 @@ In particular, three models are supported for connecting the SBOL model with oth
 
 \subsubsection{Annotating SBOL objects}
 
+\Ctodo{CJM: will edit this to match the library}
+
 \LDtodo{URI: plain or courier?}
 
 Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. 
@@ -1265,9 +1270,9 @@ These custom \sbol{Identified} entities can further be annotated with the scheme
 
 \Ctodo{CJM: I think the link from AnnotationValue from Identified should be removed.  Instead, there should be a new object that inherits from AnnotationValue called "ListOfAnnotations" which has properties nestedQName : QName, nestedURI : URI, and a 0..* annotations link to the Annotation class.  I think we should also change the type of name in the Annotation class to QName.}
 
-\Dtodo{I think this should actually be: add any object here of your own custom class (which MUST NOT use the SBOL namespace), not ``make chains of identified''}
-\Dtodo{Is this figure how the annotations are actually handled in libSBOLj?}
-\Dtodo{Consider putting Identified, uRI, and Literal on the bottom so that inheritance arrows point in the same direction as they do in other diagrams. Another consideration for maintaing consistency with the other diagrams is to add arrow heads to the opposite ends of the black diamond relations. - Nic}
+\Ctodo{I think this should actually be: add any object here of your own custom class (which MUST NOT use the SBOL namespace), not ``make chains of identified''}
+\Ctodo{Is this figure how the annotations are actually handled in libSBOLj?}
+\Ctodo{Consider putting Identified, uRI, and Literal on the bottom so that inheritance arrows point in the same direction as they do in other diagrams. Another consideration for maintaing consistency with the other diagrams is to add arrow heads to the opposite ends of the black diamond relations. - Nic}
 
 Each annotation is serialised as an RDF subject-property-object triplet in which the subject is the SBOL object being annotated, the property is the annotation name, and the object is the annotation value. Simple values URIs are serialised as RDF literals, and URI values are represented with the \external{\path{http://www.w3.org/1999/02/22-rdf-syntax-ns#resource}} RDF property. If the annotation value is another complex object then the object is embedded as an RDF resource, which can further be annotated similarly.
 \Dtodo{If we allow URI reference of a custom object stored, then update this paragraph}
