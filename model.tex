@@ -62,6 +62,8 @@ When SBOL use simple ``primitive'' data types such as strings or integers, these
 \subsection{Identified}
 \label{sec:Identified}
 
+\Ctodo{Merge identified and documented, add wasDerivedFrom, and change all UML that inherits from Documented to inherit from Identified.}
+
 \Ctodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
 
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class. This inheritance means that all SBOL objects are identified using \external{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web. 
@@ -452,7 +454,7 @@ representing an instance of promoter:
 \label{sec:SequenceAnnotation}
 The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} object linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object, as described below.
 
-\Dtodo{Can we change location to locations (1..*) and eliminate MultiRange class?}
+\Ctodo{We will change location to locations (1..*) and eliminate MultiRange class.}
 
 \begin{figure}[ht]
 \begin{center}
@@ -648,8 +650,6 @@ A \sbol{ComponentDefinition} object can link to \sbol{SequenceConstraint} object
 The purpose of \sbol{SequenceConstraint} is to allow partial designs to be specified when the precise identity, location, or ordering of \sbol{Component} objects is not yet fully determined.
 
 A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} and \sbol{object} properties to specify such constraints.
-
-\Dtodo{Should SequenceConstraint be Documented?}
 
 \begin{figure}[ht]
 \begin{center}
