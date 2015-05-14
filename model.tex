@@ -330,7 +330,7 @@ The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a collection
 
 \subsubsection*{Serialization}
 % The parent classes of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Identified}. As a result, inherited properties are serialized as explained for these parent classes.
-The \sbol{sequences} property and \sbol{types} property of a \sbol{ComponentDefinition} include collections of \external{URI}s that identify \sbol{Sequence} objects and ontology terms, respectively. As shown in the example below, each of these URIs is serialized as an \external{rdf:resource} as part of an implicit collection of {\tt \color{blue} sequence} that ignores the property name ``types.'' The \sbol{roles} property is similarly serialized as an implicit collection of sbol:roles properties.
+The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{sequenceAnnotations} properties of a \sbol{ComponentDefinition} include \external{URI}s that identify objects belonging to the appropriate SBOL classes, while the \sbol{types} and \sbol{roles} properties include URIs that identify ontology terms. As shown in the example below, each of these URIs is serialized as an \external{rdf:resource} as part of an implicit collection of SBOL properties with singular rather then plural names.
 
 \Ctodo{The name (title) and description properties should be moved from this example to one for Identified. Identified is an abstract class that shouldn't be serialized, but perhaps we could use a non-abstract class (probably ComponentDefinition) to provide an example of displayId, version, name, description, etc. - Nic}
 
@@ -353,7 +353,7 @@ The \sbol{sequences} property and \sbol{types} property of a \sbol{ComponentDefi
 \end{lstlisting}
 \Ctodo{We need to have an explanation of how to interpret these, and also have a pointer to it from each example.}
 
-The example below shows the serialization of a simple \sbol{ComponentDefinition} object. The \external{DnaRegion} from BioPAX and \external{CHEBI:4705} from CHEBI are used to indicate the type of the biological entity as a DNA molecule. Its role is specified via the generic \external{SO:0000167} (\external{promoter}) and more specific \external{SO:0000613} (\external{bacterial\_RNApol\_promoter}) terms.
+The example below shows the serialization of a simple \sbol{ComponentDefinition} for a promoter. The BioPAX term \external{DnaRegion} and the ChEBI term \external{CHEBI:4705} (\external{double-stranded DNA}) are used to indicate that the type of biological entity represented by this \sbol{ComponentDefinition} is DNA. Its role is specified using the SO terms \external{SO:0000167} (\external{promoter}) and the more specific \external{SO:0000613} (\external{bacterial\_RNApol\_promoter}).
 
 \lstsetsbol
 \begin{lstlisting}
