@@ -65,7 +65,7 @@ When SBOL use simple ``primitive'' data types such as strings or integers, these
 \subsection{Identified}
 \label{sec:Identified}
 
-\Ctodo{Merge identified and documented, add wasDerivedFrom, and change all UML that inherits from Documented to inherit from Identified.}
+\Rtodo{Merge identified and documented, add wasDerivedFrom, and change all UML that inherits from Documented to inherit from Identified.}
 
 \Ctodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
 
@@ -116,6 +116,8 @@ For a full explanation, see the linked resources.
 
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
+
+\Ctodo{Eliminate references to Documented and/or replace with Identified}
 
 \Ctodo{Need to require use of DublinCore names and show examples of them: non-stanard mappings per Matt: Title vs. Name, descripton is dcterms:description}
 
@@ -246,7 +248,7 @@ The \sbol{ComponentDefinition} class represents the structural entities of a bio
 
 As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class describes a structural design entity using the following properties: \sbol{types}, \sbol{roles}, and \sbol{sequence}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{components}, \sbol{sequenceConstraints}, and  \sbol{sequenceAnnotations}.
 
-\Ctodo{Change sequence to sequences and make 0..*}
+\Ctodo{Make sure that text is consistent with sequences property have cardinality of 0..*}
 
 \begin{figure}[ht]
 \begin{center}
@@ -738,7 +740,7 @@ The example below shows the serialization of a \sbol{SequenceConstraint} object.
 SBOL's \sbol{Model} objects are placeholders that point to some external modeling mechanism, with some additional meta-data to enable better reasoning about the contents of that external mechanism.
 In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of \sbol{ModuleDefinition} objects in a well-developed language of their choice. 
 
-Each \sbol{Model} object specifies the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modelling framework and the model's role(s). 
+Each \sbol{Model} object specifies the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modeling framework and the model's role(s). 
 
 \subsubsection*{ The \sbolheading{source} property}
 This REQUIRED property is a URI that specifies the actual location of a qualitative or quantitative model.
@@ -746,8 +748,6 @@ This REQUIRED property is a URI that specifies the actual location of a qualitat
 \subsubsection*{ The \sbolheading{language} property}
 This REQUIRED property is a URI that specifies the language the model is implemented with. 
 Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Methods (EDAM) ontology where possible. A few suggested model types and corresponding URI values are shown in \ref{tbl:model_types}.
-
-\LDtodo{Make sure EDAM goes in ontology best-practices section}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -765,8 +765,8 @@ Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Metho
 
 
 \subsubsection*{ The \sbolheading{framework} property}
-This REQUIRED property is a URI that specifies the modelling framework that a model is implemented within. 
-Values for this URI are RECOMMENDED to be chosen from the SBO's modelling framework terms where possible. A few suggested model frameworks and corresponding URI values are shown in \ref{tbl:model_frameworks}.
+This REQUIRED property is a URI that specifies the modeling framework that a model is implemented within. 
+Values for this URI are RECOMMENDED to be chosen from the SBO's modeling framework terms where possible. A few suggested model frameworks and corresponding URI values are shown in \ref{tbl:model_frameworks}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -781,10 +781,6 @@ Values for this URI are RECOMMENDED to be chosen from the SBO's modelling framew
   \label{tbl:model_frameworks}
 \end{table}
 
-\LDtodo{Made sure SBO frameworks goes in ontology best-practices section}
-
-\Ctodo{We are dropping the role property entirely --- make sure it gets deleted}
-
 \subsubsection*{Serialization}
 
 The serialization of \sbol{Model} objects has the following form:
@@ -796,7 +792,6 @@ The serialization of \sbol{Model} objects has the following form:
   [\emph{one}]         <sbol:source rdf:resource="..."/> [\emph{element}]
   [\emph{one}]         <sbol:language rdf:resource="..."/> [\emph{element}]
   [\emph{one}]         <sbol:framework rdf:resource="..."/> [\emph{element}]
-  [\emph{one or more}] <sbol:role rdf:resource="..."/> [\emph{element}]
 </sbol:Model>
 \end{lstlisting}
 
@@ -809,18 +804,16 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
     <sbol:source rdf:resource="http://virtualparts.org/part/pIKE_Toggle_1"/>
     <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
     <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
-    <sbol:role rdf:resource="http://sbols.org/v2#module_model"/>
   </sbol:Model>
 </rdf:RDF>
 
 \end{lstlisting}
 \label{ser:Model}
 
-
-
-\Ctodo{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.}
 \subsection{ModuleDefinition}
 \label{sec:ModuleDefinition}
+
+\Ctodo{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.}
 
 \begin{figure}[ht]
 \begin{center}
@@ -1294,8 +1287,6 @@ SBOL's \sbol{GenericTopLevel} is a top-level entity whose only purpose is to inc
 Entities that have independent existence (i.e., would be another ``top level'' class) and are not recognised by the SBOL standard are loaded into these top level entities. 
 These \sbol{GenericTopLevel} entities can thus be safely used by tools to exchange non-SBOL data embedded separately within SBOL.
 As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{name}, \sbol{description}, \sbol{displayId} and so on. The type of data found in the generic entity is indicated using the standard \external{rdf:type} property.
-
-\Ctodo{rdf:type should be rdfType, and I believe its type is QName.}
 
 \begin{figure}[ht]
 \begin{center}
