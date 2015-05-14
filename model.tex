@@ -286,21 +286,21 @@ The \sbol{types} property of every \sbol{ComponentDefinition} MUST contain at le
 
 The \sbol{roles} property is a OPTIONAL set of \external{URI}s that clarifies the potential function of a \sbol{ComponentDefinition} in a biological context.
 
-The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain a collection of \external{URI}s that SHOULD identify terms from ontologies that are consistent with the \sbol{types} property of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA or RNA \sbol{ComponentDefinition} component SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbol{roles} property and their \external{URI}s. These terms are organized by the type of \sbol{ComponentDefinition} to which they are expected to apply. As with the \sbol{types} property, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} SHOULD use that term as one of its \sbol{roles}.
+The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain a collection of \external{URI}s that SHOULD identify terms from ontologies that are consistent with the \sbol{types} property of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA or RNA \sbol{ComponentDefinition} component SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbol{roles} property and their \external{URI}s. These terms are organized by the type of \sbol{ComponentDefinition} to which they MUST apply. As with the \sbol{types} property, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} SHOULD use that term as one of its \sbol{roles}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
     \toprule
     \textbf{ComponentDefinition Role} & \textbf{URI for Ontology Term} & \textbf{ComponentDefinition Type} \\
     \midrule
-   Promoter & http://identifiers.org/so/SO:0000167 & DNA \\
-   Ribosome Entry Site & http://identifiers.org/so/SO:0000139 & DNA \\
-      CDS & http://identifiers.org/so/SO:0000316 & DNA \\
-      Terminator & http://identifiers.org/so/SO:0000141 & DNA \\ 
-      Gene & http://identifiers.org/so/SO:0000704 & DNA \\
-      mRNA & http://identifiers.org/so/SO:0000234 & RNA \\ 
-      Transcription Factor & http://identifiers.org/go/GO:0003700 & Protein \\
-      Effector & http://identifiers.org/chebi/CHEBI:35224 & Small Molecule \\
+   Promoter & \url{http://identifiers.org/so/SO:0000167} & DNA \\
+   Ribosome Entry Site & \url{http://identifiers.org/so/SO:0000139} & DNA \\
+      CDS & \url{http://identifiers.org/so/SO:0000316} & DNA \\
+      Terminator & \url{http://identifiers.org/so/SO:0000141} & DNA \\ 
+      Gene & \url{http://identifiers.org/so/SO:0000704} & DNA \\
+      mRNA & \url{http://identifiers.org/so/SO:0000234} & RNA \\ 
+      Transcription Factor & \url{http://identifiers.org/go/GO:0003700} & Protein \\
+      Effector & \url{http://identifiers.org/chebi/CHEBI:35224} & Small Molecule \\
     \bottomrule
   \end{edtable}
   \caption{RECOMMENDED ontology terms to specify the \sbol{roles} property of a \sbol{ComponentDefinition}.}
@@ -330,7 +330,7 @@ The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a collection
 
 \subsubsection*{Serialization}
 % The parent classes of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Identified}. As a result, inherited properties are serialized as explained for these parent classes.
-The sequence property of a \sbol{ComponentDefinition} includes a URI that identifies a \sbol{Sequence}. As shown in the example below, this URI is serialized as an \external{rdf:resource}. The \sbol{types} property, on the other hand, can include a collection of type URIs and is serialized as an implicit collection, ignoring the property name ``types''. The \sbol{roles} property is also similarly serialized as an implicit collection of sbol:roles properties.
+The \sbol{sequences} property and \sbol{types} property of a \sbol{ComponentDefinition} include collections of \external{URI}s that identify \sbol{Sequence} objects and ontology terms, respectively. As shown in the example below, each of these URIs is serialized as an \external{rdf:resource} as part of an implicit collection of {\tt \color{blue} sequence} that ignores the property name ``types.'' The \sbol{roles} property is similarly serialized as an implicit collection of sbol:roles properties.
 
 \Ctodo{The name (title) and description properties should be moved from this example to one for Identified. Identified is an abstract class that shouldn't be serialized, but perhaps we could use a non-abstract class (probably ComponentDefinition) to provide an example of displayId, version, name, description, etc. - Nic}
 
@@ -340,7 +340,7 @@ The sequence property of a \sbol{ComponentDefinition} includes a URI that identi
                ...
   [\emph{zero or one}]  <dcterms:title>...</dcterms:title> [\emph{element}]
   [\emph{zero or one}]  <dcterms:description>...</dcterms:description> [\emph{element}]
-  [\emph{zero or one}]  <sbol:sequence rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}]  <sbol:sequence rdf:resource="..."/> [\emph{element}]
   [\emph{one or more}]  <sbol:type rdf:resource="..."/> [\emph{elements}]
   [\emph{one or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]    
   [\emph{zero or more}] <sbol:subComponent>
