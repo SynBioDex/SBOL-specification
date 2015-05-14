@@ -384,8 +384,8 @@ The example below shows the serialization of a simple \sbol{ComponentDefinition}
 When a \sbol{ComponentDefinition} is used as an element of a larger design, each separate usage is represented by a \sbol{ComponentInstance} object.  
 The \sbol{ComponentInstance} class is abstract, so every usage must belong to one of its two subclasses:
 \begin{itemize}
-\item The \sbol{Component} class is used to specify the structural usage of \sbol{ComponentDefinition} inside  another \sbol{ComponentDefinition} via the \sbol{components} property.
-\item The \sbol{FunctionalComponent} class is used to specify the functional usage of \sbol{ComponentDefinition} inside a \sbol{ModuleDefinition} via the \sbol{functionalComponents} property. This class is described in \ref{sec:FunctionalComponent}.
+\item The \sbol{Component} class is used to specify the structural usage of a \sbol{ComponentDefinition} inside another \sbol{ComponentDefinition} via the \sbol{components} property.
+\item The \sbol{FunctionalComponent} class is used to specify the functional usage of a \sbol{ComponentDefinition} inside a \sbol{ModuleDefinition} via the \sbol{functionalComponents} property. This class is described in \ref{sec:FunctionalComponent}.
 \end{itemize}
 
 \paragraph{The \sbolheading{componentDefinition} property}
