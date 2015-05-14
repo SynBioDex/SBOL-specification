@@ -92,19 +92,14 @@ in the SBOL specification namespace.
 
 \printModeling{The \sbol{displayId} of a compliant object is required.  (Reference: \sec{sec:compliant})}
 
-\subsubsection*{Rules for the \class{Documented} class} 
-\setcounter{sbolCtr}{10301}
+\printValid{The \sbol{name} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
 
-\printValid{A \sbol{Documented} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Documented})}
-
-\printValid{The \sbol{name} is an optional property for all \sbol{Documented} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Documented})}
-
-\printValid{The \sbol{description} is an optional property for all \sbol{Documented} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Documented})}
+\printValid{The \sbol{description} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
 
 \subsubsection*{Rules for the \class{TopLevel} class} 
 \setcounter{sbolCtr}{10401}
 
-\printValid{A \sbol{TopLevel} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:TopLevel})}
+\printValid{A \sbol{TopLevel} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:TopLevel})}
 
 \subsubsection*{Rules for the \class{Sequence} class} 
 \setcounter{sbolCtr}{10501}
@@ -160,7 +155,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \subsubsection*{Rules for the \class{ComponentInstance} class} 
 \setcounter{sbolCtr}{10701}
 
-\printValid{A \sbol{ComponentInstance} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:ComponentInstance})}
+\printValid{A \sbol{ComponentInstance} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:ComponentInstance})}
 
 \printValid{The \sbol{access} property is a required URI which must be one of the following:
 \url{http://sbols.org/v2\#public} or \url{http://sbols.org/v2\#private}.
@@ -183,18 +178,14 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \subsubsection*{Rules for the \class{SequenceAnnotation} class} 
 \setcounter{sbolCtr}{10801}
 
-\printValid{A \sbol{SequenceAnnotation} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:SequenceAnnotation})}
+\printValid{A \sbol{SequenceAnnotation} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:SequenceAnnotation})}
 
-\Rtodo{Rule below needs to change if becomes a set of locations}
-
-\printValid{The \sbol{location} is a required property for all \sbol{SequenceAnnotation} objects and is a set of \sbol{Location} objects. (Reference: \sec{sec:SequenceAnnotation})}
+\printValid{The \sbol{locations} property is a set of \sbol{Location} objects, and it must include at least one \sbol{Location}. (Reference: \sec{sec:SequenceAnnotation})}
 
 \printValid{The \sbol{component} property is an optional URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceAnnotation})}
 
 \subsubsection*{Rules for the \class{Location} class} 
 \setcounter{sbolCtr}{10901}
-
-\Rtodo{Written assuming change in Location class to remove MultiRange}
 
 \printValid{A \sbol{Location} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Location})}
 
@@ -266,7 +257,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \subsubsection*{Rules for the \class{Module} class} 
 \setcounter{sbolCtr}{11301}
 
-\printValid{A \sbol{Module} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:Module})}
+\printValid{A \sbol{Module} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Module})}
 
 \printValid{The \sbol{definition} property is a required URI reference to a \sbol{ModuleDefinition} object.  (Reference: \sec{sec:Module})}
 
@@ -295,7 +286,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \subsubsection*{Rules for the \class{Interaction} class} 
 \setcounter{sbolCtr}{11501}
 
-\printValid{A \sbol{Interaction} object inherits all properties of a \sbol{Documented} object. (Reference: \sec{sec:Interaction})}
+\printValid{A \sbol{Interaction} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Interaction})}
 
 \printValid{The \sbol{types} property is a set of URIs, and it is required to include at least entry. (Reference: \sec{sec:Interaction})}
 
@@ -334,4 +325,3 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \printValid{A \sbol{GenericTopLevel} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:GenericTopLevel})}
 
 \printValid{The \sbol{rdfType} property is required, and it has data type QName. (Reference: \sec{sec:GenericTopLevel})}
-
