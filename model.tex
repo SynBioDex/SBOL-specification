@@ -326,12 +326,14 @@ The \sbol{sequenceConstraints} property is OPTIONAL and MAY contain a collection
 \subsubsection*{The \sbolheading{sequenceAnnotations} property}
 \label{sec:sequenceAnnotations}
 
-The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a collection of \sbol{SequenceAnnotation} objects. These objects describe  \sbol{Location}s on the \sbol{Sequence} objects of the  \sbol{ComponentDefinition}. In addition, each \sbol{SequenceAnnotation} MAY  position a \sbol{Component} of the \sbol{ComponentDefinition} at its specified \sbol{Location}.
+The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a collection of \sbol{SequenceAnnotation} objects. These objects describe  \sbol{Location}s on the \sbol{Sequence} objects of the  \sbol{ComponentDefinition}. In addition, each \sbol{SequenceAnnotation} can  position a \sbol{Component} of the \sbol{ComponentDefinition} at its specified \sbol{Location}.
 
 \subsubsection*{Serialization}
-The parent classes of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Identified}. As a result, inherited properties are serialised as explained for these parent classes. The sequence property of a \sbol{ComponentDefinition} object includes a URI to a \sbol{Sequence} object and this URI is serialized as an \external{rdf:resource}. The \sbol{types} property may include a collection of type URIs and is serialized as an implicit collection, ignoring the property name ``types''. The \sbol{roles} property is also similarly serialized as an implicit collection of sbol:roles properties.
+% The parent classes of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Identified}. As a result, inherited properties are serialized as explained for these parent classes.
+The sequence property of a \sbol{ComponentDefinition} includes a URI that identifies a \sbol{Sequence}. As shown in the example below, this URI is serialized as an \external{rdf:resource}. The \sbol{types} property, on the other hand, can include a collection of type URIs and is serialized as an implicit collection, ignoring the property name ``types''. The \sbol{roles} property is also similarly serialized as an implicit collection of sbol:roles properties.
 
-\Rtodo{Add the serialization descriptions to parent classes; make sure everything has its serialization. JSB: almost all done; marked the couple of places still to go. }
+\Ctodo{The name (title) and description properties should be moved from this example to one for Identified. Identified is an abstract class that shouldn't be serialized, but perhaps we could use a non-abstract class (probably ComponentDefinition) to provide an example of displayId, version, name, description, etc. - Nic}
+
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ComponentDefinition rdf:about="...">
