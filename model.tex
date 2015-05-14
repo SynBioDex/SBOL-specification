@@ -286,7 +286,7 @@ The \sbol{types} property of every \sbol{ComponentDefinition} MUST contain at le
 
 The \sbol{roles} property is a OPTIONAL set of \external{URI}s that clarifies the potential function of a \sbol{ComponentDefinition} in a biological context.
 
-The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain a collection of \external{URI}s that SHOULD identify terms from ontologies that are consistent with the \sbol{types} property of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA or RNA \sbol{ComponentDefinition} component SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbol{roles} property and their \external{URI}s. These terms are organized by the type of \sbol{ComponentDefinition} to which they MUST apply. As with the \sbol{types} property, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} SHOULD use that term as one of its \sbol{roles}.
+The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain a collection of \external{URI}s that SHOULD identify terms from ontologies that are consistent with the \sbol{types} property of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA or RNA \sbol{ComponentDefinition} component SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbol{roles} property and their \external{URI}s. These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply. As with the \sbol{types} property, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} SHOULD use that term as one of its \sbol{roles}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -381,11 +381,11 @@ The example below shows the serialization of a simple \sbol{ComponentDefinition}
 \end{figure}
 \Ctodo{Make sure all captions are sane and similar -JSB}
 
-When a \sbol{ComponentDefinition} is used as an element of a larger design, each separate use is represented by a \sbol{ComponentInstance} object.  
-The \sbol{ComponentInstance} class is abstract, so every usage must be as one of its two subclasses:
+When a \sbol{ComponentDefinition} is used as an element of a larger design, each separate usage is represented by a \sbol{ComponentInstance} object.  
+The \sbol{ComponentInstance} class is abstract, so every usage must belong to one of its two subclasses:
 \begin{itemize}
-\item \sbol{Component} is used for specifying hierarchical structure, and can be linked to by the properties of parts of a \sbol{ComponentDefinition}.
-\item \sbol{FunctionalComponent} is used for describing function in a \sbol{Module}, and can be linked to by the properties of parts of a \sbol{Module}.  It is described in the \sbol{Module} section.
+\item The \sbol{Component} class is used to specify the structural usage of \sbol{ComponentDefinition} inside  another \sbol{ComponentDefinition} via the \sbol{components} property.
+\item The \sbol{FunctionalComponent} class is used to specify the functional usage of \sbol{ComponentDefinition} inside a \sbol{ModuleDefinition} via the \sbol{functionalComponents} property. This class is described in \ref{sec:FunctionalComponent}.
 \end{itemize}
 
 \paragraph{The \sbolheading{componentDefinition} property}
@@ -848,6 +848,7 @@ This property is optional and includes a set of \sbol{Module} entities, which re
 
 \Ctodo{component --> functionalComponent in examples}
 \subsubsection*{The \sbolheading{functionalComponents} property}
+\label{sec:functionalComponents}
 This property is optional and includes a set of \sbol{FunctionalComponent} entities. These entities are then used to describe biological interactions via \sbol{Participation} entities.
 
 \Ctodo{use better language}
