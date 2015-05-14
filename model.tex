@@ -40,7 +40,7 @@ Finally, classes can inherit the properties of other classes. Inheritance relati
 SBOL classes are named using upper "camel case," meaning that each word is capitalized and all words are run together without spaces e.g. \sbol{Identified}, \sbol{SequenceAnnotation}.  
 Properties, on the other hand, are named using lower camel case, meaning that they begin lower case (e.g., \sbol{identity}) but if they consist of multiple words, all words after the first begin with an upper case letter (e.g., \sbol{persistentIdentity}).
 
-Within the SBOL data model, each property is given a singular or plural name in accordance with its data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{sequenceAnnotation} is the singular form of \sbol{sequenceAnnotation}s. 
+Within the SBOL data model, each property is given a singular or plural name in accordance with its data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{SequenceAnnotation} is the singular form of \sbol{SequenceAnnotation}s. 
 
 When SBOL objects are serialized to be exchanged (using \emph{Resource Description Framework} (RDF) as described in \ref{sec:serialization}), however, SBOL properties are always given singular names. This is because the SBOL data model does not contain classes that correspond directly to the RDF elements that group other elements into ordered or unordered sets. Consequently, if an SBOL property has multiple values, then it is serialized as multiple property entries, each with a singular name and a single value.
 For example, if an SBOL property has five values, then its serialization contains five RDF triples, each with a singular predicate name and one of the five values as its object.
@@ -71,7 +71,7 @@ When SBOL use simple ``primitive'' data types such as strings or integers, these
 
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class. This inheritance means that all SBOL objects are identified using \external{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web. 
 
-As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, and \sbol{annotations}. The latter property is described separately in \ref{sec:annotations}.
+As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -246,7 +246,8 @@ The \sbol{ComponentDefinition} class represents the structural entities of a bio
 
 As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class describes a structural design entity using the following properties: \sbol{types}, \sbol{roles}, and \sbol{sequence}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{components}, \sbol{sequenceConstraints}, and  \sbol{sequenceAnnotations}.
 
-% Figure has some classes named incorrectly
+\Ctodo{Change sequence to sequences and make 0..*}
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=0.95\textwidth]{uml/component_definition}
@@ -1227,38 +1228,26 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 \end{lstlisting}
 \label{ser:Collection}
 
-
-
-
 \subsection{Extending the SBOL Representation:  Annotations}
-\label{sec:annotations}
+\label{sec:Annotations}
 
-SBOL does not attempt to represent all information about a biological system, since many things do not yet have a clear ``right way'' to be represented, such as design intent, biological context, or performance data.
-Instead, SBOL allows the embedding of application specific data that are not captured by the SBOL standard. 
-Such data are optional, but can be computationally generated and exchanged via SBOL documents without getting lost. 
+\Rtodo{Matthew/Goksel/Jake: please review.}
+
+SBOL does not attempt to represent all information about a biological system, since many things do not yet have a clear ``right way'' to be represented, such as design intent, biological context, or performance data.  Instead, SBOL allows the embedding of application specific data that are not captured by the SBOL standard.  Such data are optional, but can be computationally generated and exchanged via SBOL documents without getting lost. 
 
 To do this, SBOL provides an ``annotation'' mechanism for attaching arbitrary information to SBOL objects, which allows SBOL models to be connected with any other models in an extensible manner.
-In particular, three models are supported for connecting the SBOL model with other, possibly application-specific models:
-\begin{itemize}
+In particular, three methods are supported for connecting the SBOL data model with other, possibly application-specific data:
+\begin{enumerate}
 \item Information that is ``part'' of an SBOL object (i.e., a ``filled diamond'' relationship) is annotated simply by adding non-conflicting properties and custom identity entries to an SBOL object.  An example might be source information about the registry from which a \sbol{ComponentDefinition} was imported.
 \item Information that is an independent object is annotated by wrapping it inside of a \sbol{GenericTopLevel} object.  An example might be a data sheet describing the performance of a \sbol{ModuleDefinition} in some particular context.
-\item Conversely, rather than embedding external objects in SBOL, SBOL objects can also be linked from or embedded inside of other data models.  The only requirement is that some URI resolution mechanism must be available that allows the links between SBOL objects thus separated from one another to be followed when needed.
-\end{itemize}
-
-\Ctodo{Make sure we explain about annotations up in the motivation and overview, since it's really, really important.}
+\item Conversely, rather than embedding external objects in SBOL, SBOL objects can also be linked to external data.  The only requirement is that some URI resolution mechanism must be available that allows the links from SBOL objects to be followed when needed.
+\end{enumerate}
 
 \subsubsection{Annotating SBOL objects}
 
-\Ctodo{CJM: will edit this to match the library}
+Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{name} property is specified by a qualified name (\external{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be of type \external{String}, \external{URI}, or \external{ListOfAnnotations}. The \external{ListOfAnnotations} is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and a list of nested \sbol{annotations}.
 
-\LDtodo{URI: plain or courier?}
-
-Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. 
-Property names are specified by qualified names as \external{URI}s, each formed of a namespace and a local name. 
-Values can be \external{URI}s or \external{Literal} data (for example, \external{String}, \external{Integer}, \external{Double}, \external{Boolean}) or custom \sbol{Identified} entities initialized with application specific types. 
-These custom \sbol{Identified} entities can further be annotated with the scheme described here. These custom entities are either serialized within an SBOL entity being annotated, or referenced using an \external{URI} annotation and embedded within the the annotated entity's parent.
-\Dtodo{Make sure if we have a choice here!}
-
+\Ctodo{NIC: Please update UML as follows: remove link from Identifed to AnnotationValue, change type of name to QName, change label of Literal box to String, add new class ListOfAnnotations that inherits from AnnotationValue with properties nestedQName : QName, nestedURI : URI, and a 0..* annotations link to the Annotation class.}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1267,15 +1256,6 @@ These custom \sbol{Identified} entities can further be annotated with the scheme
 \label{uml:identified_annotations}
 \end{center}
 \end{figure}
-
-\Ctodo{CJM: I think the link from AnnotationValue from Identified should be removed.  Instead, there should be a new object that inherits from AnnotationValue called "ListOfAnnotations" which has properties nestedQName : QName, nestedURI : URI, and a 0..* annotations link to the Annotation class.  I think we should also change the type of name in the Annotation class to QName.}
-
-\Ctodo{I think this should actually be: add any object here of your own custom class (which MUST NOT use the SBOL namespace), not ``make chains of identified''}
-\Ctodo{Is this figure how the annotations are actually handled in libSBOLj?}
-\Ctodo{Consider putting Identified, uRI, and Literal on the bottom so that inheritance arrows point in the same direction as they do in other diagrams. Another consideration for maintaing consistency with the other diagrams is to add arrow heads to the opposite ends of the black diamond relations. - Nic}
-
-Each annotation is serialised as an RDF subject-property-object triplet in which the subject is the SBOL object being annotated, the property is the annotation name, and the object is the annotation value. Simple values URIs are serialised as RDF literals, and URI values are represented with the \external{\path{http://www.w3.org/1999/02/22-rdf-syntax-ns#resource}} RDF property. If the annotation value is another complex object then the object is embedded as an RDF resource, which can further be annotated similarly.
-\Dtodo{If we allow URI reference of a custom object stored, then update this paragraph}
 
 \paragraph{Serialization}
 The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \external{String} value. The second \external{pr:experience} annotation has a \external{URI} value and is serialised as an RDF resource pointing to the information Web page on the Parts Registry for the promoter. The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
