@@ -127,19 +127,19 @@ For a full explanation, see the linked resources.
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
 
-\Ctodo{Eliminate references to Documented and/or replace with Identified}
+\Rtodo{Eliminate references to Documented and/or replace with Identified.  JSB: Done}
 
 \Ctodo{Need to require use of DublinCore names and show examples of them: non-stanard mappings per Matt: Title vs. Name, descripton is dcterms:description}
 
-The \sbol{name} property is OPTIONAL and has a data type of \external{String}. This property is intended to be displayed to a human when visualizing an \sbol{Documented} object.
+The \sbol{name} property is OPTIONAL and has a data type of \external{String}. This property is intended to be displayed to a human when visualizing an \sbol{Identified} object.
 
-If a \sbol{Documented} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or URI.
+If an \sbol{Identified} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or URI.
 It is RECOMMENDED that software tools give users the ability to switch perspectives between \sbol{name} properties that are human-readable and \sbol{displayId} properties that are less human-readable, but are more likely to be unique.
 
 \subsubsection*{The \sbolheading{description} property}
 \label{sec:description}
 
-The \sbol{description} property is OPTIONAL and has a data type of \external{String}. This property is intended to contain a more thorough description of a \sbol{Documented} object.
+The \sbol{description} property is OPTIONAL and has a data type of \external{String}. This property is intended to contain a more thorough description of an \sbol{Identified} object.
 
 \subsubsection*{Serialization}
 
@@ -175,7 +175,7 @@ replaced by the name of the class:
 
 \subsection {TopLevel}
 \label{sec:TopLevel}
-\sbol{TopLevel} is an abstract class that is extended by any \sbol{Documented} class that can be found at the top level of an SBOL file. In other words, when an object that belongs to a \sbol{TopLevel} class is serialized to a file representation, it is not nested inside any other object. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their URIs. The \sbol{TopLevel} classes defined by this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, and \sbol{GenericTopLevel} (\ref{uml:toplevel}).
+\sbol{TopLevel} is an abstract class that is extended by any \sbol{Identified} class that can be found at the top level of an SBOL file. In other words, when an object that belongs to a \sbol{TopLevel} class is serialized to a file representation, it is not nested inside any other object. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their URIs. The \sbol{TopLevel} classes defined by this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, and \sbol{GenericTopLevel} (\ref{uml:toplevel}).
 
 \begin{figure}[ht]
 \begin{center}
