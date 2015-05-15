@@ -5,9 +5,17 @@
 
 \Ctodo{try to target readers unfamiliar with RDF/XML.  -bder}
 
-The SBOL serialization is designed to meet several competing requirements. Firstly, SBOL needs to support ad-hoc annotations and extensions. Secondly, SBOL needs to support processing by generic semantic web and database tools that have little or no knowledge of the SBOL data model. Thirdly, SBOL needs to support the generation of light-weight software clients so as to lower the barrier to entry for new API implementations within environments where community-maintained implementation(s) are not suitable.
+In order to SBOL objects to be readily stored and exchanged, it is important that they be able to be {\em serialized}, i.e., converted to a sequence of bytes that can be stored in a file or exchanged over a network.
 
-The canonical serialization of SBOL is to a strict dialect of RDF/XML. This serialization provides the base from which to meet further requirements. Any RDF/XML-aware tooling can consume and analyze a SBOL file. Where possible, we have re-used predicates from widely-used terminologies (such as Dublin Core~\cite{dcmi2012}) to expose as much of the data as practical to standard RDF tooling.
+The serialization format for SBOL is designed to meet several competing requirements. 
+First, SBOL needs to support ad-hoc annotations and extensions. 
+Second, SBOL needs to support processing by general database and semantic web software tools that have little or no knowledge of the SBOL data model. 
+Finally, it should be relatively simple to write a new software implementation, so that SBOL can be used even in software environments where community-maintained implementation(s) are not available.
+
+To meet these goals, the canonical serialization of SBOL has been selected to be a strict dialect of the RDF/XML~\cite{rdfxml}, a syntactic standard defined for Semantic Web data exchange. 
+This serialization provides a standard base from which to meet further requirements. 
+Moreover, it allows any RDF/XML-aware software tool to consume and operate on an SBOL file without needig any customization to support SBOL. 
+Where possible, we have re-used predicates from widely-used terminologies (such as Dublin Core~\cite{dcmi2012}) to expose as much of the data as practical to such standard RDF tooling.
 
 Arbitrary RDF/XML provides a great deal of flexibility in how equivalent data can be serialized. This flexibility can result in different serializations when processing RDF/XML files using standard off-the-shelf XML tools, such as DOM-OO mappings. 
 To address this problem, we define a canonical association between the nesting of data structures within the SBOL UML data model and the RDF/XML file. For all ownership associations (filled diamonds), the RDF/XML for the owned entity is embedded within the owner's RDF/XML (the set of property values, however, may still be listed in any order).
