@@ -2,7 +2,8 @@
 \section{SBOL Data Model}
 % -----------------------------------------------------------------------------
 
-\Ctodo{All captions need full explanations.}
+\Rtodo{All captions need full explanations.  JSB: done}
+\Rtodo{Make sure all captions are sane and similar -JSB; JSB: done}
 
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
@@ -76,7 +77,7 @@ As shown in \ref{uml:identified}, the \sbol{Identified} class includes the follo
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/identified}
-\caption[]{The \sbol{Identified} abstract class.}
+\caption[]{Diagram of the \sbol{Identified} abstract class and its associated properties}
 \label{uml:identified}
 \end{center}
 \end{figure}
@@ -188,7 +189,7 @@ The purpose of the \sbol{Sequence} class is to represent the primary structure o
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/sequence}
-\caption[]{The \sbol{Sequence} class.}
+\caption[]{Diagram of the \sbol{Sequence} class and its associated properties.}
 \label{uml:sequence}
 \end{center}
 \end{figure}
@@ -254,7 +255,7 @@ As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=0.95\textwidth]{uml/component_definition}
-\caption[]{The \sbol{ComponentDefinition} class.}
+\caption[]{Diagram of the \sbol{ComponentDefinition} class and its associated properties.}
 \label{uml:component_definition}
 \end{center}
 \end{figure}
@@ -375,11 +376,10 @@ The example below shows the serialization of a simple \sbol{ComponentDefinition}
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/component_instance}
-\caption[]{The \sbol{ComponentInstance} class}
+\caption[]{Diagram of the \sbol{ComponentInstance} class and its associated properties.}
 \label{uml:component}
 \end{center}
 \end{figure}
-\Ctodo{Make sure all captions are sane and similar -JSB}
 
 When a \sbol{ComponentDefinition} is used as an element of a larger design, each separate usage is represented by a \sbol{ComponentInstance} object.  
 The \sbol{ComponentInstance} class is abstract, so every usage must belong to one of its two subclasses:
@@ -464,7 +464,7 @@ The \sbol{SequenceAnnotation} class describes a precisely known location of inte
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/sequence_annotation}
-\caption[]{SequenceAnnotation class}
+\caption[]{Diagram of the \sbol{SequenceAnnotation} class and its associated properties.}
 \label{uml:sequence_annotation}
 \end{center}
 \end{figure}
@@ -522,7 +522,7 @@ The Location class is extended by the \sbol{Range}, \sbol{MultiRange}, \sbol{Cut
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/location}
-\caption[]{Location class}
+\caption[]{Diagram of the \sbol{Location} class and its associated properties.}
 \label{uml:location}
 \end{center}
 \end{figure}
@@ -552,7 +552,7 @@ This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects r
     http://sbols.org/v2\#reverseComplement\\
     \bottomrule
   \end{edtable}
-  \caption{URI constants for orientation values}
+  \caption{URI constants for \sbol{orientation} values}
   \label{tbl:orientation_types}
 \end{table}
 
@@ -659,7 +659,7 @@ A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} a
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/sequence_constraint}
-\caption[]{SequenceConstraint class}
+\caption[]{Diagram of the \sbol{SequenceConstraint} class and its associated properties.}
 \label{uml:sequence_constraint}
 \end{center}
 \end{figure}
@@ -694,7 +694,7 @@ Note: With regards to SBOL Version 1.1., this is a generalization of former \sbo
     http://sbols.org/v2\#oppositeOrientationAs & Object orientation is ``opposite'' of subject\\    
     \bottomrule
   \end{edtable}
-  \caption{URI constants for restriction values}
+  \caption{URI constants for \sbol{restriction} values}
   \label{tbl:restriction_types}
 \end{table}
 
@@ -731,7 +731,7 @@ The example below shows the serialization of a \sbol{SequenceConstraint} object.
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/model}
-\caption[]{}
+\caption[]{Diagram of the \sbol{Model} class and its associated properties.}
 \label{uml:model}
 \end{center}
 \end{figure}
@@ -758,7 +758,7 @@ Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Metho
     BioPAX    & \url{http://identifiers.org/edam/format_3156}\\
     \bottomrule
   \end{edtable}
-  \caption{Commonly used model languages and their corresponding URIs.}
+  \caption{Some commonly used model languages and their corresponding URIs.}
   \label{tbl:model_types}
 \end{table}
 
@@ -817,7 +817,7 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/module_definition}
-\caption[]{ModuleDefinition}
+\caption[]{Diagram of the \sbol{ModuleDefinition} class and its associated properties.}
 \label{uml:module_definition}
 \end{center}
 \end{figure}
@@ -932,7 +932,7 @@ Composition of the functional layer of SBOL designs is accomplished using \sbol{
     \url{http://sbols.org/v2#none}  & To indicate a \sbol{FunctionalComponent} is neither input nor output\\
     \bottomrule
   \end{edtable}
-  \caption{URIs for the direction property.}
+  \caption{URIs for the \sbol{direction} property.}
   \label{tbl:functionalcomponent_directions}
 \end{table}
 
@@ -965,7 +965,7 @@ In the example below, the functional component is defined as public input or out
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/module}
-\caption[]{Module}
+\caption[]{Diagram of the \sbol{Module} class and its associated properties.}
 \label{uml:module}
 \end{center}
 \end{figure}
@@ -1006,7 +1006,7 @@ a part of a toggle switch:
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/maps_to}
-\caption[]{}
+\caption[]{Diagram of the \sbol{MapsTo} class and its associated properties.}
 \label{uml:maps_to}
 \end{center}
 \end{figure}
@@ -1034,7 +1034,7 @@ Each \sbol{MapsTo} entity must also specify the relationship between its local a
         \url{http://sbols.org/v2#merge}  & Indicates that data fields of the local and remote ComponentInstantiation entities are to be interpreted in combination\\
     \bottomrule
   \end{edtable}
-  \caption{URIs for the refinement property.}
+  \caption{URIs for the \sbol{refinement} property.}
   \label{tbl:mapsto_refinement}
 \end{table}
 
@@ -1056,7 +1056,7 @@ Each \sbol{MapsTo} entity must also specify the relationship between its local a
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=1]{images/MapsTo_Diagram2}
-\caption{Linking Components using MapsTo entities. Boxed with the C label represent Component entities and boxes with the M label represent MapsTo entities.}
+\caption{Linking Components using \sbol{MapsTo} entities. Boxed with the C label represent Component entities and boxes with the M label represent \sbol{MapsTo} entities.}
 \label{image:maps_to_diagram2}
 \end{center}
 \end{figure}
@@ -1098,7 +1098,7 @@ In the example below, a \sbol{FunctionalComponent} entity from the submodule is 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/interaction}
-\caption[]{Interaction}
+\caption[]{Diagram of the \sbol{Interaction} class and its associated properties.}
 \label{uml:interaction}
 \end{center}
 \end{figure}
@@ -1130,7 +1130,7 @@ The serialization of \sbol{Interaction}s has the following form.
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/participation}
-\caption[]{Participation}
+\caption[]{Diagram of the \sbol{Participation} class and its associated properties.}
 \label{uml:participation}
 \end{center}
 \end{figure}
@@ -1181,7 +1181,7 @@ Some examples of \sbol{Collection} objects:
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/collection}
-\caption[]{The Collection class}
+\caption[]{Diagram of the \sbol{Collection} class and its associated properties.}
 \label{uml:collection}
 \end{center}
 \end{figure}
@@ -1245,7 +1245,7 @@ Each \sbol{Identified} object may have a number of annotations in the form of na
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/identified_annotations}
-\caption[]{Annotating SBOL's Identified entities with application specific data.}
+\caption[]{Diagram of the \sbol{Annotation} class and its association with \sbol{Identified} and \sbol{AnnotationValue} objects, which is used for annotating SBOL entities with application specific data.}
 \label{uml:identified_annotations}
 \end{center}
 \end{figure}
@@ -1291,7 +1291,7 @@ As with any other top level entities, \sbol{GenericTopLevel} entities may includ
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/generictoplevel}
-\caption[]{Annotating SBOL documents with GenericTopLevel entities.}
+\caption[]{Diagram of the \sbol{GenericTopLevel} class and its associated properties, which is used for embedding externally defined entities into SBOL documents.}
 \label{uml:generictoplevel}
 \end{center}
 \end{figure}
