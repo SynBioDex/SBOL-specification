@@ -74,6 +74,12 @@ All SBOL-defined classes are directly or indirectly derived from the \sbol{Ident
 
 As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
 
+When an SBOL object is referred to using a URI, that URI may be either the value of an \sbol{identity} property or to the value of a \sbol{persistentIdentity} property.
+If the URI is equal to the value of an \sbol{identity} property, then it is guaranteed to be unique, and refers to precisely to one SBOL object with that value.
+If the URI is equal to the value of a \sbol{persistentIdentity} property, then multiple objects that are different ``versions'' of one another may hold that value (as described below); these SHOULD then be compared to one another to determine which is the ``best'' (usually most recent) single object to resolve the reference to.
+Throughout this document, when we use URI to refer to an SBOL object, it means that it may be either of these cases.
+\Rtodo{Need somebody to sanity check what I've written here -JSB}
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/identified}
