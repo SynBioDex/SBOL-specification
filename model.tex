@@ -79,6 +79,9 @@ If the URI is equal to the value of an \sbol{identity} property, then it is guar
 If the URI is equal to the value of a \sbol{persistentIdentity} property, then multiple objects that are different ``versions'' of one another may hold that value (as described below); these SHOULD then be compared to one another to determine which is the ``best'' (usually most recent) single object to resolve the reference to.
 Throughout this document, when we use URI to refer to an SBOL object, it means that it may be either of these cases.
 \Rtodo{Need somebody to sanity check what I've written here -JSB}
+\Rtodo{Need to document that you can reference a persistentIdentity or an identity when you reference a version.  Everywhere we say ``URI'' for an SBOL object, it means one of these two properties.  JSB: done}
+\Rtodo{Remove ``identity'' for names of URIs everywhere.  JSB: done}
+
 
 \begin{figure}[ht]
 \begin{center}
@@ -130,7 +133,7 @@ For a full explanation, see the linked resources.
 
 The \sbol{name} property is OPTIONAL and has a data type of \external{String}. This property is intended to be displayed to a human when visualizing an \sbol{Documented} object.
 
-If a \sbol{Documented} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or \sbol{identity}.
+If a \sbol{Documented} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or URI.
 It is RECOMMENDED that software tools give users the ability to switch perspectives between \sbol{name} properties that are human-readable and \sbol{displayId} properties that are less human-readable, but are more likely to be unique.
 
 \subsubsection*{The \sbolheading{description} property}
@@ -172,7 +175,7 @@ replaced by the name of the class:
 
 \subsection {TopLevel}
 \label{sec:TopLevel}
-\sbol{TopLevel} is an abstract class that is extended by any \sbol{Documented} class that can be found at the top level of an SBOL file. In other words, when an object that belongs to a \sbol{TopLevel} class is serialized to a file representation, it is not nested inside any other object. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their \sbol{identity} or \sbol{persistentIdentity} \external{URI}s. The \sbol{TopLevel} classes defined by this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, and \sbol{GenericTopLevel} (\ref{uml:toplevel}).
+\sbol{TopLevel} is an abstract class that is extended by any \sbol{Documented} class that can be found at the top level of an SBOL file. In other words, when an object that belongs to a \sbol{TopLevel} class is serialized to a file representation, it is not nested inside any other object. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their URIs. The \sbol{TopLevel} classes defined by this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, and \sbol{GenericTopLevel} (\ref{uml:toplevel}).
 
 \begin{figure}[ht]
 \begin{center}
@@ -672,15 +675,11 @@ A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} a
 
 \paragraph{The \sbolheading{subject} property}
 \label{sec:subject}
-This REQUIRED property specifies the \sbol{identity} URI of the first \sbol{Component} object in the relation.
-
-\Ctodo{Need to document that you can reference a persistentIdentity or an identity when you reference a version.  Everywhere we say ``URI'' for an SBOL object, it means one of these two properties}
-
-\Ctodo{Remove ``identity'' for names of URIs everywhere}
+This REQUIRED property specifies the URI of the first \sbol{Component} object in the relation.
 
 \paragraph{The \sbolheading{object} property}
 \label{sec:object}
-This REQUIRED property specifies the URI \sbol{identity} of the second \sbol{Component} object in the relation.
+This REQUIRED property specifies the URI of the second \sbol{Component} object in the relation.
 
 \paragraph{The \sbolheading{restriction} property}
 \label{sec:restriction}
@@ -1193,7 +1192,7 @@ Some examples of \sbol{Collection} objects:
 \end{figure}
 
 \subsubsection*{The member property}
-The member property has a data type of URI and has the \sbol{identity} value of a \sbol{TopLevel} entity.  A collection may have any number of members, including none.
+The member property has a data type of URI and has the URI for a \sbol{TopLevel} entity.  A collection may have any number of members, including none.
 
 \subsubsection*{Serialization}
 
@@ -1237,7 +1236,7 @@ SBOL does not attempt to represent all information about a biological system, si
 To do this, SBOL provides an ``annotation'' mechanism for attaching arbitrary information to SBOL objects, which allows SBOL models to be connected with any other models in an extensible manner.
 In particular, three methods are supported for connecting the SBOL data model with other, possibly application-specific data:
 \begin{enumerate}
-\item Information that is ``part'' of an SBOL object (i.e., a ``filled diamond'' relationship) is annotated simply by adding non-conflicting properties and custom identity entries to an SBOL object.  An example might be source information about the registry from which a \sbol{ComponentDefinition} was imported.
+\item Information that is ``part'' of an SBOL object (i.e., a ``filled diamond'' relationship) is annotated simply by adding non-conflicting properties and custom entries to an SBOL object.  An example might be source information about the registry from which a \sbol{ComponentDefinition} was imported.
 \item Information that is an independent object is annotated by wrapping it inside of a \sbol{GenericTopLevel} object.  An example might be a data sheet describing the performance of a \sbol{ModuleDefinition} in some particular context.
 \item Conversely, rather than embedding external objects in SBOL, SBOL objects can also be linked to external data.  The only requirement is that some URI resolution mechanism must be available that allows the links from SBOL objects to be followed when needed.
 \end{enumerate}
