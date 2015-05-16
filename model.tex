@@ -259,7 +259,7 @@ The \sbol{ComponentDefinition} class represents the structural entities of a bio
 
 As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class describes a structural design entity using the following properties: \sbol{types}, \sbol{roles}, and \sbol{sequences}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{components}, \sbol{sequenceConstraints}, and  \sbol{sequenceAnnotations}.
 
-\Ctodo{Make sure that text is consistent with sequences property have cardinality of 0..*}
+\Rtodo{Make sure that text is consistent with sequences property have cardinality of 0..*; JSB: done}
 
 \begin{figure}[ht]
 \begin{center}
@@ -327,6 +327,9 @@ While the \sbol{ComponentDefinition} class is analogous to a blueprint or specif
 \subsubsection*{The \sbolheading{sequences} property}
 \label{sec:sequences}
 The \sbol{sequences} property is OPTIONAL and MAY include a collection of \external{URI}s for \sbol{Sequence} objects. These objects define the primary structure of the \sbol{ComponentDefinition} with this property and SHOULD be consistent with each other.
+
+\Rtodo{Please check that this constraint is appropriate -JSB}
+Many \sbol{Component} objects will have precisely one \sbol{Sequence} object in this collection.  In certain use cases, however, it may be appropriate to have multiple \sbol{Sequence} objects (e.g., two different representations of the same object), and accordingly multiple objects are permitted.  If there is more than one \sbol{Sequence}, however, it must be the case that their length and topology are precisely the same, such that it is unambiguous what is referred to be \sbol{SequenceConstraint} and \sbol{SequenceAnnotation} objects.
 
 \subsubsection*{The \sbolheading{sequenceConstraints} property}
 \label{sec:sequenceConstraints}
@@ -466,9 +469,9 @@ representing an instance of promoter:
 
 \subsubsection{SequenceAnnotation}
 \label{sec:SequenceAnnotation}
-The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} object linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object, as described below.
+The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} objects linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object, as described below.
 
-\Ctodo{We will change location to locations (1..*) and eliminate MultiRange class.}
+\Rtodo{We will change location to locations (1..*) and eliminate MultiRange class.}
 
 \begin{figure}[ht]
 \begin{center}
@@ -478,8 +481,8 @@ The \sbol{SequenceAnnotation} class describes a precisely known location of inte
 \end{center}
 \end{figure}
 
-\paragraph{The \sbolheading{location} property}
-Every \sbol{SequenceAnnotation} MUST have a location property. The value of this property is a nested \sbol{Location} object.
+\paragraph{The \sbolheading{locations} property}
+Every \sbol{SequenceAnnotation} MUST has at least one \sbol{Location} object in its collection of \sbol{locations}. The value of this property is a nested \sbol{Location} object.
 
 \paragraph{The \sbolheading{component} property}
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
@@ -525,8 +528,7 @@ The example below shows the serialization of a \sbol{SequenceAnnotation} object.
 
 \subsubsection{Location}
 \label{sec:Location}
-The Location class is extended by the \sbol{Range}, \sbol{MultiRange}, \sbol{Cut}, and \sbol{GenericLocation} classes.
-
+The Location class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol{GenericLocation} classes.  All of these thus share its \sbol{orientation} property, for example to to specify directionality on a potentially double-stranded \sbol{Component} object.
 
 \begin{figure}[ht]
 \begin{center}
@@ -535,18 +537,6 @@ The Location class is extended by the \sbol{Range}, \sbol{MultiRange}, \sbol{Cut
 \label{uml:location}
 \end{center}
 \end{figure}
-
-\paragraph{Range}
-\label{sec:Range}
-A \sbol{Range} object specifies inclusive start and end positions. These properties are required in \sbol{Range} objects and they can have \external{integer} values greater than zero. A \sbol{Range} object also includes an  ``orientation'' property, for example to to specify directionality on a potentially double-stranded \sbol{Component} object.
-
-\subparagraph{The \sbolheading{start} property}
-Specifies the start of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
-
-\subparagraph{The \sbolheading{end} property}
-Specifies the end of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
-
-\Ctodo{If we remove MultiRange than Orientation can be moved to the Location class.}
 
 \subparagraph{The \sbolheading{orientation} property}
 \label{sec:orientation}
@@ -564,6 +554,19 @@ This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects r
   \caption{URI constants for \sbol{orientation} values}
   \label{tbl:orientation_types}
 \end{table}
+
+
+\paragraph{Range}
+\label{sec:Range}
+A \sbol{Range} object specifies inclusive start and end positions. These properties are required in \sbol{Range} objects and they can have \external{integer} values greater than zero.
+
+\subparagraph{The \sbolheading{start} property}
+Specifies the start of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
+
+\subparagraph{The \sbolheading{end} property}
+Specifies the end of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
+
+\Rtodo{If we remove MultiRange than Orientation can be moved to the Location class.  Done: Nic and JSB}
 
 \subparagraph{Serialization}
 
@@ -588,22 +591,15 @@ The example below shows the serialization of a \sbol{Range} object. It specifies
 </sbol:Range>
 \end{lstlisting}
 
-\paragraph{MultiRange}
-\label{sec:MultiRange}
-A \sbol{MultiRange} object represents a location that is specified by multiple \sbol{Range} objects. For example, this capability can be used to specify a \sbol{ComponentDefinition} object that represents the introns or exons of a eukaryotic gene.
-
 \paragraph{Cut}
 \label{sec:Cut}
 The \sbol{Cut} class has been introduced to enable the specification of a location between two indices. 
-Each \sbol{Cut} object has properties, \sbol{at} and \sbol{orientation}.
+Each \sbol{Cut} object has the property \sbol{at}.
 
 \subparagraph{The \sbolheading{at} property}
 \label{sec:at}
 The REQUIRED \sbol{at} property is an index greater than or equal to zero that specifies the index just before the location represented by the Cut object. 
 A Cut object with \sbol{at} equal to zero represents the location just before index one (even though there is no zero index on Structure objects in SBOL). 
-
-\subparagraph{The \sbolheading{orientation} property}
-This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects representing DNA molecules, it is RECOMMENDED to use one of the values in \ref{tbl:orientation_types} (above with \sbol{Range}).
 
 \subparagraph{Serialization}
 
@@ -635,7 +631,7 @@ describing locations on sequential structures, the
 \sbol{GenericLocation} is included as a hook for extensions, e.g., for
 describing locations in non-sequential structures.
 
-\Rtodo{Need serialization examples for MultiRange, Cut, and GenericLocation: JSB - done for Cut and GenericLocation; ignoring MultiRange as it is likely to be cut}
+\Rtodo{Need serialization examples, Cut, and GenericLocation: JSB - done for Cut and GenericLocation}
 \Ctodo{Make sure that every property has a section label so that it hyperlinks correctly}
 
 \subparagraph{Serialization}
