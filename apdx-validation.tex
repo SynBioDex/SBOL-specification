@@ -7,36 +7,42 @@
 
 \Rtodo{All please review.}
 
-This section summarizes all the conditions that must (or in some cases,
-at least \emph{should}) be true of an SBOL Version~2 document.  
-There are different degrees of rule strictness.  Formally, the differences are expressed in the statement of a rule: either a rule states that a condition \emph{must} be true, or a rule states that it \emph{should} be true.  Rules of the former kind are strict SBOL validation rules---data encoded in SBOL must conform to
+This section summarizes all the conditions that MUST be or 
+are RECOMMENDED to be true of an SBOL Version~2 document.  
+There are different degrees of rule strictness.  
+Rules of the former kind are strict SBOL validation rules---data encoded in SBOL MUST conform to
 all of them in order to be considered valid.  Rules of the latter kind
-are consistency rules.  To help highlight these differences, we use the
-following three symbols next to the rule numbers:
+are consistency rules that are RECCOMENDED for following best practices.  To help highlight these differences, we use the
+following symbols next to the rule numbers:
 
 \begin{description}
 
 \item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
-  \emph{requirement} for SBOL conformance. If a SBOL document does not follow this rule, it does not conform to the SBOL
+  REQUIRED condition for SBOL conformance. If a SBOL document does not follow this rule, it does not conform to the SBOL
   specification.  (Mnemonic intention behind the choice of symbol:
   ``This must be checked.'')
 
-\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
-  \emph{recommendation} for consistency.  If a SBOL document does not
-  follow this rule, it is not considered strictly invalid as far as the
-  SBOL specification is concerned; however, it indicates that the model contains a physical or conceptual inconsistency.  (Mnemonic intention behind the choice of symbol:
-  ``This is a cause for warning.'')
+\Rtodo{Removed triangle symbol because we are not currently using it.}
+% \item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
+%   \emph{recommendation} for consistency.  If a SBOL document does not
+%   follow this rule, it is not considered strictly invalid as far as the
+%   SBOL specification is concerned; however, it indicates that the model contains a physical or conceptual inconsistency.  (Mnemonic intention behind the choice of symbol:
+%   ``This is a cause for warning.'')
 
-\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a strong
-  recommendation for best practice.  This rule is not strictly
+\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a 
+  RECOMMENDED condition for following best practices.  This rule is not strictly
   a matter of SBOL encoding, but the recommendation comes from logical
-  reasoning.  As in the previous case, if a SBOL document does not follow this rule, it is not considered an invalid SBOL encoding.  (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
+  reasoning.  If an SBOL document does not follow this rule, it is still a valid SBOL encoding, but may have degraded functionality in some tools.  (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
 
 \end{description}
 
-The validation rules listed in the following subsections are all stated
-or implied in the rest of this specification document.  They are
-enumerated here for convenience.  
+The validation rules listed in the following subsections should all be
+stated or implied in the rest of this specification document.  They
+are enumerated here for convenience and to provide a ``master
+checklist'' for SBOL compliance.  In case of a conflict between this
+section and other portions of the specification (though there should
+be none), this section is considered authoritative for purpose of
+determining SBOL document compliance.
 
 For \notice convenience and brievity, we use the shorthand
 ``\token{sbol:x}'' to stand for an attribute or element name \token{x}
@@ -49,52 +55,52 @@ in the SBOL specification namespace.
 \subsubsection*{General rules about an SBOL document}
 \setcounter{sbolCtr}{10101} 
 
-\printValid{An SBOL document must declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://sbols.org/v2\#}}. (Reference:
+\printValid{An SBOL document MUST declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://sbols.org/v2\#}}. (Reference:
   \sec{xml-namespace}.)}
 
-\printValid{An SBOL document must declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}}. (Reference: \sec{xml-namespace}.)}
+\printValid{An SBOL document MUST declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}}. (Reference: \sec{xml-namespace}.)}
 
-\printValid{An SBOL document must declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://purl.org/dc/terms/}}. (Reference: \sec{xml-namespace}.)}
+\printValid{An SBOL document MUST declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://purl.org/dc/terms/}}. (Reference: \sec{xml-namespace}.)}
 
-\printModeling{An SBOL document should declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://www.w3.org/ns/prov\#}}. (Reference: \sec{xml-namespace}.)}
+\printModeling{An SBOL document SHOULD declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://www.w3.org/ns/prov\#}}. (Reference: \sec{xml-namespace}.)}
 
 \subsubsection*{Rules for the \class{Identified} class} 
 \setcounter{sbolCtr}{10201}
 
-\printValid{The \sbol{identity} is a required property for all \sbol{Identified} objects and has a data type of URI with a syntax defined by:\\
+\printValid{The \sbol{identity} is a REQUIRED property for all \sbol{Identified} objects and has a data type of URI with a syntax defined by:\\
 \uri{http://www.w3.org/1999/02/22-rdf-syntax\#about} (Reference: \sec{sec:Identified})}
 
-\printValid{The \sbol{persistentIdentity} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of URI with a syntax defined by:\\ \uri{http://www.w3.org/1999/02/22-rdf-syntax\#about} (Reference: \sec{sec:Identified})}
+\printValid{The \sbol{persistentIdentity} is an OPTIONAL property for all \sbol{Identified} objects and, if provided, has a data type of URI with a syntax defined by:\\ \uri{http://www.w3.org/1999/02/22-rdf-syntax\#about} (Reference: \sec{sec:Identified})}
 
-\printValid{The \sbol{displayId} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of String that is composed only of alphanumeric or underscore characters and must not begin with a digit. (Reference: \sec{sec:Identified})}
+\printValid{The \sbol{displayId} is an OPTIONAL property for all \sbol{Identified} objects and, if provided, has a data type of String that is composed only of alphanumeric or underscore characters and MUST NOT begin with a digit. (Reference: \sec{sec:Identified})}
 
-\printValid{The \sbol{version} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of String that is composed only of alphanumeric characters, underscores, hyphens, and periods and must begin with a digit. (Reference: \sec{sec:Identified})}
+\printValid{The \sbol{version} is an OPTIONAL property for all \sbol{Identified} objects and, if provided, has a data type of String that is composed only of alphanumeric characters, underscores, hyphens, and periods and MUST begin with a digit. (Reference: \sec{sec:Identified})}
 
-\printValid{The \sbol{annotations} field is an optional list of for all \sbol{Identified} objects and, if provided, includes references to \sbol{Annotation} objects. (Reference: \sec{sec:Identified})}
+\printValid{The \sbol{annotations} field is an OPTIONAL list of for all \sbol{Identified} objects and, if provided, includes references to \sbol{Annotation} objects. (Reference: \sec{sec:Identified})}
 
-\printModeling{The \sbol{identity} of a compliant object must either be equal to the \sbol{persistentIdentity} when no \sbol{version} is specified or equal to "\refObj{persistentIdentity}/\refObj{version}" when a \sbol{version} is provided. (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{identity} of a compliant object MUST either be equal to the \sbol{persistentIdentity} when no \sbol{version} is specified or equal to "\refObj{persistentIdentity}/\refObj{version}" when a \sbol{version} is provided. (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Collection} object is required and must end with "/col/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Collection} object is REQUIRED and MUST end with "/col/\refObj{displayId}". (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{ModuleDefinition} object is required and must end with "/md/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{ModuleDefinition} object is REQUIRED and MUST end with "/md/\refObj{displayId}". (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Model} object is required and must end with\\ "/mod/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Model} object is REQUIRED and MUST end with\\ "/mod/\refObj{displayId}". (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{ComponentDefinition} object is required and must end with "/cd/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{ComponentDefinition} object is REQUIRED and MUST end with "/cd/\refObj{displayId}". (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Sequence} object is required and must end with "/seq/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Sequence} object is REQUIRED and MUST end with "/seq/\refObj{displayId}". (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{GenericTopLevel} object is required and must end with "/gen/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{GenericTopLevel} object is REQUIRED and MUST end with "/gen/\refObj{displayId}". (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{persistentIdentity} of a compliant child object is required must begin with the\\ \sbol{persistentIdentity} of its parent object and be immediately followed by "/\refObj{displayId}". (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{persistentIdentity} of a compliant child object is REQUIRED MUST begin with the\\ \sbol{persistentIdentity} of its parent object and be immediately followed by "/\refObj{displayId}". (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{version} of a compliant child object is required to be equal to the \sbol{version} of its parent object. (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{version} of a compliant child object is REQUIRED to be equal to the \sbol{version} of its parent object. (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{displayId} of a compliant object is required.  (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{displayId} of a compliant object is REQUIRED.  (Reference: \sec{sec:compliant})}
 
-\printValid{The \sbol{name} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
+\printValid{The \sbol{name} is an OPTIONAL property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
 
-\printValid{The \sbol{description} is an optional property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
+\printValid{The \sbol{description} is an OPTIONAL property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
 
 \subsubsection*{Rules for the \class{TopLevel} class} 
 \setcounter{sbolCtr}{10301}
@@ -106,9 +112,9 @@ in the SBOL specification namespace.
 
 \printValid{A \sbol{Sequence} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Sequence})}
 
-\printValid{The \sbol{elements} is a required property for all \sbol{Sequence} objects and has a data type of String.  Its format must be consistent with its specified \sbol{encoding}. (Reference: \sec{sec:Sequence})}
+\printValid{The \sbol{elements} is a REQUIRED property for all \sbol{Sequence} objects and has a data type of String.  Its format MUST be consistent with its specified \sbol{encoding}. (Reference: \sec{sec:Sequence})}
 
-\printValid{The \sbol{encoding} is a required property for all \sbol{Sequence} objects and has a data type of URI. (Reference: \sec{sec:Sequence})}
+\printValid{The \sbol{encoding} is a REQUIRED property for all \sbol{Sequence} objects and has a data type of URI. (Reference: \sec{sec:Sequence})}
 
 \printModeling{A DNA \sbol{Sequence} should use the IUPAC DNA encoding:\\ \url{http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html}. (Reference: \sec{sec:Sequence})}
 
@@ -123,31 +129,31 @@ in the SBOL specification namespace.
 
 \printValid{A \sbol{ComponentDefinition} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{types} property is a set of URIs, and it is required to include at least entry. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{types} property is a set of URIs, and it is REQUIRED to include at least entry. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{roles} property is an optional set of URIs.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{components} property is an optional set of \sbol{Component} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{components} property is an OPTIONAL set of \sbol{Component} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequenceConstraints} property is an optional set of \sbol{SequenceConstraint} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{sequenceConstraints} property is an OPTIONAL set of \sbol{SequenceConstraint} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequenceAnnotations} property is an optional set of \sbol{SequenceAnnotation} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{sequenceAnnotations} property is an OPTIONAL set of \sbol{SequenceAnnotation} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequences} property is an optional set of URI references to \sbol{Sequence} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{sequences} property is an OPTIONAL set of URI references to \sbol{Sequence} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printModeling{Each URI in the set of \sbol{sequences} should reference a \sbol{Sequence} object.  (Reference: \sec{sec:Sequence})}
 
-\printValid{A DNA \sbol{ComponentDefinition} must include the URI\\ 
+\printValid{A DNA \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#DnaRegion} 
 in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{A RNA \sbol{ComponentDefinition} must include the URI\\ 
+\printValid{A RNA \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#RnaRegion} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{A protein \sbol{ComponentDefinition} must include the URI\\ 
+\printValid{A protein \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#Protein} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{A small molecule \sbol{ComponentDefinition} must include the URI\\ 
+\printValid{A small molecule \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#SmallMolecule} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printModeling{A least one type in the set of \sbol{types} should be a URI from the BioPAX or ChEBI ontologies. (Reference: \sec{sec:ComponentDefinition})}
@@ -157,21 +163,21 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{ComponentInstance} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{access} property is a required URI which must be one of the following:
+\printValid{The \sbol{access} property is a REQUIRED URI which MUST be one of the following:
 \url{http://sbols.org/v2\#public} or \url{http://sbols.org/v2\#private}.
 (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{componentDefinition} property is a required URI reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbol{componentDefinition} property is a REQUIRED URI reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
 
 \printModeling{The \sbol{componentDefinition} property URI should reference a \sbol{ComponentDefinition} object. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{mapsTo} property is an optional set of \sbol{MapsTo} objects.  (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbol{mapsTo} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:ComponentInstance})}
 
 \printValid{A \sbol{Component} object inherits all properties of a \sbol{ComponentInstance} object. (Reference: \sec{sec:ComponentInstance})}
 
 \printValid{A \sbol{FunctionalComponent} object inherits all properties of a \sbol{ComponentInstance} object. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{direction} property is a required URI for \sbol{FunctionalComponent} objects which must be one of the following:
+\printValid{The \sbol{direction} property is a REQUIRED URI for \sbol{FunctionalComponent} objects which MUST be one of the following:
 \url{http://sbols.org/v2\#inout}, \url{http://sbols.org/v2\#in}, \url{http://sbols.org/v2\#out}, or \url{http://sbols.org/v2\#none}.
 (Reference: \sec{sec:FunctionalComponent})}
 
@@ -180,16 +186,16 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{SequenceAnnotation} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:SequenceAnnotation})}
 
-\printValid{The \sbol{locations} property is a set of \sbol{Location} objects, and it must include at least one \sbol{Location}. (Reference: \sec{sec:SequenceAnnotation})}
+\printValid{The \sbol{locations} property is a set of \sbol{Location} objects, and it MUST include at least one \sbol{Location}. (Reference: \sec{sec:SequenceAnnotation})}
 
-\printValid{The \sbol{component} property is an optional URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceAnnotation})}
+\printValid{The \sbol{component} property is an OPTIONAL URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceAnnotation})}
 
 \subsubsection*{Rules for the \class{Location} class} 
 \setcounter{sbolCtr}{10801}
 
 \printValid{A \sbol{Location} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Location})}
 
-\printValid{The \sbol{orientation} property is an optional URI which, if specified, must be one of the following: \url{http://sbols.org/v2\#inline}, 
+\printValid{The \sbol{orientation} property is an OPTIONAL URI which, if specified, MUST be one of the following: \url{http://sbols.org/v2\#inline}, 
 \url{http://sbols.org/v2\#reverseComplement}.
 (Reference: \sec{sec:GenericLocation})}
 
@@ -197,41 +203,41 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{Range} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:Range})}
 
-\printValid{The \sbol{start} property is required for all \sbol{Range} objects, and it must be a positive integer.  (Reference: \sec{sec:Range})}
+\printValid{The \sbol{start} property is REQUIRED for all \sbol{Range} objects, and it MUST be a positive integer.  (Reference: \sec{sec:Range})}
 
-\printValid{The \sbol{end} property is required for all \sbol{Range} objects, and it must be a positive integer.  (Reference: \sec{sec:Range})}
+\printValid{The \sbol{end} property is REQUIRED for all \sbol{Range} objects, and it MUST be a positive integer.  (Reference: \sec{sec:Range})}
 
 \printValid{A \sbol{Cut} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:Cut})}
 
-\printValid{The \sbol{at} property is required for all \sbol{Cut} objects, and it must be a non-negative integer.  (Reference: \sec{sec:Cut})}
+\printValid{The \sbol{at} property is REQUIRED for all \sbol{Cut} objects, and it MUST be a non-negative integer.  (Reference: \sec{sec:Cut})}
 
 \subsubsection*{Rules for the \class{SequenceConstraint} class} 
 \setcounter{sbolCtr}{10901}
 
 \printValid{A \sbol{SequenceConstraint} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:SequenceConstraint})}
 
-\printValid{The \sbol{restriction} property is a required URI which must be one of the following:
+\printValid{The \sbol{restriction} property is a REQUIRED URI which MUST be one of the following:
 \url{http://sbols.org/v2\#precedes},
 \url{http://sbols.org/v2\#sameOrientationAs}, or
 \url{http://sbols.org/v2\#oppositeOrientationAs}.
 (Reference: \sec{sec:SequenceConstraint})}
 
-\printValid{The \sbol{subject} property is an required URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceConstraint})}
+\printValid{The \sbol{subject} property is an REQUIRED URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceConstraint})}
 
-\printValid{The \sbol{object} property is a required URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceConstraint})}
+\printValid{The \sbol{object} property is a REQUIRED URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceConstraint})}
 
 \subsubsection*{Rules for the \class{Model} class} 
 \setcounter{sbolCtr}{11001}
 
 \printValid{A \sbol{Model} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Model})}
 
-\printValid{The \sbol{source} property is a required URI that MUST specify the location of the model source file.}
+\printValid{The \sbol{source} property is a REQUIRED URI that MUST specify the location of the model source file.}
 
-\printValid{The \sbol{language} property is a required URI that specifies the language in which the model is encoded.}
+\printValid{The \sbol{language} property is a REQUIRED URI that specifies the language in which the model is encoded.}
 
 \printModeling{The \sbol{language} property should be a URI from the EMBRACE Data and Methods (EDAM) ontology.}
 
-\printValid{The \sbol{framework} property is a required URI that specifies the modeling framework.}
+\printValid{The \sbol{framework} property is a REQUIRED URI that specifies the modeling framework.}
 
 \printModeling{The \sbol{framework} property should be a URI from the  modeling framework branch of the Systems Biology Ontology (SBO).}
 
@@ -240,15 +246,15 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{ModuleDefinition} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:ModuleDefinition})}
 
-\printValid{The \sbol{roles} property is an optional set of URIs.  (Reference: \sec{sec:ModuleDefinition})}
+\printValid{The \sbol{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:ModuleDefinition})}
 
-\printValid{The \sbol{modules} property is an optional set of \sbol{Module} objects.  (Reference: \sec{sec:ModuleDefinition})}
+\printValid{The \sbol{modules} property is an OPTIONAL set of \sbol{Module} objects.  (Reference: \sec{sec:ModuleDefinition})}
 
-\printValid{The \sbol{interactions} property is an optional set of \sbol{Interaction} objects.  (Reference: \sec{sec:ModuleDefinition})}
+\printValid{The \sbol{interactions} property is an OPTIONAL set of \sbol{Interaction} objects.  (Reference: \sec{sec:ModuleDefinition})}
 
-\printValid{The \sbol{functionalComponents} property is an optional set of \sbol{FunctionalComponent} objects.  (Reference: \sec{sec:ModuleDefinition})}
+\printValid{The \sbol{functionalComponents} property is an OPTIONAL set of \sbol{FunctionalComponent} objects.  (Reference: \sec{sec:ModuleDefinition})}
 
-\printValid{The \sbol{models} property is an optional set of URIs. that reference \sbol{Model} objects.  (Reference: \sec{sec:ModuleDefinition})}
+\printValid{The \sbol{models} property is an OPTIONAL set of URIs. that reference \sbol{Model} objects.  (Reference: \sec{sec:ModuleDefinition})}
 
 \printModeling{Each URI in the set of \sbol{models} should reference a \sbol{Model} object.  (Reference: \sec{sec:ModuleDefinition})}
 
@@ -257,49 +263,49 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{Module} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Module})}
 
-\printValid{The \sbol{definition} property is a required URI reference to a \sbol{ModuleDefinition} object.  (Reference: \sec{sec:Module})}
+\printValid{The \sbol{definition} property is a REQUIRED URI reference to a \sbol{ModuleDefinition} object.  (Reference: \sec{sec:Module})}
 
-\printValid{The \sbol{mapsTo} property is an optional set of \sbol{MapsTo} objects.  (Reference: \sec{sec:Module})}
+\printValid{The \sbol{mapsTo} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:Module})}
 
 \subsubsection*{Rules for the \class{MapsTo} class} 
 \setcounter{sbolCtr}{11301}
 
 \printValid{A \sbol{MapsTo} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{refinement} property is a required URI for \sbol{MapsTo} objects which must be one of the following:
+\printValid{The \sbol{refinement} property is a REQUIRED URI for \sbol{MapsTo} objects which MUST be one of the following:
 \url{http://sbols.org/v2\#useremote},
 \url{http://sbols.org/v2\#uselocal},
 \url{http://sbols.org/v2\#verifyIdentical}, and
 \url{http://sbols.org/v2\#merge}.
 (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{local} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
+\printValid{The \sbol{local} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{FunctionalComponent} referenced by the \sbol{local} property must have \sbol{public} access type.}
+\printValid{The \sbol{FunctionalComponent} referenced by the \sbol{local} property MUST have \sbol{public} access type.}
 
-\printValid{The \sbol{remote} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{functionalComponents} property of the \sbol{Module} that contains this \sbol{MapsTo} object. (Reference: \sec{sec:MapsTo})}
+\printValid{The \sbol{remote} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{functionalComponents} property of the \sbol{Module} that contains this \sbol{MapsTo} object. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{FunctionalComponent} referenced by the \sbol{remote} property must have \sbol{public} access type.}
+\printValid{The \sbol{FunctionalComponent} referenced by the \sbol{remote} property MUST have \sbol{public} access type.}
 
 \subsubsection*{Rules for the \class{Interaction} class} 
 \setcounter{sbolCtr}{11401}
 
 \printValid{A \sbol{Interaction} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Interaction})}
 
-\printValid{The \sbol{types} property is a set of URIs, and it is required to include at least entry. (Reference: \sec{sec:Interaction})}
+\printValid{The \sbol{types} property is a set of URIs, and it is REQUIRED to include at least entry. (Reference: \sec{sec:Interaction})}
 
 \printModeling{A least one type in the set of \sbol{types} should be a URI from the occurring entity relationship branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Interaction})}
 
-\printValid{The \sbol{participations} property is an optional set of \sbol{Participation} objects.  (Reference: \sec{sec:Interaction})}
+\printValid{The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects.  (Reference: \sec{sec:Interaction})}
 
 \subsubsection*{Rules for the \class{Participation} class} 
 \setcounter{sbolCtr}{11501}
 
 \printValid{A \sbol{Participation} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Participation})}
 
-\printValid{The \sbol{participant} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:Participation})}
+\printValid{The \sbol{participant} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:Participation})}
 
-\printValid{The \sbol{roles} property is an optional set of URIs.  (Reference: \sec{sec:Participation})}
+\printValid{The \sbol{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:Participation})}
 
 \printModeling{A least one role in the set of \sbol{roles} should be a URI from the participant role branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Participation})}
 
@@ -308,26 +314,26 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{Collection} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Collection})}
 
-\printValid{The \sbol{members} property is an optional set of URIs. that reference \sbol{TopLevel} objects.  (Reference: \sec{sec:Collection})}
+\printValid{The \sbol{members} property is an OPTIONAL set of URIs. that reference \sbol{TopLevel} objects.  (Reference: \sec{sec:Collection})}
 
 \printModeling{Each URI in the set of \sbol{members} should reference a \sbol{TopLevel} object.  (Reference: \sec{sec:Collection})}
 
 \subsubsection*{Rules for the \class{Annotation} class} 
 \setcounter{sbolCtr}{11701}
 
-\printValid{The \sbol{name} property is required, and it has data type \external{QName}. (Reference: \sec{sec:Annotations})}
+\printValid{The \sbol{name} property is REQUIRED, and it has data type \external{QName}. (Reference: \sec{sec:Annotations})}
 
-\printValid{The \sbol{value} property is required, and it has data type \sbol{AnnotationValue}. (Reference: \sec{sec:Annotations})}
+\printValid{The \sbol{value} property is REQUIRED, and it has data type \sbol{AnnotationValue}. (Reference: \sec{sec:Annotations})}
 
 \printValid{The \sbol{AnnotationValue} class can be of data type \external{String}, \external{URI} or \external{ListOfAnnotations}. (Reference: \sec{sec:Annotations})}
 
-\printValid{The \sbol{nestedURI} property is required for a \sbol{ListOfAnnotations} object, and it has data type \external{URI}.  (Reference: \sec{sec:Annotations})}
+\printValid{The \sbol{nestedURI} property is REQUIRED for a \sbol{ListOfAnnotations} object, and it has data type \external{URI}.  (Reference: \sec{sec:Annotations})}
 
-\printValid{The \sbol{annotations} property is an optional set for a \sbol{ListOfAnnotations} object, and each member is of data type \external{Annotation}.  (Reference: \sec{sec:Annotations})}
+\printValid{The \sbol{annotations} property is an OPTIONAL set for a \sbol{ListOfAnnotations} object, and each member is of data type \external{Annotation}.  (Reference: \sec{sec:Annotations})}
 
 \subsubsection*{Rules for the \class{GenericTopLevel} class} 
 \setcounter{sbolCtr}{11801}
 
 \printValid{A \sbol{GenericTopLevel} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:GenericTopLevel})}
 
-\printValid{The \sbol{rdfType} property is required, and it has data type \external{QName}. (Reference: \sec{sec:GenericTopLevel})}
+\printValid{The \sbol{rdfType} property is REQUIRED, and it has data type \external{QName}. (Reference: \sec{sec:GenericTopLevel})}
