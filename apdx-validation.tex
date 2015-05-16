@@ -161,11 +161,11 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \url{http://sbols.org/v2\#public} or \url{http://sbols.org/v2\#private}.
 (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{definition} property is a required URI reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbol{componentDefinition} property is a required URI reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
 
-\printModeling{The \sbol{definition} property URI should reference a \sbol{ComponentDefinition} object. (Reference: \sec{sec:ComponentInstance})}
+\printModeling{The \sbol{componentDefinition} property URI should reference a \sbol{ComponentDefinition} object. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{mapsTos} property is an optional set of \sbol{MapsTo} objects.  (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbol{mapsTo} property is an optional set of \sbol{MapsTo} objects.  (Reference: \sec{sec:ComponentInstance})}
 
 \printValid{A \sbol{Component} object inherits all properties of a \sbol{ComponentInstance} object. (Reference: \sec{sec:ComponentInstance})}
 
@@ -204,8 +204,6 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \printValid{A \sbol{Cut} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:Cut})}
 
 \printValid{The \sbol{at} property is required for all \sbol{Cut} objects, and it must be a non-negative integer.  (Reference: \sec{sec:Cut})}
-
-% \Ctodo{MultiRange must have 2 ranges}
 
 \subsubsection*{Rules for the \class{SequenceConstraint} class} 
 \setcounter{sbolCtr}{10901}
@@ -261,7 +259,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{definition} property is a required URI reference to a \sbol{ModuleDefinition} object.  (Reference: \sec{sec:Module})}
 
-\printValid{The \sbol{mapsTos} property is an optional set of \sbol{MapsTo} objects.  (Reference: \sec{sec:Module})}
+\printValid{The \sbol{mapsTo} property is an optional set of \sbol{MapsTo} objects.  (Reference: \sec{sec:Module})}
 
 \subsubsection*{Rules for the \class{MapsTo} class} 
 \setcounter{sbolCtr}{11301}
@@ -279,7 +277,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{FunctionalComponent} referenced by the \sbol{local} property must have \sbol{public} access type.}
 
-\printValid{The \sbol{remote} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{definition} property of the \sbol{Module} that contains this \sbol{MapsTo} object. (Reference: \sec{sec:MapsTo})}
+\printValid{The \sbol{remote} property is a required URI that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{functionalComponents} property of the \sbol{Module} that contains this \sbol{MapsTo} object. (Reference: \sec{sec:MapsTo})}
 
 \printValid{The \sbol{FunctionalComponent} referenced by the \sbol{remote} property must have \sbol{public} access type.}
 

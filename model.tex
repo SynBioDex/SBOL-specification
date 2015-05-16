@@ -471,7 +471,7 @@ representing an instance of promoter:
 \label{sec:SequenceAnnotation}
 The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} objects linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object, as described below.
 
-\Rtodo{We will change location to locations (1..*) and eliminate MultiRange class.}
+\Rtodo{We will change location to locations (1..*) and eliminate MultiRange class.  JSB, Nic: done}
 
 \begin{figure}[ht]
 \begin{center}
@@ -481,10 +481,11 @@ The \sbol{SequenceAnnotation} class describes a precisely known location of inte
 \end{center}
 \end{figure}
 
-\paragraph{The \sbolheading{locations} property}
+\paragraph{The \sbolheading{locations} property}\label{sec:locations}
+\label{sec:locations}
 Every \sbol{SequenceAnnotation} MUST has at least one \sbol{Location} object in its collection of \sbol{locations}. The value of this property is a nested \sbol{Location} object.
 
-\paragraph{The \sbolheading{component} property}
+\paragraph{The \sbolheading{component} property}\label{sec:component}
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
 
 \Rtodo{Separate serialization better - give paragraph/subsubsec headers.  JSB: done.}
@@ -560,10 +561,10 @@ This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects r
 \label{sec:Range}
 A \sbol{Range} object specifies inclusive start and end positions. These properties are required in \sbol{Range} objects and they can have \external{integer} values greater than zero.
 
-\subparagraph{The \sbolheading{start} property}
+\subparagraph{The \sbolheading{start} property}\label{sec:start}
 Specifies the start of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
 
-\subparagraph{The \sbolheading{end} property}
+\subparagraph{The \sbolheading{end} property}\label{sec:end}
 Specifies the end of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
 
 \Rtodo{If we remove MultiRange than Orientation can be moved to the Location class.  Done: Nic and JSB}
@@ -632,7 +633,6 @@ describing locations on sequential structures, the
 describing locations in non-sequential structures.
 
 \Rtodo{Need serialization examples, Cut, and GenericLocation: JSB - done for Cut and GenericLocation}
-\Ctodo{Make sure that every property has a section label so that it hyperlinks correctly}
 
 \subparagraph{Serialization}
 
@@ -669,15 +669,15 @@ A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} a
 \end{center}
 \end{figure}
 
-\paragraph{The \sbolheading{subject} property}
+\paragraph{The \sbolheading{subject} property}\label{sec:subject}
 \label{sec:subject}
 This REQUIRED property specifies the URI of the first \sbol{Component} object in the relation.
 
-\paragraph{The \sbolheading{object} property}
+\paragraph{The \sbolheading{object} property}\label{sec:object}
 \label{sec:object}
 This REQUIRED property specifies the URI of the second \sbol{Component} object in the relation.
 
-\paragraph{The \sbolheading{restriction} property}
+\paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 \label{sec:restriction}
 
 This REQUIRED property specifies a URI that identifies the type of relationship between the \sbol{subject} and \sbol{object} \sbol{Component} objects. 
@@ -742,10 +742,10 @@ In this way, there is minimal duplication of standardization efforts and users o
 
 Each \sbol{Model} object specifies the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modeling framework and the model's role(s). 
 
-\subsubsection*{ The \sbolheading{source} property}
+\subsubsection*{ The \sbolheading{source} property}\label{sec:source}
 This REQUIRED property is a URI that specifies the actual location of a qualitative or quantitative model.
 
-\subsubsection*{ The \sbolheading{language} property}
+\subsubsection*{ The \sbolheading{language} property}\label{sec:language}
 This REQUIRED property is a URI that specifies the language the model is implemented with. 
 Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Methods (EDAM) ontology where possible. A few suggested model types and corresponding URI values are shown in \ref{tbl:model_types}.
 
@@ -764,7 +764,7 @@ Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Metho
 \end{table}
 
 
-\subsubsection*{ The \sbolheading{framework} property}
+\subsubsection*{ The \sbolheading{framework} property}\label{sec:framework}
 This REQUIRED property is a URI that specifies the modeling framework that a model is implemented within. 
 Values for this URI are RECOMMENDED to be chosen from the SBO's modeling framework terms where possible. A few suggested model frameworks and corresponding URI values are shown in \ref{tbl:model_frameworks}.
 
@@ -828,13 +828,13 @@ A \sbol{ModuleDefinition} object is composed from zero or more \sbol{FunctionalC
 A \sbol{ModuleDefinition} object relies on the ``direction'' data fields of its \sbol{FunctionalComponent} objects to specify whether they serve as its inputs or outputs.
 \Ctodo{the direction bit needs to be said much more clearly}
 
-\subsubsection*{The \sbolheading{roles} property}
+\subsubsection*{The \sbolheading{roles} property}\label{sec:roles}
 This property is OPTIONAL and may include a set of URIs that specifies the intended use of a \sbol{ModuleDefinition} entity. 
 These URIs may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for purely biological roles, such as ``metabolic pathway'' and ``signaling cascade''.
 \Ctodo{make this sentence clearer}
 
 \Ctodo{Make these more paralell to componentdefinition in the way that they are written}
-\subsubsection*{The \sbolheading{models} property}
+\subsubsection*{The \sbolheading{models} property}\label{sec:models}
 This property is OPTIONAL and includes identities of associated \sbol{Model} entities.
 
 SBOL's \sbol{Model} objects are used to link genetic descriptions of biological parts and their interactions to computational models.
@@ -843,7 +843,7 @@ A ModuleDefinition object can link to more than one model since each one can enc
 
 \Ctodo{make sure submodules --> modules}
 
-\subsubsection*{The \sbolheading{modules} property}
+\subsubsection*{The \sbolheading{modules} property}\label{sec:modules}
 This property is optional and includes a set of \sbol{Module} entities, which refer to \sbol{ModuleDefinition}s to be imported.
 \Ctodo{use better language, like in componentdefinition}
 
@@ -854,7 +854,7 @@ This property is optional and includes a set of \sbol{FunctionalComponent} entit
 
 \Ctodo{use better language}
 
-\subsubsection*{The \sbolheading{interactions} property}
+\subsubsection*{The \sbolheading{interactions} property}\label{sec:interactions}
 This property is optional and includes a set of \sbol{Interaction} entities, which include \sbol{Participation} entities.
 
 \subsubsection*{Serialization}
@@ -914,12 +914,18 @@ The example below shows a simple \sbol{ModuleDefinition} containing two componen
 
 \subsubsection{FunctionalComponent}
 \label{sec:FunctionalComponent}
-Composition of the functional layer of SBOL designs is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{Component} object for the purpose of fulfilling some function. In addition, each \sbol{FunctionalComponent} must specify via the ``direction'' field (\ref{tbl:functionalcomponent_directions}) whether it serves as an  input, output, both, or neither for its parent \sbol{ModuleDefinition} object. 
+Composition of the functional layer of SBOL designs is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{Component} object for the purpose of fulfilling some function. 
+
+\sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the definition and access properties. Additionally, it has a \sbol{direction} property that specifies whether it serves as an input, output, both, or neither for the \sbol{ModuleDefinition} that contains it.
+
 \Ctodo{Previously said a Module could own a FunctionalComponet, which i'm pretty sure is false -JB  Yes, it's false, fix it}
 
-\LDtodo{Need to explain direction better.}
+\paragraph{The \sbolheading{direction} property}\label{sec:direction}
+Each \sbol{FunctionalComponent} MUST specify via the \sbol{direction} property whether it serves as an  input, output, both, or neither for its parent \sbol{ModuleDefinition} object. 
+The value for this property MUST be one of the values given in \ref{tbl:functionalcomponent_directions}.
 
-\sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the definition and access properties. 
+
+\LDtodo{Need to explain direction better.}
 
 
 \begin{table}[ht]
@@ -1015,13 +1021,13 @@ The \sbol{MapsTo} class serves as a means of linking between \sbol{ComponentInst
 
 \Ctodo{need to explain the whole 3-way mapsto model and importation better}
 
-\paragraph{The local property}
+\paragraph{The \sbolheading{local} property}\label{sec:local}
 This required property is used to specify the \sbol{ComponentInstance} from the parent entity.
 
-\paragraph{The remote property}
+\paragraph{The \sbolheading{remote} property}\label{sec:remote}
 This required property is used to specify the \sbol{ComponentInstance} from the child entity being imported by the parent.
 
-\paragraph{The refinement property}
+\paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
 Each \sbol{MapsTo} entity must also specify the relationship between its local and remote components using the refinement property. The Table \ref{tbl:mapsto_refinement} lists the values 
 
 \begin{table}[ht]
@@ -1187,8 +1193,8 @@ Some examples of \sbol{Collection} objects:
 \end{center}
 \end{figure}
 
-\subsubsection*{The member property}
-The member property has a data type of URI and has the URI for a \sbol{TopLevel} entity.  A collection may have any number of members, including none.
+\subsubsection*{The \sbolheading{members} property}
+The \sbol{members} property has a data type of URI and has the URI for a \sbol{TopLevel} entity.  A collection may have any number of members, including none.
 
 \subsubsection*{Serialization}
 
@@ -1224,6 +1230,7 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 
 \subsection{Extending the SBOL Representation:  Annotations}
 \label{sec:Annotations}
+\label{sec:annotations}
 
 \Rtodo{Matthew/Goksel/Jake: please review.}
 
@@ -1238,6 +1245,11 @@ In particular, three methods are supported for connecting the SBOL data model wi
 \end{enumerate}
 
 \subsubsection{Annotating SBOL objects}
+% whole set of labels for the properties defined herein
+\label{sec:value}
+\label{sec:Annotation}
+\label{sec:AnnotationValue}
+\label{sec:ListOfAnnotations}
 
 Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{name} property is specified by a qualified name (\external{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be of type \external{String}, \external{URI}, or \external{ListOfAnnotations}. The \external{ListOfAnnotations} is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and a list of nested \sbol{annotations}.
 
