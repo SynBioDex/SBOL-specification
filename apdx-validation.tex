@@ -281,13 +281,17 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \url{http://sbols.org/v2\#merge}.
 (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{local} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
+\printValid{When a \sbol{MapsTo} object is specified by a \sbol{ComponentInstance} object, the \sbol{local} property is a REQUIRED URI that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{FunctionalComponent} referenced by the \sbol{local} property MUST have \sbol{public} access type.}
+\printValid{When a \sbol{MapsTo} object is specified by a \sbol{ComponentInstance} object, the \sbol{remote} property is a REQUIRED URI that MUST reference a \sbol{Component} that is specified within the \sbol{ComponentDefinition} referred to by the \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})} 
 
-\printValid{The \sbol{remote} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{functionalComponents} property of the \sbol{Module} that contains this \sbol{MapsTo} object. (Reference: \sec{sec:MapsTo})}
+\printValid{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{local} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{FunctionalComponent} referenced by the \sbol{remote} property MUST have \sbol{public} access type.}
+\printValid{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{remote} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
+
+\printValid{The \sbol{ComponentInstance} referenced by the \sbol{local} property MUST have \sbol{public} access type.}
+
+\printValid{The \sbol{ComponentInstance} referenced by the \sbol{remote} property MUST have \sbol{public} access type.}
 
 \subsubsection*{Rules for the \class{Interaction} class} 
 \setcounter{sbolCtr}{11401}
