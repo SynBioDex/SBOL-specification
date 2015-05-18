@@ -217,7 +217,7 @@ The \sbol{elements} property is a REQUIRED \external{String} of characters that 
 The \sbol{encoding} property is REQUIRED and has a data type of \external{URI}. This property is used to indicate how the \sbol{elements} property of a \sbol{Sequence} MUST be formed and interpreted.
 For example, the \sbol{elements} property of a \sbol{Sequence} with an \external{IUPAC DNA} encoding property MUST contain characters that represent nucleotide bases, such as {\tt a}, {\tt t}, {\tt c}, and {\tt g}. The \sbol{elements} property of a \sbol{Sequence} with a \external{simplified molecular-input line-entry system (SMILES)} encoding, however, MUST contain characters that represent atoms and chemical bonds, such as {\tt C}, {\tt N}, {\tt O}, and {\tt =}.
 
-\ref{tbl:sequence_encodings} provides a list of RECOMMENDED \external{URI}s for the \sbol{encoding} property. These terms are organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that MUST refer to a \sbol{Sequence} with such an \sbol{encoding}. When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \external{URI}s in \ref{tbl:sequence_encodings}, it SHOULD use that \external{URI} for this property.
+\ref{tbl:sequence_encodings} provides a list of RECOMMENDED \external{URI}s for the \sbol{encoding} property. These terms are organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that MUST refer to a \sbol{Sequence} with such an \sbol{encoding} (if it refers to any \sbol{Sequence}). When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \external{URI}s in \ref{tbl:sequence_encodings}, it SHOULD use that \external{URI} for this property.
 
 %A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
@@ -230,7 +230,7 @@ For example, the \sbol{elements} property of a \sbol{Sequence} with an \external
    SMILES & \url{http://www.opensmiles.org/opensmiles.html} & SmallMolecule \\
     \bottomrule
   \end{edtable}
-  \caption{RECOMMENDED \external{URI}s for specifying the \sbol{encoding} property of a \sbol{Sequence}, organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that MUST refer to a \sbol{Sequence} with such an \sbol{encoding}.}
+  \caption{RECOMMENDED \external{URI}s for specifying the \sbol{encoding} property of a \sbol{Sequence}, organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that MUST refer to a \sbol{Sequence} with such an \sbol{encoding} (if it refers to any \sbol{Sequence}).}
   \label{tbl:sequence_encodings}
 \end{table}
 
@@ -245,7 +245,7 @@ The serialization of a \sbol{Sequence} has the following form:
 </sbol:Sequence>
 \end{lstlisting}
 
-The example below shows the serialization of the \sbol{Sequence} for a promoter. The nucleotide bases of the \sbol{Sequence} are serialized as the \external{String} value for its \sbol{elements} property, while its \external{IUPAC DNA} encoding is serialized as the \external{URI} value for its  \sbol{encoding} property. 
+The example below shows the serialization of the \sbol{Sequence} for a promoter. The nucleotide bases of the \sbol{Sequence} are serialized as the \external{String} value of its \sbol{elements} property, while its \external{IUPAC DNA} encoding is serialized as the \external{URI} value of its  \sbol{encoding} property. 
 
 \lstsetsbol
 \begin{lstlisting}
@@ -298,7 +298,7 @@ The \sbol{types} property of every \sbol{ComponentDefinition} MUST contain at le
 
 The \sbol{roles} property is a OPTIONAL set of \external{URI}s that clarifies the potential function of a \sbol{ComponentDefinition} in a biological context.
 
-The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain a collection of \external{URI}s that SHOULD identify terms from ontologies that are consistent with the \sbol{types} property of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA or RNA \sbol{ComponentDefinition} SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbol{roles} property and their \external{URI}s. These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). As with the \sbol{types} property, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} SHOULD use that term as one of its \sbol{roles}.
+The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain a collection of \external{URI}s that SHOULD identify terms from ontologies that are consistent with the \sbol{types} property of the \sbol{ComponentDefinition}. For example, the \sbol{roles} property of a DNA or RNA \sbol{ComponentDefinition} SHOULD contain \external{URI}s identifying terms from the Sequence Ontology (SO). \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbol{roles} property and their \external{URI}s. These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). As with the \sbol{types} property, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} SHOULD use that term as one of its \sbol{roles}. In addition, no two \sbol{Sequence} objects 
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -330,11 +330,11 @@ While the \sbol{ComponentDefinition} class is analogous to a blueprint or specif
 \label{sec:sequences}
 The \sbol{sequences} property is OPTIONAL and MAY include a collection of \external{URI}s that refer to \sbol{Sequence} objects. These objects define the primary structure of the \sbol{ComponentDefinition}.
 
-Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequence} object. For certain use cases, however, it may be appropriate to refer to multiple \sbol{Sequence} objects. For example, a user may wish to provide two different representations of the primary structure of a DNA \sbol{ComponentDefinition}, one that captures its methylation and one that does not. If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects SHOULD be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties.
+Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequence} object. For certain use cases, however, it may be appropriate to refer to multiple \sbol{Sequence} objects. For example, a user may wish to provide two different representations of the primary structure of a DNA \sbol{ComponentDefinition}, one that captures its methylation and one that does not. If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects SHOULD be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In addition, no two \sbol{Sequence} objects referred to by the same \sbol{ComponentDefinition} should have the same \sbol{encoding}.
 
 \Rtodo{I think the requirement that multiple sequences be consistent with each other is a SHOULD, not a MUST, since I don't think we can realistically validate this consistency (this is how I've been approaching other requirements in this section, but I haven't reconciled them with the validation rules yet). Also, this was previously worded such that the lengths of the sequences had to be precisely the same in order to avoid ambiguous locations for sequence annotations, but what if one sequence is a SMILES encoding of DNA and not IUPAC? I think we need pointers from sequence annotations to the sequences to which they apply. I'll send a mail out about this - Nic}
 
-In addition, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbol{types} property refers to a term from \ref{tbl:componentdefinition_types}, then at least one of the \sbol{Sequence} objects MUST have the \sbol{encoding} that corresponds to this term (see \ref{tbl:sequence_encodings}). For example, if the \sbol{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) should have an \external{IUPAC DNA} \sbol{encoding}.
+Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbol{types} property refers to a term from \ref{tbl:componentdefinition_types}, then at least one of these objects MUST have the \sbol{encoding} that corresponds to this term (see \ref{tbl:sequence_encodings}). For example, if the \sbol{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) should have an \external{IUPAC DNA} \sbol{encoding}.
 
 \subsubsection*{The \sbolheading{sequenceConstraints} property}
 \label{sec:sequenceConstraints}
@@ -348,9 +348,7 @@ The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a collection
 
 \subsubsection*{Serialization}
 % The parent classes of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Identified}. As a result, inherited properties are serialized as explained for these parent classes.
-The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{sequenceAnnotations} properties of a \sbol{ComponentDefinition} include \external{URI}s that identify objects belonging to the appropriate SBOL classes, while the \sbol{types} and \sbol{roles} properties include URIs that identify ontology terms. As shown in the example below, each of these URIs is serialized as an \external{rdf:resource} as part of an implicit collection of SBOL properties with singular rather then plural names.
-
-\Rtodo{The name (title) and description properties should be moved from this example to one for Identified. Identified is an abstract class that shouldn't be serialized, but perhaps we could use a non-abstract class (probably ComponentDefinition) to provide an example of displayId, version, name, description, etc. - Nic;  JSB: moved forward}
+The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{sequenceAnnotations} properties of a \sbol{ComponentDefinition} contain objects belonging to the appropriate SBOL classes as their values, while the \sbol{types} and \sbol{roles} properties contain \external{URI}s that identify ontology terms as their values. As shown in the example below, each one of these objects and \external{URI}s is serialized as part of an implicit collection of SBOL properties with singular rather then plural names. Each object is serialized as a RDF/XML node nested within a property, while each \external{URI} is serialized as a \external{rdf:resource} on a property.
 
 \lstsetsbol
 \begin{lstlisting}
@@ -370,7 +368,6 @@ The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{
                </sbol:sequenceConstraint> [\emph{elements}]        
 </sbol:ComponentDefinition>
 \end{lstlisting}
-\Rtodo{We need to have an explanation of how to interpret these, and also have a pointer to it from each example.  JSB: I think the serialization section is enough, actually, and that these are relatively intuitive}
 
 The example below shows the serialization of a simple \sbol{ComponentDefinition} for a promoter. The BioPAX term \external{DnaRegion} and the ChEBI term \external{CHEBI:4705} (\external{double-stranded DNA}) are used to indicate that the type of biological entity represented by this \sbol{ComponentDefinition} is DNA. Its role is specified using the SO terms \external{SO:0000167} (\external{promoter}) and the more specific \external{SO:0000613} (\external{bacterial\_RNApol\_promoter}).
 
