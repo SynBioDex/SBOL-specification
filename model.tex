@@ -1012,6 +1012,8 @@ a part of a toggle switch:
 \subsubsection{MapsTo}
 \label{sec:MapsTo}
 
+\Dtodo{I propose to move this up to the ComponentDefinition section, between Component and SequenceAnnotation, since it can be used for Component/Component relationships too.  -JSB}
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/maps_to}
@@ -1019,28 +1021,66 @@ a part of a toggle switch:
 \label{uml:maps_to}
 \end{center}
 \end{figure}
-The \sbol{MapsTo} class serves as a means of linking between \sbol{ComponentInstance} objects (both \sbol{Component}s and \sbol{FunctionalComponent}s) at different levels of the design hierarchy. For example, when a child \sbol{ModuleDefinition} object is instantiated inside a parent \sbol{ModuleDefinition} object, a \sbol{MapsTo} object is used to link these two ModuleDefinitions. MapsTo has properties to specify components from the parent and child entities, and also to specify how these components are linked.
 
-\Ctodo{need to explain the whole 3-way mapsto model and importation better}
+When \sbol{ComponentInstance} or \sbol{Module} objects are combined together within a new \sbol{ComponentDefinition} or \sbol{ModuleDefinition}, it is often the case that some of the elements comprising these objects are intended to refer to the ``same'' thing, in some sense.
+The purpose of the \sbol{MapsTo} class is to make these relationships clear and explicit.
+
+In particular, a \sbol{MapsTo} object provides two pieces of information:
+\begin{itemize}
+\item An identity relationship between two \sbol{ComponentInstance}
+  objects, one inside the definition of a ``lower level'' instance that owns the
+  \sbol{MapsTo}, the other in the ``higher level'' definition that
+  contains the ``lower level'' instance.  The \sbol{local} property identifies the ``higher
+  level'' \sbol{ComponentInstance} and the \sbol{remote} property
+  identifies the ``lower level'' \sbol{ComponentInstance}.
+\item Instructions on what to do if the two \sbol{ComponentInstance}
+  objects link to different \sbol{ComponentDefinition} objects (i.e.,
+  they are not identical).  This is specified by the \sbol{refinement}
+  property, using one of the values from \ref{tbl:mapsto_refinement}.
+\end{itemize}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=1]{images/MapsTo_Diagram2}
+\caption{Linking Components using \sbol{MapsTo} entities. Boxes with diagrams represent \sbol{ComponentDefinition} objects, while boxes with the C label represent \sbol{Component} objects and boxes with the M label represent \sbol{MapsTo} objects.  In both diagrams, a promoter/5'UTR construct and a 5'UTR/coding sequence construct are being combined to form a complete functional unit.  
+In the left diagram, both 5'UTRs are abstract, with no sequence (white semicircle), and their definition is taken from a third green 5'UTR component. In the right diagram, the two 5'UTRs are different, and the one associated with the promoter (green semicircle) is selected to override the one associated with the coding sequence (red semicircle) in the new \sbol{ComponentDefinition}.}
+\label{image:maps_to_diagram2}
+\end{center}
+\end{figure}
+\Rtodo{Caption: why are some RBSs not filled in? JSB: explained meaning}
+\Dtodo{Problem: the high-level component in the right of the MapsTo example doesn't seem to want a componentDefinition, but it is required}
+
+To illustrate this concept, two examples are provided in \ref{image:maps_to_diagram2}, in which a \sbol{ComponentDefinition} for a promoter / 5'UTR / coding-sequence functional unit is constructed by combining two ``lower level'' \sbol{ComponentDefinition} objects.
+In both examples, the two ``lower level'' \sbol{ComponentDefinition} objects each contain a 5'UTR, and these are all taken to refer to the ``same'' element of the new ``higher level'' \sbol{ComponentDefinition}.
+
+In order to represent this relationship, a new \sbol{Component} is created, owned by the ``higher level'' \sbol{ComponentDefinition}, to represent the shared 5'UTR.  
+It is then linked to the equivalent \sbol{Component} in each of the ``lower level'' \sbol{ComponentDefinition} objects by means of a \sbol{MapsTo}, using one \sbol{MapsTo} per link.  
+For example, to link the shared ``higher level'' 5'UTR to the 5'UTR in the promoter/5'UTR construct, a \sbol{MapsTo} is created that is owned by the \sbol{Component} instance for the promoter/5'UTR construct, setting its \sbol{local} to the 5'UTR \sbol{Component} in the ``higher-level'' construct and its \sbol{remote} to the 5'UTR \sbol{Component} in the ``lower-level'' construct.
+Many ``lower level'' instances can then be linked together in an unambiguous relationship by using one \sbol{MapsTo} object per \sbol{remote}, all sharing the same \sbol{local}.
+
+The exact same types of relationships also apply and can likewise be declared for \sbol{FunctionalComponent} objects in a \sbol{ModuleDefinition} and the 
+\sbol{ComponentInstance} objects within the ``lower level'' \sbol{Module} or \sbol{FunctionalComponent} instances that it contains.
+
+\Rtodo{need to explain the whole 3-way mapsto model and importation better.  JSB: done, I think}
 
 \paragraph{The \sbolheading{local} property}\label{sec:local}
-This required property is used to specify the \sbol{ComponentInstance} from the parent entity.
+This REQUIRED property is used to specify the \sbol{ComponentInstance} from the ``higher level'' entity.  The same higher-level entity MUST own both the \sbol{local} and object that owns the \sbol{MapsTo}.
 
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
-This required property is used to specify the \sbol{ComponentInstance} from the child entity being imported by the parent.
+This REQUIRED property is used to specify the \sbol{ComponentInstance} from the ``lower level'' entity that is being being linked to the \sbol{local} \sbol{ComponentInstance}.  This \sbol{ComponentInstance} MUST be owned by the ``lower level'' entity that defines the object that owns the \sbol{MapsTo}
 
 \paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
-Each \sbol{MapsTo} entity must also specify the relationship between its local and remote components using the refinement property. The Table \ref{tbl:mapsto_refinement} lists the values 
+Each \sbol{MapsTo} entity MUST specify the relationship between its \sbol{local} and \sbol{remote} components using the refinement property, using one of the values in \ref{tbl:mapsto_refinement}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
     \textbf{Refinement URI} & \textbf{Description} \\
     \midrule
-    \url{http://sbols.org/v2#useremote}  & Indicates that \sbol{ComponentInstance} from the child entity is used in the parent, instead of the \sbol{ComponentInstance} specified in the parent entity.\\
-    \url{http://sbols.org/v2#uselocal}  & Indicates that \sbol{ComponentInstance} from the parent entity is used in the parent instead of the imported the \sbol{ComponentInstance} child entity.\\
-    \url{http://sbols.org/v2#verifyIdentical}  & Indicates that ComponentInstance entities must link to the same \sbol{ComponentDefinition} object\\
-        \url{http://sbols.org/v2#merge}  & Indicates that data fields of the local and remote ComponentInstantiation entities are to be interpreted in combination\\
+    \url{http://sbols.org/v2#useremote}  & Indicates that properties of the \sbol{ComponentInstance} from the \sbol{remote} are to be used, instead of the \sbol{local} \sbol{ComponentInstance}.\\
+    \url{http://sbols.org/v2#uselocal}  & Indicates that properties of the \sbol{ComponentInstance} from the \sbol{local} are to be used used, instead of the \sbol{remote} \sbol{ComponentInstance}.\\
+    \url{http://sbols.org/v2#verifyIdentical}  & Indicates that both \sbol{ComponentInstance} entities must link to the same \sbol{ComponentDefinition} object\\
+        \url{http://sbols.org/v2#merge}  & Indicates that data fields of the \sbol{local} and \sbol{remote} \sbol{ComponentInstance} entities are to be interpreted in combination\\
     \bottomrule
   \end{edtable}
   \caption{URIs for the \sbol{refinement} property.}
@@ -1048,35 +1088,7 @@ Each \sbol{MapsTo} entity must also specify the relationship between its local a
 \end{table}
 
 \Ctodo{libsbol and refinements types here need to agree on consistent capitalization. GM: We agreed to start with lowercase and use the Capital for the next word.}
-\Ctodo{The notion of refinement is very unclear -JB  Clean up the text}
-
-%GM: The paragraph below is now explained in the table above. Commented for now. Please remove the commented lines if you agree with the table description.
-%In addition to specifying a link, each MapsTo object must also specify a ``refinement'' relationship between its local and remote Components. Under this data model, there are four types of refinement: ``verifyIdentical'' requires that the Component objects link to the same ComponentDefinition object, ``useLocal'' indicates that the local Component object overrides the remote Component object, ``useRemote'' indicates the opposite, and “merge” indicates that data fields of the local and remote ComponentInstantiation objects are to be interpreted in combination.
-
-
-%\begin{figure}[ht]
-%\begin{center}
-%\includegraphics[scale=0.6]{images/MapsTo_Diagram1}
-%\caption{Linking Components using MapsTo entities.}
-%\label{image:maps_to_diagram1}
-%\end{center}
-%\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=1]{images/MapsTo_Diagram2}
-\caption{Linking Components using \sbol{MapsTo} entities. Boxed with the C label represent Component entities and boxes with the M label represent \sbol{MapsTo} entities.}
-\label{image:maps_to_diagram2}
-\end{center}
-\end{figure}
-\Ctodo{Caption: why are some RBSs not filled in?}
-
-An example design of a \sbol{ComponentDefinition} using \sbol{MapsTo} entities is shown at the left hand side of the Figure \ref{image:maps_to_diagram2}. The resulting entity is formed of a promoter, a RBS and a CDS. 
-Three sub components to create the design includes: a promoter-RBS \sbol{ComponentDefinition} with a RBS placeholder without detailed definition; a RBS \sbol{ComponentDefinition} with full description; and a RBS-CDS \sbol{ComponentDefinition} with a RBS placeholder, which is also not defined in full detail. 
-In the figure, boxes with the C label represent \sbol{Component} entities and boxes with the M label represent the \sbol{MapsTo} entities.
-In the design RBSs that are not fully defined are replaced with another RBS \sbol{ComponentDefinition} (displayed in green colour). \sbol{MapsTo} entities attached to sub components for promoter-RBS and RBS-CDS \sbol{ComponentDefinition}s include the ``use local'' refinement to replace RBSs with the fully defined version. In the second design at the right hand side of the figure, \sbol{MapsTo} entities are used to import the RBS from the promoter-RBS \sbol{ComponentDefinition} overwriting the RBS in RBS-CDS \sbol{ComponentDefinition}. 
-
-\Ctodo{Need to expand this explanation a bit more to drive home the points -JB}
+\Rtodo{The notion of refinement is very unclear -JB  Clean up the text; JSB: done}
 
 \paragraph{Serialization}
 The serialization of \sbol{MapsTo} has the following form.
