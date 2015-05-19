@@ -473,9 +473,9 @@ representing an instance of promoter:
 
 \subsubsection{SequenceAnnotation}
 \label{sec:SequenceAnnotation}
-The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} objects linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a \sbol{Location} object, as described below.
+The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} objects linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a set of  \sbol{Location} objects, as described below.  It is a set of location objects to allow the annotation of a non-contiguous location on a sequence.
 
-\Rtodo{We will change location to locations (1..*) and eliminate MultiRange class.  JSB, Nic: done}
+\Rtodo{We will change location to locations (1..*) and eliminate MultiRange class.  JSB, Nic: done, CJM: added text above to explain why it is a set of locations.}
 
 \begin{figure}[ht]
 \begin{center}
@@ -487,7 +487,9 @@ The \sbol{SequenceAnnotation} class describes a precisely known location of inte
 
 \paragraph{The \sbolheading{locations} property}\label{sec:locations}
 \label{sec:locations}
-Every \sbol{SequenceAnnotation} MUST has at least one \sbol{Location} object in its collection of \sbol{locations}. The value of this property is a nested \sbol{Location} object.
+Every \sbol{SequenceAnnotation} MUST have at least one \sbol{Location} object in its collection of \sbol{locations}. The value of this property is a nested \sbol{Location} object.
+
+\Ctodo{Use term collection above.  Is it me or is this confusing with our collection object?  We could use set instead.}
 
 \paragraph{The \sbolheading{component} property}\label{sec:component}
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
@@ -570,8 +572,6 @@ Specifies the start of a \sbol{Range}. This property is REQUIRED and can have \e
 
 \subparagraph{The \sbolheading{end} property}\label{sec:end}
 Specifies the end of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
-
-\Rtodo{If we remove MultiRange than Orientation can be moved to the Location class.  Done: Nic and JSB}
 
 \subparagraph{Serialization}
 
@@ -870,18 +870,19 @@ The serialization of \sbol{ModuleDefinition} has the following form:
                ...
   [\emph{zero or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}]  <sbol:model rdf:resource="..."/> [\emph{elements}]
-  [\emph{zero or more}] <sbol:component>
+  [\emph{zero or more}] <sbol:functionalComponent>
                  <sbol:FunctionalComponent rdf:about="...">...</sbol:FunctionalComponent >
-               </sbol:component> [\emph{elements}]
-  [\emph{zero or more}] <sbol:subModule>
+               </sbol:functionalComponent> [\emph{elements}]
+  [\emph{zero or more}] <sbol:module>
                  <sbol:Module rdf:about="...">...</sbol:Module>
-               </sbol:subModule> [\emph{elements}]
+               </sbol:module> [\emph{elements}]
   [\emph{zero or more}] <sbol:interaction>
                  <sbol:Interaction rdf:about="...">...</sbol:Interaction>
                </sbol:interaction> [\emph{elements}]
 </sbol:ModuleDefinition>
 \end{lstlisting}
-\Ctodo{Is this template still correct, given ``subModule''?}
+\Rtodo{Is this template still correct, given ``subModule''?
+No, it was not correct.  I think I fixed it. - CJM}
 
 \Rtodo{Add an example, like for all the rest.  JSB: done, but needs to be sanity-checked since I created it by hand.}
 
@@ -890,20 +891,20 @@ The example below shows a simple \sbol{ModuleDefinition} containing two componen
 \lstsetsbol
 \begin{lstlisting}
   <sbol:ModuleDefinition rdf:about="http://sbolstandard.org/example/GFP_expression">
-    <sbol:component>
+    <sbol:functionalComponent>
       <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/Constitutive_GFP">
         <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP_generator"/>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
         <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
       </sbol:FunctionalComponent>
-    </sbol:component>
-    <sbol:component>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
       <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/GFP_protein">
         <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP"/>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
         <sbol:direction rdf:resource="http://sbols.org/v2#out"/>
       </sbol:FunctionalComponent>
-    </sbol:component>
+    </sbol:functionalComponent>
     <sbol:interaction>
       <sbol:Interaction rdf:about="http://sbolstandard.org/example/GPF_expression/interaction/express_GFP">
          ...
@@ -1012,7 +1013,7 @@ a part of a toggle switch:
 \subsubsection{MapsTo}
 \label{sec:MapsTo}
 
-\Dtodo{I propose to move this up to the ComponentDefinition section, between Component and SequenceAnnotation, since it can be used for Component/Component relationships too.  -JSB}
+\Ctodo{I propose to move this up to the ComponentDefinition section, between Component and SequenceAnnotation, since it can be used for Component/Component relationships too.  -JSB I concur - CJM}
 
 \begin{figure}[ht]
 \begin{center}
@@ -1131,7 +1132,7 @@ Each Interaction object must specify its type with at least one URI that identif
 
 \Ctodo{Like the others, SBO is REQUIRED if the term exists, and you can add other stuff.  We also need to explain this up front in the beginning of the section}
 
-Furthermore, an\sbol{Interaction} object can specify the set of \sbol{FunctionalComponent} entities that are interacting by linking to \sbol{Participation} objects that descibe how each one participates in the interaction.
+Furthermore, an \sbol{Interaction} object can specify the set of \sbol{FunctionalComponent} entities that are interacting by linking to \sbol{Participation} objects that descibe how each one participates in the interaction.
 \Rtodo{I don't think this is really a MUST.  JSB: it wasn't; it is resolved.}
 
 \paragraph{Serialization}
