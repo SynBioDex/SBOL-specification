@@ -3,9 +3,15 @@
 % -----------------------------------------------------------------------------
 \subsection{PoPS Receiver}
 
-This example shows the serialization of the PoPS Receiver device designed by Canton and co-workers. Details of the device can be found at http://parts.igem.org/Part:BBa\_F2620.
+This example shows the serialization of the PoPS Receiver device designed by Canton and co-workers~\cite{canton-natbio-2008}. 
+In particular, this is a \sbol{ComponentDefinition} comprising five other \sbol{Components} to construct a detector for the cell-cell signaling molecule 3OC$_6$HSL.
+The five components are arranged in a sequence:
+first come four components together implement constitutive expression of the LuxR protein, which responds to 3OC$_6$HSL: a constitutive promoter, 5'UTR, coding sequence for LuxR, and terminator.
+Finally, after this comes the pLuxR promoter, which is activated in the presence of LuxR and 3OC$_6$HSL.
+%
+Complete details of the device can be found in the cited paper and also at \url{http://parts.igem.org/Part:BBa_F2620}.
 
-\LDtodo{Add more description and ref}
+\Rtodo{Add more description and ref; JSB: done}
 
 \label{ser:F2620}
 \lstsetsbol
