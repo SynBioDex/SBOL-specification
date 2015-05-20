@@ -3,6 +3,8 @@
 % -----------------------------------------------------------------------------
 \subsection{PoPS Receiver}
 
+\Ctodo{Make sure that these serializations are using the current and correct SBOL2.0 terms; at present they most certainly are not (e.g., subModule)}
+
 This example shows the serialization of the PoPS Receiver device designed by Canton and co-workers~\cite{canton-natbio-2008}. 
 In particular, this is a \sbol{ComponentDefinition} comprising five other \sbol{Components} to construct a detector for the cell-cell signaling molecule 3OC$_6$HSL.
 The five components are arranged in a sequence:
@@ -178,9 +180,11 @@ Complete details of the device can be found in the cited paper and also at \url{
 \end{lstlisting}
 
 \subsection{Toggle Switch}
-\Ctodo{Explain the example}
 
-\Ctodo{Make sure that these are using the current and correct terminology}
+This example shows the serialization of an SBOL data model for a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}.  
+This design is essentially similar to the one presented in \ref{sec:examples}, except that it uses some alternate groupings in how the total design is built up out of smaller entities.
+
+\Rtodo{Explain the example.  JSB: done}
 
 \label{ser:toggleswitch}
 \lstsetsbol
