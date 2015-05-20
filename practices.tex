@@ -20,21 +20,14 @@ As stated in \ref{sec:version},  it is RECOMMENDED that version numbering should
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
-\Ctodo{Remove types?}
-
 Maintaining unique identity URIs for all SBOL objects is a very challenging implementation task.  To reduce the developer's burden, users of SBOL 2.0 are encouraged to follow a few simple rules when constructing the identity and related fields for SBOL objects.  When these rules are followed, we say that the SBOL object is \emph{compliant}.  The rules are as follows:
 \begin{enumerate}
 \item The \sbol{identity} of an SBOL object should begin with a \emph{URI prefix} that maps to a domain over which the user has control.  Namely, the user can guarantee uniqueness of identities within this domain.
 \item In a compliant SBOL object, the \sbol{persistentIdentity} and \sbol{displayId} properties are required.
+\item The \sbol{persistentIdentity} of a compliant top level object must end with a delimiter ('/', '\#', or ':') followed by the \sbol{displayId} of the object. 
+\item The \sbol{persistentIdentity} of a compliant child object must begin with the \sbol{persistentIdentity} of its parent object and be immediately followed by a delimiter ('/', '\#', or ':') followed by the \sbol{displayId} of the object.
 \item When a SBOL object is not given a \sbol{version}, the \sbol{identity} and \sbol{persistentIdentity} must be equal.
 \item When a SBOL object is given a \sbol{version}, the \sbol{identity} must be equal to the "\refObj{persistentIdentity}/\refObj{version}".
-\item The \sbol{persistentIdentity} of a compliant \sbol{Collection} object must end with "/col/\refObj{displayId}". 
-\item The \sbol{persistentIdentity} of a compliant \sbol{ModuleDefinition} object must end with "/md/\refObj{displayId}". 
-\item The \sbol{persistentIdentity} of a compliant \sbol{Model} object  must end with "/mod/\refObj{displayId}".
-\item The \sbol{persistentIdentity} of a compliant \sbol{ComponentDefinition} object must end with "/cd/\refObj{displayId}". 
-\item The \sbol{persistentIdentity} of a compliant \sbol{Sequence} object must end with "/seq/\refObj{displayId}". 
-\item The \sbol{persistentIdentity} of a compliant \sbol{GenericTopLevel} object must end with "/gen/\refObj{displayId}". 
-\item The \sbol{persistentIdentity} of a compliant child object must begin with the \sbol{persistentIdentity} of its parent object and be immediately followed by "/\refObj{displayId}". 
 \item The \sbol{version} of a compliant child object must be equal to the \sbol{version} of it parent object.
 \end{enumerate}
 

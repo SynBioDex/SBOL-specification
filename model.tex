@@ -105,9 +105,11 @@ An \sbol{Identified} object MUST be referred to using either its \sbol{identity}
 \label{sec:displayId}
 The \sbol{displayId} property is an OPTIONAL identifier with a data type of \external{String}. This property is intended to be an intermediate between \sbol{name} and \sbol{identity} that is machine-readable, but more human-readable than the full \external{URI} of an \sbol{identity}. 
 
-If the \sbol{displayId} property is used, then its \external{String} value SHOULD be locally unique (global uniqueness is not required) and MUST be compliant with the type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}, except that it must not include the characters "-" and ".". 
+If the \sbol{displayId} property is used, then its \external{String} value SHOULD be locally unique (global uniqueness is not required) and MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
 
-subsubsection*{The \sbolheading{version} property}
+% compliant with the type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}, except that it must not include the characters "-" and ".". 
+
+\subsubsection*{The \sbolheading{version} property}
 \label{sec:version}
 
 The \sbol{version} property is OPTIONAL and has a data type of \external{String}. This property can be used to compare two SBOL objects with the same \sbol{persistentIdentity}.
@@ -404,12 +406,14 @@ The \sbol{ComponentInstance} abstract class is inherited by SBOL classes that re
 \paragraph{The \sbolheading{definition} property}
 \label{sec:definition}
 
-The \sbol{definition} property is a REQUIRED \external{URI} that refers to the \sbol{ComponentDefinition} for the \sbol{ComponentInstance}.
+The \sbol{definition} property is a REQUIRED \external{URI} that refers to the \sbol{ComponentDefinition} for the \sbol{ComponentInstance}. As described in the previous section, this \sbol{ComponentDefinition} provides information about the \sbol{types} and \sbol{roles} of the \sbol{ComponentInstance}.
 
 \paragraph{The \sbolheading{mapsTo} property}
 \label{sec:mapsTos}
 
-The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects that link \sbol{ComponentInstance} objects (both \sbol{Component} objects and \sbol{FunctionalComponent} objects) together within a larger design. \ref{sec:MapsTo} contains a more detailed description of the \sbol{MapsTo} class.
+The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects that refer to and link \sbol{ComponentInstance} objects (both \sbol{Component} objects and \sbol{FunctionalComponent} objects) together within a larger design.
+
+\ref{sec:MapsTo} contains a more detailed description of the \sbol{MapsTo} class.
 
 \paragraph{The \sbolheading{access} property}
 \label{sec:access}
@@ -417,31 +421,37 @@ The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects that lin
 The \sbol{access} property is a REQUIRED \external{URI} that indicates whether a \sbol{ComponentInstance} 
 can be referred to by a \sbol{MapsTo}.
 
-The value of the \sbol{access} property MUST be one of the following URIs:
+\ref{tbl:componentInstance_access} provides a list of REQUIRED \sbol{access} \external{URI}s. The value of the \sbol{access} property MUST be one of these \external{URI}s.
 
-\begin{itemize}
-\item \url{http://sbols.org/v2#public}
-  If the access is public, the \sbol{ComponentInstance} MAY be linked to by \sbol{MapsTo} objects.
+\begin{table}[ht]
+  \begin{edtable}{tabular}{lp{4in}}
+    \toprule
+    \textbf{URI} & \textbf{Access Description} \\
+    \midrule
+    \url{http://sbols.org/v2#public}  & The \sbol{ComponentInstance} MAY be referred to by \sbol{MapsTo} objects. \\
+        \url{http://sbols.org/v2#private}  & The \sbol{ComponentInstance} MUST NOT be referred to by any \sbol{MapsTo} object. \\
+    \bottomrule
+  \end{edtable}
+  \caption{\external{URI}s for the \sbol{access} property.}
+  \label{tbl:componentInstance_access}
+\end{table}
 
-\item \url{http://sbols.org/v2#private}
-  If the access is private, the \sbol{ComponentInstance} MUST NOT be linked by any \sbol{MapsTo} object.
-\end{itemize}
+Unless a designer has a reason to prevent other designers from accessing the \sbol{ComponentInstance} when their design is reused, it is RECOMMENDED that the \sbol{access} property of the \sbol{ComponentInstance} be set to public. For example, in order to avoid the retroactivity that might result from a \sbol{ComponentInstance} interacting with those in other designs, a designer might set the \sbol{access} of the \sbol{ComponentInstance} to private.
 
 \paragraph{Serialization}
 
-No serialization is defined for \sbol{ComponentInstance}, since this class is 
-only used indirectly through its child classes.
+No serialization is defined for the \sbol{ComponentInstance} class, since this class is only used indirectly through the \sbol{Component} and \sbol{FunctionalComponent} subclasses.
 
 
 \subsubsection{Component}
 \label{sec:Component}
-Composition of the structural layer of SBOL designs is accomplished using \sbol{Component} objects. Each \sbol{Component} instance is part of a \sbol{ComponentDefinition} object, associated with it by the \sbol{components} property to represent  physical composition.  
+The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects into a structural hierarchy. For example, the \sbol{ComponentDefinition} of a gene could contain four \sbol{Component} objects, including a promoter, RBS, CDS, and terminator. The \sbol{ComponentDefinition} of the promoter \sbol{Component} could in turn contain \sbol{Component} objects defined as various operator sites.
 
-All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
+% All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
 
 \paragraph{Serialization}
 
-The serialization of a \sbol{ComponentInstance} object has the following form:
+The serialization of a \sbol{Component} has the following form:
 
 \lstsetsbol
 \begin{lstlisting}
@@ -454,7 +464,7 @@ The serialization of a \sbol{ComponentInstance} object has the following form:
 \end{lstlisting}
 
 The example below shows the serialization of a \sbol{Component}
-representing an instance of promoter:
+that represents an instance of promoter:
 
 \lstsetsbol
 \begin{lstlisting}

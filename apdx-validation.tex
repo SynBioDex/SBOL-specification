@@ -77,31 +77,21 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{annotations} field is an OPTIONAL list of for all \sbol{Identified} objects and, if provided, includes references to \sbol{Annotation} objects. (Reference: \sec{sec:Identified})}
 
-\printModeling{The \sbol{identity} of a compliant object SHOULD either be equal to the \sbol{persistentIdentity} when no \sbol{version} is specified or equal to "\refObj{persistentIdentity}/\refObj{version}" when a \sbol{version} is provided. (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Collection} object is REQUIRED and MUST end with "/col/\refObj{displayId}". (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{ModuleDefinition} object is REQUIRED and MUST end with "/md/\refObj{displayId}". (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Model} object is REQUIRED and MUST end with\\ "/mod/\refObj{displayId}". (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{ComponentDefinition} object is REQUIRED and MUST end with "/cd/\refObj{displayId}". (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{Sequence} object is REQUIRED and MUST end with "/seq/\refObj{displayId}". (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{persistentIdentity} of a compliant \sbol{GenericTopLevel} object is REQUIRED and MUST end with "/gen/\refObj{displayId}". (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{persistentIdentity} of a compliant child object is REQUIRED MUST begin with the\\ \sbol{persistentIdentity} of its parent object and be immediately followed by "/\refObj{displayId}". (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{version} of a compliant child object is REQUIRED to be equal to the \sbol{version} of its parent object. (Reference: \sec{sec:compliant})}
-
-\printModeling{The \sbol{displayId} of a compliant object is REQUIRED.  (Reference: \sec{sec:compliant})}
-
 \printValid{The \sbol{wasDerivedFrom} property is OPTIONAL for all \sbol{Identified} objects and, if provided, data type of URI.  (Reference: \sec{sec:Identified})}
 
 \printValid{The \sbol{name} is an OPTIONAL property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
 
 \printValid{The \sbol{description} is an OPTIONAL property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
+
+\printModeling{The \sbol{displayId} of a compliant object is REQUIRED.  (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant top level object is REQUIRED and MUST end with a delimiter ('/', '\#', or ':') followed by the \sbol{displayId} of the object. (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{persistentIdentity} of a compliant child object is REQUIRED and MUST begin with the\\ \sbol{persistentIdentity} of its parent object and be immediately followed by a delimiter ('\', '\#', or ':') and the \sbol{displayId} of the object. (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{identity} of a compliant object MUST either be equal to the \sbol{persistentIdentity} when no \sbol{version} is specified or equal to "\refObj{persistentIdentity}/\refObj{version}" when a \sbol{version} is provided. (Reference: \sec{sec:compliant})}
+
+\printModeling{The \sbol{version} of a compliant child object is REQUIRED to be equal to the \sbol{version} of its parent object. (Reference: \sec{sec:compliant})}
 
 \subsubsection*{Rules for the \class{TopLevel} class} 
 \setcounter{sbolCtr}{10301}
