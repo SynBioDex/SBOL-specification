@@ -2,6 +2,9 @@
 \section{SBOL Data Model}\label{sec:model}
 % -----------------------------------------------------------------------------
 
+\Ctodo{We should make all of the example URIs compliant}
+\Ctodo{Need to confirm that the cardinalities of all serializations match the UML}
+
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
 \subsection{Understanding the UML Diagrams}
@@ -64,7 +67,7 @@ When SBOL use simple ``primitive'' data types such as strings or integers, these
 \subsection{Identified}
 \label{sec:Identified}
 
-\Ctodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
+\NVtodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
 
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class. This inheritance means that all SBOL objects are identified using \external{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web. 
 
@@ -1122,29 +1125,54 @@ a part of a toggle switch:
 \end{center}
 \end{figure}
 
-\Ctodo{Some of this description is incorrect or unclear}
-The Interaction class provides a qualitative basis for asserting the intended function of a given ModuleDefinition object. The proposed data model supports the representation of regulatory interactions, such as activation or repression, and processes from the central dogma of biology, such as transcription and translation. Other supported interaction types include non-covalent binding between a small molecule and TF, and phosphorylation of a TF by an enzyme. 
-\Ctodo{What does it mean for an interaction to be supported? --> nothing, pick a better word}
+\Rtodo{Heavily rewrote this section. -JSB}
+The \sbol{Interaction} class provides a description of the functional interactions of entities within a \sbol{ModuleDefinition}.
+For example, it can be used to represent regulatory interactions, such as activation or repression, processes from the central dogma of biology, such as transcription and translation, or molecular interactions like  non-covalent binding between a small molecule and transcription factor or phosphorylation of a transcription factor by an enzyme.
+Such an \sbol{Interaction} is represented in SBOL by referring to an ontology defining the type of interaction and declaring how various entities participate in the interaction.
 
-Each Interaction object must specify its type with at least one URI that identifies an appropriate ontology term, such as a term from the Systems Biology Ontology (SBO). If an Interaction object has multiple type URIs, then they must identify synonymous terms. 
+\paragraph{The \sbolheading{types} property}\label{sec:types}
 
-\Ctodo{Like the others, SBO is REQUIRED if the term exists, and you can add other stuff.  We also need to explain this up front in the beginning of the section}
+The \sbol{types} property is a REQUIRED set of one or more URIs that identify an appropriate ontology term describing the behavior represented by this \sbol{Interaction}. 
+If an \sbol{Interaction} object has multiple
+\sbol{types} URIs, then they must identify synonymous terms.
 
-Furthermore, an \sbol{Interaction} object can specify the set of \sbol{FunctionalComponent} entities that are interacting by linking to \sbol{Participation} objects that descibe how each one participates in the interaction.
-\Rtodo{I don't think this is really a MUST.  JSB: it wasn't; it is resolved.}
+Values for this URI are RECOMMENDED to be chosen from the from the occurring entity relationship branch of the Systems Biology Ontology (SBO) where possible.
+
+\Rtodo{Like the others, SBO is REQUIRED if the term exists, and you can add other stuff.  We also need to explain this up front in the beginning of the section; JSB: done}
+
+\paragraph{The \sbolheading{participations} property}\label{sec:participations}
+
+The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies a \sbol{FunctionalComponent} and the \sbol{role} is plays in the interaction.
+
 
 \paragraph{Serialization}
 
-The serialization of \sbol{Interaction}s has the following form.
+The serialization of \sbol{Interaction} objects has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Interaction rdf:about="...">
   [\emph{one or more}] <sbol:type rdf:resource="..."/> [\emph{elements}]
-  [\emph{one or more}] <sbol:participation>
+  [\emph{zero or more}] <sbol:participation>
                 <sbol:Participation rdf:about="...">...</sbol:Participation>
               </sbol:participation> [\emph{elements}]
 </sbol:Interaction>
 \end{lstlisting}
+
+The example below shows an \sbol{Interaction} representing an inhibition relationship between a repressor and a promoter (omitting the details of the \sbol{Participation} objects):
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Interaction rdf:about="http://sbolstandard.org/example/laci_inverter/interaction/LacI_pLacI">
+  <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000169"/>
+  <sbol:participation>
+    <sbol:Participation rdf:about=...> ... </sbol:Participation>
+  </sbol:participation>
+  <sbol:participation>
+    <sbol:Participation rdf:about=...> ... </sbol:Participation>
+  </sbol:participation>
+</sbol:Interaction>
+\end{lstlisting}
+
 
 \begin{figure}[ht]
 \begin{center}
@@ -1157,24 +1185,36 @@ The serialization of \sbol{Interaction}s has the following form.
 \subsubsection{Participation}
 \label{sec:Participation}
 
-\Ctodo{Fix the linking and clean grammar}
+\Rtodo{Fix the linking and clean grammar. JSB: done}
 
-Each object of the Participation class must specify the role of its participant FunctionalComponent object in its parent Interaction object with at least one URI that identifies an appropriate ontology term. If a Participation object has multiple role URIs, then they must identify synonymous terms. 
+Each \sbol{Participation} object describes the role or roles that a
+particular \sbol{FunctionalComponent} plays in its parent
+\sbol{Interaction}.
 
-\Ctodo{SBO is our REQUIRED term if available, just as in the prior cases}
+\paragraph{The \sbolheading{roles} property}\label{sec:roles}
 
+The \sbol{roles} property is an OPTIONAL set of URIs that identify an appropriate ontology term describing this elements relationship to its parent \sbol{Interaction}. 
+If a \sbol{Participation} object has multiple
+\sbol{role} URIs, then they must identify synonymous terms.
+
+Values for this URI are RECOMMENDED to be chosen from the from the participant role branch of the Systems Biology Ontology (SBO) where possible.
+
+\Rtodo{SBO is our REQUIRED term if available, just as in the prior cases. JSB: done, but set as RECOMMENDED, not required (as elsewhere)}
 \Ctodo{Goksel is going to check if there is a superset ontology that should displace SBO}
 
-While the Interaction class provide a qualitative description of genetic function, quantitative descriptions are also needed for genetic design. Instead of introducing a new language for the specification of mathematical models of biology, the proposed data model leverages existing standards and links to them via the Model class. 
+\paragraph{The \sbolheading{participant} property}\label{sec:participant}
+
+The \sbol{participant} property MUST specify precisely one \sbol{FunctionalComponent} object that plays the designated \sbol{role} in its parent \sbol{Interaction} object.
+
 
 \paragraph{Serialization}
 
-The serialization of \sbol{Participation}s has the following form.
+The serialization of \sbol{Participation} objects has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Participation rdf:about="...">
-  [\emph{one or more}] <sbol:role rdf:resource="..."/>
-  [\emph{one or more}] <sbol:participant rdf:resource="..."/>
+  [\emph{zero or more}] <sbol:role rdf:resource="..."/>
+  [\emph{one}]          <sbol:participant rdf:resource="..."/>
 </sbol:Participation>
 \end{lstlisting}
 
@@ -1219,8 +1259,6 @@ The serialization of \sbol{Collection} objects has the following form:
   [\emph{one or more}] <sbol:member rdf:resource="..."/> [\emph{element}]
 </sbol:Collection>
 \end{lstlisting}
-
-\Ctodo{We should make all of the example URIs compliant}
 
 The example below shows the serialization of a \sbol{Collection} object grouping together a library of constitutive promoters.
 \lstsetsbol
