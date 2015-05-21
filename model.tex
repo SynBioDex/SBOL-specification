@@ -514,7 +514,7 @@ In particular, a \sbol{MapsTo} object provides two pieces of information:
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=1]{images/MapsTo_Diagram2}
+\includegraphics[scale=1]{images/MapsTo_Diagram3}
 \caption{Linking Components using \sbol{MapsTo} entities. Boxes with diagrams represent \sbol{ComponentDefinition} objects, boxes with the C label represent \sbol{Component} objects, and boxes with the M label represent \sbol{MapsTo} objects. In both diagrams, a promoter-RBS \sbol{ComponentDefinition} and a RBS-CDS \sbol{ComponentDefinition} are being composed to form the \sbol{ComponentDefinition} of a complete transcriptional unit. In the lefthand diagram, the \sbol{Component} objects inside the promoter-RBS \sbol{ComponentDefinition} and RBS-CDS \sbol{ComponentDefinition} both refer to an abstract RBS \sbol{ComponentDefinition} (white semicircle, not shown separately) that lacks a sequence. Through the use of \sbol{MapsTo} objects with useLocal \sbol{refinement} properties, these \sbol{ComponentDefinition} objects are effectively overridden by that of the green RBS in the \sbol{ComponentDefinition} for the complete transcriptional unit. In the righthand diagram, however, the two ``lower level'' RBS \sbol{ComponentDefinition} objects are different and do not lack sequences. In this case, one of the \sbol{MapsTo} objcts has a useRemote \sbol{refinement}, and the one associated with the promoter (green semicircle) is selected to override the one associated with the coding sequence (red semicircle) in the new \sbol{ComponentDefinition}.}
 \label{image:maps_to_diagram2}
 \end{center}
