@@ -489,21 +489,13 @@ that represents an instance of a promoter:
 \end{center}
 \end{figure}
 
-When \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects are composed using \sbol{Component}, \sbol{FunctionalComponent}, and \sbol{Module} objects, it is often the case that some of the elements comprising these objects are intended to refer to the ``same'' thing, in some sense.
-The purpose of the \sbol{MapsTo} class is to make these relationships clear and explicit.
+When \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects are composed into a hierarchy using \sbol{Module} and \sbol{ComponentInstance} objects, it is often the case that some \sbol{ComponentInstance} objects are intended to represent the same entity in the overall design. The purpose of the \sbol{MapsTo} class is to make these identity relationships clear and explicit.
 
 In particular, a \sbol{MapsTo} object provides two pieces of information:
 \begin{itemize}
-\item An identity relationship between two \sbol{ComponentInstance}
-  objects, one inside the definition of a ``lower level'' instance that owns the
-  \sbol{MapsTo}, the other in the ``higher level'' definition that
-  contains the ``lower level'' instance.  The \sbol{local} property identifies the ``higher
-  level'' \sbol{ComponentInstance} and the \sbol{remote} property
-  identifies the ``lower level'' \sbol{ComponentInstance}.
-\item Instructions on what to do if the two \sbol{ComponentInstance}
-  objects link to different \sbol{ComponentDefinition} objects (i.e.,
-  they are not identical).  This is specified by the \sbol{refinement}
-  property, using one of the values from \ref{tbl:mapsto_refinement}.
+\item An identity relationship between two \sbol{ComponentInstance} objects, the first contained by the ``lower level'' definition of the \sbol{ComponentInstance} or \sbol{Module} that owns the
+  \sbol{MapsTo}, and the second contained by the ``higher level'' definition that contains the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}. The \sbol{remote} property of a \sbol{MapsTo} refers to the first ``lower level'' \sbol{ComponentInstance}, while the \sbol{local} property refers to the second ``higher level'' \sbol{ComponentInstance}.
+\item Instructions on what to do if the two \sbol{ComponentInstance} objects refer to different \sbol{ComponentDefinition} objects (that is, they are not identical). This is specified using the \sbol{refinement} property of the \sbol{MapsTo} class.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -514,14 +506,13 @@ In the left diagram, both 5'UTRs are abstract, with no sequence (white semicircl
 \label{image:maps_to_diagram2}
 \end{center}
 \end{figure}
-\Rtodo{Caption: why are some RBSs not filled in? JSB: explained meaning}
 
-To illustrate this concept, two examples are provided in \ref{image:maps_to_diagram2}, in which a \sbol{ComponentDefinition} for a promoter / 5'UTR / coding-sequence functional unit is constructed by combining two ``lower level'' \sbol{ComponentDefinition} objects.
-In both examples, the two ``lower level'' \sbol{ComponentDefinition} objects each contain a 5'UTR, and these are all taken to refer to the ``same'' element of the new ``higher level'' \sbol{ComponentDefinition}.
+To illustrate this concept, two examples are provided in \ref{image:maps_to_diagram2}, in which the \sbol{ComponentDefinition} of a promoter-RBS-CDS transcriptional unit is specified by composing two ``lower level'' \sbol{ComponentDefinition} objects.
+In both examples, the two ``lower level'' \sbol{ComponentDefinition} objects each contain a RBS that is intended to represent the same design entity in the ``higher level'' \sbol{ComponentDefinition}.
 
-In order to represent this relationship, a new \sbol{Component} is created, owned by the ``higher level'' \sbol{ComponentDefinition}, to represent the shared 5'UTR.  
-It is then linked to the equivalent \sbol{Component} in each of the ``lower level'' \sbol{ComponentDefinition} objects by means of a \sbol{MapsTo}, using one \sbol{MapsTo} per link.  
-For example, to link the shared ``higher level'' 5'UTR to the 5'UTR in the promoter/5'UTR construct, a \sbol{MapsTo} is created that is owned by the \sbol{Component} instance for the promoter/5'UTR construct, setting its \sbol{local} to the 5'UTR \sbol{Component} in the ``higher-level'' construct and its \sbol{remote} to the 5'UTR \sbol{Component} in the ``lower-level'' construct.
+In order to explicitly represent these identity relationships, a new \sbol{Component} must be created inside the ``higher level'' \sbol{ComponentDefinition} to represent the shared RBS.  
+This \sbol{Component} is then linked to the equivalent \sbol{Component} in each of the ``lower level'' \sbol{ComponentDefinition} objects by means of a \sbol{MapsTo}, using one \sbol{MapsTo} per link.  
+In particular, in order to link the shared ``higher level'' RBS to the ``lower level'' RBS in the promoter-RBS \sbol{ComponentDefinition}, a \sbol{MapsTo} is created  \sbol{Component} that refers to , setting its \sbol{local} to the 5'UTR \sbol{Component} in the ``higher-level'' construct and its \sbol{remote} to the 5'UTR \sbol{Component} in the ``lower-level'' construct.
 Many ``lower level'' instances can then be linked together in an unambiguous relationship by using one \sbol{MapsTo} object per \sbol{remote}, all sharing the same \sbol{local}.
 
 The exact same types of relationships also apply and can likewise be declared for \sbol{FunctionalComponent} objects in a \sbol{ModuleDefinition} and the 
