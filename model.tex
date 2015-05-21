@@ -515,8 +515,7 @@ In particular, a \sbol{MapsTo} object provides two pieces of information:
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=1]{images/MapsTo_Diagram2}
-\caption{Linking Components using \sbol{MapsTo} entities. Boxes with diagrams represent \sbol{ComponentDefinition} objects, while boxes with the C label represent \sbol{Component} objects and boxes with the M label represent \sbol{MapsTo} objects.  In both diagrams, a promoter-RBS \sbol{ComponentDefinition} and a RBS-CDS \sbol{ComponentDefinition} are being composed to form a complete transcriptional unit.  
-In the left diagram, both RBS are abstract, with no sequence (white semicircle), and their definition is taken from a third green RBS component. In the right diagram, the two RBS are different, and the one associated with the promoter (green semicircle) is selected to override the one associated with the coding sequence (red semicircle) in the new \sbol{ComponentDefinition}.}
+\caption{Linking Components using \sbol{MapsTo} entities. Boxes with diagrams represent \sbol{ComponentDefinition} objects, boxes with the C label represent \sbol{Component} objects, and boxes with the M label represent \sbol{MapsTo} objects. In both diagrams, a promoter-RBS \sbol{ComponentDefinition} and a RBS-CDS \sbol{ComponentDefinition} are being composed to form the \sbol{ComponentDefinition} of a complete transcriptional unit. In the lefthand diagram, the \sbol{Component} objects inside the promoter-RBS \sbol{ComponentDefinition} and RBS-CDS \sbol{ComponentDefinition} both refer to an abstract RBS \sbol{ComponentDefinition} (white semicircle, not shown separately) that lacks a sequence. Through the use of \sbol{MapsTo} objects with useLocal \sbol{refinement} properties, these \sbol{ComponentDefinition} objects are effectively overridden by that of the green RBS in the \sbol{ComponentDefinition} for the complete transcriptional unit. In the righthand diagram, however, the two ``lower level'' RBS \sbol{ComponentDefinition} objects are different and do not lack sequences. In this case, one of the \sbol{MapsTo} objcts has a useRemote \sbol{refinement}, and the one associated with the promoter (green semicircle) is selected to override the one associated with the coding sequence (red semicircle) in the new \sbol{ComponentDefinition}.}
 \label{image:maps_to_diagram2}
 \end{center}
 \end{figure}
@@ -762,7 +761,6 @@ The serialization of \sbol{GenericLocation} objects has the following form:
 \begin{lstlisting}
 <sbol:GenericLocation rdf:about="...">
                ...   
-  [\emph{one}]         <sbol:at>...</sbol:at> [\emph{element}] 
   [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}] 
 </sbol:GenericLocation>
 \end{lstlisting}
@@ -838,10 +836,12 @@ The serialization of \sbol{SequenceConstraint} objects has the following form:
 The example below shows the serialization of a \sbol{SequenceConstraint} object. In the example, the constraint is included as part of a \sbol{ComponentDefinition} for a LacI repressible composite promoter and has a precedes restriction. This restriction states that the subject \sbol{Component} for the core promoter precedes the object \sbol{Component} for the LacI operator in the composite promoter definition. Such restriction is especially useful to specify incomplete designs and the final design may include other components between the subject and object components. 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:SequenceConstraint rdf:about="http://www.partsregistry.org/Part:BBa_K174004/r1">
+<sbol:SequenceConstraint rdf:about="http://partsregistry.org/cd/BBa_K174004/r1">
+  <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_K174004/r1"/>
+  <sbol:displayId>r1</sbol:displayId>
   <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
-  <sbol:subject rdf:resource="http://www.partsregistry.org/Part:BBa_K174004#pspac"/>
-  <sbol:object rdf:resource="http://www.partsregistry.org/Part:BBa_K174004#LacIoperator"/>
+  <sbol:subject rdf:resource="http://partsregistry.org/cd/pspac"/>
+  <sbol:object rdf:resource="http://partsregistry.org/cd/LacI_operator"/>
 </sbol:SequenceConstraint>
 \end{lstlisting}
 
@@ -1110,10 +1110,10 @@ The serialization of \sbol{Module}s has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Module rdf:about="...">
-  [\emph{one}]          <sbol:definition rdf:resource="..."/>[\emph{element}]
-  [\emph{zero or more}] <sbol:mapping>
+  [\emph{one}]          <sbol:definition rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}] <sbol:mapsTo>
                  <sbol:MapsTo rdf:about="...">...</sbol:MapsTo>
-               </sbol:mapping> [\emph{element}]
+               </sbol:mapsTo> [\emph{element}]
 </sbol:Module>
 \end{lstlisting}
 
