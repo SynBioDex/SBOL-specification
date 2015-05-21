@@ -115,7 +115,7 @@ If the \sbol{displayId} property is used, then its \external{String} value SHOUL
 The \sbol{version} property is OPTIONAL and has a data type of \external{String}. This property can be used to compare two SBOL objects with the same \sbol{persistentIdentity}.
 
 If the \sbol{version} property is used, then it is RECOMMENDED that version numbering should follow the conventions of semantic versioning (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).
-This convention represents versions as sequences of numbers and qualifiers that are separated by the characters {\tt .} and {\tt -} and are compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).
+This convention represents versions as sequences of numbers and qualifiers that are separated by the characters ``{\tt .}'' and ``{\tt -}'' and are compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).
 For a full explanation, see the linked resources.
 
 \subsubsection*{The \sbolheading{wasDerivedFrom} property}
@@ -123,7 +123,7 @@ For a full explanation, see the linked resources.
 
 The \sbol{wasDerivedFrom} property is OPTIONAL and has a data type of \external{URI}. An SBOL object with this property refers to another SBOL object or non-SBOL resource from which this object was derived. 
 
-If the \sbol{wasDerivedFrom} URI of an SBOL object $B$ refers to another SBOL object $A$ and either $B$ or $A$ has a \sbol{persistentIdentity}, then both $B$ and $A$ must have the same \sbol{persistentIdentity} \external{URI}. In addition, if both $B$ and $A$ have a \sbol{version}, then the \sbol{version} \external{String} of $A$ MUST come before that of $B$. Finally, an SBOL object MUST NOT refer to itself via its own  \sbol{wasDerivedFrom} property or form a circular chain of references via its \sbol{wasDerivedFrom} property and those of other SBOL objects (for example, the reference chain ``$B$ was derived from $A$ and $A$ was derived from $B$'' is circular).
+If the \sbol{wasDerivedFrom} property of an SBOL object $A$ refers to another SBOL object $B$ with the same \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST come before that of $A$. In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFrom} property or form a circular chain of references via its \sbol{wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is circular.
 
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
@@ -406,7 +406,9 @@ The \sbol{ComponentInstance} abstract class is inherited by SBOL classes that re
 \paragraph{The \sbolheading{definition} property}
 \label{sec:definition}
 
-The \sbol{definition} property is a REQUIRED \external{URI} that refers to the \sbol{ComponentDefinition} for the \sbol{ComponentInstance}. As described in the previous section, this \sbol{ComponentDefinition} provides information about the \sbol{types} and \sbol{roles} of the \sbol{ComponentInstance}.
+The \sbol{definition} property is a REQUIRED \external{URI} that refers to the \sbol{ComponentDefinition} for the \sbol{ComponentInstance}. As described in the previous section, this \sbol{ComponentDefinition} effectively provides information about the \sbol{types} and \sbol{roles} of the \sbol{ComponentInstance}.
+
+The \sbol{definition} property MUST NOT refer to the same \sbol{ComponentDefinition} as that which contains the \sbol{ComponentInstance}. Furthermore, \sbol{ComponentInstance} objects MUST NOT form a circular chain of references via their \sbol{definition} properties and the \sbol{ComponentDefinition} objects that contain them. For example, consider the \sbol{ComponentInstance} objects $A$ and $B$ and the \sbol{ComponentDefinition} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is circular. 
 
 \paragraph{The \sbolheading{mapsTo} property}
 \label{sec:mapsTos}
@@ -464,7 +466,7 @@ The serialization of a \sbol{Component} has the following form:
 \end{lstlisting}
 
 The example below shows the serialization of a \sbol{Component}
-that represents an instance of promoter:
+that represents an instance of a promoter:
 
 \lstsetsbol
 \begin{lstlisting}
