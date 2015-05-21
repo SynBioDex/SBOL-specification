@@ -252,10 +252,16 @@ The example below shows the serialization for the \sbol{Sequence} of a promoter.
 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Sequence rdf:about="http://www.partsregistry.org/Part:BBa_J23119:Design">
-  <sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
-  <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
-</sbol:Sequence>
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://parts.igem.org/Part:BBa_J23119:Design"/>
+    <sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>
 \end{lstlisting}
 
 
@@ -356,9 +362,9 @@ The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{
 <sbol:ComponentDefinition rdf:about="...">
                ...
   [\emph{zero or more}]  <sbol:sequence rdf:resource="..."/> [\emph{element}]
-  [\emph{one or more}]  <sbol:type rdf:resource="..."/> [\emph{elements}]
+  [\emph{one or more}]   <sbol:type rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]    
-  [\emph{zero or more}] <sbol:component>
+  [\emph{zero or more}]  <sbol:component>
                  <sbol:Component rdf:about="...">...</sbol:Component>
                </sbol:component> [\emph{elements}]
   [\emph{zero or more}] <sbol:sequenceAnnotation>
@@ -374,15 +380,21 @@ The example below shows the serialization for the \sbol{ComponentDefinition} of 
 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_J23119">
-  <dcterms:title>J23119 promoter</dcterms:title>
-  <dcterms:description>Constitutive promoter</dcterms:description>
-  <sbol:type rdf:resource="http://identifiers.org/chebi/CHEBI:4705"/>
-  <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-  <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
-  <sbol:role rdf:resource="http://identifiers.org/so/SO:0000613"/>
-  <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_J23119:Design"/>
-</sbol:ComponentDefinition>
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
+    <dcterms:title>J23119 promoter</dcterms:title>
+    <dcterms:description>Constitutive promoter</dcterms:description>
+    <sbol:type rdf:resource="http://identifiers.org/chebi/CHEBI:4705"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000613"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
+  </sbol:ComponentDefinition>
+</rdf:RDF>
 \end{lstlisting}
 
 
@@ -459,9 +471,9 @@ The serialization of a \sbol{Component} has the following form:
 \begin{lstlisting}
 <sbol:Component rdf:about="...">
                ...
-  [\emph{one}]           <sbol:access rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]           <sbol:definition rdf:resource="..."/> [\emph{elements}]    
-  [\emph{zero or more}]  <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
+  [\emph{one}]          <sbol:access rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]          <sbol:definition rdf:resource="..."/> [\emph{element}]    
+  [\emph{zero or more}] <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
 </sbol:Component>
 \end{lstlisting}
 
@@ -470,9 +482,11 @@ that represents an instance of a promoter:
 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Component rdf:about="http://www.partsregistry.org/Part:BBa_F2620/pLuxR">
+<sbol:Component rdf:about="http://partsregistry.org/cd/BBa_F2620/pLuxR">
+  <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/pLuxR"/>
+  <sbol:displayId>pLuxR</sbol:displayId>
   <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-  <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_R0062"/>
+  <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_R0062"/>
 </sbol:Component>
 \end{lstlisting}
 
@@ -494,31 +508,28 @@ When \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects are composed
 In particular, a \sbol{MapsTo} object provides two pieces of information:
 \begin{itemize}
 \item An identity relationship between two \sbol{ComponentInstance} objects, the first contained by the ``lower level'' definition of the \sbol{ComponentInstance} or \sbol{Module} that owns the
-  \sbol{MapsTo}, and the second contained by the ``higher level'' definition that contains the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}. The \sbol{remote} property of a \sbol{MapsTo} refers to the first ``lower level'' \sbol{ComponentInstance}, while the \sbol{local} property refers to the second ``higher level'' \sbol{ComponentInstance}.
+  \sbol{MapsTo}, and the second contained by the ``higher level'' definition that contains this \sbol{ComponentInstance} or \sbol{Module}. The \sbol{remote} property of a \sbol{MapsTo} refers to the first ``lower level'' \sbol{ComponentInstance}, while the \sbol{local} property refers to the second ``higher level'' \sbol{ComponentInstance}.
 \item Instructions on what to do if the two \sbol{ComponentInstance} objects refer to different \sbol{ComponentDefinition} objects (that is, they are not identical). This is specified using the \sbol{refinement} property of the \sbol{MapsTo} class.
 \end{itemize}
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=1]{images/MapsTo_Diagram2}
-\caption{Linking Components using \sbol{MapsTo} entities. Boxes with diagrams represent \sbol{ComponentDefinition} objects, while boxes with the C label represent \sbol{Component} objects and boxes with the M label represent \sbol{MapsTo} objects.  In both diagrams, a promoter/5'UTR construct and a 5'UTR/coding sequence construct are being combined to form a complete functional unit.  
-In the left diagram, both 5'UTRs are abstract, with no sequence (white semicircle), and their definition is taken from a third green 5'UTR component. In the right diagram, the two 5'UTRs are different, and the one associated with the promoter (green semicircle) is selected to override the one associated with the coding sequence (red semicircle) in the new \sbol{ComponentDefinition}.}
+\caption{Linking Components using \sbol{MapsTo} entities. Boxes with diagrams represent \sbol{ComponentDefinition} objects, while boxes with the C label represent \sbol{Component} objects and boxes with the M label represent \sbol{MapsTo} objects.  In both diagrams, a promoter-RBS \sbol{ComponentDefinition} and a RBS-CDS \sbol{ComponentDefinition} are being composed to form a complete transcriptional unit.  
+In the left diagram, both RBS are abstract, with no sequence (white semicircle), and their definition is taken from a third green RBS component. In the right diagram, the two RBS are different, and the one associated with the promoter (green semicircle) is selected to override the one associated with the coding sequence (red semicircle) in the new \sbol{ComponentDefinition}.}
 \label{image:maps_to_diagram2}
 \end{center}
 \end{figure}
 
 To illustrate this concept, two examples are provided in \ref{image:maps_to_diagram2}, in which the \sbol{ComponentDefinition} of a promoter-RBS-CDS transcriptional unit is specified by composing two ``lower level'' \sbol{ComponentDefinition} objects.
-In both examples, the two ``lower level'' \sbol{ComponentDefinition} objects each contain a RBS that is intended to represent the same design entity in the ``higher level'' \sbol{ComponentDefinition}.
+In both examples, the two ``lower level'' \sbol{ComponentDefinition} objects each contain a RBS \sbol{Component} that is intended to represent the same design entity in the ``higher level'' \sbol{ComponentDefinition}.
 
 In order to explicitly represent these identity relationships, a new \sbol{Component} must be created inside the ``higher level'' \sbol{ComponentDefinition} to represent the shared RBS.  
-This \sbol{Component} is then linked to the equivalent \sbol{Component} in each of the ``lower level'' \sbol{ComponentDefinition} objects by means of a \sbol{MapsTo}, using one \sbol{MapsTo} per link.  
-In particular, in order to link the shared ``higher level'' RBS to the ``lower level'' RBS in the promoter-RBS \sbol{ComponentDefinition}, a \sbol{MapsTo} is created  \sbol{Component} that refers to , setting its \sbol{local} to the 5'UTR \sbol{Component} in the ``higher-level'' construct and its \sbol{remote} to the 5'UTR \sbol{Component} in the ``lower-level'' construct.
-Many ``lower level'' instances can then be linked together in an unambiguous relationship by using one \sbol{MapsTo} object per \sbol{remote}, all sharing the same \sbol{local}.
+This \sbol{Component} must then be linked to the equivalent \sbol{Component} in each of the ``lower level'' \sbol{ComponentDefinition} objects by means of a \sbol{MapsTo}, using one \sbol{MapsTo} per link.  
+In particular, in order to link the shared ``higher level'' RBS to the ``lower level'' RBS in the promoter-RBS \sbol{ComponentDefinition}, a \sbol{MapsTo} is created and owned by the \sbol{Component} that instantiates the promoter-RBS \sbol{ComponentDefinition} inside the ``higher level'' promoter-RBS-CDS \sbol{ComponentDefinition}. The \sbol{local} property of this \sbol{MapsTo} then refers to the shared RBS \sbol{Component} inside the ``higher-level'' \sbol{ComponentDefinition}, and its \sbol{remote} property refers to the RBS \sbol{Component} in the ``lower-level'' promoter-RBS \sbol{ComponentDefinition}.
+In this way, many ``lower level'' \sbol{Component} objects can be linked together at the ``higher level'' using as many \sbol{MapsTo} objects, with each \sbol{MapsTo} referring to a different \sbol{remote} \sbol{Component}, but all referring to the same \sbol{local} \sbol{Component}.
 
-The exact same types of relationships also apply and can likewise be declared for \sbol{FunctionalComponent} objects in a \sbol{ModuleDefinition} and the 
-\sbol{ComponentInstance} objects within the ``lower level'' \sbol{Module} or \sbol{FunctionalComponent} instances that it contains.
-
-\Rtodo{need to explain the whole 3-way mapsto model and importation better.  JSB: done, I think}
+The exact same types of identity relationships can also be declared between \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects, or between \sbol{Component} objects in \sbol{ComponentDefinition} objects and \sbol{FunctionalComponent} objects in \sbol{ModuleDefinition} objects. See \ref{sec:examples} for additional examples using the \sbol{MapsTo} class.
 
 \paragraph{The \sbolheading{local} property}\label{sec:local}
 This REQUIRED property is used to specify the \sbol{ComponentInstance} from the ``higher level'' entity.  The same higher-level entity MUST own both the \sbol{local} and object that owns the \sbol{MapsTo}.
@@ -551,19 +562,22 @@ The serialization of \sbol{MapsTo} has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:MapsTo rdf:about="...">
-  [\emph{one}] <sbol:refinement>...</sbol:refinement> [\emph{element}]
-  [\emph{one}] <sbol:remote rdf:resource="..."/> [\emph{element}]]
-  [\emph{one}] <sbol:local rdf:resource="..."/> [\emph{element}]]
+      ...
+  [\emph{one}] <sbol:refinement rdf:resource="..."/> [\emph{element}]
+  [\emph{one}] <sbol:remote rdf:resource="..."/> [\emph{element}]
+  [\emph{one}] <sbol:local rdf:resource="..."/> [\emph{element}]
 </sbol:MapsTo>
 \end{lstlisting}
 
 In the example below, a \sbol{FunctionalComponent} entity from the submodule is linked to a \sbol{FunctionalComponent} entity in a parent module. The former is described in the imported \sbol{ModuleDefinition} entity which is referred to by the definition property of the \sbol{Module} entity. The latter is defined in the parent \sbol{ModuleDefinition}, importing the sub module. The full example can be found in \ref{ser:toggleswitch}.
 \lstsetsbol
 \begin{lstlisting}
-<sbol:MapsTo rdf:about="http://sbolstandard.org/example/toggle_switch/submodule/laci_inverter/mapping/Q6QR72">
-  <sbol:refinement>USEREMOTE</sbol:refinement>
-  <sbol:remote rdf:resource="http://sbolstandard.org/example/toggle_switch/fc/Q6QR72"/>
-  <sbol:local rdf:resource="http://sbolstandard.org/example/tetr_inverter/fc/Q6QR72"/>
+<sbol:MapsTo rdf:about="http://sbolstandard.org/example/toggle_switch/laci_inverter/LacI_mapping">
+  <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/toggle_switch/laci_inverter/LacI_mapping"/>
+  <sbol:displayId>LacI_mapping</sbol:displayId>
+  <sbol:refinement rdf:resource="http://sbols.org/v2#useRemote"/>
+  <sbol:remote rdf:resource="http://sbolstandard.org/example/toggle_switch/LacI"/>
+  <sbol:local rdf:resource="http://sbolstandard.org/example/laci_inverter/TF"/>
 </sbol:MapsTo>
 \end{lstlisting}
 
@@ -610,18 +624,20 @@ The serialization of SequenceAnnotation objects MUST be carried out according to
 The example below shows the serialization of a \sbol{SequenceAnnotation} object. It specifies the location of a particular \sbol{Component} named BBa\_F2620.
 \lstsetsbol
 \begin{lstlisting}
-    <sbol:sequenceAnnotation>
-      <sbol:SequenceAnnotation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2">
-        <sbol:location>
-          <sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2/range">
-            <sbol:start>56</sbol:start>
-            <sbol:end>68</sbol:end>
-            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
-          </sbol:Range>
-        </sbol:location>
-        <sbol:component rdf:resource="http://www.partsregistry.org/Part:BBa_F2620/rbs"/>
-      </sbol:SequenceAnnotation>
-    </sbol:sequenceAnnotation>
+<sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno2">
+  <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno2"/>
+  <sbol:displayId>anno2</sbol:displayId>
+  <sbol:location>
+    <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno2/range">
+      <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno2/range"/>
+      <sbol:displayId>range</sbol:displayId>
+      <sbol:start>56</sbol:start>
+      <sbol:end>68</sbol:end>
+      <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+    </sbol:Range>
+  </sbol:location>
+  <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/rbs"/>
+</sbol:SequenceAnnotation>      
 \end{lstlisting}
 
 \Rtodo{Need to give an example with this one.  JSB: done.}
@@ -686,7 +702,9 @@ The serialization of Range objects has the following form:
 The example below shows the serialization of a \sbol{Range} object. It specifies the region between 56 and 68, and the orientation is given as \external{inline}.
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Range rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno2/range">
+<sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno2/range">
+  <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno2/range"/>
+  <sbol:displayId>range</sbol:displayId>
   <sbol:start>56</sbol:start>
   <sbol:end>68</sbol:end>
   <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
@@ -718,8 +736,10 @@ The serialization of \sbol{Cut} objects has the following form:
 The example below shows the serialization of a \sbol{Cut} object. It specifies the location after 27, and the orientation is given as \external{inline}.
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Cut rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno3/cut">
-  <sbol:at>27</sbol:at>
+<sbol:Cut rdf:about="http://partsregistry.org/cd/BBa_J23119/cutat10/cut">
+  <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119/cutat10/cut"/>
+  <sbol:displayId>cut</sbol:displayId>
+  <sbol:at>10</sbol:at>
   <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
 </sbol:Cut>
 \end{lstlisting}
@@ -890,9 +910,9 @@ The serialization of \sbol{Model} objects has the following form:
 \begin{lstlisting}
 <sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
   ...
-  [\emph{one}]         <sbol:source rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]         <sbol:language rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]         <sbol:framework rdf:resource="..."/> [\emph{element}]
+  [\emph{one}] <sbol:source rdf:resource="..."/> [\emph{element}]
+  [\emph{one}] <sbol:language rdf:resource="..."/> [\emph{element}]
+  [\emph{one}] <sbol:framework rdf:resource="..."/> [\emph{element}]
 </sbol:Model>
 \end{lstlisting}
 
@@ -900,14 +920,16 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Model rdf:about="http://www.sbolstandard.org/examples/pIKE_Toggle_1">
+    <sbol:persistentIdentity rdf:resource="http://www.sbolstandard.org/examples/pIKE_Toggle_1"/>
+    <sbol:displayId>pIKE_Toggle_1</sbol:displayId>
+    <dcterms:title>pIKE_Toggle_1 toggle switch</dcterms:title>
     <sbol:source rdf:resource="http://virtualparts.org/part/pIKE_Toggle_1"/>
     <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
     <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
   </sbol:Model>
 </rdf:RDF>
-
 \end{lstlisting}
 \label{ser:Model}
 
@@ -1248,7 +1270,7 @@ The serialization of \sbol{Collection} objects has the following form:
 \begin{lstlisting}
 <sbol:Collection rdf:about="...">
               ...
-  [\emph{one or more}] <sbol:member rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}] <sbol:member rdf:resource="..."/> [\emph{element}]
 </sbol:Collection>
 \end{lstlisting}
 
@@ -1256,17 +1278,17 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:sbol="http://sbols.org/v2#">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
   <sbol:Collection rdf:about="http://parts.igem.org/Promoters/Catalog/Anderson">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Promoters/Catalog/Anderson"/>
     <sbol:displayId>Anderson</sbol:displayId>
     <dcterms:title>Anderson promoters</dcterms:title>
-    <dcterms:description> The Anderson promoter collection</dcterms:description>
-    <sbol:member rdf:resource="http://parts.igem.org/wiki/index.php/Part:BBa_J23119"/>
+    <dcterms:description>The Anderson promoter collection</dcterms:description>
+    <sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
     ...
-    <sbol:member rdf:resource="http://parts.igem.org/wiki/index.php/Part:BBa_J23118"/>
+    <sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23118"/>
   </sbol:Collection>
 </rdf:RDF>
-
 \end{lstlisting}
 \label{ser:Collection}
 
@@ -1316,10 +1338,12 @@ The ComponentDefinition example for a promoter serialized below shows how annota
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:pr="http://www.partsregistry.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_J23119">
+<rdf:RDF xmlns:pr="http://partsregistry.org" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
     <pr:group>iGEM2006_Berkeley</pr:group>
-    <pr:experience rdf:resource="http://www.partsregistry.org/Part:BBa_J23119:Experience"/>
+    <pr:experience rdf:resource="http://parts.igem.org/cgi/partsdb/part_info.cgi?part_name=BBa_J23119"/>
     <pr:information>
       <pr:Information rdf:about="http://parts.igem.org/cgi/partsdb/part_info.cgi?part_name=BBa_J23119">
         <pr:sigmafactor>//rnap/prokaryote/ecoli/sigma70</pr:sigmafactor>
@@ -1329,7 +1353,7 @@ The ComponentDefinition example for a promoter serialized below shows how annota
     <dcterms:title>J23119</dcterms:title>
     <dcterms:description>Constitutive promoter</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-    <sbol:role rdf:resource="http://purl.org/obo/owl/SO#SO_0000167"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
   </sbol:ComponentDefinition>
 </rdf:RDF>
 \end{lstlisting}
@@ -1365,21 +1389,25 @@ Finally, this data sheet is linked from the component is describes using an anno
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:myapp="http://www.myapp.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/Part:BBa_J23119">
-    <myapp:datasheet rdf:resource="http://www.myapp.org/datasheet/1"/>
+<rdf:RDF xmlns:myapp="http://www.myapp.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/cd/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://www.partsregistry.org/cd/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://www.partsregistry.org/Part:BBa_J23119"/>
+    <myapp:datasheet rdf:resource="http://www.partsregistry.org/gen/datasheet1"/>
     <dcterms:title>J23119</dcterms:title>
     <dcterms:description>Constitutive promoter</dcterms:description>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-    <sbol:role rdf:resource="http://purl.org/obo/owl/SO#SO_0000167"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
   </sbol:ComponentDefinition>
-  <myapp:Datasheet rdf:about="http://www.myapp.org/datasheet/1">
+  <myapp:Datasheet rdf:about="http://www.partsregistry.org/gen/datasheet1">
+    <sbol:persistentIdentity rdf:resource="http://www.partsregistry.org/gen/datasheet1"/>
+    <sbol:displayId>datasheet1</sbol:displayId>
     <myapp:characterizationData rdf:resource="http://www.myapp.org/measurement/1"/>
     <myapp:transcriptionRate>1</myapp:transcriptionRate>
     <dcterms:title>Datasheet 1</dcterms:title>
   </myapp:Datasheet>
 </rdf:RDF>
-
 \end{lstlisting}
 \label{ser:GenericTopLevel}
 \end{figure}
