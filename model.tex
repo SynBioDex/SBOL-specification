@@ -52,15 +52,18 @@ Lastly, font color is used in the body text of this specification to indicate wh
 \subsection{Data Types}
 \label{sec:datatypes}
 
-\Ctodo{we use String, Integer, URI, Literal (these are from some W3C or XSD or whatever thing), and the classes below}
-
 When SBOL use simple ``primitive'' data types such as strings or integers, these are defined as the following specific formal types:
 \begin{itemize}
-\item String: \url{http://www.w3.org/2001/XMLSchema#string}
-\item Integer: \url{http://www.w3.org/2001/XMLSchema#integer}
-\item URI: \url{something goes here}
-  It is further RECOMMENDED that URI structure follows the recommended best-practices for compliant URIs specified in \ref{sec:compliant}.
-\item Literal: \url{something goes here}
+\item String: \url{http://www.w3.org/TR/xmlschema11-2/#string}
+\item Integer: \url{http://www.w3.org/TR/xmlschema11-2/#integer}
+\item Double: \url{http://www.w3.org/TR/xmlschema11-2/#double}
+\item Boolean: \url{http://www.w3.org/TR/xmlschema11-2/#boolean}
+\end{itemize}
+The term \external{literal} is used to denote an object that can be any of the four types listed above.
+In addition to the simple types listed above, SBOL also uses objects with types \emph{uniform resource identifier} (URI) and \emph{XML qualified name} (QName): 
+\begin{itemize}
+\item URI: \url{http://www.w3.org/TR/xmlschema11-2/#anyURI}
+\item QName: \url{http://www.w3.org/TR/xmlschema11-2/#QName}
 \end{itemize}
 
 \subsection{Identified}
@@ -87,7 +90,7 @@ Throughout this document, when a URI is used to refer to an SBOL object, it coul
 
 \subsubsection*{The \sbolheading{identity} property}
 \label{sec:identity}
-The \sbol{identity} property is REQUIRED by all \sbol{Identified} objects and has a data type of \external{URI}. A given \sbol{Identified} object's \sbol{identity} \external{URI} MUST be globally unique among all other \sbol{identity} \external{URI}s. 
+The \sbol{identity} property is REQUIRED by all \sbol{Identified} objects and has a data type of \external{URI}. A given \sbol{Identified} object's \sbol{identity} \external{URI} MUST be globally unique among all other \sbol{identity} \external{URI}s. It is also highly RECOMMENDED that the URI structure follows the recommended best-practices for compliant URIs specified in \ref{sec:compliant}.
 
 Although most SBOL properties are defined by SBOL and serialized with its namespace, the \sbol{identity} property is defined by the analogous RDF \external{about} property and is serialized with the RDF namespace as follows:
 
@@ -1315,7 +1318,7 @@ In particular, three methods are supported for connecting the SBOL data model wi
 \label{sec:AnnotationValue}
 \label{sec:ListOfAnnotations}
 
-Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{name} property is specified by a qualified name (\external{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be of type \external{String}, \external{URI}, or \external{ListOfAnnotations}. The \external{ListOfAnnotations} is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and a list of nested \sbol{annotations}.
+Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{name} property is specified by a qualified name (\external{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be a literal type (i.e., \external{String}, \external{Integer}, \external{Double}, \external{Boolean}), \external{URI}, or a \external{NestedAnnotations} object. The \external{NestedAnnotations} object is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and an optional list of nested \sbol{annotations}.
 
 \Ctodo{NIC: Please update UML as follows: remove link from Identifed to AnnotationValue, change type of name to QName, add new class NestedAnnotations that inherits from AnnotationValue with properties nestedQName : QName, nestedURI : URI, and a 0..* annotations link to the Annotation class.}
 
@@ -1327,12 +1330,33 @@ Each \sbol{Identified} object may have a number of annotations in the form of na
 \end{center}
 \end{figure}
 
-\paragraph{Serialization}
+\subsubsection*{Serialization}
+
+The serialization of \sbol{Annotation} objects has the following form:
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF ... xmlns:prefix=namespace xmlns:prefix=nestedNamespace... >
+  <sbol:TopLevelObject
+    ...
+    <prefix:localPart>literal</prefix:localPart>
+OR
+    <prefix:localPart rdf:resource=URI/>
+OR
+    <prefix:localPart>
+      <nestedPrefix:nestedLocalPart rdf:about=nestedURI>
+        ...
+      </nestedPrefix:nextedLocalPart>
+    </prefix:localPart>
+  </sbol:TopLevelObject>
+\end{lstlisting}
+The \sbol{name} property species the namespace, prefix, and localPart values.  The first annotation example is for a \external{literal} type an
+
+
 The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \external{String} value. The second \external{pr:experience} annotation has a \external{URI} value and is serialised as an RDF resource pointing to the information Web page on the Parts Registry for the promoter. The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
 
-\Ctodo{Add template}
-
-\Ctodo{Get example from cut part of libSBOLj paper}
+\Ctodo{Check example}
 
 \begin{figure} [ht]
 \lstsetsbol
@@ -1360,16 +1384,14 @@ The ComponentDefinition example for a promoter serialized below shows how annota
 \label{ser:Annotation}
 \end{figure}
 
-
-
-
 \subsubsection{GenericTopLevel}  
 \label{sec:GenericTopLevel}
+
 SBOL documents can also be annotated at the top level. 
 SBOL's \sbol{GenericTopLevel} is a top-level entity whose only purpose is to include a set of annotations as described above. 
-Entities that have independent existence (i.e., would be another ``top level'' class) and are not recognised by the SBOL standard are loaded into these top level entities. 
+Entities that have independent existence (i.e., would be another ``top level'' class) and are not recognized by the SBOL standard are loaded into these top level entities. 
 These \sbol{GenericTopLevel} entities can thus be safely used by tools to exchange non-SBOL data embedded separately within SBOL.
-As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{name}, \sbol{description}, \sbol{displayId} and so on. The type of data found in the generic entity is indicated using the standard \external{rdf:type} property.
+As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{displayId}, \sbol{name}, \sbol{description}, etc. The type of data found in the generic entity is indicated using the \sbol{rdfType} property which is of type \external{QName}.   
 
 \begin{figure}[ht]
 \begin{center}
@@ -1378,6 +1400,21 @@ As with any other top level entities, \sbol{GenericTopLevel} entities may includ
 \label{uml:generictoplevel}
 \end{center}
 \end{figure}
+
+\subsubsection*{Serialization}
+
+The serialization of \sbol{GenericTopLevel} objects has the following form where the prefix, namespace, and localPart are defined by the \sbol{rdfType} property:
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF ... xmlns:prefix=namespace ...>
+<prefix:localPart rdf:about="...">
+              ...
+</prefix:localPart>
+\end{lstlisting}
+
+\Ctodo{Get example from cut part of libSBOLj paper}
 
 The example below shows how a datasheet object can be added to an SBOL document using the \sbol{GenericTopLevel} class. 
 The J23119 promoter example is annotated with the URI of a top Level Datasheet object, here defining the annotation properties using the custom \external{\path{http://www.myapp.org/}} namespace and the \external{myapp} prefix. 

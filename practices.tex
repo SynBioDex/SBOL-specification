@@ -72,7 +72,7 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
 \Ctodo{Add recommended branch.}
 
 \begin{table}[ht]
-  \begin{edtable}{tabular}{p{3cm}p{3cm}p{4cm}}
+  \begin{edtable}{tabular}{p{3cm}p{2cm}p{5cm}}
     \toprule
     \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}\\
     \midrule
@@ -80,10 +80,10 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
     						   	  & roles & SO (if type is \textit{DNA} or \textit{RNA})    \\
     						   	  & roles & CHEBI (if type is \textit{small molecule})    \\
     						   	  & roles & UniProt (if type is \textit{protein}??) \\   
-    \textbf{Interaction}	      & types & SBO      \\
-    \textbf{Participation}	      & roles & SBO      \\
+    \textbf{Interaction}	      & types & SBO (entity relationship branch)     \\
+    \textbf{Participation}	      & roles & SBO (participant roles branch)     \\
     \textbf{Model}	      		  & language & EDAM      \\
-    				      		  & framework & SBO      \\
+    				      		  & framework & SBO (modeling framework branch)     \\
     \bottomrule
   \end{edtable}
   \caption{Preferred external resources from which to draw values for various SBOL properties.}
