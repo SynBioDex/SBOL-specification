@@ -28,6 +28,8 @@ For example, the serialization of a \sbol{ComponentDefinition} embeds the serial
 Every SBOL document must be a valid RDF/XML document. Accordingly, each SBOL document starts with an XML declaration that has its XML version set to ``1.0.'' As shown in the example below, this declaration is then followed by an \external{rdf:RDF} XML element that includes the namespace declarations for RDF and SBOL. SBOL namespace, which is \url{http://sbols.org/v2#}, is used to indicate which entities and properties in the SBOL document are defined by SBOL, and SHOULD NOT be used for any entities or properties not defined in this specification.
 \label{xml-namespace}
 
+\Ctodo{Should add dcterms and prov namespaces as required here.}
+
 \Rtodo{Need to state ``This is the SBOL2 namespace''  JSB: done}
 
 \lstsetsbol

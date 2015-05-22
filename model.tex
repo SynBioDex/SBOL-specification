@@ -547,7 +547,7 @@ The same types of identity relationships can also be declared between \sbol{Func
 This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the owner of the \sbol{MapsTo} (either a \sbol{ComponentInstance} or \sbol{Module}).
 
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
-This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.  Finally, the \sbol{ComponentInstance} MUST have \sbol{public} \sbol{AccessType}.
+This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.  Finally, the \sbol{ComponentInstance} MUST have \sbol{public} \sbol{Access}.
  
 \paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
 Each \sbol{MapsTo} entity MUST specify the relationship between its \sbol{local} and \sbol{remote} components using the refinement property, using one of the values in \ref{tbl:mapsto_refinement}.
@@ -1069,7 +1069,7 @@ The serialization of \sbol{FunctionalComponent}s has the following form.
 \begin{lstlisting}
 <sbol:FunctionalComponent rdf:about="...">
                ...
-  [\emph{zero or one}]  <sbol:definition rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]          <sbol:definition rdf:resource="..."/> [\emph{element}]
   [\emph{one}]          <sbol:access rdf:resource="..."/> [\emph{element}]
   [\emph{one}]          <sbol:direction rdf:resource="..."/> [\emph{element}]
   [\emph{zero or more}] <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
@@ -1117,6 +1117,8 @@ The serialization of \sbol{Module}s has the following form.
 
 The example below specifies a TetR inverter that is being used as
 a part of a toggle switch:
+
+\Ctodo{I think a mapsTo in this example would be good.}
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1369,11 +1371,9 @@ The serialization of \sbol{Annotation} objects has the following form:
                     ...
                   </nestedObjectPrefix:NESTED_LOCAL_NAME>
                 </prefix2:LOCAL_NAME_3> [\emph{elements}]
-</sbol:TopLevelObject>
+</sbol:TOPLEVELOBJECT>
 \end{lstlisting}
 The \sbol{name} property species the namespace, prefix, and localPart values.  The first form is for a \external{literal} annotation.  The second form is for a \external{URI} annotation.  Finally, the third form is for an \sbol{NestedAnnotations} object annotation.  In this last case, the \sbol{nestedQName} property specifies the nestedNamespace, nestedPrefix, and nestedLocalPart while the \sbol{nestedURI} property species the URI for the nested annotation.
-
-\Ctodo{Check example}
 
 The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \external{String} value. The second \external{pr:experience} annotation has a \external{URI} value and is serialised as an RDF resource pointing to the information Web page on the Parts Registry for the promoter. The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
 
@@ -1424,8 +1424,6 @@ As with any other top level entities, \sbol{GenericTopLevel} entities may includ
 
 The serialization of \sbol{GenericTopLevel} objects has the following form where the prefix, namespace, and localPart are defined by the \sbol{rdfType} property:
 
-\Rtodo{CJM - added, needs review. GM: Updated the template, please remove the commented example if you are happy.}
-
 %<?xml version="1.0" ?>
 %<rdf:RDF ... xmlns:prefix=namespace ...>
 %<prefix:localPart rdf:about="...">
@@ -1444,8 +1442,6 @@ The serialization of \sbol{GenericTopLevel} objects has the following form where
   ...
 </applicationPrefix:APPLICATION_OBJECT_NAME>
 \end{lstlisting}
-
-\Ctodo{Get example from cut part of libSBOLj paper}
 
 The example below shows how a datasheet object can be added to an SBOL document using the \sbol{GenericTopLevel} class. 
 The J23119 promoter example is annotated with the URI of a top Level Datasheet object, here defining the annotation properties using the custom \external{\path{http://www.myapp.org/}} namespace and the \external{myapp} prefix. 
