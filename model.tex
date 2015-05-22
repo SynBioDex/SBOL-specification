@@ -52,6 +52,8 @@ Lastly, font color is used in the body text of this specification to indicate wh
 \subsection{Data Types}
 \label{sec:datatypes}
 
+\Rtodo{CJM - edited, needs review}
+
 When SBOL use simple ``primitive'' data types such as strings or integers, these are defined as the following specific formal types:
 \begin{itemize}
 \item String: \url{http://www.w3.org/TR/xmlschema11-2/#string}
@@ -151,16 +153,20 @@ child class, however, has the following form for serializing
 properties inherited from \sbol{Identified}, where CLASS\_NAME is
 replaced by the name of the class:
 
+\Rtodo{CJM - edited, needs review}
+
 \lstsetsbol
 \begin{lstlisting}
 <sbol:CLASS\_NAME rdf:about="...">
+  [\emph{zero or one}]  <sbol:persistentIdentity rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}]  <sbol:displayId>...</sbol:displayId> [\emph{element}]
+  [\emph{zero or one}]  <sbol:version>...</sbol:version> [\emph{element}]
+  [\emph{zero or one}]  <prov:wasDerivedFrom rdf:resource="..."/> [\emph{element}]
   [\emph{zero or one}]  <dcterms:title>...</dcterms:title> [\emph{element}]
   [\emph{zero or one}]  <dcterms:description>...</dcterms:description> [\emph{element}]
                ...
 </sbol:CLASS\_NAME>
 \end{lstlisting}
-
-\Ctodo{Need somebody who knows DublinCore to fill in rest of template}
 
 % \subsection{Documented}
 % \label{sec:Documented}
@@ -557,8 +563,6 @@ Each \sbol{MapsTo} entity MUST specify the relationship between its \sbol{local}
   \label{tbl:mapsto_refinement}
 \end{table}
 
-\Rtodo{The notion of refinement is very unclear -JB  Clean up the text; JSB: done}
-
 \paragraph{Serialization}
 The serialization of \sbol{MapsTo} has the following form.
 \lstsetsbol
@@ -602,12 +606,8 @@ The \sbol{SequenceAnnotation} class describes a precisely known location of inte
 \label{sec:locations}
 Every \sbol{SequenceAnnotation} MUST have at least one \sbol{Location} object in its set of \sbol{locations}. The value of this property is a nested \sbol{Location} object.
 
-\Rtodo{Use term collection above.  Is it me or is this confusing with our collection object?  We could use set instead. JSB: changed collection to set, here and a number of other places}
-
 \paragraph{The \sbolheading{component} property}\label{sec:component}
 \sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
-
-\Rtodo{Separate serialization better - give paragraph/subsubsec headers.  JSB: done.}
 
 \paragraph{Serialization}
 
@@ -641,12 +641,6 @@ The example below shows the serialization of a \sbol{SequenceAnnotation} object.
   <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/rbs"/>
 </sbol:SequenceAnnotation>      
 \end{lstlisting}
-
-\Rtodo{Need to give an example with this one.  JSB: done.}
-
-\Rtodo{Make sure it's clear these templates specify content, not order.  JSB: put a note explaining ordering is flexible in the serialization section.}
-
-
 
 \subsubsection{Location}
 \label{sec:Location}
@@ -755,8 +749,6 @@ describing locations on sequential structures, the
 \sbol{GenericLocation} is included as a hook for extensions, e.g., for
 describing locations in non-sequential structures.
 
-\Rtodo{Need serialization examples, Cut, and GenericLocation: JSB - done for Cut and GenericLocation}
-
 \subparagraph{Serialization}
 
 The serialization of \sbol{GenericLocation} objects has the following form:
@@ -847,8 +839,6 @@ The example below shows the serialization of a \sbol{SequenceConstraint} object.
   <sbol:object rdf:resource="http://partsregistry.org/cd/LacI_operator"/>
 </sbol:SequenceConstraint>
 \end{lstlisting}
-
-\Rtodo{In every serialization example, make sure something differs in order from the template, to more intuitively illustrate the unimportance of order --> actually no, jake shoud put bac the examples he messed with;  JSB: done}
 
 \subsection{Model}
 \label{sec:Model}
@@ -1217,8 +1207,6 @@ If a \sbol{Participation} object has multiple
 
 Values for this URI are RECOMMENDED to be chosen from the from the participant role branch of the Systems Biology Ontology (SBO) where possible.
 
-\Rtodo{SBO is our REQUIRED term if available, just as in the prior cases. JSB: done, but set as RECOMMENDED, not required (as elsewhere)}
-
 \paragraph{The \sbolheading{participant} property}\label{sec:participant}
 
 The \sbol{participant} property MUST specify precisely one \sbol{FunctionalComponent} object that plays the designated \sbol{role} in its parent \sbol{Interaction} object.
@@ -1299,8 +1287,6 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 \label{sec:Annotations}
 \label{sec:annotations}
 
-\Rtodo{Matthew/Goksel/Jake: please review.}
-
 SBOL does not attempt to represent all information about a biological system, since many things do not yet have a clear ``right way'' to be represented, such as design intent, biological context, or performance data.  Instead, SBOL allows the embedding of application specific data that are not captured by the SBOL standard.  Such data are optional, but can be computationally generated and exchanged via SBOL documents without getting lost. 
 
 To do this, SBOL provides an ``annotation'' mechanism for attaching arbitrary information to SBOL objects, which allows SBOL models to be connected with any other models in an extensible manner.
@@ -1334,6 +1320,8 @@ Each \sbol{Identified} object may have a number of annotations in the form of na
 
 The serialization of \sbol{Annotation} objects has the following form:
 
+\Rtodo{CJM - added, needs review}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1351,12 +1339,11 @@ OR
     </prefix:localPart>
   </sbol:TopLevelObject>
 \end{lstlisting}
-The \sbol{name} property species the namespace, prefix, and localPart values.  The first annotation example is for a \external{literal} type an
-
-
-The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \external{String} value. The second \external{pr:experience} annotation has a \external{URI} value and is serialised as an RDF resource pointing to the information Web page on the Parts Registry for the promoter. The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
+The \sbol{name} property species the namespace, prefix, and localPart values.  The first form is for a \external{literal} annotation.  The second form is for a \external{URI} annotation.  Finally, the third form is for an \sbol{NestedAnnotations} object annotation.  In this last case, the \sbol{nestedQName} property specifies the nestedNamespace, nestedPrefix, and nestedLocalPart while the \sbol{nestedURI} property species the URI for the nested annotation.
 
 \Ctodo{Check example}
+
+The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \external{String} value. The second \external{pr:experience} annotation has a \external{URI} value and is serialised as an RDF resource pointing to the information Web page on the Parts Registry for the promoter. The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
 
 \begin{figure} [ht]
 \lstsetsbol
@@ -1404,6 +1391,8 @@ As with any other top level entities, \sbol{GenericTopLevel} entities may includ
 \subsubsection*{Serialization}
 
 The serialization of \sbol{GenericTopLevel} objects has the following form where the prefix, namespace, and localPart are defined by the \sbol{rdfType} property:
+
+\Rtodo{CJM - added, needs review}
 
 \lstsetsbol
 \begin{lstlisting}
