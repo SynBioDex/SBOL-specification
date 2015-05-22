@@ -1,5 +1,6 @@
 \newcounter{sbolCtr}
 \newcommand{\printValid}{\validRule{sbol-\arabic{sbolCtr}\addtocounter{sbolCtr}{1}}}
+\newcommand{\printWarning}{\consistencyRule{sbol-\arabic{sbolCtr}\addtocounter{sbolCtr}{1}}}
 \newcommand{\printModeling}{\modelingRule{sbol-\arabic{sbolCtr}\addtocounter{sbolCtr}{1}}}
 
 \section{Validation Rules}
@@ -22,11 +23,12 @@ following symbols next to the rule numbers:
   specification.  (Mnemonic intention behind the choice of symbol:
   ``This must be checked.'')
 
-% \item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
-%   \emph{recommendation} for consistency.  If a SBOL document does not
-%   follow this rule, it is not considered strictly invalid as far as the
-%   SBOL specification is concerned; however, it indicates that the model contains a physical or conceptual inconsistency.  (Mnemonic intention behind the choice of symbol:
-%   ``This is a cause for warning.'')
+\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
+  \emph{recommendation} for consistency.  
+% If a SBOL document does not
+%  follow this rule, it is not considered strictly invalid as far as the
+%  SBOL specification is concerned; however, it indicates that the model contains a physical or conceptual inconsistency. 
+These rules should be followed, but they are difficult, if not  impossible, to check automatically. (Mnemonic intention behind the choice of symbol: ``This is a cause for warning.'')
 
 \item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a 
   RECOMMENDED condition for following best practices.  This rule is not strictly
@@ -61,7 +63,7 @@ in the SBOL specification namespace.
 
 \printValid{An SBOL document MUST declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://purl.org/dc/terms/}}. (Reference: \sec{xml-namespace}.)}
 
-\printModeling{An SBOL document SHOULD declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://www.w3.org/ns/prov\#}}. (Reference: \sec{xml-namespace}.)}
+\printValid{An SBOL document SHOULD declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://www.w3.org/ns/prov\#}}. (Reference: \sec{xml-namespace}.)}
 
 \subsubsection*{Rules for the \class{Identified} class} 
 \setcounter{sbolCtr}{10201}
@@ -103,9 +105,11 @@ in the SBOL specification namespace.
 
 \printValid{A \sbol{Sequence} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Sequence})}
 
-\printValid{The \sbol{elements} is a REQUIRED property for all \sbol{Sequence} objects and has a data type of String.  Its format MUST be consistent with its specified \sbol{encoding}. (Reference: \sec{sec:Sequence})}
+\printValid{The \sbol{elements} is a REQUIRED property for all \sbol{Sequence} objects and has a data type of String. (Reference: \sec{sec:Sequence})}
 
 \printValid{The \sbol{encoding} is a REQUIRED property for all \sbol{Sequence} objects and has a data type of URI. (Reference: \sec{sec:Sequence})}
+
+\printWarning{The \sbol{elements} format MUST be consistent with its specified \sbol{encoding}. (Reference: \sec{sec:Sequence})}
 
 \printModeling{A DNA \sbol{Sequence} SHOULD use the IUPAC DNA encoding:\\ \url{http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html}. (Reference: \sec{sec:Sequence})}
 
@@ -134,17 +138,17 @@ in the SBOL specification namespace.
 
 \printModeling{Each URI in the set of \sbol{sequences} SHOULD reference an equivalent \sbol{Sequence} object.  (Reference: \sec{sec:Sequence})}
 
-\printValid{A DNA \sbol{ComponentDefinition} MUST include the URI\\ 
+\printWarning{A DNA \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#DnaRegion} 
 in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{A RNA \sbol{ComponentDefinition} MUST include the URI\\ 
+\printWarning{A RNA \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#RnaRegion} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{A protein \sbol{ComponentDefinition} MUST include the URI\\ 
+\printWarning{A protein \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#Protein} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{A small molecule \sbol{ComponentDefinition} MUST include the URI\\ 
+\printWarning{A small molecule \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#SmallMolecule} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printModeling{A least one type in the set of \sbol{types} SHOULD be a URI from the BioPAX or ChEBI ontologies. (Reference: \sec{sec:ComponentDefinition})}
@@ -158,7 +162,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \url{http://sbols.org/v2\#public} or \url{http://sbols.org/v2\#private}.
 (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{componentDefinition} property is a REQUIRED URI reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbol{definition} property is a REQUIRED URI reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
 
 \printModeling{The \sbol{componentDefinition} property URI SHOULD reference a \sbol{ComponentDefinition} object. (Reference: \sec{sec:ComponentInstance})}
 

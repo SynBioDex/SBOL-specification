@@ -531,10 +531,10 @@ In this way, many ``lower level'' \sbol{Component} objects can be linked togethe
 The same types of identity relationships can also be declared between \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects, or between \sbol{Component} objects contained by \sbol{ComponentDefinition} objects and \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects. See \ref{sec:examples} for additional examples using the \sbol{MapsTo} class.
 
 \paragraph{The \sbolheading{local} property}\label{sec:local}
-This REQUIRED property is used to specify the \sbol{ComponentInstance} from the ``higher level'' entity.  The same higher-level entity MUST own both the \sbol{local} and object that owns the \sbol{MapsTo}.
+This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the owner of the \sbol{MapsTo} (either a \sbol{ComponentInstance} or \sbol{Module}).
 
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
-This REQUIRED property is used to specify the \sbol{ComponentInstance} from the ``lower level'' entity that is being being linked to the \sbol{local} \sbol{ComponentInstance}.  This \sbol{ComponentInstance} MUST be owned by the ``lower level'' entity that defines the object that owns the \sbol{MapsTo}
+This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.
 
 \paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
 Each \sbol{MapsTo} entity MUST specify the relationship between its \sbol{local} and \sbol{remote} components using the refinement property, using one of the values in \ref{tbl:mapsto_refinement}.
