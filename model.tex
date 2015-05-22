@@ -157,15 +157,19 @@ replaced by the name of the class:
 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:CLASS\_NAME rdf:about="...">
-  [\emph{zero or one}]  <sbol:persistentIdentity rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}]  <sbol:displayId>...</sbol:displayId> [\emph{element}]
-  [\emph{zero or one}]  <sbol:version>...</sbol:version> [\emph{element}]
-  [\emph{zero or one}]  <prov:wasDerivedFrom rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}]  <dcterms:title>...</dcterms:title> [\emph{element}]
-  [\emph{zero or one}]  <dcterms:description>...</dcterms:description> [\emph{element}]
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:pr="http://partsregistry.org" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:CLASS_NAME rdf:about="...">
+    [\emph{zero or one}] <sbol:persistentIdentity rdf:resource="..."/> [\emph{element}]
+    [\emph{zero or one}] <sbol:displayId>...</sbol:displayId> [\emph{element}]
+    [\emph{zero or one}] <sbol:version>...</sbol:version> [\emph{element}]
+    [\emph{zero or one}] <prov:wasDerivedFrom rdf:resource="..."/> [\emph{element}]
+    [\emph{zero or one}] <dcterms:title>...</dcterms:title> [\emph{element}]
+    [\emph{zero or one}] <dcterms:description>...</dcterms:description> [\emph{element}]
                ...
-</sbol:CLASS\_NAME>
+  </sbol:CLASS_NAME>
+  ...
+</rdf:RDF>
 \end{lstlisting}
 
 % \subsection{Documented}
@@ -543,8 +547,8 @@ The same types of identity relationships can also be declared between \sbol{Func
 This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the owner of the \sbol{MapsTo} (either a \sbol{ComponentInstance} or \sbol{Module}).
 
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
-This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.
-
+This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.  Finally, the \sbol{ComponentInstance} MUST have \sbol{public} \sbol{AccessType}.
+ 
 \paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
 Each \sbol{MapsTo} entity MUST specify the relationship between its \sbol{local} and \sbol{remote} components using the refinement property, using one of the values in \ref{tbl:mapsto_refinement}.
 
@@ -902,7 +906,7 @@ The serialization of \sbol{Model} objects has the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
-  ...
+      ...
   [\emph{one}] <sbol:source rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:language rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:framework rdf:resource="..."/> [\emph{element}]
@@ -1002,27 +1006,27 @@ The example below shows a simple \sbol{ModuleDefinition} containing two componen
 
 \lstsetsbol
 \begin{lstlisting}
-  <sbol:ModuleDefinition rdf:about="http://sbolstandard.org/example/GFP_expression">
-    <sbol:functionalComponent>
-      <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/Constitutive_GFP">
-        <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP_generator"/>
-        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
-      </sbol:FunctionalComponent>
-    </sbol:functionalComponent>
-    <sbol:functionalComponent>
-      <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/GFP_protein">
-        <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP"/>
-        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:direction rdf:resource="http://sbols.org/v2#out"/>
-      </sbol:FunctionalComponent>
-    </sbol:functionalComponent>
-    <sbol:interaction>
-      <sbol:Interaction rdf:about="http://sbolstandard.org/example/GPF_expression/interaction/express_GFP">
-         ...
-      </sbol:Interaction>
-    </sbol:interaction>
-  </sbol:ModuleDefinition>
+<sbol:ModuleDefinition rdf:about="http://sbolstandard.org/example/md/GFP_expression">
+  <sbol:functionalComponent>
+    <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/md/GFP_expression/GFP_protein">
+      <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP"/>
+      <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      <sbol:direction rdf:resource="http://sbols.org/v2#output"/>
+    </sbol:FunctionalComponent>
+  </sbol:functionalComponent>
+  <sbol:functionalComponent>
+    <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/md/GFP_expression/Constitutive_GFP">
+      <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP_generator"/>
+      <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+    </sbol:FunctionalComponent>
+  </sbol:functionalComponent>
+  <sbol:interaction>
+    <sbol:Interaction rdf:about="http://sbolstandard.org/example/md/GFP_expression/express_GFP">
+      ...
+    </sbol:Interaction>
+  </sbol:interaction>
+</sbol:ModuleDefinition>
 \end{lstlisting}
 
 \Rtodo{Should this be here or defined in ComponentInstance section?  JSB: here}
@@ -1064,18 +1068,19 @@ The serialization of \sbol{FunctionalComponent}s has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:FunctionalComponent rdf:about="...">
-  [\emph{zero or one}]   <sbol:definition rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]           <sbol:access rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]           <sbol:direction rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or more}]  <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
+               ...
+  [\emph{zero or one}]  <sbol:definition rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]          <sbol:access rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]          <sbol:direction rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}] <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
 </sbol:FunctionalComponent>
 \end{lstlisting}
 
 In the example below, the functional component is defined as public input or output. The component refers to the \texttt{Part:BBa\_R0010} promoter from the Parts Registry.
 \lstsetsbol
 \begin{lstlisting}
-<sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/laci_inverter/fc/Part:BBa_R0010">
-  <sbol:definition rdf:resource="http://www.partsregistry.org/Part:BBa_R0010"/>
+<sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/laci_inverter/promoter">
+  <sbol:definition rdf:resource="http://www.partsregistry.org/BBa_R0010"/>
   <sbol:access rdf:resource="http://sbols.org/v2#public"/>
   <sbol:direction rdf:resource="http://sbols.org/v2#inout"/>
 </sbol:FunctionalComponent>
@@ -1115,8 +1120,9 @@ a part of a toggle switch:
 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Module rdf:about="http://sbolstandard.org/example/toggle_switch/submodule/tetr_inverter">
+<sbol:Module rdf:about="http://sbolstandard.org/example/toggle_switch/tetr_inverter">
   <sbol:definition rdf:resource="http://sbolstandard.org/example/tetr_inverter"/>
+  ...
 </sbol:Module>
 \end{lstlisting}
 
@@ -1159,10 +1165,11 @@ The serialization of \sbol{Interaction} objects has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Interaction rdf:about="...">
-  [\emph{one or more}] <sbol:type rdf:resource="..."/> [\emph{elements}]
+               ...  
+  [\emph{one or more}]  <sbol:type rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}] <sbol:participation>
-                <sbol:Participation rdf:about="...">...</sbol:Participation>
-              </sbol:participation> [\emph{elements}]
+                 <sbol:Participation rdf:about="...">...</sbol:Participation>
+               </sbol:participation> [\emph{elements}]
 </sbol:Interaction>
 \end{lstlisting}
 
@@ -1170,13 +1177,17 @@ The example below shows an \sbol{Interaction} representing an inhibition relatio
 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Interaction rdf:about="http://sbolstandard.org/example/laci_inverter/interaction/LacI_pLacI">
+<sbol:Interaction rdf:about="http://sbolstandard.org/example/laci_inverter/LacI_pLacI">
   <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000169"/>
   <sbol:participation>
-    <sbol:Participation rdf:about=...> ... </sbol:Participation>
+    <sbol:Participation rdf:about="...">
+	  ... 	
+    </sbol:Participation>
   </sbol:participation>
   <sbol:participation>
-    <sbol:Participation rdf:about=...> ... </sbol:Participation>
+    <sbol:Participation rdf:about="...">
+      ... 
+    </sbol:Participation>
   </sbol:participation>
 </sbol:Interaction>
 \end{lstlisting}
@@ -1218,17 +1229,18 @@ The serialization of \sbol{Participation} objects has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Participation rdf:about="...">
-  [\emph{zero or more}] <sbol:role rdf:resource="..."/>
-  [\emph{one}]          <sbol:participant rdf:resource="..."/>
+               ...
+  [\emph{zero or more}] <sbol:role rdf:resource="..."/> [\emph{elements}]
+  [\emph{one}]          <sbol:participant rdf:resource="..."/> [\emph{element}]
 </sbol:Participation>
 \end{lstlisting}
 
 In the example below, the role of participating \sbol{FunctionalComponent} is defined to be \external{inhibitor}, using the \external{SBO:0000020} term. This component is specified using the participant property of the \sbol{Participation} entity.
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Participation rdf:about="http://sbolstandard.org/example/laci_inverter/interaction/LacI_pLacI/participation/P03023">
+<sbol:Participation rdf:about="http://sbolstandard.org/example/laci_inverter/LacI_pLacI/P03023">
   <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000020"/>
-  <sbol:participant rdf:resource="http://sbolstandard.org/example/laci_inverter/fc/P03023"/>
+  <sbol:participant rdf:resource="http://sbolstandard.org/example/laci_inverter/TF"/>
 </sbol:Participation>
 \end{lstlisting}
 
@@ -1260,7 +1272,7 @@ The serialization of \sbol{Collection} objects has the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Collection rdf:about="...">
-              ...
+               ...
   [\emph{zero or more}] <sbol:member rdf:resource="..."/> [\emph{element}]
 </sbol:Collection>
 \end{lstlisting}
@@ -1320,24 +1332,44 @@ Each \sbol{Identified} object may have a number of annotations in the form of na
 
 The serialization of \sbol{Annotation} objects has the following form:
 
-\Rtodo{CJM - added, needs review}
+\Rtodo{CJM - added, needs review, GM: Updated as below. Please remove the commented example if you are happy.}
+
+% 
+%<?xml version="1.0" ?>
+%<rdf:RDF ... xmlns:prefix=namespace xmlns:prefix=nestedNamespace... >
+%  <sbol:TopLevelObject
+%    ...
+%    <prefix:localPart>literal</prefix:localPart>
+%OR
+%    <prefix:localPart rdf:resource=URI/>
+%OR
+%    <prefix:localPart>
+%      <nestedPrefix:nestedLocalPart rdf:about=nestedURI>
+%        ...
+%     </nestedPrefix:nextedLocalPart>
+%    </prefix:localPart>
+%  </sbol:TopLevelObject>
 
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF ... xmlns:prefix=namespace xmlns:prefix=nestedNamespace... >
-  <sbol:TopLevelObject
-    ...
-    <prefix:localPart>literal</prefix:localPart>
-OR
-    <prefix:localPart rdf:resource=URI/>
-OR
-    <prefix:localPart>
-      <nestedPrefix:nestedLocalPart rdf:about=nestedURI>
-        ...
-      </nestedPrefix:nextedLocalPart>
-    </prefix:localPart>
-  </sbol:TopLevelObject>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:sbol="http://sbols.org/v2#"
+  xmlns:prefix1="NAMESPACE_1" 
+  xmlns:prefix2="NAMESPACE_2" 
+  xmlns:nestedObjectPrefix="A_NESTED_OBJECT_NAMESPACE" 
+  ...
+ >
+<sbol:A_TOPLEVELOBJECT rdf:about="...">
+                ...
+  [\emph{zero or more}] <prefix1:LOCAL_NAME_1>A_LITERAL</prefix:LOCAL_NAME_1> [\emph{elements}]
+  [\emph{zero or more}] <prefix1:LOCAL_NAME_2 rdf:resource=URI/> [\emph{elements}]
+  [\emph{zero or more}] <prefix2:LOCAL_NAME_3>
+                  <nestedObjectPrefix:NESTED_LOCAL_NAME rdf:about="...">
+                    ...
+                  </nestedObjectPrefix:NESTED_LOCAL_NAME>
+                </prefix2:LOCAL_NAME_3> [\emph{elements}]
+</sbol:TopLevelObject>
 \end{lstlisting}
 The \sbol{name} property species the namespace, prefix, and localPart values.  The first form is for a \external{literal} annotation.  The second form is for a \external{URI} annotation.  Finally, the third form is for an \sbol{NestedAnnotations} object annotation.  In this last case, the \sbol{nestedQName} property specifies the nestedNamespace, nestedPrefix, and nestedLocalPart while the \sbol{nestedURI} property species the URI for the nested annotation.
 
@@ -1392,15 +1424,25 @@ As with any other top level entities, \sbol{GenericTopLevel} entities may includ
 
 The serialization of \sbol{GenericTopLevel} objects has the following form where the prefix, namespace, and localPart are defined by the \sbol{rdfType} property:
 
-\Rtodo{CJM - added, needs review}
+\Rtodo{CJM - added, needs review. GM: Updated the template, please remove the commented example if you are happy.}
+
+%<?xml version="1.0" ?>
+%<rdf:RDF ... xmlns:prefix=namespace ...>
+%<prefix:localPart rdf:about="...">
+%              ...
+%</prefix:localPart>
 
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF ... xmlns:prefix=namespace ...>
-<prefix:localPart rdf:about="...">
-              ...
-</prefix:localPart>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:sbol="http://sbols.org/v2#"
+  xmlns:applicationPrefix="APPLICATION_NAMESPACE" 
+  ...
+ >
+<applicationPrefix:APPLICATION_OBJECT_NAME rdf:about="...">
+  ...
+</applicationPrefix:APPLICATION_OBJECT_NAME>
 \end{lstlisting}
 
 \Ctodo{Get example from cut part of libSBOLj paper}

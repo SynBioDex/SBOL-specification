@@ -226,17 +226,17 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{Model} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Model})}
 
-\printValid{The \sbol{source} property is a REQUIRED URI that specifies the location of the model source file.}
+\printValid{The \sbol{source} property is a REQUIRED URI that specifies the location of the model source file. (Reference: \sec{sec:Model})}
 
-\printValid{The \sbol{language} property is a REQUIRED URI that specifies the language in which the model is encoded.}
+\printValid{The \sbol{language} property is a REQUIRED URI that specifies the language in which the model is encoded. (Reference: \sec{sec:Model})}
 
-\printModeling{The \sbol{language} property SHOULD be a URI from the EMBRACE Data and Methods (EDAM) ontology.}
+\printModeling{The \sbol{language} property SHOULD be a URI from the EMBRACE Data and Methods (EDAM) ontology. (Reference: \sec{sec:Model})}
 
-\printValid{The \sbol{framework} property is a REQUIRED URI that specifies the modeling framework.}
+\printValid{The \sbol{framework} property is a REQUIRED URI that specifies the modeling framework. (Reference: \sec{sec:Model})}
 
-\printModeling{The \sbol{framework} property SHOULD be a URI from the  modeling framework branch of the Systems Biology Ontology (SBO).}
+\printModeling{The \sbol{framework} property SHOULD be a URI from the  modeling framework branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Model})}
 
-\printWarning{The \sbol{source} property MUST specify the location of the model source file in the specified \sbol{language} using the specified \sbol{framework}.}
+\printWarning{The \sbol{source} property MUST specify the location of the model source file in the specified \sbol{language} using the specified \sbol{framework}. (Reference: \sec{sec:Model})}
 
 \subsubsection*{Rules for the \class{ModuleDefinition} class} 
 \setcounter{sbolCtr}{11101}
@@ -284,9 +284,9 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printWarning{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{remote} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
 
-\printValid{The \sbol{ComponentInstance} referenced by the \sbol{local} property MUST have \sbol{public} access type.}
+% \printValid{The \sbol{ComponentInstance} referenced by the \sbol{local} property MUST have \sbol{public} access type. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{ComponentInstance} referenced by the \sbol{remote} property MUST have \sbol{public} access type.}
+\printValid{The \sbol{ComponentInstance} referenced by the \sbol{remote} property MUST have \sbol{public} access type. (Reference: \sec{sec:MapsTo})}
 
 \subsubsection*{Rules for the \class{Interaction} class} 
 \setcounter{sbolCtr}{11401}
