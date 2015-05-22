@@ -2,8 +2,6 @@
 \section{SBOL Data Model}\label{sec:model}
 % -----------------------------------------------------------------------------
 
-\Ctodo{Need to generate all serialization examples and specs using the library.}
-
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
 \subsection{Understanding the UML Diagrams}
@@ -596,8 +594,6 @@ In the example below, a \sbol{FunctionalComponent} entity from the submodule is 
 \label{sec:SequenceAnnotation}
 The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} objects linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a set of  \sbol{Location} objects, as described below.  It is a set of location objects to allow the annotation of a non-contiguous location on a sequence.
 
-\Rtodo{We will change location to locations (1..*) and eliminate MultiRange class.  JSB, Nic: done, CJM: added text above to explain why it is a set of locations.}
-
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/sequence_annotation}
@@ -997,10 +993,6 @@ The serialization of \sbol{ModuleDefinition} has the following form:
                </sbol:interaction> [\emph{elements}]
 </sbol:ModuleDefinition>
 \end{lstlisting}
-\Rtodo{Is this template still correct, given ``subModule''?
-No, it was not correct.  I think I fixed it. - CJM}
-
-\Rtodo{Add an example, like for all the rest.  JSB: done, but needs to be sanity-checked since I created it by hand.}
 
 The example below shows a simple \sbol{ModuleDefinition} containing two components, a \sbol{FunctionalComponent} for a DNA sequence encoding constitutive expression of GFP and another for the GFP protein expressed from this sequence, plus an interaction describing that relation.
 
@@ -1029,11 +1021,9 @@ The example below shows a simple \sbol{ModuleDefinition} containing two componen
 </sbol:ModuleDefinition>
 \end{lstlisting}
 
-\Rtodo{Should this be here or defined in ComponentInstance section?  JSB: here}
-
 \subsubsection{FunctionalComponent}
 \label{sec:FunctionalComponent}
-Composition of the functional layer of SBOL designs is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{Component} object for the purpose of fulfilling some function. 
+Composition of the functional layer of SBOL designs is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{ComponentDefinition} object for the purpose of fulfilling some function. 
 
 \sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the definition and access properties. Additionally, it has a \sbol{direction} property that specifies whether it serves as an input, output, both, or neither for the \sbol{ModuleDefinition} that contains it.
 
@@ -1099,7 +1089,6 @@ In the example below, the functional component is defined as public input or out
 
 The \sbol{Module} class enables the composition of \sbol{ModuleDefinition} objects from other, smaller \sbol{ModuleDefinition} objects. \textcolor{red}{The first data field, ``definition'', links to the ModuleDefinition object that is effectively a part of the Module object that owns the Module object.} The second data field, ``mappings'', is a set of MapsTo objects that link between the Component objects at the same level of the design hierarchy as the Module object and the Component objects that are lower in the design hierarchy, thereby composing these objects with greater specificity.
 
-\Ctodo{mappings or mapsTo? --> mapsTo} 
 \Ctodo{need to clean up this whole description}
 \Ctodo{Is the notion of ``level of design hierarchy'' real?  I think it doesn't need to be stated here, it's actually a best practice. -->  it's a best practice.  Nick will write this better.}
 
@@ -1128,8 +1117,6 @@ a part of a toggle switch:
 </sbol:Module>
 \end{lstlisting}
 
-\Rtodo{add an example; JSB: done}
-
 \subsubsection{Interaction}
 \label{sec:Interaction}
 
@@ -1152,9 +1139,7 @@ The \sbol{types} property is a REQUIRED set of one or more URIs that identify an
 If an \sbol{Interaction} object has multiple
 \sbol{types} URIs, then they must identify synonymous terms.
 
-Values for this URI are RECOMMENDED to be chosen from the from the occurring entity relationship branch of the Systems Biology Ontology (SBO) where possible.
-
-\Rtodo{Like the others, SBO is REQUIRED if the term exists, and you can add other stuff.  We also need to explain this up front in the beginning of the section; JSB: done}
+Values for this URI are RECOMMENDED to be chosen from the from the occurring entity relationship branch of the Systems Biology Ontology (SBO), where possible.
 
 \paragraph{The \sbolheading{participations} property}\label{sec:participations}
 
@@ -1205,8 +1190,6 @@ The example below shows an \sbol{Interaction} representing an inhibition relatio
 
 \subsubsection{Participation}
 \label{sec:Participation}
-
-\Rtodo{Fix the linking and clean grammar. JSB: done}
 
 Each \sbol{Participation} object describes the role or roles that a
 particular \sbol{FunctionalComponent} plays in its parent
@@ -1333,24 +1316,6 @@ Each \sbol{Identified} object may have a number of annotations in the form of na
 \subsubsection*{Serialization}
 
 The serialization of \sbol{Annotation} objects has the following form:
-
-\Rtodo{CJM - added, needs review, GM: Updated as below. Please remove the commented example if you are happy.}
-
-% 
-%<?xml version="1.0" ?>
-%<rdf:RDF ... xmlns:prefix=namespace xmlns:prefix=nestedNamespace... >
-%  <sbol:TopLevelObject
-%    ...
-%    <prefix:localPart>literal</prefix:localPart>
-%OR
-%    <prefix:localPart rdf:resource=URI/>
-%OR
-%    <prefix:localPart>
-%      <nestedPrefix:nestedLocalPart rdf:about=nestedURI>
-%        ...
-%     </nestedPrefix:nextedLocalPart>
-%    </prefix:localPart>
-%  </sbol:TopLevelObject>
 
 \lstsetsbol
 \begin{lstlisting}

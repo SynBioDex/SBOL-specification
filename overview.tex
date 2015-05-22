@@ -14,11 +14,6 @@ Figure 1 illustrates the relationships between the main classes of information e
 The physical structure of an element is represented with a \sbol{ComponentDefinition}, often corresponding to a particular \sbol{Sequence} (e.g., DNA, RNA, amino acids), and with its structure further described in terms of the smaller \sbol{Component} instances contained within, and their absolute and relative positions within the component.
 Functional relationships are represented with a \sbol{ModuleDefinition}, often also described by some \sbol{Model}, and with its structure further described in terms of the smaller \sbol{Module} instances contained within, as well as particular components (designated \sbol{FunctionalComponent} to indicate their use in defining a module), and their interactions.
 
-\Rtodo{reword for better clarity and coverage of the model -JSB
-reworded to talk to the figure below - KC Added some further tweaks -JSB}
-
-% In the figure below, a simple toggle switch system is displayed, in which LacI and TetR repress each other's genes transcriptionally. The toggling of the system  is controlled by adding IPTG to deactivate LacI, and ATC to deactivate TetR. The components of the system includes genetic elements, proteins, small molecules.
-
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=1.2]{images/SBOL2_2_revised.png}
@@ -26,8 +21,6 @@ reworded to talk to the figure below - KC Added some further tweaks -JSB}
 \label{images:overview}
 \end{center}
 \end{figure}
-\Rtodo{Put a caption on the figure -JSB  Done -KC Tweaked further -JSB}
-\Ctodo{Remove SBML from the figure -JSB, Why?  We have done more with SBML than any alternative?  We already have SBOL2 to SBML and SBML to SBOL2, for example. - CJM}
 
 The \sbol{Sequence} is a fundamental information object for synthetic biology and is needed to reuse components, to replicate synthetic biology work, and to assemble new synthetic biological systems. In designed systems such objects can consist of small chemical molecules, DNAs, RNAs or Proteins. The \sbol{Sequence} object has been designed to encapsulate any of these types of molecules. Small molecule \sbol{Sequence} objects are typically referred to via their chemical formulae. Molecules where sequence specific information is important, such as DNA, RNA and Protein \sbol{Sequence} objects, use the object to incorporate this information. The \sbol{Sequence} object encapsulates this positional information as well as the associated experimental work or other information related to a sequenced molecule.
 
