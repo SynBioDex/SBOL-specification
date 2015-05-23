@@ -1023,18 +1023,24 @@ The example below shows a simple \sbol{ModuleDefinition} containing two componen
 
 \subsubsection{FunctionalComponent}
 \label{sec:FunctionalComponent}
-Composition of the functional layer of SBOL designs is accomplished using \sbol{FunctionalComponent} objects. Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{ComponentDefinition} object for the purpose of fulfilling some function. 
+A \sbol{FunctionalComponent} is an instance of a \sbol{ComponentDefinition} being used as part of a \sbol{ModuleDefinition}
+Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{ComponentDefinition} object for the purpose of fulfilling some function. 
 
-\sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the definition and access properties. Additionally, it has a \sbol{direction} property that specifies whether it serves as an input, output, both, or neither for the \sbol{ModuleDefinition} that contains it.
+\sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the \sbol{definition}, \sbol{access}, and \sbol{mapsTo} properties. 
+Additionally, it has a \sbol{direction} property that specifies whether it serves as an input, output, both, or neither with regards to the \sbol{ModuleDefinition} that contains it.
 
-\Ctodo{Previously said a Module could own a FunctionalComponet, which i'm pretty sure is false -JB  Yes, it's false, fix it}
+The purpose of \sbol{direction} is to encode a common way in which designers think about the ``purpose'' of a \sbol{FunctionalComponent} within a \sbol{ModuleDefinition}.
+For example, consider a system that is designed to indicate concentration of the cell-cell signalling molecule 3OC$_6$HSL by the concentration of the product of a particular CDS.
+In this system, the concentration of 3OC$_6$HSL is the signal being interpreted by the system, so the \sbol{FunctionalComponent} for 3OC$_6$HSL would have a \sbol{direction} of ``input.''  
+Complementarily, the concentration of the designated product is the signal intended for consumption by other biologicals systems, and so the \sbol{FunctionalComponent} for that product would have a \sbol{direction} of ``output.''
+The CDS encoding the product, however, is not intended to interact directly, and so its \sbol{FunctionalComponent} would have a \sbol{direction} of ``neither.''
+Finally, in some cases a \sbol{FunctionalComponent} may serve as both an input and output, and be marked as having a \sbol{direction} of ``both.''
+
+\Rtodo{Need to explain direction better.  JSB: done}
 
 \paragraph{The \sbolheading{direction} property}\label{sec:direction}
 Each \sbol{FunctionalComponent} MUST specify via the \sbol{direction} property whether it serves as an  input, output, both, or neither for its parent \sbol{ModuleDefinition} object. 
 The value for this property MUST be one of the values given in \ref{tbl:functionalcomponent_directions}.
-
-
-\LDtodo{Need to explain direction better.}
 
 
 \begin{table}[ht]
