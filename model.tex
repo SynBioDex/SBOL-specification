@@ -1093,10 +1093,23 @@ In the example below, the functional component is defined as public input or out
 \end{center}
 \end{figure}
 
-The \sbol{Module} class enables the composition of \sbol{ModuleDefinition} objects from other, smaller \sbol{ModuleDefinition} objects. \textcolor{red}{The first data field, ``definition'', links to the ModuleDefinition object that is effectively a part of the Module object that owns the Module object.} The second data field, ``mappings'', is a set of MapsTo objects that link between the Component objects at the same level of the design hierarchy as the Module object and the Component objects that are lower in the design hierarchy, thereby composing these objects with greater specificity.
+The \sbol{Module} class represents the usage or occurrence of a \sbol{ModuleDefinition} within a larger design (that is, another \sbol{ModuleDefinition}).  
 
-\Ctodo{need to clean up this whole description}
-\Ctodo{Is the notion of ``level of design hierarchy'' real?  I think it doesn't need to be stated here, it's actually a best practice. -->  it's a best practice.  Nick will write this better.}
+\paragraph{The \sbolheading{definition} property}
+\label{sec:definition}
+
+The \sbol{definition} property is a REQUIRED \external{URI} that refers to the \sbol{ModuleDefinition} for the \sbol{Module}.
+
+The \sbol{definition} property MUST NOT refer to the same \sbol{ModuleDefinition} as that which contains the \sbol{Module}. Furthermore, \sbol{Module} objects MUST NOT form a circular chain of references via their \sbol{definition} properties and the \sbol{ModuleDefinition} objects that contain them. For example, consider the \sbol{Module} objects $A$ and $B$ and the \sbol{ModuleDefinition} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is circular. 
+
+\paragraph{The \sbolheading{mapsTo} property}
+\label{sec:mapsTos}
+
+The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects that refer to and link \sbol{Module} objects together within a larger design.
+
+\ref{sec:MapsTo} contains a detailed description of the \sbol{MapsTo} class.
+
+\Rtodo{need to clean up this whole description; JSB: done}
 
 \paragraph{Serialization}
 The serialization of \sbol{Module}s has the following form.
@@ -1113,7 +1126,7 @@ The serialization of \sbol{Module}s has the following form.
 The example below specifies a TetR inverter that is being used as
 a part of a toggle switch:
 
-\Ctodo{I think a mapsTo in this example would be good.}
+\Rtodo{I think a mapsTo in this example would be good. JSB: I don't think we need it, since we've got a nice description and examples in MapsTo}
 
 \lstsetsbol
 \begin{lstlisting}
