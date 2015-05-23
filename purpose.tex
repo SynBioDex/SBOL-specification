@@ -20,9 +20,9 @@ Because the standard itself can represent information from other sources for seq
 This document presents the second version of SBOL.
 The previous version 1.1 of the SBOL standard focused on representing the structural aspects of genetic designs. 
 Users of the standard were able to use it to echange information on DNA designs but could not represent molecules other than DNA or represent the functional aspects of their designs beyond the DNA sequences. 
-To serve as an effective medium for the computational exchange of genetic designs, SBOL must be extended to capture more aspects of a designed system, including both structural and functional information, and the composition of complex structural and functional designs by combining simpler parts. The SBOL 2.0 data model proposed in this specification thus provides for addressing the most pressing needs for expanding SBOL Version 1.1. 
+To serve as an effective medium for the computational exchange of genetic designs, SBOL must be extended to capture more aspects of a designed system, including both structural and functional information, and the composition of complex structural and functional designs by combining simpler parts. The SBOL 2.0 data model defined in this specification thus provides for addressing the most pressing needs for expanding SBOL Version 1.1:
 
-\begin{enumerate}
+\begin{itemize}
 
 \item represent structural components of a biological design, including DNA, RNA, proteins, small molecules and other physical components
 
@@ -32,13 +32,11 @@ To serve as an effective medium for the computational exchange of genetic design
 
 \item support rich annotations of all components, so that data required to describe a design, but not formalized in this specification can be safely exchanged
 
-\end{enumerate}
+\end{itemize}
 
 Taken together, these capabilities allow SBOL sufficient expressivity to support the description and exchange of hierarchical, modular representations of both the intended structure and function of designed biological systems.
 
 To address the need for functional descriptions in SBOL, the proposed data model adds classes for modules, interactions, and models. These classes provide a firm basis for functional representation in SBOL without going so far as to create a new standard for mathematically modeling biology, as there already exist several established languages for doing so, from the Systems Biology Markup Language (SBML)~\cite{SBML} to CellML~\cite{CellML} and even MatLab~\cite{matlab}. Rather, these classes enable users of SBOL to group components that function together, describe the basic qualitative interactions between these components, and document references to standard mathematical models that are external to SBOL and that provide more detailed descriptions of component function. In other words, a module gathers together a set of component instantiations, a set of interactions between these component instantiations, and a set of references to external models that are expected to be consistent with the module's interactions.
-
-\Ctodo{v1.1 to me seems easy to confuse with SBOLv 1.0, so removed the v. - CJM}
 
 The SBOL standard has been developed in collaboration between both ``wet'' bench scientists and ``dry'' scientific modelers and tool designers active within the Synthetic Biology community. 
 As with the earlier SBOL 1.1 standard this community (open for any practitioner to join) has met to discuss, argue and agree upon needs that the SBOL standard should address. 
