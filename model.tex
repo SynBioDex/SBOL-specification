@@ -929,7 +929,7 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
 \subsection{ModuleDefinition}
 \label{sec:ModuleDefinition}
 
-\Ctodo{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.}
+\Rtodo{This section has not been edited much compared to other sections. We need to explain classes and their properties a bit more in detail.  JSB: done}
 
 \begin{figure}[ht]
 \begin{center}
@@ -939,39 +939,52 @@ The example below shows the serialization of a \sbol{Model} object. The model ob
 \end{center}
 \end{figure}
 
-The \sbol{ModuleDefinition} class is the hub where the structural and functional aspects of genetic designs come together to form a complete picture of the design. 
+The \sbol{ModuleDefinition} class is the hub where the structural and functional aspects of genetic designs are brought together to form a complete picture of the design. 
 A \sbol{ModuleDefinition} object is composed from zero or more \sbol{FunctionalComponent}, \sbol{Module}, and \sbol{Interaction} objects, and links to zero or more \sbol{Model} objects. 
-A \sbol{ModuleDefinition} object relies on the ``direction'' data fields of its \sbol{FunctionalComponent} objects to specify whether they serve as its inputs or outputs.
-\Ctodo{the direction bit needs to be said much more clearly}
+
+As an engineering object, a \sbol{ModuleDefinition} will often have certain of its \sbol{FunctionalComponent} objects that are intended to carry signals in or out of it.  
+This functionality of designated ``inputs'' and ``outputs'' is expressed by \sbol{direction} properties on its \sbol{FunctionalComponent} elements.
+
+\Rtodo{the direction bit needs to be said much more clearly.  JSB: done}
 
 \subsubsection*{The \sbolheading{roles} property}\label{sec:roles}
-This property is OPTIONAL and may include a set of URIs that specifies the intended use of a \sbol{ModuleDefinition} entity. 
-These URIs may identify terms for abstract module roles, such as``inverter'' or ``AND gate'', or they may identify terms for purely biological roles, such as ``metabolic pathway'' and ``signaling cascade''.
-\Ctodo{make this sentence clearer}
+The \sbol{roles} property is an OPTIONAL set of \external{URI}s that clarifies the intended function of a \sbol{ModuleDefinition} in a biological context.
 
-\Ctodo{Make these more paralell to componentdefinition in the way that they are written}
-\subsubsection*{The \sbolheading{models} property}\label{sec:models}
-This property is OPTIONAL and includes identities of associated \sbol{Model} entities.
+These terms might identify ``logical'' roles, such as ``inverter'' or ``AND gate'', or they might identify descriptive biological roles, such as ``metabolic pathway'' and ``signaling cascade,'' or might identify roles from some other manner of describing intended function.
+\Ctodo{Do we have any ontology to recommend here? -JSB}
 
-SBOL's \sbol{Model} objects are used to link genetic descriptions of biological parts and their interactions to computational models.
-A ModuleDefinition object can link to more than one model since each one can encode different levels of functional detail and play different roles in engineering design. 
-\Ctodo{clarify this bit with a bit more explanation and better content}
+\Rtodo{Make these more paralell to componentdefinition in the way that they are written.  JSB: done}
 
-\Ctodo{make sure submodules --> modules}
+\Rtodo{make sure submodules --> modules; JSB: done}
 
 \subsubsection*{The \sbolheading{modules} property}\label{sec:modules}
-This property is optional and includes a set of \sbol{Module} entities, which refer to \sbol{ModuleDefinition}s to be imported.
-\Ctodo{use better language, like in componentdefinition}
 
-\Ctodo{component --> functionalComponent in examples}
+The \sbol{modules} property is OPTIONAL and MAY specify a set of \sbol{Module} objects contained by the \sbol{ModuleDefinition}.
+
+While the \sbol{ModuleDefinition} class is analogous to a blueprint or specification sheet for a system of interaction biological elements, the \sbol{Module} class represents the specific occurrence of a particular sub-system within that design. Hence, this class allows a biological design to include multiple copies of a subsystem. For example, the \sbol{ModuleDefinition} for a network of two-input repressor systems, where the particular repressors have not yet been chosen, contain multiple \sbol{Module} objects that refer to the same \external{URI} for the \sbol{ModuleDefinition} of an abstract two-input repressor device.
+
+
 \subsubsection*{The \sbolheading{functionalComponents} property}
 \label{sec:functionalComponents}
-This property is optional and includes a set of \sbol{FunctionalComponent} entities. These entities are then used to describe biological interactions via \sbol{Participation} entities.
 
-\Ctodo{use better language}
+The \sbol{functionalComponents} property is OPTIONAL and MAY specify a set of \sbol{FunctionalComponent} objects contained by the \sbol{ModuleDefinition}.
+
+Just as a \sbol{Module} represents an instance of a subsystem in the ``blueprint'' of a \sbol{ModuleDefintion}, a \sbol{FunctionalComponent} represents an instance of an individual element whose \sbol{ComponentDefinition} may be used multiple times in a \sbol{ModuleDefinition}.  For example, a \sbol{ModuleDefinition} might contain several copies of a particular promoter.
+
+\Rtodo{use better language; JSB: done}
 
 \subsubsection*{The \sbolheading{interactions} property}\label{sec:interactions}
-This property is optional and includes a set of \sbol{Interaction} entities, which include \sbol{Participation} entities.
+
+The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects contained by the \sbol{ModuleDefinition}.
+
+The \sbol{Interaction} class provides an abstract, machine-friendly representation of the functional interactions of entities within a \sbol{ModuleDefinition} (whereas a \sbol{Model} is concrete and may not be readily susceptible to machine reasoning, depending on how it is implemented).  Each \sbol{Interaction} includes \sbol{Participation} entities that indicate the roles of the \sbol{FunctionalComponent} objects involved in the \sbol{Interaction}
+
+\subsubsection*{The \sbolheading{models} property}\label{sec:models}
+The \sbol{models} property is OPTIONAL and MAY specify a set of \external{URI}s identifying \sbol{Model} objects.
+
+SBOL's \sbol{Model} objects are placeholders used to link specifications of biological parts and their interactions to computational models of arbitrary format.
+A \sbol{ModuleDefinition} object can link to more than one \sbol{Model} since each might encode the same system in a different way or at a different level of detail.
+\Rtodo{clarify this bit with a bit more explanation and better content.  JSB: done}
 
 \subsubsection*{Serialization}
 
