@@ -50,8 +50,6 @@ Lastly, font color is used in the body text of this specification to indicate wh
 \subsection{Data Types}
 \label{sec:datatypes}
 
-\Rtodo{CJM - edited, needs review}
-
 When SBOL use simple ``primitive'' data types such as strings or integers, these are defined as the following specific formal types:
 \begin{itemize}
 \item String: \url{http://www.w3.org/TR/xmlschema11-2/#string}
@@ -433,8 +431,7 @@ The \sbol{definition} property is a REQUIRED \external{URI} that refers to the \
 
 The \sbol{definition} property MUST NOT refer to the same \sbol{ComponentDefinition} as that which contains the \sbol{ComponentInstance}. Furthermore, \sbol{ComponentInstance} objects MUST NOT form a circular chain of references via their \sbol{definition} properties and the \sbol{ComponentDefinition} objects that contain them. For example, consider the \sbol{ComponentInstance} objects $A$ and $B$ and the \sbol{ComponentDefinition} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is circular. 
 
-\paragraph{The \sbolheading{mapsTo} property}
-\label{sec:mapsTos}
+\paragraph{The \sbolheading{mapsTos} property}\label{sec:mapsTos}
 
 The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects that refer to and link \sbol{ComponentInstance} objects (both \sbol{Component} objects and \sbol{FunctionalComponent} objects) together within a larger design.
 
@@ -461,7 +458,8 @@ can be referred to by a \sbol{MapsTo}.
   \label{tbl:componentInstance_access}
 \end{table}
 
-Unless a designer has a reason to prevent other designers from accessing the \sbol{ComponentInstance} when their design is reused, it is RECOMMENDED that the \sbol{access} property of the \sbol{ComponentInstance} be set to public. For example, in order to avoid the retroactivity that might result from a \sbol{ComponentInstance} interacting with those in other designs, a designer might set the \sbol{access} of the \sbol{ComponentInstance} to private.
+Unless a designer has a reason to prevent other designers from accessing the \sbol{ComponentInstance} when their design is reused, it is RECOMMENDED that the \sbol{access} property of the \sbol{ComponentInstance} be set to \external{public}. 
+For example, in order to avoid the retroactivity that might result from a \sbol{ComponentInstance} interacting with those in other designs, a designer might set the \sbol{access} of the \sbol{ComponentInstance} to private.
 
 \paragraph{Serialization}
 
@@ -545,7 +543,7 @@ The same types of identity relationships can also be declared between \sbol{Func
 This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the owner of the \sbol{MapsTo} (either a \sbol{ComponentInstance} or \sbol{Module}).
 
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
-This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.  Finally, the \sbol{ComponentInstance} MUST have \sbol{public} \sbol{Access}.
+This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.  Finally, the \sbol{ComponentInstance} MUST have \external{public} \sbol{access}.
  
 \paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
 Each \sbol{MapsTo} entity MUST specify the relationship between its \sbol{local} and \sbol{remote} components using the refinement property, using one of the values in \ref{tbl:mapsto_refinement}.
@@ -969,7 +967,7 @@ While the \sbol{ModuleDefinition} class is analogous to a blueprint or specifica
 
 The \sbol{functionalComponents} property is OPTIONAL and MAY specify a set of \sbol{FunctionalComponent} objects contained by the \sbol{ModuleDefinition}.
 
-Just as a \sbol{Module} represents an instance of a subsystem in the ``blueprint'' of a \sbol{ModuleDefintion}, a \sbol{FunctionalComponent} represents an instance of an individual element whose \sbol{ComponentDefinition} may be used multiple times in a \sbol{ModuleDefinition}.  For example, a \sbol{ModuleDefinition} might contain several copies of a particular promoter.
+Just as a \sbol{Module} represents an instance of a subsystem in the ``blueprint'' of a \sbol{ModuleDefinition}, a \sbol{FunctionalComponent} represents an instance of an individual element whose \sbol{ComponentDefinition} may be used multiple times in a \sbol{ModuleDefinition}.  For example, a \sbol{ModuleDefinition} might contain several copies of a particular promoter.
 
 \Rtodo{use better language; JSB: done}
 
@@ -1039,7 +1037,7 @@ The example below shows a simple \sbol{ModuleDefinition} containing two componen
 A \sbol{FunctionalComponent} is an instance of a \sbol{ComponentDefinition} being used as part of a \sbol{ModuleDefinition}
 Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves as an explicit usage of a \sbol{ComponentDefinition} object for the purpose of fulfilling some function. 
 
-\sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the \sbol{definition}, \sbol{access}, and \sbol{mapsTo} properties. 
+\sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the \sbol{definition}, \sbol{access}, and \sbol{mapsTos} properties. 
 Additionally, it has a \sbol{direction} property that specifies whether it serves as an input, output, both, or neither with regards to the \sbol{ModuleDefinition} that contains it.
 
 The purpose of \sbol{direction} is to encode a common way in which designers think about the ``purpose'' of a \sbol{FunctionalComponent} within a \sbol{ModuleDefinition}.
@@ -1175,7 +1173,7 @@ Values for this URI are RECOMMENDED to be chosen from the from the occurring ent
 
 \paragraph{The \sbolheading{participations} property}\label{sec:participations}
 
-The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies a \sbol{FunctionalComponent} and the \sbol{role} is plays in the interaction.
+The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies a \sbol{FunctionalComponent} and the \sbol{roles} is plays in the interaction.
 
 
 \paragraph{Serialization}
@@ -1231,13 +1229,13 @@ particular \sbol{FunctionalComponent} plays in its parent
 
 The \sbol{roles} property is an OPTIONAL set of URIs that identify an appropriate ontology term describing this elements relationship to its parent \sbol{Interaction}. 
 If a \sbol{Participation} object has multiple
-\sbol{role} URIs, then they must identify synonymous terms.
+\sbol{roles} URIs, then they must identify synonymous terms.
 
 Values for this URI are RECOMMENDED to be chosen from the from the participant role branch of the Systems Biology Ontology (SBO) where possible.
 
 \paragraph{The \sbolheading{participant} property}\label{sec:participant}
 
-The \sbol{participant} property MUST specify precisely one \sbol{FunctionalComponent} object that plays the designated \sbol{role} in its parent \sbol{Interaction} object.
+The \sbol{participant} property MUST specify precisely one \sbol{FunctionalComponent} object that plays the designated \sbol{roles} in its parent \sbol{Interaction} object.
 
 
 \paragraph{Serialization}
@@ -1279,7 +1277,7 @@ Some examples of \sbol{Collection} objects:
 \end{center}
 \end{figure}
 
-\subsubsection*{The \sbolheading{members} property}
+\subsubsection*{The \sbolheading{members} property}\label{sec:members}
 The \sbol{members} property has a data type of URI and has the URI for a \sbol{TopLevel} entity.  A \sbol{Collection} may have any number of members, including none.
 
 \subsubsection*{Serialization}
@@ -1331,9 +1329,11 @@ In particular, three methods are supported for connecting the SBOL data model wi
 \label{sec:value}
 \label{sec:Annotation}
 \label{sec:AnnotationValue}
-\label{sec:ListOfAnnotations}
+\label{sec:NestedAnnotations}
+\label{sec:nestedQName}
+\label{sec:nestedURI}
 
-Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{name} property is specified by a qualified name (\external{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be a literal type (i.e., \external{String}, \external{Integer}, \external{Double}, \external{Boolean}), \external{URI}, or a \external{NestedAnnotations} object. The \external{NestedAnnotations} object is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and an optional list of nested \sbol{annotations}.
+Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{name} property is specified by a qualified name (\external{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be a literal type (i.e., \external{String}, \external{Integer}, \external{Double}, \external{Boolean}), \external{URI}, or a \sbol{NestedAnnotations} object. The \sbol{NestedAnnotations} object is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and an optional list of nested \sbol{annotations}.
 
 \Ctodo{NIC: Please update UML as follows: remove link from Identifed to AnnotationValue, change type of name to QName, add new class NestedAnnotations that inherits from AnnotationValue with properties nestedQName : QName, nestedURI : URI, and a 0..* annotations link to the Annotation class.}
 
