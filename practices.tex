@@ -2,16 +2,13 @@
 \section{Best Practices}
 \label{sec:bestpractices}
 % -----------------------------------------------------------------------------
-\subsection{Indicate Modification of Data with Version}
+\subsection{Use of the Version Property}
 
 Once an SBOL object has been published where others might have accessed it (e.g., to an online repository), it may be the case that others make copies of the object or else come to depend on the particular contents of the object.  Thus, in order to avoid confusion, if a person wants to change the properties of a published object, the best practice is to do so by making a new copy that incorporates the change, with a new URI.
 
 The relationship between the old and new objects (i.e., that the new object was derived from the old object), however, is not visible unless it is explicitly declared.  This is RECOMMENDED to be done using the \sbol{persistentIdentity}, and \sbol{version} properties. The preferred practice for declaring such a relationship is to use the same \sbol{persistentIdentity} for both objects, and label the newer one as being the newer version. Then, when the new object is published, it can be clear to both humans and machines that this object is intended to replace the one that was published previously.  In this way also, when the user of an object always wants the latest version, they can obtain it by referencing the object with the \sbol{persistentIdentity} rather than the \sbol{identity}.
 
 As stated in \ref{sec:version},  it is RECOMMENDED that version numbering should follow the conventions of semantic versions (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).  This convention represents versions as sequences of numbers and qualifiers separated by the characters {\tt .} and {\tt -} and compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).  For a full explanation, see the linked resources.
-
-\Rtodo{try to target readers unfamiliar with RDF/XML.  -bder; JSB: done}
-\Rtodo{maybe clarify what type of versioning is this object affecting? TN  JSB: done}
 
 %% \subsection{Creation and Modification Dates}
 
