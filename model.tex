@@ -943,17 +943,12 @@ A \sbol{ModuleDefinition} object is composed from zero or more \sbol{FunctionalC
 As an engineering object, a \sbol{ModuleDefinition} will often have certain of its \sbol{FunctionalComponent} objects that are intended to carry signals in or out of it.  
 This functionality of designated ``inputs'' and ``outputs'' is expressed by \sbol{direction} properties on its \sbol{FunctionalComponent} elements.
 
-\Rtodo{the direction bit needs to be said much more clearly.  JSB: done}
-
 \subsubsection*{The \sbolheading{roles} property}\label{sec:roles}
-The \sbol{roles} property is an OPTIONAL set of \external{URI}s that clarifies the intended function of a \sbol{ModuleDefinition} in a biological context.
+The \sbol{roles} property is an OPTIONAL set of \external{URI}s that clarifies the intended function of a \sbol{ModuleDefinition} in a biological context.  
 
 These terms might identify ``logical'' roles, such as ``inverter'' or ``AND gate'', or they might identify descriptive biological roles, such as ``metabolic pathway'' and ``signaling cascade,'' or might identify roles from some other manner of describing intended function.
-\Ctodo{Do we have any ontology to recommend here? -JSB}
 
-\Rtodo{Make these more paralell to componentdefinition in the way that they are written.  JSB: done}
-
-\Rtodo{make sure submodules --> modules; JSB: done}
+\Ctodo{Do we have any ontology to recommend here? -JSB  I don't believe so. -CJM}
 
 \subsubsection*{The \sbolheading{modules} property}\label{sec:modules}
 
@@ -961,15 +956,12 @@ The \sbol{modules} property is OPTIONAL and MAY specify a set of \sbol{Module} o
 
 While the \sbol{ModuleDefinition} class is analogous to a blueprint or specification sheet for a system of interaction biological elements, the \sbol{Module} class represents the specific occurrence of a particular sub-system within that design. Hence, this class allows a biological design to include multiple copies of a subsystem. For example, the \sbol{ModuleDefinition} for a network of two-input repressor systems, where the particular repressors have not yet been chosen, contain multiple \sbol{Module} objects that refer to the same \external{URI} for the \sbol{ModuleDefinition} of an abstract two-input repressor device.
 
-
 \subsubsection*{The \sbolheading{functionalComponents} property}
 \label{sec:functionalComponents}
 
 The \sbol{functionalComponents} property is OPTIONAL and MAY specify a set of \sbol{FunctionalComponent} objects contained by the \sbol{ModuleDefinition}.
 
 Just as a \sbol{Module} represents an instance of a subsystem in the ``blueprint'' of a \sbol{ModuleDefinition}, a \sbol{FunctionalComponent} represents an instance of an individual element whose \sbol{ComponentDefinition} may be used multiple times in a \sbol{ModuleDefinition}.  For example, a \sbol{ModuleDefinition} might contain several copies of a particular promoter.
-
-\Rtodo{use better language; JSB: done}
 
 \subsubsection*{The \sbolheading{interactions} property}\label{sec:interactions}
 
@@ -982,7 +974,6 @@ The \sbol{models} property is OPTIONAL and MAY specify a set of \external{URI}s 
 
 SBOL's \sbol{Model} objects are placeholders used to link specifications of biological parts and their interactions to computational models of arbitrary format.
 A \sbol{ModuleDefinition} object can link to more than one \sbol{Model} since each might encode the same system in a different way or at a different level of detail.
-\Rtodo{clarify this bit with a bit more explanation and better content.  JSB: done}
 
 \subsubsection*{Serialization}
 
@@ -1040,15 +1031,6 @@ Each FunctionalComponent object is owned by a \sbol{ModuleDefinition} and serves
 \sbol{FunctionalComponent} derives from \sbol{ComponentInstance}, and therefore has the \sbol{definition}, \sbol{access}, and \sbol{mapsTos} properties. 
 Additionally, it has a \sbol{direction} property that specifies whether it serves as an input, output, both, or neither with regards to the \sbol{ModuleDefinition} that contains it.
 
-The purpose of \sbol{direction} is to encode a common way in which designers think about the ``purpose'' of a \sbol{FunctionalComponent} within a \sbol{ModuleDefinition}.
-For example, consider a system that is designed to indicate concentration of the cell-cell signalling molecule 3OC$_6$HSL by the concentration of the product of a particular CDS.
-In this system, the concentration of 3OC$_6$HSL is the signal being interpreted by the system, so the \sbol{FunctionalComponent} for 3OC$_6$HSL would have a \sbol{direction} of ``input.''  
-Complementarily, the concentration of the designated product is the signal intended for consumption by other biologicals systems, and so the \sbol{FunctionalComponent} for that product would have a \sbol{direction} of ``output.''
-The CDS encoding the product, however, is not intended to interact directly, and so its \sbol{FunctionalComponent} would have a \sbol{direction} of ``neither.''
-Finally, in some cases a \sbol{FunctionalComponent} may serve as both an input and output, and be marked as having a \sbol{direction} of ``both.''
-
-\Rtodo{Need to explain direction better.  JSB: done}
-
 \paragraph{The \sbolheading{direction} property}\label{sec:direction}
 Each \sbol{FunctionalComponent} MUST specify via the \sbol{direction} property whether it serves as an  input, output, both, or neither for its parent \sbol{ModuleDefinition} object. 
 The value for this property MUST be one of the values given in \ref{tbl:functionalcomponent_directions}.
@@ -1068,6 +1050,13 @@ The value for this property MUST be one of the values given in \ref{tbl:function
   \caption{URIs for the \sbol{direction} property.}
   \label{tbl:functionalcomponent_directions}
 \end{table}
+
+The purpose of \sbol{direction} is to encode a common way in which designers think about the ``purpose'' of a \sbol{FunctionalComponent} within a \sbol{ModuleDefinition}.
+For example, consider a system that is designed to indicate concentration of the cell-cell signalling molecule 3OC$_6$HSL by the concentration of the product of a particular CDS.
+In this system, the concentration of 3OC$_6$HSL is the signal being interpreted by the system, so the \sbol{FunctionalComponent} for 3OC$_6$HSL would have a \sbol{direction} of ``input.''  
+Complementarily, the concentration of the designated product is the signal intended for consumption by other biologicals systems, and so the \sbol{FunctionalComponent} for that product would have a \sbol{direction} of ``output.''
+The CDS encoding the product, however, is not intended to interact directly, and so its \sbol{FunctionalComponent} would have a \sbol{direction} of ``neither.''
+Finally, in some cases a \sbol{FunctionalComponent} may serve as both an input and output, and be marked as having a \sbol{direction} of ``both.''
 
 \paragraph{Serialization}
 
@@ -1120,8 +1109,6 @@ The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects that ref
 
 \ref{sec:MapsTo} contains a detailed description of the \sbol{MapsTo} class.
 
-\Rtodo{need to clean up this whole description; JSB: done}
-
 \paragraph{Serialization}
 The serialization of \sbol{Module}s has the following form.
 \lstsetsbol
@@ -1136,8 +1123,6 @@ The serialization of \sbol{Module}s has the following form.
 
 The example below specifies a TetR inverter that is being used as
 a part of a toggle switch:
-
-\Rtodo{I think a mapsTo in this example would be good. JSB: I don't think we need it, since we've got a nice description and examples in MapsTo}
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1158,7 +1143,6 @@ a part of a toggle switch:
 \end{center}
 \end{figure}
 
-\Rtodo{Heavily rewrote this section. -JSB}
 The \sbol{Interaction} class provides a description of the functional interactions of entities within a \sbol{ModuleDefinition}.
 For example, it can be used to represent regulatory interactions, such as activation or repression, processes from the central dogma of biology, such as transcription and translation, or molecular interactions like  non-covalent binding between a small molecule and transcription factor or phosphorylation of a transcription factor by an enzyme.
 Such an \sbol{Interaction} is represented in SBOL by referring to an ontology defining the type of interaction and declaring how various entities participate in the interaction.
@@ -1169,11 +1153,11 @@ The \sbol{types} property is a REQUIRED set of one or more URIs that identify an
 If an \sbol{Interaction} object has multiple
 \sbol{types} URIs, then they must identify synonymous terms.
 
-Values for this URI are RECOMMENDED to be chosen from the from the occurring entity relationship branch of the Systems Biology Ontology (SBO), where possible.
+Values for this URI are RECOMMENDED to be chosen from the occurring entity relationship branch of the Systems Biology Ontology (SBO), where possible.
 
 \paragraph{The \sbolheading{participations} property}\label{sec:participations}
 
-The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies a \sbol{FunctionalComponent} and the \sbol{roles} is plays in the interaction.
+The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies a \sbol{FunctionalComponent} and the \sbol{roles} it plays in the interaction.
 
 
 \paragraph{Serialization}
@@ -1231,7 +1215,7 @@ The \sbol{roles} property is an OPTIONAL set of URIs that identify an appropriat
 If a \sbol{Participation} object has multiple
 \sbol{roles} URIs, then they must identify synonymous terms.
 
-Values for this URI are RECOMMENDED to be chosen from the from the participant role branch of the Systems Biology Ontology (SBO) where possible.
+Values for this URI are RECOMMENDED to be chosen from the participant role branch of the Systems Biology Ontology (SBO) where possible.
 
 \paragraph{The \sbolheading{participant} property}\label{sec:participant}
 

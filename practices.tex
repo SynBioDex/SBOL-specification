@@ -20,6 +20,8 @@ As stated in \ref{sec:version},  it is RECOMMENDED that version numbering should
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
+\Rtodo{This section was revised recently to remove types which are no longer required.  Would be good to have another set of eyes read it to be sure it is clear.  -CJM}
+
 Maintaining unique identity URIs for all SBOL objects is a very challenging implementation task.  To reduce the developer's burden, users of SBOL 2.0 are encouraged to follow a few simple rules when constructing the identity and related fields for SBOL objects.  When these rules are followed, we say that the SBOL object is \emph{compliant}.  The rules are as follows:
 \begin{enumerate}
 \item The \sbol{identity} of an SBOL object should begin with a \emph{URI prefix} that maps to a domain over which the user has control.  Namely, the user can guarantee uniqueness of identities within this domain.
