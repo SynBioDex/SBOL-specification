@@ -7,7 +7,7 @@ Synthetic designs need to convey three types of information:
 \item The functional role of the element in the design
 \item The functional consequence of this element within the overall design or the biological system where it will perform 
 \end{itemize}
-In broad strokes, SBOL 1.1 describes the first of these, the physical information, whereas SBOL 2.0 extends the description of the design to include functional information. The physical information about a designed genetic circuit includes the order of its constituents and their descriptions. The exact locations of these constituents and their sequences allow genetic circuits to be defined unambiguously, and reused in other designs. However, functional descriptions of interactions among elements within a design, and functional descriptions of the overall system were missing in SBOL 1.1. 
+In broad strokes, SBOL 1.1 describes the first of these, the physical information, whereas SBOL 2.0 extends the description of the design to include functional information. The physical information about a designed genetic circuit includes the order of its constituents and their descriptions. The exact locations of these constituents and their sequences allow genetic circuits to be defined unambiguously, and reused in other designs. However, SBOL 1.1 lacked the ability to describe functional interactions among elements within a design, nor functional descriptions of the overall system.
 
 \Rtodo {next two paragraphs are un-edited text provid by Kevin C. I will try to reduce these, without losing biological relevance.}
 
@@ -27,8 +27,8 @@ Functional relationships are represented with a \sbol{ModuleDefinition}, often a
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.5]{images/OverviewFigforSpec-v2.png}
-\caption{Main classes of information represented by the SBOL standard, and their relationships.  Red boxes are classes from the 1.1 version, while blue classes are the some of the new classes for this version of SBOL.}
+\includegraphics[scale=0.5]{images/OverviewFigforSpec-v3.png}
+\caption{Main classes of information represented by the SBOL standard, and their relationships.  Red boxes are classes from the 1.1 version of SBOL that focused on structure, whereas blue classes are some of the new classes that support the functional aspects of designs.}
 \label{images:overview1}
 \end{center}
 \end{figure}
