@@ -70,22 +70,26 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
 \Ctodo{It would be useful to add URLs to the resources - NeilW}
 
 \begin{table}[ht]
-  \begin{edtable}{tabular}{p{3cm}p{2cm}p{5cm}}
+  \begin{edtable}{tabular}{p{3cm}p{2cm}p{5cm}p{5cm}}
     \toprule
-    \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}\\
+    \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}
+    & More Information \\
     \midrule
-    \textbf{ComponentDefinition}  & types & BioPAX \\
-    						   	  & roles & SO (if type is \textit{DNA} or \textit{RNA})    \\
-    						   	  & roles & CHEBI (if type is \textit{small molecule})    \\
-    						   	  & roles & UniProt (if type is \textit{protein}??) \\   
-    \textbf{Interaction}	      & types & SBO (entity relationship branch)     \\
-    \textbf{Participation}	      & roles & SBO (participant roles branch)     \\
-    \textbf{Model}	      		  & language & EDAM      \\
-    				      		  & framework & SBO (modeling framework branch)     \\
+    \textbf{ComponentDefinition}  & types & BioPAX & \url{http://www.biopax.org}\\
+    						   	  & roles & SO (if type is \textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
+    						   	  & roles & CHEBI (if type is \textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
+%    						   	  & roles & UniProt (if type is \textit{protein}??) \\   
+    \textbf{Interaction}	      & types & SBO (entity relationship branch) & 
+    \url{http://www.ebi.ac.uk/sbo/main/} \\
+    \textbf{Participation}	      & roles & SBO (participant roles branch) &
+    \url{http://www.ebi.ac.uk/sbo/main/} \\
+    \textbf{Model}	      		  & language & EDAM &      \\
+    				      		  & framework & SBO (modeling framework branch) &
+    \url{http://www.ebi.ac.uk/sbo/main/} \\
     \bottomrule
   \end{edtable}
   \caption{Preferred external resources from which to draw values for various SBOL properties.}
   \label{tbl:preferred_external_resources}
 \end{table}
 
-\Ctodo{Goksel and Neil need to sort out GO vs. UniProt, and possibly just recommend both here.}
+\NVtodo{Goksel and Neil need to sort out GO vs. UniProt, and possibly just recommend both here.}
