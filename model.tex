@@ -147,7 +147,7 @@ child class, however, has the following form for serializing
 properties inherited from \sbol{Identified}, where CLASS\_NAME is
 replaced by the name of the class:
 
-\Ctodo{Need to require use of DublinCore names and show examples of them: non-stanard mappings per Matt: Title vs. Name, descripton is dcterms:description}
+\Rtodo{Need to require use of DublinCore names and show examples of them: non-stanard mappings per Matt: Title vs. Name, descripton is dcterms:description}
 
 \lstsetsbol
 \begin{lstlisting}
@@ -165,6 +165,15 @@ replaced by the name of the class:
   ...
 </rdf:RDF>
 \end{lstlisting}
+
+Note that several of the properties are not in the \external{sbol}
+namespace, but are mapped to standardized terms defined elsewhere:
+\begin{itemize}
+\item \sbol{identity} is serialized as \external{rdf:about}
+\item \sbol{wasDerivedFrom} is serialized as \external{prov:wasDerivedFrom}
+\item \sbol{name} is serialized as \external{dcterms:title}
+\item \sbol{description} is serialized as \external{dcterms:description}
+\end{itemize}
 
 % \subsection{Documented}
 % \label{sec:Documented}
