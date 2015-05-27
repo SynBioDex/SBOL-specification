@@ -129,8 +129,6 @@ If the \sbol{wasDerivedFrom} property of an SBOL object $A$ refers to another SB
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
 
-\Ctodo{Need to require use of DublinCore names and show examples of them: non-stanard mappings per Matt: Title vs. Name, descripton is dcterms:description}
-
 The \sbol{name} property is OPTIONAL and has a data type of \external{String}. This property is intended to be displayed to a human when visualizing an \sbol{Identified} object.
 
 If an \sbol{Identified} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or \sbol{identity}.
@@ -150,6 +148,8 @@ properties inherited from \sbol{Identified}, where CLASS\_NAME is
 replaced by the name of the class:
 
 \Rtodo{CJM - edited, needs review}
+
+\Ctodo{Need to require use of DublinCore names and show examples of them: non-stanard mappings per Matt: Title vs. Name, descripton is dcterms:description}
 
 \lstsetsbol
 \begin{lstlisting}
