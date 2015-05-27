@@ -147,8 +147,6 @@ child class, however, has the following form for serializing
 properties inherited from \sbol{Identified}, where CLASS\_NAME is
 replaced by the name of the class:
 
-\Rtodo{CJM - edited, needs review}
-
 \Ctodo{Need to require use of DublinCore names and show examples of them: non-stanard mappings per Matt: Title vs. Name, descripton is dcterms:description}
 
 \lstsetsbol
@@ -305,7 +303,7 @@ The \sbol{types} property of every \sbol{ComponentDefinition} MUST contain one o
     RNA  & \url{http://www.biopax.org/release/biopax-level3.owl#RnaRegion}\\
     Protein  & \url{http://www.biopax.org/release/biopax-level3.owl#Protein}\\
     Small Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#SmallMolecule}\\  
-    \bottomrulfe
+    \bottomrule
   \end{edtable}
   \caption{RECOMMENDED BioPAX terms to specify the \sbol{types} property of a \sbol{ComponentDefinition}.}
  \label{tbl:componentdefinition_types}
@@ -329,7 +327,6 @@ The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain one or mor
       Terminator & \url{http://identifiers.org/so/SO:0000141} & DNA \\ 
       Gene & \url{http://identifiers.org/so/SO:0000704} & DNA \\
       mRNA & \url{http://identifiers.org/so/SO:0000234} & RNA \\ 
-      //Transcription Factor & \url{http://identifiers.org/go/GO:0003700} & Protein \\
       Effector & \url{http://identifiers.org/chebi/CHEBI:35224} & Small Molecule \\
     \bottomrule
   \end{edtable}
@@ -373,8 +370,7 @@ The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a set of \sb
 If the \sbol{ComponentDefinition} does not refer to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then it MUST NOT contain any \sbol{SequenceAnnotation} with a \sbol{Range} or \sbol{Cut} \sbol{Location}. By contrast, if the \sbol{ComponentDefinition} does refer to a \sbol{Sequence} with an \sbol{IUPAC} \sbol{encoding}, then each \sbol{SequenceAnnotation} it contains with a \sbol{Range} and/or \sbol{Cut} MUST cover a region on the \sbol{elements} of this \sbol{Sequence}. For example, the \sbol{ComponentDefinition} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{ComponentDefinition} would need a \sbol{SequenceAnnotation} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that are consistent with the \sbol{elements} of its DNA \sbol{Sequence}.
 
 \subsubsection*{Serialization}
-% The parent classes of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Identified}. As a result, inherited properties are serialized as explained for these parent classes.
-The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{sequenceAnnotations} properties of a \sbol{ComponentDefinition} contain objects belonging to the appropriate SBOL classes as their values, while the \sbol{types} and \sbol{roles} properties contain \external{URI}s that identify ontology terms as their values. As shown in the example below, each one of these objects and \external{URI}s is serialized as part of an implicit set of SBOL properties with singular rather then plural names. In particular, each object is serialized as a RDF/XML node nested within a singular property, while each \external{URI} is serialized as a \external{rdf:resource} on a singular property.
+The serialization of a \sbol{ComponentDefinition} MUST have the form below. The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{sequenceAnnotations} properties of a \sbol{ComponentDefinition} contain objects belonging to the appropriate SBOL classes as their values, while the \sbol{types} and \sbol{roles} properties contain \external{URI}s that identify ontology terms as their values. As shown below, each one of these objects and \external{URI}s is serialized as part of an implicit set of SBOL properties with singular rather then plural names. In particular, each object is serialized as a RDF/XML node nested within a singular property, while each \external{URI} is serialized as a \external{rdf:resource} on a singular property.
 
 \lstsetsbol
 \begin{lstlisting}
@@ -394,6 +390,7 @@ The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{
                </sbol:sequenceConstraint> [\emph{elements}]        
 </sbol:ComponentDefinition>
 \end{lstlisting}
+
 
 The example below shows the serialization for the \sbol{ComponentDefinition} of a promoter. The BioPAX term \external{DnaRegion} and the ChEBI term \external{CHEBI:4705} (\external{double-stranded DNA}) are used to indicate that the type of biological entity represented by this \sbol{ComponentDefinition} is DNA. Its role is specified using the SO terms \external{SO:0000167} (\external{promoter}) and the more specific \external{SO:0000613} (\external{bacterial\_RNApol\_promoter}).
 
@@ -483,7 +480,7 @@ The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects
 
 \paragraph{Serialization}
 
-The serialization of a \sbol{Component} has the following form:
+The serialization of a \sbol{Component} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
@@ -573,7 +570,7 @@ The \sbol{refinement} property is REQUIRED and has a data type of \external{URI}
 \end{table}
 
 \paragraph{Serialization}
-The serialization of \sbol{MapsTo} has the following form.
+The serialization of \sbol{MapsTo} MUST have the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:MapsTo rdf:about="...">
