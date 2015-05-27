@@ -343,6 +343,16 @@ The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain one or mor
 
 \NVtodo{Goksel to replace URI for Transcription Factor role with something more appropriate (currently is URI for the term ``transcription activity.''}
 
+\subsubsection*{The \sbolheading{sequences} property}
+\label{sec:sequences}
+The \sbol{sequences} property is OPTIONAL and MAY include a set of \external{URI}s that refer to \sbol{Sequence} objects. These objects define the primary structure of the \sbol{ComponentDefinition}.
+
+Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequence} object. For certain use cases, however, it may be appropriate to refer to multiple \sbol{Sequence} objects. For example, a user may wish to provide two different representations of the structure of a DNA \sbol{ComponentDefinition}, one that captures its primary structure at the level of nucleotide bases and one that captures its secondary and tertiary structure at the level of atoms and bonds. 
+
+If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In addition, a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} (see \ref{tbl:sequence_encodings}). 
+
+Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbol{types} property refers to a term from \ref{tbl:componentdefinition_types}, then at least one of these \sbol{Sequence} objects MUST have the \sbol{encoding} from \ref{tbl:sequence_encodings} that corresponds to this term.  Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbol{types} property MUST refer to the corresponding term from \ref{tbl:componentdefinition_types}. For example, if the \sbol{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbol{types} property must refer to the BioPAX term for DNA.
+
 \subsubsection*{The \sbolheading{components} property}
 \label{sec:components}
 
@@ -354,27 +364,17 @@ If the \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects,
 
 % Furthermore, this \sbol{Sequence} MUST have the same \external{IUPAC} \sbol{encoding} as a \sbol{Sequence} of the parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. 
 
-\subsubsection*{The \sbolheading{sequences} property}
-\label{sec:sequences}
-The \sbol{sequences} property is OPTIONAL and MAY include a set of \external{URI}s that refer to \sbol{Sequence} objects. These objects define the primary structure of the \sbol{ComponentDefinition}.
-
-Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequence} object. For certain use cases, however, it may be appropriate to refer to multiple \sbol{Sequence} objects. For example, a user may wish to provide two different representations of the structure of a DNA \sbol{ComponentDefinition}, one that captures its primary structure at the level of nucleotide bases and one that captures its secondary and tertiary structure at the level of atoms and bonds. 
-
-If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In addition, a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} (see \ref{tbl:sequence_encodings}). 
-
-Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbol{types} property refers to a term from \ref{tbl:componentdefinition_types}, then at least one of these \sbol{Sequence} objects MUST have the \sbol{encoding} from \ref{tbl:sequence_encodings} that corresponds to this term.  Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbol{types} property MUST refer to the corresponding term from \ref{tbl:componentdefinition_types}. For example, if the \sbol{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an an \external{IUPAC DNA} \sbol{encoding}, then its \sbol{types} property must refer to the BioPAX term for DNA.
-
-\subsubsection*{The \sbolheading{sequenceConstraints} property}
-\label{sec:sequenceConstraints}
-
-The \sbol{sequenceConstraints} property is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects. These objects describe any restrictions on the relative, sequence-based positions of the \sbol{Component} objects contained by the \sbol{ComponentDefinition}. For example, the \sbol{ComponentDefinition} of a gene may specify that its promoter \sbol{Component} precedes its CDS \sbol{Component}. This is particulary useful when a \sbol{ComponentDefinition} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{Component} objects using \sbol{SequenceAnnotation} objects.
-
 \subsubsection*{The \sbolheading{sequenceAnnotations} property}
 \label{sec:sequenceAnnotations}
 
 The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. Each \sbol{SequenceAnnotation} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{ComponentDefinition}. In addition, each \sbol{SequenceAnnotation} can  position a \sbol{Component} of the \sbol{ComponentDefinition} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}).
 
 If the \sbol{ComponentDefinition} does not refer to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then it MUST NOT contain any \sbol{SequenceAnnotation} with a \sbol{Range} or \sbol{Cut} \sbol{Location}. By contrast, if the \sbol{ComponentDefinition} does refer to a \sbol{Sequence} with an \sbol{IUPAC} \sbol{encoding}, then each \sbol{SequenceAnnotation} it contains with a \sbol{Range} and/or \sbol{Cut} MUST cover a region on the \sbol{elements} of this \sbol{Sequence}. For example, the \sbol{ComponentDefinition} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{ComponentDefinition} would need a \sbol{SequenceAnnotation} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices for the \sbol{elements} of its DNA \sbol{Sequence}.
+
+\subsubsection*{The \sbolheading{sequenceConstraints} property}
+\label{sec:sequenceConstraints}
+
+The \sbol{sequenceConstraints} property is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects. These objects describe any restrictions on the relative, sequence-based positions of the \sbol{Component} objects contained by the \sbol{ComponentDefinition}. For example, the \sbol{ComponentDefinition} of a gene may specify that its promoter \sbol{Component} precedes its CDS \sbol{Component}. This is particulary useful when a \sbol{ComponentDefinition} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{Component} objects using \sbol{SequenceAnnotation} objects.
 
 \subsubsection*{Serialization}
 The serialization of a \sbol{ComponentDefinition} MUST have the form below. The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{sequenceAnnotations} properties of a \sbol{ComponentDefinition} contain objects belonging to the appropriate SBOL classes as their values, while the \sbol{types} and \sbol{roles} properties contain \external{URI}s that identify ontology terms as their values. As shown below, each one of these objects and \external{URI}s is serialized as part of an implicit set of SBOL properties with singular rather then plural names. In particular, each object is serialized as a RDF/XML node nested within a singular property, while each \external{URI} is serialized as a \external{rdf:resource} on a singular property.
@@ -1330,7 +1330,9 @@ In particular, three methods are supported for connecting the SBOL data model wi
 
 Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{name} property is specified by a qualified name (\external{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be a literal type (i.e., \external{String}, \external{Integer}, \external{Double}, \external{Boolean}), \external{URI}, or a \sbol{NestedAnnotations} object. The \sbol{NestedAnnotations} object is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and an optional list of nested \sbol{annotations}.
 
-\Ctodo{NIC: Please update UML as follows: remove link from Identifed to AnnotationValue, change type of name to QName, add new class NestedAnnotations that inherits from AnnotationValue with properties nestedQName : QName, nestedURI : URI, and a 0..* annotations link to the Annotation class.}
+\Rtodo{NIC: Please update UML as follows: remove link from Identifed to AnnotationValue, change type of name to QName, add new class NestedAnnotations that inherits from AnnotationValue with properties nestedQName : QName, nestedURI : URI, and a 0..* annotations link to the Annotation class.
+
+Done. Also changed ``name'' property of Annotation class to ``qName'' to be consistent with ``nestedQName'' property of NestedAnnotations class. }
 
 \begin{figure}[!ht]
 \begin{center}
