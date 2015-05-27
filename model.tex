@@ -350,7 +350,7 @@ The \sbol{components} property is OPTIONAL and MAY specify a set of \sbol{Compon
 
 While the \sbol{ComponentDefinition} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Component} class represents the specific occurrence of a part within a design. Hence, this class allows a biological design to include multiple copies of a particular part. For example, the \sbol{ComponentDefinition} of a polycistronic gene could contain two \sbol{Component} objects that refer to the same \sbol{ComponentDefinition} of a CDS.
 
-If the \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, then at least one of them MUST have the same \sbol{encoding} as a \sbol{Sequence} from the \sbol{ComponentDefinition} of each \sbol{Component} in the \sbol{components} property. In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{encoding}-matched \sbol{Sequence} objects to the former. For example, a DNA \sbol{ComponentDefinition} could have a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and \sbol{elements} ``{\tt gattaca}.'' In this case, any \sbol{Component} contained by this \sbol{ComponentDefinition} would itself need to have a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and \sbol{elements} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}'' or ``{\tt ttaca}.''
+If the \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, then at least one of them MUST have the same \sbol{encoding} as a \sbol{Sequence} from the \sbol{ComponentDefinition} of each \sbol{Component} in the \sbol{components} property. In addition, it MUST be possible to align the \sbol{elements} of these \sbol{encoding}-matched \sbol{Sequence} objects. For example, a DNA \sbol{ComponentDefinition} could have a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and \sbol{elements} ``{\tt gattaca}.'' In this case, any \sbol{Component} contained by this \sbol{ComponentDefinition} would itself need to have a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and \sbol{elements} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}," or ``{\tt tgta}'' in the case of a \sbol{Component} that is positioned by a \sbol{SequenceAnnotation} that has a \sbol{Location} with its \sbol{orientation} set to ``reverse complement.'' 
 
 % Furthermore, this \sbol{Sequence} MUST have the same \external{IUPAC} \sbol{encoding} as a \sbol{Sequence} of the parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. 
 
@@ -674,12 +674,12 @@ The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol
 The \sbol{orientation} property is OPTIONAL and has a data type of \external{URI}. All subclasses of \sbol{Location} share this property, which can be used to specify how a \sbol{SequenceAnnotation} and any associated double-stranded \sbol{Component} should be oriented on the \sbol{Sequence} of their parent \sbol{ComponentDefinition}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \external{URI}s. If a \sbol{Location} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}. 
 
 \begin{table}[ht]
-  \begin{edtable}{tabular}{l l}
+  \begin{edtable}{tabular}{lp{3.75in}}
     \toprule
     \textbf{Orientation URI} & \textbf{Description} \\
     \midrule
-    \url{http://sbols.org/v2\#inline} & A \sbol{Location} specifies \\
-    \url{http://sbols.org/v2\#reverseComplement} & \\
+    \url{http://sbols.org/v2\#inline} & The region specified by this \sbol{Location} MUST be on the \sbol{elements} of a \sbol{Sequence} owned by the same \sbol{ComponentDefinition} that owns this \sbol{Location} \\
+    \url{http://sbols.org/v2\#reverseComplement} & The region specified by this \sbol{Location} MUST be on the reverse-complement translation of the \sbol{elements} of a \sbol{Sequence} owned by the same \sbol{ComponentDefinition} that owns this \sbol{Location}. The defintion of this translation depends on the \sbol{encoding}  \\
     \bottomrule
   \end{edtable}
   \caption{REQUIRED \external{URI}s for the \sbol{orientation} property}
