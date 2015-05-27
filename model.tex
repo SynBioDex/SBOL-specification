@@ -462,7 +462,7 @@ can be referred to by a \sbol{MapsTo}.
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
-    \textbf{URI} & \textbf{Access Description} \\
+    \textbf{Access URI} & \textbf{Description} \\
     \midrule
     \url{http://sbols.org/v2#public}  & The \sbol{ComponentInstance} MAY be referred to by \sbol{MapsTo} objects. \\
         \url{http://sbols.org/v2#private}  & The \sbol{ComponentInstance} MUST NOT be referred to by any \sbol{MapsTo} object. \\
@@ -659,7 +659,7 @@ The example below shows the serialization of a \sbol{SequenceAnnotation} object.
 
 \subsubsection{Location}
 \label{sec:Location}
-The Location class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol{GenericLocation} classes.  All of these thus share its \sbol{orientation} property, for example to to specify directionality on a potentially double-stranded \sbol{Component} object.
+The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol{GenericLocation} classes. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -669,21 +669,20 @@ The Location class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol{Generi
 \end{center}
 \end{figure}
 
-\subparagraph{The \sbolheading{orientation} property}
+\paragraph{The \sbolheading{orientation} property}
 \label{sec:orientation}
-
-This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects representing DNA molecules, it is RECOMMENDED to use one of the values in \ref{tbl:orientation_types}. 
+The \sbol{orientation} property is OPTIONAL and has a data type of \external{URI}. All subclasses of \sbol{Location} share this property, which can be used to specify how a \sbol{SequenceAnnotation} and any associated double-stranded \sbol{Component} should be oriented on the \sbol{Sequence} of their parent \sbol{ComponentDefinition}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \external{URI}s. If a \sbol{Location} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}. 
 
 \begin{table}[ht]
-  \begin{edtable}{tabular}{l}
+  \begin{edtable}{tabular}{l l}
     \toprule
-    \textbf{Orientation Types}  \\
+    \textbf{Orientation URI} & \textbf{Description} \\
     \midrule
-    http://sbols.org/v2\#inline\\
-    http://sbols.org/v2\#reverseComplement\\
+    \url{http://sbols.org/v2\#inline} & A \sbol{Location} specifies \\
+    \url{http://sbols.org/v2\#reverseComplement} & \\
     \bottomrule
   \end{edtable}
-  \caption{URI constants for \sbol{orientation} values}
+  \caption{REQUIRED \external{URI}s for the \sbol{orientation} property}
   \label{tbl:orientation_types}
 \end{table}
 
@@ -692,15 +691,15 @@ This OPTIONAL property has a URI value. For \sbol{ComponentDefinition} objects r
 \label{sec:Range}
 A \sbol{Range} object specifies inclusive start and end positions. These properties are required in \sbol{Range} objects and they can have \external{integer} values greater than zero.
 
-\subparagraph{The \sbolheading{start} property}\label{sec:start}
+\paragraph{The \sbolheading{start} property}\label{sec:start}
 Specifies the start of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
 
-\subparagraph{The \sbolheading{end} property}\label{sec:end}
+\paragraph{The \sbolheading{end} property}\label{sec:end}
 Specifies the end of a \sbol{Range}. This property is REQUIRED and can have \external{integer} values greater than zero.
 
-\subparagraph{Serialization}
+\paragraph{Serialization}
 
-The serialization of Range objects has the following form:
+The serialization of a \sbol{Range} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Range rdf:about="...">
@@ -728,14 +727,14 @@ The example below shows the serialization of a \sbol{Range} object. It specifies
 The \sbol{Cut} class has been introduced to enable the specification of a location between two indices. 
 Each \sbol{Cut} object has the property \sbol{at}.
 
-\subparagraph{The \sbolheading{at} property}
+\paragraph{The \sbolheading{at} property}
 \label{sec:at}
 The REQUIRED \sbol{at} property is an index greater than or equal to zero that specifies the index just before the location represented by the Cut object. 
 A Cut object with \sbol{at} equal to zero represents the location just before index one (even though there is no zero index on Structure objects in SBOL). 
 
-\subparagraph{Serialization}
+\paragraph{Serialization}
 
-The serialization of \sbol{Cut} objects has the following form:
+The serialization of a \sbol{Cut} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Cut rdf:about="...">
@@ -765,9 +764,9 @@ describing locations on sequential structures, the
 \sbol{GenericLocation} is included as a hook for extensions, e.g., for
 describing locations in non-sequential structures.
 
-\subparagraph{Serialization}
+\paragraph{Serialization}
 
-The serialization of \sbol{GenericLocation} objects has the following form:
+The serialization of a \sbol{GenericLocation} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:GenericLocation rdf:about="...">
@@ -787,9 +786,7 @@ The example below shows the serialization of a \sbol{GenericLocation} object wit
 \subsubsection{SequenceConstraint}
 \label{sec:SequenceConstraint}
 A \sbol{ComponentDefinition} can use objects of the  \sbol{SequenceConstraint} class to assert various structural restrictions between pairs of its \sbol{Component} objects. 
-The primary purpose of the \sbol{SequenceConstraint} class is to enable the specification of partial designs to be specified when the precise position or ordering of \sbol{Component} objects is not yet fully determined.
-
-A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} and \sbol{object} properties to specify such constraints.
+The primary purpose of the \sbol{SequenceConstraint} class is to enable the specification of partially designed \sbol{ComponentDefinition} objects, for which the precise position or ordering of their sub-\sbol{Component} objects is not yet fully determined. Each \sbol{SequenceConstraint} includes the \sbol{restriction}, \sbol{subject}, and \sbol{object} properties.
 
 \begin{figure}[ht]
 \begin{center}
