@@ -227,9 +227,9 @@ The \sbol{elements} property is a REQUIRED \external{String} of characters that 
 \label{sec:encoding}
 The \sbol{encoding} property is REQUIRED and has a data type of \external{URI}. This property is used to indicate how the \sbol{elements} property of a \sbol{Sequence} MUST be formed and interpreted. 
 
-For example, the \sbol{elements} property of a \sbol{Sequence} with an \external{IUPAC DNA} encoding property MUST contain characters that represent nucleotide bases, such as `{\tt a},' {\tt t}, {\tt c}, and {\tt g}. The \sbol{elements} property of a \sbol{Sequence} with a \external{simplified molecular-input line-entry system (SMILES)} encoding, on the other hand, MUST contain characters that represent atoms and chemical bonds, such as {\tt C}, {\tt N}, {\tt O}, and {\tt =}.
+For example, the \sbol{elements} property of a \sbol{Sequence} with an \external{IUPAC DNA} encoding property MUST contain characters that represent nucleotide bases, such as `{\tt a},' `{\tt t},' `{\tt c},' and `{\tt g}.' The \sbol{elements} property of a \sbol{Sequence} with a \external{simplified molecular-input line-entry system (SMILES)} encoding, on the other hand, MUST contain characters that represent atoms and chemical bonds, such as `{\tt C},' `{\tt N},' `{\tt O},' and `{\tt =}.'
 
-\ref{tbl:sequence_encodings} provides a list of RECOMMENDED \external{URI}s for the \sbol{encoding} property. The terms in \ref{tbl:sequence_encodings} are organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that MUST refer to a \sbol{Sequence} with such an \sbol{encoding} (if it refers to any \sbol{Sequence} at all). When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \external{URI}s in \ref{tbl:sequence_encodings}, it MUST use that \external{URI} for this property.
+\ref{tbl:sequence_encodings} provides a list of RECOMMENDED \external{URI}s for the \sbol{encoding} property. The terms in \ref{tbl:sequence_encodings} are organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}. When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \external{URI}s in \ref{tbl:sequence_encodings}, it MUST use that \external{URI} for this property.
 
 %A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
@@ -242,7 +242,7 @@ For example, the \sbol{elements} property of a \sbol{Sequence} with an \external
    SMILES & \url{http://www.opensmiles.org/opensmiles.html} & SmallMolecule \\
     \bottomrule
   \end{edtable}
-  \caption{RECOMMENDED \external{URI}s for specifying the \sbol{encoding} property of a \sbol{Sequence}, organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that MUST refer to a \sbol{Sequence} with such an \sbol{encoding} (if it refers to any \sbol{Sequence} at all).}
+  \caption{RECOMMENDED \external{URI}s for specifying the \sbol{encoding} property of a \sbol{Sequence}, organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}.}
   \label{tbl:sequence_encodings}
 \end{table}
 
@@ -333,16 +333,18 @@ The \sbol{roles} property of a \sbol{ComponentDefinition} MAY contain a set of \
       Effector & \url{http://identifiers.org/chebi/CHEBI:35224} & Small Molecule \\
     \bottomrule
   \end{edtable}
-  \caption{RECOMMENDED ontology terms to specify the \sbol{roles} property of a \sbol{ComponentDefinition}, organized by the type of \sbol{ComponentDefinition} to which they MUST apply (see \ref{tbl:componentdefinition_types}).}
+  \caption{RECOMMENDED ontology terms to specify the \sbol{roles} property of a \sbol{ComponentDefinition}, organized by the type of \sbol{ComponentDefinition} to which they should apply (see \ref{tbl:componentdefinition_types}).}
   \label{tbl:componentdefinition_roles}
 \end{table}
+
+\Ctodo{Goksel to replace URI for Transcription Factor role with something more appropriate (currently is URI for the term ``transcription activity.''}
 
 \subsubsection*{The \sbolheading{components} property}
 \label{sec:components}
 
 The \sbol{components} property is OPTIONAL and MAY specify a set of \sbol{Component} objects contained by its \sbol{ComponentDefinition}.
 
-While the \sbol{ComponentDefinition} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Component} class represents the specific occurrence of a part within a design. Hence, this class allows a biological design to include multiple copies of a particular part. For example, the \sbol{ComponentDefinition} of a polycistronic gene could contain two \sbol{Component} objects that refer to the same \external{URI} for the \sbol{ComponentDefinition} of a CDS.
+While the \sbol{ComponentDefinition} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Component} class represents the specific occurrence of a part within a design. Hence, this class allows a biological design to include multiple copies of a particular part. For example, the \sbol{ComponentDefinition} of a polycistronic gene could contain two \sbol{Component} objects that refer to the same \sbol{ComponentDefinition} of a CDS.
 
 \subsubsection*{The \sbolheading{sequences} property}
 \label{sec:sequences}
@@ -350,7 +352,9 @@ The \sbol{sequences} property is OPTIONAL and MAY include a set of \external{URI
 
 Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequence} object. For certain use cases, however, it may be appropriate to refer to multiple \sbol{Sequence} objects. For example, a user may wish to provide two different representations of the structure of a DNA \sbol{ComponentDefinition}, one that captures its primary structure at the level of nucleotide bases and one that captures its secondary and tertiary structure at the level of atoms and bonds. 
 
-If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In addition, any two \sbol{Sequence} objects referred to by the same \sbol{ComponentDefinition} MUST NOT have the same \sbol{encoding}. Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbol{types} property refers to a term from \ref{tbl:componentdefinition_types}, then at least one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that corresponds to this term (see \ref{tbl:sequence_encodings}).  Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbol{types} property must refer to the corresponding term from \ref{tbl:componentdefinition_types}. For example, if the \sbol{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an an \external{IUPAC DNA} \sbol{encoding}, then its \sbol{types} property must refer to the BioPAX term for DNA.
+If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In general, any two \sbol{Sequence} objects referred to by the same \sbol{ComponentDefinition} SHOULD NOT have the same \sbol{encoding}. 
+
+Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbol{types} property refers to a term from \ref{tbl:componentdefinition_types}, then at least one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that corresponds to this term (see \ref{tbl:sequence_encodings}).  Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbol{types} property MUST refer to the corresponding term from \ref{tbl:componentdefinition_types}. For example, if the \sbol{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an an \external{IUPAC DNA} \sbol{encoding}, then its \sbol{types} property must refer to the BioPAX term for DNA.
 
 \subsubsection*{The \sbolheading{sequenceConstraints} property}
 \label{sec:sequenceConstraints}
@@ -360,11 +364,13 @@ The \sbol{sequenceConstraints} property is OPTIONAL and MAY contain a set of \sb
 \subsubsection*{The \sbolheading{sequenceAnnotations} property}
 \label{sec:sequenceAnnotations}
 
-The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. Each \sbol{SequenceAnnotation} contains and describes a \sbol{Location} on a \sbol{Sequence} of the \sbol{ComponentDefinition}. In addition, each \sbol{SequenceAnnotation} can  position a \sbol{Component} contained by the \sbol{ComponentDefinition} at the \sbol{Location} of the \sbol{SequenceAnnotation}.
+The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. Each \sbol{SequenceAnnotation} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{ComponentDefinition}. In addition, each \sbol{SequenceAnnotation} can  position a \sbol{Component} contained by the \sbol{ComponentDefinition} by means of its specified region.
+
+If the \sbol{ComponentDefinition} does not refer to any \sbol{Sequence} objects, then it MUST NOT contain any \sbol{SequenceAnnotation} that contains a non-\sbol{GenericLocation} (see \ref{sec:SequenceAnnotation} and \ref{sec:Location}). By contrast, if the \sbol{ComponentDefinition} does refer to one or more \sbol{Sequence} objects, then each of its  \sbol{SequenceAnnotation} objects and their non-\sbol{GenericLocation} objects must cover a region on the \sbol{elements} of at least one such \sbol{Sequence}.
 
 \subsubsection*{Serialization}
 % The parent classes of the \sbol{ComponentDefinition} class are \sbol{TopLevel} and, transitively, \sbol{Identified}. As a result, inherited properties are serialized as explained for these parent classes.
-The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{sequenceAnnotations} properties of a \sbol{ComponentDefinition} contain objects belonging to the appropriate SBOL classes as their values, while the \sbol{types} and \sbol{roles} properties contain \external{URI}s that identify ontology terms as their values. As shown in the example below, each one of these objects and \external{URI}s is serialized as part of an implicit set of SBOL properties with singular rather then plural names. Each object is serialized as a RDF/XML node nested within a property, while each \external{URI} is serialized as a \external{rdf:resource} on a property.
+The \sbol{sequences}, \sbol{components},  \sbol{sequenceConstraints}, and \sbol{sequenceAnnotations} properties of a \sbol{ComponentDefinition} contain objects belonging to the appropriate SBOL classes as their values, while the \sbol{types} and \sbol{roles} properties contain \external{URI}s that identify ontology terms as their values. As shown in the example below, each one of these objects and \external{URI}s is serialized as part of an implicit set of SBOL properties with singular rather then plural names. In particular, each object is serialized as a RDF/XML node nested within a singular property, while each \external{URI} is serialized as a \external{rdf:resource} on a singular property.
 
 \lstsetsbol
 \begin{lstlisting}
@@ -427,20 +433,20 @@ The \sbol{ComponentInstance} abstract class is inherited by SBOL classes that re
 \paragraph{The \sbolheading{definition} property}
 \label{sec:definition}
 
-The \sbol{definition} property is a REQUIRED \external{URI} that refers to the \sbol{ComponentDefinition} for the \sbol{ComponentInstance}. As described in the previous section, this \sbol{ComponentDefinition} effectively provides information about the \sbol{types} and \sbol{roles} of the \sbol{ComponentInstance}.
+The \sbol{definition} property is a REQUIRED \external{URI} that refers to the \sbol{ComponentDefinition} of the \sbol{ComponentInstance}. As described in the previous section, this \sbol{ComponentDefinition} effectively provides information about the \sbol{types} and \sbol{roles} of the \sbol{ComponentInstance}.
 
 The \sbol{definition} property MUST NOT refer to the same \sbol{ComponentDefinition} as that which contains the \sbol{ComponentInstance}. Furthermore, \sbol{ComponentInstance} objects MUST NOT form a circular chain of references via their \sbol{definition} properties and the \sbol{ComponentDefinition} objects that contain them. For example, consider the \sbol{ComponentInstance} objects $A$ and $B$ and the \sbol{ComponentDefinition} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is circular. 
 
 \paragraph{The \sbolheading{mapsTos} property}\label{sec:mapsTos}
 
-The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects that refer to and link \sbol{ComponentInstance} objects (both \sbol{Component} objects and \sbol{FunctionalComponent} objects) together within a larger design.
+The \sbol{mapsTos} property is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects that refer to and link together \sbol{ComponentInstance} objects (both \sbol{Component} objects and \sbol{FunctionalComponent} objects)  within a larger design.
 
 \ref{sec:MapsTo} contains a more detailed description of the \sbol{MapsTo} class.
 
 \paragraph{The \sbolheading{access} property}
 \label{sec:access}
 
-The \sbol{access} property is a REQUIRED \external{URI} that indicates whether a \sbol{ComponentInstance} 
+The \sbol{access} property is a REQUIRED \external{URI} that indicates whether the \sbol{ComponentInstance} 
 can be referred to by a \sbol{MapsTo}.
 
 \ref{tbl:componentInstance_access} provides a list of REQUIRED \sbol{access} \external{URI}s. The value of the \sbol{access} property MUST be one of these \external{URI}s.
@@ -454,21 +460,20 @@ can be referred to by a \sbol{MapsTo}.
         \url{http://sbols.org/v2#private}  & The \sbol{ComponentInstance} MUST NOT be referred to by any \sbol{MapsTo} object. \\
     \bottomrule
   \end{edtable}
-  \caption{\external{URI}s for the \sbol{access} property.}
+  \caption{REQUIRED \external{URI}s for the \sbol{access} property.}
   \label{tbl:componentInstance_access}
 \end{table}
 
-Unless a designer has a reason to prevent other designers from accessing the \sbol{ComponentInstance} when their design is reused, it is RECOMMENDED that the \sbol{access} property of the \sbol{ComponentInstance} be set to \external{public}. 
-For example, in order to avoid the retroactivity that might result from a \sbol{ComponentInstance} interacting with those in other designs, a designer might set the \sbol{access} of the \sbol{ComponentInstance} to private.
+Unless a designer has a reason to prevent others from accessing the \sbol{ComponentInstance} when their design is reused, it is RECOMMENDED that the \sbol{access} property of the \sbol{ComponentInstance} be set to ``public.''
+For example, a designer who is concerned about retroactivity may set the \sbol{access} of the \sbol{ComponentInstance} to ``private'' in order to prevent others from specifying its \sbol{Participation} in a new \sbol{Interaction} as part of a composite design.
 
 \paragraph{Serialization}
 
 No serialization is defined for the \sbol{ComponentInstance} class, since this class is only used indirectly through the \sbol{Component} and \sbol{FunctionalComponent} subclasses.
 
-
 \subsubsection{Component}
 \label{sec:Component}
-The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects into a structural hierarchy. For example, the \sbol{ComponentDefinition} of a gene could contain four \sbol{Component} objects, including a promoter, RBS, CDS, and terminator. The \sbol{ComponentDefinition} of the promoter \sbol{Component} could in turn contain \sbol{Component} objects defined as various operator sites.
+The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects into a structural hierarchy. For example, the \sbol{ComponentDefinition} of a gene could contain four \sbol{Component} objects, including a promoter, RBS, CDS, and terminator. In turn, the \sbol{ComponentDefinition} of the promoter \sbol{Component} could contain \sbol{Component} objects defined as various operator sites.
 
 % All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
 
@@ -512,7 +517,7 @@ that represents an instance of a promoter:
 \end{center}
 \end{figure}
 
-When \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects are composed into a hierarchy using \sbol{Module} and \sbol{ComponentInstance} objects, it is often the case that some \sbol{ComponentInstance} objects are intended to represent the same entity in the overall design. The purpose of the \sbol{MapsTo} class is to make these identity relationships clear and explicit.
+When \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects are composed into a structural and functional hierarchies using \sbol{ComponentInstance} and \sbol{Module} objects, it is often the case that some \sbol{ComponentInstance} objects are intended to represent the same entity in the overall design. The purpose of the \sbol{MapsTo} class is to make these identity relationships clear and explicit.
 
 In particular, a \sbol{MapsTo} object provides two pieces of information:
 \begin{itemize}
@@ -532,34 +537,34 @@ In particular, a \sbol{MapsTo} object provides two pieces of information:
 To illustrate this concept, two examples are provided in \ref{image:maps_to_diagram2}, in which the \sbol{ComponentDefinition} of a transcriptional unit is specified by composing two ``lower level'' \sbol{ComponentDefinition} objects.
 In both examples, the two ``lower level'' \sbol{ComponentDefinition} objects each contain a RBS \sbol{Component} that is intended to represent the same design entity in the ``higher level'' \sbol{ComponentDefinition} of the transcriptional unit.
 
-In order to explicitly represent these identity relationships, a new RBS \sbol{Component} must be created inside the ``higher level'' \sbol{ComponentDefinition}.  
-This ``higher level'' \sbol{Component} must then be linked to the equivalent ``lower level'' \sbol{Component} objects by means of the \sbol{MapsTo} class, using one \sbol{MapsTo} object per link.  
-For example, in order to link the ``higher level'' RBS \sbol{Component} of the transcriptional unit \sbol{ComponentDefinition} to the ``lower level'' RBS \sbol{Component} of the promoter-RBS \sbol{ComponentDefinition}, a \sbol{MapsTo} must be created on the ``higher level'' promoter-RBS \sbol{Component}. The \sbol{local} property of this \sbol{MapsTo} must then refer to the ``higher level'' RBS \sbol{Component}, while its \sbol{remote} property must refer to the ``lower level'' RBS \sbol{Component}.
+In order to explicitly represent the identity relationships in this example, a new RBS \sbol{Component} needs to be created inside the ``higher level'' \sbol{ComponentDefinition}.
+This ``higher level'' \sbol{Component} then needs to be linked to the equivalent ``lower level'' \sbol{Component} objects by means of the \sbol{MapsTo} class, using one \sbol{MapsTo} object per link.  
+For example, in order to link the ``higher level'' RBS \sbol{Component} to the ``lower level'' RBS \sbol{Component} of the promoter-RBS \sbol{ComponentDefinition}, a \sbol{MapsTo} must be created on the ``higher level'' promoter-RBS \sbol{Component}. The \sbol{local} property of this \sbol{MapsTo} must then refer to the ``higher level'' RBS \sbol{Component}, while its \sbol{remote} property must refer to the ``lower level'' RBS \sbol{Component}.
 In this way, many ``lower level'' \sbol{Component} objects can be linked together at the ``higher level'' using as an equal number of \sbol{MapsTo} objects, each one referring to a different \sbol{remote} \sbol{Component}, but all referring to the same \sbol{local} \sbol{Component}.
 
-The same types of identity relationships can also be declared between \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects, or between \sbol{Component} objects contained by \sbol{ComponentDefinition} objects and \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects. See \ref{sec:examples} for additional examples using the \sbol{MapsTo} class.
+The same types of identity relationships can also be declared between \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects, or between \sbol{Component} objects and \sbol{FunctionalComponent} objects contained by \sbol{ComponentDefinition} objects and \sbol{ModuleDefinition} objects, respectively. See \ref{sec:examples} and \ref{ser:examples} for additional examples using the \sbol{MapsTo} class.
 
 \paragraph{The \sbolheading{local} property}\label{sec:local}
-This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the owner of the \sbol{MapsTo} (either a \sbol{ComponentInstance} or \sbol{Module}).
+This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}. Finally, the \sbol{access} property of the \sbol{local} \sbol{ComponentInstance} MUST be set to ``public.''
 
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
-This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.  Finally, the \sbol{ComponentInstance} MUST have \external{public} \sbol{access}.
+This REQUIRED property has a data type of \external{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  This \sbol{remote} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is the \sbol{definition} of the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}. Lastly, the \sbol{access} property of the \sbol{remote} \sbol{ComponentInstance} MUST be set to ``public.''
  
 \paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
-Each \sbol{MapsTo} entity MUST specify the relationship between its \sbol{local} and \sbol{remote} components using the refinement property, using one of the values in \ref{tbl:mapsto_refinement}.
+The \sbol{refinement} property is REQUIRED and has a data type of \external{URI}. Each \sbol{MapsTo} object MUST specify the relationship between its \sbol{local} and \sbol{remote} \sbol{ComponentInstance} objects using one of the REQUIRED \sbol{refinement} \external{URI}s provided in \ref{tbl:mapsto_refinement}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
     \textbf{Refinement URI} & \textbf{Description} \\
     \midrule
-    \url{http://sbols.org/v2#useRemote}  & Indicates that properties of the \sbol{ComponentInstance} from the \sbol{remote} are to be used, instead of the \sbol{local} \sbol{ComponentInstance}.\\
-    \url{http://sbols.org/v2#useLocal}  & Indicates that properties of the \sbol{ComponentInstance} from the \sbol{local} are to be used used, instead of the \sbol{remote} \sbol{ComponentInstance}.\\
-    \url{http://sbols.org/v2#verifyIdentical}  & Indicates that both \sbol{ComponentInstance} entities must link to the same \sbol{ComponentDefinition} object\\
-        \url{http://sbols.org/v2#merge}  & Indicates that data fields of the \sbol{local} and \sbol{remote} \sbol{ComponentInstance} entities are to be interpreted in combination\\
+    \url{http://sbols.org/v2#useRemote}  & All references to the \sbol{definition} property of the \sbol{local}  \sbol{ComponentInstance} MUST dereference to that of the \sbol{remote} \sbol{ComponentInstance} instead.\\
+    \url{http://sbols.org/v2#useLocal}  & In the context of the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the owner of the \sbol{MapsTo}, all references to the \sbol{definition} property of the \sbol{remote}  \sbol{ComponentInstance} MUST dereference to that of the \sbol{local} \sbol{ComponentInstance} instead.\\
+    \url{http://sbols.org/v2#verifyIdentical}  & The \sbol{definition} properties of the \sbol{local} and \sbol{remote} \sbol{ComponentInstance} objects MUST refer to the same \sbol{ComponentDefinition}.\\
+        \url{http://sbols.org/v2#merge}  & In the context of the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the owner of the \sbol{MapsTo}, all references to the \sbol{definition} property of the \sbol{local} \sbol{ComponentInstance} or that of the \sbol{remote} \sbol{ComponentInstance} MUST dereference to both such properties.\\
     \bottomrule
   \end{edtable}
-  \caption{URIs for the \sbol{refinement} property.}
+  \caption{REQUIRED \external{URI}s for the \sbol{refinement} property.}
   \label{tbl:mapsto_refinement}
 \end{table}
 
@@ -575,7 +580,7 @@ The serialization of \sbol{MapsTo} has the following form.
 </sbol:MapsTo>
 \end{lstlisting}
 
-In the example below, a \sbol{FunctionalComponent} entity from the submodule is linked to a \sbol{FunctionalComponent} entity in a parent module. The former is described in the imported \sbol{ModuleDefinition} entity which is referred to by the definition property of the \sbol{Module} entity. The latter is defined in the parent \sbol{ModuleDefinition}, importing the sub module. The full example can be found in \ref{ser:toggleswitch}.
+In the example below, a \sbol{FunctionalComponent} in a ``lower level'' LacI inverter \sbol{ModuleDefinition} is linked to a \sbol{FunctionalComponent} in a ``higher level'' \sbol{ModuleDefinition} of a genetic toggle switch. The full example can be found in \ref{ser:toggleswitch}.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:MapsTo rdf:about="http://sbolstandard.org/example/toggle_switch/laci_inverter/LacI_mapping">
@@ -590,7 +595,7 @@ In the example below, a \sbol{FunctionalComponent} entity from the submodule is 
 
 \subsubsection{SequenceAnnotation}
 \label{sec:SequenceAnnotation}
-The \sbol{SequenceAnnotation} class describes a precisely known location of interest on the \sbol{Sequence} objects linked by its parent \sbol{ComponentDefinition} object.  It can also optionally associate this location with a \sbol{Component} object. \sbol{SequenceAnnotation} objects specify their location using a set of  \sbol{Location} objects, as described below.  It is a set of location objects to allow the annotation of a non-contiguous location on a sequence.
+The \sbol{SequenceAnnotation} class describes one or more regions of interest on the \sbol{Sequence} objects referred to by a parent \sbol{ComponentDefinition}. In addition, \sbol{SequenceAnnotation} objects can describe the substructure of their parent {ComponentDefinition} through their association with sub-\sbol{Component} objects. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -602,10 +607,14 @@ The \sbol{SequenceAnnotation} class describes a precisely known location of inte
 
 \paragraph{The \sbolheading{locations} property}\label{sec:locations}
 \label{sec:locations}
-Every \sbol{SequenceAnnotation} MUST have at least one \sbol{Location} object in its set of \sbol{locations}. The value of this property is a nested \sbol{Location} object.
+The \sbol{locations} property is a REQUIRED set of one or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Sequence} are described by the \sbol{SequenceAnnotation}. 
+
+In general, these \sbol{Location} objects SHOULD NOT cover the same \sbol{Sequence} \sbol{elements}.
 
 \paragraph{The \sbolheading{component} property}\label{sec:component}
-\sbol{SequenceAnnotation} objects MAY use this property to link location information to a \sbol{Component} object, by specifying its URI.
+The \sbol{component} property is OPTIONAL and has a data type of \external{URI}. This \external{URI} MUST refer to a \sbol{Component} that is contained by the same parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. In this way, the properties of the \sbol{SequenceAnnotation}, such as its \sbol{description} and \sbol{locations}, are associated with part of its parent \sbol{ComponentDefinition}'s substructure.
+
+If the \sbol{SequenceAnnotation} contains a non-\sbol{GenericLocation}, then any \sbol{Component} it refers to MUST have a \sbol{ComponentDefinition} that refers to one or more \sbol{Sequence} objects. Furthermore, at least one these \sbol{Sequence} objects MUST have the same \sbol{encoding} as a \sbol{Sequence} of the parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. Finally, the non-\sbol{GenericLocation} objects of the \sbol{SequenceAnnotation} MUST precisely cover the \sbol{elements} of one of these \sbol{encoding}-matched \sbol{Sequence} objects.
 
 \paragraph{Serialization}
 
