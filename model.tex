@@ -786,8 +786,8 @@ The example below shows the serialization of a \sbol{GenericLocation} object wit
 
 \subsubsection{SequenceConstraint}
 \label{sec:SequenceConstraint}
-A \sbol{ComponentDefinition} object can link to \sbol{SequenceConstraint} objects to assert various kinds of structural restrictions between two \sbol{Component} objects that are its subcomponents. 
-The purpose of the \sbol{SequenceConstraint} class is to allow partial designs to be specified when the precise identity, location, or ordering of \sbol{Component} objects is not yet fully determined.
+A \sbol{ComponentDefinition} can use objects of the  \sbol{SequenceConstraint} class to assert various structural restrictions between pairs of its \sbol{Component} objects. 
+The primary purpose of the \sbol{SequenceConstraint} class is to enable the specification of partial designs to be specified when the precise identity, location, or ordering of \sbol{Component} objects is not yet fully determined.
 
 A \sbol{SequenceConstraint} object requires \sbol{restriction}, \sbol{subject} and \sbol{object} properties to specify such constraints.
 
