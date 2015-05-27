@@ -67,24 +67,24 @@ being unverified and not depend on their correctness.
 
 External ontologies and controlled vocabularies are an integral part of SBOL. SBOL utilizes these resources to access existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, types of components, such as DNA or protein, are indicated using BioPAX. Similarly, the role of a DNA component is indicated via the SO terms. Although preferred ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
 
-\Ctodo{It would be useful to add URLs to the resources - NeilW}
+\Rtodo{It would be useful to add URLs to the resources - NeilW}
 
 \begin{table}[ht]
-  \begin{edtable}{tabular}{p{3cm}p{2cm}p{5cm}p{5cm}}
+  \begin{edtable}{tabular}{p{3cm}p{2cm}p{4cm}p{6cm}}
     \toprule
     \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}
-    & More Information \\
+    & \textbf{More Information} \\
     \midrule
     \textbf{ComponentDefinition}  & types & BioPAX & \url{http://www.biopax.org}\\
-    						   	  & roles & SO (if type is \textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
-    						   	  & roles & CHEBI (if type is \textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
+    						   	  & roles & SO (\textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
+    						   	  & roles & CHEBI (\textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
 %    						   	  & roles & UniProt (if type is \textit{protein}??) \\   
     \textbf{Interaction}	      & types & SBO (entity relationship branch) & 
     \url{http://www.ebi.ac.uk/sbo/main/} \\
     \textbf{Participation}	      & roles & SBO (participant roles branch) &
     \url{http://www.ebi.ac.uk/sbo/main/} \\
     \textbf{Model}	      		  & language & EDAM & \url{http://bioportal.bioontology.org/ontologies/EDAM}     \\
-    				      		  & framework & SBO (modeling framework branch) &
+    				      		  & framework & SBO (modeling framework) &
     \url{http://www.ebi.ac.uk/sbo/main/} \\
     \bottomrule
   \end{edtable}
