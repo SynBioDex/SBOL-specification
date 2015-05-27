@@ -227,7 +227,7 @@ The \sbol{elements} property is a REQUIRED \external{String} of characters that 
 \label{sec:encoding}
 The \sbol{encoding} property is REQUIRED and has a data type of \external{URI}. This property is used to indicate how the \sbol{elements} property of a \sbol{Sequence} MUST be formed and interpreted. 
 
-For example, the \sbol{elements} property of a \sbol{Sequence} with an \external{IUPAC DNA} encoding property MUST contain characters that represent nucleotide bases, such as `{\tt a},' `{\tt t},' `{\tt c},' and `{\tt g}.' The \sbol{elements} property of a \sbol{Sequence} with a \external{Simplified Molecular-Input Line-Entry System (SMILES)} encoding, on the other hand, MUST contain characters that represent atoms and chemical bonds, such as `{\tt C},' `{\tt N},' `{\tt O},' and `{\tt =}.'
+For example, the \sbol{elements} property of a \sbol{Sequence} with an \external{IUPAC DNA} encoding property MUST contain characters that represent nucleotide bases, such as {\tt a}, {\tt t}, {\tt c}, and {\tt g}. The \sbol{elements} property of a \sbol{Sequence} with a \external{Simplified Molecular-Input Line-Entry System (SMILES)} encoding, on the other hand, MUST contain characters that represent atoms and chemical bonds, such as {\tt C}, {\tt N}, {\tt O}, and {\tt =}.
 
 \ref{tbl:sequence_encodings} provides a list of RECOMMENDED \external{URI}s for the \sbol{encoding} property. The terms in \ref{tbl:sequence_encodings} are organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}. When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \external{URI}s in \ref{tbl:sequence_encodings}, it MUST use that \external{URI} for this property.
 
@@ -247,7 +247,7 @@ For example, the \sbol{elements} property of a \sbol{Sequence} with an \external
 \end{table}
 
 \subsubsection*{Serialization}
-The serialization of a \sbol{Sequence} has the following form:
+The serialization of a \sbol{Sequence} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Sequence rdf:about="...">
@@ -257,7 +257,7 @@ The serialization of a \sbol{Sequence} has the following form:
 </sbol:Sequence>
 \end{lstlisting}
 
-The example below shows the serialization for the \sbol{Sequence} of a promoter. The nucleotide bases of the \sbol{Sequence} are serialized as the \external{String} value of its \sbol{elements} property, while its \external{IUPAC DNA} encoding is serialized as the \external{URI} value of its  \sbol{encoding} property. 
+The example below shows the serialization of the \sbol{Sequence} for a promoter. The nucleotide bases of the \sbol{Sequence} are serialized as the \external{String} value of its \sbol{elements} property, while its \external{IUPAC DNA} encoding is serialized as the \external{URI} value of its  \sbol{encoding} property. 
 
 \lstsetsbol
 \begin{lstlisting}
@@ -346,7 +346,7 @@ The \sbol{components} property is OPTIONAL and MAY specify a set of \sbol{Compon
 
 While the \sbol{ComponentDefinition} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Component} class represents the specific occurrence of a part within a design. Hence, this class allows a biological design to include multiple copies of a particular part. For example, the \sbol{ComponentDefinition} of a polycistronic gene could contain two \sbol{Component} objects that refer to the same \sbol{ComponentDefinition} of a CDS.
 
-If the \sbol{ComponentDefinition} refers to one or \sbol{Sequence} objects, then at least one of these \sbol{Sequence} objects MUST have the same \sbol{encoding} as a \sbol{Sequence} from each \sbol{ComponentDefinition} of its \sbol{Component} objects. In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{encoding}-matched \sbol{Sequence} objects to the former. For example, a DNA \sbol{ComponentDefinition} could have a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and \sbol{elements} ``{\tt gattaca}.'' Any \sbol{Component} contained by this \sbol{ComponentDefinition} would then need to have a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and \sbol{elements} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}'' or ``{\tt ttaca}.''
+If the \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, then at least one of them MUST have the same \sbol{encoding} as a \sbol{Sequence} from the \sbol{ComponentDefinition} of each \sbol{Component} in the \sbol{components} property. In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{encoding}-matched \sbol{Sequence} objects to the former. For example, a DNA \sbol{ComponentDefinition} could have a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and \sbol{elements} ``{\tt gattaca}.'' In this case, any \sbol{Component} contained by this \sbol{ComponentDefinition} would itself need to have a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and \sbol{elements} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}'' or ``{\tt ttaca}.''
 
 % Furthermore, this \sbol{Sequence} MUST have the same \external{IUPAC} \sbol{encoding} as a \sbol{Sequence} of the parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. 
 
