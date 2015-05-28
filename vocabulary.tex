@@ -2,6 +2,8 @@
 \section{SBOL Specification Vocabulary}
 % -----------------------------------------------------------------------------
 
+\subsection{Term Conventions}
+
 This document indicates requirement levels using the controlled vocabulary specified in IETF RFC 2119 and reiterated in BBF RFC 0.
 In particular, the key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
 
@@ -33,7 +35,7 @@ Each \sbol{Component} is associated with a \sbol{ComponentDefinition}, and there
 Specifies the base coordinates and orientation of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecule such as a protein.
 
 \item \emph{\sbol{SequenceAnnotation}}:
-Describes the \sbol{Location} of a notable sub-sequence found within a \sbol{ComponentDefinition}, optionally linking it to a \sbol{Component}.
+Describes the \sbol{Location} of a notable sub-sequence found within the \sbol{Sequence} linked to a \sbol{ComponentDefinition}, with an optional link to a \sbol{Component}.
 
 \item \emph{\sbol{SequenceConstraint}}:
 Describes the relative spatial position and orientation of two \sbol{Component} objects that are contained within the same \sbol{ComponentDefinition}.
@@ -50,7 +52,7 @@ Describes a ``system'' design as a collection of biological components and their
 
 \begin{itemize}
 \item \emph{\sbol{FunctionalComponent}}:
-Represents a specific occurrence or instance of an entity within a \sbol{ModuleDefinition}.
+Represents a specific occurrence or instance of an \sbol{ComponentDefinition} within a \sbol{ModuleDefinition}.
 Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a containing \sbol{ComponentDefinition}.
 
 \item \emph{\sbol{Interaction}}:
