@@ -124,9 +124,9 @@ in the SBOL specification namespace.
 
 \printValid{A \sbol{ComponentDefinition} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{types} property is a set of URIs, and it is REQUIRED to include at least one entry. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbolmult{types:CD}{types} property is a set of URIs, and it is REQUIRED to include at least one entry. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{components} property is an OPTIONAL set of \sbol{Component} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
@@ -140,18 +140,18 @@ in the SBOL specification namespace.
 
 \printWarning{A DNA \sbol{ComponentDefinition} MUST include the URI\\ 
 \url{http://www.biopax.org/release/biopax-level3.owl\#DnaRegion} 
-in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
+in the set of \sbolmult{types:CD}{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printWarning{A RNA \sbol{ComponentDefinition} MUST include the URI\\ 
-\url{http://www.biopax.org/release/biopax-level3.owl\#RnaRegion} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
+\url{http://www.biopax.org/release/biopax-level3.owl\#RnaRegion} in the set of \sbolmult{types:CD}{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printWarning{A protein \sbol{ComponentDefinition} MUST include the URI\\ 
-\url{http://www.biopax.org/release/biopax-level3.owl\#Protein} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
+\url{http://www.biopax.org/release/biopax-level3.owl\#Protein} in the set of \sbolmult{types:CD}{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printWarning{A small molecule \sbol{ComponentDefinition} MUST include the URI\\ 
-\url{http://www.biopax.org/release/biopax-level3.owl\#SmallMolecule} in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
+\url{http://www.biopax.org/release/biopax-level3.owl\#SmallMolecule} in the set of \sbolmult{types:CD}{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
-\printModeling{A least one type in the set of \sbol{types} SHOULD be a URI from the BioPAX or ChEBI ontologies. (Reference: \sec{sec:ComponentDefinition})}
+\printModeling{A least one type in the set of \sbolmult{types:CD}{types} SHOULD be a URI from the BioPAX or ChEBI ontologies. (Reference: \sec{sec:ComponentDefinition})}
 
 \subsubsection*{Rules for the \class{ComponentInstance} class} 
 \setcounter{sbolCtr}{10601}
@@ -162,11 +162,11 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 \url{http://sbols.org/v2\#public} or \url{http://sbols.org/v2\#private}.
 (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{definition} property is a REQUIRED URI reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbolmult{definition:CI}{definition} property is a REQUIRED URI reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
 
-\printModeling{The \sbol{definition} property URI SHOULD reference a \sbol{ComponentDefinition} object. (Reference: \sec{sec:ComponentInstance})}
+\printModeling{The \sbolmult{definition:CI}{definition} property URI SHOULD reference a \sbol{ComponentDefinition} object. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbolmult{mapsTos:CI}{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:ComponentInstance})}
 
 \printValid{A \sbol{Component} object inherits all properties of a \sbol{ComponentInstance} object. (Reference: \sec{sec:ComponentInstance})}
 
@@ -243,7 +243,7 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{ModuleDefinition} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:ModuleDefinition})}
 
-\printValid{The \sbol{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:ModuleDefinition})}
+\printValid{The \sbolmult{roles:MD}{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:ModuleDefinition})}
 
 \printValid{The \sbol{modules} property is an OPTIONAL set of \sbol{Module} objects.  (Reference: \sec{sec:ModuleDefinition})}
 
@@ -260,9 +260,9 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{Module} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Module})}
 
-\printValid{The \sbol{definition} property is a REQUIRED URI reference to a \sbol{ModuleDefinition} object.  (Reference: \sec{sec:Module})}
+\printValid{The \sbolmult{definition:M}{definition} property is a REQUIRED URI reference to a \sbol{ModuleDefinition} object.  (Reference: \sec{sec:Module})}
 
-\printValid{The \sbol{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:Module})}
+\printValid{The \sbolmult{mapsTos:M}{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:Module})}
 
 \subsubsection*{Rules for the \class{MapsTo} class} 
 \setcounter{sbolCtr}{11301}
@@ -293,9 +293,9 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{A \sbol{Interaction} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Interaction})}
 
-\printValid{The \sbol{types} property is a set of URIs, and it is REQUIRED to include at least one entry. (Reference: \sec{sec:Interaction})}
+\printValid{The \sbolmult{types:I}{types} property is a set of URIs, and it is REQUIRED to include at least one entry. (Reference: \sec{sec:Interaction})}
 
-\printModeling{A least one type in the set of \sbol{types} SHOULD be a URI from the occurring entity relationship branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Interaction})}
+\printModeling{A least one type in the set of \sbolmult{types:I}{types} SHOULD be a URI from the occurring entity relationship branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Interaction})}
 
 \printValid{The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects.  (Reference: \sec{sec:Interaction})}
 
@@ -306,9 +306,9 @@ in the set of \sbol{types}.  (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{participant} property is a REQUIRED URI that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:Participation})}
 
-\printValid{The \sbol{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:Participation})}
+\printValid{The \sbolmult{roles:P}{roles} property is an OPTIONAL set of URIs.  (Reference: \sec{sec:Participation})}
 
-\printModeling{A least one role in the set of \sbol{roles} SHOULD be a URI from the participant role branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Participation})}
+\printModeling{A least one role in the set of \sbolmult{roles:P}{roles} SHOULD be a URI from the participant role branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Participation})}
 
 \subsubsection*{Rules for the \class{Collection} class} 
 \setcounter{sbolCtr}{11601}
