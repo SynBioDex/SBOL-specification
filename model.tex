@@ -369,7 +369,9 @@ If the \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects,
 
 The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. Each \sbol{SequenceAnnotation} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{ComponentDefinition}. In addition, each \sbol{SequenceAnnotation} can  position a \sbol{Component} of the \sbol{ComponentDefinition} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}).
 
-If the \sbol{ComponentDefinition} does not refer to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then it MUST NOT contain any \sbol{SequenceAnnotation} with a \sbol{Range} or \sbol{Cut} \sbol{Location}. By contrast, if the \sbol{ComponentDefinition} does refer to a \sbol{Sequence} with an \sbol{IUPAC} \sbol{encoding}, then each \sbol{SequenceAnnotation} it contains with a \sbol{Range} and/or \sbol{Cut} MUST cover a region on the \sbol{elements} of this \sbol{Sequence}. For example, the \sbol{ComponentDefinition} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{ComponentDefinition} would need a \sbol{SequenceAnnotation} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices for the \sbol{elements} of its DNA \sbol{Sequence}.
+If the \sbol{ComponentDefinition} does not refer to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then it MUST NOT contain any \sbol{SequenceAnnotation} with a \sbol{Range} or \sbol{Cut} \sbol{Location}. 
+By contrast, if the \sbol{ComponentDefinition} does refer to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding}, then each \sbol{SequenceAnnotation} it contains with a \sbol{Range} and/or \sbol{Cut} MUST cover a region on the \sbol{elements} of this \sbol{Sequence}. 
+For example, the \sbol{ComponentDefinition} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{ComponentDefinition} would need a \sbol{SequenceAnnotation} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices for the \sbol{elements} of its DNA \sbol{Sequence}.
 
 \subsubsection*{The \sbolheading{sequenceConstraints} property}
 \label{sec:sequenceConstraints}
@@ -1399,6 +1401,7 @@ The ComponentDefinition example for a promoter serialized below shows how annota
 
 \subsubsection{GenericTopLevel}  
 \label{sec:GenericTopLevel}
+\label{sec:rdfType}
 
 SBOL documents can also be annotated at the top level. 
 SBOL's \sbol{GenericTopLevel} is a top-level entity whose only purpose is to include a set of annotations as described above. 
