@@ -2,57 +2,42 @@
 \section{Overview of SBOL}
 % % -----------------------------------------------------------------------------
 
-\LDtodo{under construction....
+\Rtodo{I took a stab at revising this especially in explaining Figure 2. Needs review.  -CJM}
 
-
-The only content to keep is some version of Figure 2, -- jhg }
-
-\Rtodo{I went through and did some light editing to the text. Excellent job John! I also added some references that were needed in the text - KC }
-
-Synthetic biology designs can be described using both structural and functional terms:
+Synthetic biology designs can be described using:
 \begin{itemize}
-\item We can describe the physical structure of the design, e.g., a set of sequences or information about chemical makeup.
-\item We can describe the functional roles of the design. Such a description includes both the overall function, as well as the ways that components might interact with each other.
+\item Structural terms, e.g., a set of annotated sequences or information about chemical makeup.
+\item Functional terms, e.g., the way that components might interact with each other and the overall behavior.
 \end{itemize}
-In broad strokes, SBOL 1.1 focuses on physical, structural information, whereas SBOL 2.0 includes functional aspects. The physical information about a designed genetic circuit includes the order of its constituents and their descriptions. The exact locations of these constituents and their sequences allow genetic circuits to be defined unambiguously, and reused in other designs. SBOL 2.0 extends v1.1 in several ways: it allows for functional descriptions of the design and its interaction, and it extends physical descriptions to include entities beyond DNA sequences. 
+In broad strokes, SBOL 1.1 focuses on physical, structural information, whereas SBOL 2.0 includes functional aspects. The physical information about a designed genetic circuit includes the order of its constituents and their descriptions. The exact locations of these constituents and their sequences allow genetic circuits to be defined unambiguously, and reused in other designs. SBOL 2.0 extends SBOL 1.1 in several ways: it extends physical descriptions to include entities beyond DNA sequences, and it allows for functional descriptions of the design. 
 
 As an example, consider the design of an expression cassette, such as found in the plasmid pUC18 \cite{L08752.1}, a device that is designed to detect successful versus unsuccessful molecular cloning. As an overall system, the device is designed to grow either blue-colored (unsuccessful) or white-colored (successful) colonies in the presence of IPTG and the chemical X-gal. Internally, the device has a number of parts, including a promoter, the lac repressor binding site, and the lacZ coding sequence. These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional and translational machinery that collectively lead to the desired system-level behavior. 
 
 Understanding how such a device works within the context of a host and how it might be adapted to new experimental applications is currently passed on through working with fellow scientists or reading articles in papers and books. But there is no systematic way of communicating the integration of sequence with functional design, so users typically have to look in many different places to develop an understanding of this system.  
 The SBOL standard allows designers to describe these functional characteristics, and to connect them to the physical parts and sequences that make up the design. 
 
-SBOL includes main classes that match the structural/physical distinction above:
+SBOL includes two main classes that match the structural/functional distinction above:
 \begin{itemize}
 \item The \sbol{ComponentDefinition} object describes the physical aspects of the designed system, such as the DNA or RNA sequences and the physical relationships among sub-components.
 \item The \sbol{ModuleDefinition} object describes the local interactions of the designed system, such as specific binding relationships, and repression and activation relationships. 
 \end{itemize}
 
-Figure 1 shows a simplified view of these classes, as well as other helper classes in SBOL. To continue with the pUC18 example, the description would begin by creating a top-level \sbol{ModuleDefinition}. This object could then point to a \sbol{Model} object if it exists, for example, an SBML model of the behavior of this design. The \sbol{ModuleDefinition} would also include a number of \sbol{ComponentDefinition} objects. These would specify the structural elements that make up the cassette. Finally, the \sbol{ModuleDefinition} could specify \sbol{Interaction} objects that describe any internal functional relationships among components. 
-
-\Rtodo{I think the paragraph above and below should be weaved together.  Also, I think you should start with the structural part then the functional part.  You should highlight that the structural part is largely 1.1 classes though they are extended.  The functional part is completely new.}
+Figure 1 shows a simplified view of these classes, as well as other helper classes in SBOL. To continue with the pUC18 example, the description would begin by creating a top-level \sbol{ModuleDefinition}.  The \sbol{ModuleDefinition} specifies the structural elements that make up the cassette by referencing a number of \sbol{ComponentDefinition} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
+The \sbol{ComponentDefinition} objects can be organized hierarchically.  For example, the plasmid \sbol{ComponentDefinition} may reference \sbol{ComponentDefinition}s for the promoter, coding sequence, etc.  
+Each \sbol{ComponentDefinition} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceAnnotation} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
+In order to specify functional information, the \sbol{ModuleDefinition} can specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene projects.  Finally, \sbol{ModuleDefinition} object can point to a \sbol{Model} object that provides a reference to a complete quantitative model using a language such as SBML, CellML, Matlab, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.7]{images/OverviewFigforSpec-v6.png}
-\caption{Main classes of information represented by the SBOL standard, and their relationships.  Red boxes are classes from the 1.1 version of SBOL that focused on structure, whereas blue classes are some of the new classes that support the functional aspects of designs.}
+\caption{Main classes of information represented by the SBOL standard, and their relationships.  Red boxes are classes from the SBOL 1.1 that focused on structure, whereas blue classes are some of the new classes that support the functional aspects of designs.}
 \label{images:overview1}
 \end{center}
 \end{figure}
 
-On the structural side, the \sbol{ComponentDefinition} objects could be a simple flat list, or they could be organized into sub-components---note that both \sbol{ModuleDefinition} and \sbol{ComponentDefinition} can point to themselves, allowing for arbitrary nesting.
-\sbol{ComponentDefinition} objects also include the actual \sbol{Sequence} information (if available) as well as \sbol{SequenceAnnotation} objects that name the promoters, coding sequences, etc., as well as provide location information. 
+% SBOL aims to facilitate the communication and reuse of synthetic biology designs. Given that these designs leverage biochemical knowledge and that they ultimately affect biological systems, it is important that SBOL interacts well with other relevant standards and resources, such as GenBank \cite{genbank}, SwissProt \cite{swissprot}, SBML \cite{SBML}, ChEBI\cite{chebi}, or the Sequence Ontology \cite{so}. Thus, SBOL leverages semantic web technologies, using RDF as a serialization format, and URIs (\emph{Universal Resource Identifiers}) for its objects. URIs allow for direct and un-ambiguous reuse of designs---if a designer in Newcastle wishes to refer to a particular design built in California, he or she can simply name the URI of the ModuleDefinition that describes that design. 
 
-% The high-level view of Figure 1 is meant as a simple prelude to the full specification of SBOL that we provide in the next section. Importantly, our specification uses the UML (Unified Modeling Language) and Figure 1 is NOT a UML diagram. Figure 2 shows... 
-
-\Rtodo{I think the reader does not even know we will be talking about UML yet - I don't see an expectation that this should be XML - KC, Agreed, text above seems unnecessary here.}
-
-\Rtodo{Do you even need Figure 2 at this point? We've provided a high level overview, but not gone into details. Do we need to? - KC Yes, we do need the more detailed description here.  This section is meant to ease the readers into the data model.  It is being done in stages with the second diagram expanding the details.  The main point of the expanded figure will be to introduce the "tricky" concept of instantiations which is very important going forward.}
-
-\Ctodo{Need explanation of Figure 2 here.  Also, need Figure 2 to be updated to follow style of Figure 1.}
-
-SBOL aims to facilitate the communication and reuse of synthetic biology designs. Given that these designs leverage biochemical knowledge and that they ultimately affect biological systems, it is important that SBOL interacts well with other relevant standards and resources, such as GenBank \cite{genbank}, SwissProt \cite{swissprot}, SBML \cite{SBML}, ChEBI\cite{chebi}, or the Sequence Ontology \cite{so}. Thus, SBOL leverages semantic web technologies, using RDF as a serialization format, and URIs (\emph{Universal Resource Identifiers}) for its objects. URIs allow for direct and un-ambiguous reuse of designs---if a designer in Newcastle wishes to refer to a particular design built in California, he or she can simply name the URI of the ModuleDefinition that describes that design. 
-
-In sum, we hope that the SBOL standard will enable sharing of synthetic biology designs across the web, and allow developers to more easily build up rich, complex designs by re-using the work of others. 
+% In sum, we hope that the SBOL standard will enable sharing of synthetic biology designs across the web, and allow developers to more easily build up rich, complex designs by re-using the work of others. 
 
 
 % Figure 2 extends this view to provide a more detailed view of these classes. 
@@ -62,12 +47,13 @@ In sum, we hope that the SBOL standard will enable sharing of synthetic biology 
 % The physical structure of an element is represented with a \sbol{ComponentDefinition}, often corresponding to a particular \sbol{Sequence} (e.g., DNA, RNA, amino acids), and with its structure further described in terms of the smaller \sbol{Component} instances contained within, and their absolute and relative positions within the component.
 % Functional relationships are represented with a \sbol{ModuleDefinition}, often also described by some \sbol{Model}, and with its structure further described in terms of the smaller \sbol{Module} instances contained within, as well as particular components (designated \sbol{FunctionalComponent} to indicate their use in defining a module), and their interactions.
 
-\Ctodo{SequenceConstraint was in a simpler form in 1.1.  Actually though I think maybe we should change color scheme in this one to highlight TopLevel versus Child as before as this is an important concept for the overview.  One minor issue is some issues are crooked.}
+Figure~\ref{images:overview2} provides a more detailed view the the class structure for the SBOL 2.0 data model.  The main, or \emph{top level} classes, are \sbol{Collection}, \sbol{ComponentDefinition}, sbol{Sequence}, \sbol{ModuleDefinition}, and \sbol{Model}.  The key distinction of these classes is that they can stand alone and be referenced by other top level objects (see the dashed arrows between the green boxes).  The purpose of these classes is described above.  Each of these classes is assisted in their purpose by several \emph{child} classes.  The key distinction of a child object is that it is owned by its parent object, and if that parent object is removed, so is the child object.  This ownership is indicated using the solid arrows in the figure.  For example, a \sbol{ComponentDefinition} owns its \sbol{SequenceAnnotation}s.  Another important distinction in this diagram are the additional additional \emph{instantiation} classes, \sbol{Component}, \sbol{FunctionalComponent}, and \sbol{Module}.  As described above, a \sbol{ModuleDefinition} may include instantiations of \sbol{ComponentDefinitions}.  These instantiations are called \sbol{FunctionalComponent}s.  Furthermore, \sbol{ModuleDefinition}s and \sbol{ComponentDefinition}s can be constructed hierarchically of instantiations of the same time, and these instantiations are called \sbol{Module}s and \sbol{Component}s, respectively.  Using a software analogy, a \sbol{ComponentDefinition} or \sbol{ModuleDefinition} are a class definition while a \sbol{Component}, \sbol{FunctionalComponent}, or \sbol{Module} are an object of that class type.  Finally, one last thing to notice is that child objects can be referenced.  For example, an \sbol{Interaction} is between \sbol{FunctionalComponent} object(s) referenced through the \sbol{Participation} class.  Since this is only a reference, if an \sbol{Interaction} is removed, its \sbol{Participation} objects would be removed but not the \sbol{FunctionalComponent}s that they refer to.  Similarly, \sbol{SequenceAnnotation}s and \sbol{SequenceConstraint}s (provide relative positioning information) only refer to the \sbol{Component}s that they provide positioning information for.
+
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.7]{images/OverviewFig2-v3.png}
-\caption{Main classes of information represented by the SBOL standard, and their relationships.  Green boxes are ``top level'' classes, while the other classes are in support of these classes. Solid arrows indicates "contains", whereas a dashed arrow indicates that one class refers to another.}
+\caption{Main classes of information represented by the SBOL standard, and their relationships.  Green boxes are ``top level'' classes, while the other classes are in support of these classes. Solid arrows indicates "contains", whereas a dashed arrow indicates that one class refers to an object of another class.}
 \label{images:overview2}
 \end{center}
 \end{figure}

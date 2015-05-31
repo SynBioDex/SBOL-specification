@@ -330,7 +330,7 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URIs
 \subsubsection*{The \sbolheading{roles} property}
 \label{sec:roles:CD}
 
-The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s that clarifies the potential function of a \sbol{ComponentDefinition} in a biological context.
+The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s that clarifies the potential function of an entity in a biochemical or physical context.
 
 The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MAY contain one or more \sbol{URI}s that MUST identify terms from ontologies that are consistent with the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition}.
 For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{ComponentDefinition} could contain \sbol{URI}s identifying terms from the Sequence Ontology (SO). 
@@ -366,7 +366,7 @@ Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequen
 
 If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In addition, a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} (see \ref{tbl:sequence_encodings}). 
 
-Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then at least one of these \sbol{Sequence} objects MUST have the \sbol{encoding} from \ref{tbl:sequence_encodings} that corresponds to this term.  
+Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then at least one of these \sbol{Sequence} objects MUST have the \sbol{encoding} from \ref{tbl:sequence_encodings} that is cross-listed with this term.  
 Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbolmult{types:CD}{types} property MUST refer to the corresponding term from \ref{tbl:componentdefinition_types}. 
 For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property must refer to the BioPAX term for DNA.
 

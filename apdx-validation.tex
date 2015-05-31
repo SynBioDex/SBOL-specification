@@ -18,22 +18,17 @@ following symbols next to the rule numbers:
 
 \begin{description}
 
-\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
+\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a strong
   REQUIRED condition for SBOL conformance. If a SBOL document does not follow this rule, it does not conform to the SBOL
   specification.  (Mnemonic intention behind the choice of symbol:
   ``This must be checked.'')
 
-\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
-  \emph{recommendation} for consistency.  
-% If a SBOL document does not
-%  follow this rule, it is not considered strictly invalid as far as the
-%  SBOL specification is concerned; however, it indicates that the model contains a physical or conceptual inconsistency. 
-These rules should be followed, but they are difficult, if not  impossible, to check automatically. (Mnemonic intention behind the choice of symbol: ``This is a cause for warning.'')
+\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a weak
+  REQUIRED condition for SBOL conformance. While this rule MUST be followed, it is difficult, if not  impossible, for a machine to automatically check whether the rule has been followed. (Mnemonic intention behind the choice of symbol: ``This is a cause for warning.'')
 
 \item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a 
-  RECOMMENDED condition for following best practices.  This rule is not strictly
-  a matter of SBOL encoding, but the recommendation comes from logical
-  reasoning.  If an SBOL document does not follow this rule, it is still a valid SBOL encoding, but may have degraded functionality in some tools.  (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
+  RECOMMENDED condition for following best practices.  This rule is not strictly a matter of SBOL conformance, but its recommendation comes from logical
+  reasoning.  If an SBOL document does not follow this rule, it is still valid SBOL, but it may have degraded functionality in some tools.  (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
 
 \end{description}
 
@@ -103,55 +98,54 @@ in the SBOL specification namespace.
 \subsubsection*{Rules for the \class{Sequence} class} 
 \setcounter{sbolCtr}{10401}
 
-\printValid{A \sbol{Sequence} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Sequence})}
+\printValid{A \sbol{Sequence} MUST inherit all properties of the \sbol{TopLevel} class. (Reference: \sec{sec:Sequence})}
 
-\printValid{The \sbol{elements} is a REQUIRED property for all \sbol{Sequence} objects and has a data type of String. (Reference: \sec{sec:Sequence})}
+\printValid{The \sbol{elements} property of a \sbol{Sequence} is REQUIRED and MUST contain a \external{String}. (Reference: \sec{sec:Sequence})}
 
-\printValid{The \sbol{encoding} is a REQUIRED property for all \sbol{Sequence} objects and has a data type of \sbol{URI}. (Reference: \sec{sec:Sequence})}
+\printValid{The \sbol{encoding} property of \sbol{Sequence} is REQUIRED and MUST contain a \external{URI}. (Reference: \sec{sec:Sequence})}
 
-\printWarning{The \sbol{elements} format MUST be consistent with its specified \sbol{encoding}. (Reference: \sec{sec:Sequence})}
+\printWarning{The \sbol{encoding} property of a \sbol{Sequence} MUST contain a \external{URI} from \ref{tbl:sequence_encodings} if it is well-described by this \external{URI}. (Reference: \sec{sec:Sequence})}
 
-\printModeling{A DNA \sbol{Sequence} SHOULD use the IUPAC DNA encoding:\\ \url{http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html}. (Reference: \sec{sec:Sequence})}
-
-\printModeling{A RNA \sbol{Sequence} SHOULD use the IUPAC RNA encoding:\\ \url{http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html}. (Reference: \sec{sec:Sequence})}
-
-\printModeling{A protein \sbol{Sequence} SHOULD use the IUPAC Protein encoding:\\ \url{http://www.chem.qmul.ac.uk/iupac/AminoAcid/}. (Reference: \sec{sec:Sequence})}
-
-\printModeling{A small molecule \sbol{Sequence} SHOULD use the SMILES encoding:\\ \url{http://www.opensmiles.org/opensmiles.html}. (Reference: \sec{sec:Sequence})}
+\printWarning{The \sbol{elements} property of a \sbol{Sequence} MUST be consistent with its \sbol{encoding} property. (Reference: \sec{sec:Sequence})}
 
 \subsubsection*{Rules for the \class{ComponentDefinition} class} 
 \setcounter{sbolCtr}{10501}
 
-\printValid{A \sbol{ComponentDefinition} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{A \sbol{ComponentDefinition} MUST inherit all properties of the \sbol{TopLevel} class. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbolmult{types:CD}{types} property is a set of \sbol{URI}s, and it is REQUIRED to include at least one entry. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} is REQUIRED and MUST contain a non-empty set of \external{URI}s. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s.  (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{Each \external{URI} contained by the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that describes the category of biochemical or physical entity that is represented by the \sbol{ComponentDefinition}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{components} property is an OPTIONAL set of \sbol{Component} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{All \external{URI}s contained by the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST refer to synonymous ontology terms. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequenceConstraints} property is an OPTIONAL set of \sbol{SequenceConstraint} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_types} if it is well-described by this \external{URI}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequenceAnnotations} property is an OPTIONAL set of \sbol{SequenceAnnotation} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{URI}s. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequences} property is an OPTIONAL set of \sbol{URI} references to \sbol{Sequence} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{Each \external{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that clarifies the potential function of the \sbol{ComponentDefinition} in a biochemical or physical context. (Reference: \sec{sec:ComponentDefinition})}
 
-\printModeling{Each \sbol{URI} in the set of \sbol{sequences} SHOULD reference an equivalent \sbol{Sequence} object.  (Reference: \sec{sec:Sequence})}
+\printWarning{Each \external{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that is consistent with its \sbolmult{types:CD}{types} property. (Reference: \sec{sec:ComponentDefinition})}
 
-\printWarning{A DNA \sbol{ComponentDefinition} MUST include the \sbol{URI}\\ 
-\url{http://www.biopax.org/release/biopax-level3.owl\#DnaRegion} 
-in the set of \sbolmult{types:CD}{types}.  (Reference: \sec{sec:ComponentDefinition})}
+\printModeling{The \sbolmult{roles:CD}{roles} provided in \ref{tbl:componentdefinition_roles} SHOULD apply to \sbol{ComponentDefinition} objects of the corresponding \sbolmult{types:CD}{types} listed in this table. (Reference: \sec{sec:ComponentDefinition})}
 
-\printWarning{A RNA \sbol{ComponentDefinition} MUST include the \sbol{URI}\\ 
-\url{http://www.biopax.org/release/biopax-level3.owl\#RnaRegion} in the set of \sbolmult{types:CD}{types}.  (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_roles} if it is well-described by this \external{URI}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printWarning{A protein \sbol{ComponentDefinition} MUST include the \sbol{URI}\\ 
-\url{http://www.biopax.org/release/biopax-level3.owl\#Protein} in the set of \sbolmult{types:CD}{types}.  (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{URI} references to \sbol{Sequence} objects. (Reference: \sec{sec:ComponentDefinition})}
 
-\printWarning{A small molecule \sbol{ComponentDefinition} MUST include the \sbol{URI}\\ 
-\url{http://www.biopax.org/release/biopax-level3.owl\#SmallMolecule} in the set of \sbolmult{types:CD}{types}.  (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{The \sbol{Sequence} objects referred to by the \sbol{sequences} property of a \sbol{ComponentDefinition} MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. (Reference: \sec{sec:ComponentDefinition})}
 
-\printModeling{A least one type in the set of \sbolmult{types:CD}{types} SHOULD be a \sbol{URI} from the BioPAX or ChEBI ontologies. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, and the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} contains a \external{URI} that refers to a type from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have an \sbol{encoding} property that contains the \external{URI} from \ref{tbl:sequence_encodings} that is cross-listed with this type. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} and the \sbol{encoding} property of this \sbol{Sequence} contains a \external{URI} from \ref{tbl:sequence_encodings}, then the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} MUST contain a \external{URI} that refers to the type that is cross-listed in \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{The \sbol{components} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{Component} objects. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects.  (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{The \sbol{sequenceConstraints} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
 \subsubsection*{Rules for the \class{ComponentInstance} class} 
 \setcounter{sbolCtr}{10601}
