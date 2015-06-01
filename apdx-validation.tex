@@ -143,9 +143,13 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{components} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{Component} objects. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{Component} in the \sbol{components} property of the \sbol{ComponentDefinition} MUST itself refer to a \sbol{ComponentDefinition} that has a \sbol{Sequence} with the same \sbol{encoding}. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{Component} in the \sbol{components} property of the \sbol{ComponentDefinition} MUST itself refer to a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with the same \sbol{encoding}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects.  (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{Given that the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, and that each \sbol{Component} in the \sbol{components} property of the \sbol{ComponentDefinition} refers to a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with the same \sbol{encoding}, then it MUST be possible to align the \sbol{elements} of the latter \sbol{Sequence} objects to the \sbol{elements} of the \sbol{ComponentDefinition}'s \sbol{Sequence}, subject to any restrictions imposed by the \sbol{SequenceAnnotation} and \sbol{SequenceConstraint} objects that refer to the contents of the \sbol{components} property. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceAnnotation} that includes a \sbol{Range} or \sbol{Cut} in the \sbol{sequenceAnnotations} property of the \sbol{ComponentDefinition} MUST specify a region on the \sbol{elements} of this \sbol{Sequence}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{sequenceConstraints} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
