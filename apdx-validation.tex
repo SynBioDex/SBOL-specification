@@ -137,11 +137,13 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, and the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} contains a \external{URI} that refers to a type from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have an \sbol{encoding} property that contains the \external{URI} from \ref{tbl:sequence_encodings} that is cross-listed with this type. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, and one of the  \sbolmult{types:CD}{types} of this \sbol{ComponentDefinition} comes from \ref{tbl:componentdefinition_types}, then one of the \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this type in \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} and the \sbol{encoding} property of this \sbol{Sequence} contains a \external{URI} from \ref{tbl:sequence_encodings}, then the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} MUST contain a \external{URI} that refers to the type that is cross-listed in \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} MUST contain the type from \ref{tbl:componentdefinition_types} that is cross-listed with this \sbol{encoding} in  \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{components} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{Component} objects. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{Component} in the \sbol{components} property of the \sbol{ComponentDefinition} MUST itself refer to a \sbol{ComponentDefinition} that has a \sbol{Sequence} with the same \sbol{encoding}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
