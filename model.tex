@@ -678,9 +678,9 @@ The \sbol{SequenceAnnotation} class describes one or more regions of interest on
 The \sbol{locations} property is a REQUIRED set of one or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Sequence} are described by the \sbol{SequenceAnnotation}. 
 
 \Rtodo{Need somebody to make sure I didn't screw this up.  -JSB}
-Allowing multiple \sbol{Location} objects on a single \sbol{SequenceAnnotation} is intended to allow representation of a component with gaps in its encoding (e.g., encoded across a set of exons with interspersed introns). 
-As such, the \sbol{Location} objects of a single SHOULD NOT specify overlapping regions, since it is not clear what this means.  
-There is no such concern with different \sbol{SequenceAnnotation} objects, however, which can easily overlap in \sbol{Location}.
+Allowing multiple \sbol{Location} objects on a single \sbol{SequenceAnnotation} is intended to allow representation of discontinuous ranges (e.g., a component encoded across a set of exons with interspersed introns). 
+As such, the \sbol{Location} objects of a single SHOULD NOT specify overlapping regions, since it is not clear what this would mean.
+There is no such concern with different \sbol{SequenceAnnotation} objects, however, which can freely overlap in \sbol{Location} (e.g., specifying overlapping linkers for sequence assembly).
 
 \paragraph{The \sbolheading{component} property}\label{sec:component}
 The \sbol{component} property is OPTIONAL and has a data type of \sbol{URI}. This \sbol{URI} MUST refer to a \sbol{Component} that is contained by the same parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. In this way, the properties of the \sbol{SequenceAnnotation}, such as its \sbol{description} and \sbol{locations}, are associated with part of the substructure of its \sbol{ComponentDefinition}. A \sbol{SequenceAnnotation} MUST NOT refer to the same \sbol{Component} as another \sbol{SequenceAnnotation}. 
