@@ -156,25 +156,52 @@ in the SBOL specification namespace.
 \subsubsection*{Rules for the \class{ComponentInstance} class} 
 \setcounter{sbolCtr}{10601}
 
-\printValid{A \sbol{ComponentInstance} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:ComponentInstance})}
+\printValid{A \sbol{ComponentInstance} MUST inherit all properties of the \sbol{Identified} class. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbol{access} property is a REQUIRED \sbol{URI} which MUST be one of the following:
-\url{http://sbols.org/v2\#public} or \url{http://sbols.org/v2\#private}.
-(Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbol{access} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \external{URI} from \ref{tbl:componentInstance_access} (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbolmult{definition:CI}{definition} property is a REQUIRED \sbol{URI} reference to a \sbol{ComponentDefinition} object.  (Reference: \sec{sec:ComponentInstance})}
+\printModeling{It is RECOMMENDED that the \sbol{access} property of a \sbol{ComponentInstance} contain the \external{URI} \url{http://sbols.org/v2\#public}. (Reference: \sec{sec:ComponentInstance})}
 
-\printModeling{The \sbolmult{definition:CI}{definition} property \sbol{URI} SHOULD reference a \sbol{ComponentDefinition} object. (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{ComponentDefinition}. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbolmult{mapsTos:CI}{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:ComponentInstance})}
+\printWarning{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} MUST NOT contain a \external{URI} reference to \sbol{ComponentDefinition} that contains the \sbol{ComponentInstance}. In general, \sbol{ComponentInstance} objects MUST NOT form circular reference chains via their \sbol{definition} properties and the \sbol{ComponentDefinition} objects that contain them. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{A \sbol{Component} object inherits all properties of a \sbol{ComponentInstance} object. (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbolmult{mapsTos:CI}{mapsTos} property of a \sbol{ComponentInstance} is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects. (Reference: \sec{sec:ComponentInstance})}
+
+\printValid{A \sbol{Component} MUST inherit all properties of the \sbol{ComponentInstance} class. (Reference: \sec{sec:ComponentInstance})}
 
 \printValid{A \sbol{FunctionalComponent} object inherits all properties of a \sbol{ComponentInstance} object. (Reference: \sec{sec:ComponentInstance})}
 
 \printValid{The \sbol{direction} property is a REQUIRED \sbol{URI} for \sbol{FunctionalComponent} objects which MUST be one of the following:
 \url{http://sbols.org/v2\#inout}, \url{http://sbols.org/v2\#in}, \url{http://sbols.org/v2\#out}, or \url{http://sbols.org/v2\#none}.
 (Reference: \sec{sec:FunctionalComponent})}
+
+\subsubsection*{Rules for the \class{Component} class} 
+\setcounter{sbolCtr}{10601}
+
+\subsubsection*{Rules for the \class{MapsTo} class} 
+\setcounter{sbolCtr}{11301}
+
+\printValid{A \sbol{MapsTo} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:MapsTo})}
+
+\printValid{The \sbol{refinement} property is a REQUIRED \sbol{URI} for \sbol{MapsTo} objects which MUST be one of the following:
+\url{http://sbols.org/v2\#useRemote},
+\url{http://sbols.org/v2\#useLocal},
+\url{http://sbols.org/v2\#verifyIdentical}, and
+\url{http://sbols.org/v2\#merge}.
+(Reference: \sec{sec:MapsTo})}
+
+\printValid{When a \sbol{MapsTo} object is specified by a \sbol{ComponentInstance} object, the \sbol{local} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:MapsTo})}
+
+\printWarning{When a \sbol{MapsTo} object is specified by a \sbol{ComponentInstance} object, the \sbol{remote} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the \sbol{ComponentDefinition} referred to by the \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})} 
+
+\printValid{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{local} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
+
+\printWarning{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{remote} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
+
+% \printValid{The \sbol{ComponentInstance} referenced by the \sbol{local} property MUST have \sbol{public} access type. (Reference: \sec{sec:MapsTo})}
+
+\printValid{The \sbol{ComponentInstance} referenced by the \sbol{remote} property MUST have \sbol{public} access type. (Reference: \sec{sec:MapsTo})}
 
 \subsubsection*{Rules for the \class{SequenceAnnotation} class} 
 \setcounter{sbolCtr}{10701}
@@ -263,30 +290,6 @@ in the SBOL specification namespace.
 \printValid{The \sbolmult{definition:M}{definition} property is a REQUIRED \sbol{URI} reference to a \sbol{ModuleDefinition} object.  (Reference: \sec{sec:Module})}
 
 \printValid{The \sbolmult{mapsTos:M}{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:Module})}
-
-\subsubsection*{Rules for the \class{MapsTo} class} 
-\setcounter{sbolCtr}{11301}
-
-\printValid{A \sbol{MapsTo} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:MapsTo})}
-
-\printValid{The \sbol{refinement} property is a REQUIRED \sbol{URI} for \sbol{MapsTo} objects which MUST be one of the following:
-\url{http://sbols.org/v2\#useRemote},
-\url{http://sbols.org/v2\#useLocal},
-\url{http://sbols.org/v2\#verifyIdentical}, and
-\url{http://sbols.org/v2\#merge}.
-(Reference: \sec{sec:MapsTo})}
-
-\printValid{When a \sbol{MapsTo} object is specified by a \sbol{ComponentInstance} object, the \sbol{local} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:MapsTo})}
-
-\printWarning{When a \sbol{MapsTo} object is specified by a \sbol{ComponentInstance} object, the \sbol{remote} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the \sbol{ComponentDefinition} referred to by the \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})} 
-
-\printValid{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{local} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
-
-\printWarning{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{remote} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
-
-% \printValid{The \sbol{ComponentInstance} referenced by the \sbol{local} property MUST have \sbol{public} access type. (Reference: \sec{sec:MapsTo})}
-
-\printValid{The \sbol{ComponentInstance} referenced by the \sbol{remote} property MUST have \sbol{public} access type. (Reference: \sec{sec:MapsTo})}
 
 \subsubsection*{Rules for the \class{Interaction} class} 
 \setcounter{sbolCtr}{11401}
