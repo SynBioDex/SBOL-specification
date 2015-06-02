@@ -256,10 +256,10 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{Component} referenced by the \sbol{object} property of a \sbol{SequenceConstraint} MUST be contained by the \sbol{ComponentDefinition} that contains the \sbol{SequenceConstraint}. (Reference: \sec{sec:SequenceConstraint})}
 
-\printValid{The \sbol{restriction} property is a REQUIRED \sbol{URI} and  which MUST be one of the following:
-\url{http://sbols.org/v2\#precedes},
-\url{http://sbols.org/v2\#sameOrientationAs}, or
-\url{http://sbols.org/v2\#oppositeOrientationAs}.
+\printValid{The \sbol{restriction} property is REQUIRED and MUST contain a \sbol{URI}.
+(Reference: \sec{sec:SequenceConstraint})}
+
+\printModeling{The \external{URI} contained by the \sbol{restriction} property SHOULD come from \ref{tbl:restriction_types}.
 (Reference: \sec{sec:SequenceConstraint})}
 
 \subsubsection*{Rules for the \class{Model} class} 

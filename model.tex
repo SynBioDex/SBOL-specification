@@ -77,20 +77,18 @@ When SBOL use simple ``primitive'' data types such as strings or integers, these
 \end{itemize}
 The term \sbol{literal} is used to denote an object that can be any of the four types listed above.
 In addition to the simple types listed above, SBOL also uses objects with types \emph{uniform resource identifier} (URI) and \emph{XML qualified name} (QName): 
-\Rtodo{Somebody please make sure I haven't screwed up QName and URI descriptions. -JSB}
+\Rtodo{Somebody please make sure I haven't screwed up QName and URI descriptions. -JSB A QName also has a namespace to define the prefix.  The localPart must be defined in this namespace. -CJM}
 \begin{itemize}
 \item URI: \url{http://www.w3.org/TR/xmlschema11-2/#anyURI}\\
   {\em Example: \external{http://www.partsregistry.org/Part:BBa\_J23119}}
 \item QName: \url{http://www.w3.org/TR/xmlschema11-2/#QName}\\
-  {\em Example: \external{myapp:Datasheet}}
+  {\em Example: \external{myapp:Datasheet}} where  \external{myapp="http://www.myapp.org/"} namespace.
 \end{itemize}
 
 Note that, in compliance with RDF standards, URIs are generally serialized using an \external{rdf:resource} property, e.g.:
 \external{rdf:resource="http://www.partsregistry.org/Part:BBa\_J23119"}
 
-\Rtodo{Added text describing relation of URI and URL, per suggestion from Mike B. -JSB}
 It is also important to realize that, as used in RDF, a URI may or may not be a resolvable URL (web address).  A URI is always a unique identifier within a structured name-space.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., through a web browser).
-
 
 \subsection{Identified}
 \label{sec:Identified}
@@ -169,7 +167,10 @@ It is RECOMMENDED that software tools give users the ability to switch perspecti
 
 The \sbol{description} property is OPTIONAL and has a data type of \sbol{String}. This property is intended to contain a more thorough text description of an \sbol{Identified} object.
 
-\Ctodo{Need to describe annotations property.}
+\subsubsection*{The \sbolheading{annotations} property}
+\label{sec:annotations}
+
+The \sbol{annotations} property is OPTIONAL and MAY specify a set of \sbol{Annotation} objects that are contained by the \sbol{Identified} object. \sbol{Annotation} objects are described in more detail in Section~\ref{sec:Annotation}.
 
 \subsubsection*{Serialization}
 
@@ -334,7 +335,7 @@ The \sbolmult{types:CD}{types} property is a REQUIRED set of \sbol{URI}s that sp
 
 The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). 
 \ref{tbl:componentdefinition_types} provides a list of RECOMMENDED ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s. 
-In order to maximize the compatibility of designs, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its \sbolmult{types:CD}{types}. 
+In order to maximize the compatibility of designs, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use the \external{URI} for that term as one of its \sbolmult{types:CD}{types}. 
 Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify synonymous terms (otherwise, it may be unclear how to interpret the terms).
 \LDtodo{Do we mean synonymous, or can it be weakened to non-conflicting?  Query from Mike B}
 
@@ -361,9 +362,9 @@ The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s that c
 The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MAY contain one or more \sbol{URI}s that MUST identify terms from ontologies that are consistent with the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition}.
 For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{ComponentDefinition} could contain \sbol{URI}s identifying terms from the Sequence Ontology (SO). 
 \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. 
-These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use that term as one of its \sbolmult{roles:CD}{roles}. 
+These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use the \external{URI} for that term as one of its \sbolmult{roles:CD}{roles}. 
 
-\LDtodo{Query from Mike B: ``In my organization, it is very common to define single components containing multiple adjacent items from table 3, the table of roles. For example, it's more common to design a part as a gene + stop + terminator than just a lonely gene. We're not alone in this. Do you want to make any recommendations for this situation?''}
+\LDtodo{Query from Mike B: ``In my organization, it is very common to define single components containing multiple adjacent items from table 3, the table of roles. For example, it's more common to design a part as a gene + stop + terminator than just a lonely gene. We're not alone in this. Do you want to make any recommendations for this situation?'' ComponentDefinitions are hierarchical.  I think the confusion is that what to do with a composite CD.  I think we should have a term for engineered region or the like for that and explain it.}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -930,17 +931,16 @@ The example below shows the serialization of a \sbol{SequenceConstraint} belongi
 \end{center}
 \end{figure}
 
-SBOL's \sbol{Model} objects are placeholders that point to some external modeling mechanism, with some additional meta-data to enable better reasoning about the contents of that external mechanism.
-In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of \sbol{ModuleDefinition} objects in a language of their choice. 
+The purpose of the \sbol{Model} class is to serve as a placeholder for an external model and provide additional meta-data to enable better reasoning about the contents of this model.
+In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of a \sbol{ModuleDefinition} in the language of their choice. 
 
-Each \sbol{Model} object specifies the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modeling framework and the model's role(s). 
+The meta-data provided by the \sbol{Model} class include the following properties: the \sbol{source} or location of the actual content of the model, the \sbol{language} in which the model is implemented, and the model's mathematical \sbol{framework}. 
 
 \subsubsection*{ The \sbolheading{source} property}\label{sec:source}
-This REQUIRED property is a URI that uniquely refers to a qualitative or quantitative model.
+The \sbol{source} property is REQUIRED and MUST contain a \external{URI} reference to a qualitative or quantitative model.
 
 \subsubsection*{ The \sbolheading{language} property}\label{sec:language}
-This REQUIRED property is a URI that specifies the language the model is implemented with. 
-Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Methods (EDAM) ontology where possible. A few suggested model types and corresponding URI values are shown in \ref{tbl:model_types}.
+The \sbol{language} property is REQUIRED and MUST contain a \external{URI} that specifies the language in which the model is implemented. It is RECOMMENDED that this \external{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology. \ref{tbl:model_types} provides a list of RECOMMENDED terms from this ontology and their \external{URI}s. If the \sbol{language} property of a \sbol{Model} is well-described by one these terms, then it MUST  use the \external{URI} for this term as its value.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -952,7 +952,7 @@ Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Metho
     BioPAX    & \url{http://identifiers.org/edam/format_3156}\\
     \bottomrule
   \end{edtable}
-  \caption{Some commonly used model languages and their corresponding \sbol{URI}s.}
+  \caption{RECOMMENDED terms from the EDAM ontology to specify the \sbol{language} property of a \sbol{Model}.}
   \label{tbl:model_types}
 \end{table}
 
@@ -976,7 +976,7 @@ Values for this URI are RECOMMENDED to be chosen from the SBO's modeling framewo
 
 \subsubsection*{Serialization}
 
-The serialization of \sbol{Model} objects has the following form:
+The serialization of a \sbol{Model} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
@@ -988,7 +988,7 @@ The serialization of \sbol{Model} objects has the following form:
 </sbol:Model>
 \end{lstlisting}
 
-The example below shows the serialization of a \sbol{Model} object. The model object includes information about the models of a toggle switch. The model is implemented in SBML using a continuous modelling framework.  In this case, the source property identifies the URL that can be used to retrieve the SBML model from a model repository.
+The example below shows the serialization of a \sbol{Model} object that refers to a quantitative model of a genetic toggle switch. The model is implemented in the SBML \sbol{language} and adheres to a continuous modeling \sbol{framework}. Lastly, the model can be retrieved from a model repository via its \sbol{source} \external{URI}, which is a \external{URL}.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1487,7 +1487,6 @@ SBOL's \sbol{GenericTopLevel} is a top-level entity whose only purpose is to inc
 Entities that have independent existence (i.e., would be another ``top level'' class) and are not recognized by the SBOL standard are loaded into these top level entities. 
 These \sbol{GenericTopLevel} entities can thus be safely used by tools to exchange non-SBOL data embedded separately within SBOL.
 As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{displayId}, \sbol{name}, \sbol{description}, etc. The type of data found in the generic entity is indicated using the \sbol{rdfType} property which is of type \sbol{QName}.   
-
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/generictoplevel}

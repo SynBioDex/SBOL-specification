@@ -18,14 +18,11 @@ Because the standard itself can represent information from other sources for seq
 The ultimate utility of URIs in the SBOL Standard is the ability to support flexible annotation with appropriate metadata while associating an authority with that annotation. 
 The definition of the data model and associated format, the rules on the addition of data within the format and the representation of this in electronic data files are intended to make the SBOL standard a useful means of promoting global data exchange between laboratories and between software programs.
 
-\Ctodo{Need to make clear that this replaces SBOL 1.1 and all future work should use SBOL 2.0.}
-
 This document presents the second version of SBOL.
 The previous version 1.1 of the SBOL standard focused on representing the structural aspects of genetic designs. 
 Users of the standard were able to use it to exchange information on DNA designs but could not represent molecules other than DNA or represent the functional aspects of their designs beyond the DNA sequences. 
 To serve as an effective medium for the computational exchange of genetic designs, SBOL must be extended to capture more aspects of a designed system, including both structural and functional information, and the composition of complex structural and functional designs by combining simpler parts. 
-The SBOL 2.0 data model defined in this specification thus extends the prior model to provide for addressing the most pressing needs for expanding SBOL Version 1.1:
-
+The SBOL 2.0 data model defined in this specification thus extends the prior model to provide for addressing the most pressing needs for expanding SBOL Version 1.1, in particular it can:
 \begin{itemize}
 
 \item represent structural components of a biological design, including DNA, RNA, proteins, small molecules and other physical components
@@ -37,6 +34,7 @@ The SBOL 2.0 data model defined in this specification thus extends the prior mod
 \item support rich annotations of all components, so that data required to describe a design, but not formalized in this specification can be safely exchanged
 
 \end{itemize}
+Taken together, these capabilities allow SBOL sufficient expressiveness to support the description and exchange of hierarchical, modular representations of both the intended structure and function of designed biological systems.
 
 \begin{figure}
 \centering
@@ -44,25 +42,26 @@ The SBOL 2.0 data model defined in this specification thus extends the prior mod
 \caption{SBOL 2.0 extends prior formats to represent both structure and function of a genetic design in a single model.}
 \end{figure}
 
-\Rtodo{Please review this new figure}
+\Ctodo{Figure is not referenced in the text and moved to where it is referenced. -CJM}
 
-Taken together, these capabilities allow SBOL sufficient expressivity to support the description and exchange of hierarchical, modular representations of both the intended structure and function of designed biological systems.
-
-To address the need for functional descriptions in SBOL, the proposed data model adds classes for modules, interactions, and models. These classes provide a firm basis for functional representation in SBOL without going so far as to create a new standard for mathematically modeling biology, as there already exist several established languages for doing so, from the Systems Biology Markup Language (SBML)~\cite{SBML} to CellML~\cite{CellML} and even MatLab~\cite{matlab}. Rather, these classes enable users of SBOL to group components that function together, describe the basic qualitative interactions between these components, and document references to standard mathematical models that are external to SBOL and that provide more detailed descriptions of component function. In other words, a module gathers together a set of component instantiations, a set of interactions between these component instantiations, and a set of references to external models that are expected to be consistent with the module's interactions.
-
-\Rtodo{Added next two paragraphs to address queries from Mike B.  -JSB}
+To address the need for functional descriptions in SBOL, the proposed data model adds new classes to provide a firm basis for functional representation in SBOL without going so far as to create a new standard for mathematically modeling biology, as there already exist several established languages for doing so, from the \emph{Systems Biology Markup Language} (SBML)~\cite{SBML} to CellML~\cite{CellML} and even MatLab~\cite{matlab}. Rather, these classes enable users of SBOL to group components that function together, describe the basic qualitative interactions between these components, and document references to standard mathematical models that are external to SBOL and that provide more detailed descriptions of component function. In other words, a module definition gathers together a set of component instantiations, a set of interactions between these component instantiations, and a set of references to external models that are expected to be consistent with the module's interactions.
 
 The SBOL 2.0 specification also adds a number of measures to simplify adoption and validation of compatibility with the standard.
 First, the specification explicitly incorporates its serialization format into the specification, whereas SBOL 1.1 used an implicit standard tied to a reference implementation.
 Second, the specification includes a set of validation rules for determining compatibility of a document with SBOL 2.0, most of which are machine-verifiable.
 Finally, the specification includes a set of recommended best-practices likely to allow a tool to take best advantage of the standard and other compatible tools.
 
+\Ctodo{We should add a section showing the mapping of objects from 1.1 to 2.0 using Nic's diagram.}
+
 Care has been taken to ensure that SBOL 2.0 is backward-compatible with SBOL 1.x.  
 The generalization of the data model does mean that many names have changed and thus an SBOL 1.x file is not a valid SBOL 2.0 file.
 There is, however, a direct mapping from the SBOL 1.x data model into the SBOL 2.0 data model, making it simple to automatically ``upgrade'' any SBOL 1.x file into and SBOL 2.0 file.
+Therefore, SBOL 2.0 supersedes SBOL 1.1, and developers are encouraged to use it for all new software efforts.  Since SBOL 2.0 can encode all data previously encoded in SBOL 1.1, developers are also encouraged to upgrade their SBOL 1.1 compliant software tools to use SBOL 2.0 data objects. 
+
+\Rtodo{Added text above to address Swapnil's comment.  Needs review.  -CJM}
 
 The SBOL standard has been developed in collaboration between both ``wet'' bench scientists and ``dry'' scientific modelers and tool designers active within the Synthetic Biology community. 
-As with the earlier SBOL 1.1 standard this community (open for any practitioner to join) has met to discuss, argue and agree upon needs that the SBOL standard should address. 
-This information has then been used by developers within our community to design, develop and test a specification of the standard. The specification has been tested by the community through several iterations for the ability to represent a wide range of synthetic biology design projects, as well as, the ability to share designs between different laboratories. 
+As with the earlier SBOL 1.1 standard, this community (open for any practitioner to join) has met to discuss, argue and agree upon needs that the SBOL standard should address. 
+This information has then been used by developers within our community to design, develop, and test a specification of the standard. The specification has been tested by the community through several iterations for the ability to represent a wide range of synthetic biology design projects, as well as, the ability to share designs between different laboratories. 
 The standard has also been used to develop software tools that employ the standard for developing and sharing synthetic design projects. 
 The publication of this specification is intended to make these capabilities more widely accessible to the community of potential developers and users.
