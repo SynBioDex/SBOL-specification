@@ -180,9 +180,11 @@ in the SBOL specification namespace.
 
 \printValid{A \sbol{MapsTo} MUST inherit all properties of the \sbol{Identified} class. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{local} property of a \sbol{MapsTo} that is contained by a \sbol{ComponentDefinition}the  is a REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:MapsTo})}
+\printValid{The \sbol{local} property of a \sbol{MapsTo} is REQUIRED and MUST contain a \external{URI} reference to a \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{local} property of a \sbol{MapsTo} that is contained by a \sbol{ComponentDefinition}the  is a REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:MapsTo})}
+\printValid{The \sbol{local} property of a \sbol{MapsTo} that is contained by a \sbol{Component} MUST refer to another \sbol{Component} contained by the \sbol{components} property of the same parent \sbol{ComponentDefinition}. (Reference: \sec{sec:MapsTo})}
+
+\printValid{The \sbol{local} property of a \sbol{MapsTo} that is contained by a \sbol{FunctionalComponent} or \sbol{Module} MUST refer to another \sbol{FunctionalComponent} contained by the \sbol{functionalComponents} property of the same parent \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
 
 \printValid{The \sbol{refinement} property is a REQUIRED \sbol{URI} for \sbol{MapsTo} objects which MUST be one of the following:
 \url{http://sbols.org/v2\#useRemote},
@@ -192,8 +194,6 @@ in the SBOL specification namespace.
 (Reference: \sec{sec:MapsTo})}
 
 \printWarning{When a \sbol{MapsTo} object is specified by a \sbol{ComponentInstance} object, the \sbol{remote} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the \sbol{ComponentDefinition} referred to by the \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})} 
-
-\printValid{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{local} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:MapsTo})}
 
 \printWarning{When a \sbol{MapsTo} object is specified by a \sbol{Module} object, the \sbol{remote} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{FunctionalComponent} that is specified within the \sbol{ModuleDefinition} referred to by the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
 
