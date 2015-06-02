@@ -202,11 +202,11 @@ in the SBOL specification namespace.
 \subsubsection*{Rules for the \class{SequenceAnnotation} class} 
 \setcounter{sbolCtr}{10901}
 
-\printValid{A \sbol{SequenceAnnotation} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:SequenceAnnotation})}
+\printValid{A \sbol{SequenceAnnotation} MUST inherit all properties of the \sbol{Identified} class. (Reference: \sec{sec:SequenceAnnotation})}
 
-\printValid{The \sbol{locations} property is a set of \sbol{Location} objects, and it MUST include at least one \sbol{Location}. (Reference: \sec{sec:SequenceAnnotation})}
+\printValid{The \sbol{locations} property of a \sbol{SequenceAnnotation} is REQUIRED and MUST contain a non-empty set of \sbol{Location} objects. (Reference: \sec{sec:SequenceAnnotation})}
 
-\printValid{The \sbol{component} property is an OPTIONAL \sbol{URI} that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceAnnotation})}
+\printValid{The \sbol{component} property is OPTIONAL and MAY contain a \sbol{URI} that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceAnnotation})}
 
 \subsubsection*{Rules for the \class{Location} class} 
 \setcounter{sbolCtr}{11001}
