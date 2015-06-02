@@ -127,7 +127,7 @@ in the SBOL specification namespace.
 
 \printWarning{Each \external{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that is consistent with its \sbolmult{types:CD}{types} property. (Reference: \sec{sec:ComponentDefinition})}
 
-\printModeling{The \sbolmult{roles:CD}{roles} provided in \ref{tbl:componentdefinition_roles} SHOULD apply to \sbol{ComponentDefinition} objects of the corresponding \sbolmult{types:CD}{types} listed in this table. (Reference: \sec{sec:ComponentDefinition})}
+\printModeling{The \sbolmult{roles:CD}{roles} property of a  \sbol{ComponentDefinition} SHOULD only contain a \external{URI} provided in  \ref{tbl:componentdefinition_roles} if one of its \sbolmult{types:CD}{types} is cross-listed with the \external{URI}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printWarning{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_roles} if it is well-described by this \external{URI}. (Reference: \sec{sec:ComponentDefinition})}
 
@@ -149,7 +149,9 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceAnnotation} that includes a \sbol{Range} or \sbol{Cut} in the \sbol{sequenceAnnotations} property of the \sbol{ComponentDefinition} MUST specify a region on the \sbol{elements} of this \sbol{Sequence}. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{If the \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} contains two or more \sbol{SequenceAnnotation} objects that refer to the same \sbol{Component}, then their \sbol{Location} objects  MUST NOT specify regions that have conflicting \sbol{orientation} properties or occupy non-overlapping positions. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceAnnotation} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceAnnotations} property of the \sbol{ComponentDefinition} MUST specify a region on the \sbol{elements} of this \sbol{Sequence}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{sequenceConstraints} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
@@ -192,11 +194,11 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{remote} property of a \sbol{MapsTo} MUST refer to a \sbol{ComponentInstance} with an \sbol{access} property that contains the \external{URI} \url{http://sbols.org/v2\#public}. (Reference: \sec{sec:MapsTo})}
 
-\printValid{If a \sbol{MapsTo} is contained by a \sbol{ComponentInstance}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{Component} in the \sbol{ComponentDefinition} that is referenced by the \sbol{definition} of the \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})} 
+\printValid{If a \sbol{MapsTo} is contained by a \sbol{ComponentInstance}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{Component} in the \sbol{ComponentDefinition} that is referenced by the \sbolmult{definition:CI}{definition} of the \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})} 
 
-\printValid{If a \sbol{MapsTo} is contained by a \sbol{Module}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{FunctionalComponent} in the \sbol{ModuleDefinition} that is referenced by the \sbol{definition} of the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
+\printValid{If a \sbol{MapsTo} is contained by a \sbol{Module}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{FunctionalComponent} in the \sbol{ModuleDefinition} that is referenced by the \sbolmult{definition:CI}{definition} of the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
 
-\printValid{The \sbol{refinement} property is REQUIRED and must contain a \external{URI} from \ref{tbl:mapsto_refinement}.
+\printValid{The \sbol{refinement} property is REQUIRED and MUST contain a \external{URI} from \ref{tbl:mapsto_refinement}.
 (Reference: \sec{sec:MapsTo})}
 
 \subsubsection*{Rules for the \class{SequenceAnnotation} class} 
@@ -208,28 +210,38 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{component} property is OPTIONAL and MAY contain a \sbol{URI} reference to a \sbol{Component}. (Reference: \sec{sec:SequenceAnnotation})}
 
-\printValid{The \sbol{component} property is OPTIONAL and MAY contain a \sbol{URI} reference to a \sbol{Component}. (Reference: \sec{sec:SequenceAnnotation})}
+\printValid{The \sbol{Component} referenced by the \sbol{component} property of a \sbol{SequenceAnnotation} MUST be contained by the \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. (Reference: \sec{sec:SequenceAnnotation})}
 
 \subsubsection*{Rules for the \class{Location} class} 
 \setcounter{sbolCtr}{11001}
 
-\printValid{A \sbol{Location} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Location})}
+\printValid{A \sbol{Location} MUST inherit all properties of the \sbol{Identified} class. (Reference: \sec{sec:Location})}
 
-\printValid{The \sbol{orientation} property is an OPTIONAL \sbol{URI} which, if specified, MUST be one of the following: \url{http://sbols.org/v2\#inline}, 
-\url{http://sbols.org/v2\#reverseComplement}.
+\printValid{The \sbol{orientation} property of a \sbol{Location} is OPTIONAL and MAY contain a \sbol{URI} from \ref{tbl:orientation_types}.
 (Reference: \sec{sec:GenericLocation})}
 
-\printValid{A \sbol{GenericLocation} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:GenericLocation})}
+\subsubsection*{Rules for the \class{Range} class} 
+\setcounter{sbolCtr}{11001}
 
-\printValid{A \sbol{Range} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:Range})}
+\printValid{A \sbol{Range} MUST inherit all properties of the \sbol{Location} class. (Reference: \sec{sec:Range})}
 
-\printValid{The \sbol{start} property is REQUIRED for all \sbol{Range} objects, and it MUST be a positive integer.  (Reference: \sec{sec:Range})}
+\printValid{The \sbol{start} property of a \sbol{Range} is REQUIRED and MUST contain an \external{Integer} greater than zero. (Reference: \sec{sec:Range})}
 
-\printValid{The \sbol{end} property is REQUIRED for all \sbol{Range} objects, and it MUST be a positive integer.  (Reference: \sec{sec:Range})}
+\printValid{The \sbol{end} property of a \sbol{Range} is REQUIRED and MUST contain an \external{Integer} greater than zero. (Reference: \sec{sec:Range})}
 
-\printValid{A \sbol{Cut} object inherits all properties of a \sbol{Location} object. (Reference: \sec{sec:Cut})}
+\printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property. (Reference: \sec{sec:Range})}
 
-\printValid{The \sbol{at} property is REQUIRED for all \sbol{Cut} objects, and it MUST be a non-negative integer.  (Reference: \sec{sec:Cut})}
+\subsubsection*{Rules for the \class{Cut} class} 
+\setcounter{sbolCtr}{11001}
+
+\printValid{A \sbol{Cut} MUST inherit all properties of the \sbol{Location} class. (Reference: \sec{sec:Cut})}
+
+\printValid{The \sbol{at} property is REQUIRED and MUST contain \external{Integer} greater than or equal to zero.  (Reference: \sec{sec:Cut})}
+
+\subsubsection*{Rules for the \class{GenericLocation} class} 
+\setcounter{sbolCtr}{11001}
+
+\printValid{A \sbol{GenericLocation} MUST inherit all properties of the \sbol{Location} c. (Reference: \sec{sec:GenericLocation})}
 
 \subsubsection*{Rules for the \class{SequenceConstraint} class} 
 \setcounter{sbolCtr}{11101}
