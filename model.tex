@@ -85,9 +85,11 @@ In addition to the simple types listed above, SBOL also uses objects with types 
   {\em Example: \external{myapp:Datasheet}}
 \end{itemize}
 
-Note that, in compliance with RDF standards, URI objects are generally serialized using an \external{rdf:resource} property, e.g.:
+Note that, in compliance with RDF standards, URIs are generally serialized using an \external{rdf:resource} property, e.g.:
 \external{rdf:resource="http://www.partsregistry.org/Part:BBa\_J23119"}
 
+\Rtodo{Added text describing relation of URI and URL, per suggestion from Mike B. -JSB}
+It is also important to realize that, as used in RDF, a URI may or may not be a resolvable URL (web address).  A URI is always a unique identifier within a structured name-space.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., through a web browser).
 
 
 \subsection{Identified}
@@ -285,7 +287,7 @@ The serialization of a \sbol{Sequence} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Sequence rdf:about="...">
-      ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}] <sbol:elements>...</sbol:elements> [\emph{element}]
   [\emph{one}] <sbol:encoding rdf:resource="..."/> [\emph{element}]
 </sbol:Sequence>
@@ -402,7 +404,8 @@ For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefi
 The \sbol{components} property is OPTIONAL and MAY specify a set of \sbol{Component} objects that are contained by the \sbol{ComponentDefinition}.
 Note that the set of relations between \sbol{Component} and \sbol{ComponentDefinition} objects is strictly acyclic.
 
-While the \sbol{ComponentDefinition} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Component} class represents the specific occurrence of a part within a design. Hence, this class allows a biological design to include multiple copies of a particular part. For example, the \sbol{ComponentDefinition} of a polycistronic gene could contain two \sbol{Component} objects that refer to the same \sbol{ComponentDefinition} of a CDS.
+While the \sbol{ComponentDefinition} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Component} class represents the specific occurrence of a part within a design. 
+Hence, this class allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{ComponentDefinition}). For example, the \sbol{ComponentDefinition} of a polycistronic gene could contain two \sbol{Component} objects that refer to the same \sbol{ComponentDefinition} of a CDS.
 
 \LDtodo{Comment from Mike B: ``"it MUST be possible to align the elements of the latter Sequence objects to the elements of the ComponentDefinition's Sequence." Alignment comes in lossy and lossless forms. One of SBOL 1.1's practical limitations when it came to modeling real-world processes was that annotations couldn't bear an approximate resemblance to the sequences they annotated; they had to be exact substrings. If you really intend to keep this restriction in SBOL 2.0, then please use stronger language than "align," because we all use alignment tools to detect lossy near-matches (indels), so this passage might be read the wrong way. If, on the other hand, you've deliberately changed that rule, then highlight the change here, because SBOL 1.1 was pretty emphatic about its "logical consistency" rules.''}
 
@@ -436,7 +439,7 @@ In particular, each object is serialized as a RDF/XML node nested within a singu
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ComponentDefinition rdf:about="...">
-               ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{zero or more}]  <sbol:sequence rdf:resource="..."/> [\emph{element}]
   [\emph{one or more}]   <sbol:type rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]    
@@ -551,7 +554,7 @@ The serialization of a \sbol{Component} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Component rdf:about="...">
-               ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}]          <sbol:access rdf:resource="..."/> [\emph{element}]
   [\emph{one}]          <sbol:definition rdf:resource="..."/> [\emph{element}]    
   [\emph{zero or more}] <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
@@ -644,7 +647,7 @@ The serialization of \sbol{MapsTo} MUST have the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:MapsTo rdf:about="...">
-      ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}] <sbol:refinement rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:remote rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:local rdf:resource="..."/> [\emph{element}]
@@ -694,7 +697,7 @@ The serialization of a \sbol{SequenceAnnotation} MUST have the form below. In th
 \lstsetsbol
 \begin{lstlisting}
 <sbol:SequenceAnnotation rdf:about="...">
-               ...   
+  ... [\emph{properties inherited from identified}] ...
   [\emph{zero or one}] <sbol:component rdf:resource="..."/> [\emph{element}] 
   [\emph{one or more}]         <sbol:location>
                  <sbol:A_LOCATION_SUBCLASS rdf:about="...">...</sbol:A_LOCATION_SUBCLASS>
@@ -769,7 +772,7 @@ The serialization of a \sbol{Range} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Range rdf:about="...">
-               ...   
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}]         <sbol:start>...</sbol:start> [\emph{element}] 
   [\emph{one}]         <sbol:end>...</sbol:end> [\emph{element}] 
   [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}] 
@@ -803,7 +806,7 @@ The serialization of a \sbol{Cut} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Cut rdf:about="...">
-               ...   
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}]         <sbol:at>...</sbol:at> [\emph{element}] 
   [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}] 
 </sbol:Cut>
@@ -834,7 +837,7 @@ The serialization of a \sbol{GenericLocation} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:GenericLocation rdf:about="...">
-               ...   
+  ... [\emph{properties inherited from identified}] ...
   [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}] 
 </sbol:GenericLocation>
 \end{lstlisting}
@@ -868,7 +871,8 @@ The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers
 
 \paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
-The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. This property is used to indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{subject} and \sbol{object} \sbol{Component} objects. The \sbol{URI} value of this property MUST come from the RECOMMENDED \sbol{URI}s in  \ref{tbl:restriction_types}, or it MUST refer to an appropriate ontology term.
+The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. This property is used to indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{subject} and \sbol{object} \sbol{Component} objects. The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI}s in  \ref{tbl:restriction_types}.
+\Rtodo{Per Mike B comment: changed ``MUST ... or an [ill-defined] appropriate ontology'' to SHOULD, since that's the same.  -JSB}
 
 % Note: With regards to SBOL Version 1.1., this is a generalization of former \sbol{SequenceAnnotation} property \external{precedes}.
 
@@ -894,7 +898,7 @@ The serialization of a \sbol{SequenceConstraint} MUST have the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:SequenceConstraint rdf:about="...">
-      ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}] <sbol:restriction rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:subject rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:object rdf:resource="..."/> [\emph{element}]
@@ -925,12 +929,12 @@ The example below shows the serialization of a \sbol{SequenceConstraint} belongi
 \end{figure}
 
 SBOL's \sbol{Model} objects are placeholders that point to some external modeling mechanism, with some additional meta-data to enable better reasoning about the contents of that external mechanism.
-In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of \sbol{ModuleDefinition} objects in a well-developed language of their choice. 
+In this way, there is minimal duplication of standardization efforts and users of SBOL can specify the quantitative function of \sbol{ModuleDefinition} objects in a language of their choice. 
 
 Each \sbol{Model} object specifies the location of the actual content of a qualitative/quantitative model, the language the model is implemented with, the modeling framework and the model's role(s). 
 
 \subsubsection*{ The \sbolheading{source} property}\label{sec:source}
-This REQUIRED property is a URI that specifies the actual location of a qualitative or quantitative model.
+This REQUIRED property is a URI that uniquely refers to a qualitative or quantitative model.
 
 \subsubsection*{ The \sbolheading{language} property}\label{sec:language}
 This REQUIRED property is a URI that specifies the language the model is implemented with. 
@@ -975,14 +979,14 @@ The serialization of \sbol{Model} objects has the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
-      ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}] <sbol:source rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:language rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:framework rdf:resource="..."/> [\emph{element}]
 </sbol:Model>
 \end{lstlisting}
 
-The example below shows the serialization of a \sbol{Model} object. The model object includes information about the models of a toggle switch. The model is implemented in SBML using a continuous modelling framework. The source property shows the physical location of the SBML model, in a model repository. 
+The example below shows the serialization of a \sbol{Model} object. The model object includes information about the models of a toggle switch. The model is implemented in SBML using a continuous modelling framework.  In this case, the source property identifies the URL that can be used to retrieve the SBML model from a model repository.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1020,13 +1024,16 @@ This functionality of designated ``inputs'' and ``outputs'' is expressed by \sbo
 The \sbolmult{roles:MD}{roles} property is an OPTIONAL set of \sbol{URI}s that clarifies the intended function of a \sbol{ModuleDefinition} in a biological context.  
 
 These terms might identify ``logical'' roles, such as ``inverter'' or ``AND gate'', or they might identify descriptive biological roles, such as ``metabolic pathway'' and ``signaling cascade,'' or might identify roles from some other manner of describing intended function.
+Interpretation of the meaning of such roles is currently implementation-dependent.
 
 \subsubsection*{The \sbolheading{modules} property}\label{sec:modules}
 
 The \sbol{modules} property is OPTIONAL and MAY specify a set of \sbol{Module} objects contained by the \sbol{ModuleDefinition}.
 Note that the set of relations between \sbol{Module} and \sbol{ModuleDefinition} objects is strictly acyclic.
 
-While the \sbol{ModuleDefinition} class is analogous to a blueprint or specification sheet for a system of interaction biological elements, the \sbol{Module} class represents the specific occurrence of a particular sub-system within that design. Hence, this class allows a biological design to include multiple copies of a subsystem. For example, the \sbol{ModuleDefinition} for a network of two-input repressor systems, where the particular repressors have not yet been chosen, contain multiple \sbol{Module} objects that refer to the same \sbol{URI} for the \sbol{ModuleDefinition} of an abstract two-input repressor device.
+While the \sbol{ModuleDefinition} class is analogous to a blueprint or specification sheet for a system of interaction biological elements, the \sbol{Module} class represents the specific occurrence of a particular sub-system within that design. 
+Hence, this class allows a biological design to include multiple instances of a subsystem (defined by reference to the same \sbol{ModuleDefinition}).
+For example, the \sbol{ModuleDefinition} for a network of two-input repressor systems, where the particular repressors have not yet been chosen, contain multiple \sbol{Module} objects that refer to the same \sbol{URI} for the \sbol{ModuleDefinition} of an abstract two-input repressor device.
 
 \subsubsection*{The \sbolheading{functionalComponents} property}
 \label{sec:functionalComponents}
@@ -1039,7 +1046,8 @@ Just as a \sbol{Module} represents an instance of a subsystem in the  \sbol{Modu
 
 The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within a \sbol{ModuleDefinition}.
 
-The \sbol{Interaction} class provides an abstract, machine-friendly representation of the functional interactions of entities within a \sbol{ModuleDefinition} (whereas a \sbol{Model} is concrete and may not be readily susceptible to machine reasoning, depending on how it is implemented).  Each \sbol{Interaction} includes \sbol{Participation} entities that indicate the roles of the \sbol{FunctionalComponent} objects involved in the \sbol{Interaction}
+The \sbol{Interaction} class provides an abstract, machine-friendly representation of the functional interactions of entities within a \sbol{ModuleDefinition} (whereas a \sbol{Model} of a system may not be readily susceptible to machine reasoning, depending on how it is implemented).  
+Each \sbol{Interaction} includes \sbol{Participation} entities that indicate the roles of the \sbol{FunctionalComponent} objects involved in the \sbol{Interaction}
 
 \subsubsection*{The \sbolheading{models} property}\label{sec:models}
 The \sbol{models} property is OPTIONAL and MAY specify a set of \sbol{URI}s identifying \sbol{Model} objects.
@@ -1053,7 +1061,7 @@ The serialization of \sbol{ModuleDefinition} has the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:ModuleDefinition rdf:about="...">
-               ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{zero or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}]  <sbol:model rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}] <sbol:functionalComponent>
@@ -1136,7 +1144,7 @@ The serialization of \sbol{FunctionalComponent}s has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:FunctionalComponent rdf:about="...">
-               ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}]          <sbol:definition rdf:resource="..."/> [\emph{element}]
   [\emph{one}]          <sbol:access rdf:resource="..."/> [\emph{element}]
   [\emph{one}]          <sbol:direction rdf:resource="..."/> [\emph{element}]
@@ -1187,6 +1195,7 @@ The serialization of \sbol{Module}s has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Module rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one}]          <sbol:definition rdf:resource="..."/> [\emph{element}]
   [\emph{zero or more}] <sbol:mapsTo>
                  <sbol:MapsTo rdf:about="...">...</sbol:MapsTo>
@@ -1226,12 +1235,14 @@ The \sbolmult{types:I}{types} property is a REQUIRED set of one or more \sbol{UR
 If an \sbol{Interaction} object has multiple
 \sbolmult{types:I}{types} \sbol{URI}s, then they must identify synonymous terms.
 
-Values for this URI are RECOMMENDED to be chosen from the occurring entity relationship branch of the Systems Biology Ontology (SBO), where possible.
+Values for this URI are RECOMMENDED to be chosen from the occurring entity branch of the Systems Biology Ontology (SBO), where possible.
+(See \url{http://www.ebi.ac.uk/sbo/main/})
 
 \paragraph{The \sbolheading{participations} property}\label{sec:participations}
 
-The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies a the \sbolmult{roles:P}{roles} that the referenced \sbol{FunctionalComponent} plays in the interaction.
+The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that the referenced \sbol{FunctionalComponent} plays in the interaction.
 
+\LDtodo{Should particpations be 1..n rather than 0..n? -JSB, per Mike B.}
 
 \paragraph{Serialization}
 
@@ -1239,7 +1250,7 @@ The serialization of \sbol{Interaction} objects has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Interaction rdf:about="...">
-               ...  
+  ... [\emph{properties inherited from identified}] ...
   [\emph{one or more}]  <sbol:type rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}] <sbol:participation>
                  <sbol:Participation rdf:about="...">...</sbol:Participation>
@@ -1247,15 +1258,16 @@ The serialization of \sbol{Interaction} objects has the following form.
 </sbol:Interaction>
 \end{lstlisting}
 
-The example below shows an \sbol{Interaction} representing an inhibition relationship between a repressor and a promoter (omitting the details of the \sbol{Participation} objects):
+The example below shows an \sbol{Interaction} representing an inhibition relationship (SBO:0000169) between a repressor (SBO:0000020, full \sbol{Participation} details shown) and a promoter:
 
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Interaction rdf:about="http://sbolstandard.org/example/laci_inverter/LacI_pLacI">
   <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000169"/>
   <sbol:participation>
-    <sbol:Participation rdf:about="...">
-	  ... 	
+    <sbol:Participation rdf:about="http://sbolstandard.org/example/laci_inverter/LacI_pLacI/P03023">
+      <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000020"/>
+      <sbol:participant rdf:resource="http://sbolstandard.org/example/laci_inverter/TF"/>
     </sbol:Participation>
   </sbol:participation>
   <sbol:participation>
@@ -1289,6 +1301,7 @@ If a \sbol{Participation} object has multiple
 \sbolmult{roles:P}{roles} \sbol{URI}s, then they must identify synonymous terms.
 
 Values for this URI are RECOMMENDED to be chosen from the participant role branch of the Systems Biology Ontology (SBO) where possible.
+(See \url{http://www.ebi.ac.uk/sbo/main/})
 
 \paragraph{The \sbolheading{participant} property}\label{sec:participant}
 
@@ -1301,7 +1314,7 @@ The serialization of \sbol{Participation} objects has the following form.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Participation rdf:about="...">
-               ...
+  ... [\emph{properties inherited from identified}] ...
   [\emph{zero or more}] <sbol:role rdf:resource="..."/> [\emph{elements}]
   [\emph{one}]          <sbol:participant rdf:resource="..."/> [\emph{element}]
 </sbol:Participation>
@@ -1344,7 +1357,7 @@ The serialization of \sbol{Collection} objects has the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Collection rdf:about="...">
-               ...
+  \emph{[properties inherited from identified]}
   [\emph{zero or more}] <sbol:member rdf:resource="..."/> [\emph{element}]
 </sbol:Collection>
 \end{lstlisting}
@@ -1484,6 +1497,8 @@ The serialization of \sbol{GenericTopLevel} objects has the following form where
 %              ...
 %</prefix:localPart>
 
+\LDtodo{I don't see rdfType serialized in here; how is it worked? -JSB}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1493,7 +1508,8 @@ The serialization of \sbol{GenericTopLevel} objects has the following form where
   ...
  >
 <applicationPrefix:APPLICATION_OBJECT_NAME rdf:about="...">
-  ...
+  \emph{[properties inherited from identified]}
+  \emph{[any non-conflicting application-specific properties]}
 </applicationPrefix:APPLICATION_OBJECT_NAME>
 \end{lstlisting}
 
