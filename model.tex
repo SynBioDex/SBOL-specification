@@ -11,7 +11,7 @@ The types of biological design data modeled by SBOL are commonly referred to as 
 
 Classes may be connected to other classes by association properties, which are represented in UML diagrams as arrows. These arrows are labeled with data cardinalities in order to indicate how many values a given association property may possess (see below). The remaining (non-association) properties of a class are listed below its name. Each of the latter properties is labeled with its data type and cardinality.
 
-In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, in which the owner of the association property exists independently of its value. In the SBOL data model, the value of an association property MUST be a URI or set of URIs that refer to SBOL objects belonging to the class at the tip of the arrow.
+In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, in which the owner of the association property exists independently of its value. In the SBOL data model, the value of an association property MUST be a URI or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.
 
 By contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which the value of the association property MUST NOT exist independently of its owner. In addition, in the SBOL data model, it is REQUIRED that the value of each composite aggregation property is a unique SBOL object (that is, not the value for more than one such property).
 %For example, it will later be shown how objects of the \sbol{SequenceAnnotation} class must associated with an object of the \sbol{ComponentDefinition} class (and only that object).
@@ -310,7 +310,7 @@ The \sbolmult{types:CD}{types} property is a REQUIRED set of \sbol{URI}s that sp
 The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). 
 \ref{tbl:componentdefinition_types} provides a list of RECOMMENDED ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s. 
 In order to maximize the compatibility of designs, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its \sbolmult{types:CD}{types}. 
-Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URIs}, then they MUST identify synonymous terms. 
+Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify synonymous terms. 
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -905,7 +905,7 @@ Values for this URI are RECOMMENDED to be chosen from the EMBRACE Data and Metho
     BioPAX    & \url{http://identifiers.org/edam/format_3156}\\
     \bottomrule
   \end{edtable}
-  \caption{Some commonly used model languages and their corresponding URIs.}
+  \caption{Some commonly used model languages and their corresponding \sbol{URI}s.}
   \label{tbl:model_types}
 \end{table}
 
@@ -1077,7 +1077,7 @@ The value for this property MUST be one of the values given in \ref{tbl:function
     \url{http://sbols.org/v2#none}  & To indicate a \sbol{FunctionalComponent} is neither input nor output\\
     \bottomrule
   \end{edtable}
-  \caption{URIs for the \sbol{direction} property.}
+  \caption{\sbol{URI}s for the \sbol{direction} property.}
   \label{tbl:functionalcomponent_directions}
 \end{table}
 
@@ -1180,9 +1180,9 @@ Such an \sbol{Interaction} is represented in SBOL by referring to an ontology de
 
 \paragraph{The \sbolheading{types} property}\label{sec:types:I}
 
-The \sbolmult{types:I}{types} property is a REQUIRED set of one or more URIs that identify an appropriate ontology term describing the behavior represented by this \sbol{Interaction}. 
+The \sbolmult{types:I}{types} property is a REQUIRED set of one or more \sbol{URI}s that identify an appropriate ontology term describing the behavior represented by this \sbol{Interaction}. 
 If an \sbol{Interaction} object has multiple
-\sbolmult{types:I}{types} URIs, then they must identify synonymous terms.
+\sbolmult{types:I}{types} \sbol{URI}s, then they must identify synonymous terms.
 
 Values for this URI are RECOMMENDED to be chosen from the occurring entity relationship branch of the Systems Biology Ontology (SBO), where possible.
 
@@ -1242,9 +1242,9 @@ particular \sbol{FunctionalComponent} plays in its parent
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:P}
 
-The \sbolmult{roles:P}{roles} property is an OPTIONAL set of URIs that identify an appropriate ontology term describing this elements relationship to its parent \sbol{Interaction}. 
+The \sbolmult{roles:P}{roles} property is an OPTIONAL set of \sbol{URI}s that identify an appropriate ontology term describing this elements relationship to its parent \sbol{Interaction}. 
 If a \sbol{Participation} object has multiple
-\sbolmult{roles:P}{roles} URIs, then they must identify synonymous terms.
+\sbolmult{roles:P}{roles} \sbol{URI}s, then they must identify synonymous terms.
 
 Values for this URI are RECOMMENDED to be chosen from the participant role branch of the Systems Biology Ontology (SBO) where possible.
 
@@ -1325,11 +1325,11 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 \end{lstlisting}
 \label{ser:Collection}
 
-\subsection{Extending the SBOL Representation:  Annotations}
+\subsection{SBOL Extension Mechanism}
 \label{sec:Annotations}
 \label{sec:annotations}
 
-SBOL does not attempt to represent all information about a biological system, since many things do not yet have a clear ``right way'' to be represented, such as design intent, biological context, or performance data.  Instead, SBOL allows the embedding of application specific data that are not captured by the SBOL standard.  Such data are optional, but can be computationally generated and exchanged via SBOL documents without getting damaged or lost. 
+SBOL does not attempt to represent all information about a biological system, since many things do not yet have a clear ``right way'' to be represented, such as design intent, biological context, or performance data.  Instead, SBOL allows the embedding of application specific data that are not captured by the SBOL standard.  Such data are optional, but can be computationally generated and exchanged via SBOL documents without getting damaged or lost. This SBOL extension mechanism is designed to allow easy incorporation within the SBOL standard once there is community agreement on data content to be exchanged.
 
 To do this, SBOL provides an ``annotation'' mechanism for attaching arbitrary information to SBOL objects, which allows SBOL models to be connected with any other models in an extensible manner.
 In particular, three methods are supported for connecting the SBOL data model with other, possibly application-specific data:

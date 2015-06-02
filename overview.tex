@@ -2,10 +2,6 @@
 \section{Overview of SBOL}
 % % -----------------------------------------------------------------------------
 
-\Rtodo{I took a stab at revising this especially in explaining Figure 2. Needs review.  -CJM
-
-Review and re-writing completed. -jhg}
-
 Synthetic biology designs can be described using:
 \begin{itemize}
 \item Structural terms, e.g., a set of annotated sequences or information about chemical makeup.
@@ -27,33 +23,33 @@ SBOL includes two main classes that match the structural/functional distinction 
 Figure 1 shows a simplified view of these classes, as well as other helper classes in SBOL. To continue with the pUC18 example, the description would begin by creating a top-level \sbol{ModuleDefinition}.  The \sbol{ModuleDefinition} specifies the structural elements that make up the cassette by referencing a number of \sbol{ComponentDefinition} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
 The \sbol{ComponentDefinition} objects can be organized hierarchically.  For example, the plasmid \sbol{ComponentDefinition} may reference \sbol{ComponentDefinition}s for the promoter, coding sequence, etc.  
 Each \sbol{ComponentDefinition} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceAnnotation} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
-In order to specify functional information, the \sbol{ModuleDefinition} can specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene projects.  Finally, \sbol{ModuleDefinition} object can point to a \sbol{Model} object that provides a reference to a complete quantitative model using a language such as SBML, CellML, Matlab, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
+In order to specify functional information, the \sbol{ModuleDefinition} can specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{ModuleDefinition} object can point to a \sbol{Model} object that provides a reference to a complete quantitative model using a language such as SBML, CellML, Matlab, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.7]{images/OverviewFigforSpec-v6.png}
+\includegraphics[scale=0.7]{images/OverviewFigforSpec-v7.png}
 \caption{Main classes of information represented by the SBOL standard, and their relationships.  Red boxes are classes from the SBOL 1.1 that focused on structure, whereas blue classes are some of the new classes that support the functional aspects of designs.}
 \label{images:overview1}
 \end{center}
 \end{figure}
 
-
-Whereas Figure 1 provides a broad overview of SBOL, Figure 2 provides a detailed, implementation-level overview of the class structure for the SBOL 2.0 data model. This figure relies on the semantics of the Unified Modeling Language (UML), which will be presented in more detail in the next section. Figure 2 distinguishes between \emph{top level} classes, in green, and other supporting classes (note that Figure 1 also includes all of the top level classes). In both figures, dashed arcs represent "refersTo", whereas a solid arrow represents ownership. In UML, the meaning of ownership is that if a parent class is deleted, so are all of its owned children. Thus, a \sbol{Collection} does not own its
+Whereas Figure~\ref{images:overview1} provides a broad overview of SBOL, Figure~\ref{images:overview2} provides a detailed, implementation-level overview of the class structure for the SBOL 2.0 data model. This figure relies on the semantics of the \emph{Unified Modeling Language} (UML), which will be presented in more detail in the next section. Figure 2 distinguishes between \emph{top level} classes, in green, and other supporting classes (note that Figure 1 also includes all of the top level classes). In Figure 2, dashed arcs represent "refersTo", whereas a solid arrow represents ownership. In UML, the meaning of ownership is that if a parent class is deleted, so are all of its owned children. Thus, a \sbol{Collection} does not own its
 \sbol{ComponentDefinition} objects, because these can stand on their own. All of the supporting classes (in orange) must be owned by some top-level class, directly or indirectly. 
 
 % Figure~\ref{images:overview2} provides a more detailed view the the class structure for the SBOL 2.0 data model.  The main, or \emph{top level} classes, are \sbol{Collection}, \sbol{ComponentDefinition}, sbol{Sequence}, \sbol{ModuleDefinition}, and \sbol{Model}.  The key distinction of these classes is that they can stand alone and be referenced by other top level objects (see the dashed arrows between the green boxes).  The purpose of these classes is described above.  Each of these classes is assisted in their purpose by several \emph{child} classes.  The key distinction of a child object is that it is owned by its parent object, and if that parent object is removed, so is the child object.  This ownership is indicated using the solid arrows in the figure.  For example, a \sbol{ComponentDefinition} owns its \sbol{SequenceAnnotation}s.  
 
-
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.7]{images/OverviewFig2-v3.png}
-\caption{Main classes of information represented by the SBOL standard, and their relationships.  Green boxes are ``top level'' classes, while the other classes are in support of these classes. Solid arrows indicates ownership, whereas a dashed arrow indicates that one class refers to an object of another class.}
+\includegraphics[scale=0.85]{images/OverviewFig2-v4.png}
+\caption{Main classes of information represented by the SBOL 2.0 standard, and their relationships.  Green boxes are ``top level'' classes, while the other classes are in support of these classes. Solid arrows indicates ownership, whereas a dashed arrow indicates that one class refers to an object of another class.}
 \label{images:overview2}
 \end{center}
 \end{figure}
 
-Another important difference between the figures is to more appropriately connect the functional side (modules) to the physical side (components). This is accomplished via the class \sbol{FunctionalComponent}. This class allows modules to own their components, and yet also allows the physical descriptions (in \sbol{ComponentDefinition}s) to stand on their own. In a similar manner, the ability to have hierarchies of either functional or physical components shown in Figure 1 must be broken apart, so that subcomponents can be used in multiple functional modules or multiple physical components. Thus, instead of the arc from \sbol{ModuleDefinition} to itself as in Figure 1, our implementation actually divides this notion into two classes, \sbol{ModuleDefinition} and \sbol{Module}. The identical relationship occurs on the physical side with \sbol{ComponentDefinition} and \sbol{Component}. Finally, Figure 2 provides a few other additional helper classes such as \sbol{SequenceConstraint} which provides relative positioning information among \sbol{Component}s, and 
+Another important difference between the figures is to more appropriately connect the functional side (modules) to the physical side (components). This is accomplished via the class \sbol{FunctionalComponent}. This class allows modules to own their components instances, and yet also allows the physical descriptions (in \sbol{ComponentDefinition}s) to stand on their own. In a similar manner, the ability to have hierarchies of either functional or physical components shown in Figure~\ref{images:overview1} must be broken apart, so that sub-components can be used in multiple functional modules or multiple physical components. Thus, instead of the arc from \sbol{ModuleDefinition} to itself as in Figure~\ref{images:overview1}, our implementation actually divides this notion into two classes, \sbol{ModuleDefinition} and \sbol{Module}. Therefore, a \sbol{ModuleDefinition} does not own the \sbol{ModuleDefinition}s that it uses, but instead it refers to them using the \sbol{Module} objects that it does own.  The identical relationship occurs on the physical side with \sbol{ComponentDefinition} and \sbol{Component}. Finally, SBOL 2.0 provides a few other additional helper classes such as \sbol{Location} that generalizes the positioning information from SBOL 1.1 to allow discontinuous ranges and cuts to be annotated, and \sbol{SequenceConstraint}s that provides relative positioning information among \sbol{Component}s, and 
 \sbol{Participation}, which allows \sbol {Interaction} objects to own their participants, yet only references \sbol{FunctionalComponent}, so that these can stand on their own. The next section provides complete definitions and details for all of these classes.
+
+
 
 % Another important distinction in this diagram are the additional additional \emph{instantiation} classes, \sbol{Component}, \sbol{FunctionalComponent}, and \sbol{Module}.  As described above, a \sbol{ModuleDefinition} may include instantiations of \sbol{ComponentDefinitions}.  These instantiations are called \sbol{FunctionalComponent}s.  Furthermore, \sbol{ModuleDefinition}s and \sbol{ComponentDefinition}s can be constructed hierarchically of instantiations of the same time, and these instantiations are called \sbol{Module}s and \sbol{Component}s, respectively.  Using a software analogy, a \sbol{ComponentDefinition} or \sbol{ModuleDefinition} are a class definition while a \sbol{Component}, \sbol{FunctionalComponent}, or \sbol{Module} are an object of that class type.  
 
