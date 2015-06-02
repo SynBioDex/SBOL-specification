@@ -36,6 +36,14 @@ The SBOL 2.0 data model defined in this specification thus extends the prior mod
 
 \end{itemize}
 
+\begin{figure}
+\centering
+\includegraphics[width=5in]{images/format-comparison.pdf}
+\caption{SBOL 2.0 extends prior formats to represent both structure and function of a genetic design in a single model.}
+\end{figure}
+
+\Rtodo{Please review this new figure}
+
 Taken together, these capabilities allow SBOL sufficient expressivity to support the description and exchange of hierarchical, modular representations of both the intended structure and function of designed biological systems.
 
 To address the need for functional descriptions in SBOL, the proposed data model adds classes for modules, interactions, and models. These classes provide a firm basis for functional representation in SBOL without going so far as to create a new standard for mathematically modeling biology, as there already exist several established languages for doing so, from the Systems Biology Markup Language (SBML)~\cite{SBML} to CellML~\cite{CellML} and even MatLab~\cite{matlab}. Rather, these classes enable users of SBOL to group components that function together, describe the basic qualitative interactions between these components, and document references to standard mathematical models that are external to SBOL and that provide more detailed descriptions of component function. In other words, a module gathers together a set of component instantiations, a set of interactions between these component instantiations, and a set of references to external models that are expected to be consistent with the module's interactions.
