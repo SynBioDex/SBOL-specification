@@ -1359,7 +1359,7 @@ The serialization of \sbol{Collection} objects has the following form:
 \lstsetsbol
 \begin{lstlisting}
 <sbol:Collection rdf:about="...">
-  \emph{[properties inherited from identified]}
+  ... [\emph{properties inherited from identified}] ...
   [\emph{zero or more}] <sbol:member rdf:resource="..."/> [\emph{element}]
 </sbol:Collection>
 \end{lstlisting}
@@ -1389,11 +1389,12 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 SBOL does not attempt to represent all information about a biological system, since many things do not yet have a clear ``right way'' to be represented, such as design intent, biological context, or performance data.  Instead, SBOL allows the embedding of application specific data that are not captured by the SBOL standard.  Such data are optional, but can be computationally generated and exchanged via SBOL documents without getting damaged or lost. This SBOL extension mechanism is designed to allow easy incorporation within the SBOL standard once there is community agreement on data content to be exchanged.
 
 To do this, SBOL provides an ``annotation'' mechanism for attaching arbitrary information to SBOL objects, which allows SBOL models to be connected with any other models in an extensible manner.
-In particular, three methods are supported for connecting the SBOL data model with other, possibly application-specific data:
+In particular, several methods are supported for connecting the SBOL data model with other, possibly application-specific data:
 \begin{enumerate}
 \item Information that is ``part'' of an SBOL object (i.e., a ``filled diamond'' relationship) is annotated simply by adding non-conflicting properties and custom entries to an SBOL object.  An example might be source information about the registry from which a \sbol{ComponentDefinition} was imported.
 \item Information that is an independent object is annotated by wrapping it inside of a \sbol{GenericTopLevel} object.  An example might be a data sheet describing the performance of a \sbol{ModuleDefinition} in some particular context.
 \item Conversely, rather than embedding external objects in SBOL, SBOL objects can also be linked to external data.  The only requirement is that some URI resolution mechanism must be available that allows the links from SBOL objects to be followed when needed.
+\item Finally, just as external objects can be embedded in SBOL, external documents can embed or refer to SBOL objects.  This last case needs no explicit support from this specification (it depends only on the external non-SBOL system managing its own relations to SBOL), and is included here for completeness.
 \end{enumerate}
 
 \subsubsection{Annotating SBOL objects}
@@ -1408,6 +1409,8 @@ In particular, three methods are supported for connecting the SBOL data model wi
 
 Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{QName} property is specified by a qualified name (\sbol{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be a literal type (i.e., \sbol{String}, \sbol{Integer}, \sbol{Double}, \sbol{Boolean}), \sbol{URI}, or a \sbol{NestedAnnotations} object. The \sbol{NestedAnnotations} object is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and an optional list of nested \sbol{annotations}.
 
+\Ctodo{Mike B: ``I was confused when I first read this because Annotation.qName seemed to be encoding XML within XML. Then I realized that no, the XML serialized form is clean, and you just needed a place to save arbitrary annotation tag names in the deserialized data model. Please explicitly note that you have to store qNames this way because it's an XML thing, and so the qNames become tag names. It's all right there in the examples, but I had to read it a few times to get it. Every XML-related complication is another temptation for a newcomer to quit in frustration. We should make it really easy to understand the weird parts of SBOL, like here, where the tail of SBOL's serialization format seems to be wagging the dog of the abstract data model.''}
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/identified_annotations}
@@ -1417,6 +1420,8 @@ Each \sbol{Identified} object may have a number of annotations in the form of na
 \end{figure}
 
 \subsubsection*{Serialization}
+
+\Ctodo{Mike B: ``Please refer to the relevant portions of the w3c XSD/XML specs when discussing prefix aliases and namespaces. Someone who isn't already familiar with how XSDs incorporate other XSDs by reference, or how XMLs exploit the types declared in XSDs, is likely to find this section very confusing. Just a few sentences summarizing what xmns:prefix really does, and why it's helpful, would help pave the way for XML newbies. Also, please note here that prefix strings are arbitrary. Some people assume that the "sbol" prefix has some special significance, when in fact it's just an alias set up by their own xmlns: decls in the document header.''}
 
 The serialization of \sbol{Annotation} objects has the following form:
 
@@ -1443,7 +1448,9 @@ The serialization of \sbol{Annotation} objects has the following form:
 \end{lstlisting}
 The \sbol{name} property species the namespace, prefix, and localPart values.  The first form is for a \sbol{literal} annotation.  The second form is for a \sbol{URI} annotation.  Finally, the third form is for an \sbol{NestedAnnotations} object annotation.  In this last case, the \sbol{nestedQName} property specifies the nestedNamespace, nestedPrefix, and nestedLocalPart while the \sbol{nestedURI} property species the URI for the nested annotation.
 
-The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \sbol{String} value. The second \external{pr:experience} annotation has a \sbol{URI} value and is serialised as an RDF resource pointing to the information Web page on the Parts Registry for the promoter. The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
+The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \sbol{String} value. 
+The second \external{pr:experience} annotation has a \sbol{URI} value and is serialised as an RDF resource; in this case, the identifier also happens to be able to be resolved to the information Web page on the Parts Registry for the promoter. 
+The  \external{pr:information} property represents a complex annotation which is a type of \external{pr:Information} and includes information about the regulatory details of the promoter using Parts Registry categories.   
 
 \begin{figure} [ht]
 \lstsetsbol
@@ -1510,8 +1517,8 @@ The serialization of \sbol{GenericTopLevel} objects has the following form where
   ...
  >
 <applicationPrefix:APPLICATION_OBJECT_NAME rdf:about="...">
-  \emph{[properties inherited from identified]}
-  \emph{[any non-conflicting application-specific properties]}
+  ... [\emph{properties inherited from identified}] ...
+  ... [\emph{any non-conflicting application-specific properties}] ...
 </applicationPrefix:APPLICATION_OBJECT_NAME>
 \end{lstlisting}
 
