@@ -74,7 +74,7 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{annotations} field is an OPTIONAL list of for all \sbol{Identified} objects and, if provided, includes references to \sbol{Annotation} objects. (Reference: \sec{sec:Identified})}
 
-\printValid{The \sbol{wasDerivedFrom} property is OPTIONAL for all \sbol{Identified} objects and, if provided, data type of \sbol{URI}.  (Reference: \sec{sec:Identified})}
+\printValid{The \sbol{wasDerivedFrom} property is OPTIONAL for all \sbol{Identified} objects and, if provided, has a data type of \sbol{URI}.  (Reference: \sec{sec:Identified})}
 
 \printValid{The \sbol{name} is an OPTIONAL property for all \sbol{Identified} objects and, if provided, has a data type of String.  (Reference: \sec{sec:Identified})}
 
@@ -84,7 +84,7 @@ in the SBOL specification namespace.
 
 \printModeling{The \sbol{persistentIdentity} of a compliant top level object is REQUIRED and MUST end with a delimiter ('/', '\#', or ':') followed by the \sbol{displayId} of the object. (Reference: \sec{sec:compliant})}
 
-\printModeling{The \sbol{persistentIdentity} of a compliant child object is REQUIRED and MUST begin with the\\ \sbol{persistentIdentity} of its parent object and be immediately followed by a delimiter ('\', '\#', or ':') and the \sbol{displayId} of the object. (Reference: \sec{sec:compliant})}
+\printModeling{The \sbol{persistentIdentity} of a compliant child object is REQUIRED and MUST begin with the\\ \sbol{persistentIdentity} of its parent object and be immediately followed by a delimiter ('/', '\#', or ':') and the \sbol{displayId} of the object. (Reference: \sec{sec:compliant})}
 
 \printModeling{The \sbol{identity} of a compliant object MUST either be equal to the \sbol{persistentIdentity} when no \sbol{version} is specified or equal to "\refObj{persistentIdentity}/\refObj{version}" when a \sbol{version} is provided. (Reference: \sec{sec:compliant})}
 
@@ -270,8 +270,8 @@ in the SBOL specification namespace.
 \printValid{A \sbol{MapsTo} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:MapsTo})}
 
 \printValid{The \sbol{refinement} property is a REQUIRED \sbol{URI} for \sbol{MapsTo} objects which MUST be one of the following:
-\url{http://sbols.org/v2\#useremote},
-\url{http://sbols.org/v2\#uselocal},
+\url{http://sbols.org/v2\#useRemote},
+\url{http://sbols.org/v2\#useLocal},
 \url{http://sbols.org/v2\#verifyIdentical}, and
 \url{http://sbols.org/v2\#merge}.
 (Reference: \sec{sec:MapsTo})}
