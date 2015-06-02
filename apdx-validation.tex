@@ -121,7 +121,7 @@ in the SBOL specification namespace.
 
 \printWarning{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_types} if it is well-described by this \external{URI}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{URI}s. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \external{URI}s. (Reference: \sec{sec:ComponentDefinition})}
 
 \printWarning{Each \external{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that clarifies the potential function of the \sbol{ComponentDefinition} in a biochemical or physical context. (Reference: \sec{sec:ComponentDefinition})}
 
@@ -131,7 +131,7 @@ in the SBOL specification namespace.
 
 \printWarning{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_roles} if it is well-described by this \external{URI}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{URI} references to \sbol{Sequence} objects. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \external{URI} references to \sbol{Sequence} objects. (Reference: \sec{sec:ComponentDefinition})}
 
 \printWarning{The \sbol{Sequence} objects referred to by the \sbol{sequences} property of a \sbol{ComponentDefinition} MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. (Reference: \sec{sec:ComponentDefinition})}
 
@@ -241,22 +241,26 @@ in the SBOL specification namespace.
 \subsubsection*{Rules for the \class{GenericLocation} class} 
 \setcounter{sbolCtr}{11001}
 
-\printValid{A \sbol{GenericLocation} MUST inherit all properties of the \sbol{Location} c. (Reference: \sec{sec:GenericLocation})}
+\printValid{A \sbol{GenericLocation} MUST inherit all properties of the \sbol{Location} class. (Reference: \sec{sec:GenericLocation})}
 
 \subsubsection*{Rules for the \class{SequenceConstraint} class} 
 \setcounter{sbolCtr}{11101}
 
-\printValid{A \sbol{SequenceConstraint} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:SequenceConstraint})}
+\printValid{A \sbol{SequenceConstraint} MUST inherit all properties of the \sbol{Identified} class. (Reference: \sec{sec:SequenceConstraint})}
+
+\printValid{The \sbol{subject} property REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{Component}. (Reference: \sec{sec:SequenceConstraint})}
+
+\printValid{The \sbol{Component} referenced by the \sbol{subject} property of a \sbol{SequenceConstraint} MUST be contained by the \sbol{ComponentDefinition} that contains the \sbol{SequenceConstraint}. (Reference: \sec{sec:SequenceConstraint})}
+
+\printValid{The \sbol{object} property REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{Component}. (Reference: \sec{sec:SequenceConstraint})}
+
+\printValid{The \sbol{Component} referenced by the \sbol{object} property of a \sbol{SequenceConstraint} MUST be contained by the \sbol{ComponentDefinition} that contains the \sbol{SequenceConstraint}. (Reference: \sec{sec:SequenceConstraint})}
 
 \printValid{The \sbol{restriction} property is a REQUIRED \sbol{URI} which MUST be one of the following:
 \url{http://sbols.org/v2\#precedes},
 \url{http://sbols.org/v2\#sameOrientationAs}, or
 \url{http://sbols.org/v2\#oppositeOrientationAs}.
 (Reference: \sec{sec:SequenceConstraint})}
-
-\printValid{The \sbol{subject} property is an REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceConstraint})}
-
-\printValid{The \sbol{object} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{Component} that is specified within the same \sbol{ComponentDefinition}. (Reference: \sec{sec:SequenceConstraint})}
 
 \subsubsection*{Rules for the \class{Model} class} 
 \setcounter{sbolCtr}{11201}
