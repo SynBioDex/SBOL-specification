@@ -56,11 +56,11 @@ Represents a specific occurrence or instance of an \sbol{ComponentDefinition} wi
 Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a containing \sbol{ComponentDefinition}.
 
 \item \emph{\sbol{Interaction}}:
-Describes a functional relationship between biological entities, such as regulatory activation or repression, or a biological processes such as transcription or translation.
+Describes a functional relationship between biological entities, such as regulatory activation or repression, or a biological process such as transcription or translation.
 
 \item \emph{\sbol{MapsTo}}:
 When a design (\sbol{ComponentDefinition} or \sbol{ModuleDefinition}) includes another design as a substructure, the larger design may need to refer to a \sbol{ComponentInstance} from the sub-design.
-In this case, a copy of the referenced \sbol{ComponentInstance} needs to be created in the design and a \sbol{MapsTo} is added to the instance for the sub-design, which associates the original and the copy.
+In this case, a referencing \sbol{ComponentInstance} needs to be created in the design and a \sbol{MapsTo} is added to the instance for the sub-design, which associates the original and the referencing instance.
 
 \item \emph{\sbol{Module}}:
 Represents a specific occurrence or instance of a sub-system within a larger design.

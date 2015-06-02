@@ -6,23 +6,27 @@
 
 Synthetic biology designs can be described using:
 \begin{itemize}
-\item Structural terms, e.g., a set of annotated sequences or information about chemical makeup.
+\item Structural terms, e.g., a set of annotated sequences or information about its chemical makeup.
 \item Functional terms, e.g., the way that components might interact with each other and the overall behavior.
 \end{itemize}
 In broad strokes, SBOL 1.1 focuses on physical, structural information, whereas SBOL 2.0 includes functional aspects. The physical information about a designed genetic circuit includes the order of its constituents and their descriptions. The exact locations of these constituents and their sequences allow genetic circuits to be defined unambiguously, and reused in other designs. SBOL 2.0 extends SBOL 1.1 in several ways: it extends physical descriptions to include entities beyond DNA sequences, and it allows for functional descriptions of the design. 
 
-As an example, consider the design of an expression cassette, such as found in the plasmid pUC18 \cite{L08752.1}, a device that is designed to detect successful versus unsuccessful molecular cloning. As an overall system, the device is designed to grow either blue-colored (unsuccessful) or white-colored (successful) colonies in the presence of IPTG and the chemical X-gal. Internally, the device has a number of parts, including a promoter, the lac repressor binding site, and the lacZ coding sequence. These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional and translational machinery that collectively lead to the desired system-level behavior. 
+As an example, consider the design of an expression cassette, such as the one found in the plasmid pUC18~\cite{L08752.1}. This device that is designed to detect successful versus unsuccessful molecular cloning. 
+As an overall system, the device is designed to grow either blue-colored (unsuccessful) or white-colored (successful) colonies in the presence of IPTG and the chemical X-gal. Internally, the device has a number of parts, including a promoter, the lac repressor binding site, and the lacZ coding sequence. 
+These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional machinery and translational machinery that collectively cause the desired system-level behavior. 
 
-Understanding how such a device works within the context of a host and how it might be adapted to new experimental applications is currently passed on through working with fellow scientists or reading articles in papers and books. But there is no systematic way of communicating the integration of sequence with functional design, so users typically have to look in many different places to develop an understanding of this system.  
-The SBOL standard allows designers to describe these functional characteristics, and to connect them to the physical parts and sequences that make up the design. 
+Knowledge of how such a device functions within the context of a host and how it might be adapted to new experimental applications is currently passed on through working with fellow scientists or reading articles in papers and books. 
+But there is no systematic way to communicate the integration of sequences with functional designs, so users typically have to look in many different places to develop an understanding of this system.  
+The SBOL standard allows designers to describe these functional characteristics and connect them to the physical parts and sequences that make up the design. 
 
 SBOL includes two main classes that match the structural/functional distinction above:
 \begin{itemize}
 \item The \sbol{ComponentDefinition} object describes the physical aspects of the designed system, such as the DNA or RNA sequences and the physical relationships among sub-components.
-\item The \sbol{ModuleDefinition} object describes the local interactions of the designed system, such as specific binding relationships, and repression and activation relationships. 
+\item The \sbol{ModuleDefinition} object describes the local interactions of the designed system, such as specific binding relationships and repression and activation relationships. 
 \end{itemize}
 
-Figure 1 shows a simplified view of these classes, as well as other helper classes in SBOL. To continue with the pUC18 example, the description would begin by creating a top-level \sbol{ModuleDefinition}.  The \sbol{ModuleDefinition} specifies the structural elements that make up the cassette by referencing a number of \sbol{ComponentDefinition} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
+Figure 1 shows a simplified view of these classes, as well as other helper classes in SBOL. To continue with the pUC18 example, the description would begin with a top-level \sbol{ModuleDefinition}.  
+The \sbol{ModuleDefinition} specifies the structural elements that make up the cassette by referencing a number of \sbol{ComponentDefinition} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
 The \sbol{ComponentDefinition} objects can be organized hierarchically.  For example, the plasmid \sbol{ComponentDefinition} may reference \sbol{ComponentDefinition}s for the promoter, coding sequence, etc.  
 Each \sbol{ComponentDefinition} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceAnnotation} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
 In order to specify functional information, the \sbol{ModuleDefinition} can specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{ModuleDefinition} object can point to a \sbol{Model} object that provides a reference to a complete quantitative model using a language such as SBML, CellML, Matlab, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
