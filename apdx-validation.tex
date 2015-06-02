@@ -164,7 +164,7 @@ in the SBOL specification namespace.
 
 \printModeling{It is RECOMMENDED that the \sbol{access} property of a \sbol{ComponentInstance} contain the \external{URI} \url{http://sbols.org/v2\#public}. (Reference: \sec{sec:ComponentInstance})}
 
-\printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{ComponentDefinition}. (Reference: \sec{sec:ComponentInstance})}
+\printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \external{URI} reference to a \sbol{ComponentDefinition}. (Reference: \sec{sec:ComponentInstance})}
 
 \printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} MUST NOT contain a \external{URI} reference to the \sbol{ComponentDefinition} that contains the \sbol{ComponentInstance}. (Reference: \sec{sec:ComponentInstance})}
 
@@ -236,7 +236,7 @@ in the SBOL specification namespace.
 
 \printValid{A \sbol{Cut} MUST inherit all properties of the \sbol{Location} class. (Reference: \sec{sec:Cut})}
 
-\printValid{The \sbol{at} property is REQUIRED and MUST contain \external{Integer} greater than or equal to zero.  (Reference: \sec{sec:Cut})}
+\printValid{The \sbol{at} property is REQUIRED and MUST contain an \external{Integer} greater than or equal to zero.  (Reference: \sec{sec:Cut})}
 
 \subsubsection*{Rules for the \class{GenericLocation} class} 
 \setcounter{sbolCtr}{11001}
@@ -248,15 +248,15 @@ in the SBOL specification namespace.
 
 \printValid{A \sbol{SequenceConstraint} MUST inherit all properties of the \sbol{Identified} class. (Reference: \sec{sec:SequenceConstraint})}
 
-\printValid{The \sbol{subject} property REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{Component}. (Reference: \sec{sec:SequenceConstraint})}
+\printValid{The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{Component}. (Reference: \sec{sec:SequenceConstraint})}
 
 \printValid{The \sbol{Component} referenced by the \sbol{subject} property of a \sbol{SequenceConstraint} MUST be contained by the \sbol{ComponentDefinition} that contains the \sbol{SequenceConstraint}. (Reference: \sec{sec:SequenceConstraint})}
 
-\printValid{The \sbol{object} property REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{Component}. (Reference: \sec{sec:SequenceConstraint})}
+\printValid{The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{Component}. (Reference: \sec{sec:SequenceConstraint})}
 
 \printValid{The \sbol{Component} referenced by the \sbol{object} property of a \sbol{SequenceConstraint} MUST be contained by the \sbol{ComponentDefinition} that contains the \sbol{SequenceConstraint}. (Reference: \sec{sec:SequenceConstraint})}
 
-\printValid{The \sbol{restriction} property is a REQUIRED \sbol{URI} which MUST be one of the following:
+\printValid{The \sbol{restriction} property is a REQUIRED \sbol{URI} and  which MUST be one of the following:
 \url{http://sbols.org/v2\#precedes},
 \url{http://sbols.org/v2\#sameOrientationAs}, or
 \url{http://sbols.org/v2\#oppositeOrientationAs}.
