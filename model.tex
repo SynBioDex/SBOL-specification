@@ -2,6 +2,9 @@
 \section{SBOL Data Model}\label{sec:model}
 % -----------------------------------------------------------------------------
 
+\Ctodo{Change all figures from raster to vector format}
+\Ctodo{Ensure that no UML figures have labels conflicting with their arrows}
+
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
 \subsection{Understanding the UML Diagrams}
@@ -13,7 +16,9 @@ Classes may be connected to other classes by association properties, which are r
 
 In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, in which the owner of the association property exists independently of its value. In the SBOL data model, the value of an association property MUST be a URI or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.
 
-By contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which the value of the association property MUST NOT exist independently of its owner. In addition, in the SBOL data model, it is REQUIRED that the value of each composite aggregation property is a unique SBOL object (that is, not the value for more than one such property).
+By contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which the value of the association property MUST NOT exist independently of its owner. 
+In addition, in the SBOL data model, it is REQUIRED that the value of each composite aggregation property is a unique SBOL object (that is, not the value for more than one such property).
+Note that in all cases, composite aggregation is used in such a way that there should be no duplication of such objects.
 %For example, it will later be shown how objects of the \sbol{SequenceAnnotation} class must associated with an object of the \sbol{ComponentDefinition} class (and only that object).
 
 All SBOL properties are labeled with one of several restrictions on data cardinality. These are:
@@ -22,7 +27,7 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 
 \item $1$ - required, one: there must be exactly one value for this property.
 
-\item $0 \ldots 1$ - optional: there may be a single value for this property or it may be absent.
+\item $0 \ldots 1$ - optional: there may be a single value for this property, or it may be absent.
 
 \item $0 \ldots *$ - unbounded: there may be any number of values for this property, including none.
 
@@ -37,12 +42,14 @@ Finally, classes can inherit the properties of other classes. Inheritance relati
 \subsection{Naming and Font Conventions}
 \label{sec:nameconventions}
 
-SBOL classes are named using upper "camel case," meaning that each word is capitalized and all words are run together without spaces e.g. \sbol{Identified}, \sbol{SequenceAnnotation}.  
-Properties, on the other hand, are named using lower camel case, meaning that they begin lower case (e.g., \sbol{identity}) but if they consist of multiple words, all words after the first begin with an upper case letter (e.g., \sbol{persistentIdentity}).
+SBOL classes are named using upper "camel case," meaning that each word is capitalized and all words are run together without spaces, e.g. \sbol{Identified}, \sbol{SequenceAnnotation}.  
+Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbol{identity}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{persistentIdentity}).
 
-Within the SBOL data model, each property is given a singular or plural name in accordance with its data cardinalities. The forms of these names follow the usual rules of grammar. For example, \sbol{SequenceAnnotation} is the singular form of \sbol{SequenceAnnotation}s. 
+Within the SBOL data model, each property is given a singular or plural name in accordance with its data cardinalities. 
+The forms of these names follow the usual rules of English grammar. For example, \sbol{SequenceAnnotation} is the singular form of \sbol{SequenceAnnotation}s. 
 
-When SBOL objects are serialized to be exchanged (using \emph{Resource Description Framework} (RDF) as described in \ref{sec:serialization}), however, SBOL properties are always given singular names. This is because the SBOL data model does not contain classes that correspond directly to the RDF elements that group other elements into ordered or unordered sets. Consequently, if an SBOL property has multiple values, then it is serialized as multiple property entries, each with a singular name and a single value.
+SBOL properties are always given singular names, however, when SBOL objects are serialized (using \emph{Resource Description Framework} (RDF) as described in \ref{sec:serialization}).
+This is because the SBOL data model does not contain classes that correspond directly to the RDF elements that group other elements into ordered or unordered sets. Consequently, if an SBOL property has multiple values, then it is serialized as multiple property entries, each with a singular name and a single value.
 For example, if an SBOL property has five values, then its serialization contains five RDF triples, each with a singular predicate name and one of the five values as its object.
 
 Lastly, font color is used in the body text of this specification to indicate whether a class or property is defined externally or within the SBOL data model. In particular, if a class or property name is written in a blue font, then it is defined by SBOL. If it is written in a bold font, then it is defined externally.
@@ -59,24 +66,37 @@ Lastly, font color is used in the body text of this specification to indicate wh
 
 When SBOL use simple ``primitive'' data types such as strings or integers, these are defined as the following specific formal types:
 \begin{itemize}
-\item String: \url{http://www.w3.org/TR/xmlschema11-2/#string}
-\item Integer: \url{http://www.w3.org/TR/xmlschema11-2/#integer}
-\item Double: \url{http://www.w3.org/TR/xmlschema11-2/#double}
-\item Boolean: \url{http://www.w3.org/TR/xmlschema11-2/#boolean}
+\item String: \url{http://www.w3.org/TR/xmlschema11-2/#string}\\
+  {\em Example: ``LacI coding sequence''}
+\item Integer: \url{http://www.w3.org/TR/xmlschema11-2/#integer}\\
+  {\em Example: 3}
+\item Double: \url{http://www.w3.org/TR/xmlschema11-2/#double}\\
+  {\em Example: 3.14159}
+\item Boolean: \url{http://www.w3.org/TR/xmlschema11-2/#boolean}\\
+  {\em Example: \external{true}}
 \end{itemize}
 The term \sbol{literal} is used to denote an object that can be any of the four types listed above.
 In addition to the simple types listed above, SBOL also uses objects with types \emph{uniform resource identifier} (URI) and \emph{XML qualified name} (QName): 
+\Rtodo{Somebody please make sure I haven't screwed up QName and URI descriptions. -JSB}
 \begin{itemize}
-\item URI: \url{http://www.w3.org/TR/xmlschema11-2/#anyURI}
-\item QName: \url{http://www.w3.org/TR/xmlschema11-2/#QName}
+\item URI: \url{http://www.w3.org/TR/xmlschema11-2/#anyURI}\\
+  {\em Example: \external{http://www.partsregistry.org/Part:BBa\_J23119}}
+\item QName: \url{http://www.w3.org/TR/xmlschema11-2/#QName}\\
+  {\em Example: \external{myapp:Datasheet}}
 \end{itemize}
+
+Note that, in compliance with RDF standards, URI objects are generally serialized using an \external{rdf:resource} property, e.g.:
+\external{rdf:resource="http://www.partsregistry.org/Part:BBa\_J23119"}
+
+
 
 \subsection{Identified}
 \label{sec:Identified}
 
 \NVtodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
 
-All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class. This inheritance means that all SBOL objects are identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web. 
+All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class. 
+This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web. 
 
 As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
 
@@ -95,13 +115,13 @@ Throughout this document, when a URI is used to refer to an SBOL object, it coul
 
 \subsubsection*{The \sbolheading{identity} property}
 \label{sec:identity}
-The \sbol{identity} property is REQUIRED by all \sbol{Identified} objects and has a data type of \sbol{URI}. A given \sbol{Identified} object's \sbol{identity} \sbol{URI} MUST be globally unique among all other \sbol{identity} \sbol{URI}s. It is also highly RECOMMENDED that the URI structure follows the recommended best-practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.
+The \sbol{identity} property is REQUIRED by all \sbol{Identified} objects and has a data type of \sbol{URI}. A given \sbol{Identified} object's \sbol{identity} \sbol{URI} MUST be globally unique among all other \sbol{identity} \sbol{URI}s. It is also highly RECOMMENDED that the URI structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.
 
 Although most SBOL properties are defined by SBOL and serialized with its namespace, the \sbol{identity} property is defined by the analogous RDF \external{about} property and is serialized with the RDF namespace as follows:
 
-\external{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about}.
+\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about}.
 
-This substitution is in keeping with the commitment of the SBOL community to the practical reuse of existing standards.
+The use of \external{about} is expressly for the purpose of making SBOL compliant with pre-existing standards: when you see \external{about} in an SBOL document, you should interpret it as meaning \sbol{identity}.
 
 \subsubsection*{The \sbolheading{persistentIdentity} property}
 \label{sec:persistentIdentity}
@@ -131,7 +151,8 @@ For a full explanation, see the linked resources.
 
 The \sbol{wasDerivedFrom} property is OPTIONAL and has a data type of \sbol{URI}. An SBOL object with this property refers to another SBOL object or non-SBOL resource from which this object was derived. 
 
-If the \sbol{wasDerivedFrom} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST come before that of $A$. In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFrom} property or form a circular chain of references via its \sbol{wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is circular.
+If the \sbol{wasDerivedFrom} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$. 
+In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFrom} property or form a cyclical chain of references via its \sbol{wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
 
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
@@ -310,7 +331,8 @@ The \sbolmult{types:CD}{types} property is a REQUIRED set of \sbol{URI}s that sp
 The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). 
 \ref{tbl:componentdefinition_types} provides a list of RECOMMENDED ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s. 
 In order to maximize the compatibility of designs, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use that term as one of its \sbolmult{types:CD}{types}. 
-Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify synonymous terms. 
+Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify synonymous terms (otherwise, it may be unclear how to interpret the terms).
+\LDtodo{Do we mean synonymous, or can it be weakened to non-conflicting?  Query from Mike B}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -336,6 +358,8 @@ The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MAY cont
 For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{ComponentDefinition} could contain \sbol{URI}s identifying terms from the Sequence Ontology (SO). 
 \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. 
 These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use that term as one of its \sbolmult{roles:CD}{roles}. 
+
+\LDtodo{Query from Mike B: ``In my organization, it is very common to define single components containing multiple adjacent items from table 3, the table of roles. For example, it's more common to design a part as a gene + stop + terminator than just a lonely gene. We're not alone in this. Do you want to make any recommendations for this situation?''}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -366,6 +390,8 @@ Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequen
 
 If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In addition, a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} (see \ref{tbl:sequence_encodings}). 
 
+\LDtodo{Query from Mike B: ``"a ComponentDefinition MUST NOT refer to more than one Sequence with an IUPAC encoding...." If this is true, then how can I provide nonconflicting descriptions of a sequence at two different levels of abstraction? The example from the paragraph starting at p21 line 16 makes me think that this should be permitted. Did you really mean that "a ComponentDefinition MUST NOT refer to more than one Sequence with any single IUPAC encoding," i.e. you can't give two conflicting DNA sequences? If you really mean what it says, please provide a clarifying rationale for why e.g. I shouldn't be allowed to specify DNA, RNA, and protein sequences for a part.''}
+
 Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}.  
 Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbolmult{types:CD}{types} property MUST refer to the term from \ref{tbl:componentdefinition_types} that is cross-listed with this \sbol{encoding} in \ref{tbl:sequence_encodings}. 
 For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property must refer to the BioPAX term for DNA.
@@ -374,10 +400,15 @@ For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefi
 \label{sec:components}
 
 The \sbol{components} property is OPTIONAL and MAY specify a set of \sbol{Component} objects that are contained by the \sbol{ComponentDefinition}.
+Note that the set of relations between \sbol{Component} and \sbol{ComponentDefinition} objects is strictly acyclic.
 
 While the \sbol{ComponentDefinition} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Component} class represents the specific occurrence of a part within a design. Hence, this class allows a biological design to include multiple copies of a particular part. For example, the \sbol{ComponentDefinition} of a polycistronic gene could contain two \sbol{Component} objects that refer to the same \sbol{ComponentDefinition} of a CDS.
 
-If the \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{Component} in its \sbol{components} property MUST refer to a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with the same \sbol{encoding}. In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{Sequence} objects to the \sbol{elements} of the \sbol{ComponentDefinition}'s \sbol{Sequence}, subject to any restrictions imposed by the \sbol{SequenceAnnotation} and \sbol{SequenceConstraint} objects that refer to the contents of the \sbol{components} property. A DNA \sbol{ComponentDefinition}, for example, could refer to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In this case, any \sbol{Component} contained by this \sbol{ComponentDefinition} would itself need to have a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}," or perhaps ``{\tt tgta}'' in the case of a \sbol{Component} that is positioned by a \sbol{SequenceAnnotation} with a \sbol{Location} \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
+\LDtodo{Comment from Mike B: ``"it MUST be possible to align the elements of the latter Sequence objects to the elements of the ComponentDefinition's Sequence." Alignment comes in lossy and lossless forms. One of SBOL 1.1's practical limitations when it came to modeling real-world processes was that annotations couldn't bear an approximate resemblance to the sequences they annotated; they had to be exact substrings. If you really intend to keep this restriction in SBOL 2.0, then please use stronger language than "align," because we all use alignment tools to detect lossy near-matches (indels), so this passage might be read the wrong way. If, on the other hand, you've deliberately changed that rule, then highlight the change here, because SBOL 1.1 was pretty emphatic about its "logical consistency" rules.''}
+
+If the \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{Component} in its \sbol{components} property MUST refer to a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with the same \sbol{encoding}. 
+In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{Sequence} objects to the \sbol{elements} of the \sbol{ComponentDefinition}'s \sbol{Sequence}, subject to any restrictions imposed by the \sbol{SequenceAnnotation} and \sbol{SequenceConstraint} objects that refer to the contents of the \sbol{components} property. 
+A DNA \sbol{ComponentDefinition}, for example, could refer to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In this case, any \sbol{Component} contained by this \sbol{ComponentDefinition} would itself need to have a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}," or perhaps ``{\tt tgta}'' in the case of a \sbol{Component} that is positioned by a \sbol{SequenceAnnotation} with a \sbol{Location} \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
 
 % Furthermore, this \sbol{Sequence} MUST have the same \external{IUPAC} \sbol{encoding} as a \sbol{Sequence} of the parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. 
 
@@ -398,7 +429,7 @@ The \sbol{sequenceConstraints} property is OPTIONAL and MAY contain a set of \sb
 The serialization of a \sbol{ComponentDefinition} MUST have the form below. 
 The \sbol{components},  \sbol{sequenceConstraints},  \sbol{sequenceAnnotations}, and \sbol{sequences} properties of a \sbol{ComponentDefinition} contain objects belonging to the appropriate SBOL classes as their values, while the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} properties contain \sbol{URI}s that identify ontology terms as their values. 
 As shown below, each of these objects and \sbol{URI}s is serialized as part of an implicit set of SBOL properties with singular rather then plural names. 
-In particular, each object is serialized as a RDF/XML node nested within a singular property, while each \sbol{URI} is serialized as a \external{rdf:resource} on a singular property.
+In particular, each object is serialized as a RDF/XML node nested within a singular property, while each \sbol{URI} (except the \sbol{identity}) is serialized as a \external{rdf:resource} on a singular property.
 
 \lstsetsbol
 \begin{lstlisting}
@@ -466,8 +497,8 @@ The \sbolmult{definition:CI}{definition} property is a REQUIRED \sbol{URI} that 
 As described in the previous section, this \sbol{ComponentDefinition} effectively provides information about the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} of the \sbol{ComponentInstance}.
 
 The \sbolmult{definition:CI}{definition} property MUST NOT refer to the same \sbol{ComponentDefinition} as the one that contains the \sbol{ComponentInstance}. 
-Furthermore, \sbol{ComponentInstance} objects MUST NOT form a circular chain of references via their \sbolmult{definition:CI}{definition} properties and the \sbol{ComponentDefinition} objects that contain them. 
-For example, consider the \sbol{ComponentInstance} objects $A$ and $B$ and the \sbol{ComponentDefinition} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is circular. 
+Furthermore, \sbol{ComponentInstance} objects MUST NOT form a cyclical chain of references via their \sbolmult{definition:CI}{definition} properties and the \sbol{ComponentDefinition} objects that contain them. 
+For example, consider the \sbol{ComponentInstance} objects $A$ and $B$ and the \sbol{ComponentDefinition} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is cyclical. 
 
 \paragraph{The \sbolheading{mapsTos} property}\label{sec:mapsTos:CI}
 
@@ -550,6 +581,8 @@ that represents an instance of a promoter:
 \label{uml:maps_to}
 \end{center}
 \end{figure}
+
+\Ctodo{Mike B comment: ``This discussion feels a little messy. As a first- and second-time reader, I was not sold on the need for this class, and eventually I had to sort of reverse-engineer its practical rationale. I think the first paragraph should make it crystal clear what this is for. If two things are identical, then under what real-world circumstances would I expect to have two copies in my model? If two copies are in conflict, or if they are nonidentical but overlapping, then why is this the right way to unify them? I think you have answers for these questions, informed by real-world experience, but they're not conveyed here. Readers need insight.''}
 
 When \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects are composed into structural and functional hierarchies using \sbol{ComponentInstance} and \sbol{Module} objects, it is often the case that some \sbol{ComponentInstance} objects are intended to represent the same entity in the overall design. The purpose of the \sbol{MapsTo} class is to make these identity relationships clear and explicit.
 
@@ -644,10 +677,15 @@ The \sbol{SequenceAnnotation} class describes one or more regions of interest on
 \paragraph{The \sbolheading{locations} property}\label{sec:locations}
 The \sbol{locations} property is a REQUIRED set of one or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Sequence} are described by the \sbol{SequenceAnnotation}. 
 
-In general, these \sbol{Location} objects SHOULD NOT specify overlapping regions.
+\Rtodo{Need somebody to make sure I didn't screw this up.  -JSB}
+Allowing multiple \sbol{Location} objects on a single \sbol{SequenceAnnotation} is intended to allow representation of a component with gaps in its encoding (e.g., encoded across a set of exons with interspersed introns). 
+As such, the \sbol{Location} objects of a single SHOULD NOT specify overlapping regions, since it is not clear what this means.  
+There is no such concern with different \sbol{SequenceAnnotation} objects, however, which can easily overlap in \sbol{Location}.
 
 \paragraph{The \sbolheading{component} property}\label{sec:component}
 The \sbol{component} property is OPTIONAL and has a data type of \sbol{URI}. This \sbol{URI} MUST refer to a \sbol{Component} that is contained by the same parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. In this way, the properties of the \sbol{SequenceAnnotation}, such as its \sbol{description} and \sbol{locations}, are associated with part of the substructure of its \sbol{ComponentDefinition}. A \sbol{SequenceAnnotation} MUST NOT refer to the same \sbol{Component} as another \sbol{SequenceAnnotation}. 
+
+\LDtodo{Mike B query: ``"A SequenceAnnotation MUST NOT refer to the same Component as another SequenceAnnotation." As long as the two annotations are nonconflicting, what could possibly be the harm in this? Please explain.''}
 
 \paragraph{Serialization}
 
@@ -715,6 +753,8 @@ The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. A
 \paragraph{Range}
 \label{sec:Range}
 A \sbol{Range} object specifies a region via discrete, inclusive \sbol{start} and \sbol{end} positions that correspond to indices for characters in the \sbol{elements} \sbol{String} of a \sbol{Sequence}.
+
+Note that the index of the first location is 1, as is typical practice in biology, rather than 0, as is typical practice in computer science.
 
 \paragraph{The \sbolheading{start} property}\label{sec:start}
 The \sbol{start} property specifies the inclusive starting position of the \sbol{Range}. This property is REQUIRED and MUST contain an \sbol{Integer} value greater than zero.
@@ -983,6 +1023,7 @@ These terms might identify ``logical'' roles, such as ``inverter'' or ``AND gate
 \subsubsection*{The \sbolheading{modules} property}\label{sec:modules}
 
 The \sbol{modules} property is OPTIONAL and MAY specify a set of \sbol{Module} objects contained by the \sbol{ModuleDefinition}.
+Note that the set of relations between \sbol{Module} and \sbol{ModuleDefinition} objects is strictly acyclic.
 
 While the \sbol{ModuleDefinition} class is analogous to a blueprint or specification sheet for a system of interaction biological elements, the \sbol{Module} class represents the specific occurrence of a particular sub-system within that design. Hence, this class allows a biological design to include multiple copies of a subsystem. For example, the \sbol{ModuleDefinition} for a network of two-input repressor systems, where the particular repressors have not yet been chosen, contain multiple \sbol{Module} objects that refer to the same \sbol{URI} for the \sbol{ModuleDefinition} of an abstract two-input repressor device.
 
@@ -1131,7 +1172,7 @@ The \sbol{Module} class represents the usage or occurrence of a \sbol{ModuleDefi
 The \sbolmult{definition:M}{definition} property is a REQUIRED \sbol{URI} that refers to the \sbol{ModuleDefinition} for the \sbol{Module}.
 
 The \sbolmult{definition:M}{definition} property MUST NOT refer to the same \sbol{ModuleDefinition} as that which contains the \sbol{Module}. 
-Furthermore, \sbol{Module} objects MUST NOT form a circular chain of references via their \sbolmult{definition:M}{definition} properties and the \sbol{ModuleDefinition} objects that contain them. For example, consider the \sbol{Module} objects $A$ and $B$ and the \sbol{ModuleDefinition} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is circular. 
+Furthermore, \sbol{Module} objects MUST NOT form a cyclical chain of references via their \sbolmult{definition:M}{definition} properties and the \sbol{ModuleDefinition} objects that contain them. For example, consider the \sbol{Module} objects $A$ and $B$ and the \sbol{ModuleDefinition} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is cyclical. 
 
 \paragraph{The \sbolheading{mapsTo} property}
 \label{sec:mapsTos:M}
