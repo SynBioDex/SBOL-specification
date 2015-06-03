@@ -226,6 +226,8 @@ namespace, but are mapped to standardized terms defined elsewhere:
 % properties inherited from \sbol{Documented}, where CLASS\_NAME is
 % replaced by the name of the class:
 
+\Ctodo{Mike B: ``There is some potential for confusion because TopLevels aren't really at the TopLevel in the XML serialized form; they're one level down, beneath the RDF document root. Might want to clarify this in the relevant passages.''}
+
 \subsection {TopLevel}
 \label{sec:TopLevel}
 \sbol{TopLevel} is an abstract class that is extended by any \sbol{Identified} class that can be found at the top level of an SBOL document or file. In other words, \sbol{TopLevel} objects are not nested inside any other object via a composite aggregation or black diamond arrow association property. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their \sbol{URI}s using shared aggregation or white diamond arrow association properties. The \sbol{TopLevel} classes defined in this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, and \sbol{GenericTopLevel} (\ref{uml:toplevel}).

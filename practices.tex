@@ -1,5 +1,5 @@
 % -----------------------------------------------------------------------------
-\section{Best Practices}
+\section{Recommended Best Practices}
 \label{sec:bestpractices}
 % -----------------------------------------------------------------------------
 \subsection{Use of the Version Property}
@@ -17,6 +17,8 @@ As stated in \ref{sec:version},  it is RECOMMENDED that version numbering should
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
+\LDtodo{Mike B. ``If the persistentIdentity of a compliant object must end with a delim + its displayId, then a compliant object's displayId may never change. If that was your intent, I think you should state it explicitly here, to reinforce an impliciation which otherwise might go unnoticed by readers.''}
+
 Maintaining unique identity URIs for all SBOL objects is a very challenging implementation task.  To reduce the developer's burden, users of SBOL 2.0 are encouraged to follow a few simple rules when constructing the identity and related fields for SBOL objects.  When these rules are followed, we say that the SBOL object is \emph{compliant}.  The rules are as follows:
 \begin{enumerate}
 \item The \sbol{identity} of an SBOL object should begin with a \emph{URI prefix} that maps to a domain over which the user has control.  Namely, the user can guarantee uniqueness of identities within this domain.
@@ -25,8 +27,19 @@ Maintaining unique identity URIs for all SBOL objects is a very challenging impl
 \item The \sbol{persistentIdentity} of a compliant child object must begin with the \sbol{persistentIdentity} of its parent object and be immediately followed by a delimiter ('/', '\#', or ':') followed by the \sbol{displayId} of the object.
 \item When a SBOL object is not given a \sbol{version}, the \sbol{identity} and \sbol{persistentIdentity} must be equal.
 \item When a SBOL object is given a \sbol{version}, the \sbol{identity} must be equal to the "\refObj{persistentIdentity}/\refObj{version}".
-\item The \sbol{version} of a compliant child object must be equal to the \sbol{version} of it parent object.
+\item The \sbol{version} of a compliant child object must be equal to the \sbol{version} of its parent object.
 \end{enumerate}
+
+\LDtodo{Mike B: ``"The version of a compliant child object must be equal to the version of {its} parent object."
+There is an alternative. Consider what happens in the following scenario:
+suppose my parent object is 'dad', and its two children are 'daughter' and 'son'.
+dad starts at v1.0, and likewise daughter starts at v1.0 and son is v1.0.
+Now I want to revise just the son, so I give him a new haircut and I increment his version to v1.1.
+Since the dad's child version changed, then dad needs to change as well, so let's increment his version to v1.1.
+However, there is no reason why daughter's version should change to v1.1. Daughter is exactly the same as she was at v1.0, and retaining her old version saves us the trouble of diffing v1.0 and the identical v1.1.
+In other words, version changes should be minimally promoted up the tree, but not back down to siblings and relatives if they didn't change.  
+
+If you don't want to do it this way, I do see why, but I've found it helpful on past projects to increment versions only on the things that contain diffs (including their containers, recursively). That's the way that many dependency management systems work, as well as certain aspects of version control: when you ask for a log on an individual file in a version control system, you don't see every revisions that ever touched the repo, you only see the revisions that modified that file.''}
 
 For examples, see any example in this specification, as all have been
 formulated using compliant URIs.
@@ -41,7 +54,11 @@ two general methods that can be used:
 \item Store the information separately and annotate the SBOL model
   with URIs that point to it.
 \end{itemize}
-In theory, either can be used in any case.  In practice, however,
+In theory, either can be used in any case (note that a third case not
+discussed here is to use SBOL to annotate external objects, by linking
+to SBOL documents rather than from the external objects).
+
+In practice, 
 embedding massive amounts of non-SBOL data into SBOL models is likely
 to cause problems for people and software tools trying to manage and
 exchange such models.  Therefore, it is RECOMMENDED that small amounts of information (e.g., design notes, preferred graphical layout) be embedded in the SBOL model, while large amounts of information (e.g., the contents of the scientific publication from which a model was derived, flow cytometry data characterizing performance) be linked with URIs pointing to external resources.  The boundary between ``small'' and ``large'' is left deliberately vague, recognizing that it will likely depend on the particulars of a given SBOL application.
@@ -63,9 +80,14 @@ either have a means of validating those external references (e.g., by
 retrieving them from various repositories) or else to mark them as
 being unverified and not depend on their correctness.
 
+\LDtodo{Mike B. ``"the program doing [the deserialization] SHOULD verify that all of the property values encoded therein have the right type...."
+Not everybody knows how to apply XML+XSD. Maybe we should give new users a big hint: they can just use any correctly implemented SBOL 2.0 XSD file along with a validating XML parser to do this stuff automatically. We really don't want implementators getting scared off by the burden imposed by this section of the spec. Let's perhaps additionally recommend as a bootstrapping exercise to grab an SBOL 2.0 XSD file out of a recognized reference implementation (libSBOLj, for instance), then start by feeding the XSD and the user's SBOL document in question to a validating XML parser such as xmllint, which is FOSS, works great, and installs in seconds. (Side note: if you choose to give these helpful hints, please make it clear that a given reference implementation is not a spec; if it contains errors, the spec wins.)
+
+A section about completeness and validation that doesn't talk about the available official or unofficial XSDs is incomplete. This part was left out of SBOL 1.1, but now that serialization is a big part of SBOL 2.0, an XSD should be included somehow, if only by reference.''}
+
 \subsection{Recommended Ontologies for External Terms}
 
-External ontologies and controlled vocabularies are an integral part of SBOL. SBOL utilizes these resources to access existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, types of components, such as DNA or protein, are indicated using BioPAX. Similarly, the role of a DNA component is indicated via the SO terms. Although preferred ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found at \ref{tbl:preferred_external_resources}.
+External ontologies and controlled vocabularies are an integral part of SBOL. SBOL utilizes these resources to access existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, types of components, such as DNA or protein, are indicated using BioPAX. Similarly, the role of a DNA component is indicated via the SO terms. Although preferred ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{p{3cm}p{1.5cm}p{4.5cm}p{6cm}}

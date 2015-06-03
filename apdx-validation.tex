@@ -8,6 +8,8 @@
 
 \Rtodo{New validation rules have been added.  Needs review.}
 
+\Ctodo{Mike B: ``I recommend reformatting the references, because they are a repeating motif in all rules, but their typographical positioning is unpredictable. Many of them linebreak awkwardly. Why not remove them from their parentheses and uniformly insert a newline before each rule's references? Then the eye can scan the references with an ergonomically friendly vertical sweep, instead of bouncing all over the page. (Sometimes I look for rules by section number, not vice versa.) It'll be prettier, too.''}
+
 This section summarizes all the conditions that MUST be or 
 are RECOMMENDED to be true of an SBOL Version~2 document.  
 There are different degrees of rule strictness.  
@@ -50,6 +52,12 @@ in the SBOL specification namespace.
 
 \subsubsection*{General rules about an SBOL document}
 \setcounter{sbolCtr}{10101} 
+
+\LDtodo{Mike B: ``"An SBOL document MUST declare the use of the following XML Namespace: [dcterms]"
+I don't think this is required by XML+XSD unless a dcterms element or attribute is actually used. The rules for Identified's serialization on p17 state that dcterms are 0..*, so maybe we should say this instead:
+"An SBOL document MUST declare the use of the following XML Namespace: [dcterms] if it uses any of the tags provided by dcterms, such as title or description."
+Aliasing an xmlns with a prefix, but then failing to using it int the document, is actually a lint violation.
+Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax isn't replicated in SBOL 2.0, so why is this rule special? Same goes for the others. If you want to include enough rules on p56 (lines 27-35) to make it obvious how to construct a header, then the spec should also have rules for the <?xml version="1.0 ?> header (optional but recommended by XML, IIRC) and the <rdf:RDF ...> root tag.''}
 
 \printValid{An SBOL document MUST declare the use of the following XML Namespace: \\ \textls[-25]{\uri{http://sbols.org/v2\#}}. (Reference:
   \sec{xml-namespace}.)}
@@ -233,6 +241,8 @@ in the SBOL specification namespace.
 
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property. (Reference: \sec{sec:Range})}
 
+\Ctodo{Mike B: ``Might want to clarify how implementors should interpret these ranges, especially for cases of stuff that aligns to the - strand. For instance, can - strand components have end < start, because start and end are relative to the + strand?''}
+
 \subsubsection*{Rules for the \class{Cut} class} 
 \setcounter{sbolCtr}{11201}
 
@@ -318,13 +328,13 @@ in the SBOL specification namespace.
 \subsubsection*{Rules for the \class{Interaction} class} 
 \setcounter{sbolCtr}{11901}
 
-\printValid{A \sbol{Interaction} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Interaction})}
+\printValid{An \sbol{Interaction} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Interaction})}
 
 \printValid{The \sbolmult{types:I}{types} property is a set of \sbol{URI}s, and it is REQUIRED to include at least one entry. (Reference: \sec{sec:Interaction})}
 
 \printModeling{A least one type in the set of \sbolmult{types:I}{types} SHOULD be a \sbol{URI} from the occurring entity relationship branch of the SBO. (Reference: \sec{sec:Interaction})}
 
-\printValid{The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects.  (Reference: \sec{sec:Interaction})}
+\printValid{The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects. (Reference: \sec{sec:Interaction})}
 
 \subsubsection*{Rules for the \class{Participation} class} 
 \setcounter{sbolCtr}{12001}
@@ -333,7 +343,7 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{participant} property is a REQUIRED \sbol{URI} that MUST reference a \sbol{FunctionalComponent} that is specified within the same \sbol{ModuleDefinition}. (Reference: \sec{sec:Participation})}
 
-\printValid{The \sbolmult{roles:P}{roles} property is an OPTIONAL set of \sbol{URI}s.  (Reference: \sec{sec:Participation})}
+\printValid{The \sbolmult{roles:P}{roles} property is an OPTIONAL set of \sbol{URI}s. (Reference: \sec{sec:Participation})}
 
 \printModeling{A least one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO. (Reference: \sec{sec:Participation})}
 
@@ -342,9 +352,9 @@ in the SBOL specification namespace.
 
 \printValid{A \sbol{Collection} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Collection})}
 
-\printValid{The \sbol{members} property is an OPTIONAL set of \sbol{URI}s. that reference \sbol{TopLevel} objects.  (Reference: \sec{sec:Collection})}
+\printValid{The \sbol{members} property is an OPTIONAL set of \sbol{URI}s. that reference \sbol{TopLevel} objects. (Reference: \sec{sec:Collection})}
 
-\printModeling{Each \sbol{URI} in the set of \sbol{members} SHOULD reference a \sbol{TopLevel} object.  (Reference: \sec{sec:Collection})}
+\printModeling{Each \sbol{URI} in the set of \sbol{members} SHOULD reference a \sbol{TopLevel} object. (Reference: \sec{sec:Collection})}
 
 \subsubsection*{Rules for the \class{Annotation} class} 
 \setcounter{sbolCtr}{12201}
