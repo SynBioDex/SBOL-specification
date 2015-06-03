@@ -145,9 +145,9 @@ Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax
 
 \printWarning{The \sbol{Sequence} objects referred to by the \sbol{sequences} property of a \sbol{ComponentDefinition} MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with the same \sbol{encoding}. (Reference: \sec{sec:ComponentDefinition})}
+\printModeling{The \sbol{sequences} property of a \sbol{ComponentDefinition} SHOULD NOT refer to more than one \sbol{Sequence} with the same \sbol{encoding}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
+\printModeling{The \sbol{sequences} property of a \sbol{ComponentDefinition} SHOULD NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, and one of the  \sbolmult{types:CD}{types} of this \sbol{ComponentDefinition} comes from \ref{tbl:componentdefinition_types}, then one of the \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this type in \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
