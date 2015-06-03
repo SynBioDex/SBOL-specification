@@ -202,11 +202,11 @@ Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax
 
 \printValid{The \sbol{remote} property of a \sbol{MapsTo} is REQUIRED and MUST contain a \external{URI} reference to a \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})}
 
-\printValid{The \sbol{remote} property of a \sbol{MapsTo} MUST refer to a \sbol{ComponentInstance} with an \sbol{access} property that contains the \external{URI} \url{http://sbols.org/v2\#public}. (Reference: \sec{sec:MapsTo})}
+\printWarning{The \sbol{remote} property of a \sbol{MapsTo} MUST refer to a \sbol{ComponentInstance} with an \sbol{access} property that contains the \external{URI} \url{http://sbols.org/v2\#public}. (Reference: \sec{sec:MapsTo})}
 
-\printValid{If a \sbol{MapsTo} is contained by a \sbol{ComponentInstance}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{Component} in the \sbol{ComponentDefinition} that is referenced by the \sbolmult{definition:CI}{definition} of the \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})} 
+\printWarning{If a \sbol{MapsTo} is contained by a \sbol{ComponentInstance}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{Component} in the \sbol{ComponentDefinition} that is referenced by the \sbolmult{definition:CI}{definition} of the \sbol{ComponentInstance}. (Reference: \sec{sec:MapsTo})} 
 
-\printValid{If a \sbol{MapsTo} is contained by a \sbol{Module}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{FunctionalComponent} in the \sbol{ModuleDefinition} that is referenced by the \sbolmult{definition:CI}{definition} of the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
+\printWarning{If a \sbol{MapsTo} is contained by a \sbol{Module}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{FunctionalComponent} in the \sbol{ModuleDefinition} that is referenced by the \sbolmult{definition:CI}{definition} of the \sbol{Module}. (Reference: \sec{sec:MapsTo})} 
 
 \printValid{The \sbol{refinement} property is REQUIRED and MUST contain a \external{URI} from \ref{tbl:mapsto_refinement}.
 (Reference: \sec{sec:MapsTo})}
