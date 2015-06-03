@@ -364,7 +364,7 @@ For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{Compo
 \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. 
 These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use the \external{URI} for that term as one of its \sbolmult{roles:CD}{roles}. 
 
-\LDtodo{Query from Mike B: ``In my organization, it is very common to define single components containing multiple adjacent items from table 3, the table of roles. For example, it's more common to design a part as a gene + stop + terminator than just a lonely gene. We're not alone in this. Do you want to make any recommendations for this situation?'' ComponentDefinitions are hierarchical.  I think the confusion is that what to do with a composite CD.  I think we should have a term for engineered region or the like for that and explain it.}
+\Ctodo{Query from Mike B: ``In my organization, it is very common to define single components containing multiple adjacent items from table 3, the table of roles. For example, it's more common to design a part as a gene + stop + terminator than just a lonely gene. We're not alone in this. Do you want to make any recommendations for this situation?'' Answer from Chris: ComponentDefinitions are hierarchical.  I think the confusion is that what to do with a composite CD.  I think we should have a term for engineered region or the like for that and explain it.}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -395,7 +395,7 @@ Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequen
 
 If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In addition, a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} (see \ref{tbl:sequence_encodings}). 
 
-\LDtodo{Query from Mike B: ``"a ComponentDefinition MUST NOT refer to more than one Sequence with an IUPAC encoding...." If this is true, then how can I provide nonconflicting descriptions of a sequence at two different levels of abstraction? The example from the paragraph starting at p21 line 16 makes me think that this should be permitted. Did you really mean that "a ComponentDefinition MUST NOT refer to more than one Sequence with any single IUPAC encoding," i.e. you can't give two conflicting DNA sequences? If you really mean what it says, please provide a clarifying rationale for why e.g. I shouldn't be allowed to specify DNA, RNA, and protein sequences for a part.''}
+\Ctodo{Query from Mike B: ``"a ComponentDefinition MUST NOT refer to more than one Sequence with an IUPAC encoding...." If this is true, then how can I provide nonconflicting descriptions of a sequence at two different levels of abstraction? The example from the paragraph starting at p21 line 16 makes me think that this should be permitted. Did you really mean that "a ComponentDefinition MUST NOT refer to more than one Sequence with any single IUPAC encoding," i.e. you can't give two conflicting DNA sequences? If you really mean what it says, please provide a clarifying rationale for why e.g. I shouldn't be allowed to specify DNA, RNA, and protein sequences for a part.'' Answer: Mike is does not realize that these would all be different ComponentDefinitions.}
 
 Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}.  
 Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbolmult{types:CD}{types} property MUST refer to the term from \ref{tbl:componentdefinition_types} that is cross-listed with this \sbol{encoding} in \ref{tbl:sequence_encodings}. 
@@ -412,9 +412,11 @@ Hence, this class allows a biological design to include multiple instances of a 
 
 \LDtodo{Comment from Mike B: ``"it MUST be possible to align the elements of the latter Sequence objects to the elements of the ComponentDefinition's Sequence." Alignment comes in lossy and lossless forms. One of SBOL 1.1's practical limitations when it came to modeling real-world processes was that annotations couldn't bear an approximate resemblance to the sequences they annotated; they had to be exact substrings. If you really intend to keep this restriction in SBOL 2.0, then please use stronger language than "align," because we all use alignment tools to detect lossy near-matches (indels), so this passage might be read the wrong way. If, on the other hand, you've deliberately changed that rule, then highlight the change here, because SBOL 1.1 was pretty emphatic about its "logical consistency" rules.''}
 
-If the \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{Component} in its \sbol{components} property MUST refer to a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with the same \sbol{encoding}. 
-In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{Sequence} objects to the \sbol{elements} of the \sbol{ComponentDefinition}'s \sbol{Sequence}, subject to any restrictions imposed by the \sbol{SequenceAnnotation} and \sbol{SequenceConstraint} objects that refer to the contents of the \sbol{components} property. 
-A DNA \sbol{ComponentDefinition}, for example, could refer to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In this case, any \sbol{Component} contained by this \sbol{ComponentDefinition} would itself need to have a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}," or perhaps ``{\tt tgta}'' in the case of a \sbol{Component} that is positioned by a \sbol{SequenceAnnotation} with a \sbol{Location} \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
+In this way, the \sbol{components} property can be used to construct a hierarchy of \sbol{ComponentDefinition} objects. If a \sbol{ComponentDefinition} in this hierarchy refers to one or more \sbol{Sequence} objects, then any .
+
+% If the \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{Component} in its \sbol{components} property MUST refer to a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with the same \sbol{encoding}. 
+% In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{Sequence} objects to the \sbol{elements} of the \sbol{ComponentDefinition}'s \sbol{Sequence}, subject to any restrictions imposed by the \sbol{SequenceAnnotation} and \sbol{SequenceConstraint} objects that refer to the contents of the \sbol{components} property. 
+% A DNA \sbol{ComponentDefinition}, for example, could refer to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In this case, any \sbol{Component} contained by this \sbol{ComponentDefinition} would itself need to have a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}," or perhaps ``{\tt tgta}'' in the case of a \sbol{Component} that is positioned by a \sbol{SequenceAnnotation} with a \sbol{Location} \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
 
 % Furthermore, this \sbol{Sequence} MUST have the same \external{IUPAC} \sbol{encoding} as a \sbol{Sequence} of the parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. 
 
@@ -875,7 +877,7 @@ The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers
 \paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
 The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. This property is used to indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{subject} and \sbol{object} \sbol{Component} objects. The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI}s in  \ref{tbl:restriction_types}.
-\Rtodo{Per Mike B comment: changed ``MUST ... or an [ill-defined] appropriate ontology'' to SHOULD, since that's the same.  -JSB}
+\Rtodo{Per Mike B comment: changed ``MUST ... or an [ill-defined] appropriate ontology'' to SHOULD, since that's the same.  -JSB  I'm not sure about this.  I think it is MUST, as these are the only ones we allow right now.  Same for all enumerated types we have defined. -CJM}
 
 % Note: With regards to SBOL Version 1.1., this is a generalization of former \sbol{SequenceAnnotation} property \external{precedes}.
 
@@ -1167,6 +1169,8 @@ In the example below, the functional component is defined as public input or out
 \subsubsection{Module}
 \label{sec:Module}
 
+\Ctodo{Documented should be Identified in Figure below.}
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/module}
@@ -1244,7 +1248,7 @@ Values for this URI are RECOMMENDED to be chosen from the occurring entity branc
 
 The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that the referenced \sbol{FunctionalComponent} plays in the interaction.
 
-\LDtodo{Should particpations be 1..n rather than 0..n? -JSB, per Mike B.}
+\Rtodo{Should particpations be 1..n rather than 0..n? -JSB, per Mike B. I actually brought this up earlier, and I was told that we may want to be able to specify that we know there is an interaction but we don't yet know what the participants are. -CJM}
 
 \paragraph{Serialization}
 
@@ -1399,6 +1403,7 @@ In particular, several methods are supported for connecting the SBOL data model 
 
 \subsubsection{Annotating SBOL objects}
 % whole set of labels for the properties defined herein
+\label{sec:qName}
 \label{sec:QName}
 \label{sec:value}
 \label{sec:Annotation}
@@ -1407,9 +1412,10 @@ In particular, several methods are supported for connecting the SBOL data model 
 \label{sec:nestedQName}
 \label{sec:nestedURI}
 
-Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{QName} property is specified by a qualified name (\sbol{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{value} property can be a literal type (i.e., \sbol{String}, \sbol{Integer}, \sbol{Double}, \sbol{Boolean}), \sbol{URI}, or a \sbol{NestedAnnotations} object. The \sbol{NestedAnnotations} object is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and an optional list of nested \sbol{annotations}.
+Each \sbol{Identified} object may have a number of annotations in the form of name/value property pairs. The \sbol{qName} property is specified by a qualified name (\sbol{QName}), which is composed of a namespace, a prefix, and a local name. The \sbol{qName} property must be stored in the data model to allow for proper serialization as described below.
+The \sbol{value} property can be a literal type (i.e., \sbol{String}, \sbol{Integer}, \sbol{Double}, \sbol{Boolean}), \sbol{URI}, or a \sbol{NestedAnnotations} object. The \sbol{NestedAnnotations} object is composed of a \sbol{nestedQName}, \sbol{nestedURI}, and an optional list of nested \sbol{annotations}.
 
-\Ctodo{Mike B: ``I was confused when I first read this because Annotation.qName seemed to be encoding XML within XML. Then I realized that no, the XML serialized form is clean, and you just needed a place to save arbitrary annotation tag names in the deserialized data model. Please explicitly note that you have to store qNames this way because it's an XML thing, and so the qNames become tag names. It's all right there in the examples, but I had to read it a few times to get it. Every XML-related complication is another temptation for a newcomer to quit in frustration. We should make it really easy to understand the weird parts of SBOL, like here, where the tail of SBOL's serialization format seems to be wagging the dog of the abstract data model.''}
+\Rtodo{Mike B: ``I was confused when I first read this because Annotation.qName seemed to be encoding XML within XML. Then I realized that no, the XML serialized form is clean, and you just needed a place to save arbitrary annotation tag names in the deserialized data model. Please explicitly note that you have to store qNames this way because it's an XML thing, and so the qNames become tag names. It's all right there in the examples, but I had to read it a few times to get it. Every XML-related complication is another temptation for a newcomer to quit in frustration. We should make it really easy to understand the weird parts of SBOL, like here, where the tail of SBOL's serialization format seems to be wagging the dog of the abstract data model.'' I've added a sentence for this above.  -CJM}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1421,7 +1427,7 @@ Each \sbol{Identified} object may have a number of annotations in the form of na
 
 \subsubsection*{Serialization}
 
-\Ctodo{Mike B: ``Please refer to the relevant portions of the w3c XSD/XML specs when discussing prefix aliases and namespaces. Someone who isn't already familiar with how XSDs incorporate other XSDs by reference, or how XMLs exploit the types declared in XSDs, is likely to find this section very confusing. Just a few sentences summarizing what xmns:prefix really does, and why it's helpful, would help pave the way for XML newbies. Also, please note here that prefix strings are arbitrary. Some people assume that the "sbol" prefix has some special significance, when in fact it's just an alias set up by their own xmlns: decls in the document header.''}
+\Rtodo{Mike B: ``Please refer to the relevant portions of the w3c XSD/XML specs when discussing prefix aliases and namespaces. Someone who isn't already familiar with how XSDs incorporate other XSDs by reference, or how XMLs exploit the types declared in XSDs, is likely to find this section very confusing. Just a few sentences summarizing what xmns:prefix really does, and why it's helpful, would help pave the way for XML newbies. Also, please note here that prefix strings are arbitrary. Some people assume that the "sbol" prefix has some special significance, when in fact it's just an alias set up by their own xmlns: decls in the document header.''  I tried to address this with text below. -CJM}
 
 The serialization of \sbol{Annotation} objects has the following form:
 
@@ -1446,7 +1452,11 @@ The serialization of \sbol{Annotation} objects has the following form:
                 </prefix2:LOCAL_NAME_3> [\emph{elements}]
 </sbol:TOPLEVELOBJECT>
 \end{lstlisting}
-The \sbol{name} property species the namespace, prefix, and localPart values.  The first form is for a \sbol{literal} annotation.  The second form is for a \sbol{URI} annotation.  Finally, the third form is for an \sbol{NestedAnnotations} object annotation.  In this last case, the \sbol{nestedQName} property specifies the nestedNamespace, nestedPrefix, and nestedLocalPart while the \sbol{nestedURI} property species the URI for the nested annotation.
+The \sbol{qName} property specifies the namespace, prefix, and localPart values.  The use of such qualified names is described in detail by the w3c here:\\
+\url{http://www.w3.org/TR/1999/REC-xml-names-19990114/#ns-using}\\
+Essentially, the "xmlns" statement defines the prefix string to use as an alias for the namespace.  The prefix can be any arbitrary string, and its use is optional, since it simply replaces the full namespace making the serialization more readable.
+
+The first annotation shown above is for a \sbol{literal} annotation.  The second form is for a \sbol{URI} annotation.  Finally, the third form is for an \sbol{NestedAnnotations} object annotation.  In this last case, the \sbol{nestedQName} property specifies the nestedNamespace, nestedPrefix, and nestedLocalPart while the \sbol{nestedURI} property species the URI for the nested annotation.
 
 The ComponentDefinition example for a promoter serialized below shows how annotations can be added to SBOL objects. Annotations are added using the relevant information from the Parts Registry. Annotation property names are qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first annotation is named as \external{pr:group}, indicating the iGEM group designing the promoter, and has a \sbol{String} value. 
 The second \external{pr:experience} annotation has a \sbol{URI} value and is serialised as an RDF resource; in this case, the identifier also happens to be able to be resolved to the information Web page on the Parts Registry for the promoter. 
@@ -1486,7 +1496,8 @@ SBOL documents can also be annotated at the top level.
 SBOL's \sbol{GenericTopLevel} is a top-level entity whose only purpose is to include a set of annotations as described above. 
 Entities that have independent existence (i.e., would be another ``top level'' class) and are not recognized by the SBOL standard are loaded into these top level entities. 
 These \sbol{GenericTopLevel} entities can thus be safely used by tools to exchange non-SBOL data embedded separately within SBOL.
-As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{displayId}, \sbol{name}, \sbol{description}, etc. The type of data found in the generic entity is indicated using the \sbol{rdfType} property which is of type \sbol{QName}.   
+As with any other top level entities, \sbol{GenericTopLevel} entities may include SBOL properties such as \sbol{displayId}, \sbol{name}, \sbol{description}, etc. The type of data found in the generic entity is indicated using the \sbol{rdfType} property which is of type \sbol{QName}.  Again, the \sbol{rdfType} property is used to set the prefix and localPart fields during serialization.
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/generictoplevel}
@@ -1505,7 +1516,7 @@ The serialization of \sbol{GenericTopLevel} objects has the following form where
 %              ...
 %</prefix:localPart>
 
-\LDtodo{I don't see rdfType serialized in here; how is it worked? -JSB}
+\Rtodo{I don't see rdfType serialized in here; how is it worked? -JSB It is again used for serialization.  Added sentence above.}
 
 \lstsetsbol
 \begin{lstlisting}

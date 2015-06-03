@@ -133,6 +133,8 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \external{URI} references to \sbol{Sequence} objects. (Reference: \sec{sec:ComponentDefinition})}
 
+\printModeling{Each \sbol{Sequence} object in the list of \sbol{sequences} SHOULD reference a \sbol{Sequence} object. (Reference: \sec{sec:ComponentDefinition})}
+
 \printWarning{The \sbol{Sequence} objects referred to by the \sbol{sequences} property of a \sbol{ComponentDefinition} MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
@@ -221,7 +223,7 @@ in the SBOL specification namespace.
 (Reference: \sec{sec:GenericLocation})}
 
 \subsubsection*{Rules for the \class{Range} class} 
-\setcounter{sbolCtr}{11001}
+\setcounter{sbolCtr}{11101}
 
 \printValid{A \sbol{Range} MUST inherit all properties of the \sbol{Location} class. (Reference: \sec{sec:Range})}
 
@@ -232,19 +234,19 @@ in the SBOL specification namespace.
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property. (Reference: \sec{sec:Range})}
 
 \subsubsection*{Rules for the \class{Cut} class} 
-\setcounter{sbolCtr}{11001}
+\setcounter{sbolCtr}{11201}
 
 \printValid{A \sbol{Cut} MUST inherit all properties of the \sbol{Location} class. (Reference: \sec{sec:Cut})}
 
 \printValid{The \sbol{at} property is REQUIRED and MUST contain an \external{Integer} greater than or equal to zero.  (Reference: \sec{sec:Cut})}
 
 \subsubsection*{Rules for the \class{GenericLocation} class} 
-\setcounter{sbolCtr}{11001}
+\setcounter{sbolCtr}{11301}
 
 \printValid{A \sbol{GenericLocation} MUST inherit all properties of the \sbol{Location} class. (Reference: \sec{sec:GenericLocation})}
 
 \subsubsection*{Rules for the \class{SequenceConstraint} class} 
-\setcounter{sbolCtr}{11101}
+\setcounter{sbolCtr}{11401}
 
 \printValid{A \sbol{SequenceConstraint} MUST inherit all properties of the \sbol{Identified} class. (Reference: \sec{sec:SequenceConstraint})}
 
@@ -263,7 +265,7 @@ in the SBOL specification namespace.
 (Reference: \sec{sec:SequenceConstraint})}
 
 \subsubsection*{Rules for the \class{Model} class} 
-\setcounter{sbolCtr}{11201}
+\setcounter{sbolCtr}{11501}
 
 \printValid{A \sbol{Model} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Model})}
 
@@ -275,12 +277,12 @@ in the SBOL specification namespace.
 
 \printValid{The \sbol{framework} property is a REQUIRED \sbol{URI} that specifies the modeling framework. (Reference: \sec{sec:Model})}
 
-\printModeling{The \sbol{framework} property SHOULD be a \sbol{URI} from the  modeling framework branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Model})}
+\printModeling{The \sbol{framework} property SHOULD be a \sbol{URI} from the  modeling framework branch of the SBO. (Reference: \sec{sec:Model})}
 
 \printWarning{The \sbol{source} property MUST specify the location of the model source file in the specified \sbol{language} using the specified \sbol{framework}. (Reference: \sec{sec:Model})}
 
 \subsubsection*{Rules for the \class{ModuleDefinition} class} 
-\setcounter{sbolCtr}{11301}
+\setcounter{sbolCtr}{11601}
 
 \printValid{A \sbol{ModuleDefinition} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:ModuleDefinition})}
 
@@ -297,7 +299,7 @@ in the SBOL specification namespace.
 \printModeling{Each \sbol{URI} in the set of \sbol{models} SHOULD reference a \sbol{Model} object.  (Reference: \sec{sec:ModuleDefinition})}
 
 \subsubsection*{Rules for the \class{FunctionalComponent} class} 
-\setcounter{sbolCtr}{11401}
+\setcounter{sbolCtr}{11701}
 
 \printValid{A \sbol{FunctionalComponent} MUST inherit all properties of the \sbol{ComponentInstance} class. (Reference: \sec{sec:ComponentInstance})}
 
@@ -305,7 +307,7 @@ in the SBOL specification namespace.
 (Reference: \sec{sec:FunctionalComponent})}
 
 \subsubsection*{Rules for the \class{Module} class} 
-\setcounter{sbolCtr}{11501}
+\setcounter{sbolCtr}{11801}
 
 \printValid{A \sbol{Module} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Module})}
 
@@ -314,18 +316,18 @@ in the SBOL specification namespace.
 \printValid{The \sbolmult{mapsTos:M}{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} objects.  (Reference: \sec{sec:Module})}
 
 \subsubsection*{Rules for the \class{Interaction} class} 
-\setcounter{sbolCtr}{11601}
+\setcounter{sbolCtr}{11901}
 
 \printValid{A \sbol{Interaction} object inherits all properties of a \sbol{Identified} object. (Reference: \sec{sec:Interaction})}
 
 \printValid{The \sbolmult{types:I}{types} property is a set of \sbol{URI}s, and it is REQUIRED to include at least one entry. (Reference: \sec{sec:Interaction})}
 
-\printModeling{A least one type in the set of \sbolmult{types:I}{types} SHOULD be a \sbol{URI} from the occurring entity relationship branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Interaction})}
+\printModeling{A least one type in the set of \sbolmult{types:I}{types} SHOULD be a \sbol{URI} from the occurring entity relationship branch of the SBO. (Reference: \sec{sec:Interaction})}
 
 \printValid{The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects.  (Reference: \sec{sec:Interaction})}
 
 \subsubsection*{Rules for the \class{Participation} class} 
-\setcounter{sbolCtr}{11701}
+\setcounter{sbolCtr}{12001}
 
 \printValid{A \sbol{Participation} object inherits all properties of an \sbol{Identified} object. (Reference: \sec{sec:Participation})}
 
@@ -333,10 +335,10 @@ in the SBOL specification namespace.
 
 \printValid{The \sbolmult{roles:P}{roles} property is an OPTIONAL set of \sbol{URI}s.  (Reference: \sec{sec:Participation})}
 
-\printModeling{A least one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the Systems Biology Ontology (SBO). (Reference: \sec{sec:Participation})}
+\printModeling{A least one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO. (Reference: \sec{sec:Participation})}
 
 \subsubsection*{Rules for the \class{Collection} class} 
-\setcounter{sbolCtr}{11801}
+\setcounter{sbolCtr}{12101}
 
 \printValid{A \sbol{Collection} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:Collection})}
 
@@ -345,7 +347,7 @@ in the SBOL specification namespace.
 \printModeling{Each \sbol{URI} in the set of \sbol{members} SHOULD reference a \sbol{TopLevel} object.  (Reference: \sec{sec:Collection})}
 
 \subsubsection*{Rules for the \class{Annotation} class} 
-\setcounter{sbolCtr}{11901}
+\setcounter{sbolCtr}{12201}
 
 \printValid{The \sbol{name} property is REQUIRED, and it has data type \sbol{QName}. (Reference: \sec{sec:Annotations})}
 
@@ -358,7 +360,7 @@ in the SBOL specification namespace.
 \printValid{The \sbol{annotations} property is an OPTIONAL set for a \sbol{NestedAnnotations} object, and each member is of data type \sbol{Annotation}.  (Reference: \sec{sec:Annotations})}
 
 \subsubsection*{Rules for the \class{GenericTopLevel} class} 
-\setcounter{sbolCtr}{12001}
+\setcounter{sbolCtr}{12301}
 
 \printValid{A \sbol{GenericTopLevel} object inherits all properties of a \sbol{TopLevel} object. (Reference: \sec{sec:GenericTopLevel})}
 
