@@ -125,9 +125,13 @@ Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax
 
 \printWarning{Each \external{URI} contained by the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that describes the category of biochemical or physical entity that is represented by the \sbol{ComponentDefinition}. (Reference: \sec{sec:ComponentDefinition})}
 
-\printWarning{All \external{URI}s contained by the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST refer to synonymous ontology terms. (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{All \external{URI}s contained by the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST refer to non-conflicting ontology terms. (Reference: \sec{sec:ComponentDefinition})}
+
+
 
 \printWarning{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_types} if it is well-described by this \external{URI}. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST NOT contain more than one \external{URI} from \ref{tbl:componentdefinition_types}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \external{URI}s. (Reference: \sec{sec:ComponentDefinition})}
 
@@ -141,13 +145,13 @@ Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax
 
 \printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \external{URI} references to \sbol{Sequence} objects. (Reference: \sec{sec:ComponentDefinition})}
 
-\printModeling{Each \sbol{Sequence} object in the list of \sbol{sequences} SHOULD reference a \sbol{Sequence} object. (Reference: \sec{sec:ComponentDefinition})}
-
 \printWarning{The \sbol{Sequence} objects referred to by the \sbol{sequences} property of a \sbol{ComponentDefinition} MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. (Reference: \sec{sec:ComponentDefinition})}
 
-\printModeling{The \sbol{sequences} property of a \sbol{ComponentDefinition} SHOULD NOT refer to more than one \sbol{Sequence} with the same \sbol{encoding}. (Reference: \sec{sec:ComponentDefinition})}
+\printModeling{If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths. (Reference: \sec{sec:ComponentDefinition})}
 
-\printModeling{The \sbol{sequences} property of a \sbol{ComponentDefinition} SHOULD NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
+\printWarning{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to \sbol{Sequence} objects with conflicting \sbol{encoding} properties. (Reference: \sec{sec:ComponentDefinition})}
+
+\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, and one of the  \sbolmult{types:CD}{types} of this \sbol{ComponentDefinition} comes from \ref{tbl:componentdefinition_types}, then one of the \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this type in \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
@@ -155,13 +159,13 @@ Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax
 
 \printValid{The \sbol{components} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{Component} objects. (Reference: \sec{sec:ComponentDefinition})}
 
-\printWarning{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects MUST be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} (subject to any restrictions on the positions of \sbol{Component} objects in the hierarchy that are imposed by \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects). (Reference: \sec{sec:ComponentDefinition})}
+\printModeling{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} (subject to any restrictions on the positions of \sbol{Component} objects in the hierarchy that are imposed by \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects). (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{If the \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} contains two or more \sbol{SequenceAnnotation} objects that refer to the same \sbol{Component}, then their \sbol{Location} objects  MUST NOT specify regions that have conflicting \sbol{orientation} properties or occupy non-overlapping positions. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceAnnotation} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceAnnotations} property of the \sbol{ComponentDefinition} MUST specify a region on the \sbol{elements} of this \sbol{Sequence}. (Reference: \sec{sec:ComponentDefinition})}
+\printModeling{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceAnnotation} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceAnnotations} property of the \sbol{ComponentDefinition} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{The \sbol{sequenceConstraints} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects.  (Reference: \sec{sec:ComponentDefinition})}
 
