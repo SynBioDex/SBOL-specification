@@ -127,7 +127,7 @@ Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax
 
 \printWarning{All \external{URI}s contained by the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST refer to non-conflicting ontology terms. (Reference: \sec{sec:ComponentDefinition})}
 
-
+\printValid{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST NOT contain more than one \external{URI} from \ref{tbl:componentdefinition_types}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printWarning{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_types} if it is well-described by this \external{URI}. (Reference: \sec{sec:ComponentDefinition})}
 
@@ -151,7 +151,7 @@ Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax
 
 \printWarning{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to \sbol{Sequence} objects with conflicting \sbol{encoding} properties. (Reference: \sec{sec:ComponentDefinition})}
 
-\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to more than one \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
+\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to \sbol{Sequence} objects with conflicting \external{IUPAC} \sbol{encoding} \external{URI}s from \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
 \printValid{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, and one of the  \sbolmult{types:CD}{types} of this \sbol{ComponentDefinition} comes from \ref{tbl:componentdefinition_types}, then one of the \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this type in \ref{tbl:sequence_encodings}. (Reference: \sec{sec:ComponentDefinition})}
 
