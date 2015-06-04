@@ -229,8 +229,6 @@ namespace, but are mapped to standardized terms defined elsewhere:
 % properties inherited from \sbol{Documented}, where CLASS\_NAME is
 % replaced by the name of the class:
 
-\Ctodo{Mike B: ``There is some potential for confusion because TopLevels aren't really at the TopLevel in the XML serialized form; they're one level down, beneath the RDF document root. Might want to clarify this in the relevant passages.''}
-
 \subsection {TopLevel}
 \label{sec:TopLevel}
 \sbol{TopLevel} is an abstract class that is extended by any \sbol{Identified} class that can be found at the top level of an SBOL document or file. In other words, \sbol{TopLevel} objects are not nested inside any other object via a composite aggregation or black diamond arrow association property. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their \sbol{URI}s using shared aggregation or white diamond arrow association properties. The \sbol{TopLevel} classes defined in this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, and \sbol{GenericTopLevel} (\ref{uml:toplevel}).
@@ -245,9 +243,10 @@ namespace, but are mapped to standardized terms defined elsewhere:
 
 \subsubsection*{Serialization}
 
-No serialization is defined for \sbol{TopLevel}, since this class has
-no properties of its own and is only used indirectly through its child
-classes.
+No serialization is defined for \sbol{TopLevel}, since this class has no properties of its own and is only used indirectly through its child classes.  All \sbol{TopLevel} classes are serialized one level beneath the RDF document root.
+
+\Rtodo{Mike B: ``There is some potential for confusion because TopLevels aren't really at the TopLevel in the XML serialized form; they're one level down, beneath the RDF document root. Might want to clarify this in the relevant passages.'' - Added text above -CJM}
+
 
 \subsection{Sequence}
 \label{sec:Sequence}
@@ -369,7 +368,7 @@ For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{Compo
 \ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. 
 These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use the \external{URI} for that term as one of its \sbolmult{roles:CD}{roles}. 
 
-\Ctodo{Query from Mike B: ``In my organization, it is very common to define single components containing multiple adjacent items from table 3, the table of roles. For example, it's more common to design a part as a gene + stop + terminator than just a lonely gene. We're not alone in this. Do you want to make any recommendations for this situation?'' Answer from Chris: ComponentDefinitions are hierarchical.  I think the confusion is that what to do with a composite CD.  I think we should have a term for engineered region or the like for that and explain it.}
+\Rtodo{Query from Mike B: ``In my organization, it is very common to define single components containing multiple adjacent items from table 3, the table of roles. For example, it's more common to design a part as a gene + stop + terminator than just a lonely gene. We're not alone in this. Do you want to make any recommendations for this situation?'' Answer from Chris: ComponentDefinitions are hierarchical.  I think the confusion is that what to do with a composite CD.  I have added the term for engineered gene for this.}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -382,7 +381,8 @@ These terms are organized by the type of \sbol{ComponentDefinition} to which the
       Terminator & \url{http://identifiers.org/so/SO:0000141} & DNA \\ 
       Gene & \url{http://identifiers.org/so/SO:0000704} & DNA \\
       Operator & \url{http://identifiers.org/so/SO:0000057} & DNA \\
-      mRNA & \url{http://identifiers.org/so/SO:0000234} & RNA \\       
+      Engineered Gene & \url{http://identifiers.org/so/SO:0000280} & DNA \\   
+      mRNA & \url{http://identifiers.org/so/SO:0000234} & RNA \\    
       Effector & \url{http://identifiers.org/chebi/CHEBI:35224} & Small Molecule \\
     \bottomrule
   \end{edtable}
