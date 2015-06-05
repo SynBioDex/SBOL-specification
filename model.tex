@@ -6,7 +6,7 @@
 %
 % -----------------------------------------------------------------------------
 
-\Ctodo{Ensure that no UML figures have labels conflicting with their arrows}
+\Rtodo{Ensure that no UML figures have labels conflicting with their arrows}
 
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
@@ -80,7 +80,6 @@ When SBOL use simple ``primitive'' data types such as strings or integers, these
 \end{itemize}
 The term \sbol{literal} is used to denote an object that can be any of the four types listed above.
 In addition to the simple types listed above, SBOL also uses objects with types \emph{uniform resource identifier} (URI) and \emph{XML qualified name} (QName): 
-\Rtodo{Somebody please make sure I haven't screwed up QName and URI descriptions. -JSB A QName also has a namespace to define the prefix.  The localPart must be defined in this namespace. -CJM}
 \begin{itemize}
 \item URI: \url{http://www.w3.org/TR/xmlschema11-2/#anyURI}\\
   {\em Example: \external{http://www.partsregistry.org/Part:BBa\_J23119}}
@@ -91,7 +90,6 @@ In addition to the simple types listed above, SBOL also uses objects with types 
 Note that, in compliance with RDF standards, URIs are generally serialized using an \external{rdf:resource} property, e.g.:
 \external{rdf:resource="http://www.partsregistry.org/Part:BBa\_J23119"}
 
-\Rtodo{Below, I added 'globally' before 'unique identifer' per my reading of RDF + Tim Berners-Lee's blogs. TBL likes to emphasize the global and distributed nature of 'webized' docs, refs, and objects. Could somebody please sanity check my interpretation? -MB}
 It is important to realize that in RDF, a URI may or may not be a resolvable URL (web address).  A URI is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
 
 \subsection{Identified}
@@ -104,7 +102,6 @@ This inheritance means that all SBOL objects are uniquely identified using \sbol
 
 As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
 
-\Rtodo{Reworded the following sentence to be about a reference, not an object, because the paragraph says that the reference might 'refer' to one object or a versioned lineage of multiple objects. Please proofread. -MB}
 When an SBOL resource reference takes the form of a URI, that URI may either be the value of an \sbol{identity} property or the value of a \sbol{persistentIdentity} property.
 If the URI is equal to the value of an \sbol{identity} property, then it is guaranteed to be unique, and it refers to precisely one SBOL object with that identity value.
 If the URI is equal to the value of a \sbol{persistentIdentity} property, then it may refer to multiple SBOL objects that are different ``versions'' of each other. These objects SHOULD be compared to one another to determine which single object the URI should resolve to (normally the most recent version - see \ref{sec:version}).

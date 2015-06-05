@@ -4,7 +4,8 @@
 % -----------------------------------------------------------------------------
 
 \Ctodo{Mike B: ``DNA sequences run off the page.
-Historically, this has often been a problem with long DNA string datatypes that don't permit inline whitespace. They're impossible to print or justify for web presentation without breaking the validity of the document.''}
+Historically, this has often been a problem with long DNA string datatypes that don't permit inline whitespace. They're impossible to print or justify for web presentation without breaking the validity of the document.''
+Goksel: I like the Genbank files having 60 nucleotides in one row. :) I keep Mike's comment here in case if someone else has any suggestion.}
 
 \subsection{PoPS Receiver}
 
@@ -21,51 +22,6 @@ Complete details of the device can be found in the cited paper and also at \url{
 \begin{lstlisting}
 <?xml version="1.0" ?>
 <rdf:RDF xmlns:pr="http://partsregistry.org" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_B0015">
-    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_B0015"/>
-    <sbol:displayId>BBa_B0015</sbol:displayId>
-    <dcterms:title>BBa_B0015</dcterms:title>
-    <dcterms:description>Double terminator</dcterms:description>
-    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
-    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_B0015"/>
-  </sbol:ComponentDefinition>
-  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_R0062">
-    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_R0062"/>
-    <sbol:displayId>BBa_R0062</sbol:displayId>
-    <dcterms:title>BBa_R0062</dcterms:title>
-    <dcterms:description>LuxR inducible promoter</dcterms:description>
-    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
-    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_R0062"/>
-  </sbol:ComponentDefinition>
-  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_C0062">
-    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_C0062"/>
-    <sbol:displayId>BBa_C0062</sbol:displayId>
-    <dcterms:title>BBa_C0062</dcterms:title>
-    <dcterms:description>luxR coding sequence</dcterms:description>
-    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
-    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_C0062"/>
-  </sbol:ComponentDefinition>
-  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_R0040">
-    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_R0040"/>
-    <sbol:displayId>BBa_R0040</sbol:displayId>
-    <dcterms:title>BBa_R0040</dcterms:title>
-    <dcterms:description>TetR repressible promoter</dcterms:description>
-    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
-    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_R0040"/>
-  </sbol:ComponentDefinition>
-  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_B0034">
-    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_B0034"/>
-    <sbol:displayId>BBa_B0034</sbol:displayId>
-    <dcterms:title>BBa_B0034</dcterms:title>
-    <dcterms:description>RBS based on Elowitz repressilator</dcterms:description>
-    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
-    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_B0034"/>
-  </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_F2620">
     <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620"/>
     <sbol:displayId>BBa_F2620</sbol:displayId>
@@ -86,7 +42,7 @@ Complete details of the device can be found in the cited paper and also at \url{
         <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/luxR"/>
         <sbol:displayId>luxR</sbol:displayId>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_B0034"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_C0062"/>
       </sbol:Component>
     </sbol:component>
     <sbol:component>
@@ -110,7 +66,7 @@ Complete details of the device can be found in the cited paper and also at \url{
         <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/rbs"/>
         <sbol:displayId>rbs</sbol:displayId>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_C0062"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_B0034"/>
       </sbol:Component>
     </sbol:component>
     <sbol:sequenceAnnotation>
@@ -118,9 +74,9 @@ Complete details of the device can be found in the cited paper and also at \url{
         <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno3"/>
         <sbol:displayId>anno3</sbol:displayId>
         <sbol:location>
-          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno3/range">
-            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno3/range"/>
-            <sbol:displayId>range</sbol:displayId>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno3/location3">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno3/location3"/>
+            <sbol:displayId>location3</sbol:displayId>
             <sbol:start>69</sbol:start>
             <sbol:end>770</sbol:end>
             <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
@@ -130,45 +86,13 @@ Complete details of the device can be found in the cited paper and also at \url{
       </sbol:SequenceAnnotation>
     </sbol:sequenceAnnotation>
     <sbol:sequenceAnnotation>
-      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno4">
-        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno4"/>
-        <sbol:displayId>anno4</sbol:displayId>
-        <sbol:location>
-          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno4/range">
-            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno4/range"/>
-            <sbol:displayId>range</sbol:displayId>
-            <sbol:start>771</sbol:start>
-            <sbol:end>900</sbol:end>
-            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
-          </sbol:Range>
-        </sbol:location>
-        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/ter"/>
-      </sbol:SequenceAnnotation>
-    </sbol:sequenceAnnotation>
-    <sbol:sequenceAnnotation>
-      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno1">
-        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno1"/>
-        <sbol:displayId>anno1</sbol:displayId>
-        <sbol:location>
-          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno1/range">
-            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno1/range"/>
-            <sbol:displayId>range</sbol:displayId>
-            <sbol:start>1</sbol:start>
-            <sbol:end>55</sbol:end>
-            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
-          </sbol:Range>
-        </sbol:location>
-        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/pTetR"/>
-      </sbol:SequenceAnnotation>
-    </sbol:sequenceAnnotation>
-    <sbol:sequenceAnnotation>
       <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno5">
         <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno5"/>
         <sbol:displayId>anno5</sbol:displayId>
         <sbol:location>
-          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno5/range">
-            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno5/range"/>
-            <sbol:displayId>range</sbol:displayId>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno5/location5">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno5/location5"/>
+            <sbol:displayId>location5</sbol:displayId>
             <sbol:start>901</sbol:start>
             <sbol:end>956</sbol:end>
             <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
@@ -178,13 +102,45 @@ Complete details of the device can be found in the cited paper and also at \url{
       </sbol:SequenceAnnotation>
     </sbol:sequenceAnnotation>
     <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno1">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno1"/>
+        <sbol:displayId>anno1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno1/location1">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno1/location1"/>
+            <sbol:displayId>location1</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>55</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/pTetR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno4">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno4"/>
+        <sbol:displayId>anno4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno4/location4">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno4/location4"/>
+            <sbol:displayId>location4</sbol:displayId>
+            <sbol:start>771</sbol:start>
+            <sbol:end>900</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/ter"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
       <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno2">
         <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno2"/>
         <sbol:displayId>anno2</sbol:displayId>
         <sbol:location>
-          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno2/range">
-            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno2/range"/>
-            <sbol:displayId>range</sbol:displayId>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno2/location2">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno2/location2"/>
+            <sbol:displayId>location2</sbol:displayId>
             <sbol:start>56</sbol:start>
             <sbol:end>68</sbol:end>
             <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
@@ -193,6 +149,51 @@ Complete details of the device can be found in the cited paper and also at \url{
         <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/rbs"/>
       </sbol:SequenceAnnotation>
     </sbol:sequenceAnnotation>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_R0062">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_R0062"/>
+    <sbol:displayId>BBa_R0062</sbol:displayId>
+    <dcterms:title>pLuxR</dcterms:title>
+    <dcterms:description>LuxR inducible promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_R0062"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_B0015">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_B0015"/>
+    <sbol:displayId>BBa_B0015</sbol:displayId>
+    <dcterms:title>BBa_B0015</dcterms:title>
+    <dcterms:description>Double terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_B0015"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_C0062">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_C0062"/>
+    <sbol:displayId>BBa_C0062</sbol:displayId>
+    <dcterms:title>luxR</dcterms:title>
+    <dcterms:description>luxR coding sequence</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_C0062"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_R0040">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_R0040"/>
+    <sbol:displayId>BBa_R0040</sbol:displayId>
+    <dcterms:title>pTetR</dcterms:title>
+    <dcterms:description>TetR repressible promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_R0040"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_B0034">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_B0034"/>
+    <sbol:displayId>BBa_B0034</sbol:displayId>
+    <dcterms:title>BBa_B0034</dcterms:title>
+    <dcterms:description>RBS based on Elowitz repressilator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_B0034"/>
   </sbol:ComponentDefinition>
   <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_B0034">
     <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_B0034"/>
@@ -209,7 +210,15 @@ Complete details of the device can be found in the cited paper and also at \url{
   <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_C0062">
     <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_C0062"/>
     <sbol:displayId>BBa_C0062</sbol:displayId>
-    <sbol:elements>atgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac</sbol:elements>
+    <sbol:elements>atgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattcta
+    tggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgat
+    cctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaa
+    tgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgctta
+    gttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctcta
+    gttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggc
+    atgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaa
+    tgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaa
+    taacactgatagtgctagtgtagatcac</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_R0062">
@@ -221,7 +230,8 @@ Complete details of the device can be found in the cited paper and also at \url{
   <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_B0015">
     <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_B0015"/>
     <sbol:displayId>BBa_B0015</sbol:displayId>
-    <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
+    <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtg
+    aacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
 </rdf:RDF>
@@ -833,13 +843,22 @@ This design is essentially similar to the one presented in \ref{sec:examples}, e
   <sbol:Sequence rdf:about="http://www.virtualparts.org/part/BBa_E0040">
     <sbol:persistentIdentity rdf:resource="http://www.virtualparts.org/part/BBa_E0040"/>
     <sbol:displayId>BBa_E0040</sbol:displayId>
-    <sbol:elements>atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>
+    <sbol:elements>atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgg
+    gcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaac
+    tacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcat
+    gactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgc
+    tgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggac
+    acaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaatt
+    agacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttacc
+    agacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaa
+    cagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.virtualparts.org/part/ECK120033736">
     <sbol:persistentIdentity rdf:resource="http://www.virtualparts.org/part/ECK120033736"/>
     <sbol:displayId>ECK120033736</sbol:displayId>
-    <sbol:elements>ttcagccaaaaaacttaagaccgccggtcttgtccactaccttgcagtaatgcggtggacaggatcggcggttttcttttctcttctcaa</sbol:elements>
+    <sbol:elements>ttcagccaaaaaacttaagaccgccggtcttgtccactaccttgcagtaatgcggtggacaggatcggcggtt
+    ttcttttctcttctcaa</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.virtualparts.org/part/BBa_R0010">
@@ -863,19 +882,40 @@ This design is essentially similar to the one presented in \ref{sec:examples}, e
   <sbol:Sequence rdf:about="http://www.virtualparts.org/part/BBa_C0040">
     <sbol:persistentIdentity rdf:resource="http://www.virtualparts.org/part/BBa_C0040"/>
     <sbol:displayId>BBa_C0040</sbol:displayId>
-    <sbol:elements>atgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:elements>atgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaagg
+    tttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcg
+    acgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaat
+    aacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagta
+    tgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggc
+    attttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccg
+    ccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcgg
+    attagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elemen
+    ts>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.virtualparts.org/part/BBa_C0012">
     <sbol:persistentIdentity rdf:resource="http://www.virtualparts.org/part/BBa_C0012"/>
     <sbol:displayId>BBa_C0012</sbol:displayId>
-    <sbol:elements>atggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:elements>atggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttccc
+    gcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccg
+    cgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtc
+    gcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcgg
+    cggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgc
+    ctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcga
+    ctgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtc
+    tggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttca
+    acaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgcc
+    attaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgt
+    taaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaaggg
+    caatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgat
+    tcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
   <sbol:Sequence rdf:about="http://www.virtualparts.org/part/ECK120029600">
     <sbol:persistentIdentity rdf:resource="http://www.virtualparts.org/part/ECK120029600"/>
     <sbol:displayId>ECK120029600</sbol:displayId>
-    <sbol:elements>ttcagccaaaaaacttaagaccgccggtcttgtccactaccttgcagtaatgcggtggacaggatcggcggttttcttttctcttctcaa</sbol:elements>
+    <sbol:elements>ttcagccaaaaaacttaagaccgccggtcttgtccactaccttgcagtaatgcggtggacaggatcggcggtt
+    ttcttttctcttctcaa</sbol:elements>
     <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
   </sbol:Sequence>
 </rdf:RDF>
