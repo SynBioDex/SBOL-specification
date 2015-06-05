@@ -8,8 +8,6 @@
 
 \Rtodo{New validation rules have been added.  Needs review.}
 
-\Rtodo{Mike B: ``I recommend reformatting the references, because they are a repeating motif in all rules, but their typographical positioning is unpredictable. Many of them linebreak awkwardly. Why not remove them from their parentheses and uniformly insert a newline before each rule's references? Then the eye can scan the references with an ergonomically friendly vertical sweep, instead of bouncing all over the page. (Sometimes I look for rules by section number, not vice versa.) It'll be prettier, too.'' Good suggestion, done.  CJM}
-
 This section summarizes all the conditions that MUST be or 
 are RECOMMENDED to be true of an SBOL Version~2 document.  
 There are different degrees of rule strictness.  
@@ -52,12 +50,6 @@ in the SBOL specification namespace.
 
 \subsubsection*{General rules about an SBOL document}
 \setcounter{sbolCtr}{10101} 
-
-\Rtodo{Mike B: ``"An SBOL document MUST declare the use of the following XML Namespace: [dcterms]"
-I don't think this is required by XML+XSD unless a dcterms element or attribute is actually used. The rules for Identified's serialization on p17 state that dcterms are 0..*, so maybe we should say this instead:
-"An SBOL document MUST declare the use of the following XML Namespace: [dcterms] if it uses any of the tags provided by dcterms, such as title or description."
-Aliasing an xmlns with a prefix, but then failing to using it int the document, is actually a lint violation.
-Come to think of it, this rule is nothing but XML syntax. The rest of XML syntax isn't replicated in SBOL 2.0, so why is this rule special? Same goes for the others. If you want to include enough rules on p56 (lines 27-35) to make it obvious how to construct a header, then the spec should also have rules for the <?xml version="1.0 ?> header (optional but recommended by XML, IIRC) and the <rdf:RDF ...> root tag.'' ANSWER: I can see your point, but I prefer to leave them in as this is something specific that must be included for an SBOL document, but if others think it should be removed, I could change my mind.  For now, I've added the clarification that only needed if you use things in that namespace.  SBOL and RDF namespace though are always required for any non-empty sbol document. CJM}
 
 \printValid{An SBOL document MUST declare the use of the following XML namespace: \\ \textls[-25]{\uri{http://sbols.org/v2\#}}.\\
 Reference: \sec{xml-namespace}}
@@ -222,6 +214,8 @@ Reference: \sec{sec:Identified}}
 \subsubsection*{Rules for the \class{SequenceAnnotation} class} 
 \setcounter{sbolCtr}{10901}
 
+\Ctodo{Should check that location is a valid position in the sequence.}
+
 \printValid{A \sbol{SequenceAnnotation} MUST inherit all properties of the \sbol{Identified} class.\\ Reference: \sec{sec:SequenceAnnotation}}
 
 \printValid{The \sbol{locations} property of a \sbol{SequenceAnnotation} is REQUIRED and MUST contain a non-empty set of \sbol{Location} objects.\\ Reference: \sec{sec:SequenceAnnotation}}
@@ -249,7 +243,6 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property.\\ Reference: \sec{sec:Range}}
 
-\Ctodo{Mike B: ``Might want to clarify how implementors should interpret these ranges, especially for cases of stuff that aligns to the - strand. For instance, can - strand components have end < start, because start and end are relative to the + strand?''}
 
 \subsubsection*{Rules for the \class{Cut} class} 
 \setcounter{sbolCtr}{11201}

@@ -38,7 +38,7 @@ Since the dad's child version changed, then dad needs to change as well, so let'
 However, there is no reason why daughter's version should change to v1.1. Daughter is exactly the same as she was at v1.0, and retaining her old version saves us the trouble of diffing v1.0 and the identical v1.1.
 In other words, version changes should be minimally promoted up the tree, but not back down to siblings and relatives if they didn't change.  
 
-If you don't want to do it this way, I do see why, but I've found it helpful on past projects to increment versions only on the things that contain diffs (including their containers, recursively). That's the way that many dependency management systems work, as well as certain aspects of version control: when you ask for a log on an individual file in a version control system, you don't see every revisions that ever touched the repo, you only see the revisions that modified that file.''
+If you don't want to do it this way, I do see why, but I've found it helpful on past projects to increment versions only on the things that contain diffs (including their containers, recursively). That's the way that many dependency management systems work, as well as certain aspects of version control: when you ask for a log on an individual file in a version control system, you don't see every revision that ever touched the repo, you only see the revisions that modified that file.''
 
 ANSWER: I can see your point.  It would, however, complicate a few things in our library implementation, and it would be very difficult to change at this point.  We can consider this for a future version.}
 
@@ -55,9 +55,9 @@ two general methods that can be used:
 \item Store the information separately and annotate the SBOL model
   with URIs that point to it.
 \end{itemize}
-In theory, either can be used in any case (note that a third case not
-discussed here is to use SBOL to annotate external objects, by linking
-to SBOL documents rather than from the external objects).
+In theory, either method can be used in any case. (Note that a third case not
+discussed here is to use SBOL to annotate external objects by linking
+to SBOL documents rather than from the external objects.)
 
 In practice, 
 embedding massive amounts of non-SBOL data into SBOL models is likely
@@ -84,7 +84,7 @@ being unverified and not depend on their correctness.
 \NVtodo{Mike B. ``"the program doing [the deserialization] SHOULD verify that all of the property values encoded therein have the right type...."
 Not everybody knows how to apply XML+XSD. Maybe we should give new users a big hint: they can just use any correctly implemented SBOL 2.0 XSD file along with a validating XML parser to do this stuff automatically. We really don't want implementators getting scared off by the burden imposed by this section of the spec. Let's perhaps additionally recommend as a bootstrapping exercise to grab an SBOL 2.0 XSD file out of a recognized reference implementation (libSBOLj, for instance), then start by feeding the XSD and the user's SBOL document in question to a validating XML parser such as xmllint, which is FOSS, works great, and installs in seconds. (Side note: if you choose to give these helpful hints, please make it clear that a given reference implementation is not a spec; if it contains errors, the spec wins.)
 
-A section about completeness and validation that doesn't talk about the available official or unofficial XSDs is incomplete. This part was left out of SBOL 1.1, but now that serialization is a big part of SBOL 2.0, an XSD should be included somehow, if only by reference.'' ANSWER: agreed, we need to do an XSD as soon as possible.  Help would be appreciated. -CJM}
+A section about completeness and validation that doesn't talk about the available official or unofficial XSDs is incomplete. This part was left out of SBOL 1.1, but now that serialization is a big part of SBOL 2.0, an XSD should be included somehow, if only by reference.'' ANSWER: agreed, we need to do an XSD as soon as possible.  Help would be appreciated. -CJM I'll get in touch with the libsbol devs and offer to lend a hand. -MB}
 
 \subsection{Recommended Ontologies for External Terms}
 

@@ -15,7 +15,7 @@ As an overall system, the device is designed to grow either blue-colored (unsucc
 These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional machinery and translational machinery that collectively cause the desired system-level behavior. 
 
 Knowledge of how such a device functions within the context of a host and how it might be adapted to new experimental applications has generally been passed on through working with fellow scientists or reading articles in papers and books. 
-But there was no systematic way to communicate the integration of sequences with functional designs, so users typically had to look in many different places to develop an understanding of this system.  
+But there was no systematic way to communicate the integration of sequences with functional designs, so users typically had to look in many different places to develop an understanding of a system.  
 The SBOL 2.0 standard allows designers to describe these functional characteristics and connect them to the physical parts and sequences that make up the design. 
 
 SBOL 2.0 includes two main classes that match the structural/functional distinction above:
@@ -51,11 +51,12 @@ Whereas \ref{images:overview1} provides a broad overview of SBOL, \ref{images:ov
 \end{center}
 \end{figure}
 
-Another important difference between the figures is to more appropriately describe the connection of the functional side (modules) to the physical side (components). 
+\Rtodo{The first sentence of the following paragraph was a little awkward. I don't think we'd say that "Another important difference between the two cars is to be red." I patched it up a little, but perhaps one of you could check it? - MB}
+The second figure additionally depicts the connection of the functional side (modules) to the physical side (components). 
 This is accomplished via the class \sbol{FunctionalComponent}. This class allows modules to own their components instances, and yet also allows the physical descriptions (in \sbol{ComponentDefinition}s) to stand on their own. 
 In a similar manner, the ability to have hierarchies of either functional or physical components shown in \ref{images:overview1} must be broken apart, so that sub-components can be used in multiple functional modules or multiple physical components. 
 Thus, instead of the arc from \sbol{ModuleDefinition} to itself as in \ref{images:overview1}, our implementation actually divides this notion into two classes, \sbol{ModuleDefinition} and \sbol{Module}. 
-Therefore, a \sbol{ModuleDefinition} does not own the \sbol{ModuleDefinition}s that it uses, but instead it refers to them using the \sbol{Module} objects that it does own.  The identical relationship occurs on the physical side with \sbol{ComponentDefinition} and \sbol{Component}. Finally, SBOL 2.0 provides a few other additional helper classes such as \sbol{Location} that generalizes the positioning information from SBOL 1.1 to allow discontinuous ranges and cuts to be annotated, and \sbol{SequenceConstraint} that generalizes the relative positioning information among \sbol{Component}s.  There is also 
+Therefore, a \sbol{ModuleDefinition} does not own the \sbol{ModuleDefinition}s that it uses, but instead it refers to them using the \sbol{Module} objects that it does own.  The identical relationship occurs on the physical side with \sbol{ComponentDefinition} and \sbol{Component}. Finally, SBOL 2.0 provides a few other additional helper classes such as \sbol{Location}, which generalizes the positioning information from SBOL 1.1 to allow discontinuous ranges and cuts to be annotated, and \sbol{SequenceConstraint}, which generalizes the relative positioning information among \sbol{Component}s.  There is also 
 \sbol{Participation}s, which allow \sbol {Interaction} objects to specify the roles of their participants while referencing the \sbol{FunctionalComponent}s, so that these can stand on their own. Finaly, there is the \sbol{MapsTo} class (not shown) that enables connections to be made between \sbol{Component}s and \sbol{FunctionalComponent}s at various levels of the design hierarchy.  The next section provides complete definitions and details for all of these classes.
 
 \Rtodo{Added mapping of objects from 1.1 to 2.0 using the diagram from the libSBOLj paper.  Needs review. Also not entirely sure this is the right place.  Should we move it to its own section later? -CJM}
@@ -69,5 +70,6 @@ Figure~\ref{SBOL1TO2} depicts the mapping between SBOL 1.1 data objects and SBOL
 \caption{\label{SBOL1TO2}The mapping from the SBOL 1.1 data model to the SBOL 2.0  data model.}
 \end{figure*}
 
-There is one final critical part of SBOL 2.0, its extension mechanism.  This extension mechanism enables both a framework for application specific information, and a means to prototype representation of data whose format has not yet reached community consensus.  In particular, each SBOL entity can be annotated using the \emph{Resource Description Framework} (RDF). Moreover, application specific entities in the form of RDF documents can be included as \sbol{GenericTopLevel} entities. SBOL libraries makes these annotations and entities available to tools as generic properties and objects that are preserved during subsequent read and write operations.
+\Rtodo{Please review my rewording of the following paragraph. Just wanted to polish it up a bit, and I eliminated the redundant use of "mechanism" + "framework". -MB}
+There is one final, critical element of SBOL 2.0: its extension mechanism.  This extension mechanism enables the storage of application specific information within an SBOL document.  It is also intended to support the prototyping of data representations whose format is not yet a matter of consensus within the community.  In particular, each SBOL entity can be annotated using the \emph{Resource Description Framework} (RDF). Moreover, application specific entities in the form of RDF documents can be included as \sbol{GenericTopLevel} entities. SBOL libraries makes these annotations and entities available to tools as generic properties and objects that are preserved during subsequent read and write operations.
 
