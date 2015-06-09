@@ -348,7 +348,8 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
     DNA  & \url{http://www.biopax.org/release/biopax-level3.owl#DnaRegion}\\
     RNA  & \url{http://www.biopax.org/release/biopax-level3.owl#RnaRegion}\\
     Protein  & \url{http://www.biopax.org/release/biopax-level3.owl#Protein}\\
-    Small Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#SmallMolecule}\\  
+    Small Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#SmallMolecule}\\
+    Complex  & \url{http://www.biopax.org/release/biopax-level3.owl#Complex}\\
     \bottomrule
   \end{edtable}
   \caption{RECOMMENDED BioPAX terms to specify the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
@@ -591,9 +592,8 @@ that represents an instance of a promoter:
 \end{center}
 \end{figure}
 
-\Ctodo{Mike B comment: ``This discussion feels a little messy. As a first- and second-time reader, I was not sold on the need for this class, and eventually I had to sort of reverse-engineer its practical rationale. I think the first paragraph should make it crystal clear what this is for. If two things are identical, then under what real-world circumstances would I expect to have two copies in my model? If two copies are in conflict, or if they are nonidentical but overlapping, then why is this the right way to unify them? I think you have answers for these questions, informed by real-world experience, but they're not conveyed here. Readers need insight.''}
 
-When \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects are composed into structural and functional hierarchies using \sbol{ComponentInstance} and \sbol{Module} objects, it is often the case that some \sbol{ComponentInstance} objects are intended to represent the same entity in the overall design. The purpose of the \sbol{MapsTo} class is to make these identity relationships clear and explicit.
+When \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects are composed into structural and functional hierarchies using \sbol{ComponentInstance} and \sbol{Module} objects, it is often the case that some \sbol{ComponentInstance} objects are intended to represent the same entity in the overall design. The purpose of the \sbol{MapsTo} class is to make these identity relationships clear and explicit.  For example, consider a \sbol{ModuleDefinition} for a generic genetic inverter that includes a \sbol{FunctionalComponent} for a repressor protein.  When this \sbol{ModuleDefinition} is instantiated within a higher level \sbol{ModuleDefinition} that  includes a \sbol{FunctionalComponent} for a LacI protein, the \sbol{MapsTo} object can be used to indicate that the specific repressor protein in this instance is LacI.
 
 In particular, a \sbol{MapsTo} object provides two pieces of information:
 \begin{itemize}
@@ -875,7 +875,7 @@ The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers
 \paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
 The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. This property is used to indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{subject} and \sbol{object} \sbol{Component} objects. The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI}s in  \ref{tbl:restriction_types}.
-\Rtodo{Per Mike B comment: changed ``MUST ... or an [ill-defined] appropriate ontology'' to SHOULD, since that's the same.  -JSB  I'm not sure about this.  I think it is MUST, as these are the only ones we allow right now.  Same for all enumerated types we have defined. -CJM I agree with CJM. The original wording was problematic because it said 'restrictions MUST come from table 7 or anywhere else,' which we've simplified to a SHOULD. But implementors need a solid definition of each option, and a complete enumeration of options, because a hard constraint MUST never be disobeyed -- and that means that implementors MUST enforce all constraints. So this can't be open-ended. -MB }
+\Ctodo{Per Mike B comment: changed ``MUST ... or an [ill-defined] appropriate ontology'' to SHOULD, since that's the same.  -JSB  I'm not sure about this.  I think it is MUST, as these are the only ones we allow right now.  Same for all enumerated types we have defined. -CJM I agree with CJM. The original wording was problematic because it said 'restrictions MUST come from table 7 or anywhere else,' which we've simplified to a SHOULD. But implementors need a solid definition of each option, and a complete enumeration of options, because a hard constraint MUST never be disobeyed -- and that means that implementors MUST enforce all constraints. So this can't be open-ended. -MB So the outstanding question is do we want to make this SHOULD or MUST? -CJM}
 
 % Note: With regards to SBOL Version 1.1., this is a generalization of former \sbol{SequenceAnnotation} property \external{precedes}.
 
@@ -1244,7 +1244,7 @@ Values for this URI are RECOMMENDED to be chosen from the occurring entity branc
 
 The \sbol{participations} property is an OPTIONAL set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that the referenced \sbol{FunctionalComponent} plays in the interaction.
 
-Note that even though an \sbol{Interaction} generally involves at least one \sbol{Participation}, the case of zero participations is allowed because it is plausible that a design may wish to specify that an \sbol{Interaction} will exist, even if its \sbol{participants} are not yet determined.
+Note that even though an \sbol{Interaction} generally involves at least one \sbol{Participation}, the case of zero participations is allowed because it is plausible that a design may wish to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s are not yet determined.
 
 \paragraph{Serialization}
 
@@ -1509,8 +1509,6 @@ The serialization of \sbol{GenericTopLevel} objects has the following form where
 %<prefix:localPart rdf:about="...">
 %              ...
 %</prefix:localPart>
-
-\Rtodo{I don't see rdfType serialized in here; how is it worked? -JSB It is again used for serialization.  Added sentence above.}
 
 \lstsetsbol
 \begin{lstlisting}
