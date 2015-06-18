@@ -875,6 +875,7 @@ The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers
 \paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
 The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. This property is used to indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{subject} and \sbol{object} \sbol{Component} objects. The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI}s in  \ref{tbl:restriction_types}.
+
 \Ctodo{Per Mike B comment: changed ``MUST ... or an [ill-defined] appropriate ontology'' to SHOULD, since that's the same.  -JSB  I'm not sure about this.  I think it is MUST, as these are the only ones we allow right now.  Same for all enumerated types we have defined. -CJM I agree with CJM. The original wording was problematic because it said 'restrictions MUST come from table 7 or anywhere else,' which we've simplified to a SHOULD. But implementors need a solid definition of each option, and a complete enumeration of options, because a hard constraint MUST never be disobeyed -- and that means that implementors MUST enforce all constraints. So this can't be open-ended. -MB So the outstanding question is do we want to make this SHOULD or MUST? -CJM}
 
 % Note: With regards to SBOL Version 1.1., this is a generalization of former \sbol{SequenceAnnotation} property \external{precedes}.
@@ -1556,3 +1557,18 @@ Finally, this data sheet is linked from the component it describes using an anno
 \end{lstlisting}
 \label{ser:GenericTopLevel}
 \end{figure}
+
+\section{Mapping Between SBOL 1.1 and SBOL 2.0}
+\label{sec:mapping}
+
+\Rtodo{I moved this into its own section after data model, since I believe it makes the most sense after the data model is explained, and though short is perhaps important enough for its own section.  Open to moving this further down, if need be.  -CJM}
+
+Figure~\ref{SBOL1TO2} depicts the mapping between SBOL 1.1 data objects and SBOL 2.0 data objects. Collections of DNA components map to Collections of ComponentDefinitions, among other top level SBOL objects.  DnaComponents map to ComponentDefinitions of type DNA.  DnaSequences map to Sequences using the IUPAC encoding for nucleotide sequences. SequenceAnnotations with precise start and end positions are mapped to SequenceAnnotations with Range Locations, while SequenceAnnotations with imprecise positions are mapped to SequenceAnnotations with GenericLocations. Each Sequence Annotation also maps to a Component, which in SBOL 2.0 represents the instantiation or usage of a given ComponentDefinition. Finally, precedes relationships map to SequenceConstraints that specify precedes restrictions.
+
+\begin{figure*}[h]
+\begin{center}
+  \includegraphics[width=\textwidth]{images/sbol_v1_to_v2} 
+\end{center}
+\caption{\label{SBOL1TO2}The mapping from the SBOL 1.1 data model to the SBOL 2.0  data model.}
+\end{figure*}
+
