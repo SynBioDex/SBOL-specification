@@ -6,8 +6,6 @@
 %
 % -----------------------------------------------------------------------------
 
-\Rtodo{Ensure that no UML figures have labels conflicting with their arrows}
-
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively. 
 
 \subsection{Understanding the UML Diagrams}
@@ -94,8 +92,6 @@ It is important to realize that in RDF, a URI may or may not be a resolvable URL
 
 \subsection{Identified}
 \label{sec:Identified}
-
-\NVtodo{Put a small concrete example for each toplevel, in the style of the mapsTo diagram}
 
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class. 
 This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web. 
@@ -270,7 +266,6 @@ For example, the \sbol{elements} property of a \sbol{Sequence} with an \external
 
 \ref{tbl:sequence_encodings} provides a list of RECOMMENDED \sbol{URI}s for the \sbol{encoding} property. The terms in \ref{tbl:sequence_encodings} are organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}. When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \sbol{URI}s in \ref{tbl:sequence_encodings}, it MUST use that \sbol{URI} for this property.
 
-\NVtodo{revisit for next version of the spec. We looked at EDAM on NCBO as a nice example that integrates many ontologies in biology. This could be a possible way to simplify to one ontology source rathern than many as a best practice - KC}
 %A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -386,8 +381,6 @@ These terms are organized by the type of \sbol{ComponentDefinition} to which the
   \caption{RECOMMENDED ontology terms to specify the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition}, organized by the type of \sbol{ComponentDefinition} to which they should apply (see \ref{tbl:componentdefinition_types}).}
   \label{tbl:componentdefinition_roles}
 \end{table}
-
-\NVtodo{Goksel to replace URI for Transcription Factor role with something more appropriate (currently is URI for the term ``transcription activity.''}
 
 \subsubsection*{The \sbolheading{sequences} property}
 \label{sec:sequences}
@@ -876,8 +869,6 @@ The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers
 
 The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. This property is used to indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{subject} and \sbol{object} \sbol{Component} objects. The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI}s in  \ref{tbl:restriction_types}.
 
-\Ctodo{Per Mike B comment: changed ``MUST ... or an [ill-defined] appropriate ontology'' to SHOULD, since that's the same.  -JSB  I'm not sure about this.  I think it is MUST, as these are the only ones we allow right now.  Same for all enumerated types we have defined. -CJM I agree with CJM. The original wording was problematic because it said 'restrictions MUST come from table 7 or anywhere else,' which we've simplified to a SHOULD. But implementors need a solid definition of each option, and a complete enumeration of options, because a hard constraint MUST never be disobeyed -- and that means that implementors MUST enforce all constraints. So this can't be open-ended. -MB So the outstanding question is do we want to make this SHOULD or MUST? -CJM}
-
 % Note: With regards to SBOL Version 1.1., this is a generalization of former \sbol{SequenceAnnotation} property \external{precedes}.
 
 \begin{table}[ht]
@@ -893,8 +884,6 @@ The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. T
   \caption{RECOMMENDED \sbol{URI}s for the \sbol{restriction} property.}
   \label{tbl:restriction_types}
 \end{table}
-
-\NVtodo{We need things like nextTo and overlapping, and think we might be able to get it from region-connection-calculus ontology}
 
 \paragraph{Serialization}
 
@@ -1560,8 +1549,6 @@ Finally, this data sheet is linked from the component it describes using an anno
 
 \section{Mapping Between SBOL 1.1 and SBOL 2.0}
 \label{sec:mapping}
-
-\Rtodo{I moved this into its own section after data model, since I believe it makes the most sense after the data model is explained, and though short is perhaps important enough for its own section.  Open to moving this further down, if need be.  -CJM}
 
 Figure~\ref{SBOL1TO2} depicts the mapping between SBOL 1.1 data objects and SBOL 2.0 data objects. Collections of DNA components map to Collections of ComponentDefinitions, among other top level SBOL objects.  DnaComponents map to ComponentDefinitions of type DNA.  DnaSequences map to Sequences using the IUPAC encoding for nucleotide sequences. SequenceAnnotations with precise start and end positions are mapped to SequenceAnnotations with Range Locations, while SequenceAnnotations with imprecise positions are mapped to SequenceAnnotations with GenericLocations. Each Sequence Annotation also maps to a Component, which in SBOL 2.0 represents the instantiation or usage of a given ComponentDefinition. Finally, precedes relationships map to SequenceConstraints that specify precedes restrictions.
 
