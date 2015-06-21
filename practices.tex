@@ -10,10 +10,6 @@ The relationship between the old and new objects (i.e., that the new object was 
 
 As stated in \ref{sec:version},  it is RECOMMENDED that version numbering should follow the conventions of semantic versions (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).  This convention represents versions as sequences of numbers and qualifiers separated by the characters {\tt .} and {\tt -} and compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).  For a full explanation, see the linked resources.
 
-%% \subsection{Creation and Modification Dates}
-
-\NVtodo{Annotations: Annotating with created and modified dates, and how to add them. Is this section needed?  -- CJM}
-
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
@@ -28,19 +24,6 @@ Maintaining unique identity URIs for all SBOL objects is a very challenging impl
 \item The \sbol{version} of a compliant child object must be equal to the \sbol{version} of its parent object.
 \item The \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, and \sbol{version} of a compliant object once set can never be changed.
 \end{enumerate}
-
-\NVtodo{Mike B: ``"The version of a compliant child object must be equal to the version of {its} parent object."
-There is an alternative. Consider what happens in the following scenario:
-suppose my parent object is 'dad', and its two children are 'daughter' and 'son'.
-dad starts at v1.0, and likewise daughter starts at v1.0 and son is v1.0.
-Now I want to revise just the son, so I give him a new haircut and I increment his version to v1.1.
-Since the dad's child version changed, then dad needs to change as well, so let's increment his version to v1.1.
-However, there is no reason why daughter's version should change to v1.1. Daughter is exactly the same as she was at v1.0, and retaining her old version saves us the trouble of diffing v1.0 and the identical v1.1.
-In other words, version changes should be minimally promoted up the tree, but not back down to siblings and relatives if they didn't change.  
-
-If you don't want to do it this way, I do see why, but I've found it helpful on past projects to increment versions only on the things that contain diffs (including their containers, recursively). That's the way that many dependency management systems work, as well as certain aspects of version control: when you ask for a log on an individual file in a version control system, you don't see every revision that ever touched the repo, you only see the revisions that modified that file.''
-
-ANSWER: I can see your point.  It would, however, complicate a few things in our library implementation, and it would be very difficult to change at this point.  We can consider this for a future version.}
 
 For examples, see any example in this specification, as all have been
 formulated using compliant URIs.
@@ -81,11 +64,6 @@ either have a means of validating those external references (e.g., by
 retrieving them from various repositories) or else to mark them as
 being unverified and not depend on their correctness.
 
-\NVtodo{Mike B. ``"the program doing [the deserialization] SHOULD verify that all of the property values encoded therein have the right type...."
-Not everybody knows how to apply XML+XSD. Maybe we should give new users a big hint: they can just use any correctly implemented SBOL 2.0 XSD file along with a validating XML parser to do this stuff automatically. We really don't want implementators getting scared off by the burden imposed by this section of the spec. Let's perhaps additionally recommend as a bootstrapping exercise to grab an SBOL 2.0 XSD file out of a recognized reference implementation (libSBOLj, for instance), then start by feeding the XSD and the user's SBOL document in question to a validating XML parser such as xmllint, which is FOSS, works great, and installs in seconds. (Side note: if you choose to give these helpful hints, please make it clear that a given reference implementation is not a spec; if it contains errors, the spec wins.)
-
-A section about completeness and validation that doesn't talk about the available official or unofficial XSDs is incomplete. This part was left out of SBOL 1.1, but now that serialization is a big part of SBOL 2.0, an XSD should be included somehow, if only by reference.'' ANSWER: agreed, we need to do an XSD as soon as possible.  Help would be appreciated. -CJM I'll get in touch with the libsbol devs and offer to lend a hand. -MB}
-
 \subsection{Recommended Ontologies for External Terms}
 
 External ontologies and controlled vocabularies are an integral part of SBOL. SBOL utilizes these resources to access existing biological information where possible. New SBOL specific terms are defined only when necessary. Instead, SBOL provides placeholders that can point to external terms. For example, types of components, such as DNA or protein, are indicated using BioPAX. Similarly, the role of a DNA component is indicated via the SO terms. Although preferred ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
@@ -112,5 +90,3 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
   \caption{Preferred external resources from which to draw values for various SBOL properties.}
   \label{tbl:preferred_external_resources}
 \end{table}
-
-\NVtodo{Goksel and Neil need to sort out GO vs. UniProt, and possibly just recommend both here.}
