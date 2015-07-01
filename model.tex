@@ -418,7 +418,7 @@ A DNA \sbol{ComponentDefinition}, for example, could refer to a \sbol{Sequence} 
 
 The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. Each \sbol{SequenceAnnotation} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{ComponentDefinition}. 
 
-In addition, each \sbol{SequenceAnnotation} can  position a \sbol{Component} of the \sbol{ComponentDefinition} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}). If more than one \sbol{SequenceAnnotation} refers to a \sbol{Component} in this manner, then they MUST NOT specify conflicting regions. That is, their \sbol{Location} objects  MUST NOT specify regions that have conflicting \sbol{orientation} properties or occupy non-overlapping positions.
+In addition, each \sbol{SequenceAnnotation} can  position a \sbol{Component} of the \sbol{ComponentDefinition} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}). The \sbol{sequenceAnnotations} property MUST NOT contain two or more \sbol{SequenceAnnotation} objects that refer to the same \sbol{Component} in this way.
 
 Finally, as a best practice, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceAnnotation} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}. 
 For example, the \sbol{ComponentDefinition} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{ComponentDefinition} would need a \sbol{SequenceAnnotation} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
@@ -970,7 +970,7 @@ The serialization of a \sbol{Model} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswicth">
+<sbol:Model rdf:about="http://www.sbolstandard.org/examples/toogleswitch">
   ... [\emph{properties inherited from identified}] ...
   [\emph{one}] <sbol:source rdf:resource="..."/> [\emph{element}]
   [\emph{one}] <sbol:language rdf:resource="..."/> [\emph{element}]
@@ -1558,4 +1558,3 @@ Figure~\ref{SBOL1TO2} depicts the mapping between SBOL 1.1 data objects and SBOL
 \end{center}
 \caption{\label{SBOL1TO2}The mapping from the SBOL 1.1 data model to the SBOL 2.0  data model.}
 \end{figure*}
-
