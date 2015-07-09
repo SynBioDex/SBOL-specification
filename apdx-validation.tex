@@ -22,7 +22,7 @@ following symbols next to the rule numbers:
   ``This must be checked.'')
 
 \item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a weak
-  REQUIRED condition for SBOL conformance. While this rule MUST be followed, it is difficult, if not  impossible, for a machine to automatically check whether the rule has been followed. (Mnemonic intention behind the choice of symbol: ``This is a cause for warning.'')
+  REQUIRED condition for SBOL conformance. While this rule MUST be followed, it can be difficult, if not  impossible, for a machine to automatically check whether the rule has been followed. (Mnemonic intention behind the choice of symbol: ``This is a cause for warning.'')
 
 \item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a 
   RECOMMENDED condition for following best practices.  This rule is not strictly a matter of SBOL conformance, but its recommendation comes from logical
@@ -153,7 +153,7 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbol{components} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{Component} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printModeling{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} (subject to any restrictions on the positions of \sbol{Component} objects in the hierarchy that are imposed by \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects).\\ Reference: \sec{sec:ComponentDefinition}}
+\printModeling{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding}. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{ComponentDefinition} objects in the hierarchy.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 

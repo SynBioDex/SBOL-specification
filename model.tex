@@ -264,7 +264,7 @@ The \sbol{encoding} property is REQUIRED and has a data type of \sbol{URI}. This
 
 For example, the \sbol{elements} property of a \sbol{Sequence} with an \external{IUPAC DNA} encoding property MUST contain characters that represent nucleotide bases, such as {\tt a}, {\tt t}, {\tt c}, and {\tt g}. The \sbol{elements} property of a \sbol{Sequence} with a \external{Simplified Molecular-Input Line-Entry System (SMILES)} encoding, on the other hand, MUST contain characters that represent atoms and chemical bonds, such as {\tt C}, {\tt N}, {\tt O}, and {\tt =}.
 
-\ref{tbl:sequence_encodings} provides a list of RECOMMENDED \sbol{URI}s for the \sbol{encoding} property. The terms in \ref{tbl:sequence_encodings} are organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}. When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \sbol{URI}s in \ref{tbl:sequence_encodings}, it MUST use that \sbol{URI} for this property.
+\ref{tbl:sequence_encodings} provides a list of possible \sbol{URI} values for the \sbol{encoding} property. The terms in \ref{tbl:sequence_encodings} are organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}. When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \sbol{URI}s in \ref{tbl:sequence_encodings}, it MUST contain that \sbol{URI}.
 
 %A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
@@ -277,7 +277,7 @@ For example, the \sbol{elements} property of a \sbol{Sequence} with an \external
    SMILES & \url{http://www.opensmiles.org/opensmiles.html} & SmallMolecule \\
     \bottomrule
   \end{edtable}
-  \caption{RECOMMENDED \sbol{URI}s for specifying the \sbol{encoding} property of a \sbol{Sequence}, organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}.}
+  \caption{\sbol{URI}s for specifying the \sbol{encoding} property of a \sbol{Sequence}, organized by the type of \sbol{ComponentDefinition} (see \ref{tbl:componentdefinition_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}.}
   \label{tbl:sequence_encodings}
 \end{table}
 
@@ -330,7 +330,7 @@ As shown in \ref{uml:component_definition}, the \sbol{ComponentDefinition} class
 The \sbolmult{types:CD}{types} property is a REQUIRED set of \sbol{URI}s that specifies the category of biochemical or physical entity (for example DNA, protein, or small molecule) that a \sbol{ComponentDefinition} object abstracts for the purpose of engineering design. 
 
 The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). 
-\ref{tbl:componentdefinition_types} provides a list of RECOMMENDED ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s. 
+\ref{tbl:componentdefinition_types} provides a list of possible ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s. 
 In order to maximize the compatibility of designs, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use the \external{URI} for that term as one of its \sbolmult{types:CD}{types}. 
 Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it may not be clear how to interpret them). For example, the BioPAX terms provided by \ref{tbl:componentdefinition_types} would conflict because they specify classes of biochemical entities with different molecular structures.
 
@@ -347,7 +347,7 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
     Complex  & \url{http://www.biopax.org/release/biopax-level3.owl#Complex}\\
     \bottomrule
   \end{edtable}
-  \caption{RECOMMENDED BioPAX terms to specify the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
+  \caption{BioPAX terms to specify the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
  \label{tbl:componentdefinition_types}
 \end{table}
 
@@ -358,7 +358,7 @@ The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s that c
 
 The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MAY contain one or more \sbol{URI}s that MUST identify terms from ontologies that are consistent with the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition}.
 For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{ComponentDefinition} could contain \sbol{URI}s identifying terms from the Sequence Ontology (SO). 
-\ref{tbl:componentdefinition_roles} contains a list of RECOMMENDED ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. 
+\ref{tbl:componentdefinition_roles} contains a list of possible ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. 
 These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use the \external{URI} for that term as one of its \sbolmult{roles:CD}{roles}. 
 
 
@@ -378,7 +378,7 @@ These terms are organized by the type of \sbol{ComponentDefinition} to which the
       Effector & \url{http://identifiers.org/chebi/CHEBI:35224} & Small Molecule \\
     \bottomrule
   \end{edtable}
-  \caption{RECOMMENDED ontology terms to specify the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition}, organized by the type of \sbol{ComponentDefinition} to which they should apply (see \ref{tbl:componentdefinition_types}).}
+  \caption{Ontology terms to specify the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition}, organized by the type of \sbol{ComponentDefinition} to which they should apply (see \ref{tbl:componentdefinition_types}).}
   \label{tbl:componentdefinition_roles}
 \end{table}
 
@@ -388,24 +388,23 @@ The \sbol{sequences} property is OPTIONAL and MAY include a set of \sbol{URI}s t
 
 Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequence} object. For certain use cases, however, it may be appropriate to refer to multiple \sbol{Sequence} objects. For example, a user may wish to provide two different representations of the structure of a DNA \sbol{ComponentDefinition}, one that represents its structure at the level of nucleotide bases and one that represents its structure at the level of atoms and bonds. 
 
-If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects SHOULD be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. In addition, if a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths. These best practices are intended to make it easier for software tools to locate any regions specified by the \sbol{SequenceAnnotation} objects of a \sbol{ComponentDefinition} on its associated \sbol{Sequence} objects, as well as validate whether its \sbol{Sequence} objects are consistent with those associated with any \sbol{ComponentDefinition} objects that it may compose via its \sbol{Component} objects. 
+If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. Furthermore, these objects MUST NOT have conflicting \sbol{encoding} properties. For example, the \external{IUPAC} \sbol{encoding} properties provided by \ref{tbl:sequence_encodings} conflict with each other because they do not specify how to encode the same class of biochemical entity. The \external{SMILES} \sbol{encoding}, however, does not conflict with them because it specifies how to encode biochemical entities in general, which includes DNA, RNA, and proteins. If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths. These requirements and best practices are intended to make it easier for software tools to locate any regions specified by the \sbol{SequenceAnnotation} objects of a \sbol{ComponentDefinition} on its associated \sbol{Sequence} objects, as well as validate whether its \sbol{Sequence} objects are consistent with those associated with any \sbol{ComponentDefinition} objects that it composes via its \sbol{Component} objects. 
 
-Finally, a \sbol{ComponentDefinition} MUST NOT refer to \sbol{Sequence} objects with conflicting \sbol{encoding} properties. For example, the \external{IUPAC} \sbol{encoding} properties provided by \ref{tbl:sequence_encodings} conflict with each other because they do not specify how to encode the same class of biochemical entity. The \external{SMILES} \sbol{encoding}, however, does not conflict with them because it specifies how to encode biochemical entities in general, which includes DNA, RNA, and proteins. In addition, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}.  
+Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}.  
 Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbolmult{types:CD}{types} property MUST refer to the term from \ref{tbl:componentdefinition_types} that is cross-listed with this \sbol{encoding} in \ref{tbl:sequence_encodings}. 
-For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property must refer to the BioPAX term for DNA.
+For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property must refer to the BioPAX term for DNA. These requirements are meant to provide for some degree of consistency between the \sbol{types} property of a \sbol{ComponentDefinition} and the \sbol{encoding} properties of the \sbol{Sequence} objects to which it refers.
 
 \subsubsection*{The \sbolheading{components} property}
 \label{sec:components}
 
-The \sbol{components} property is OPTIONAL and MAY specify a set of \sbol{Component} objects that are contained by the \sbol{ComponentDefinition}.
-Note that the set of relations between \sbol{Component} and \sbol{ComponentDefinition} objects is strictly acyclic.
+The \sbol{components} property is OPTIONAL and MAY specify a set of \sbol{Component} objects that are contained by the \sbol{ComponentDefinition}. The set of relations between \sbol{Component} and \sbol{ComponentDefinition} objects is strictly acyclic (see \ref{sec:ComponentInstance}).
 
 While the \sbol{ComponentDefinition} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Component} class represents the specific occurrence of a part within a design. 
 Hence, this class allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{ComponentDefinition}). For example, the \sbol{ComponentDefinition} of a polycistronic gene could contain two \sbol{Component} objects that refer to the same \sbol{ComponentDefinition} of a CDS.
 
-In this way, the \sbol{components} property can be used to construct a hierarchy of \sbol{ComponentDefinition} objects. If a \sbol{ComponentDefinition} in the hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} (subject to any restrictions on the positions of \sbol{Component} objects in the hierarchy that are imposed by \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects).
+The \sbol{components} properties of \sbol{ComponentDefinition} objects can be used to construct a hierarchy of \sbol{ComponentDefinition} and \sbol{Component} objects. If a \sbol{ComponentDefinition} in the hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding}. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{ComponentDefinition} objects in the hierarchy.
 
-A DNA \sbol{ComponentDefinition}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{ComponentDefinition} could contain a \sbol{Component} that refers to a ``lower level''  \sbol{ComponentDefinition} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, the \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta}," or perhaps ``{\tt tgta}'' if the \sbol{Component} is positioned by a \sbol{SequenceAnnotation} that contains a \sbol{Location}  with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
+A DNA \sbol{ComponentDefinition}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{ComponentDefinition} could contain a \sbol{Component} that refers to a ``lower level''  \sbol{ComponentDefinition} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, a consistent \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta}," or perhaps ``{\tt tgta}'' if the \sbol{Component} is positioned by a \sbol{SequenceAnnotation} that contains a \sbol{Location}  with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
 
 % If the \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{Component} in its \sbol{components} property MUST refer to a \sbol{ComponentDefinition} that refers to a \sbol{Sequence} with the same \sbol{encoding}. 
 % In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{Sequence} objects to the \sbol{elements} of the \sbol{ComponentDefinition}'s \sbol{Sequence}, subject to any restrictions imposed by the \sbol{SequenceAnnotation} and \sbol{SequenceConstraint} objects that refer to the contents of the \sbol{components} property. 
