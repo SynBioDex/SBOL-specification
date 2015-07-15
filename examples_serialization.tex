@@ -2,9 +2,293 @@
 \section{Examples of Serialization}
 \label{ser:examples}
 % -----------------------------------------------------------------------------
-\subsection{Simple examples}
+\subsection{Simple Examples}
 
-\subsection{PoPS Receiver}
+\subsubsection{Serializing Sequence Entities}
+This example shows how to create \sbol{Sequence} entities.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://parts.igem.org/Part:BBa_J23119:Design"/>
+    <sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>
+\end{lstlisting}
+
+
+\subsubsection{Serializing ComponentDefinition Entities}
+This example shows how to create simple \sbol{ComponentDefinition} entities. A \sbol{ComponentDefinition} entity is created for a promoter part, and its nucleotide sequence is associated using a \sbol{Sequence} entity.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
+    <dcterms:title>J23119 promoter</dcterms:title>
+    <dcterms:description>Constitutive promoter</dcterms:description>
+    <sbol:type rdf:resource="http://identifiers.org/chebi/CHEBI:4705"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000613"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://parts.igem.org/Part:BBa_J23119:Design"/>
+    <sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>
+\end{lstlisting}
+
+\subsubsection{Serializing SequenceConstraint Entities}
+ This example shows to add constraints between subcomponents of a \sbol{ComponentDefinition} entity using \sbol{SequenceConstraint} entities. In the example, a promoter has two subcomponents: a core promoter region and and a binding site. Using a \sbol{SequenceConstraint} entity, it is specified that the core promoter region precedes the binding site.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_K174004">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_K174004"/>
+    <sbol:displayId>BBa_K174004</sbol:displayId>
+    <dcterms:title>pspac promoter</dcterms:title>
+    <dcterms:description>LacI repressible promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://partsregistry.org/cd/BBa_K174004/r1">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_K174004/r1"/>
+        <sbol:displayId>r1</sbol:displayId>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="http://partsregistry.org/cd/pspac"/>
+        <sbol:object rdf:resource="http://partsregistry.org/cd/LacI_operator"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/pspac">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/pspac"/>
+    <sbol:displayId>pspac</sbol:displayId>
+    <dcterms:title>constitutive promoter</dcterms:title>
+    <dcterms:description>pspac core promoter region</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/LacI_operator">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/LacI_operator"/>
+    <sbol:displayId>LacI_operator</sbol:displayId>
+    <dcterms:title>LacI operator</dcterms:title>
+    <dcterms:description>LacI binding site</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000057"/>
+  </sbol:ComponentDefinition>
+</rdf:RDF>
+\end{lstlisting}
+
+\subsubsection{Serializing Cut Location Entities}
+This example shows how to use {@link org.sbolstandard.core2.Cut} entities to specify a cut location.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
+    <dcterms:title>J23119 promoter</dcterms:title>
+    <dcterms:description>Constitutive promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000613"/>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_J23119/cutat10">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119/cutat10"/>
+        <sbol:displayId>cutat10</sbol:displayId>
+        <sbol:location>
+          <sbol:Cut rdf:about="http://partsregistry.org/cd/BBa_J23119/cutat10/cut1">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119/cutat10/cut1"/>
+            <sbol:displayId>cut1</sbol:displayId>
+            <sbol:at>10</sbol:at>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Cut>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_J23119/cutat12">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119/cutat12"/>
+        <sbol:displayId>cutat12</sbol:displayId>
+        <sbol:location>
+          <sbol:Cut rdf:about="http://partsregistry.org/cd/BBa_J23119/cutat12/cut2">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119/cutat12/cut2"/>
+            <sbol:displayId>cut2</sbol:displayId>
+            <sbol:at>12</sbol:at>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Cut>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://parts.igem.org/Part:BBa_J23119:Design"/>
+    <sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>
+\end{lstlisting}
+
+
+\subsubsection{Serializing Model Entities}
+This example shows how to create \sbol{Model} entities. In the example, the \sbol{Model} entity refers to an ODE model in the SBML format.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Model rdf:about="http://www.sbolstandard.org/examples/pIKE_Toggle_1">
+    <sbol:persistentIdentity rdf:resource="http://www.sbolstandard.org/examples/pIKE_Toggle_1"/>
+    <sbol:displayId>pIKE_Toggle_1</sbol:displayId>
+    <dcterms:title>pIKE_Toggle_1 toggle switch</dcterms:title>
+    <sbol:source rdf:resource="http://virtualparts.org/part/pIKE_Toggle_1"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
+  </sbol:Model>
+</rdf:RDF>
+\end{lstlisting}
+
+\subsubsection{Serializing ModuleDefinition Entities}
+This example shows to create simple \sbol{ModuleDefinition} entities. The module includes an \sbol{Interaction} entity to represent the translation of a protein.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ModuleDefinition rdf:about="http://sbolstandard.org/example/md/GFP_expression">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/md/GFP_expression"/>
+    <sbol:displayId>GFP_expression</sbol:displayId>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/md/GFP_expression/Constitutive_GFP">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/md/GFP_expression/Constitutive_GFP"/>
+        <sbol:displayId>Constitutive_GFP</sbol:displayId>
+        <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP_generator"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#in"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbolstandard.org/example/md/GFP_expression/GFP_protein">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/md/GFP_expression/GFP_protein"/>
+        <sbol:displayId>GFP_protein</sbol:displayId>
+        <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#out"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbolstandard.org/example/md/GFP_expression/express_GFP">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/md/GFP_expression/express_GFP"/>
+        <sbol:displayId>express_GFP</sbol:displayId>
+        <sbol:type rdf:resource="Transcription"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbolstandard.org/example/md/GFP_expression/express_GFP/Protein">
+            <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/md/GFP_expression/express_GFP/Protein"/>
+            <sbol:displayId>Protein</sbol:displayId>
+            <sbol:participant rdf:resource="http://sbolstandard.org/example/md/GFP_expression/GFP_protein"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbolstandard.org/example/md/GFP_expression/express_GFP/CDS">
+            <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/md/GFP_expression/express_GFP/CDS"/>
+            <sbol:displayId>CDS</sbol:displayId>
+            <sbol:participant rdf:resource="http://sbolstandard.org/example/md/GFP_expression/Constitutive_GFP"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+  </sbol:ModuleDefinition>
+</rdf:RDF>
+</rdf:RDF>
+\end{lstlisting}
+
+\subsubsection{Serializing Application Specific Data Within SBOL entities}
+This example shows how to embed application specific custom data into SBOL documents. A \sbol{ComponentDefinition} entity, representing a promoter, is annotated with information about the promoter's sigma factor and how it is regulated.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:pr="http://partsregistry.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <pr:group>iGEM2006_Berkeley</pr:group>
+    <pr:experience rdf:resource="http://parts.igem.org/cgi/partsdb/part_info.cgi?part_name=BBa_J23119"/>
+    <pr:information>
+      <pr:Information rdf:about="http://parts.igem.org/cgi/partsdb/part_info.cgi?part_name=BBa_J23119">
+        <pr:sigmafactor>//rnap/prokaryote/ecoli/sigma70</pr:sigmafactor>
+        <pr:regulation>//regulation/constitutive</pr:regulation>
+      </pr:Information>
+    </pr:information>
+    <dcterms:title>J23119</dcterms:title>
+    <dcterms:description>Constitutive promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+  </sbol:ComponentDefinition>
+</rdf:RDF>
+\end{lstlisting}
+
+\subsubsection{Serializing Application Specific Data Outside SBOL entities}
+This example shows embedding custom application specific data into SBOL documents as top-level entities. Such data are represented using \sbol{GenericTopLevel} entities and can be referenced from other SBOL entities via custom annotations.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:myapp="http://www.myapp.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/cd/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://www.partsregistry.org/cd/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://www.partsregistry.org/Part:BBa_J23119"/>
+    <myapp:datasheet rdf:resource="http://www.partsregistry.org/gen/datasheet1"/>
+    <dcterms:title>J23119</dcterms:title>
+    <dcterms:description>Constitutive promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+  </sbol:ComponentDefinition>
+  <myapp:Datasheet rdf:about="http://www.partsregistry.org/gen/datasheet1">
+    <sbol:persistentIdentity rdf:resource="http://www.partsregistry.org/gen/datasheet1"/>
+    <sbol:displayId>datasheet1</sbol:displayId>
+    <myapp:characterizationData rdf:resource="http://www.myapp.org/measurement/1"/>
+    <myapp:transcriptionRate>1</myapp:transcriptionRate>
+    <dcterms:title>Datasheet 1</dcterms:title>
+  </myapp:Datasheet>
+</rdf:RDF>
+\end{lstlisting}
+
+
+\subsubsection{Serializing Collection Entities}
+This examples shows how to create \sbol{Collection} entities. The Collection entity in the example is used to represent a library of promoters.
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Collection rdf:about="http://parts.igem.org/Promoters/Catalog/Anderson">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Promoters/Catalog/Anderson"/>
+    <sbol:displayId>Anderson</sbol:displayId>
+    <dcterms:title>Anderson promoters</dcterms:title>
+    <dcterms:description>The Anderson promoter collection</dcterms:description>
+    <sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
+    <sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23118"/>
+  </sbol:Collection>
+</rdf:RDF>
+\end{lstlisting}
+
+\subsection{Complex Examples}
+
+\subsubsection{PoPS Receiver}
 
 This example shows the serialization of the PoPS Receiver device designed by Canton and co-workers~\cite{canton-natbio-2008}. 
 In particular, this is a \sbol{ComponentDefinition} comprising five other \sbol{Component} objects to construct a detector for the cell-cell signaling molecule 3OC$_6$HSL.
@@ -234,7 +518,7 @@ Complete details of the device can be found in the cited paper and also at \url{
 </rdf:RDF>
 \end{lstlisting}
 
-\subsection{Toggle Switch}
+\subsubsection{Toggle Switch}
 
 This example shows the serialization of an SBOL data model for a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}.  
 This design is essentially similar to the one presented in \ref{sec:examples}, except that it uses some alternate groupings in how the total design is built up out of smaller entities.

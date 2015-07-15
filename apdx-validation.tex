@@ -106,9 +106,9 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbol{encoding} property of \sbol{Sequence} is REQUIRED and MUST contain a \external{URI}.\\ Reference: \sec{sec:Sequence}}
 
-\printWarning{The \sbol{encoding} property of a \sbol{Sequence} MUST contain a \external{URI} from \ref{tbl:sequence_encodings} if it is well-described by this \external{URI}.\\ Reference: \sec{sec:Sequence}}
-
 \printWarning{The \sbol{elements} property of a \sbol{Sequence} MUST be consistent with its \sbol{encoding} property.\\ Reference: \sec{sec:Sequence}}
+
+\printWarning{The \sbol{encoding} property of a \sbol{Sequence} MUST contain a \external{URI} from \ref{tbl:sequence_encodings} if it is well-described by this \external{URI}.\\ Reference: \sec{sec:Sequence}}
 
 \subsubsection*{Rules for the \class{ComponentDefinition} class} 
 \setcounter{sbolCtr}{10501}
@@ -119,31 +119,32 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST NOT contain more than one \external{URI} from \ref{tbl:componentdefinition_types}.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printWarning{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_types} if it is well-described by this \external{URI}.\\ Reference: \sec{sec:ComponentDefinition}}
-
 \printWarning{Each \external{URI} contained by the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that describes the category of biochemical or physical entity that is represented by the \sbol{ComponentDefinition}.\\ Reference: \sec{sec:ComponentDefinition}}
+
+\printWarning{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_types} if it is well-described by this \external{URI}.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printWarning{All \external{URI}s contained by the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} MUST refer to non-conflicting ontology terms.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printValid{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \external{URI}s.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printWarning{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_roles} if it is well-described by this \external{URI}.\\ Reference: \sec{sec:ComponentDefinition}}
-
 \printWarning{Each \external{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that clarifies the potential function of the \sbol{ComponentDefinition} in a biochemical or physical context.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printWarning{Each \external{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST refer to an ontology term that is consistent with its \sbolmult{types:CD}{types} property.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printModeling{The \sbolmult{roles:CD}{roles} property of a  \sbol{ComponentDefinition} SHOULD only contain a \external{URI} provided in  \ref{tbl:componentdefinition_roles} if one of its \sbolmult{types:CD}{types} is cross-listed with the \external{URI}.\\ Reference: \sec{sec:ComponentDefinition}}
+\printWarning{The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MUST contain a \external{URI} from \ref{tbl:componentdefinition_roles} if it is well-described by this \external{URI}.\\ Reference: \sec{sec:ComponentDefinition}}
+
+\printModeling{The \sbolmult{roles:CD}{roles} property of a  \sbol{ComponentDefinition} SHOULD only contain a \external{URI} provided in  \ref{tbl:componentdefinition_roles} if one of its \sbolmult{types:CD}{types} is cross-listed with this \external{URI}.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \external{URI} references to \sbol{Sequence} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printWarning{Each \external{URI} in the set of \sbol{sequences} MUST reference a \sbol{Sequence} object.\\ Reference: \sec{sec:ComponentDefinition}}
-
-\printWarning{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to \sbol{Sequence} objects with conflicting \sbol{encoding} properties.\\ Reference: \sec{sec:ComponentDefinition}}
+\printWarning{Each \external{URI} contained by the \sbol{sequences} property of a \sbol{ComponentDefinition} MUST refer to a \sbol{Sequence} object.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printWarning{The \sbol{Sequence} objects referred to by the \sbol{sequences} property of a \sbol{ComponentDefinition} MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printWarning{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to \sbol{Sequence} objects with conflicting \external{IUPAC} \sbol{encoding} \external{URI}s from \ref{tbl:sequence_encodings}.\\ Reference: \sec{sec:ComponentDefinition}}
+\printWarning{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to \sbol{Sequence} objects with conflicting \sbol{encoding} properties.\\ Reference: \sec{sec:ComponentDefinition}}
+
+% Redundant since subsumed by previous rule of equivalent strength
+% \printWarning{The \sbol{sequences} property of a \sbol{ComponentDefinition} MUST NOT refer to \sbol{Sequence} objects with conflicting \external{IUPAC} \sbol{encoding} \external{URI}s from \ref{tbl:sequence_encodings}.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printWarning{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, and one of the  \sbolmult{types:CD}{types} of this \sbol{ComponentDefinition} comes from \ref{tbl:componentdefinition_types}, then one of the \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this type in \ref{tbl:sequence_encodings}.\\ Reference: \sec{sec:ComponentDefinition}}
 
@@ -153,7 +154,7 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbol{components} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{Component} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printModeling{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding}. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{ComponentDefinition} objects in the hierarchy.\\ Reference: \sec{sec:ComponentDefinition}}
+\printModeling{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{ComponentDefinition} objects in the hierarchy.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 
@@ -168,17 +169,17 @@ Reference: \sec{sec:Identified}}
 
 \printValid{A \sbol{ComponentInstance} MUST inherit all properties of the \sbol{Identified} class.\\ Reference: \sec{sec:ComponentInstance}}
 
-\printValid{The \sbol{access} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \external{URI} from \ref{tbl:componentInstance_access} \\ Reference: \sec{sec:ComponentInstance}}
-
 \printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \external{URI} reference to a \sbol{ComponentDefinition}.\\ Reference: \sec{sec:ComponentInstance}}
 
-\printWarning{The \sbol{definition} property \external{URI} must reference a \sbol{ComponentDefinition} object.\\ Reference: \sec{sec:ComponentInstance}}
-
 \printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} MUST NOT contain a \external{URI} reference to the \sbol{ComponentDefinition} that contains the \sbol{ComponentInstance}.\\ Reference: \sec{sec:ComponentInstance}}
+
+\printWarning{The \external{URI} contained by the \sbolmult{definition:CI}{definition} property must refer to a \sbol{ComponentDefinition} object.\\ Reference: \sec{sec:ComponentInstance}}
 
 \printWarning{\sbol{ComponentInstance} objects MUST NOT form circular reference chains via their \sbolmult{definition:CI}{definition} properties and parent \sbol{ComponentDefinition} objects.\\ Reference: \sec{sec:ComponentInstance}}
 
 \printValid{The \sbolmult{mapsTos:CI}{mapsTos} property of a \sbol{ComponentInstance} is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects.\\ Reference: \sec{sec:ComponentInstance}}
+
+\printValid{The \sbol{access} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \external{URI} from \ref{tbl:componentInstance_access} \\ Reference: \sec{sec:ComponentInstance}}
 
 \subsubsection*{Rules for the \class{Component} class} 
 \setcounter{sbolCtr}{10701}
