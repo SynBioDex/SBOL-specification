@@ -504,7 +504,7 @@ For example, consider the \sbol{ComponentInstance} objects $A$ and $B$ and the \
 
 \paragraph{The \sbolheading{mapsTos} property}\label{sec:mapsTos:CI}
 
-The \sbolmult{mapsTos:CI}{mapsTos} property is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects that refer to and link together \sbol{ComponentInstance} objects (both \sbol{Component} objects and \sbol{FunctionalComponent} objects)  within a larger design.
+The \sbolmult{mapsTos:CI}{mapsTos} property is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects that refer to and link together \sbol{ComponentInstance} objects (both \sbol{Component} objects and \sbol{FunctionalComponent} objects) within a larger design.
 
 \ref{sec:MapsTo} contains a more detailed description of the \sbol{MapsTo} class.
 
@@ -514,7 +514,7 @@ The \sbolmult{mapsTos:CI}{mapsTos} property is OPTIONAL and MAY contain a set of
 \label{sec:private}
 
 The \sbol{access} property is a REQUIRED \sbol{URI} that indicates whether the \sbol{ComponentInstance} 
-can be referred to by a \sbol{MapsTo}.
+can be referred to remotely by a \sbol{MapsTo} on another \sbol{ComponentInstance} or \sbol{Module} contained by a different parent \sbol{ComponentDefinition} or \sbol{ModuleDefinition} (one that does not contain this \sbol{ComponentInstance}).
 
 \ref{tbl:componentInstance_access} provides a list of REQUIRED \sbol{access} \sbol{URI}s. The value of the \sbol{access} property MUST be one of these \sbol{URI}s.
 
@@ -612,7 +612,7 @@ In this way, many ``lower level'' \sbol{Component} objects can be linked togethe
 The same types of identity relationships can also be declared between \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects, or between \sbol{Component} objects and \sbol{FunctionalComponent} objects contained by \sbol{ComponentDefinition} objects and \sbol{ModuleDefinition} objects, respectively. See \ref{sec:examples} and \ref{ser:examples} for additional examples using the \sbol{MapsTo} class.
 
 \paragraph{The \sbolheading{local} property}\label{sec:local}
-This REQUIRED property has a data type of \sbol{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}. Finally, the \sbol{access} property of the \sbol{local} \sbol{ComponentInstance} MUST be set to ``public.''
+This REQUIRED property has a data type of \sbol{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.
 
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
 This REQUIRED property has a data type of \sbol{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.  
@@ -1402,7 +1402,7 @@ The \sbol{value} property can be a literal type (i.e., \sbol{String}, \sbol{Inte
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[scale=0.6]{uml/identified_annotations}
+\includegraphics[scale=0.55]{uml/identified_annotations}
 \caption[]{Diagram of the \sbol{Annotation} class and its association with \sbol{Identified} and \sbol{AnnotationValue} objects, which is used for annotating SBOL entities with application specific data.}
 \label{uml:identified_annotations}
 \end{center}
