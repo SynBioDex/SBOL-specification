@@ -28,14 +28,14 @@ Represents a user-defined container for organizing a group of SBOL objects.
 
 \begin{itemize}
 \item \emph{\sbol{Component}}:
-Pointer class. Incorporates a child \sbol{ComponentDefinition} by reference into exactly one parent \sbol{ComponentDefinition}. Represents a specific occurrence or instance of an entity within the design of a more complex entity. Because the same definition may appear at multiple locations in a design, a single \sbol{ComponentDefinition} may have zero or more parent \sbol{ComponentDefinition}s, and each such parent-child link requires its own, distinct \sbol{Component}.
-% Mike Bissell - Clarified the role of this class to match changes below in section six. Introduced the term "pointer class" after consulting briefly with Chris M. The emphasis on pointer classes is on the definitions they point to. WAS: "Represents a specific occurrence or instance of a single entity within the design of a more complex component. Each Component is associated with a ComponentDefinition, and there may be many different instances at different locations in a design that share the same definition."
+Pointer class. Incorporates a child \sbol{ComponentDefinition} \textit{by reference} into exactly one parent \sbol{ComponentDefinition}. Represents a specific occurrence or instance of an entity within the design of a more complex entity. Because the same definition may appear at multiple locations in a design, a single \sbol{ComponentDefinition} may have zero or more parent \sbol{ComponentDefinition}s, and each such parent-child link requires its own, distinct \sbol{Component}.
+% Mike Bissell - Clarified the role of this class to match changes below in section six. Introduced the term "pointer class" after consulting briefly with Chris M. The emphasis on pointer classes is on the definitions they point to. WAS: "Represents a specific occurrence or instance of a single entity within the design of a more complex component. Each Component is associated with a ComponentDefinition, and there may be many different instances at different locations in a design that share the same definition." I felt this was necessary because it
 
 \item \emph{\sbol{Location}}:
 Specifies the base coordinates and orientation of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecule such as a protein.
 
 \item \emph{\sbol{SequenceAnnotation}}:
-Describes the \sbol{Location} of a notable sub-sequence found within a 
+Describes the \sbol{Location} of a notable sub-sequence found within a \newline
 \sbol{ComponentDefinition}'s \sbol{Sequence}. Optionally contains a child \sbol{Component} link.
 % Mike Bissell - Reworded for clarity of the relationship between ComponentDefinition and Sequence. Broke the original paragraph into two sentences for simplicity. Reworded second sentence to emphasize that a Component is a) a child entity, and b) a link (pointer). Old wording was vague on Component's job within SequenceAnnotation, and old wording made it sound as if the Component was the payload itself, rather than just a reference. WAS: "Describes the Location of a notable sub-sequence found within the Sequence linked to a ComponentDefinition, with an optional link to a Component." 
 
@@ -55,8 +55,8 @@ Describes a ``system'' design as a collection of biological components and their
 
 \begin{itemize}
 \item \emph{\sbol{FunctionalComponent}}:
-Represents a specific occurrence or instance of an \sbol{ComponentDefinition} within a \sbol{ModuleDefinition}.
-Exactly like a \sbol{Component}, except that it can be associated with information about its context of use in the \sbol{Module}, rather than in the context of a containing \sbol{ComponentDefinition}.
+Pointer class. Incorporates a child \sbol{ComponentDefinition} \textit{by reference} into exactly one parent \sbol{ModuleDefinition}. Represents a specific occurrence or instance of an entity within the design of a system. Because the same definition may appear at multiple locations in a design, a single \sbol{ComponentDefinition} may have zero or more parent \sbol{ModuleDefinition}s, and each such parent-child link requires its own, distinct \sbol{FunctionalComponent}.
+% Mike Bissell - As above, reworded to clarify the structure of these relationships, with special attention to the pointer-like nature of this type. WAS: "Represents a specific occurrence or instance of an ComponentDefinition within a ModuleDefinition. Exactly like a Component, except that it can be associated with information about its context of use in the Module, rather than in the context of a containing ComponentDefinition." I eliminated the bit about it being "exactly like... except," because with those exceptions, the likeness is *inexact*. Instead, I deliberately reworked the paragraph's phrasing and contents to emphasize this class's similarity to the other two pointer classes.
 
 \item \emph{\sbol{Interaction}}:
 Describes a functional relationship between biological entities, such as regulatory activation or repression, or a biological process such as transcription or translation.
@@ -66,8 +66,8 @@ When a design (\sbol{ComponentDefinition} or \sbol{ModuleDefinition}) includes a
 In this case, a referencing \sbol{ComponentInstance} needs to be created in the design and a \sbol{MapsTo} is added to the instance for the sub-design, which associates the original and the referencing instance.
 
 \item \emph{\sbol{Module}}:
-Represents a specific occurrence or instance of a sub-system within a larger design.
-Each \sbol{Module} is associated with a \sbol{ModuleDefinition}, and there may be many different instances at different locations in a design that share the same definition.
+Pointer class. Incorporates a child \sbol{ModuleDefinition} by \textit{reference} into exactly one parent \sbol{ModuleDefinition}. Represents a specific occurrence or instance of a subsystem within the design of a larger system. Because the same definition may appear at multiple locations in a design, a single \sbol{ModuleDefinition} may have zero or more parent \sbol{ModuleDefinition}s, and each such parent-child link requires its own, distinct \sbol{Module}.
+% Mike Bissell - Reworked this paragraph like I did for Component and FunctionalComponent (see above). WAS: "Represents a specific occurrence or instance of a sub-system within a larger design. Each Module is associated with a ModuleDefinition, and there may be many different instances at different locations in a design that share the same definition."
 
 \item \emph{\sbol{Participation}}:
 Describes the role that a \sbol{Component} plays in an \sbol{Interaction}.
