@@ -1548,7 +1548,18 @@ Finally, this data sheet is linked from the component it describes using an anno
 \section{Mapping Between SBOL 1.1 and SBOL 2.0}
 \label{sec:mapping}
 
-Figure~\ref{SBOL1TO2} depicts the mapping between SBOL 1.1 data objects and SBOL 2.0 data objects. Collections of DNA components map to Collections of ComponentDefinitions, among other top level SBOL objects.  DnaComponents map to ComponentDefinitions of type DNA.  DnaSequences map to Sequences using the IUPAC encoding for nucleotide sequences. SequenceAnnotations with precise start and end positions are mapped to SequenceAnnotations with Range Locations, while SequenceAnnotations with imprecise positions are mapped to SequenceAnnotations with GenericLocations. Each Sequence Annotation also maps to a Component, which in SBOL 2.0 represents the instantiation or usage of a given ComponentDefinition. Finally, precedes relationships map to SequenceConstraints that specify precedes restrictions.
+\ref{SBOL1TO2} depicts the mapping of SBOL 1.1 classes to SBOL 2.0 classes, indicating corresponding elements by color.
+The SBOL 2.0 Model and ModuleDefinition classes have no SBOL 1.1 equivalent, and are thus not shown.
+In particular:
+\begin{itemize}
+\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.0 \sbol{Collection} objects that can contain both \sbol{ComponentDefinition} objects and other top level SBOL objects.  
+\item SBOL 1.1 \external{DnaComponent} maps to an SBOL 2.0 \sbol{ComponentDefinition} of type DNA.
+\item SBOL 1.1 \external{DnaSequence} maps to an SBOL 2.0 \sbol{Sequence} using the IUPAC encoding for nucleotide sequences.
+\item SBOL 1.1 \external{SequenceAnnotation} with a precise start and end position maps to an SBOL 2.0 \sbol{SequenceAnnotation} with a \sbol{Range} \sbol{Location}
+\item SBOL 1.1 \external{SequenceAnnotation} with imprecise positions maps to an SBOL 2.0 \sbol{SequenceAnnotation} with a \sbol{GenericLocation}. 
+\item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.0 \sbol{Component}, which represents the instantiation or usage of a given \sbol{ComponentDefinition}.
+\item Each SBOL 1.1 \external{precedes} relationship maps to an SBOL 2.0 \sbol{SequenceConstraint} that specifies a \external{precedes} restriction.
+\end{itemize}
 
 \begin{figure*}[h]
 \begin{center}
