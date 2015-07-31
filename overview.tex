@@ -17,7 +17,7 @@ As an overall system, the device is designed to grow either blue-colored (unsucc
 These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional machinery and translational machinery that collectively cause the desired system-level behavior. 
 
 Knowledge of how such a device functions within the context of a host and how it might be adapted to new experimental applications has generally been passed on through working with fellow scientists or reading articles in papers and books. 
-But there was no systematic way to communicate the integration of sequences with functional designs, so users typically had to look in many different places to develop an understanding of a system.  
+But there has been no systematic way to communicate the integration of sequences with functional designs, so users typically have had to look in many different places to develop an understanding of a system.  
 The SBOL 2.0 standard allows designers to describe these functional characteristics and connect them to the physical parts and sequences that make up the design. 
 
 SBOL 2.0 includes two main classes that match the structural/functional distinction above:
@@ -30,7 +30,7 @@ SBOL 2.0 includes two main classes that match the structural/functional distinct
 The \sbol{ModuleDefinition} specifies the structural elements that make up the cassette by referencing a number of \sbol{ComponentDefinition} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
 The \sbol{ComponentDefinition} objects can be organized hierarchically.  For example, the plasmid \sbol{ComponentDefinition} may reference \sbol{ComponentDefinition}s for the promoter, coding sequence, etc.  
 Each \sbol{ComponentDefinition} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceAnnotation} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
-In order to specify functional information, the \sbol{ModuleDefinition} can specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{ModuleDefinition} object can point to a \sbol{Model} object that provides a reference to a complete quantitative model using a language such as SBML, CellML, Matlab, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
+In order to specify functional information, the \sbol{ModuleDefinition} can specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{ModuleDefinition} object can point to a \sbol{Model} object that provides a reference to a complete computational model using a language such as SBML, CellML, Matlab, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -53,12 +53,12 @@ Whereas \ref{images:overview1} provides a broad overview of SBOL, \ref{images:ov
 \end{center}
 \end{figure}
 
-\ref{images:overview2} additionally shows that when it is possible to incorporate a single object into multiple parents, we always incorporate that object by reference. We do not directly incorporate it by copy, as when an object is used many times, keeping many copies can become both very inefficient and also difficult to maintain.
+\ref{images:overview2} additionally shows that when it is possible to incorporate a single object into multiple parents, we always incorporate that object by reference. We do not directly incorporate it by copy, because when an object is used many times, keeping many copies becomes spatially inefficient and difficult to maintain.
 Instead, each reference is handled by a pointer object. 
 Pointers refer from a parent to a child. There are three distinct pointer classes: \sbol{Component}, \sbol{Module}, and \sbol{FunctionalComponent}. A \sbol{Component} points from a \sbol{ComponentDefinition} to a child \sbol{ComponentDefinition}, incorporating it by reference into the parent structure. A \sbol{Module} points from a \sbol{ModuleDefinition} to a child \sbol{ModuleDefinition}, likewise incorporating the child by reference into the parent system. Similarly, a parent \sbol{ModuleDefinition} on the functional side of a model may incorporate a child \sbol{ComponentDefinition} from the model's physical side by means of a \sbol{FunctionalComponent} reference. These three pointer classes allow the efficient reuse of definitions in multiple locations.
 % Mike Bissell - I rewrote the first half of the paragraph that used to live here per Chris Myers's request. Please review my changes. (Also, could somebody please fix the right alignment?) Rationale: the old version did not have a single theme, and it obscured what is essentially a simple pattern. This edit prompted the insertion of extra verbiage re: the three "pointer classes" above, in section 5.2. I also eliminated two out of the three transitions using "finally" or "final," because only one item can come last.
 
-SBOL 2.0 provides a few helper classes.  First, \sbol{Location}  generalizes the positioning information from SBOL 1.1 to allow discontinuous ranges and cuts to be annotated, and \sbol{SequenceConstraint}, which generalizes the relative positioning information among \sbol{Component}s.  
+SBOL 2.0 provides a few helper classes. \sbol{Location}  generalizes the positioning information from SBOL 1.1 to allow discontinuous ranges and cuts to be annotated.  \sbol{SequenceConstraint} generalizes the relative positioning information among \sbol{Component}s.  
 There are also \sbol{Participation}s, which allow \sbol{Interaction} objects to specify the roles of their participants while referencing the \sbol{FunctionalComponent}s, so that these can stand on their own.
 Additionally, there is the \sbol{MapsTo} class (not shown), which enables connections to be made between \sbol{Component}s and \sbol{FunctionalComponent}s across various levels of the design hierarchy.  The next section provides complete definitions and details for all of these classes.
 % Mike Bissell - Changed "at various levels" to "across various levels." Please confirm.
