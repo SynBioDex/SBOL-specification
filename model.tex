@@ -11,9 +11,9 @@ In this section, we describe the types of biological design data that can belong
 \subsection{Understanding the UML Diagrams}
 \label{sec:umldiagrams}
 
-The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Each SBOL class can be instantiated by many SBOL objects. These objects may contain data that differ in content, but they MUST agree on the type and form of their data as dictated by their common class. Classes are represented in UML diagrams as rectangles labeled at the top with class names.
+The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Each SBOL class can be instantiated by many SBOL objects. These objects MAY contain data that differ in content, but they MUST agree on the type and form of their data as dictated by their common class. Classes are represented in UML diagrams as rectangles labeled at the top with class names.
 
-Classes may be connected to other classes by association properties, which are represented in UML diagrams as arrows. These arrows are labeled with data cardinalities in order to indicate how many values a given association property may possess (see below). The remaining (non-association) properties of a class are listed below its name. Each of the latter properties is labeled with its data type and cardinality.
+Classes can be connected to other classes by association properties, which are represented in UML diagrams as arrows. These arrows are labeled with data cardinalities in order to indicate how many values a given association property can possess (see below). The remaining (non-association) properties of a class are listed below its name. Each of the latter properties is labeled with its data type and cardinality.
 
 In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, in which the owner of the association property exists independently of its value. In the SBOL data model, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.
 
@@ -27,7 +27,7 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 
 \item $1$ - REQUIRED, one: there MUST be exactly one value for this property.
 
-\item $0 \ldots 1$ - OPTIONAL: there MAY be a single value for this property, or it may be absent.
+\item $0 \ldots 1$ - OPTIONAL: there MAY be a single value for this property, or it MAY be absent.
 
 \item $0 \ldots *$ - unbounded: there MAY be any number of values for this property, including none.
 
@@ -84,7 +84,7 @@ In addition to the simple types listed above, SBOL also uses objects with types 
 Note that, in compliance with RDF standards, \sbol{URI}s are generally serialized using an \external{rdf:resource} property, e.g.:
 \external{rdf:resource="http://www.partsregistry.org/Part:BBa\_J23119"}
 
-It is important to realize that in RDF, a \sbol{URI} may or may not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
+It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
 
 \subsection{Identified}
 \label{sec:Identified}
@@ -94,9 +94,9 @@ This inheritance means that all SBOL objects are uniquely identified using \sbol
 
 As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
 
-When an SBOL resource reference takes the form of a \sbol{URI}, that \sbol{URI} may either be the value of an \sbol{identity} property or the value of a \sbol{persistentIdentity} property.
+When an SBOL resource reference takes the form of a \sbol{URI}, that \sbol{URI} can either be the value of an \sbol{identity} property or the value of a \sbol{persistentIdentity} property.
 If the \sbol{URI} is equal to the value of an \sbol{identity} property, then it is guaranteed to be unique, and it refers to precisely one SBOL object with that \sbol{URI}.
-If the \sbol{URI} is equal to the value of a \sbol{persistentIdentity} property, then it may refer to multiple SBOL objects that are different ``versions'' of each other. These objects SHOULD be compared to one another to determine which single object the \sbol{URI} resolves to (normally the most recent version - see \ref{sec:version}).
+If the \sbol{URI} is equal to the value of a \sbol{persistentIdentity} property, then it MAY refer to multiple SBOL objects that are different ``versions'' of each other. These objects SHOULD be compared to one another to determine which single object the \sbol{URI} resolves to (normally the most recent version - see \ref{sec:version}).
 Throughout this document, when a \sbol{URI} is used to refer to an SBOL object, it could fall into either of these cases.
 
 \begin{figure}[ht]
@@ -328,7 +328,7 @@ The \sbolmult{types:CD}{types} property is a REQUIRED set of \sbol{URI}s that sp
 The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI). 
 \ref{tbl:componentdefinition_types} provides a list of possible ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s. 
 In order to maximize the compatibility of designs, any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use the \sbol{URI} for that term as one of its \sbolmult{types:CD}{types}. 
-Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it may not be clear how to interpret them). For example, the BioPAX terms provided by \ref{tbl:componentdefinition_types} would conflict because they specify classes of biochemical entities with different molecular structures.
+Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it might not be clear how to interpret them). For example, the BioPAX terms provided by \ref{tbl:componentdefinition_types} would conflict because they specify classes of biochemical entities with different molecular structures.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -381,7 +381,9 @@ These terms are organized by the type of \sbol{ComponentDefinition} to which the
 \label{sec:sequences}
 The \sbol{sequences} property is OPTIONAL and MAY include a set of \sbol{URI}s that refer to \sbol{Sequence} objects. These objects define the primary structure of the \sbol{ComponentDefinition}.
 
-Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequence} object. For certain use cases, however, it may be appropriate to refer to multiple \sbol{Sequence} objects. For example, a user may wish to provide two different representations of the structure of a DNA \sbol{ComponentDefinition}, one that represents its structure at the level of nucleotide bases and one that represents its structure at the level of atoms and bonds. 
+Many \sbol{ComponentDefinition} objects will refer to precisely one \sbol{Sequence} object. 
+For certain use cases, however, it can be appropriate to refer to multiple \sbol{Sequence} objects. 
+For example, a user might wish to provide two different representations of the structure of a DNA \sbol{ComponentDefinition}, one that represents its structure at the level of nucleotide bases and one that represents its structure at the level of atoms and bonds. 
 
 If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. Furthermore, these objects MUST NOT have conflicting \sbol{encoding} properties. For example, the \external{IUPAC} \sbol{encoding} properties provided by \ref{tbl:sequence_encodings} conflict with each other because they do not specify how to encode the same class of biochemical entity. The \external{SMILES} \sbol{encoding}, however, does not conflict with them because it specifies how to encode biochemical entities in general, which includes DNA, RNA, and proteins. If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths. These requirements and best practices are intended to make it easier for software tools to locate any regions specified by the \sbol{SequenceAnnotation} objects of a \sbol{ComponentDefinition} on its associated \sbol{Sequence} objects, as well as validate whether its \sbol{Sequence} objects are consistent with those associated with any \sbol{ComponentDefinition} objects that it composes via its \sbol{Component} objects. 
 
@@ -420,7 +422,8 @@ For example, the \sbol{ComponentDefinition} of a eukaryotic gene could refer to 
 \subsubsection*{The \sbolheading{sequenceConstraints} property}
 \label{sec:sequenceConstraints}
 
-The \sbol{sequenceConstraints} property is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects. These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{Component} objects contained by the \sbol{ComponentDefinition}. For example, the \sbol{ComponentDefinition} of a gene may specify that the position of its promoter \sbol{Component} precedes that of its CDS \sbol{Component}. This is particulary useful when a \sbol{ComponentDefinition} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{Component} objects using \sbol{SequenceAnnotation} objects.
+The \sbol{sequenceConstraints} property is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects. These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{Component} objects contained by the \sbol{ComponentDefinition}. 
+For example, the \sbol{ComponentDefinition} of a gene might specify that the position of its promoter \sbol{Component} precedes that of its CDS \sbol{Component}. This is particulary useful when a \sbol{ComponentDefinition} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{Component} objects using \sbol{SequenceAnnotation} objects.
 
 \subsubsection*{Serialization}
 The serialization of a \sbol{ComponentDefinition} MUST have the form below. 
@@ -1005,7 +1008,7 @@ As shown in \ref{uml:module_definition}, these child entities are aggregated via
 \subsubsection*{The \sbolheading{roles} property}\label{sec:roles:MD}
 The \sbolmult{roles:MD}{roles} property is an OPTIONAL set of \sbol{URI}s that clarifies the intended function of a \sbol{ModuleDefinition}.  
 
-These \sbol{URI}s might identify descriptive biological roles, such as ``metabolic pathway'' and ``signaling cascade,'' but they may also identify identify ``logical'' roles, such as ``inverter'' or ``AND gate'', or other abstract roles for describing the function of design. Interpretation of the meaning of such roles currently depends on the software tools that read and write them.
+These \sbol{URI}s might identify descriptive biological roles, such as ``metabolic pathway'' and ``signaling cascade,'' but they can also identify identify ``logical'' roles, such as ``inverter'' or ``AND gate'', or other abstract roles for describing the function of design. Interpretation of the meaning of such roles currently depends on the software tools that read and write them.
 
 \subsubsection*{The \sbolheading{modules} property}\label{sec:modules}
 
@@ -1027,7 +1030,7 @@ Just as a \sbol{Module} represents an instance of a subsystem in the overall sys
 
 The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the \sbol{ModuleDefinition}.
 
-The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a \sbol{ModuleDefinition} (whereas a more detailed model of the system may not be suited to machine reasoning, depending on its implementation).  
+The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a \sbol{ModuleDefinition} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).  
 Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{FunctionalComponent} objects involved in the \sbol{Interaction}.
 
 \subsubsection*{The \sbolheading{models} property}\label{sec:models}
@@ -1236,7 +1239,7 @@ If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:int
 
 The \sbol{participations} property is an OPTIONAL and MAY contain a set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that its referenced \sbol{FunctionalComponent} plays in the \sbol{Interaction}.
 
-Even though an \sbol{Interaction} generally contains at least one \sbol{Participation}, the case of zero \sbol{Participation} objects is allowed because it is plausible that a designer may want to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s have not yet been determined.
+Even though an \sbol{Interaction} generally contains at least one \sbol{Participation}, the case of zero \sbol{Participation} objects is allowed because it is plausible that a designer might want to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s have not yet been determined.
 
 \paragraph{Serialization}
 
@@ -1358,7 +1361,7 @@ Some examples of \sbol{Collection} objects:
 \end{figure}
 
 \subsubsection*{The \sbolheading{members} property}\label{sec:members}
-The \sbol{members} property of a \sbol{Collection} is optional and MAY contain a set of \sbol{URI} references to zero or more \sbol{TopLevel} objects.
+The \sbol{members} property of a \sbol{Collection} is OPTIONAL and MAY contain a set of \sbol{URI} references to zero or more \sbol{TopLevel} objects.
 
 \subsubsection*{Serialization}
 
