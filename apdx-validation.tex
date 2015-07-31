@@ -152,7 +152,7 @@ Reference: \sec{sec:Identified}}
 
 \printModeling{The \sbolmult{roles:CD}{roles} property of a  \sbol{ComponentDefinition} SHOULD only contain a \sbol{URI} provided in  \ref{tbl:componentdefinition_roles} if one of its \sbolmult{types:CD}{types} is cross-listed with this \sbol{URI}.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{URI} references to \sbol{Sequence} objects.\\ Reference: \sec{sec:ComponentDefinition}}
+\printValid{The \sbol{sequences} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:ComponentDefinition}}
 
 \printWarning{Each \sbol{URI} contained by the \sbol{sequences} property of a \sbol{ComponentDefinition} MUST refer to a \sbol{Sequence} object.\\ Reference: \sec{sec:ComponentDefinition}}
 
@@ -186,7 +186,7 @@ Reference: \sec{sec:Identified}}
 
 \printValid{A \sbol{ComponentInstance} MUST inherit all properties of the \sbol{Identified} class.\\ Reference: \sec{sec:ComponentInstance}}
 
-\printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{ComponentDefinition}.\\ Reference: \sec{sec:ComponentInstance}}
+\printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:ComponentInstance}}
 
 \printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} MUST NOT contain a \sbol{URI} reference to the \sbol{ComponentDefinition} that contains the \sbol{ComponentInstance}.\\ Reference: \sec{sec:ComponentInstance}}
 
@@ -208,15 +208,17 @@ Reference: \sec{sec:Identified}}
 
 \printValid{A \sbol{MapsTo} MUST inherit all properties of the \sbol{Identified} class.\\ Reference: \sec{sec:MapsTo}}
 
-\printValid{The \sbol{local} property of a \sbol{MapsTo} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{ComponentInstance}.\\ Reference: \sec{sec:MapsTo}}
+\printValid{The \sbol{local} property of a \sbol{MapsTo} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:MapsTo}}
 
 \printValid{If a \sbol{MapsTo} is contained by a \sbol{Component} in a \sbol{ComponentDefinition}, then the \sbol{local} property of the \sbol{MapsTo} MUST refer to another \sbol{Component} in the \sbol{ComponentDefinition}.\\ Reference: \sec{sec:MapsTo}}
 
 \printValid{If a \sbol{MapsTo} is contained by a \sbol{FunctionalComponent} or \sbol{Module} in a \sbol{ModuleDefinition}, then the \sbol{local} property of the \sbol{MapsTo} MUST refer to another \sbol{FunctionalComponent} in the \sbol{ModuleDefinition}.\\ Reference: \sec{sec:MapsTo}}
 
-\printValid{The \sbol{remote} property of a \sbol{MapsTo} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{ComponentInstance}.\\ Reference: \sec{sec:MapsTo}}
+\printValid{The \sbol{remote} property of a \sbol{MapsTo} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:MapsTo}}
 
-\printWarning{The \sbol{remote} property of a \sbol{MapsTo} MUST refer to a \sbol{ComponentInstance} with an \sbol{access} property that contains the \sbol{URI} \url{http://sbols.org/v2\#public}.\\ Reference: \sec{sec:MapsTo}}
+\printWarning{The \sbol{remote} property of a \sbol{MapsTo} MUST refer to a \sbol{ComponentInstance}.\\ Reference: \sec{sec:MapsTo}}
+
+\printWarning{The \sbol{ComponentInstance} referred to by the \sbol{remote} property of a \sbol{MapsTo} MUST have an \sbol{access} property that contains the \sbol{URI} \url{http://sbols.org/v2\#public}.\\ Reference: \sec{sec:MapsTo}}
 
 \printWarning{If a \sbol{MapsTo} is contained by a \sbol{ComponentInstance}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{Component} in the \sbol{ComponentDefinition} that is referenced by the \sbolmult{definition:CI}{definition} property of the \sbol{ComponentInstance}.\\ Reference: \sec{sec:MapsTo}} 
 
@@ -324,7 +326,7 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbol{framework} property is REQUIRED and must contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
 
-\printWarning{The \sbol{URI} contained by the \sbol{framework} property of a \sbol{Model} MUST specify the mathematical framework of the model.\\ Reference: \sec{sec:Model}}
+\printWarning{The \sbol{URI} contained by the \sbol{framework} property of a \sbol{Model} MUST specify the modeling framework of the model.\\ Reference: \sec{sec:Model}}
 
 \printWarning{The \sbol{framework} property of a \sbol{Model} MUST contain a \sbol{URI} from \ref{tbl:model_frameworks} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:Model}}
 
@@ -336,6 +338,8 @@ Reference: \sec{sec:Identified}}
 \printValid{A \sbol{ModuleDefinition} MUST inherit all properties of the \sbol{TopLevel} class.\\ Reference: \sec{sec:ModuleDefinition}}
 
 \printValid{The \sbolmult{roles:MD}{roles} property is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:ModuleDefinition}}
+
+\printWarning{Each \sbol{URI} contained by \sbolmult{roles:MD}{roles} property of a \sbol{ModuleDefinition} MUST refer to a resource that clarifies the intended function of the \sbol{ModuleDefinition}.\\ Reference: \sec{sec:ModuleDefinition}}
 
 \printValid{The \sbol{modules} property OPTIONAL and may contain a set of \sbol{Module} objects.\\ Reference: \sec{sec:ModuleDefinition}}
 
@@ -429,6 +433,6 @@ Reference: \sec{sec:Identified}}
 \subsubsection*{Rules for the \class{GenericTopLevel} class} 
 \setcounter{sbolCtr}{12301}
 
-\printValid{A \sbol{GenericTopLevel} object MUST inherits all properties of the \sbol{TopLevel} class.\\ Reference: \sec{sec:GenericTopLevel}}
+\printValid{A \sbol{GenericTopLevel} object MUST inherit all properties of the \sbol{TopLevel} class.\\ Reference: \sec{sec:GenericTopLevel}}
 
 \printValid{The \sbol{rdfType} property of a \sbol{GenericTopLevel} object is REQUIRED and MUST contain a \sbol{QName}.\\ Reference: \sec{sec:GenericTopLevel}}
