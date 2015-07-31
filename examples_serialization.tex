@@ -4,8 +4,8 @@
 % -----------------------------------------------------------------------------
 \subsection{Simple Examples}
 
-\subsubsection{Serializing Sequence Entities}
-This example shows how to create \sbol{Sequence} entities.
+\subsubsection{Serializing Sequence Objects}
+This example shows the serialization of a \sbol{Sequence}.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -21,8 +21,8 @@ This example shows how to create \sbol{Sequence} entities.
 \end{lstlisting}
 
 
-\subsubsection{Serializing ComponentDefinition Entities}
-This example shows how to create simple \sbol{ComponentDefinition} entities. A \sbol{ComponentDefinition} entity is created for a promoter part, and its nucleotide sequence is associated using a \sbol{Sequence} entity.
+\subsubsection{Serializing ComponentDefinition Objects}
+This example shows the serialization of a simple promoter \sbol{ComponentDefinition} and the \sbol{Sequence} to which it refers.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -49,8 +49,8 @@ This example shows how to create simple \sbol{ComponentDefinition} entities. A \
 </rdf:RDF>
 \end{lstlisting}
 
-\subsubsection{Serializing SequenceConstraint Entities}
- This example shows to add constraints between subcomponents of a \sbol{ComponentDefinition} entity using \sbol{SequenceConstraint} entities. In the example, a promoter has two subcomponents: a core promoter region and and a binding site. Using a \sbol{SequenceConstraint} entity, it is specified that the core promoter region precedes the binding site.
+\subsubsection{Serializing SequenceConstraint Objects}
+ This example shows the serialization of \sbol{SequenceConstraint} between two \sbol{Component} objects in a composite promoter \sbol{ComponentDefinition}. In the example, the promoter \sbol{ComponentDefinition} has two sub-\sbol{Component}s that instantiate the \sbol{ComponentDefinition} objects for a core promoter region and and a binding site. The \sbol{SequenceConstraint} specifies that the core promoter region precedes the binding site.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -91,8 +91,8 @@ This example shows how to create simple \sbol{ComponentDefinition} entities. A \
 </rdf:RDF>
 \end{lstlisting}
 
-\subsubsection{Serializing Cut Location Entities}
-This example shows how to use {@link org.sbolstandard.core2.Cut} entities to specify a cut location.
+\subsubsection{Serializing Cut Location Objects}
+This example shows the serialization of a \sbol{Cut} \sbol{Location}.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -147,8 +147,8 @@ This example shows how to use {@link org.sbolstandard.core2.Cut} entities to spe
 \end{lstlisting}
 
 
-\subsubsection{Serializing Model Entities}
-This example shows how to create \sbol{Model} entities. In the example, the \sbol{Model} entity refers to an ODE model in the SBML format.
+\subsubsection{Serializing Model Objects}
+This example shows the serialization of a \sbol{Model}. In this example, the \sbol{Model} refers to an ODE model written in SBML that can be accessed the identified source repository.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -164,8 +164,8 @@ This example shows how to create \sbol{Model} entities. In the example, the \sbo
 </rdf:RDF>
 \end{lstlisting}
 
-\subsubsection{Serializing ModuleDefinition Entities}
-This example shows to create simple \sbol{ModuleDefinition} entities. The module includes an \sbol{Interaction} entity to represent the translation of a protein.
+\subsubsection{Serializing ModuleDefinition Objects}
+This example shows the serialization of a simple \sbol{ModuleDefinition}. This \sbol{ModuleDefinition} includes an \sbol{Interaction} that represents the translation of a protein.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -217,8 +217,8 @@ This example shows to create simple \sbol{ModuleDefinition} entities. The module
 </rdf:RDF>
 \end{lstlisting}
 
-\subsubsection{Serializing Application Specific Data Within SBOL entities}
-This example shows how to embed application specific custom data into SBOL documents. A \sbol{ComponentDefinition} entity, representing a promoter, is annotated with information about the promoter's sigma factor and how it is regulated.
+\subsubsection{Serializing Application Specific Data Within SBOL Objects}
+This example shows the serialization of application-specific data from \sbol{Annotation} objects. A \sbol{ComponentDefinition} that represents a promoter is annotated with custom data on the promoter's sigma factor and how it is regulated.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -242,8 +242,8 @@ This example shows how to embed application specific custom data into SBOL docum
 </rdf:RDF>
 \end{lstlisting}
 
-\subsubsection{Serializing Application Specific Data Outside SBOL entities}
-This example shows embedding custom application specific data into SBOL documents as top-level entities. Such data are represented using \sbol{GenericTopLevel} entities and can be referenced from other SBOL entities via custom annotations.
+\subsubsection{Serializing Application-Specific Data Outside SBOL Objects}
+This example shows the serialization of application-specific data from \sbol{GenericTopLevel} objects. Such data can be referenced by other SBOL objects via \sbol{Annotation} objects.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -269,8 +269,8 @@ This example shows embedding custom application specific data into SBOL document
 \end{lstlisting}
 
 
-\subsubsection{Serializing Collection Entities}
-This examples shows how to create \sbol{Collection} entities. The Collection entity in the example is used to represent a library of promoters.
+\subsubsection{Serializing Collection Objects}
+This example shows the serialization of a \sbol{Collection}. This \sbol{Collection} represents a library of promoters.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -291,10 +291,10 @@ This examples shows how to create \sbol{Collection} entities. The Collection ent
 \subsubsection{PoPS Receiver}
 
 This example shows the serialization of the PoPS Receiver device designed by Canton and co-workers~\cite{canton-natbio-2008}. 
-In particular, this is a \sbol{ComponentDefinition} comprising five other \sbol{Component} objects to construct a detector for the cell-cell signaling molecule 3OC$_6$HSL.
+In particular, this example includes the serialization of a \sbol{ComponentDefinition} that composes five  \sbol{Component} objects to define the structure of a detector for the cell-cell signaling molecule 3OC$_6$HSL.
 The five components are arranged in a sequence:
-first come four components together implement constitutive expression of the LuxR protein, which responds to 3OC$_6$HSL: a constitutive promoter, 5'UTR, coding sequence for LuxR, and terminator.
-Finally, after this comes the pLuxR promoter, which is activated in the presence of LuxR and 3OC$_6$HSL.
+first come four \sbol{Component} objects that together implement constitutive expression of the LuxR protein, which in turn responds to 3OC$_6$HSL: a constitutive promoter, 5'UTR, coding sequence for LuxR, and terminator.
+Finally, after these objects comes the \sbol{Component} object for the pLuxR promoter, which is activated in the presence of LuxR and 3OC$_6$HSL.
 %
 Complete details of the device can be found in the cited paper and also at \url{http://parts.igem.org/Part:BBa_F2620}.
 
@@ -520,7 +520,7 @@ Complete details of the device can be found in the cited paper and also at \url{
 
 \subsubsection{Toggle Switch}
 
-This example shows the serialization of an SBOL data model for a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}.  
+This example shows the serialization of the \sbol{ComponentDefinition} and \sbol{ModuleDefinition} objects for a LacI/TetR toggle switch similar to those constructed in \cite{Gardner2000}.  
 This design is essentially similar to the one presented in \ref{sec:examples}, except that it uses some alternate groupings in how the total design is built up out of smaller entities.
 
 \label{ser:toggleswitch}
