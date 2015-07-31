@@ -19,22 +19,21 @@ In the case of an association property, the class from which the arrow originate
 
 By contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which the value of the association property MUST NOT exist independently of its owner. 
 In addition, in the SBOL data model, it is REQUIRED that the value of each composite aggregation property is a unique SBOL object (that is, not the value for more than one such property).
-Note that in all cases, composite aggregation is used in such a way that there should be no duplication of such objects.
-%For example, it will later be shown how objects of the \sbol{SequenceAnnotation} class must associated with an object of the \sbol{ComponentDefinition} class (and only that object).
+Note that in all cases, composite aggregation is used in such a way that there SHOULD NOT be duplication of such objects.
 
 All SBOL properties are labeled with one of several restrictions on data cardinality. These are:
 
 \begin{itemize}
 
-\item $1$ - required, one: there must be exactly one value for this property.
+\item $1$ - REQUIRED, one: there MUST be exactly one value for this property.
 
-\item $0 \ldots 1$ - optional: there may be a single value for this property, or it may be absent.
+\item $0 \ldots 1$ - OPTIONAL: there MAY be a single value for this property, or it may be absent.
 
-\item $0 \ldots *$ - unbounded: there may be any number of values for this property, including none.
+\item $0 \ldots *$ - unbounded: there MAY be any number of values for this property, including none.
 
-\item $1 \ldots *$ - required, unbounded: there may be any number of values for this property, as long as there is at least one.
+\item $1 \ldots *$ - REQUIRED, unbounded: there MAY be any number of values for this property, as long as there is at least one.
 
-\item $n \ldots *$ - at least: there must be at least $n$ values for this property.
+\item $n \ldots *$ - at least: there MUST be at least $n$ values for this property.
 
 \end{itemize}
 
@@ -97,7 +96,7 @@ As shown in \ref{uml:identified}, the \sbol{Identified} class includes the follo
 
 When an SBOL resource reference takes the form of a \sbol{URI}, that \sbol{URI} may either be the value of an \sbol{identity} property or the value of a \sbol{persistentIdentity} property.
 If the \sbol{URI} is equal to the value of an \sbol{identity} property, then it is guaranteed to be unique, and it refers to precisely one SBOL object with that \sbol{URI}.
-If the \sbol{URI} is equal to the value of a \sbol{persistentIdentity} property, then it may refer to multiple SBOL objects that are different ``versions'' of each other. These objects SHOULD be compared to one another to determine which single object the \sbol{URI} should resolve to (normally the most recent version - see \ref{sec:version}).
+If the \sbol{URI} is equal to the value of a \sbol{persistentIdentity} property, then it may refer to multiple SBOL objects that are different ``versions'' of each other. These objects SHOULD be compared to one another to determine which single object the \sbol{URI} resolves to (normally the most recent version - see \ref{sec:version}).
 Throughout this document, when a \sbol{URI} is used to refer to an SBOL object, it could fall into either of these cases.
 
 \begin{figure}[ht]
@@ -116,7 +115,7 @@ Although most SBOL properties are defined by SBOL and serialized with its namesp
 
 \url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about}.
 
-The use of \external{about} is expressly for the purpose of making SBOL compliant with pre-existing standards: when you see \external{about} in an SBOL document, you should interpret it as meaning \sbol{identity}.
+The use of \external{about} is expressly for the purpose of making SBOL compliant with pre-existing standards: when you see \external{about} in an SBOL document, you SHOULD interpret it as meaning \sbol{identity}.
 
 \subsubsection*{The \sbolheading{persistentIdentity} property}
 \label{sec:persistentIdentity}
@@ -128,16 +127,16 @@ An \sbol{Identified} object MUST be referred to using either its \sbol{identity}
 \label{sec:displayId}
 The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between \sbol{name} and \sbol{identity} that is machine-readable, but more human-readable than the full \sbol{URI} of an \sbol{identity}. 
 
-If the \sbol{displayId} property is used, then its \sbol{String} value SHOULD be locally unique (global uniqueness is not required) and MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
+If the \sbol{displayId} property is used, then its \sbol{String} value SHOULD be locally unique (global uniqueness is not necessary) and MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
 
-% compliant with the type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}, except that it must not include the characters "-" and ".". 
+% compliant with the type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}, except that it MUST not include the characters "-" and ".". 
 
 \subsubsection*{The \sbolheading{version} property}
 \label{sec:version}
 
 The \sbol{version} property is OPTIONAL and has a data type of \sbol{String}. This property can be used to compare two SBOL objects with the same \sbol{persistentIdentity}.
 
-If the \sbol{version} property is used, then it is RECOMMENDED that version numbering should follow the conventions of semantic versioning (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).
+If the \sbol{version} property is used, then it is RECOMMENDED that version numbering follow the conventions of semantic versioning (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).
 This convention represents versions as sequences of numbers and qualifiers that are separated by the characters ``{\tt .}'' and ``{\tt -}'' and are compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).
 For a full explanation, see the linked resources.
 
@@ -374,7 +373,7 @@ These terms are organized by the type of \sbol{ComponentDefinition} to which the
       Effector & \url{http://identifiers.org/chebi/CHEBI:35224} & Small Molecule \\
     \bottomrule
   \end{edtable}
-  \caption{Ontology terms to specify the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition}, organized by the type of \sbol{ComponentDefinition} to which they should apply (see \ref{tbl:componentdefinition_types}).}
+  \caption{Ontology terms to specify the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition}, organized by the type of \sbol{ComponentDefinition} to which they are intended to apply (see \ref{tbl:componentdefinition_types}).}
   \label{tbl:componentdefinition_roles}
 \end{table}
 
@@ -388,7 +387,7 @@ If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, 
 
 Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}.  
 Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbolmult{types:CD}{types} property MUST refer to the term from \ref{tbl:componentdefinition_types} that is cross-listed with this \sbol{encoding} in \ref{tbl:sequence_encodings}. 
-For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property must refer to the BioPAX term for DNA. These requirements are meant to provide for some degree of consistency between the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} and the \sbol{encoding} properties of the \sbol{Sequence} objects to which the \sbol{ComponentDefinition} refers.
+For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property MUST refer to the BioPAX term for DNA. These requirements are meant to provide for some degree of consistency between the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} and the \sbol{encoding} properties of the \sbol{Sequence} objects to which the \sbol{ComponentDefinition} refers.
 
 \subsubsection*{The \sbolheading{components} property}
 \label{sec:components}
@@ -601,7 +600,7 @@ In both examples, the two ``lower level'' \sbol{ComponentDefinition} objects eac
 
 In order to explicitly represent the identity relationships in this example, a new RBS \sbol{Component} needs to be created inside the ``higher level'' \sbol{ComponentDefinition}.
 This ``higher level'' \sbol{Component} then needs to be linked to the equivalent ``lower level'' \sbol{Component} objects by means of the \sbol{MapsTo} class, using one \sbol{MapsTo} object per link.  
-For example, in order to link the ``higher level'' RBS \sbol{Component} to the ``lower level'' RBS \sbol{Component} of the promoter-RBS \sbol{ComponentDefinition}, a \sbol{MapsTo} must be created on the ``higher level'' promoter-RBS \sbol{Component}. The \sbol{local} property of this \sbol{MapsTo} must then refer to the ``higher level'' RBS \sbol{Component}, while its \sbol{remote} property must refer to the ``lower level'' RBS \sbol{Component}.
+For example, in order to link the ``higher level'' RBS \sbol{Component} to the ``lower level'' RBS \sbol{Component} of the promoter-RBS \sbol{ComponentDefinition}, a \sbol{MapsTo} has to be created on the ``higher level'' promoter-RBS \sbol{Component}. The \sbol{local} property of this \sbol{MapsTo} then has to refer to the ``higher level'' RBS \sbol{Component}, while its \sbol{remote} property has to refer to the ``lower level'' RBS \sbol{Component}.
 In this way, many ``lower level'' \sbol{Component} objects can be linked together at the ``higher level'' using as an equal number of \sbol{MapsTo} objects, each one referring to a different \sbol{remote} \sbol{Component}, but all referring to the same \sbol{local} \sbol{Component}.
 
 The same types of identity relationships can also be declared between \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects, or between \sbol{Component} objects and \sbol{FunctionalComponent} objects contained by \sbol{ComponentDefinition} objects and \sbol{ModuleDefinition} objects, respectively. See \ref{sec:examples} and \ref{ser:examples} for additional examples using the \sbol{MapsTo} class.
@@ -1230,8 +1229,8 @@ The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that
   \label{tbl:interaction_types}
 \end{table}
 
-If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:interaction_types}, then its \sbolmult{types:I}{types} property must contain the \sbol{URI} that identifies this term. Lastly, if the \sbolmult{types:I}{types} property of an \sbol{Interaction} contains multiple
- \sbol{URI}s, then they must identify non-conflicting terms. For example, the SBO terms ``stimulation'' and ``inhibition'' would conflict.
+If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:interaction_types}, then its \sbolmult{types:I}{types} property MUST contain the \sbol{URI} that identifies this term. Lastly, if the \sbolmult{types:I}{types} property of an \sbol{Interaction} contains multiple
+ \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulation'' and ``inhibition'' would conflict.
 
 \paragraph{The \sbolheading{participations} property}\label{sec:participations}
 
@@ -1311,8 +1310,8 @@ The \sbolmult{roles:P}{roles} property MAY contain one or more \sbol{URI}s that 
   \label{tbl:participant_roles}
 \end{table}
 
-If a \sbol{Participation} is well described by one of the terms from \ref{tbl:participant_roles}, then its \sbolmult{roles:P}{roles} property must contain the \sbol{URI} that identifies this term. Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} contains multiple
- \sbol{URI}s, then they must identify non-conflicting terms. For example, the SBO terms ``stimulator'' and ``inhibitor'' would conflict.
+If a \sbol{Participation} is well described by one of the terms from \ref{tbl:participant_roles}, then its \sbolmult{roles:P}{roles} property MUST contain the \sbol{URI} that identifies this term. Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} contains multiple
+ \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulator'' and ``inhibitor'' would conflict.
 
 \paragraph{The \sbolheading{participant} property}\label{sec:participant}
 
@@ -1416,8 +1415,8 @@ Several methods are supported for connecting the SBOL data model with other type
 \label{sec:nestedQName}
 \label{sec:nestedURI}
 
-Each \sbol{Identified} object may contain any number of \sbol{Annotation} objects that store data in the form of name/value property pairs. The \sbol{qName} is REQUIRED and MUST contain a \sbol{QName}, which is composed of a namespace, an OPTIONAL prefix, and a local name. The \sbol{qName} property must be stored in the data model to allow for proper serialization as described below.
-The \sbol{value} property is also REQUIRED and must contain a \sbol{literal} (i.e., a \sbol{String}, \sbol{Integer}, \sbol{Double}, \sbol{Boolean}), \sbol{URI}, or \sbol{NestedAnnotations} object. A \sbol{NestedAnnotations} object MUST contain \sbol{nestedQName} and \sbol{nestedURI} properties, and it MAY contain an \sbol{annotations} property that contains zero or more \sbol{Annotation} objects.
+Each \sbol{Identified} object MAY contain any number of \sbol{Annotation} objects that store data in the form of name/value property pairs. The \sbol{qName} is REQUIRED and MUST contain a \sbol{QName}, which is composed of a namespace, an OPTIONAL prefix, and a local name. The \sbol{qName} property MUST be stored in the data model to allow for proper serialization as described below.
+The \sbol{value} property is also REQUIRED and MUST contain a \sbol{literal} (i.e., a \sbol{String}, \sbol{Integer}, \sbol{Double}, \sbol{Boolean}), \sbol{URI}, or \sbol{NestedAnnotations} object. A \sbol{NestedAnnotations} object MUST contain \sbol{nestedQName} and \sbol{nestedURI} properties, and it MAY contain an \sbol{annotations} property that contains zero or more \sbol{Annotation} objects.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1458,7 +1457,7 @@ The first form of \sbol{Annotation} shown above is for an \sbol{Annotation} that
 
 The example below shows how the serialization for a promoter \sbol{ComponentDefinition} can be annotated with custom data. \sbol{Annotation}s are added containing the relevant information from the iGEM Parts Registry. Each property serialization of an \sbol{Annotation} is qualified with the \external{http://www.partsregistry.org/} namespace, which is prefixed using \external{pr}. The first \sbol{Annotation} is named \external{pr:group}. It specifies the iGEM group that has designed the promoter and has a \sbol{String} value. 
 The second \sbol{Annotation} is named \external{pr:experience}. It contains a \sbol{URI} value that is serialized as an RDF resource and can be resolved to the information Web page on the Parts Registry for the promoter. 
-Finally, the third \sbol{Annotation} is named \external{pr:information}. It contains a \sbol{NestedAnnotation} object that is serialized as shown and includes information about the regulatory details of the promoter using \sbol{Annotations} that correspond to Parts Registry categories.   
+Finally, the third \sbol{Annotation} is named \external{pr:information}. It contains a \sbol{NestedAnnotations} object that is serialized as shown and includes information about the regulatory details of the promoter using \sbol{Annotations} that correspond to Parts Registry categories.   
 
 \begin{figure} [ht]
 \lstsetsbol
@@ -1567,7 +1566,7 @@ In particular:
 \begin{itemize}
 \item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.0 \sbol{Collection} objects that contain \sbol{ComponentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.  
 \item SBOL 1.1 \external{DnaComponent} objects maps to SBOL 2.0 \sbol{ComponentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
-\item SBOL 1.1 \external{DnaSequence} objects maps to an SBOL 2.0 \sbol{Sequence} objects with \sbol{IUPAC DNA} \sbol{encoding} properties.
+\item SBOL 1.1 \external{DnaSequence} objects maps to an SBOL 2.0 \sbol{Sequence} objects with \external{IUPAC DNA} \sbol{encoding} properties.
 \item SBOL 1.1 \external{SequenceAnnotation} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.0 \sbol{SequenceAnnotation} objects that contain \sbol{Range} objects.
 \item SBOL 1.1 \external{SequenceAnnotation} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.0 \sbol{SequenceAnnotation} objects that contain \sbol{GenericLocation} objects. 
 \item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.0 \sbol{Component}, which represents the instantiation or usage of the appropriate \sbol{ComponentDefinition}.

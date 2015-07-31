@@ -19,29 +19,29 @@ following symbols next to the rule numbers:
 \item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a strong
   REQUIRED condition for SBOL conformance. If a SBOL document does not follow this rule, it does not conform to the SBOL
   specification.  (Mnemonic intention behind the choice of symbol:
-  ``This must be checked.'')
+  ``This MUST be checked.'')
 
 \item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a weak
   REQUIRED condition for SBOL conformance. While this rule MUST be followed, it can be difficult, if not  impossible, for a machine to automatically check whether the rule has been followed. (Mnemonic intention behind the choice of symbol: ``This is a cause for warning.'')
 
 \item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a 
   RECOMMENDED condition for following best practices.  This rule is not strictly a matter of SBOL conformance, but its recommendation comes from logical
-  reasoning.  If an SBOL document does not follow this rule, it is still valid SBOL, but it may have degraded functionality in some tools.  (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
+  reasoning.  If an SBOL document does not follow this rule, it is still valid SBOL, but it might have degraded functionality in some tools.  (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
 
 \end{description}
 
-The validation rules listed in the following subsections should all be
+The validation rules listed in the following subsections are all believed to be
 stated or implied in the rest of this specification document.  They
 are enumerated here for convenience and to provide a ``master
 checklist'' for SBOL validation.  In case of a conflict between this
-section and other portions of the specification (though there should
+section and other portions of the specification (though there are believed to
 be none), this section is considered authoritative for the purpose of
 determining the validity of an SBOL document.
 
 For \notice convenience and brievity, we use the shorthand
 ``\token{sbol:x}'' to stand for an attribute or element name \token{x}
 in the namespace for the SBOL specification, using
-the namespace prefix \token{sbol}.  In reality, the prefix string may be different from the literal ``\token{sbol}'' used here (and indeed, it can be any valid XML namespace prefix that the software
+the namespace prefix \token{sbol}.  In reality, the prefix string can be different from the literal ``\token{sbol}'' used here (and indeed, it can be any valid XML namespace prefix that the software
 chooses).  We use ``\token{sbol:x}'' because it is shorter than to
 write a full explanation everywhere we refer to an attribute or element
 in the SBOL specification namespace.
@@ -190,7 +190,7 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} MUST NOT contain a \sbol{URI} reference to the \sbol{ComponentDefinition} that contains the \sbol{ComponentInstance}.\\ Reference: \sec{sec:ComponentInstance}}
 
-\printWarning{The \sbol{URI} contained by the \sbolmult{definition:CI}{definition} property must refer to a \sbol{ComponentDefinition} object.\\ Reference: \sec{sec:ComponentInstance}}
+\printWarning{The \sbol{URI} contained by the \sbolmult{definition:CI}{definition} property MUST refer to a \sbol{ComponentDefinition} object.\\ Reference: \sec{sec:ComponentInstance}}
 
 \printWarning{\sbol{ComponentInstance} objects MUST NOT form circular reference chains via their \sbolmult{definition:CI}{definition} properties and parent \sbol{ComponentDefinition} objects.\\ Reference: \sec{sec:ComponentInstance}}
 
@@ -322,7 +322,7 @@ Reference: \sec{sec:Identified}}
 
 \printModeling{The \sbol{language} property of a \sbol{Model} SHOULD contain a \sbol{URI} that refers to a term from the EDAM ontology.\\ Reference: \sec{sec:Model}}
 
-\printValid{The \sbol{framework} property is REQUIRED and must contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
+\printValid{The \sbol{framework} property is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
 
 \printWarning{The \sbol{URI} contained by the \sbol{framework} property of a \sbol{Model} MUST specify the mathematical framework of the model.\\ Reference: \sec{sec:Model}}
 
@@ -337,7 +337,7 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbolmult{roles:MD}{roles} property is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:ModuleDefinition}}
 
-\printValid{The \sbol{modules} property OPTIONAL and may contain a set of \sbol{Module} objects.\\ Reference: \sec{sec:ModuleDefinition}}
+\printValid{The \sbol{modules} property is OPTIONAL and MAY contain a set of \sbol{Module} objects.\\ Reference: \sec{sec:ModuleDefinition}}
 
 \printValid{The \sbol{interactions} property is OPTIONAL and MAY contain a set of \sbol{Interaction} objects.\\ Reference: \sec{sec:ModuleDefinition}}
 
@@ -354,7 +354,7 @@ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbolmult{definition:M}{definition} property of a \sbol{Module} is REQUIRED and MUST contain a \sbol{URI}. \\ Reference: \sec{sec:Module}}
 
-\printValid{The \sbol{URI} contained by the \sbolmult{definition:M}{definition} property of \sbol{Module} must refer to a \sbol{ModuleDefinition}.\\ Reference: \sec{sec:Module}}
+\printValid{The \sbol{URI} contained by the \sbolmult{definition:M}{definition} property of \sbol{Module} MUST refer to a \sbol{ModuleDefinition}.\\ Reference: \sec{sec:Module}}
 
 \printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{Module} MUST NOT contain a \sbol{URI} reference to the \sbol{ModuleDefinition} that contains the \sbol{Module}.\\ Reference: \sec{sec:Module}}
 
@@ -420,7 +420,7 @@ Reference: \sec{sec:Identified}}
 
 \printValid{An  \sbol{AnnotationValue} MUST be a \sbol{literal} (a \sbol{String}, \sbol{Integer}, \sbol{Double}, or \sbol{Boolean}), \sbol{URI}, or a \sbol{NestedAnnotations} object.\\ Reference: \sec{sec:Annotations}}
 
-\printValid{The \sbol{nestedQName} property of a \sbol{NestedAnnotations} object is REQUIRED and must contain a \sbol{QName}.  \\ Reference: \sec{sec:Annotations}}
+\printValid{The \sbol{nestedQName} property of a \sbol{NestedAnnotations} object is REQUIRED and MUST contain a \sbol{QName}.  \\ Reference: \sec{sec:Annotations}}
 
 \printValid{The \sbol{nestedURI} property of a \sbol{NestedAnnotations} object is REQUIRED and MUST contain a \sbol{URI}.  \\ Reference: \sec{sec:Annotations}}
 
