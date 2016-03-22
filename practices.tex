@@ -2,6 +2,10 @@
 \section{Recommended Best Practices}
 \label{sec:bestpractices}
 % -----------------------------------------------------------------------------
+\subsection{Best Practice for SBOL Namespaces}
+
+\twozeroone{Namespaces corresponding to different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example an SBOL 2.0.1 ComponentInstance SHOULD NOT refer to an SBOL 1.1 DNAComponent.  However, different versions MAY be present in the same document so long as they are semantically independent. In case multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting the most recent version of SBOL in the document. Any remaining elements in any other SBOL namespace SHOULD be treated as generic top levels and custom annotations by serialization libraries.}
+
 \subsection{Use of the Version Property}
 
 Once an SBOL object has been published where others might have access it (e.g., to an online repository), it might be the case that other objects come to depend on the particular contents of the published object. 
@@ -90,3 +94,20 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
   \caption{Preferred external resources from which to draw values for various SBOL properties.}
   \label{tbl:preferred_external_resources}
 \end{table}
+
+\subsection{Annotating Entities with Date \& Time}
+\twozeroone{Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{dateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:}
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:pr="http://partsregistry.org" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:CLASS_NAME rdf:about="...">
+    <dcterms:created>DATE_TIME_STRING</dcterms:created>
+    <dcterms:modified>DATE_TIME_STRING</dcterms:modified>
+               ...
+  </sbol:CLASS_NAME>
+  ...
+</rdf:RDF>
+\end{lstlisting}
+ 

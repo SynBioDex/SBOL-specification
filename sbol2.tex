@@ -3,6 +3,8 @@
 \usepackage{microtype}
 \usepackage{color}
 \usepackage{todonotes}
+\usepackage{changebar}
+\usepackage{xcolor}
 
 %% ============================================================================
 %% Description:  Documentation for sbmlpkgspec.cls
@@ -94,6 +96,16 @@
 %Command to format external terms in the document
 \newcommand{\external}[1]{\texttt{#1}}
 
+%Commands to highlight SBOL versions
+\newcommand{\twozeroone}[1]{%
+\cbcolor{red}
+\cbstart%
+{\color{red}%
+\version{2.0.1}%
+#1
+}
+\cbend
+}
 
 % -----------------------------------------------------------------------------
 % Start of document
@@ -154,8 +166,9 @@ Michael Bissell & \emph{Amyris, Inc., USA}
 
 \input{serialization}
 
-\input{practices}
+\input{compliance}
 
+\input{practices}
 
 \newpage
 \bibliography{sbol}

@@ -1,0 +1,29 @@
+\section{SBOL Compliance}
+
+\twozeroone{
+There are different types of software compliance to the SBOL specification.  First, a software tool can either support all classes or only the structural subset of SBOL 2.0.  The structural subset includes the following classes:
+\begin{itemize}
+\item \sbol{Sequence}
+\item \sbol{ComponentDefinition}
+\begin{itemize}
+\item \sbol{Component}
+\item \sbol{SequenceAnnotation}
+\item \sbol{SequenceConstraint}
+\end{itemize}
+\item \sbol{Collection}
+\item \sbol{Annotation}
+\item \sbol{GenericTopLevel}
+\end{itemize}
+Second, an SBOL compliant software tool can support import, export, or both.  
+Finally, if it supports both import and export, it can either do so in a lossy or lossless fashion.
+
+In order to test import compliance, developers are encouraged to utilize SBOL test files found here:\\ {\url{https://github.com/SynBioDex/SBOLTestSuite}}\\
+Examples with every meaningful subset of objects are provided including both structural-only SBOL (i.e., annotated DNA sequence data) and complete tests.  
+
+In order to test export compliance, developers are encouraged to validate their generated SBOL files with the SBOL Validator found here:\\
+\url{http://www.async.ece.utah.edu/sbol-validator/}\\
+This validator can also be used to check lossless import/export support, since it can compare the data content of a file between a files imported and exported into a software tool.
+
+Finally, developers of SBOL-compliant tools are encouraged to notify the SBOL editors (editors@sbolstandard.org) when they have determined that their tool is SBOL compliant, so their tool can be advertised on the SBOL website.
+}
+
