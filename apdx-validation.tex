@@ -59,22 +59,30 @@ in the SBOL specification namespace.
 \setcounter{sbolCtr}{10101} 
 
 \printValid{An SBOL document MUST declare the use of the following XML namespace: \\ \textls[-25]{\uri{http://sbols.org/v2\#}}.\\
-Reference: \sec{xml-namespace}}
+Reference: \sec{sec:serialization}}
 
-\twozeroone{\printValid{(removed)}
-%An SBOL document MUST declare the use of the following XML namespace: \\ \textls[-25]{\uri{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}}.\\
-%Reference: \sec{xml-namespace}}
+\twozeroone{
+\printValid{\st{An SBOL document MUST declare the use of the following XML namespace: \\ {\tt http://www.w3.org/1999/02/22-rdf-syntax-ns\#}. \\ 
+Reference: Section 10 on page 54}}
+}
 
-\printValid{(removed)}
-%If an SBOL document includes any \sbol{name} or \sbol{description} properties, then it MUST declare the use of the following XML namespace: \\ \textls[-25]{\uri{http://purl.org/dc/terms/}}.\\ 
-%Reference: \sec{xml-namespace}}
+\twozeroone{
+\printValid{\st{
+If an SBOL document includes any name or description properties, then it MUST declare the use of the following XML namespace: \\ {\tt http://purl.org/dc/terms/}. \\ 
+Reference: Section 10 on page 54}}
+}
 
-\printValid{(removed)}
-%If an SBOL document includes any \sbol{wasDerivedFrom} properties, then it MUST declare the use of the following XML namespace: \\ \textls[-25]{\uri{http://www.w3.org/ns/prov\#}}.\\ Reference: \sec{xml-namespace}}
+\twozeroone{
+\printValid{\st{
+If an SBOL document includes any wasDerivedFrom properties, then it MUST declare the use of the following XML namespace: \\ {\tt http://www.w3.org/ns/prov\#}.  \\ 
+Reference: Section 10 on page 54}}
+}
 
+\twozeroone{
 \printValid{An SBOL document MUST be serialized as a well-formed RDF/XML file that adheres to the grammar defined by:\\
 \uri{https://www.w3.org/TR/rdf-syntax-grammar/}\\
-Reference: \sec{sec:serialization}}}
+Reference: \sec{sec:serialization}}
+}
 
 \subsubsection*{Rules for the \class{Identified} class} 
 \setcounter{sbolCtr}{10201}
@@ -94,10 +102,10 @@ Reference: \sec{sec:Identified}}
 \printValid{The \sbol{displayId} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String} that MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.\\ Reference: \sec{sec:Identified}}
 
 \twozeroone{
-\printModeling{(removed)}
-% The \sbol{displayId} property of an \sbol{Identified} object SHOULD be locally unique. \\ 
-%Reference: \sec{sec:Identified}}
+\printModeling{\st{The displayId property of an Identified object SHOULD be locally unique. \\ 
+Reference: Section 7.4 on page 16}}
 }
+
 
 \printValid{The \sbol{version} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String} that MUST be composed of only alphanumeric characters, underscores, hyphens, or periods and MUST begin with a digit.\\ Reference: \sec{sec:Identified}}
 
@@ -143,8 +151,8 @@ Reference: \sec{sec:Identified}}
 \setcounter{sbolCtr}{10301}
 
 \twozeroone{
-\printValid{(removed)}
-% A \sbol{TopLevel} object MUST inherit all properties of the \sbol{Identified} class.\\ Reference: \sec{sec:TopLevel}}
+\printValid{\st{A TopLevel object MUST inherit all properties of the Identified class. \\ 
+Reference: Section 7.5 on page 19}}
 
 \printModeling{If the \sbol{wasDerivedFrom} property of one \sbol{TopLevel} object refers to another \sbol{TopLevel} object with the same \sbol{persistentIdentity} property, then \sbol{version} property of the second \sbol{TopLevel} object SHOULD precede that of the first if both objects have a \sbol{version} and it is assumed that these \sbol{version}s follow the conventions of semantic versioning.\\ Reference: \sec{sec:Identified}}
 
@@ -159,7 +167,7 @@ Reference: \sec{sec:Identified}}
 \setcounter{sbolCtr}{10401}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Sequence} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{elements}, and \sbol{encoding}.\\ Reference: \sec{sec:Sequence}}
+\printValid{A sbol{Sequence} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{elements}, and \sbol{encoding}.\\ Reference: \sec{sec:Sequence}}
 % A \sbol{Sequence} MUST inherit all properties of the \sbol{TopLevel} class.
 }
 
@@ -183,7 +191,7 @@ Reference: \sec{sec:Identified}}
 \setcounter{sbolCtr}{10501}
 
 \twozeroone{
-\printValid{The only properties a \sbol{ComponentDefinition} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{types:CD}{roles}, \sbol{components}, \sbol{sequences}, \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.\\ Reference: \sec{sec:ComponentDefinition}}
+\printValid{A \sbol{ComponentDefinition} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{types:CD}{roles}, \sbol{components}, \sbol{sequences}, \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.\\ Reference: \sec{sec:ComponentDefinition}}
 %A \sbol{ComponentDefinition} MUST inherit all properties of the \sbol{TopLevel} class.}
 }
 
@@ -207,7 +215,7 @@ Reference: \sec{sec:Identified}}
 
 \twozeroone{
 \printModeling{
-The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} SHOULD NOT contain a \sbol{URI} that refers to a term from the sequence feature branch of the SO unless its \sbolmult{types:CD}{types} property contains the DNA or RNA type \sbol{URI} listed in Table 2.
+The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} SHOULD NOT contain a \sbol{URI} that refers to a term from the sequence feature branch of the SO unless its \sbolmult{types:CD}{types} property contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:componentdefinition_types}.
 %The \sbolmult{roles:CD}{roles} property of a  \sbol{ComponentDefinition} SHOULD only contain a \sbol{URI} provided in  \ref{tbl:componentdefinition_roles} if one of its \sbolmult{types:CD}{types} is cross-listed with this \sbol{URI}.
 \\ Reference: \sec{sec:ComponentDefinition}}
 %\\ Reference: \sec{sec:recomm_ontologies}}
@@ -230,8 +238,9 @@ The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} SHOULD N
 \printComplete{If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects, and one of the  \sbolmult{types:CD}{types} of this \sbol{ComponentDefinition} comes from \ref{tbl:componentdefinition_types}, then one of the \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this type in \ref{tbl:sequence_encodings}.\\ 
 Reference: \sec{sec:ComponentDefinition}}
 
-\printWarning{(removed)}}
-% If the \sbol{sequences} property of a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} MUST contain the type from \ref{tbl:componentdefinition_types} that is cross-listed with this \sbol{encoding} in  \ref{tbl:sequence_encodings}.\\ Reference: \sec{sec:ComponentDefinition}}
+\printWarning{\st{If the sequences property of a ComponentDefinition refers to a Sequence with an encoding from Table 1, then the types property of the ComponentDefinition MUST contain the type from Table 2 that is cross-listed with this encoding in  Table 1. \\ 
+Reference: Section 7.7 on page 21}}
+}
 
 \printModeling{If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths.\\ Reference: \sec{sec:ComponentDefinition}}
 
@@ -255,15 +264,15 @@ Reference: \sec{sec:ComponentDefinition}}
 % \printModeling{Exactly one \sbol{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} SHOULD refer to a term from the sequence feature branch of SO, if it includes the DNA or RNA type, as listed in \ref{tbl:componentdefinition_types}, in its set of \sbolmult{types:CD}{types}.\\ 
 % Reference: \sec{sec:ComponentDefinition}}}
 
-\printModeling{If the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{types:CD}{roles} property SHOULD contain at least one \sbol{URI} that refers to a term from the sequence feature branch of the SO.\\ 
+\printModeling{If the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{types:CD}{roles} property SHOULD contain exactly one \sbol{URI} that refers to a term from the sequence feature branch of the SO.\\ 
 Reference: \sec{sec:ComponentDefinition}}}
 
 \subsubsection*{Rules for the \class{ComponentInstance} class} 
 \setcounter{sbolCtr}{10601}
 
 \twozeroone{
-\printValid{(removed)}
-%A \sbol{ComponentInstance} MUST inherit all properties of the \sbol{Identified} class.\\ Reference: \sec{sec:ComponentInstance}}
+\printValid{\st{A ComponentInstance MUST inherit all properties of the Identified class. \\ 
+Reference: Section 7.7.1 on page 24}}
 }
 
 \printValid{The \sbolmult{definition:CI}{definition} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:ComponentInstance}}
@@ -284,7 +293,7 @@ Reference: \sec{sec:ComponentDefinition}}}
 \setcounter{sbolCtr}{10701}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Component} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{access}, \sbolmult{definition:CI}{definition}, and \sbolmult{mapsTos:CI}{mapsTos}.\\ Reference: \sec{sec:ComponentInstance}}
+\printValid{A \sbol{Component} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{access}, \sbolmult{definition:CI}{definition}, and \sbolmult{mapsTos:CI}{mapsTos}.\\ Reference: \sec{sec:ComponentInstance}}
 % A \sbol{Component} MUST inherit all properties of the \sbol{ComponentInstance} class.
 }
 
@@ -292,7 +301,7 @@ Reference: \sec{sec:ComponentDefinition}}}
 \setcounter{sbolCtr}{10801}
 
 \twozeroone{
-\printValid{The only properties a \sbol{MapsTo} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{refinement}, \sbol{local}, and  \sbol{remote}\\ Reference: \sec{sec:MapsTo}}
+\printValid{A \sbol{MapsTo} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{refinement}, \sbol{local}, and  \sbol{remote}\\ Reference: \sec{sec:MapsTo}}
 %A \sbol{MapsTo} MUST inherit all properties of the \sbol{Identified} class.
 }
 
@@ -305,8 +314,8 @@ Reference: \sec{sec:ComponentDefinition}}}
 \printValid{The \sbol{remote} property of a \sbol{MapsTo} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:MapsTo}}
 
 \twozeroone{
-\printWarning{(removed)}
-% The \sbol{remote} property of a \sbol{MapsTo} MUST refer to a \sbol{ComponentInstance}.\\ Reference: \sec{sec:MapsTo}}
+\printWarning{\st{The remote property of a MapsTo MUST refer to a ComponentInstance. \\ 
+Reference: Section 7.7.3 on page 26}}
 
 \printComplete{The \sbol{ComponentInstance} referred to by the \sbol{remote} property of a \sbol{MapsTo} MUST have an \sbol{access} property that contains the \sbol{URI} \url{http://sbols.org/v2\#public}.\\ Reference: \sec{sec:MapsTo}}
 
@@ -326,7 +335,7 @@ Reference: \sec{sec:ComponentDefinition}}}
 \setcounter{sbolCtr}{10901}
 
 \twozeroone{
-\printValid{The only properties a \sbol{SequenceAnnotation} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, and \sbol{locations}.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{A \sbol{SequenceAnnotation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, and \sbol{locations}.\\ Reference: \sec{sec:SequenceAnnotation}}
 %A \sbol{SequenceAnnotation} MUST inherit all properties of the \sbol{Identified} class.
 }
 
@@ -342,8 +351,8 @@ Reference: \sec{sec:ComponentDefinition}}}
 \setcounter{sbolCtr}{11001}
 
 \twozeroone{
-\printValid{(removed)}
-%A \sbol{Location} MUST inherit all properties of the \sbol{Identified} class.\\ Reference: \sec{sec:Location}}
+\printValid{\st{A Location MUST inherit all properties of the Identified class. \\ 
+Reference: Section 7.7.5 on page 30}}
 }
 
 \printValid{The \sbol{orientation} property of a \sbol{Location} is OPTIONAL and MAY contain a \sbol{URI} from \ref{tbl:orientation_types}.
@@ -353,7 +362,7 @@ Reference: \sec{sec:ComponentDefinition}}}
 \setcounter{sbolCtr}{11101}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Range} have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{orientation}, \sbol{start}, and \sbol{end}.\\ Reference: \sec{sec:Range}}
+\printValid{A \sbol{Range} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{orientation}, \sbol{start}, and \sbol{end}.\\ Reference: \sec{sec:Range}}
 % A \sbol{Range} MUST inherit all properties of the \sbol{Location} class.
 }
 
@@ -368,7 +377,7 @@ Reference: \sec{sec:ComponentDefinition}}}
 \setcounter{sbolCtr}{11201}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Cut} have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{orientation}, and \sbol{at}\\ Reference: \sec{sec:Cut}}
+\printValid{A \sbol{Cut} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{orientation}, and \sbol{at}\\ Reference: \sec{sec:Cut}}
 }
 
 \printValid{The \sbol{at} property is REQUIRED and MUST contain an \sbol{Integer} greater than or equal to zero.  \\ Reference: \sec{sec:Cut}}
@@ -377,7 +386,7 @@ Reference: \sec{sec:ComponentDefinition}}}
 \setcounter{sbolCtr}{11301}
 
 \twozeroone{
-\printValid{The only properties a \sbol{GenericLocation} have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{orientation}.\\
+\printValid{A \sbol{GenericLocation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{orientation}.\\
 Reference: \sec{sec:GenericLocation}}
 %A \sbol{GenericLocation} MUST inherit all properties of the \sbol{Location} class.
 }
@@ -386,7 +395,7 @@ Reference: \sec{sec:GenericLocation}}
 \setcounter{sbolCtr}{11401}
 
 \twozeroone{
-\printValid{The only properties a \sbol{SequenceConstraint} have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{restriction}, \sbol{subject}, and \sbol{object}.\\ Reference: \sec{sec:SequenceConstraint}}
+\printValid{A \sbol{SequenceConstraint} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{restriction}, \sbol{subject}, and \sbol{object}.\\ Reference: \sec{sec:SequenceConstraint}}
 %A \sbol{SequenceConstraint} MUST inherit all properties of the \sbol{Identified} class.
 }
 
@@ -424,7 +433,7 @@ Reference: \sec{sec:GenericLocation}}
 \setcounter{sbolCtr}{11501}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Model} have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{source}, \sbol{language}, and \sbol{framework}.\\ Reference: \sec{sec:Model}}
+\printValid{A \sbol{Model} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{source}, \sbol{language}, and \sbol{framework}.\\ Reference: \sec{sec:Model}}
 %A \sbol{Model} MUST inherit all properties of the \sbol{TopLevel} class.
 }
 
@@ -452,7 +461,7 @@ Reference: \sec{sec:GenericLocation}}
 \setcounter{sbolCtr}{11601}
 
 \twozeroone{
-\printValid{The only properties a \sbol{ModuleDefinition} have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:MD}{roles}, \sbol{modules}, \sbol{interactions}, \sbol{functionalComponents}, and \sbol{models}.\\ Reference: \sec{sec:ModuleDefinition}}
+\printValid{A \sbol{ModuleDefinition} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:MD}{roles}, \sbol{modules}, \sbol{interactions}, \sbol{functionalComponents}, and \sbol{models}.\\ Reference: \sec{sec:ModuleDefinition}}
 % A \sbol{ModuleDefinition} MUST inherit all properties of the \sbol{TopLevel} class.
 }
 
@@ -471,13 +480,13 @@ Reference: \sec{sec:GenericLocation}}
 \twozeroone{
 \printComplete{Each \sbol{URI} contained by the \sbol{models} property of a \sbol{ModuleDefinition} MUST refer to a \sbol{Model}.\\ Reference: \sec{sec:ModuleDefinition}}
 
-\printValid{If multiple \sbol{MapsTo}s belonging to the \sbol{Module}s and \sbol{FunctionalComponent}s of a \sbol{ModuleDefinition} have \sbol{local} properties that refer to the same \sbol{FunctionalCommponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}.\\ Reference: \sec{sec:MapsTo}}}
+\printValid{If multiple \sbol{MapsTo}s belonging to the \sbol{Module}s and \sbol{FunctionalComponent}s of a \sbol{ModuleDefinition} have \sbol{local} properties that refer to the same \sbol{FunctionalComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}.\\ Reference: \sec{sec:MapsTo}}}
 
 \subsubsection*{Rules for the \class{Module} class} 
 \setcounter{sbolCtr}{11701}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Module} have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{definition:M}{definition}, and \sbolmult{mapsTos:M}{mapsTos}.\\ Reference: \sec{sec:Module}}
+\printValid{A \sbol{Module} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{definition:M}{definition}, and \sbolmult{mapsTos:M}{mapsTos}.\\ Reference: \sec{sec:Module}}
 }
 
 \printValid{The \sbolmult{definition:M}{definition} property of a \sbol{Module} is REQUIRED and MUST contain a \sbol{URI}. \\ Reference: \sec{sec:Module}}
@@ -498,7 +507,7 @@ Reference: \sec{sec:GenericLocation}}
 \setcounter{sbolCtr}{11801}
 
 \twozeroone{
-\printValid{The only properties a \sbol{FunctionalComponent} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations},\sbol{access}, \sbol{definition}, \sbol{mapsTo}, and \sbol{direction}.\\ Reference: \sec{sec:ComponentInstance}}
+\printValid{A \sbol{FunctionalComponent} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations},\sbol{access}, \sbol{definition}, \sbol{mapsTo}, and \sbol{direction}.\\ Reference: \sec{sec:ComponentInstance}}
 %A \sbol{FunctionalComponent} MUST inherit all properties of the \sbol{ComponentInstance} class.
 }
 
@@ -509,7 +518,7 @@ Reference: \sec{sec:GenericLocation}}
 \setcounter{sbolCtr}{11901}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Interaction} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:I}{types}, and \sbol{participations}.\\ Reference: \sec{sec:Interaction}}
+\printValid{An \sbol{Interaction} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:I}{types}, and \sbol{participations}.\\ Reference: \sec{sec:Interaction}}
 %An \sbol{Interaction} MUST inherit all properties of the \sbol{Identified} class.
 }
 
@@ -534,7 +543,7 @@ Reference: \sec{sec:Participation}}
 \setcounter{sbolCtr}{12001}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Participation} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:P}{roles}, and \sbol{participant}.\\ Reference: \sec{sec:Participation}}
+\printValid{A \sbol{Participation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:P}{roles}, and \sbol{participant}.\\ Reference: \sec{sec:Participation}}
 % A \sbol{Participation} MUST inherit all properties of the \sbol{Identified} class.
 }
 
@@ -558,7 +567,7 @@ Reference: \sec{sec:Participation}}
 \setcounter{sbolCtr}{12101}
 
 \twozeroone{
-\printValid{The only properties a \sbol{Collection} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{members}.\\Reference: \sec{sec:Collection}}
+\printValid{A \sbol{Collection} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{members}.\\Reference: \sec{sec:Collection}}
 }
 
 \printValid{The \sbol{members} property of a \sbol{Collection} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Collection}}
@@ -571,11 +580,11 @@ Reference: \sec{sec:Participation}}
 \setcounter{sbolCtr}{12201}
 
 \twozeroone{
-\printValid{(removed)}
-%The \sbol{name} property of an \sbol{Annotation} is REQUIRED and MUST contain a \sbol{QName}.\\ Reference: \sec{sec:Annotations}}
+\printValid{\st{The name property of an Annotation is REQUIRED and MUST contain a QName. \\ 
+Reference: Section 7.11 on page 43}}
 
-\printValid{(removed)}
-%The \sbol{value} property of an \sbol{Annotation} is REQUIRED and MUST contain an \sbol{AnnotationValue}.\\ Reference: \sec{sec:Annotations}}
+\printValid{\st{The value property of an Annotation is REQUIRED and MUST contain an AnnotationValue. \\ 
+Reference: Section 7.11 on page 43}}
 
 \printWarning{An  \sbol{AnnotationValue} MUST be a \sbol{literal} (a \sbol{String}, \sbol{Integer}, \sbol{Double}, or \sbol{Boolean}), \sbol{URI}, or a \sbol{NestedAnnotations} object.\\ Reference: \sec{sec:Annotations}}
 
@@ -590,7 +599,7 @@ Reference: \sec{sec:Participation}}
 \setcounter{sbolCtr}{12301}
 
 \twozeroone{
-\printValid{The only properties a \sbol{GenericTopLevel} may have are: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\Reference: \sec{sec:Collection}}
+\printValid{A \sbol{GenericTopLevel} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\Reference: \sec{sec:GenericTopLevel}}
 }
 
 \printValid{The \sbol{rdfType} property of a \sbol{GenericTopLevel} object is REQUIRED and MUST contain a \sbol{QName}.\\ Reference: \sec{sec:GenericTopLevel}}

@@ -127,7 +127,7 @@ An \sbol{Identified} object MUST be referred to using either its \sbol{identity}
 \label{sec:displayId}
 The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between \sbol{name} and \sbol{identity} that is machine-readable, but more human-readable than the full \sbol{URI} of an \sbol{identity}. 
 
-If the \sbol{displayId} property is used, then its \sbol{String} value SHOULD be locally unique (global uniqueness is not necessary) and MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
+If the \sbol{displayId} property is used, then its \sbol{String} value \twozeroone{\st{SHOULD be locally unique (global uniqueness is not necessary) and}} MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
 
 % compliant with the type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}, except that it MUST not include the characters "-" and ".". 
 
@@ -145,7 +145,7 @@ For a full explanation, see the linked resources.
 
 The \sbol{wasDerivedFrom} property is OPTIONAL and has a data type of \sbol{URI}. An SBOL object with this property refers to another SBOL object or non-SBOL resource from which this object was derived. 
 
-\twozeroone{For \sbol{TopLevel} objects, there are some rules that the \sbol{wasDerivedFrom} property must satisfy.}
+\twozeroone{The \sbol{wasDerivedFrom} property of a \sbol{TopLevel} SBOL object is subject to the following rules.}
 If the \sbol{wasDerivedFrom} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$. 
 In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFrom} property or form a cyclical chain of references via its \sbol{wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical. 
 
@@ -353,9 +353,8 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
 The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s that clarifies the potential function of the entity represented by a \sbol{ComponentDefinition} in a biochemical or physical context.
 
 The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MAY contain one or more \sbol{URI}s that MUST identify terms from ontologies that are consistent with the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition}.
-For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{ComponentDefinition} \twozeroone{SHOULD contain a \sbol{URI} identifying term} from the Sequence Ontology (SO). 
-\ref{tbl:componentdefinition_roles} contains a list of possible ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. 
-These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use the \sbol{URI} for that term as one of its \sbolmult{roles:CD}{roles}. 
+For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{ComponentDefinition} could contain URIs identifying terms from the Sequence Ontology (SO). \twozeroone{As a best practice, a DNA or RNA \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{URI} that refers to a term from the sequence feature branch of the SO.}
+\ref{tbl:componentdefinition_roles} contains a list of possible ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use the \sbol{URI} for that term as one of its \sbolmult{roles:CD}{roles}.
 
 
 \begin{table}[ht]
@@ -619,7 +618,7 @@ Lastly, the \sbol{access} property of the \sbol{remote} \sbol{ComponentInstance}
  
 \paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
 The \sbol{refinement} property is REQUIRED and has a data type of \sbol{URI}. Each \sbol{MapsTo} object MUST specify the relationship between its \sbol{local} and \sbol{remote} \sbol{ComponentInstance} objects using one of the REQUIRED \sbol{refinement} \sbol{URI}s provided in \ref{tbl:mapsto_refinement}.
-\twozeroone{Note that if multiple \sbol{MapsTo}s within the \sbol{Component}s of a \sbol{ComponentDefinition} refer to the same \sbol{Commponent} in the \sbol{local} field, then there MUST not be more than one \sbol{MapsTo} that has \sbol{refinement} with \sbol{URI} \url{http://sbols.org/v2\#useRemote}. Similarly, if multiple \sbol{MapsTo}s within the \sbol{modules} and \sbol{functionalComponents} of a \sbol{ModuleDefinition} refer to the same \sbol{FunctionalCommponent} in the \sbol{local} field, then there MUST not be more than one \sbol{MapsTo} that has \sbol{refinement} with \sbol{URI} \url{http://sbols.org/v2\#useRemote}.}
+\twozeroone{Note that if multiple \sbol{MapsTo}s belonging to the \sbol{Component}s of a \sbol{ComponentDefinition} have \sbol{local} properties that refer to the same \sbol{Component}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}. Similarly, if multiple \sbol{MapsTo}s belonging the \sbol{Module}s and \sbol{FunctionalComponent}s of a \sbol{ModuleDefinition} have \sbol{local} properties that refer to the same \sbol{FunctionalComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}.}
 
 
 \begin{table}[ht]
@@ -1300,12 +1299,11 @@ The example below shows an \sbol{Interaction} representing an inhibition relatio
 Each \sbol{Participation} represents how a particular \sbol{FunctionalComponent} behaves in its parent
 \sbol{Interaction}.
 
-\twozeroone{
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:P}
 
-The \sbolmult{roles:P}{roles} property is a REQUIRED set of \sbol{URI}s that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{FunctionalComponent}) in the context of its parent \sbol{Interaction}. 
+\twozeroone{The \sbolmult{roles:P}{roles} property is a REQUIRED set of \sbol{URI}s that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{FunctionalComponent}) in the context of its parent \sbol{Interaction}. 
 
-The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{types:I}{types} property refer to a term from the participant role branch of the SBO. \ref{tbl:participant_roles} provides a list of possible SBO terms for the \sbolmult{roles:P}{roles} property and their corresponding \sbol{URI}s. 
+The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{roles:P}{roles} property refer to a term from the participant role branch of the SBO.} \ref{tbl:participant_roles} provides a list of possible SBO terms for the \sbolmult{roles:P}{roles} property and their corresponding \sbol{URI}s. 
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -1329,10 +1327,10 @@ The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that
 \end{table}
 
 If a \sbol{Participation} is well described by one of the terms from \ref{tbl:participant_roles}, then its \sbolmult{roles:P}{roles} property MUST contain the \sbol{URI} that identifies this term.
-Also, if the \sbol{Interaction} that includes a \sbol{Participation} has a type listed in \ref{tbl:interaction_types}, the role of the \sbol{Participation} should correspond with this type as indicated in \ref{tbl:participant_roles}. 
+\twozeroone{Also, if a \sbol{Participation} belongs to an \sbol{Interaction} that has a type listed in \ref{tbl:interaction_types}, then the \sbol{Participation} SHOULD have a role that is cross-listed with this type in \ref{tbl:participant_roles}.} 
 Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} contains multiple
  \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulator'' and ``inhibitor'' would conflict.
-}
+
 
 \paragraph{The \sbolheading{participant} property}\label{sec:participant}
 
