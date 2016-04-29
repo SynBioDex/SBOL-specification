@@ -429,7 +429,7 @@ For example, the \sbol{ComponentDefinition} of a gene might specify that the pos
 The serialization of a \sbol{ComponentDefinition} MUST have the form below. 
 The \sbol{components},  \sbol{sequenceConstraints},  \sbol{sequenceAnnotations}, and \sbol{sequences} properties of a \sbol{ComponentDefinition} contain or reference objects belonging to the appropriate SBOL classes as their values, while the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} properties contain \sbol{URI}s that identify ontology terms as their values. 
 As shown below, each of these objects and \sbol{URI}s are serialized as part of an implicit set of SBOL properties with singular rather then plural names. 
-In particular, each object is serialized as an RDF/XML node nested within a property, while each \sbol{URI} (except the \sbol{identity}) is serialized as a \external{rdf:resource} on a property.
+In particular, each object is serialized as an RDF/XML node nested within a property, while each \sbol{URI} (except the \sbol{identity}) is serialized as an \external{rdf:resource} on a property.
 
 \lstsetsbol
 \begin{lstlisting}
