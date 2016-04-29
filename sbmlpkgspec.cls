@@ -84,6 +84,7 @@ Package Specification Style]
 \RequirePackage[T1]{fontenc}
 \RequirePackage{suffix}
 \RequirePackage{varwidth}
+\RequirePackage{txfonts}
 
 % We use the "optional" package to indicate whether to generate a grayscale
 % vs a color version of the document without having to alter the .tex file
@@ -880,6 +881,8 @@ Package Specification Style]
 \newcommand{\vSymbolName}{checked box\xspace}
 \newcommand{\cSymbol}{\textcolor{Goldenrod}{\scalefont{0.9}\ding{115}}}
 \newcommand{\cSymbolName}{triangle\xspace}
+\newcommand{\rSymbol}{\textcolor{blue}{$\medbullet$}}
+\newcommand{\rSymbolName}{circle\xspace}
 \newcommand{\mSymbol}{\textcolor{Green}{$\bigstar$}}
 \newcommand{\mSymbolName}{star\xspace}
 
@@ -888,6 +891,7 @@ Package Specification Style]
 
 \newcommand{\vsp}{\hspace*{4pt}}
 \newcommand{\csp}{\hspace*{6.25pt}}
+\newcommand{\rsp}{\hspace*{6.25pt}}
 \newcommand{\msp}{\hspace*{4.9pt}}
 
 % Now the actual user commands for validation rules.
@@ -899,6 +903,7 @@ Package Specification Style]
 \newcommand{\validRule}[2]      {\sbmlrule{#1}{\vSymbol}{#2}}
 \newcommand{\consistencyRule}[2]{\sbmlrule{#1}{\cSymbol}{#2}}
 \newcommand{\modelingRule}[2]   {\sbmlrule{#1}{\mSymbol}{#2}}
+\newcommand{\completeRule}[2]   {\sbmlrule{#1}{\rSymbol}{#2}}
 
 
 % Code examples.
@@ -946,6 +951,7 @@ Package Specification Style]
 \reversemarginpar  % Want these be put on the left, not the right.
 
 \newcommand{\notice}{\marginpar{\hspace*{34pt}\raisebox{-0.5ex}{\color{black}\Large\ding{43}}}}
+\newcommand{\version}[1]{\marginpar{\hspace*{34pt}\raisebox{-3.0ex}{\color{blue}\small #1}}}
 \newcommand{\warning}{\marginpar{\hspace*{34pt}{\color{red}\large\danger}}}
 
 % Margin notes.
