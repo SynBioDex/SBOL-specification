@@ -155,7 +155,7 @@ Reference: \sec{sec:Identified}}
 \printValid{\st{A TopLevel object MUST inherit all properties of the Identified class. \\ 
 Reference: Section 7.5 on page 19}}
 
-\printModeling{If the \sbol{wasDerivedFrom} property of one \sbol{TopLevel} object refers to another \sbol{TopLevel} object with the same \sbol{persistentIdentity} property, then \sbol{version} property of the second \sbol{TopLevel} object SHOULD precede that of the first if both objects have a \sbol{version} and it is assumed that these \sbol{version}s follow the conventions of semantic versioning.\\ Reference: \sec{sec:Identified}}
+\printModeling{If the \sbol{wasDerivedFrom} property of one \sbol{TopLevel} object refers to another \sbol{TopLevel} object with the same \sbol{persistentIdentity} property, then the \sbol{version} property of the second \sbol{TopLevel} object SHOULD precede that of the first if both objects have a \sbol{version} and it is assumed that these \sbol{version}s follow the conventions of semantic versioning.\\ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbol{wasDerivedFrom} property of an \sbol{TopLevel} object MUST NOT contain a \sbol{URI} reference to the \sbol{TopLevel} object itself.\\ Reference: \sec{sec:Identified}}
 
@@ -168,7 +168,7 @@ Reference: Section 7.5 on page 19}}
 \setcounter{sbolCtr}{10401}
 
 \twozeroone{
-\printValid{A sbol{Sequence} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{elements}, and \sbol{encoding}.\\ Reference: \sec{sec:Sequence}}
+\printValid{A \sbol{Sequence} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{elements}, and \sbol{encoding}.\\ Reference: \sec{sec:Sequence}}
 % A \sbol{Sequence} MUST inherit all properties of the \sbol{TopLevel} class.
 }
 
@@ -508,7 +508,7 @@ Reference: \sec{sec:GenericLocation}}
 \setcounter{sbolCtr}{11801}
 
 \twozeroone{
-\printValid{A \sbol{FunctionalComponent} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations},\sbol{access}, \sbol{definition}, \sbol{mapsTo}, and \sbol{direction}.\\ Reference: \sec{sec:ComponentInstance}}
+\printValid{A \sbol{FunctionalComponent} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations},\sbol{access}, \sbolmult{definition:M}{definition}, and \sbolmult{mapsTos:M}{mapsTos}, and \sbol{direction}.\\ Reference: \sec{sec:ComponentInstance}}
 %A \sbol{FunctionalComponent} MUST inherit all properties of the \sbol{ComponentInstance} class.
 }
 
