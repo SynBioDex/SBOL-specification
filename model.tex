@@ -347,30 +347,6 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
  \label{tbl:componentdefinition_types}
 \end{table}
 
-\subsubsection*{The \sbolheading{roleIntegration} property}
-\label{sec:roleIntegration:CD}
-
-The `Component.roleIntegration` property has a data type of URI. A `Component`
-instance with zero `roles` MAY OPTIONALLY specify a `roleIntegration`. A
-`Component` instance with one or more `roles` MUST specify a `roleIntegration`
-from the table below.
-
-A `roleIntegration` specifies the relationship between a `Component` instance's
-own set set of `roles` and the set of `roles` on the child
-`ComponentDefinition`.
-
-| Integration URI                   | Description |
-|-----------------------------------|-------------|
-| http://sbols.org/v2#overrideRoles | In the context of this `Component`, ignore any role(s) given for the child `ComponentDefinition`. Instead use only the set of zero or more roles given for this `Component`. |
-| http://sbols.org/v2#mergeRoles    | Use the union of the two sets: both the set of zero or more roles given for this `Component` as well as the set of zero or more roles given for the child `ComponentDefinition`. |
-
-If zero `Component.roles` are given and no `Component.roleIntegration` is
-given, then `http://sbols.org/v2#mergeRoles` is assumed.
-
-It is RECOMMENDED to specify a set of `Component.roles` only if the integrated
-result set of roles would differ from the set of `roles` belonging to the child
-`ComponentDefinition`.
-
 \subsubsection*{The \sbolheading{roles} property}
 \label{sec:roles:CD}
 
@@ -463,7 +439,6 @@ In particular, each object is serialized as an RDF/XML node nested within a prop
   [\emph{zero or more}]  <sbol:sequence rdf:resource="..."/> [\emph{element}]
   [\emph{one or more}]   <sbol:type rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]
-  [\emph{zero or one}]  <sbol:roleIntegration rdf:resource="..."/> [\emph{element}]
   [\emph{zero or more}]  <sbol:component>
                  <sbol:Component rdf:about="...">...</sbol:Component>
                </sbol:component> [\emph{elements}]
@@ -566,6 +541,34 @@ No serialization is defined for the \sbol{ComponentInstance} class, since this c
 The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects into a structural hierarchy. For example, the \sbol{ComponentDefinition} of a gene could contain four \sbol{Component} objects: a promoter, RBS, CDS, and terminator. In turn, the \sbol{ComponentDefinition} of the promoter \sbol{Component} could contain \sbol{Component} objects defined as various operator sites.
 
 % All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
+
+
+\subsubsection*{The \sbolheading{roles} property}
+\label{sec:roles:C}
+
+The `Component.roles` property comprises an OPTIONAL set of zero or more URIs describing the purpose or potential function of a given child `ComponentDefinition` in the context of its parent `ComponentDefinition`.
+
+If provided, these `role` URIs MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate Components' function in any domain for which an ontology exists.
+
+It is RECOMMENDED that these `role` URIs identify terms that are compatible with the `type` properties of both the parent and child ComponentDefinitions. For example, a `role` of a `Component` which belongs to a `ComponentDefinition` of type DNA and points to a child `ComponentDefinition` of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology branches is given in the [SBOL] specification.
+
+
+\subsubsection*{The \sbolheading{roleIntegration} property}
+\label{sec:roleIntegration:C}
+
+The `Component.roleIntegration` property has a data type of URI. A `Component` instance with zero `roles` MAY OPTIONALLY specify a `roleIntegration`. A `Component` instance with one or more `roles` MUST specify a `roleIntegration` from the table below.
+
+A `roleIntegration` specifies the relationship between a `Component` instance's own set set of `roles` and the set of `roles` on the child `ComponentDefinition`.
+
+| Integration URI                   | Description |
+|-----------------------------------|-------------|
+| http://sbols.org/v2#overrideRoles | In the context of this `Component`, ignore any role(s) given for the child `ComponentDefinition`. Instead use only the set of zero or more roles given for this `Component`. |
+| http://sbols.org/v2#mergeRoles    | Use the union of the two sets: both the set of zero or more roles given for this `Component` as well as the set of zero or more roles given for the child `ComponentDefinition`. |
+
+If zero `Component.roles` are given and no `Component.roleIntegration` is given, then `http://sbols.org/v2#mergeRoles` is assumed.
+
+It is RECOMMENDED to specify a set of `Component.roles` only if the integrated result set of roles would differ from the set of `roles` belonging to the child `ComponentDefinition`.
+
 
 \paragraph{Serialization}
 
