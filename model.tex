@@ -347,6 +347,30 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
  \label{tbl:componentdefinition_types}
 \end{table}
 
+\subsubsection*{The \sbolheading{roleIntegration} property}
+\label{sec:roleIntegration:CD}
+
+The `Component.roleIntegration` property has a data type of URI. A `Component`
+instance with zero `roles` MAY OPTIONALLY specify a `roleIntegration`. A
+`Component` instance with one or more `roles` MUST specify a `roleIntegration`
+from the table below.
+
+A `roleIntegration` specifies the relationship between a `Component` instance's
+own set set of `roles` and the set of `roles` on the child
+`ComponentDefinition`.
+
+| Integration URI                   | Description |
+|-----------------------------------|-------------|
+| http://sbols.org/v2#overrideRoles | In the context of this `Component`, ignore any role(s) given for the child `ComponentDefinition`. Instead use only the set of zero or more roles given for this `Component`. |
+| http://sbols.org/v2#mergeRoles    | Use the union of the two sets: both the set of zero or more roles given for this `Component` as well as the set of zero or more roles given for the child `ComponentDefinition`. |
+
+If zero `Component.roles` are given and no `Component.roleIntegration` is
+given, then `http://sbols.org/v2#mergeRoles` is assumed.
+
+It is RECOMMENDED to specify a set of `Component.roles` only if the integrated
+result set of roles would differ from the set of `roles` belonging to the child
+`ComponentDefinition`.
+
 \subsubsection*{The \sbolheading{roles} property}
 \label{sec:roles:CD}
 
