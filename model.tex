@@ -439,6 +439,7 @@ In particular, each object is serialized as an RDF/XML node nested within a prop
   [\emph{zero or more}]  <sbol:sequence rdf:resource="..."/> [\emph{element}]
   [\emph{one or more}]   <sbol:type rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]
+  [\emph{zero or one}]  <sbol:roleIntegration rdf:resource="..."/> [\emph{element}]
   [\emph{zero or more}]  <sbol:component>
                  <sbol:Component rdf:about="...">...</sbol:Component>
                </sbol:component> [\emph{elements}]
@@ -553,6 +554,8 @@ The serialization of a \sbol{Component} MUST have the following form:
   [\emph{one}]          <sbol:access rdf:resource="..."/> [\emph{element}]
   [\emph{one}]          <sbol:definition rdf:resource="..."/> [\emph{element}]
   [\emph{zero or more}] <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
+  [\emph{zero or more}] <sbol:role rdf:resource="..."/> [\emph{elements}]
+  [\emph{zero or one}] <sbol:roleIntegration rdf:resource="..."/> [\emph{element}]
 </sbol:Component>
 \end{lstlisting}
 
@@ -696,6 +699,8 @@ The serialization of a \sbol{SequenceAnnotation} MUST have the form below. In th
   [\emph{one or more}] <sbol:location>
                  <sbol:A_LOCATION_SUBCLASS rdf:about="...">...</sbol:A_LOCATION_SUBCLASS>
               </sbol:location> [\emph{elements}]
+  [\emph{zero or more}] <sbol:role rdf:resource="..."/> [\emph{elements}]
+  [\emph{zero or one}] <sbol:roleIntegration rdf:resource="..."/> [\emph{element}]
 </sbol:SequenceAnnotation>
 \end{lstlisting}
 
