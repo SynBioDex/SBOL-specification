@@ -545,7 +545,7 @@ The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
 
-The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more \sbolmult{roles:C}{role} \sbol{URI}s describing the purpose or potential function of this \sbol{Component}'s included sub-\sbol{ComponentDefinition} in the context of its parent \sbol{ComponentDefinition}.
+A sequences's purpose and function are sometimes determined by context. The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more \sbolmult{roles:C}{role} \sbol{URI}s describing the purpose or potential function of this \sbol{Component}'s included sub-\sbol{ComponentDefinition} in the \textit{context} of its parent \sbol{ComponentDefinition}.
 
 If provided, these \sbolmult{roles:C}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{Component}'s function in any domain for which an ontology exists.
 
@@ -724,7 +724,7 @@ The \sbol{component} property is OPTIONAL and has a data type of \sbol{URI}. Thi
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:SA}
 
-The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more \sbol{URI}s describing the purpose or potential function of a given subsequence (and, if given, a sub-\sbol{ComponentDefinition} included by the associated \sbol{Component}) in the context of its parent \sbol{ComponentDefinition}.
+A design's purpose and function are sometimes determined by context. The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more \sbol{URI}s describing the purpose or potential function of a given subsequence (and, if given, a sub-\sbol{ComponentDefinition} included by the associated \sbol{Component}) in the \textit{context} of its parent \sbol{ComponentDefinition}.
 
 If provided, these \sbolmult{roles:SA}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate \sbol{Sequence}s' function in any domain for which an ontology exists.
 
