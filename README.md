@@ -26,7 +26,7 @@ Installing LaTeX on your system is beyond the scope of this README, however we w
 
 # MacTex installation notes
 
-Here is how one community member managed to install MacTex and BibTex on OS X 10.10.5 Yosemite in August 2016. This recipe was found on StackOverflow. Not all of these commands may be strictly necessary to build the SBOL2 pdf at this time. Please note that BasicTex alone did not suffice.
+Here is how one community member managed to install MacTex and BibTex on OS X 10.10.5 Yosemite in August 2016. This recipe was found on StackOverflow. Not all of these commands may be strictly necessary to build the SBOL2 pdf at this time. The bibesk settings especially need curation. Please note that BasicTex alone did not suffice.
 
     # First install homebrew from http://brew.sh then...
     brew update
