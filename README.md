@@ -14,7 +14,7 @@ To build, run these commands and check the output for errors. If there are error
     pdflatex sbol2
     pdflatex sbol2
 
-Note that pdflatex is run several times. Each successive pass mows down unresolved references from the previous pass. For development purposes, you may just need to run it once unless you're editing features that only appear after later build steps.
+Note that pdflatex is run several times. Each successive pass mows down unresolved references from the previous passes. For example, the extra pdflatex commands set references correctly after bibtex completes. You don’t need to do this in every build unless the bibliography has changed.  For development purposes, you may just need to run pdflatex once.
 
 The git status command will show you which intermediate build products and logs you need to delete for a clean build.
 
@@ -26,7 +26,7 @@ Installing LaTeX on your system is beyond the scope of this README, however we w
 
 # MacTex installation notes
 
-Here is how one community member managed to install MacTex and BibTex on OS X 10.10.5 Yosemite in August 2016. This recipe was found on StackOverflow. Not all of these commands may be strictly necessary to build the SBOL2 pdf at this time.
+Here is how one community member managed to install MacTex and BibTex on OS X 10.10.5 Yosemite in August 2016. This recipe was found on StackOverflow. Not all of these commands may be strictly necessary to build the SBOL2 pdf at this time. Please note that BasicTex alone did not suffice.
 
     # First install homebrew from http://brew.sh then...
     brew update
