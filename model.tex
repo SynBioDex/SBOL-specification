@@ -545,16 +545,16 @@ The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
 
-The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more \sbolmult{roles:C}{role} URIs describing the purpose or potential function of a given child \sbol{ComponentDefinition} in the context of its parent \sbol{ComponentDefinition}.
+The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more \sbolmult{roles:C}{role} \sbol{URI}s describing the purpose or potential function of this \sbol{Component}'s child \sbol{ComponentDefinition} in the context of its parent \sbol{ComponentDefinition}.
 
-If provided, these \sbolmult{roles:C}{role} URIs MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate \sbol{Component}s' function in any domain for which an ontology exists.
+If provided, these \sbolmult{roles:C}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{Component}'s function in any domain for which an ontology exists.
 
-It is RECOMMENDED that these \sbolmult{roles:C}{role} URIs identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both the parent and child \sbol{ComponentDefinition}s. For example, a \sbolmult{roles:C}{role} of a \sbol{Component} which belongs to a \sbol{ComponentDefinition} of type DNA and points to a child \sbol{ComponentDefinition} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology branches is given in this specification. [SEP 004 TODO: link to section]
+It is RECOMMENDED that these \sbolmult{roles:C}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both this \sbol{Component}'s parent and its child \sbol{ComponentDefinition}s. For example, a \sbolmult{roles:C}{role} of a \sbol{Component} which belongs to a \sbol{ComponentDefinition} of type DNA and refers to a child \sbol{ComponentDefinition} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology branches for \sbolmult{roles:C}{roles} is given above, in the description of \sbolmult{roles:CD}{ComponentDefinition.roles}.
 
 
 \paragraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:C}
 
-The \sbolmult{roleIntegration:C}{roleIntegration} property has a data type of URI. A \sbol{Component} instance with zero \sbolmult{roles:C}{roles} MAY OPTIONALLY specify a \sbolmult{roleIntegration:C}{roleIntegration}. A \sbol{Component} instance with one or more \sbolmult{roles:C}{roles} MUST specify a \sbolmult{roleIntegration:C}{roleIntegration} from the table below.
+The \sbolmult{roleIntegration:C}{roleIntegration} property has a data type of \sbol{URI}. A \sbol{Component} instance with zero \sbolmult{roles:C}{roles} MAY OPTIONALLY specify a \sbolmult{roleIntegration:C}{roleIntegration}. A \sbol{Component} instance with one or more \sbolmult{roles:C}{roles} MUST specify a \sbolmult{roleIntegration:C}{roleIntegration} from the table below.
 
 A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship between a \sbol{Component} instance's own set set of \sbolmult{roles:C}{roles} and the set of \sbolmult{roles:CD}{roles} on the child \sbol{ComponentDefinition}.
 
@@ -563,9 +563,9 @@ A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship betwe
 | \url{http://sbols.org/v2#overrideRoles} | In the context of this \sbol{Component}, ignore any \sbolmult{roles:CD}{roles} given for the child \sbol{ComponentDefinition}. Instead use only the set of zero or more \sbolmult{roles:C}{roles} given for this \sbol{Component}. |
 | \url{http://sbols.org/v2#mergeRoles}    | Use the union of the two sets: both the set of zero or more \sbolmult{roles:C}{roles} given for this \sbol{Component} as well as the set of zero or more \sbolmult{roles:CD}{roles} given for the child \sbol{ComponentDefinition}. |
 
-If zero \sbol{Component} \sbolmult{roles:C}{roles} are given and no \sbol{Component} \sbolmult{roleIntegration:C}{roleIntegration} is given, then ``http://sbols.org/v2#mergeRoles'' is assumed.
+If zero \sbol{Component} \sbolmult{roles:C}{roles} are given and no \sbol{Component} \sbolmult{roleIntegration:C}{roleIntegration} is given, then \url{http://sbols.org/v2\#mergeRoles} is assumed.
 
-It is RECOMMENDED to specify a set of \sbol{Component} \sbolmult{roles:C}{roles} only if the integrated result set of roles would differ from the set of \sbolmult{roles:CD}{roles} belonging to the child \sbol{ComponentDefinition}.
+It is RECOMMENDED to specify a set of \sbol{Component} \sbolmult{roles:C}{roles} only if the integrated result set of roles would differ from the set of \sbolmult{roles:CD}{roles} belonging to this \sbol{Component}'s child \sbol{ComponentDefinition}.
 
 
 \paragraph{Serialization}
@@ -715,27 +715,27 @@ The \sbol{component} property is OPTIONAL and has a data type of \sbol{URI}. Thi
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:SA}
 
-The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more URIs describing the purpose or potential function of a given subsequence (and, if given, a child \sbol{ComponentDefinition}) in the context of its parent \sbol{ComponentDefinition}.
+The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more \sbol{URI}s describing the purpose or potential function of a given subsequence (and, if given, a child \sbol{ComponentDefinition}) in the context of its parent \sbol{ComponentDefinition}.
 
-If provided, these \sbolmult{roles:SA}{role} URIs MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate \sbol{Sequence}s' function in any domain for which an ontology exists.
+If provided, these \sbolmult{roles:SA}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate \sbol{Sequence}s' function in any domain for which an ontology exists.
 
-It is RECOMMENDED that these \sbolmult{roles:SA}{role} URIs identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both the parent and child \sbol{ComponentDefinition}s (if given). For example, a \sbolmult{roles:SA}{role} of a \sbol{SequenceAnnotation} which belongs to a \sbol{ComponentDefinition} of type DNA and incorporates a child \sbol{ComponentDefinition} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology branches is given in this specification. [SEP 004-TODO - refer directly]
+It is RECOMMENDED that these \sbolmult{roles:SA}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both the parent and child \sbol{ComponentDefinition}s (if given). For example, a \sbolmult{roles:SA}{role} of a \sbol{SequenceAnnotation} which belongs to a \sbol{ComponentDefinition} of type DNA and incorporates a child \sbol{ComponentDefinition} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology branches for \sbolmult{roles:SA}{roles} is given above, in the description of \sbolmult{roles:CD}{ComponentDefinition.roles}.
 
 
 \paragraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:SA}
 
-The \sbolmult{roleIntegration:SA}{roleIntegration} property has a data type of \sbol{URI}. A \sbol{SequenceAnnotation} instance with zero \sbolmult{roles:SA}{roles} MAY OPTIONALLY specify a `roleIntegration`. A \sbol{SequenceAnnotation} instance with one or more \sbolmult{roles:SA}{roles} MUST specify a `roleIntegration` from the table below.
+The \sbolmult{roleIntegration:SA}{roleIntegration} property has a data type of \sbol{URI}. A \sbol{SequenceAnnotation} instance with zero \sbolmult{roles:SA}{roles} MAY OPTIONALLY specify a \sbolmult{roleIntegration:SA}{roleIntegration}. A \sbol{SequenceAnnotation} instance with one or more \sbolmult{roles:SA}{roles} MUST specify a \sbolmult{roleIntegration:SA}{roleIntegration} from the table below.
 
-Using `roleIntegration`, a \sbol{SequenceAnnotation} instance MAY specify the relationship between its own set of \sbolmult{roles:SA}{roles} and the set of \sbolmult{roles:C}{roles} computed for the sibling \sbol{Component} (if given). The integrated result set of computed roles may include \sbolmult{roles:CD}{role} elements from the child \sbol{ComponentDefinition} if dictated by the value of \sbolmult{roleIntegration:C}{Component.roleIntegration}. To determine the integrated role set for a \sbol{SequenceAnnotation}, first compute the integrated set of roles for the sibling \sbol{Component} (if given) according to the integration rules in section 2.1.1 above. [SEP 004-TODO - link directly to these rules in Component, clarify if needed, refer to table number] If no sibling \sbol{Component} is given, then the sibling set is assumed to be the empty set.
+Using \sbolmult{roleIntegration:SA}{roleIntegration}, a \sbol{SequenceAnnotation} instance MAY specify the relationship between its own set of \sbolmult{roles:SA}{roles} and the set of \sbolmult{roles:C}{roles} computed for its sibling \sbol{Component} (if given). The integrated result set of computed roles may include \sbolmult{roles:CD}{role} elements from the child \sbol{ComponentDefinition} if dictated by the value of \sbolmult{roleIntegration:C}{Component.roleIntegration}. To determine the integrated role set for a \sbol{SequenceAnnotation}, first compute the integrated set of roles for this \sbol{SequenceAnnotation}'s sibling \sbol{Component} (if given) according to the integration rules in the subsection on \sbolmult{roleIntegration:C}{Component.roleIntegration} above. If no sibling \sbol{Component} is given, then the sibling set is assumed to be the empty set.
 
 | Integration URI                   | Description |
 |-----------------------------------|-------------|
 | \url{http://sbols.org/v2#overrideRoles} | In the context of this \sbol{SequenceAnnotation}, ignore the integrated set of roles computed for the optional sibling \sbol{Component}. Instead use only the set of zero or more \sbolmult{roles:SA}{roles} given for this \sbol{SequenceAnnotation}. |
 | \url{http://sbols.org/v2#mergeRoles}    | Use the union of the two sets: both the set of zero or more \sbolmult{roles:SA}{roles} given for this \sbol{SequenceAnnotation} as well as the integrated set of zero or more roles computed for the optional sibling \sbol{Component}. |
 
-If zero \sbolmult{roles:SA}{SequenceAnnotation.roles} are given and no \sbolmult{roleIntegration:SA}{SequenceAnnotation.roleIntegration} is given, then ``http://sbols.org/v2#mergeRoles'' is assumed.
+If zero \sbolmult{roles:SA}{SequenceAnnotation.roles} are given and no \sbolmult{roleIntegration:SA}{SequenceAnnotation.roleIntegration} is given, then \url{http://sbols.org/v2\#mergeRoles} is assumed.
 
-It is RECOMMENDED to specify a set of \sbolmult{roles:SA}{SequenceAnnotation.roles} only if the integrated result set of roles would differ from the integrated set of roles computed for the sibling Component.
+It is RECOMMENDED to specify a set of \sbolmult{roles:SA}{SequenceAnnotation.roles} only if the integrated result set of roles would differ from the integrated set of roles computed for this \sbol{SequenceAnnotation}'s sibling \sbol{Component} (if given).
 
 
 \paragraph{Serialization}
