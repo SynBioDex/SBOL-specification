@@ -58,7 +58,7 @@
 %Listing style for SBOL RDF/XML serialization examples
 \usepackage{listings}
 \usepackage{color}
-\usepackage{xcolor} 
+\usepackage{xcolor}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{light-gray}{gray}{0.97}
@@ -78,7 +78,7 @@
      morestring=[b]",                           % string format
      escapeinside={[}{]},
      alsoletter=:
-     %breakatwhitespace=true, 
+     %breakatwhitespace=true,
      %literate={\-}{}{0\discretionary{a}{\\}{}}
 }
 
@@ -92,9 +92,20 @@
 }
 
 %Commands to format SBOL terms in the document
+
+% Use sbolheading when you are referencing an SBOL data model class/field in a
+% section heading.
 \newcommand{\sbolheading}[1]{\texttt{#1}}
+
+% Use sbol when you are referencing an SBOL data model class/field in text.
 \newcommand{\sbol}[1]{\texttt{\hyperref[sec:#1]{#1}}}
+
+% Use sbolmult for SBOL fields that appear in multiple classes, for example
+% \sbolmult{types:CD}{types}. This ensures the reference links to the correct
+% section.
 \newcommand{\sbolmult}[2]{\texttt{\hyperref[sec:#1]{#2}}}
+
+% Rarely used. Use refObj you want to put the field in angle brackets.
 \newcommand{\refObj}[1]{$\langle$#1$\rangle$}
 
 %Command to format external terms in the document
@@ -132,7 +143,7 @@
 \packageVersion{Version 2.0.1}
 \packageVersionDate{April 29, 2016}
 
-% BBF RFC \rfcnum{}: 
+% BBF RFC \rfcnum{}:
 \title{Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~2.0.1}}
 
 
@@ -271,7 +282,7 @@ Michael Bissell & \emph{Amyris, Inc., USA}
     \bottomrule
   \end{edtable}
   \caption{Commands for the names of object classes defined in the SBML Level~3
-    Core specification.} 
+    Core specification.}
   \label{sbmlcore}
 \end{table}
 
@@ -345,5 +356,5 @@ Michael Bissell & \emph{Amyris, Inc., USA}
 \end{itemize}
 % * <myers@ece.utah.edu> 2015-06-03T17:34:31.200Z:
 %
-% 
+%
 %
