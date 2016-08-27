@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+echo "compile document like this:
+  compile sbol2
+"
+
+pdflatex $1
+bibtex $1
+pdflatex $1
+echo ""
+echo "============FINAL LATEX RUN==========="
+echo ""
+pdflatex $1
