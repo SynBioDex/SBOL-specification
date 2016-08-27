@@ -542,18 +542,24 @@ The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects
 
 % All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
 
+\twoonezero{
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
 
-A design's purpose and function are sometimes determined by context. The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more \sbolmult{roles:C}{role} \sbol{URI}s describing the purpose or potential function of this \sbol{Component}'s included sub-\sbol{ComponentDefinition} in the \textit{context} of its parent \sbol{ComponentDefinition}.
+}
+
+The expected purpose and function of a genetic part are described by the
+\sbolmult{roles:CD}{roles} property of \sbol{ComponentDefinition}. However, the same building block might be used for a different purpose in an actual design. In other words, purpose and function are sometimes determined by context. The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more \sbolmult{roles:C}{role} \sbol{URI}s describing the purpose or potential function of this \sbol{Component}'s included sub-\sbol{ComponentDefinition} in the \textit{context} of its parent \sbol{ComponentDefinition}.
 
 If provided, these \sbolmult{roles:C}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{Component}'s function in any domain for which an ontology exists.
 
 It is RECOMMENDED that these \sbolmult{roles:C}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both this \sbol{Component}'s parent \sbol{ComponentDefinition} and its included sub-\sbol{ComponentDefinition}. For example, a \sbolmult{roles:C}{role} of a \sbol{Component} which belongs to a \sbol{ComponentDefinition} of type DNA and includes a sub-\sbol{ComponentDefinition} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology branches for \sbolmult{roles:C}{roles} is given in the specification of \sbolmult{roles:CD}{ComponentDefinition.roles}.
 
+\twoonezero{
 
 \paragraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:C}
 
+}
 A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship between a \sbol{Component} instance's own set of \sbolmult{roles:C}{roles} and the set of \sbolmult{roles:CD}{roles} on the included sub-\sbol{ComponentDefinition}.
 
 The \sbolmult{roleIntegration:C}{roleIntegration} property has a data type of \sbol{URI}. A \sbol{Component} instance with zero \sbolmult{roles:C}{roles} MAY OPTIONALLY specify a \sbolmult{roleIntegration:C}{roleIntegration}. A \sbol{Component} instance with one or more \sbolmult{roles:C}{roles} MUST specify a \sbolmult{roleIntegration:C}{roleIntegration} from the table below.
@@ -575,6 +581,7 @@ The \sbolmult{roleIntegration:C}{roleIntegration} property has a data type of \s
 If zero \sbol{Component} \sbolmult{roles:C}{roles} are given and no \sbol{Component} \sbolmult{roleIntegration:C}{roleIntegration} is given, then \url{http://sbols.org/v2\#mergeRoles} is assumed.
 
 It is RECOMMENDED to specify a set of \sbol{Component} \sbolmult{roles:C}{roles} only if the integrated result set of roles would differ from the set of \sbolmult{roles:CD}{roles} belonging to this \sbol{Component}'s included sub-\sbol{ComponentDefinition}.
+
 
 
 \paragraph{Serialization}
@@ -722,16 +729,26 @@ There is no such concern with different \sbol{SequenceAnnotation} objects, howev
 The \sbol{component} property is OPTIONAL and has a data type of \sbol{URI}. This \sbol{URI} MUST refer to a \sbol{Component} that is contained by the same parent \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}. In this way, the properties of the \sbol{SequenceAnnotation}, such as its \sbol{description} and \sbol{locations}, are associated with part of the substructure of its parent \sbol{ComponentDefinition}.
 
 
+\twoonezero{
+
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:SA}
 
-A sequences's purpose and function are sometimes determined by context. The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more \sbol{URI}s describing the purpose or potential function of a given subsequence (and, if given, a sub-\sbol{ComponentDefinition} included by the associated \sbol{Component}) in the \textit{context} of its parent \sbol{ComponentDefinition}.
+}
+
+The expected purpose and function of a genetic part are described by the
+\sbolmult{roles:CD}{roles} property of \sbol{ComponentDefinition}. However, the
+same building block might be used for a different purpose in an actual
+design. In other words, purpose and function are sometimes determined by context. The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more \sbol{URI}s describing the purpose or potential function of a given subsequence (and, if given, a sub-\sbol{ComponentDefinition} included by the associated \sbol{Component}) in the \textit{context} of its parent \sbol{ComponentDefinition}.
 
 If provided, these \sbolmult{roles:SA}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate \sbol{Sequence}s' function in any domain for which an ontology exists.
 
 It is RECOMMENDED that these \sbolmult{roles:SA}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both this \sbol{SequenceAnnotation}'s' parent \sbol{ComponentDefinition} and, if given, the sub-\sbol{ComponentDefinition} included by the associated \sbol{Component}. For example, a \sbolmult{roles:SA}{role} of a \sbol{SequenceAnnotation} which belongs to a \sbol{ComponentDefinition} of type DNA and includes a sub-\sbol{ComponentDefinition} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology branches for \sbolmult{roles:SA}{roles} is given in the specification of \sbolmult{roles:CD}{ComponentDefinition.roles}.
 
+\twoonezero{
 
 \paragraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:SA}
+
+}
 
 A \sbolmult{roleIntegration:SA}{roleIntegration} specifies the relationship between a \sbol{SequenceAnnotation}'s own set of \sbolmult{roles:C}{roles} and the set of \sbolmult{roles:CD}{roles} on an associated \sbol{Component}.
 
@@ -755,6 +772,7 @@ Using \sbolmult{roleIntegration:SA}{roleIntegration}, a \sbol{SequenceAnnotation
 If zero \sbolmult{roles:SA}{SequenceAnnotation.roles} are given and no \sbolmult{roleIntegration:SA}{SequenceAnnotation.roleIntegration} is given, then \url{http://sbols.org/v2\#mergeRoles} is assumed.
 
 It is RECOMMENDED to specify a set of \sbolmult{roles:SA}{SequenceAnnotation.roles} only if the integrated result set of roles would differ from the integrated set of roles computed for this \sbol{SequenceAnnotation}'s associated \sbol{Component}.
+
 
 
 \paragraph{Serialization}
