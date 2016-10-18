@@ -373,7 +373,7 @@ Reference: Section 7.7.3 on page 26}}
 \setcounter{sbolCtr}{10901}
 
 \twoonezero{
-\printValid{A \sbol{SequenceAnnotation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, \sbol{locations}, \sbolmult{roles:SA}{roles}, and \sbolmult{roleIntegration:SA}{roleIntegration}.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{A \sbol{SequenceAnnotation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, \sbol{locations}, and \sbolmult{roles:SA}{roles}.\\ Reference: \sec{sec:SequenceAnnotation}}
 %A \sbol{SequenceAnnotation} MUST inherit all properties of the \sbol{Identified} class.
 }
 
@@ -394,32 +394,12 @@ Reference: Section 7.7.3 on page 26}}
 }
 
 \twoonezero{
-\printWarning{Each \sbol{URI} contained by the \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} MUST refer to an ontology term that is consistent with the  \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} referred to by the \sbolmult{definition:CI}{definition} property of the \sbol{Component} specified in the \sbol{component} property of this \sbol{SequenceAnnotation}.\\ Reference: \sec{sec:SequenceAnnotation}}
-}
-
-\twoonezero{
 \printWarning{The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} MUST contain a \sbol{URI} from \ref{tbl:componentdefinition_roles} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:SequenceAnnotation}}
 }
 
 \twoonezero{
-\printModeling{
-The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} SHOULD NOT contain a \sbol{URI} that refers to a term from the sequence feature branch of the SO unless the  \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} referred to by the \sbolmult{definition:CI}{definition} property of the \sbol{Component} specified in the \sbol{component} property of this \sbol{SequenceAnnotation} contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:componentdefinition_types}.
-\\ Reference: \sec{sec:SequenceAnnotation}}
-}
-
-\twoonezero{
-\printModeling{If the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} referred to by the \sbolmult{definition:CI}{definition} property of the \sbol{Component} specified in the \sbol{component} property of this \sbol{SequenceAnnotation} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{roles:SA}{roles} property SHOULD contain no more than one \sbol{URI} that refers to a term from the sequence feature branch of the SO.\\ 
+\printValid{A \sbol{SequenceAnnotation} MUST not include both a \sbol{component} property and a \sbolmult{roles:SA}{roles} property.\\ 
 Reference: \sec{sec:SequenceAnnotation}}
-}
-
-\twoonezero{
-\printValid{The \sbolmult{roleIntegration:C}{roleIntegration} property of a \sbol{SequenceAnnotation}, if provided, MUST contain a \sbol{URI} from \ref{tbl:sequenceAnnotation_roleIntegration}.
-\\ Reference: \sec{sec:SequenceAnnotation}}
-}
-
-\twoonezero{
-\printValid{The \sbolmult{roleIntegration:C}{roleIntegration} property of a \sbol{SequenceAnnotation} is REQUIRED, if \sbolmult{roles:SA}{roles} property includes one or more roles.
-\\ Reference: \sec{sec:SequenceAnnotation}}
 }
 
 \subsubsection*{Rules for the \class{Location} class} 
