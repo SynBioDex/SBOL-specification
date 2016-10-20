@@ -6,17 +6,16 @@
     <coordinates>
       <x>100</x>
       <y>100</y>
-      <w>100</w>
+      <w>120</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>/Identified/
-</panel_attributes>
+    <panel_attributes>/Identified/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>320</x>
       <y>100</y>
       <w>120</w>
       <h>30</h>
@@ -28,7 +27,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
+      <x>370</x>
       <y>120</y>
       <w>30</w>
       <h>100</h>
@@ -39,7 +38,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>270</x>
+      <x>280</x>
       <y>200</y>
       <w>280</w>
       <h>60</h>
@@ -53,44 +52,46 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
+      <x>240</x>
       <y>250</y>
-      <w>220</w>
+      <w>190</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-prov:qualifiedAssociation [0..*]</panel_attributes>
-    <additional_attributes>130.0;10.0;130.0;60.0;80.0;60.0;80.0;90.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+prov:qualifiedAssociation
+0..*</panel_attributes>
+    <additional_attributes>150.0;10.0;150.0;60.0;30.0;60.0;30.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
+      <x>150</x>
       <y>120</y>
-      <w>210</w>
-      <h>140</h>
+      <w>170</w>
+      <h>130</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-prov:wasGeneratedBy [1..*]</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0;130.0;120.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+prov:wasGeneratedBy 
+           1..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0;130.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
+      <x>160</x>
       <y>340</y>
       <w>230</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>prov:Association
 --
-- prov:hadRole [1..*]: URI</panel_attributes>
+- prov:hadRole [1]: URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
+      <x>330</x>
       <y>470</y>
       <w>120</w>
       <h>30</h>
@@ -101,45 +102,47 @@ prov:wasGeneratedBy [1..*]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
+      <x>280</x>
       <y>380</y>
-      <w>120</w>
+      <w>110</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-prov:agent [1..1]</panel_attributes>
-    <additional_attributes>30.0;10.0;30.0;60.0;80.0;60.0;80.0;90.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+prov:agent 
+1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;90.0;60.0;90.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>440</x>
+      <x>450</x>
       <y>340</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>provo:Usage
 --
-- prov:entity [1..1]: URI
-- prov:hadRole [1..*]: URI</panel_attributes>
+- prov:entity [1]: URI
+- prov:hadRole [1]: URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
+      <x>430</x>
       <y>250</y>
-      <w>180</w>
+      <w>150</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-prov:qualifiedUsage [0..*]</panel_attributes>
-    <additional_attributes>60.0;10.0;60.0;50.0;110.0;50.0;110.0;90.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+  prov:qualifiedUsage
+0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;130.0;50.0;130.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
+      <x>430</x>
       <y>110</y>
       <w>280</w>
       <h>390</h>
@@ -150,7 +153,7 @@ prov:qualifiedUsage [0..*]</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
+      <x>90</x>
       <y>470</y>
       <w>120</w>
       <h>30</h>
@@ -161,36 +164,51 @@ prov:qualifiedUsage [0..*]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
+      <x>140</x>
       <y>380</y>
-      <w>140</w>
+      <w>130</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-prov:hadPlan [0..1]</panel_attributes>
-    <additional_attributes>110.0;10.0;110.0;60.0;20.0;60.0;20.0;90.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+prov:hadPlan 
+0..1</panel_attributes>
+    <additional_attributes>110.0;10.0;110.0;60.0;10.0;60.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
+      <x>450</x>
       <y>140</y>
-      <w>190</w>
+      <w>150</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-prov:wasInformedBy [0..*]</panel_attributes>
-    <additional_attributes>60.0;60.0;60.0;20.0;120.0;20.0;120.0;60.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+prov:wasInformedBy
+0..*</panel_attributes>
+    <additional_attributes>40.0;60.0;40.0;20.0;100.0;20.0;100.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>130</x>
+      <x>140</x>
       <y>470</y>
       <w>570</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>550.0;10.0;550.0;60.0;10.0;60.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>40</y>
+      <w>170</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+prov:wasDerivedFrom 
+1</panel_attributes>
+    <additional_attributes>130.0;60.0;130.0;20.0;30.0;20.0;30.0;60.0</additional_attributes>
   </element>
 </diagram>
