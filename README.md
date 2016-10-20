@@ -11,13 +11,14 @@ Before writing text for a non-trivial change, please have it approved by discuss
 Proposed changes should be made in either a branch or a separate fork on GitHub.  To do this, follow standard git branching or forking procedure.  
 
 Here is an example of git commands to achieve this:
-git clone https://github.com/SynBioDex/SBOL-specification.git
-git pull origin master — MAKE SURE NO ONE HAS MADE ANYMORE CHANGES
-git checkout -b <newBranch> — CREATE NEW BRANCH
-MAKE YOUR EDITS
-git add <filesYouChanged>
-git commit
-git push origin <newBranch>
+
+    git clone https://github.com/SynBioDex/SBOL-specification.git
+    git pull origin master — MAKE SURE NO ONE HAS MADE ANYMORE CHANGES
+    git checkout -b <newBranch> — CREATE NEW BRANCH
+    MAKE YOUR EDITS
+    git add <filesYouChanged>
+    git commit
+    git push origin <newBranch>
 
 When you are ready for your changes to be reviewed for incorporation, create a pull request.
 If you need help on pull requests see: https://help.github.com/articles/about-pull-requests/
