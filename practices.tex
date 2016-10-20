@@ -115,9 +115,11 @@ Entities in an SBOL document can be annotated with creation and modification dat
 \twoonezero{\subsection{Adding Provenance}
 Provenance is central to a range of quality control and attribution tasks within the Synthetic Biology design process. Tracking attribution and derivation of one resource from another is paramount for managing intellectual property purposes. Source designs are often modified in systematic ways to generate derived designs, for example, by applying codon optimization or systematically removing all of a class of restriction enzyme sites, and documenting the transformation used, and any associated parameters, makes this explicit and potentially allows the process to be reproduced systematically. If a design has been used within other designs, and is later found to be defective, it is paramount that all uses of it, including uses of edited versions of the design, can be identified, and ideally replaced with a non-defective alternative. When importing data from external sources, it is important not only to attribute the original source (for example, GenBank), but also the tool used to perform the import, as this may have made arbitrary choices as to how to represent the source knowledge as SBOL. All these activities have in common that it is necessary to track what resource, and what transformation process was applied by whom to derive an SBOL design.
 
-The PROV-O ontology (https://www.w3.org/TR/prov-o/) already defines a data model for provenance and a subset of PROV-O is adopted for SBOL as a best practice to describe these activities. PROV-O defines three core classes: \texttt{Entity}, \texttt{Activity} and \texttt{Agent}. An Agent runs an Activity to generate one Entity from another. PROV-O provides many other classes and rich set of terms. Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}.  This subset includes the PROV-O's Activity, Usage, Association, Agent and Plan classes. Any SBOL's Identified object implicitly act as an instance of PROV-O's Entity class and can include provenance through relationships to different Activities. Agent, Activity and Plan classes should be handled as \sbol{GenericTopLevel}, whilst Usage, Association should be nested within their parent Activities. 
+The PROV-O ontology (https://www.w3.org/TR/prov-o/) already defines a data model for provenance and a subset of PROV-O is adopted for SBOL as a best practice to describe these activities. PROV-O defines three core classes: \texttt{Entity}, \texttt{Activity} and \texttt{Agent}. An Agent (for example a software or a person) runs an Activity (according to a Plan) to generate one Entity from another. Although, PROV-O provides many other classes and rich set of terms. this specification describes the minimal subset of PROV-O that a provenance-aware SBOL tool must be able to handle. This subset (\ref{uml:provenance}) includes the PROV-O's Activity, Usage, Association, Agent and Plan classes. Any SBOL's Identified object implicitly act as an instance of PROV-O's Entity class and can include provenance through relationships to different Activities. Agent, Activity and Plan classes should be handled as \sbol{GenericTopLevel}, whilst Usage and Association should be nested within their parent Activities. 
 
-Providers of provenance information are free to make use of more of PROV-O than is described here. This specification describes the minimal subset of PROV-O that a provenance-aware SBOL tool must be able to handle. However, it is acceptable for tools that understand more than this subset and use as much as they are able. Tools that only understand this sub-set must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a ComponentDefinition may be derived from another ComponentDefinition, but it would probably not make sense for it to be derived from a Collection.
+%Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}.  
+
+Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset and use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a ComponentDefinition may be derived from another ComponentDefinition, but it would probably not make sense for it to be derived from a Collection.
 
 Subset of advised PROV-O terms and their relationships to SBOL objects are defined below.
 
@@ -131,13 +133,13 @@ Subset of advised PROV-O terms and their relationships to SBOL objects are defin
 
 \subsubsection{Activity}
 \label{sec:Activity}
-A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \texttt{Activity}, which is used to qualify how an \texttt{Agent} was used. An \texttt{Activity} is linked through a \texttt{qualifiedAssociation} to \texttt{Association}s, to describe the role of agents, and is linked through \texttt{qualifiedUsage} to \texttt{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \texttt{Activity} includes optional startedAtTime and endedAtTime properties. When using \texttt{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached to the Activity as annotations. This may include software settings or textual notes. Activities can also be linked together using the \texttt{wasInformedBy} relationship to provide dependency without explicitly specifying start and end times.
+A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to qualify how an \sbol{Agent} was used. An \sbol{Activity} is linked through a \sbol{qualifiedAssociation} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{qualifiedUsage} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBy} relationship to provide dependency without explicitly specifying start and end times.
 
 \paragraph{The \sbolheading{qualifiedAssociation} property}\label{sec:qualifiedAssociation}
-The \sbol{qualifiedAssociation} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to Association objects.
+The \sbol{qualifiedAssociation} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
 
 \paragraph{The \sbolheading{qualifiedUsage} property}\label{sec:qualifiedUsage}
-The \sbol{qualifiedUsage} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to Usage objects.
+The \sbol{qualifiedUsage} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
 
 \paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
 The \sbol{startedAtTime} property is OPTIONAL and contains a dateTime value, indicating when the activity started.
@@ -165,15 +167,18 @@ The serialization of an \sbol{Activity} MUST have the following form:
                </prov:qualifiedUsage> [\emph{elements}]             
   [\emph{zero or one}]  <prov:startedAtTime>...</prov:startedAtTime> [\emph{element}]
   [\emph{zero or one}]  <prov:endedAtTime>...</prov:startedAtTime> [\emph{element}] 
+  [\emph{zero or one}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
+ 
  </prov:Activity>
 \end{lstlisting}
 
+\twozeroone{
 \subsubsection{Association}
 \label{sec:Association}
-An \texttt{Association} is linked to an \texttt{Agent} through the \texttt{agent} relationship. The \texttt{Association} includes the \texttt{hadRole} property to qualify the role of the \texttt{Agent} in the \texttt{Activity}.
+An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \texttt{hadRole} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
 
 \paragraph{The \sbolheading{agent} property}\label{sec:agent}
-The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI}s that refers to an Agent object.
+The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI}s that refers to an \sbol{Agent} object.
 
 \paragraph{The \sbolheading{hadRole} property}\label{sec:hadRole}
 The \sbol{hadRole} property is REQUIRED and MUST contain a \sbol{URI} that refers to a particular term describing the usage of the agent.
@@ -184,6 +189,7 @@ The \sbol{hadPlan} property is OPTIONAL and contains a URI that refers to a Plan
 \paragraph{Serialization}
 The serialization of an \sbol{Association} MUST have the following form:
 
+}%\twozeroone{ end
 
 \lstsetsbol
 \begin{lstlisting}
@@ -195,20 +201,23 @@ The serialization of an \sbol{Association} MUST have the following form:
  </prov:Association>
 \end{lstlisting}
 
+\twozeroone{
 \subsubsection{Usage}
 \label{sec:Usage}
-How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{qualifiedUsage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{hadRole} property. 
+How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{qualifiedUsage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{hadRole} property. SBOL already supports dcumenting derivation between entities using PROV-O's \sbol{wasDerivedFrom} in a lightweight provenance scheme. When this property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFrom} property MUST be included in a \sbol{Usage}.
 
 
 \paragraph{The \sbolheading{entity} property}\label{sec:entity}
 The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI}s which MAY refer to an SBOL Identified object.
 
 \paragraph{The \sbolheading{hadRole} property}\label{sec:hadRole:usage}
-The \sbol{hadRole:usage} property is REQUIRED and MAY contain a \sbol{URI} that refers to a particular term describing the usage of an Entity referenced by the entity property.
+The \sbolmult{hadRole:Usage}{hadRole} property is REQUIRED and MAY contain a \sbol{URI} that refers to a particular term describing the usage of an \sbol{Entity} referenced by the \sbol{entity} property.
 
 
 \paragraph{Serialization}
 The serialization of an \sbol{Usage} MUST have the following form:
+
+}%\twozeroone{ end
 
 \lstsetsbol
 \begin{lstlisting}
@@ -219,12 +228,15 @@ The serialization of an \sbol{Usage} MUST have the following form:
  </prov:Association>
 \end{lstlisting}
 
+\twozeroone{
 \subsubsection{Plan}
 \label{sec:Plan}
 The Plan entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an agent is used in a particular activity. 
 
 \paragraph{Serialization}
 The serialization of an \sbol{Usage} MUST have the following form:
+
+}%\twozeroone{ end
 
 \lstsetsbol
 \begin{lstlisting}
@@ -234,12 +246,15 @@ The serialization of an \sbol{Usage} MUST have the following form:
  </prov:Plan>
 \end{lstlisting}
 
+\twozeroone{
 \subsubsection{Agent}
 \label{sec:Agent}
 Examples of agents are person, organisation or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Agent} MUST have the following form:
+
+}%\twozeroone{ end
 
 \lstsetsbol
 \begin{lstlisting}
@@ -250,11 +265,14 @@ The serialization of an \sbol{Agent} MUST have the following form:
 \end{lstlisting}
 
 
-
+\twozeroone{
 \paragraph{Example - Codon optimisation}
 Codon optimisation is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between the original CDS and the codon-optimized version could simply be represented using a prov:wasDerivedFrom predicate, in a light-weight form. Using the PROV-O subset adopted for SBOL, additional information can be attached. For example information about the software used to codon-optimize the reading frame, and the parameters used can be captured in an SBOL document.
 
 With more comprehensive use of the PROV ontology, the codon optimization can be represented as a prov:Activity. The Activity can then add additional information, such as the prov:Agent responsible (in this case, codon-optimizing software). The original CDS used to derive the optimised version can also be linked to the activity.
+
+}%\twozeroone{ end
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -288,9 +306,11 @@ With more comprehensive use of the PROV ontology, the codon optimization can be 
 </rdf:RDF>
 \end{lstlisting}
 
-
+\twozeroone{
 \paragraph{Example - Deriving strains}
-Bacterial strains are often derived from parent strains through modifications such as gene knockouts or mutations. Bacillus subtilis 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. B. subtilis 168 strains are easy to transform and are not motile, facilitating the analysis of engineered cells easily. This strain was derived from the Marburg strain in the 1940s through x-radiation. The Marburg strain, on the other hand, is motile and also more difficult to transform compared to the 168 strain. In this example, how the 168 was derived from the Marburg strain is shown.
+Bacterial strains are often derived from parent strains through modifications such as gene knockouts or mutations. \textit{Bacillus subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. \textit{B. subtilis} 168 strains are easy to transform and are not motile, facilitating the analysis of engineered cells easily. This strain was derived from the Marburg strain in the 1940s through x-radiation. The Marburg strain, on the other hand, is motile and also more difficult to transform compared to the 168 strain. In the example below, how the 168 was derived from the Marburg strain is shown.
+
+}%\twozeroone{ end
 
 \lstsetsbol
 \begin{lstlisting}
