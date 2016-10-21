@@ -96,7 +96,7 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
   \label{tbl:preferred_external_resources}
 \end{table}
 
-\twozeroone{\subsection{Annotating Entities with Date \& Time}
+\twozeroone{\subsection{Annotating Entities with Date \& Time}\label{sec:datetime}
 Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{dateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:}
 
 \lstsetsbol
@@ -111,3 +111,239 @@ Entities in an SBOL document can be annotated with creation and modification dat
   ...
 </rdf:RDF>
 \end{lstlisting}
+
+\twoonezero{\subsection{Adding Provenance}
+Provenance is central to a range of quality control and attribution tasks within the Synthetic Biology design process. Tracking attribution and derivation of one resource from another is paramount for managing intellectual property purposes. Source designs are often modified in systematic ways to generate derived designs, for example, by applying codon optimization or systematically removing all of a class of restriction enzyme sites.  Documenting the transformation used, and any associated parameters, makes this explicit and potentially allows the process to be reproduced systematically. If a design has been used within other designs, and is later found to be defective, it is paramount that all uses of it, including uses of edited versions of the design, can be identified, and ideally replaced with a non-defective alternative. When importing data from external sources, it is important not only to attribute the original source (for example, GenBank), but also the tool used to perform the import, as this may have made arbitrary choices as to how to represent the source knowledge as SBOL. All these activities have in common that it is necessary to track what resource, and what transformation process was applied by whom to derive an SBOL design.
+
+The PROV-O ontology (https://www.w3.org/TR/prov-o/) already defines a data model for provenance. PROV-O's \sbol{wasDerivedFrom} property was adopted in SBOL 2.0 to describe the derivation of an SBOL entity from another in a light-weight provenance scheme.  Here, a subset of PROV-O is adopted for SBOL as a best practice to describe these activities in more detail\footnote{We thank Dr Paolo Missier from the School of Computing Science, Newcastle University for discussions regarding the use of PROV-O for SBOL.}. PROV-O defines three core classes: \texttt{Entity}, \texttt{Activity} and \texttt{Agent}. An Agent (for example a software or a person) runs an Activity (according to a Plan) to generate one Entity from another. Although, PROV-O provides many other classes and rich set of terms. this specification describes the minimal subset of PROV-O that a provenance-aware SBOL tool should handle. This subset (\ref{uml:provenance}) includes the PROV-O's \sbol{Activity}, \sbol{Usage}, \sbol{Association}, \sbol{Agent} and \sbol{Plan} classes. Any SBOL's \sbol{Identified} object implicitly can act as an instance of PROV-O's \texttt{Entity} class and can include provenance through relationships to different activities. Resources representing \sbol{Agent}, \sbol{Activity} and \sbol{Plan} classes should be handled as \sbol{GenericTopLevel}, whilst \sbol{Usage} and \sbol{Association} resources should be nested within their parent activities. 
+
+%Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}.  
+
+Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset and use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a ComponentDefinition may be derived from another ComponentDefinition, but it would probably not make sense for it to be derived from a Collection.
+
+The adopted subset of PROV-O terms and their relationships to SBOL objects are defined below.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/provenance}
+\caption[]{Relationships between SBOL and PROV-O classes. PROV-O specific classes and terms are prefixed with \texttt{provo}.}
+\label{uml:provenance}
+\end{center}
+\end{figure}
+
+\subsubsection{Activity}
+\label{sec:Activity}
+A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{qualifiedAssociation} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{qualifiedUsage} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBy} relationship to provide dependency without explicitly specifying start and end times.
+
+\paragraph{The \sbolheading{qualifiedAssociation} property}\label{sec:qualifiedAssociation}
+The \sbol{qualifiedAssociation} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
+
+\paragraph{The \sbolheading{qualifiedUsage} property}\label{sec:qualifiedUsage}
+The \sbol{qualifiedUsage} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
+
+\paragraph{The \sbolheading{endedAtTime} property}\label{sec:endedAtTime}
+The \sbol{endedAtTime} property is OPTIONAL and contains a dateTime (see section \ref{sec:datetime}) value, indicating when the activity ended.
+
+\paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
+The \sbol{startedAtTime} property is OPTIONAL and contains a dateTime (see section \ref{sec:datetime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
+
+\paragraph{The \sbolheading{wasInformedBy} property}\label{sec:wasInformedBy}
+The \sbol{wasInformedBy} property is OPTIONAL and contains a URI of another activity.
+
+\paragraph{Serialization}
+The serialization of an \sbol{Activity} MUST have the following form:
+%\twoonezero -end
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<prov:Activity rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  [\emph{zero or more}]  <prov:qualifiedAssociation>
+                   <prov:Association rdf:about="...">...</prov:Association>
+               </prov:qualifiedAssociation> [\emph{elements}]
+  [\emph{zero or more}]  <prov:qualifiedUsage>
+                   <prov:Usage rdf:about="...">...</prov:Usage>
+               </prov:qualifiedUsage> [\emph{elements}]             
+  [\emph{zero or one}]  <prov:startedAtTime>...</prov:startedAtTime> [\emph{element}]
+  [\emph{zero or one}]  <prov:endedAtTime>...</prov:startedAtTime> [\emph{element}] 
+  [\emph{zero or one}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
+ 
+ </prov:Activity>
+\end{lstlisting}
+
+\twoonezero{
+\subsubsection{Association}
+\label{sec:Association}
+An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \texttt{hadRole} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
+
+\paragraph{The \sbolheading{agent} property}\label{sec:agent}
+The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI}s that refers to an \sbol{Agent} object.
+
+\paragraph{The \sbolheading{hadRole} property}\label{sec:hadRole}
+The \sbol{hadRole} property is REQUIRED and MUST contain a \sbol{URI} that refers to a particular term describing the usage of the agent.
+
+\paragraph{The \sbolheading{hadPlan} property}\label{sec:hadPlan}
+The \sbol{hadPlan} property is OPTIONAL and contains a URI that refers to a \sbol{Plan}.
+
+\paragraph{Serialization}
+The serialization of an \sbol{Association} MUST have the following form:
+
+}%\twoonezero{ end
+
+\lstsetsbol
+\begin{lstlisting}
+<prov:Association rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  [\emph{one}]          <prov:hadRole rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}]  <prov:hadPlan rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]          <prov:agent rdf:resource="..."/> [\emph{element}]
+ </prov:Association>
+\end{lstlisting}
+
+\twoonezero{
+\subsubsection{Usage}
+\label{sec:Usage}
+How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{qualifiedUsage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{hadRole} property. When the \sbol{wasDerivedFrom} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFrom} property MUST be included in a \sbol{Usage}.
+
+
+\paragraph{The \sbolheading{entity} property}\label{sec:entity}
+The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI}s which MAY refer to an SBOL Identified object.
+
+\paragraph{The \sbolheading{hadRole} property}\label{sec:hadRole:usage}
+The \sbolmult{hadRole:Usage}{hadRole} property is REQUIRED and MAY contain a \sbol{URI} that refers to a particular term describing the usage of an \sbol{Entity} referenced by the \sbol{entity} property.
+
+
+\paragraph{Serialization}
+The serialization of an \sbol{Usage} MUST have the following form:
+
+}%\twoonezero{ end
+
+\lstsetsbol
+\begin{lstlisting}
+<prov:Association rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  [\emph{one}]         <prov:hadRole rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]          <prov:entity rdf:resource="..."/> [\emph{element}]
+ </prov:Association>
+\end{lstlisting}
+
+\twoonezero{
+\subsubsection{Plan}
+\label{sec:Plan}
+The Plan entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \sbol{Agent} is used in a particular \sbol{Activity}. 
+
+\paragraph{Serialization}
+The serialization of an \sbol{Usage} MUST have the following form:
+
+}%\twoonezero{ end
+
+\lstsetsbol
+\begin{lstlisting}
+<prov:Plan rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  ... [\emph{other annotations}] ...
+ </prov:Plan>
+\end{lstlisting}
+
+\twoonezero{
+\subsubsection{Agent}
+\label{sec:Agent}
+Examples of agents are person, organisation or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
+
+\paragraph{Serialization}
+The serialization of an \sbol{Agent} MUST have the following form:
+
+}%\twoonezero{ end
+
+\lstsetsbol
+\begin{lstlisting}
+<prov:Agent rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  ... [\emph{other annotations}] ...
+ </prov:Agent>
+\end{lstlisting}
+
+
+\twoonezero{
+\paragraph{Example - Codon optimisation}
+Codon optimisation is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
+
+}%\twoonezero{ end
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+    <sbol:ComponentDefinition rdf:about="http://cds/codon-optimized">
+        <dcterms:title>Codon Optimized CDS</dcterms:title>
+        <prov:wasGeneratedBy rdf:resource="http://codon-optimization-activity"/>                  
+    </sbol:ComponentDefinition>
+    <sbol:ComponentDefinition rdf:about="http://cds/non-codon-optimized">
+        <dcterms:title>Non Codon Optimized CDS</dcterms:title>
+    </sbol:ComponentDefinition>
+     <prov:Activity rdf:about="http://codon-optimization-activity">
+     <dcterms:title>Codon Optimization Activity</dcterms:title>
+     <prov:qualifiedUsage>
+        <prov:Usage rdf:about="http://codon-optimization-activity/usage">
+           <prov:entity rdf:resource="http://cds/non-codon-optimized"/>
+           <prov:hadRole rdf:resource="http://sbols.org/v2/role/source"/>
+        </prov:Usage>
+     </prov:qualifiedUsage>
+     <prov:qualifiedAssociation>
+        <prov:Association rdf:about="http://codon-optimization-activity/usage">
+           <prov:agent rdf:resource="http://codon-optimization-software"/>
+           <prov:hadRole rdf:resource="http://sbols.org/v2/role/codonoptimiser"/>
+           </prov:Association>
+        </prov:qualifiedAssociation>    
+    </prov:Activity>
+    <prov:Agent rdf:about="http://codon-optimization-software">
+        <dcterms:title>Codon Optimization Software</dcterms:title>
+    </prov:Agent>
+</rdf:RDF>
+\end{lstlisting}
+
+\twoonezero{
+\paragraph{Example - Deriving strains}
+Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the Ncib3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
+
+}%twoonezero end
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+    <sbol:ComponentDefinition rdf:about="http://Bsubtilis168">
+        <dcterms:title>Bacillus subtilis 168</dcterms:title>
+        <prov:wasGeneratedBy rdf:resource="http://xraymutagenesis"/>                  
+    </sbol:ComponentDefinition>
+    <sbol:ComponentDefinition rdf:about="http://BsubtilisNcib3610">
+        <dcterms:title>Bacillus subtilis Ncbi 3016</dcterms:title>
+    </sbol:ComponentDefinition>
+     <prov:Activity rdf:about="http://xraymutagenesis">
+     <dcterms:title>X-ray mutagenesis</dcterms:title>
+     <prov:endedAtTime>1947</prov:endedAtTime>
+     <prov:qualifiedUsage>
+        <prov:Usage rdf:about="http://xraymutagenesis/usage/ncib3016">
+           <prov:entity rdf:resource="http://BsubtilisNcib3610"/>
+           <prov:hadRole rdf:resource="http://sbols.org/v2/role/source"/>
+        </prov:Usage>
+     </prov:qualifiedUsage>
+     <prov:qualifiedAssociation>
+        <prov:Association rdf:about="http://xraymutagenesis/x-ray">
+           <prov:agent rdf:resource="http://x-ray"/>
+           <prov:hadRole rdf:resource="http://mutagen"/>
+           </prov:Association>
+        </prov:qualifiedAssociation>    
+    </prov:Activity>
+    <prov:Agent rdf:about="http://x-ray">
+        <dcterms:title>X-ray</dcterms:title>
+    </prov:Agent>
+</rdf:RDF>
+\end{lstlisting}
+
+
+
+
