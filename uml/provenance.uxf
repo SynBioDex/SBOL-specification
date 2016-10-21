@@ -4,12 +4,14 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
+      <x>60</x>
       <y>100</y>
-      <w>120</w>
-      <h>30</h>
+      <w>210</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>/Identified/</panel_attributes>
+    <panel_attributes>/Identified/
+--
+- prov:wasDerivedFrom [0..1] : URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -65,15 +67,15 @@ prov:qualifiedAssociation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
-      <y>120</y>
+      <x>140</x>
+      <y>140</y>
       <w>170</w>
-      <h>130</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 prov:wasGeneratedBy 
            1..*</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0;130.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;140.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -197,18 +199,5 @@ prov:wasInformedBy
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>550.0;10.0;550.0;60.0;10.0;60.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>80</x>
-      <y>40</y>
-      <w>170</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-prov:wasDerivedFrom 
-1</panel_attributes>
-    <additional_attributes>130.0;60.0;130.0;20.0;30.0;20.0;30.0;60.0</additional_attributes>
   </element>
 </diagram>
