@@ -73,6 +73,8 @@ unverified and not depend on their correctness.
 
 External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{ComponentDefinition} \sbolmult{types:CD}{types}, such as DNA or protein, are described using BioPAX terms. Similarly, the roles of a DNA \twozeroone{or RNA} \sbol{ComponentDefinition} are described via SO terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 
+The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.
+
 \begin{table}[ht]
   \begin{edtable}{tabular}{p{3cm}p{1.5cm}p{4.5cm}p{6cm}}
     \toprule
