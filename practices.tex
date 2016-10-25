@@ -273,34 +273,39 @@ Codon optimisation is a practical real-wold example where provenance properties 
 
 \lstsetsbol
 \begin{lstlisting}
-<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/"
-    xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
-    <sbol:ComponentDefinition rdf:about="http://cds/codon-optimized">
-        <dcterms:title>Codon Optimized CDS</dcterms:title>
-        <prov:wasGeneratedBy rdf:resource="http://codon-optimization-activity"/>                  
-    </sbol:ComponentDefinition>
-    <sbol:ComponentDefinition rdf:about="http://cds/non-codon-optimized">
-        <dcterms:title>Non Codon Optimized CDS</dcterms:title>
-    </sbol:ComponentDefinition>
-     <prov:Activity rdf:about="http://codon-optimization-activity">
-     <dcterms:title>Codon Optimization Activity</dcterms:title>
-     <prov:qualifiedUsage>
-        <prov:Usage rdf:about="http://codon-optimization-activity/usage">
-           <prov:entity rdf:resource="http://cds/non-codon-optimized"/>
-           <prov:hadRole rdf:resource="http://sbols.org/v2/role/source"/>
-        </prov:Usage>
-     </prov:qualifiedUsage>
-     <prov:qualifiedAssociation>
-        <prov:Association rdf:about="http://codon-optimization-activity/usage">
-           <prov:agent rdf:resource="http://codon-optimization-software"/>
-           <prov:hadRole rdf:resource="http://sbols.org/v2/role/codonoptimiser"/>
-           </prov:Association>
-        </prov:qualifiedAssociation>    
-    </prov:Activity>
-    <prov:Agent rdf:about="http://codon-optimization-software">
-        <dcterms:title>Codon Optimization Software</dcterms:title>
-    </prov:Agent>
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" 
+xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:myapp="http://myapp.com/">
+  <sbol:ComponentDefinition rdf:about="http://myapp.com/cd/non_codon_optimized">
+    <dcterms:title>Non Codon optimised CDS</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://myapp.com/cd/codon_optimized">
+    <prov:wasDerivedFrom rdf:resource="http://myapp.com/cd/non_codon_optimized"/>
+    <dcterms:title>Codon optimised CDS</dcterms:title>
+    <prov:wasGeneratedBy rdf:resource="http://myapp.com/gen/codon_optimization_activity"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <prov:Agent rdf:about="http://myapp.com/gen/codon_optimization_software">
+    <dcterms:title>Codon Optimization Software</dcterms:title>
+  </prov:Agent>
+  <prov:Activity rdf:about="http://myapp.com/gen/codon_optimization_activity">
+    <dcterms:title>Codon Optimization Activity</dcterms:title>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://myapp.com/gen/codon_optimization_activity/usage">
+        <prov:entity rdf:resource="http://myapp.com/cd/non_codon_optimized"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#source"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://myapp.com/gen/codon_optimization_activity/association">
+        <prov:agent rdf:resource="http://myapp.com/gen/codon_optimization_software"/>
+        <prov:hadRole rdf:resource="http://myapp.com/codonoptimiser"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+  </prov:Activity>
 </rdf:RDF>
 \end{lstlisting}
 
@@ -312,35 +317,39 @@ Bacterial strains are often derived from other strains through modifications suc
 
 \lstsetsbol
 \begin{lstlisting}
-<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/"
-    xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
-    <sbol:ComponentDefinition rdf:about="http://Bsubtilis168">
-        <dcterms:title>Bacillus subtilis 168</dcterms:title>
-        <prov:wasGeneratedBy rdf:resource="http://xraymutagenesis"/>                  
-    </sbol:ComponentDefinition>
-    <sbol:ComponentDefinition rdf:about="http://BsubtilisNcib3610">
-        <dcterms:title>Bacillus subtilis Ncbi 3016</dcterms:title>
-    </sbol:ComponentDefinition>
-     <prov:Activity rdf:about="http://xraymutagenesis">
-     <dcterms:title>X-ray mutagenesis</dcterms:title>
-     <prov:endedAtTime>1947</prov:endedAtTime>
-     <prov:qualifiedUsage>
-        <prov:Usage rdf:about="http://xraymutagenesis/usage/ncib3016">
-           <prov:entity rdf:resource="http://BsubtilisNcib3610"/>
-           <prov:hadRole rdf:resource="http://sbols.org/v2/role/source"/>
-        </prov:Usage>
-     </prov:qualifiedUsage>
-     <prov:qualifiedAssociation>
-        <prov:Association rdf:about="http://xraymutagenesis/x-ray">
-           <prov:agent rdf:resource="http://x-ray"/>
-           <prov:hadRole rdf:resource="http://mutagen"/>
-           </prov:Association>
-        </prov:qualifiedAssociation>    
-    </prov:Activity>
-    <prov:Agent rdf:about="http://x-ray">
-        <dcterms:title>X-ray</dcterms:title>
-    </prov:Agent>
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" 
+xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:myapp="http://myapp.com/">
+  <sbol:ComponentDefinition rdf:about="http://myapp.com/cd/non_codon_optimized">
+    <dcterms:title>Non Codon optimised CDS</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://myapp.com/cd/codon_optimized">
+    <prov:wasDerivedFrom rdf:resource="http://myapp.com/cd/non_codon_optimized"/>
+    <dcterms:title>Codon optimised CDS</dcterms:title>
+    <prov:wasGeneratedBy rdf:resource="http://myapp.com/gen/codon_optimization_activity"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <prov:Agent rdf:about="http://myapp.com/gen/codon_optimization_software">
+    <dcterms:title>Codon Optimization Software</dcterms:title>
+  </prov:Agent>
+  <prov:Activity rdf:about="http://myapp.com/gen/codon_optimization_activity">
+    <dcterms:title>Codon Optimization Activity</dcterms:title>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://myapp.com/gen/codon_optimization_activity/usage">
+        <prov:entity rdf:resource="http://myapp.com/cd/non_codon_optimized"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#source"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://myapp.com/gen/codon_optimization_activity/association">
+        <prov:agent rdf:resource="http://myapp.com/gen/codon_optimization_software"/>
+        <prov:hadRole rdf:resource="http://myapp.com/codonoptimiser"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+  </prov:Activity>
 </rdf:RDF>
 \end{lstlisting}
 
