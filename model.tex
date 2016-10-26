@@ -348,7 +348,7 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
     Complex  & \url{http://www.biopax.org/release/biopax-level3.owl#Complex}\\
     \bottomrule
   \end{edtable}
-  \caption{BioPAX terms to specify the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
+  \caption{BioPAX terms to specify the molecule type using the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
  \label{tbl:componentdefinition_types}
 \end{table}
 
@@ -387,10 +387,10 @@ that sequence features may be mapped or identified across this junction. \emph{D
     \textbf{Nucleic Acid Topology} & \textbf{URI for Nucleic Acid Topology
       Term in SO} \\
     \midrule
-    linear  & \url{http://www.sequenceontology.org/browser/current_svn/term/SO:0000987}\\
-    circular  & \url{http://www.sequenceontology.org/browser/current_svn/term/SO:0000987}\\
-    single-stranded & \url{http://www.sequenceontology.org/browser/current_svn/term/SO:0000984}\\
-    double-stranded & \url{http://www.sequenceontology.org/browser/current_svn/term/SO:0000985}\\
+    linear  & \url{http://identifiers.org/so/SO:0000987}\\
+    circular  & \url{http://identifiers.org/so/SO:0000987}\\
+    single-stranded & \url{http://identifiers.org/so/SO:0000984}\\
+    double-stranded & \url{http://identifiers.org/so/SO:0000985}\\
     \bottomrule
   \end{edtable}
   \caption{Sequence Ontology terms to encode DNA or RNA topology information in \sbolmult{types:CD}{types} properties of a \sbol{ComponentDefinition}.}
@@ -515,8 +515,8 @@ The example below shows the serialization for the \sbol{ComponentDefinition} of 
     <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
     <dcterms:title>J23119 promoter</dcterms:title>
     <dcterms:description>Constitutive promoter</dcterms:description>
-    <sbol:type rdf:resource="http://identifiers.org/chebi/CHEBI:4705"/>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987">
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000613"/>
     <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
