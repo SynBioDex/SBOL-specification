@@ -267,24 +267,35 @@ Reference: Section 7.7 on page 21}}
 % Reference: \sec{sec:ComponentDefinition}}}
 
 \printModeling{If the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{types:CD}{roles} property SHOULD contain exactly one \sbol{URI} that refers to a term from the sequence feature branch of the SO.\\ 
+Reference: \sec{sec:ComponentDefinition}}
+}
+
+\twoonezero{
+\printModeling{If the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{types:CD}{types} property SHOULD also contain exactly one \sbol{URI} that refers to a term from the topology attribute branch of the SO.\\ 
 Reference: \sec{sec:ComponentDefinition}}}
-
-\twoonezero{
-\printModeling{If the \sbolmult{types:CD}{types} property of
-a \sbol{ComponentDefinition} contains the DNA type \sbol{URI}, then it SHOULD
-have an additional \sbolmult{types:CD}{type} property which points to
-the SequenceOntology term for either linear or circular topology \sbol{URI}\\ 
-Reference: \sec{sec:ComponentDefinition}}
 }
 
+%\printModeling{If the \sbolmult{types:CD}{types} property of
+%a \sbol{ComponentDefinition} contains the DNA type \sbol{URI}, then it SHOULD
+%have an additional \sbolmult{types:CD}{type} property which points to
+%the SequenceOntology term for either linear or circular topology \sbol{URI}\\ 
+%Reference: \sec{sec:ComponentDefinition}}
+%}
+
 \twoonezero{
-\printValid{If the \sbolmult{types:CD}{types} property of
-a \sbol{ComponentDefinition} is pointing to anything other than DNA or RNA
-type \sbol{URI}, then any additional \sbolmult{types:CD}{type} properties MUST
-NOT point to SequenceOntology terms for double-stranded or single-stranded or
-circular or linear nucleic acid \sbol{URI}.\\ 
-Reference: \sec{sec:ComponentDefinition}}
+\printModeling{
+The \sbolmult{roles:CD}{types} property of a \sbol{ComponentDefinition} SHOULD NOT contain a \sbol{URI} that refers to a term from the topology attribute or strand attribute branches of the SO unless its \sbolmult{types:CD}{types} property contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:componentdefinition_types}.
+\\ Reference: \sec{sec:ComponentDefinition}}
 }
+
+%\twoonezero{
+%\printValid{If the \sbolmult{types:CD}{types} property of
+%a \sbol{ComponentDefinition} is pointing to anything other than DNA or RNA
+%type \sbol{URI}, then any additional \sbolmult{types:CD}{type} properties MUST
+%NOT point to SequenceOntology terms for double-stranded or single-stranded or
+%circular or linear nucleic acid \sbol{URI}.\\ 
+%Reference: \sec{sec:ComponentDefinition}}
+%}
 
 \subsubsection*{Rules for the \class{ComponentInstance} class} 
 \setcounter{sbolCtr}{10601}
