@@ -352,34 +352,29 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
  \label{tbl:componentdefinition_types}
 \end{table}
 
-\twoonezero{\emph{Nucleic Acid Topology types}}
+\twoonezero{\emph{Nucleic Acid Topology types}
 \-\hspace{0.8cm}[New in 2.1.0; see SEP 011: \url{https://github.com/SynBioDex/SEPs/issues/26}]
 
-Any ComponentDefinition classified as DNA (biopax:DnaRegion) is RECOMMENDED to
-encode circular/linear topology information in an additional type field. This
-(topology) type field MUST point to either of two possible Sequence Ontology
-terms ('linear' or 'circular') given in table~\ref{tbl:componentdefinition_topology}. There is no default topology for
-DNA. Lack of topology information is only acceptable for DNA records without or
-with incomplete sequence information. Lack of topology information is not
-acceptable for DNA ComponentDefinition records with fully specified sequence --
+Any \sbol{ComponentDefinition} classified as DNA (see \ref{tbl:componentdefinition_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This
+(topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
+(this is currently just 'linear' or 'circular' as given in \ref{tbl:componentdefinition_topology}). There is no default topology for DNA. Lack of topology information is only acceptable for DNA records without or
+with incomplete sequence information. Topology information SHOULD be specified for DNA \sbol{ComponentDefinition} records with a fully specified sequence --
 unless the topology is genuinely unknown, in which case the sequence is, in
-fact, not fully specified. For RNA (biopax:RnaRegion)
-ComponentDefinitions, a topology type field is OPTIONAL. The default
-assumption in this case is linear topology.
+fact, not fully specified.  Any \sbol{ComponentDefinition} classified as RNA (see \ref{tbl:componentdefinition_types}), a topology type field is OPTIONAL. The default
+assumption in this case is linear topology.  In any case, no more than one topology should be specified.
 
-Moreover, any ComponentDefinition classified as DNA or RNA MAY have strand
-information encoded in an additional (third) type field pointing to either of
-two possible Sequence Ontology terms for single or double-stranded nucleic
-acids given in table~\ref{tbl:componentdefinition_topology}. In absence of this field, the
+Any \sbol{ComponentDefinition} classified as DNA or RNA MAY also have strand
+information encoded in an additional (third) type field using a URI from the Strand Attribute branch of the SO (currently there are only two possible terms for single or double-stranded nucleic
+acids given in \ref{tbl:componentdefinition_topology}). In absence of this field, the
 default strand information assumed for DNA is 'double-stranded' and for RNA is
 'single-stranded'. 
 
-Any other ComponentDefinition record (protein, small molecule, etc) MUST NOT
-have any type field pointing to SO terms of table~\ref{tbl:componentdefinition_topology}.
+Any other type of \sbol{ComponentDefinition} record (protein, small molecule, etc) SHOULD NOT
+have any type field pointing to SO terms from the topology or strand attribute branches of SO.
 
-\emph{Circular} topology (SO:0000988) instructs software to interpret the
+Note that a \emph{circular} topology instructs software to interpret the
 beginning / end position of a given sequence (be it DNA or RNA) as arbitrary so
-that sequence features may be mapped or identified across this junction. \emph{Double stranded} (SO:0000985) instructs software to apply sequence searches to both strands (i.e. sequence and reverse complement of sequence).
+that sequence features may be mapped or identified across this junction. \emph{Double stranded} instructs software to apply sequence searches to both strands (i.e. sequence and reverse complement of sequence).
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -396,7 +391,7 @@ that sequence features may be mapped or identified across this junction. \emph{D
   \caption{Sequence Ontology terms to encode DNA or RNA topology information in \sbolmult{types:CD}{types} properties of a \sbol{ComponentDefinition}.}
  \label{tbl:componentdefinition_topology}
 \end{table}
-
+}
 
 \subsubsection*{The \sbolheading{roles} property}
 \label{sec:roles:CD}
