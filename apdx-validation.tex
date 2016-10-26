@@ -8,7 +8,7 @@
 \label{validation}
 
 This section summarizes all the conditions that either MUST be or 
-are RECOMMENDED to be true of an SBOL Version~2.0 document. There are different degrees of rule strictness.  
+are RECOMMENDED to be true of an SBOL Version~2.1 document. There are different degrees of rule strictness.  
 Rules of the former kind are strict SBOL validation rules---data encoded in SBOL MUST conform to
 all of them in order to be considered valid. Rules of the latter kind
 are consistency rules that SBOL data are RECOMMENDED to adhere to as a best practice.  To help highlight these differences, we use the
@@ -32,7 +32,7 @@ following symbols next to the rule numbers:
 % (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
 \end{description}
 
-We also include a fourth type of rule that represents a required condition for SBOL-compliance that cannot be checked by a machine. Therefore, violations of these rules are not expected to be reported as errors by any of the software libraries implementing SBOL 2.0. It is the user's responsibility to make sure that these validation rules are followed.
+We also include a fourth type of rule that represents a required condition for SBOL-compliance that cannot be checked by a machine. Therefore, violations of these rules are not expected to be reported as errors by any of the software libraries implementing SBOL 2.1. It is the user's responsibility to make sure that these validation rules are followed.
 
 \begin{description}
 \item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a weak REQUIRED condition for SBOL conformance. While this rule MUST be followed, it is not possible in practice for a machine to automatically check whether the rule has been followed.
@@ -89,7 +89,7 @@ Reference: \sec{sec:serialization}}
 \setcounter{sbolCtr}{10201}
 
 \printValid{The \sbol{identity} property of an \sbol{Identified} object is REQUIRED and MUST contain a \sbol{URI} that adheres to the syntax defined by:\\
-\uri{http://www.w3.org/1999/02/22-rdf-syntax\#about} \\ 
+\uri{http://www.w3.org/TR/xmlschema11-2/\#anyURI}\\
 Reference: \sec{sec:Identified}}
 
 \twozeroone{
@@ -97,7 +97,8 @@ Reference: \sec{sec:Identified}}
 Reference: \sec{sec:Identified}}
 }
 
-\printValid{The \sbol{persistentIdentity} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{URI} that MUST adhere to the syntax defined by:\\ \uri{http://www.w3.org/1999/02/22-rdf-syntax\#about}\\ 
+\printValid{The \sbol{persistentIdentity} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{URI} that MUST adhere to the syntax defined by:\\ 
+\uri{http://www.w3.org/TR/xmlschema11-2/\#anyURI}\\
 Reference: \sec{sec:Identified}}
 
 \printValid{The \sbol{displayId} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String} that MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.\\ Reference: \sec{sec:Identified}}
@@ -373,7 +374,7 @@ Reference: Section 7.7.3 on page 26}}
 \setcounter{sbolCtr}{10901}
 
 \twoonezero{
-\printValid{A \sbol{SequenceAnnotation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, \sbol{locations}, \sbolmult{roles:SA}{roles}, and \sbolmult{roleIntegration:SA}{roleIntegration}.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{A \sbol{SequenceAnnotation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, \sbol{locations}, and \sbolmult{roles:SA}{roles}.\\ Reference: \sec{sec:SequenceAnnotation}}
 %A \sbol{SequenceAnnotation} MUST inherit all properties of the \sbol{Identified} class.
 }
 
@@ -394,32 +395,12 @@ Reference: Section 7.7.3 on page 26}}
 }
 
 \twoonezero{
-\printWarning{Each \sbol{URI} contained by the \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} MUST refer to an ontology term that is consistent with the  \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} referred to by the \sbolmult{definition:CI}{definition} property of the \sbol{Component} specified in the \sbol{component} property of this \sbol{SequenceAnnotation}.\\ Reference: \sec{sec:SequenceAnnotation}}
-}
-
-\twoonezero{
 \printWarning{The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} MUST contain a \sbol{URI} from \ref{tbl:componentdefinition_roles} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:SequenceAnnotation}}
 }
 
 \twoonezero{
-\printModeling{
-The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} SHOULD NOT contain a \sbol{URI} that refers to a term from the sequence feature branch of the SO unless the  \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} referred to by the \sbolmult{definition:CI}{definition} property of the \sbol{Component} specified in the \sbol{component} property of this \sbol{SequenceAnnotation} contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:componentdefinition_types}.
-\\ Reference: \sec{sec:SequenceAnnotation}}
-}
-
-\twoonezero{
-\printModeling{If the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} referred to by the \sbolmult{definition:CI}{definition} property of the \sbol{Component} specified in the \sbol{component} property of this \sbol{SequenceAnnotation} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{roles:SA}{roles} property SHOULD contain no more than one \sbol{URI} that refers to a term from the sequence feature branch of the SO.\\ 
+\printValid{A \sbol{SequenceAnnotation} MUST NOT include both a \sbol{component} property and a \sbolmult{roles:SA}{roles} property.\\ 
 Reference: \sec{sec:SequenceAnnotation}}
-}
-
-\twoonezero{
-\printValid{The \sbolmult{roleIntegration:C}{roleIntegration} property of a \sbol{SequenceAnnotation}, if provided, MUST contain a \sbol{URI} from \ref{tbl:sequenceAnnotation_roleIntegration}.
-\\ Reference: \sec{sec:SequenceAnnotation}}
-}
-
-\twoonezero{
-\printValid{The \sbolmult{roleIntegration:C}{roleIntegration} property of a \sbol{SequenceAnnotation} is REQUIRED, if \sbolmult{roles:SA}{roles} property includes one or more roles.
-\\ Reference: \sec{sec:SequenceAnnotation}}
 }
 
 \subsubsection*{Rules for the \class{Location} class} 
