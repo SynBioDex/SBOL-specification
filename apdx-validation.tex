@@ -285,7 +285,11 @@ Reference: \sec{sec:ComponentDefinition}}
 \twoonezero{
 \printModeling{
 The \sbolmult{roles:CD}{types} property of a \sbol{ComponentDefinition} SHOULD NOT contain a \sbol{URI} that refers to a term from the topology attribute or strand attribute branches of the SO unless its \sbolmult{types:CD}{types} property contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:componentdefinition_types}.
-\\ Reference: \sec{sec:ComponentDefinition}}
+Reference: \sec{sec:ComponentDefinition}}
+}
+
+\twoonezero{
+\printWarning{If the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{types:CD}{types} property MUST contain a \sbol{URI} that refers to a term from the topology attribute branch of the SO, if the topology is known.\\ Reference: \sec{sec:ComponentDefinition}}
 }
 
 %\twoonezero{
