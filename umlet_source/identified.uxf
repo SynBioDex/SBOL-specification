@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.2">
+<diagram program="umlet" version="14.2">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>220</x>
+      <x>200</x>
       <y>190</y>
-      <w>200</w>
+      <w>220</w>
       <h>150</h>
     </coordinates>
-    <panel_attributes>
-/*Identified*/
+    <panel_attributes>/*Identified*/
 --
 -identity[1] : URI
 -persistentIdentity[0..1] : URI
 -displayId[0..1] : String
 -version[0..1] : String
--wasDerivedFrom[0..1] : URI
+-wasDerivedFrom[0..*] : URI
 -name[0..1] : String
 -description[0..1] : String
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>390</x>
       <y>220</y>
