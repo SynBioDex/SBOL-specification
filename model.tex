@@ -143,10 +143,10 @@ For a full explanation, see the linked resources.
 \subsubsection*{The \sbolheading{wasDerivedFrom} property}
 \label{sec:wasDerivedFrom}
 
-The \sbol{wasDerivedFrom} property is OPTIONAL and has a data type of \sbol{URI}. An SBOL object with this property refers to another SBOL object or non-SBOL resource from which this object was derived.
+The \sbol{wasDerivedFrom} property is OPTIONAL \twooneone{and MAY specify a set of \sbol{URI}s}. An SBOL object with this property refers to \twooneone{one or more SBOL objects or non-SBOL resources} from which this object was derived.
 
 \twozeroone{The \sbol{wasDerivedFrom} property of a \sbol{TopLevel} SBOL object is subject to the following rules.}
-If the \sbol{wasDerivedFrom} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$.
+If \twooneone{one of the members of the} \sbol{wasDerivedFrom} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$.
 In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFrom} property or form a cyclical chain of references via its \sbol{wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
 
 \subsubsection*{The \sbolheading{name} property}
