@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
+      <x>0</x>
       <y>100</y>
       <w>210</w>
       <h>50</h>
@@ -17,7 +17,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
+      <x>260</x>
       <y>100</y>
       <w>120</w>
       <h>30</h>
@@ -29,7 +29,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
+      <x>310</x>
       <y>120</y>
       <w>30</w>
       <h>100</h>
@@ -40,7 +40,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
+      <x>220</x>
       <y>200</y>
       <w>280</w>
       <h>60</h>
@@ -54,7 +54,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
+      <x>180</x>
       <y>250</y>
       <w>190</w>
       <h>110</h>
@@ -67,7 +67,7 @@ prov:qualifiedAssociation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
+      <x>80</x>
       <y>140</y>
       <w>170</w>
       <h>110</h>
@@ -80,7 +80,7 @@ prov:wasGeneratedBy
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>160</x>
+      <x>100</x>
       <y>340</y>
       <w>230</w>
       <h>50</h>
@@ -93,7 +93,7 @@ prov:wasGeneratedBy
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
+      <x>270</x>
       <y>470</y>
       <w>120</w>
       <h>30</h>
@@ -104,7 +104,7 @@ prov:wasGeneratedBy
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
+      <x>220</x>
       <y>380</y>
       <w>110</w>
       <h>110</h>
@@ -117,12 +117,12 @@ prov:agent
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
+      <x>390</x>
       <y>340</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>provo:Usage
+    <panel_attributes>prov:Usage
 --
 - prov:entity [1]: URI
 - prov:hadRole [1]: URI</panel_attributes>
@@ -131,7 +131,7 @@ prov:agent
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
+      <x>370</x>
       <y>250</y>
       <w>150</w>
       <h>110</h>
@@ -144,7 +144,7 @@ prov:agent
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
+      <x>370</x>
       <y>110</y>
       <w>280</w>
       <h>390</h>
@@ -155,7 +155,7 @@ prov:agent
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
+      <x>30</x>
       <y>470</y>
       <w>120</w>
       <h>30</h>
@@ -166,7 +166,7 @@ prov:agent
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
+      <x>80</x>
       <y>380</y>
       <w>130</w>
       <h>110</h>
@@ -179,7 +179,7 @@ prov:hadPlan
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
+      <x>390</x>
       <y>140</y>
       <w>150</w>
       <h>80</h>
@@ -192,7 +192,7 @@ prov:wasInformedBy
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
+      <x>80</x>
       <y>470</y>
       <w>570</w>
       <h>80</h>
