@@ -99,8 +99,8 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
 
 \twoonezero{The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.}
 
-\twozeroone{\subsection{Annotating Entities with Date \& Time}\label{sec:datetime}
-Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{dateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:}
+\twozeroone{\subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
+Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:}
 
 \lstsetsbol
 \begin{lstlisting}
@@ -116,9 +116,11 @@ Entities in an SBOL document can be annotated with creation and modification dat
 \end{lstlisting}
 
 \twoonezero{\subsection{Adding Provenance}
+\label{sec:provenance}
+\label{sec:wasGeneratedBys}
 Provenance is central to a range of quality control and attribution tasks within the Synthetic Biology design process. Tracking attribution and derivation of one resource from another is paramount for managing intellectual property purposes. Source designs are often modified in systematic ways to generate derived designs, for example, by applying codon optimization or systematically removing all of a class of restriction enzyme sites.  Documenting the transformation used, and any associated parameters, makes this explicit and potentially allows the process to be reproduced systematically. If a design has been used within other designs, and is later found to be defective, it is paramount that all uses of it, including uses of edited versions of the design, can be identified, and ideally replaced with a non-defective alternative. When importing data from external sources, it is important not only to attribute the original source (for example, GenBank), but also the tool used to perform the import, as this may have made arbitrary choices as to how to represent the source knowledge as SBOL. All these activities have in common that it is necessary to track what resource, and what transformation process was applied by whom to derive an SBOL design.
 
-The PROV-O ontology (https://www.w3.org/TR/prov-o/) already defines a data model for provenance. PROV-O's \sbol{wasDerivedFrom} property was adopted in SBOL 2.x to describe the derivation of an SBOL entity from another in a light-weight provenance scheme.  Here, a subset of PROV-O is adopted for SBOL as a best practice to describe these activities in more detail\footnote{We thank Dr Paolo Missier from the School of Computing Science, Newcastle University for discussions regarding the use of PROV-O.}. PROV-O defines three core classes: \texttt{Entity}, \texttt{Activity} and \texttt{Agent}. An Agent (for example a software or a person) runs an Activity (according to a Plan) to generate one Entity from another. Although, PROV-O provides many other classes and rich set of terms. this specification describes the minimal subset of PROV-O that a provenance-aware SBOL tool should handle. This subset (\ref{uml:provenance}) includes the PROV-O's \sbol{Activity}, \sbol{Usage}, \sbol{Association}, \sbol{Agent} and \sbol{Plan} classes. Any SBOL's \sbol{Identified} object implicitly can act as an instance of PROV-O's \texttt{Entity} class and can include provenance through relationships to different activities. Resources representing \sbol{Agent}, \sbol{Activity} and \sbol{Plan} classes should be handled as \sbol{GenericTopLevel}, whilst \sbol{Usage} and \sbol{Association} resources should be nested within their parent activities. 
+The PROV-O ontology (https://www.w3.org/TR/prov-o/) already defines a data model for provenance. PROV-O's \sbol{wasDerivedFroms} property was adopted in SBOL 2.x to describe the derivation of an SBOL entity from another in a light-weight provenance scheme.  Here, a subset of PROV-O is adopted for SBOL as a best practice to describe these activities in more detail\footnote{We thank Dr Paolo Missier from the School of Computing Science, Newcastle University for discussions regarding the use of PROV-O.}. PROV-O defines three core classes: \texttt{Entity}, \texttt{Activity} and \texttt{Agent}. An Agent (for example a software or a person) runs an Activity (according to a Plan) to generate one Entity from another. Although, PROV-O provides many other classes and rich set of terms. this specification describes the minimal subset of PROV-O that a provenance-aware SBOL tool should handle. This subset (\ref{uml:provenance}) includes the PROV-O's \sbol{Activity}, \sbol{Usage}, \sbol{Association}, \sbol{Agent} and \sbol{Plan} classes. Any SBOL's \sbol{Identified} object implicitly can act as an instance of PROV-O's \texttt{Entity} class and can include provenance through relationships to different activities. Resources representing \sbol{Agent}, \sbol{Activity} and \sbol{Plan} classes should be handled as \sbol{GenericTopLevel}, whilst \sbol{Usage} and \sbol{Association} resources should be nested within their parent activities. 
 
 %Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}.  
 
@@ -126,6 +128,7 @@ Providers of provenance information are free to make use of more of PROV-O than 
 
 The adopted subset of PROV-O terms and their relationships to SBOL objects are defined below.
 
+\twotwozero{
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/provenance}
@@ -133,25 +136,27 @@ The adopted subset of PROV-O terms and their relationships to SBOL objects are d
 \label{uml:provenance}
 \end{center}
 \end{figure}
+}
 
 \subsubsection{Activity}
 \label{sec:Activity}
-A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{qualifiedAssociation} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{qualifiedUsage} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBy} relationship to provide dependency without explicitly specifying start and end times.
 
-\paragraph{The \sbolheading{qualifiedAssociation} property}\label{sec:qualifiedAssociation}
-The \sbol{qualifiedAssociation} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
+A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{qualifiedAssociations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{qualifiedUsages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
 
-\paragraph{The \sbolheading{qualifiedUsage} property}\label{sec:qualifiedUsage}
-The \sbol{qualifiedUsage} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
+\paragraph{The \sbolheading{qualifiedAssociations} property}\label{sec:qualifiedAssociations}
+The \sbol{qualifiedAssociations} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
+
+\paragraph{The \sbolheading{qualifiedUsages} property}\label{sec:qualifiedUsages}
+The \sbol{qualifiedUsages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
 
 \paragraph{The \sbolheading{endedAtTime} property}\label{sec:endedAtTime}
-The \sbol{endedAtTime} property is OPTIONAL and contains a dateTime (see section \ref{sec:datetime}) value, indicating when the activity ended.
+The \sbol{endedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity ended.
 
 \paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
-The \sbol{startedAtTime} property is OPTIONAL and contains a dateTime (see section \ref{sec:datetime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
+The \sbol{startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
 
-\paragraph{The \sbolheading{wasInformedBy} property}\label{sec:wasInformedBy}
-The \sbol{wasInformedBy} property is OPTIONAL and contains a URI of another activity.
+\paragraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
+The \sbol{wasInformedBys} property is OPTIONAL and contains a URI of another activity.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Activity} MUST have the following form:
@@ -207,7 +212,7 @@ The serialization of an \sbol{Association} MUST have the following form:
 \twoonezero{
 \subsubsection{Usage}
 \label{sec:Usage}
-How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{qualifiedUsage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{hadRole} property. When the \sbol{wasDerivedFrom} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFrom} property MUST be included in a \sbol{Usage}.
+How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{qualifiedUsage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{hadRole} property. When the \sbol{wasDerivedFroms} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFroms} property MUST be included in a \sbol{Usage}.
 
 
 \paragraph{The \sbolheading{entity} property}\label{sec:entity}

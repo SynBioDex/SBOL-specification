@@ -15,7 +15,7 @@
 -persistentIdentity[0..1] : URI
 -displayId[0..1] : String
 -version[0..1] : String
--wasDerivedFrom[0..*] : URI
+-wasDerivedFroms[0..*] : URI
 -name[0..1] : String
 -description[0..1] : String
 </panel_attributes>
