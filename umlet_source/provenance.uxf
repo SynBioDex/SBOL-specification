@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>20</x>
-      <y>100</y>
+      <y>20</y>
       <w>230</w>
       <h>50</h>
     </coordinates>
@@ -22,7 +22,7 @@
       <w>120</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>/GenericTopLevel/
+    <panel_attributes>/TopLevel/
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -68,14 +68,14 @@
     <id>Relation</id>
     <coordinates>
       <x>140</x>
-      <y>140</y>
+      <y>60</y>
       <w>150</w>
-      <h>110</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 wasGeneratedBys 
            0..*</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0;110.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0;110.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -204,12 +204,12 @@ wasInformedBys
     <id>Relation</id>
     <coordinates>
       <x>60</x>
-      <y>140</y>
+      <y>60</y>
       <w>30</w>
-      <h>240</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;300.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -232,5 +232,16 @@ wasInformedBys
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0;40.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>30</y>
+      <w>130</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;70.0</additional_attributes>
   </element>
 </diagram>
