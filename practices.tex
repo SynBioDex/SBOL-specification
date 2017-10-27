@@ -141,13 +141,13 @@ The adopted subset of PROV-O terms and their relationships to SBOL objects are d
 \subsubsection{Activity}
 \label{sec:Activity}
 
-A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{qualifiedAssociations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{qualifiedUsages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
+A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{associations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{usages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
 
-\paragraph{The \sbolheading{qualifiedAssociations} property}\label{sec:qualifiedAssociations}
-The \sbol{qualifiedAssociations} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
+\paragraph{The \sbolheading{associations} property}\label{sec:associations}
+The \sbol{associations} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
 
-\paragraph{The \sbolheading{qualifiedUsages} property}\label{sec:qualifiedUsages}
-The \sbol{qualifiedUsages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
+\paragraph{The \sbolheading{usages} property}\label{sec:usages}
+The \sbol{usages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
 
 \paragraph{The \sbolheading{endedAtTime} property}\label{sec:endedAtTime}
 The \sbol{endedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity ended.
@@ -183,16 +183,16 @@ The serialization of an \sbol{Activity} MUST have the following form:
 \twoonezero{
 \subsubsection{Association}
 \label{sec:Association}
-An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \texttt{hadRole} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
+An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \texttt{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
 
 \paragraph{The \sbolheading{agent} property}\label{sec:agent}
 The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{Agent} object.
 
-\paragraph{The \sbolheading{hadRole} property}\label{sec:hadRole}
-The \sbol{hadRole} property is REQUIRED and MUST contain a \sbol{URI} that refers to a particular term describing the usage of the agent.
+\paragraph{The \sbolheading{roles} property}\label{sec:roles:A}
+The \sbolmult{roles:A}{roles} property is REQUIRED and MUST contain a set of \sbol{URI}s that refers to particular term(s) describing the usage of the agent.
 
-\paragraph{The \sbolheading{hadPlan} property}\label{sec:hadPlan}
-The \sbol{hadPlan} property is OPTIONAL and contains a URI that refers to a \sbol{Plan}.
+\paragraph{The \sbolheading{plan} property}\label{sec:plan}
+The \sbol{plan} property is OPTIONAL and contains a URI that refers to a \sbol{Plan}.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Association} MUST have the following form:
@@ -212,14 +212,14 @@ The serialization of an \sbol{Association} MUST have the following form:
 \twoonezero{
 \subsubsection{Usage}
 \label{sec:Usage}
-How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{qualifiedUsage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{hadRole} property. When the \sbol{wasDerivedFroms} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFroms} property MUST be included in a \sbol{Usage}.
+How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{usage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{roles} property. When the \sbol{wasDerivedFroms} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFroms} property MUST be included in a \sbol{Usage}.
 
 
 \paragraph{The \sbolheading{entity} property}\label{sec:entity}
 The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an SBOL Identified object.
 
-\paragraph{The \sbolheading{hadRole} property}\label{sec:hadRole:usage}
-The \sbolmult{hadRole:usage}{hadRole} property is REQUIRED and MAY contain a \sbol{URI} that refers to a particular term describing the usage of an \sbol{entity} referenced by the \sbol{entity} property.
+\paragraph{The \sbolheading{roles} property}\label{sec:roles:U}
+The \sbolmult{roles:U}{roles} property is REQUIRED and MAY contain a set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property.
 
 
 \paragraph{Serialization}

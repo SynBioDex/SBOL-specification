@@ -47,22 +47,22 @@
     </coordinates>
     <panel_attributes>Activity
 --
-- startedAtTime [0..1]: dateTime
-- endedAtTime [0..1]: dateTime</panel_attributes>
+- startedAtTime [0..1]: DateTime
+- endedAtTime [0..1]: DateTime</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
+      <x>390</x>
       <y>260</y>
-      <w>170</w>
+      <w>150</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-    qualifiedAssociations
+    associations
 0..*</panel_attributes>
-    <additional_attributes>20.0;10.0;20.0;50.0;140.0;50.0;140.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;130.0;50.0;130.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -87,7 +87,7 @@ wasGeneratedBys
     </coordinates>
     <panel_attributes>Association
 --
-- hadRole [1]: URI</panel_attributes>
+- roles [0..*]: URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -125,7 +125,7 @@ agent
     <panel_attributes>Usage
 --
 - entity [1]: URI
-- hadRole [1]: URI</panel_attributes>
+- roles [0..*]: URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -137,7 +137,7 @@ agent
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-  qualifiedUsages
+  usages
 0..*</panel_attributes>
     <additional_attributes>150.0;10.0;150.0;50.0;10.0;50.0;10.0;130.0</additional_attributes>
   </element>
@@ -172,7 +172,7 @@ agent
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-hadPlan 
+plan 
 0..1</panel_attributes>
     <additional_attributes>100.0;10.0;100.0;60.0;10.0;60.0;10.0;90.0</additional_attributes>
   </element>
