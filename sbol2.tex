@@ -25,7 +25,7 @@
 
 % Macros just for this document:
 
-\newcommand{\rfcnum}{112}
+\newcommand{\rfcnum}{TBD}
 
 \newcommand{\sbmlpkg}{\texorpdfstring{%
     \textls[-25]{\textsc{SBMLPkgSpec}}}{%
@@ -145,6 +145,17 @@
 \cbend
 }
 
+%Commands to highlight SBOL versions
+\newcommand{\twotwozero}[1]{%
+\cbcolor{red}
+\cbstart%
+{\color{red}%
+\version{2.2.0}%
+#1
+}
+\cbend
+}
+
 % -----------------------------------------------------------------------------
 % Start of document
 % -----------------------------------------------------------------------------
@@ -152,19 +163,18 @@
 \begin{document}
 
 \packageTitle{\latex Class for SBML Package Specifications}
-\packageVersion{Version 2.1.1}
-\packageVersionDate{October 28, 2016}
+\packageVersion{Version 2.2.0}
+\packageVersionDate{October 31, 2017}
 
-\title{BBF RFC \rfcnum{}: Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~2.1.1}}
-
+\title{BBF RFC \rfcnum{}: Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~2.2.0}}
 
 \author{{\bf Editors:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
-Jacob Beal		& \emph{Raytheon BBN Technologies, USA}\\
 Robert Sidney Cox & \emph{Kobe University, Japan}\\
-Raik Gr\"unberg & \emph{King Abdullah University for Science and Technology, SA}\\
+Curtis Madsen & \emph{Boston University, USA}\\  
 James McLaughlin & \emph{Newcastle University, UK}\\
 Tramy Nguyen & \emph{University of Utah, USA}\\
+Nicholas Roehner & \emph{Raytheon BBN Technologies, USA}\\ 
 \end{tabular}\\
 {\bf Chair:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
@@ -174,15 +184,18 @@ Anil Wipat		& \emph{Newcastle University, UK}\\[8pt]
 \\
 {\bf Additional authors, by institution:}\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
+Jacob Beal		& \emph{Raytheon BBN Technologies, USA}\\ 
+Kevin Clancy & \emph{ThermoFisher Scientific, USA}\\ 
+Raik Gr\"unberg & \emph{King Abdullah University for Science and Technology, SA}\\
 Chris Macklin, Michael Bissell & \emph{Amyris, Inc., USA}\\
-Curtis Madsen, Nicholas Roehner & \emph{Boston University, USA}\\
+Goksel Misirli & \emph{Newcastle University, UK}\\ 
 Ernst Oberortner & \emph{DOE Joint Genome Institute, USA}\\
-Goksel Misirli & \emph{Newcastle University, UK}\\
-Kevin Clancy & \emph{ThermoFisher Scientific, USA}\\
 Matthew Pocock & \emph{Turing Ate My Hamster LTD, UK}\\
-Zhen Zhang & \emph{University of South Florida, USA}\\
-Chris Myers, Michael Zhang, Meher Samineni, Zach Zundel& \emph{University of Utah, USA}\\
-Bryan Bartley, Kiri Choi, John H. Gennari, Herbert Sauro & \emph{University of Washington, USA}\\
+Zhen Zhang & \emph{Utah State University, USA}\\
+Chris Myers, Michael Zhang, & \\
+Meher Samineni, Zach Zundel& \emph{University of Utah, USA}\\   
+Bryan Bartley, Kiri Choi, & \\
+John H. Gennari, Herbert Sauro & \emph{University of Washington, USA}\\
 \end{tabular}\\
 \\
 {\bf Non-author contributors, by institution:}\\
