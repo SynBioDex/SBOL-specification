@@ -92,7 +92,7 @@ It is important to realize that in RDF, a \sbol{URI} might or might not be a res
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
 This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
 
-As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, \twooneone{\sbol{wasDerivedFroms}}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
+As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
 
 When an SBOL resource reference takes the form of a \sbol{URI}, that \sbol{URI} can either be the value of an \sbol{identity} property or the value of a \sbol{persistentIdentity} property.
 If the \sbol{URI} is equal to the value of an \sbol{identity} property, then it is guaranteed to be unique, and it refers to precisely one SBOL object with that \sbol{URI}.
@@ -143,9 +143,9 @@ For a full explanation, see the linked resources.
 \subsubsection*{The \sbolheading{wasDerivedFroms} property}
 \label{sec:wasDerivedFroms}
 
-The \twooneone{\sbol{wasDerivedFroms}} property is OPTIONAL \twooneone{and MAY specify a set of \sbol{URI}s}. An SBOL object with this property refers to \twooneone{one or more SBOL objects or non-SBOL resources} from which this object was derived.
+The \twotwozero{\sbol{wasDerivedFroms}} property is OPTIONAL \twotwozero{and MAY specify a set of \sbol{URI}s}. An SBOL object with this property refers to \twotwozero{one or more SBOL objects or non-SBOL resources} from which this object was derived.
 
-\twooneone{
+\twotwozero{
 \twozeroone{The \sbol{wasDerivedFroms} property of a \sbol{TopLevel} SBOL object is subject to the following rules.}
 If any members of the \sbol{wasDerivedFroms} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$.
 In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFroms} property or form a cyclical chain of references via its \sbol{wasDerivedFroms} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
@@ -198,7 +198,7 @@ Note that several of the properties are not in the \external{sbol}
 namespace, but are mapped to standardized terms defined elsewhere:
 \begin{itemize}
 \item \sbol{identity} is serialized as \external{rdf:about}
-\item \twooneone{\sbol{wasDerivedFroms} are} serialized as \external{prov:wasDerivedFrom}
+\item \twotwozero{\sbol{wasDerivedFroms} are} serialized as \external{prov:wasDerivedFrom}
 \item \sbol{name} is serialized as \external{dcterms:title}
 \item \sbol{description} is serialized as \external{dcterms:description}
 \end{itemize}
