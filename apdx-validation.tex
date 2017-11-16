@@ -530,6 +530,11 @@ Reference: \sec{sec:GenericLocation}}
 \printModeling{The \sbol{URI} contained by the \sbol{restriction} property SHOULD come from \ref{tbl:restriction_types}.
 \\ Reference: \sec{sec:SequenceConstraint}}
 
+\twotwozero{
+\printValid{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI} \url{http://sbols.org/v2\#differentFrom}, then the \sbol{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT contain the same \sbol{URI} as the \sbol{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
+\\ Reference: \sec{sec:SequenceConstraint}}
+}
+
 \subsubsection*{Rules for the \class{Model} class} 
 \setcounter{sbolCtr}{11501}
 
@@ -777,7 +782,7 @@ Reference: \sec{sec:Annotations}}
 \printValid{The \sbol{strategy} property of a \sbol{CombinatorialDerivation} is OPTIONAL and SHOULD contain a \sbol{URI} from \ref{tbl:combinatorialderivation_strategies}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printValid{If the \sbol{strategy} property of a \sbol{CombinatorialDerivation} contains the \sbol{URI} \url{http://sbols.org/v2#enumerate}, then its \sbol{variableComponents} property MUST NOT contain a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2#zeroOrMore} or the \sbol{URI} \url{http://sbols.org/v2#oneOrMore}.
+\printValid{If the \sbol{strategy} property of a \sbol{CombinatorialDerivation} contains the \sbol{URI} \url{http://sbols.org/v2\#enumerate}, then its \sbol{variableComponents} property MUST NOT contain a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2\#zeroOrMore} or the \sbol{URI} \url{http://sbols.org/v2\#oneOrMore}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
 \printValid{The \sbol{template} property of a \sbol{CombinatorialDerivation} is REQUIRED and MUST contain a \sbol{URI}.
@@ -881,13 +886,13 @@ Reference: \sec{sec:Annotations}}
 \printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the \sbol{wasDerivedFroms} property of a \sbol{Component} contained by the \sbol{ComponentDefinition} refers to a \sbol{Component} contained by the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation}, then the \sbolmult{types:CD}{roles} property of the first \sbol{Component} SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} property of the second \sbol{Component}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2#zeroOrOne}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD NOT contain more than one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the variable \sbol{Component} of the \sbol{VariableComponent}.
+\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2\#zeroOrOne}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD NOT contain more than one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the variable \sbol{Component} of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2#one}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{variable} \sbol{Component} of the \sbol{VariableComponent}.
+\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2\#one}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{variable} \sbol{Component} of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2#oneOrMore}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD contain at least one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{variable} \sbol{Component} of the \sbol{VariableComponent}.
+\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2\#oneOrMore}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD contain at least one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{variable} \sbol{Component} of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation} contains a \sbol{Component} that is not referred to by the \sbol{variable} property of any \sbol{VariableComponent} contained by the \sbol{CombinatorialDerivation}, then the first \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{Component} in the template \sbol{ComponentDefinition}.
