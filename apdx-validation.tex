@@ -686,20 +686,24 @@ Reference: \sec{sec:Participation}}
 \subsubsection*{Rules for the \class{Annotation} class} 
 \setcounter{sbolCtr}{12201}
 
-\twozeroone{
+\twotwozero{
 \printValid{The name property of an Annotation is REQUIRED and MUST contain a QName. \\ 
 Reference: \sec{sec:Annotations}}
+}
 
-\printValid{The value property of an Annotation is REQUIRED and MUST contain an AnnotationValue. \\ 
-Reference: \sec{sec:Annotations}}
+\twozeroone{
+\printValid{\st{The value property of an Annotation is REQUIRED and MUST contain an AnnotationValue. \\ 
+Reference: Section 7.11 on page 46}}
+}
 
-\printWarning{An  \sbol{AnnotationValue} MUST be a \sbol{literal} (a \sbol{String}, \sbol{Integer}, \sbol{Double}, or \sbol{Boolean}), \sbol{URI}, or a \sbol{NestedAnnotations} object.\\ Reference: \sec{sec:Annotations}}
+\twotwozero{
+\printValid{An  \sbol{AnnotationValue} MUST be a \sbol{literal} (a \sbol{String}, \sbol{Integer}, \sbol{Double}, or \sbol{Boolean}), \sbol{URI}, or a \sbol{NestedAnnotations} object.\\ Reference: \sec{sec:Annotations}}
 
-\printWarning{The \sbol{nestedQName} property of a \sbol{NestedAnnotations} object is REQUIRED and MUST contain a \sbol{QName}.  \\ Reference: \sec{sec:Annotations}}
+\printValid{The \sbol{nestedQName} property of a \sbol{NestedAnnotations} object is REQUIRED and MUST contain a \sbol{QName}.  \\ Reference: \sec{sec:Annotations}}
 
-\printWarning{The \sbol{nestedURI} property of a \sbol{NestedAnnotations} object is REQUIRED and MUST contain a \sbol{URI}.  \\ Reference: \sec{sec:Annotations}}
+\printValid{The \sbol{nestedURI} property of a \sbol{NestedAnnotations} object is REQUIRED and MUST contain a \sbol{URI}.  \\ Reference: \sec{sec:Annotations}}
 
-\printWarning{The \sbol{annotations} property of a \sbol{NestedAnnotations} object is OPTIONAL and MAY contain a set of \sbol{Annotation} objects.  \\ Reference: \sec{sec:Annotations}}
+\printValid{The \sbol{annotations} property of a \sbol{NestedAnnotations} object is OPTIONAL and MAY contain a set of \sbol{Annotation} objects.  \\ Reference: \sec{sec:Annotations}}
 }
 
 \subsubsection*{Rules for the \class{GenericTopLevel} class} 
