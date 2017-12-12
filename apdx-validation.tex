@@ -758,3 +758,25 @@ Reference: Section 7.11 on page 43}}
 
 \printValid{An \sbol{Plan} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:provenance}}
 }
+
+\twotwozero{
+\subsubsection*{Rules for the \class{Attachment} class} 
+\setcounter{sbolCtr}{12901}
+
+\printValid{An \sbol{Attachment} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{source}, \sbol{format}, \sbol{size}, and \sbol{hash}.\\ Reference: \sec{sec:Attachment}}
+%A \sbol{Model} MUST inherit all properties of the \sbol{TopLevel} class.
+
+\printValid{The \sbol{source} property of an \sbol{Attachment} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
+
+\printWarning{The \sbol{URI} contained by the \sbol{source} property of an \sbol{Attachment} MUST specify the location of the model's source file.\\ Reference: \sec{sec:Attachment}}
+
+\printValid{The \sbol{format} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
+
+\printWarning{The \sbol{URI} contained by the \sbol{format} property of an \sbol{Attachment} MUST specify the file type of the attachment.\\ Reference: \sec{sec:Attachment}}
+
+\printModeling{The \sbol{format} property of an \sbol{Attachment} SHOULD contain a \sbol{URI} that refers to a term from the EDAM ontology.\\ Reference: \sec{sec:Attachment}}
+
+\printValid{The \sbol{size} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{Long}.\\ Reference: \sec{sec:Attachment}}
+
+\printValid{The \sbol{hash} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Attachment}}
+}
