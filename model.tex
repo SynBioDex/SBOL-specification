@@ -56,6 +56,7 @@ For example, if an SBOL property has five values, then its serialization contain
 \label{sec:datatypes}
 \label{sec:String}
 \label{sec:Integer}
+\label{sec:Long}
 \label{sec:Double}
 \label{sec:Boolean}
 \label{sec:URI}
@@ -67,6 +68,8 @@ When SBOL use simple ``primitive'' data types such as \sbol{String}s or \sbol{In
   {\em Example: ``LacI coding sequence''}
 \item \sbol{Integer}: \url{http://www.w3.org/TR/xmlschema11-2/#integer}\\
   {\em Example: 3}
+\item \twotwozero{\sbol{Long}:} \url{http://www.w3.org/TR/xmlschema11-2/#long}\\
+  \twotwozero{{\em Example: 9223372036854775806}}
 \item \sbol{Double}: \url{http://www.w3.org/TR/xmlschema11-2/#double}\\
   {\em Example: 3.14159}
 \item \sbol{Boolean}: \url{http://www.w3.org/TR/xmlschema11-2/#boolean}\\
@@ -1523,6 +1526,72 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:Collection}
+
+\twoonezero{
+\subsection{Attachment}
+\label{sec:Attachment}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/attachment}
+\caption[]{Diagram of the \sbol{Attachment} class and its associated properties.}
+\label{uml:attachment}
+\end{center}
+\end{figure}
+
+The purpose of the \sbol{Attachment} class is to serve as a general container for data files, especially experimental data files.
+It provides a means for linking files and metadata to SBOL designs.
+
+The meta-data provided by the \sbol{Attachment} class include the following properties: the \sbol{source} or location of the actual file of the attachment, the \sbol{format} of the file, the \sbol{size} of the file, and the \sbol{hash} for the file.
+
+\subsubsection*{ The \sbolheading{source} property}\label{sec:source}
+The \sbol{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file.
+
+\subsubsection*{ The \sbolheading{format} property}\label{sec:format}
+The \sbol{format} property is OPTIONAL and MAY contain a \sbol{URI} that specifies the format of the attached file. It is RECOMMENDED that this \sbol{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology.
+
+\subsubsection*{ The \sbolheading{size} property}\label{sec:size}
+The \sbol{size} property is OPTIONAL and MAY contain a long indicating the file size in bytes. This may be used by client applications accessing files over RESTful APIs.
+
+\subsubsection*{ The \sbolheading{hash} property}\label{sec:hash}
+The \sbol{hash} property is OPTIONAL and MAY contain a string used to retrieve files from a cache.
+
+\subsubsection*{Serialization}
+
+The serialization of a \sbol{Attachment} MUST have the following form:
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Attachment rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  [\emph{one}] <sbol:source rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:format rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:size>...</sbol:size> [\emph{element}]
+  [\emph{zero or one}] <sbol:hash>...</sbol:hash> [\emph{element}]
+</sbol:Attachment>
+\end{lstlisting}
+
+\twoonezero{
+The example below shows the serialization of a \sbol{Attachment} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbol{source} \sbol{URI}, which is a \external{URL}.
+}
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Attachment rdf:about="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6"/>
+    <sbol:displayId>attachment_00009Les8pDTQCmKA7A5T6</sbol:displayId>
+    <dcterms:title>NicePlot.png</dcterms:title>
+    <sbol:source rdf:resource="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6/1/download"/>
+    <sbol:format rdf:resource="http://identifiers.org/edam/format_3603"/>
+    <sbol:size>31399</sbol:size>
+    <sbol:hash>404966a5062857f63edb5c3ba16bb581d7fb6a1e</sbol:hash>
+  </sbol:Attachment>
+</rdf:RDF>
+\end{lstlisting}
+\label{ser:Attachment}
 
 \subsection{Annotation and Extension of SBOL}
 \label{sec:Annotations}
