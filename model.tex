@@ -1038,10 +1038,10 @@ The example below shows the serialization of a \sbol{SequenceConstraint} belongi
 The purpose of the \sbol{Model} class is to serve as a placeholder for an external computational model and provide additional meta-data to enable better reasoning about the contents of this model.
 In this way, there is minimal duplication of standardization efforts and users of SBOL can formalize the function of a \sbol{ModuleDefinition} in the language of their choice.
 
-The meta-data provided by the \sbol{Model} class include the following properties: the \sbol{source} or location of the actual content of the model, the \sbol{language} in which the model is implemented, and the model's \sbol{framework}.
+The meta-data provided by the \sbol{Model} class include the following properties: the \sbolmult{source:M}{source} or location of the actual content of the model, the \sbol{language} in which the model is implemented, and the model's \sbol{framework}.
 
-\subsubsection*{ The \sbolheading{source} property}\label{sec:source}
-The \sbol{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file for a model.
+\subsubsection*{ The \sbolheading{source} property}\label{sec:source:M}
+The \sbolmult{source:M}{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file for a model.
 
 \subsubsection*{ The \sbolheading{language} property}\label{sec:language}
 The \sbol{language} property is REQUIRED and MUST contain a \sbol{URI} that specifies the language in which the model is implemented. It is RECOMMENDED that this \sbol{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology. \ref{tbl:model_types} provides a list of terms from this ontology and their \sbol{URI}s. If the \sbol{language} property of a \sbol{Model} is well-described by one these terms, then it MUST contain the \sbol{URI} for this term as its value.
@@ -1092,7 +1092,7 @@ The serialization of a \sbol{Model} MUST have the following form:
 </sbol:Model>
 \end{lstlisting}
 
-The example below shows the serialization of a \sbol{Model} object that refers to a quantitative model of a genetic toggle switch. The model is implemented in the SBML \sbol{language} and adheres to a continuous modeling \sbol{framework}. Lastly, the model can be retrieved from a model repository via its \sbol{source} \sbol{URI}, which is a \external{URL}.
+The example below shows the serialization of a \sbol{Model} object that refers to a quantitative model of a genetic toggle switch. The model is implemented in the SBML \sbol{language} and adheres to a continuous modeling \sbol{framework}. Lastly, the model can be retrieved from a model repository via its \sbolmult{source:M}{source} \sbol{URI}, which is a \external{URL}.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1632,7 +1632,7 @@ The example below shows the serialization of a \sbol{CombinatorialDerivation} th
 </rdf:RDF>
 \end{lstlisting}
 
-\label{ser:Attachment}
+%\label{ser:Attachment}
 
 \twotwozero{
 \subsubsection{VariableComponent}
@@ -1735,10 +1735,10 @@ The example below shows the serialization of a \sbol{VariableComponent} that spe
 The purpose of the \sbol{Attachment} class is to serve as a general container for data files, especially experimental data files.
 It provides a means for linking files and metadata to SBOL designs.
 
-The meta-data provided by the \sbol{Attachment} class include the following properties: the \sbol{source} or location of the actual file of the attachment, the \sbol{format} of the file, the \sbol{size} of the file, and the \sbol{hash} for the file.
+The meta-data provided by the \sbol{Attachment} class include the following properties: the \sbolmult{source:A}{source} or location of the actual file of the attachment, the \sbol{format} of the file, the \sbol{size} of the file, and the \sbol{hash} for the file.
 
-\subsubsection*{ The \sbolheading{source} property}\label{sec:source}
-The \sbol{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file.
+\subsubsection*{ The \sbolheading{source} property}\label{sec:source:A}
+The \sbolmult{source:A}{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file.
 
 \subsubsection*{ The \sbolheading{format} property}\label{sec:format}
 The \sbol{format} property is OPTIONAL and MAY contain a \sbol{URI} that specifies the format of the attached file. It is RECOMMENDED that this \sbol{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology.
@@ -1767,7 +1767,7 @@ The serialization of a \sbol{Attachment} MUST have the following form:
 \end{lstlisting}
 
 \twotwozero{
-The example below shows the serialization of a \sbol{Attachment} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbol{source} \sbol{URI}, which is a \external{URL}.
+The example below shows the serialization of a \sbol{Attachment} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbolmult{source:A}{source} \sbol{URI}, which is a \external{URL}.
 }
 \lstsetsbol
 \begin{lstlisting}

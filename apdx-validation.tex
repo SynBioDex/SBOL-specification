@@ -202,7 +202,7 @@ Reference: Section 7.5 on page 19}}
 \setcounter{sbolCtr}{10501}
 
 \twozeroone{
-\printValid{A \sbol{ComponentDefinition} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}}, \twotwozero{\sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{types:CD}{roles}, \sbol{components}, \sbol{sequences}, \\ \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.\\ 
+\printValid{A \sbol{ComponentDefinition} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}}, \twotwozero{\sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \sbol{components}, \sbol{sequences}, \\ \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.\\ 
 Reference: \sec{sec:ComponentDefinition}}
 %A \sbol{ComponentDefinition} MUST inherit all properties of the \sbol{TopLevel} class.}
 }
@@ -539,13 +539,13 @@ Reference: \sec{sec:GenericLocation}}
 \setcounter{sbolCtr}{11501}
 
 \twozeroone{
-\printValid{A \sbol{Model} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}}, \twotwozero{\sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{source}, \sbol{language}, and \sbol{framework}.\\ Reference: \sec{sec:Model}}
+\printValid{A \sbol{Model} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}}, \twotwozero{\sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{source:M}{source}, \sbol{language}, and \sbol{framework}.\\ Reference: \sec{sec:Model}}
 %A \sbol{Model} MUST inherit all properties of the \sbol{TopLevel} class.
 }
 
-\printValid{The \sbol{source} property of a \sbol{Model} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
+\printValid{The \sbolmult{source:M}{source} property of a \sbol{Model} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
 
-\printWarning{The \sbol{URI} contained by the \sbol{source} property of a \sbol{Model} MUST specify the location of the model's source file.\\ Reference: \sec{sec:Model}}
+\printWarning{The \sbol{URI} contained by the \sbolmult{source:M}{source} property of a \sbol{Model} MUST specify the location of the model's source file.\\ Reference: \sec{sec:Model}}
 
 \printValid{The \sbol{language} property of a \sbol{Model} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
 
@@ -833,7 +833,7 @@ Reference: Section 7.11 on page 46}}
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printValid{The \sbol{URI} contained by the \sbol{operator} property of a \sbol{VariableComponent} MUST come from 
-\ref{tbl:variableComponent_operator}.
+\ref{tbl:operator}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printValid{The \sbol{variable} property of a \sbol{VariableComponent} is REQUIRED and MUST contain a \sbol{URI}.
@@ -906,14 +906,15 @@ Reference: Section 7.11 on page 46}}
 
 \twotwozero{
 \subsubsection*{Rules for the \class{Attachment} class} 
-\setcounter{sbolCtr}{12901}
+\setcounter{sbolCtr}{13101}
 
-\printValid{An \sbol{Attachment} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{source}, \sbol{format}, \sbol{size}, and \sbol{hash}.\\ Reference: \sec{sec:Attachment}}
+\printValid{An \sbol{Attachment} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, and \sbol{hash}.\\ Reference: \sec{sec:Attachment}}
 %A \sbol{Model} MUST inherit all properties of the \sbol{TopLevel} class.
 
-\printValid{The \sbol{source} property of an \sbol{Attachment} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
+\printValid{The \sbolmult{source:A}{source} property of an \sbol{Attachment} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
 
-\printWarning{The \sbol{URI} contained by the \sbol{source} property of an \sbol{Attachment} MUST specify the location of the model's source file.\\ Reference: \sec{sec:Attachment}}
+\printWarning{The \sbol{URI} contained by the \sbolmult{source:A}{source} property of an \sbol{Attachment} MUST specify the location of the model's source file.\\ Reference: \sec{sec:Attachment}}
 
 \printValid{The \sbol{format} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
 
