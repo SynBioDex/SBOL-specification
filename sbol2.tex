@@ -1,13 +1,13 @@
 
 \documentclass[finalspec]{sbmlpkgspec}
 %% \documentclass[draftspec]{sbmlpkgspec}
+\usepackage{float}
 \usepackage{microtype}
 \usepackage{color}
 \usepackage{todonotes}
 \usepackage{changebar}
 \usepackage{xcolor}
 \usepackage{soul}
-
 %% ============================================================================
 %% Description:  Documentation for sbmlpkgspec.cls
 %% First author: Michael Hucka <mhucka@caltech.edu>
@@ -140,6 +140,17 @@
 \cbstart%
 {\color{red}%
 \version{2.2.0}%
+#1
+}
+\cbend
+}
+
+%Commands to highlight SBOL versions
+\newcommand{\twothreezero}[1]{%
+\cbcolor{red}
+\cbstart%
+{\color{red}%
+\version{2.3.0}%
 #1
 }
 \cbend

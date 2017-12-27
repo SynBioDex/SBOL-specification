@@ -1478,6 +1478,34 @@ In the example below, the role of participating \sbol{FunctionalComponent} is de
 </sbol:Participation>
 \end{lstlisting}
 
+\subsection{Implementation}
+\label{sec:implementation}
+An \sbol{Implementation} represents a real, physical instance of a synthetic biological construct which may be associated with a laboratory sample. An \sbol{Implementation} describes the thing which was built during the build phase of a design-built-test-learn workflow. An \sbol{Implementation} may be linked back to its original design (either a \sbol{ModuleDefinition} or \sbol{ComponentDefinition}) using the \sbol{wasDerivedFrom} property inherited from the \sbol{Identified} superclass. An \sbol{Implementation} may also link to a \sbol{ModuleDefinition} or \sbol{ComponentDefinition} that specifies its realized structure and/or function as described in Section2.1.1.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/implementation}
+\caption[]{Diagram of the \sbol{Implementation} class and its associated properties.}
+\label{uml:implementation}
+\end{center}
+\end{figure}
+
+\subsubsection*{ The \sbolheading{built} property}\label{sec:built}
+The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a \sbol{TopLevel} object that is either a \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{ComponentDefinition} or \sbol{ModuleDefinition} is intended to describe the actual physical structure and/or functional behavior of the \sbol{Implementation}. When the built property refers to a \sbol{ComponentDefinition} that is also linked to the \sbol{Implementation} via PROV-O properties such as \sbol{wasDerivedFrom}, it can be inferred that the actual structure and/or function of the \sbol{Implementation} matches its original design. When the \sbol{built} property refers to a different \sbol{ComponentDefinition}, it can be inferred that the \sbol{Implementation} has deviated from the original design. For example, the latter could be used to document when the DNA sequencing results for an assembled construct do not match the original target sequence.
+
+\subsubsection*{Serialization}
+
+The serialization of an \sbol{Implementation} has the following form:
+\lstsetsbol
+\begin{lstlisting}
+  <sbol:Implementation rdf:about="http://examples.org/Implementation/build/1.0.0">
+    <sbol:built rdf:resource="http://examples.org/ComponentDefinition/mutant/1.0.0"/>
+    <sbol:displayId>build</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Implementation/build"/>
+    <sbol:version>1.0.0</sbol:version>
+  </sbol:Implementation>
+\end{lstlisting}
+
 \subsection {Collection}
 \label{sec:Collection}
 The \sbol{Collection} class is a class that groups together a set of \sbol{TopLevel} objects that have something in common.

@@ -173,6 +173,9 @@ Reference: Section 7.5 on page 19}}
 
 \printWarning{If the \twotwozero{\sbol{wasDerivedFroms}} property of one \sbol{TopLevel} object refers to another \sbol{TopLevel} object with the same \sbol{persistentIdentity} property, then \sbol{version} property of the second \sbol{TopLevel} object MUST precede that of the first if both objects have a \sbol{version}.\\ Reference: \sec{sec:Identified}}
 }
+\twotwozero{
+\printComplete{\sbol{TopLevel} objects MUST NOT form circular reference chains via their \twooneone{\sbol{wasGeneratedBy}} properties.\\ Reference: \sec{sec:wasGeneratedBys}}
+}
 
 \subsubsection*{Rules for the \class{Sequence} class} 
 \setcounter{sbolCtr}{10401}
@@ -732,6 +735,22 @@ Reference: Section 7.11 on page 46}}
 \printValid{The \sbol{wasInformedBys} property of an \sbol{Activity} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:provenance}}
 
 \printComplete{Each \sbol{URI} contained by the \sbol{wasInformedBys} property of an \sbol{Activity} MUST refer to a \sbol{Activity} object.\\ Reference: \sec{sec:provenance}}
+
+\printValid{An \sbol{Activity} with a child \sbol{Association} given a \sbol{roles} value of \sbol{sbol:design} MUST NOT have child \sbol{Usages} with \sbol{roles} other than \sbol{sbol:learn} or \sbol{sbol:design}.\\ Reference: \sec{sec:Activity}}
+
+\printValid{An \sbol{Activity} with a child \sbol{Association} given a \sbol{roles} value of \sbol{sbol:build} MUST NOT have child \sbol{Usages} with \sbol{roles} other than \sbol{sbol:design} or \sbol{sbol:build}.\\ Reference: \sec{sec:Activity}}
+
+\printValid{An \sbol{Activity} with a child \sbol{Association} given a \sbol{roles} value of \sbol{sbol:test} MUST NOT have child \sbol{Usages} with \sbol{roles} other than \sbol{sbol:build} or \sbol{sbol:test}.\\ Reference: \sec{sec:Activity} }
+
+\printValid{An \sbol{Activity} with a child \sbol{Association} given a \sbol{roles} value of \sbol{sbol:learn} MUST NOT have child \sbol{Usages} with \sbol{roles} other than \sbol{sbol:test} or \sbol{sbol:learn}.\\ Reference: \sec{sec:Activity}}
+
+\printModeling{It is RECOMMENDED that a \sbol{Usage} with \sbol{roles} of \sbol{sbol:design} SHOULD refer to a ModuleDefinition, ComponentDefinition, or Sequence.\\ Reference: \sec{sec:Usage}}
+
+\printModeling{It is RECOMMENDED that a \sbol{Usage} with \sbol{roles} of \sbol{sbol:build} SHOULD refer to an Implementation.\\ Reference: \sec{sec:Usage}}
+
+\printModeling{It is RECOMMENDED that a \sbol{Usage} with \sbol{roles} of \sbol{sbol:test} refer to an \sbol{Attachment} or \sbol{Collection} of \sbol{Attachments} which refer to files containing raw, experimental data.\\ Reference: \sec{sec:Usage}}
+
+\printModeling{It is RECOMMENDED that a \sbol{Usage} with \sbol{roles} of \sbol{sbol:learn} SHOULD refer to a Model derived from fitting experimental data, a consensus \sbol{Sequence} derived from sequence analysis of a construct, or \sbol{Attachments} that reference files containing analyzed data (including graphs and tables).\\ Reference: \sec{sec:Usage}}
 }
 
 \twotwozero{
@@ -926,3 +945,12 @@ Reference: Section 7.11 on page 46}}
 
 \printValid{The \sbol{hash} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Attachment}}
 }
+
+\twotwozero{
+\subsubsection*{Rules for the \class{Implementation} class} 
+\setcounter{sbolCtr}{13201}
+
+\printValid{An \sbol{Implementation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFrom}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{roles}, and \sbol{built}.\\ Reference: \sec{sec:implementation}}
+
+\printValid{The \sbol{built} property of an \sbol{Implementation} is OPTIONAL and MAY contain a \sbol{URI} that MUST reference either a \sbol{ComponentDefinition} or a \sbol{ModuleDefinition}.\\ Reference: \sec{sec:implementation}}
+} 
