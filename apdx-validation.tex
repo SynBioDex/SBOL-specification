@@ -158,6 +158,22 @@ Reference: \sec{sec:Identified}}
 \printComplete{Each \sbol{URI} contained by the \sbol{wasGeneratedBys} property of an \sbol{Identified} object MUST refer to an \sbol{Activity} object.\\ Reference: \sec{sec:provenance}}
 }
 
+\twotwozero{
+\printComplete{\sbol{Identified} objects MUST NOT form circular reference chains via their \sbol{wasGeneratedBys} properties.\\ Reference: \sec{sec:wasGeneratedBys}}
+
+\printModeling{A \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD be a \sbol{TopLevel} object other than \sbol{Implementation}.\\
+Reference: \sec{sec:provenance}}
+
+\printModeling{A \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD be an \sbol{Implementation}.\\ 
+Reference: \sec{sec:provenance}}
+
+\printModeling{A \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD be an \sbol{Attachment} or a \sbol{Collection} of \sbol{Attachment} objects.\\ 
+Reference: \sec{sec:provenance}}
+
+\printModeling{A \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD not be an \sbol{Implementation}.]\\
+Reference: \sec{sec:provenance}}
+}
+
 \subsubsection*{Rules for the \class{TopLevel} class} 
 \setcounter{sbolCtr}{10301}
 
@@ -172,22 +188,6 @@ Reference: Section 7.5 on page 19}}
 \printComplete{\sbol{TopLevel} objects MUST NOT form circular reference chains via their \twotwozero{\sbol{wasDerivedFroms}} properties.\\ Reference: \sec{sec:Identified}}
 
 \printWarning{If the \twotwozero{\sbol{wasDerivedFroms}} property of one \sbol{TopLevel} object refers to another \sbol{TopLevel} object with the same \sbol{persistentIdentity} property, then \sbol{version} property of the second \sbol{TopLevel} object MUST precede that of the first if both objects have a \sbol{version}.\\ Reference: \sec{sec:Identified}}
-}
-\twotwozero{
-\printComplete{\sbol{TopLevel} objects MUST NOT form circular reference chains via their \sbol{wasGeneratedBys} properties.\\ Reference: \sec{sec:wasGeneratedBys}}
-
-%% CHRIS: should these be best practice or uncheckable required
-\printModeling{A \sbol{TopLevel} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD be a \sbol{ModuleDefinition}, \sbol{ComponentDefinition}, or \sbol{Sequence}.\\ 
-Reference: \sec{sec:provenance}}
-
-\printModeling{A \sbol{TopLevel} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD be an \sbol{Implementation}.\\ 
-Reference: \sec{sec:provenance}}
-
-\printModeling{A \sbol{TopLevel} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD be an \sbol{Attachment} or a \sbol{Collection} of \sbol{Attachment} objects.\\ 
-Reference: \sec{sec:provenance}}
-
-\printModeling{A \sbol{TopLevel} with a \sbol{wasGeneratedBys} property that includes a references to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD be a \sbol{Model}, a \sbol{ModuleDefinition}, a \sbol{ComponentDefinition}, a \sbol{Sequence}, an \sbol{Attachment}, or a \sbol{Collection} of \sbol{Attachment} objects.\\ 
-Reference: \sec{sec:provenance}}
 }
 
 \subsubsection*{Rules for the \class{Sequence} class} 
@@ -749,7 +749,6 @@ Reference: Section 7.11 on page 46}}
 
 \printComplete{Each \sbol{URI} contained by the \sbol{wasInformedBys} property of an \sbol{Activity} MUST refer to a \sbol{Activity} object.\\ Reference: \sec{sec:Activity}}
 
-%% CHRIS: should these be best practice or uncheckable required 
 \printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#build} or~\url{http://sbols.org/v2\#test}.\\ Reference: \sec{sec:Activity}}
 
 \printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#test} or~\url{http://sbols.org/v2\#learn}.\\ Reference: \sec{sec:Activity}}
@@ -769,14 +768,13 @@ Reference: Section 7.11 on page 46}}
 
 \printValid{The \sbolmult{roles:U}{roles} property of an \sbol{Usage} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Usage}}
 
-%% CHRIS: should these be best practice or uncheckable required  
-\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD refer to a \sbol{ModuleDefinition}, \sbol{ComponentDefinition}, or \sbol{Sequence}.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD refer to a \sbol{TopLevel} other than \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
 
 \printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD refer to a \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
 
 \printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD refer to an \sbol{Attachment} or \sbol{Collection} of \sbol{Attachment} objects.\\ Reference: \sec{sec:Usage}}
 
-\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD refer to a \sbol{Model}, a \sbol{ModuleDefinition}, a \sbol{ComponentDefinition}, a \sbol{Sequence}, an \sbol{Attachment}, or a \sbol{Collection} of \sbol{Attachment} objects.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD NOT refer to an \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
 
 \subsubsection*{Rules for the \class{Association} class} 
 \setcounter{sbolCtr}{12601}
@@ -836,7 +834,6 @@ Reference: Section 7.11 on page 46}}
 \printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation} contains\\ \sbol{SequenceConstraint} objects, then any \sbol{Component} contained by the first \sbol{ComponentDefinition} that has a \sbol{wasDerivedFroms} property that refers to the \sbol{subject} or \sbol{object} \sbol{Component} of any of the \sbol{SequenceConstraint} objects MUST adhere to the \sbol{restriction} properties of these \sbol{SequenceConstraint} objects.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-%% CHRIS: why is this best practice and not required?
 \printModeling{The \sbol{components} property of the template \sbol{ComponentDefinition} of a \sbol{CombinatorialDerivation} SHOULD contain one or more \sbol{Component} objects.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
