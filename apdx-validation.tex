@@ -175,6 +175,19 @@ Reference: Section 7.5 on page 19}}
 }
 \twotwozero{
 \printComplete{\sbol{TopLevel} objects MUST NOT form circular reference chains via their \sbol{wasGeneratedBys} properties.\\ Reference: \sec{sec:wasGeneratedBys}}
+
+%% CHRIS: should these be best practice or uncheckable required
+\printModeling{\sbol{TopLevel} objects with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD be a \sbol{ModuleDefinition}, \sbol{ComponentDefinition}, or \sbol{Sequence}.\\ 
+Reference: \sec{sec:provenance}}
+
+\printModeling{\sbol{TopLevel} objects with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD be an \sbol{Implementation}.\\ 
+Reference: \sec{sec:provenance}}
+
+\printModeling{\sbol{TopLevel} objects with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD be an \sbol{Attachment} or a \sbol{Collection} of \sbol{Attachment} objects.\\ 
+Reference: \sec{sec:provenance}}
+
+\printModeling{\sbol{TopLevel} objects with a \sbol{wasGeneratedBys} property that includes a references to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD be a \sbol{Model}, a \sbol{ModuleDefinition}, a \sbol{ComponentDefinition}, a \sbol{Sequence}, an \sbol{Attachment}, or a \sbol{Collection} of \sbol{Attachment} objects.\\ 
+Reference: \sec{sec:provenance}}
 }
 
 \subsubsection*{Rules for the \class{Sequence} class} 
@@ -274,7 +287,7 @@ Reference: Section 7.7 on page 21}}
 \twozeroone{
 \printModeling{The \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} SHOULD contain a \sbol{URI} from \ref{tbl:componentdefinition_types}.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printValid{If multiple \sbol{MapsTo}s belonging to the \sbol{Component}s of a \sbol{ComponentDefinition} have \sbol{local} properties that refer to the same \sbol{Component}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}.\\ Reference: \sec{sec:MapsTo}}
+\printValid{If multiple \sbol{MapsTo}s belonging to the \sbol{Component}s of a \sbol{ComponentDefinition} have \sbol{local} properties that refer to the same \sbol{Component}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#useRemote}.\\ Reference: \sec{sec:MapsTo}}
 
 % \printModeling{Exactly one \sbol{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} SHOULD refer to a term from the sequence feature branch of SO, if it includes the DNA or RNA type, as listed in \ref{tbl:componentdefinition_types}, in its set of \sbolmult{types:CD}{types}.\\ 
 % Reference: \sec{sec:ComponentDefinition}}}
@@ -402,7 +415,7 @@ Reference: \sec{sec:Component}}
 \printWarning{\st{The remote property of a MapsTo MUST refer to a ComponentInstance. \\ 
 Reference: Section 7.7.3 on page 26}}
 
-\printComplete{The \sbol{ComponentInstance} referred to by the \sbol{remote} property of a \sbol{MapsTo} MUST have an \sbol{access} property that contains the \sbol{URI} \url{http://sbols.org/v2\#public}.\\ Reference: \sec{sec:MapsTo}}
+\printComplete{The \sbol{ComponentInstance} referred to by the \sbol{remote} property of a \sbol{MapsTo} MUST have an \sbol{access} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#public}.\\ Reference: \sec{sec:MapsTo}}
 
 \printComplete{If a \sbol{MapsTo} is contained by a \sbol{ComponentInstance}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{Component} in the \sbol{ComponentDefinition} that is referenced by the \sbolmult{definition:CI}{definition} property of the \sbol{ComponentInstance}.\\ Reference: \sec{sec:MapsTo}} 
 
@@ -413,7 +426,7 @@ Reference: Section 7.7.3 on page 26}}
 \\ Reference: \sec{sec:MapsTo}}
 
 \twozeroone{
-\printComplete{If the \sbol{refinement} property of a \sbol{MapsTo} contains the \sbol{URI} \url{http://sbols.org/v2\#verifyIdentical}, then the \sbol{ComponentInstance} objects referred to by \sbol{local} and \sbol{remote} properties of the \sbol{MapsTo} MUST refer to the same \sbol{ComponentDefinition} via their \sbolmult{definition:CI}{definition} properties.\\ Reference: \sec{sec:MapsTo}}
+\printComplete{If the \sbol{refinement} property of a \sbol{MapsTo} contains the \sbol{URI}~\url{http://sbols.org/v2\#verifyIdentical}, then the \sbol{ComponentInstance} objects referred to by \sbol{local} and \sbol{remote} properties of the \sbol{MapsTo} MUST refer to the same \sbol{ComponentDefinition} via their \sbolmult{definition:CI}{definition} properties.\\ Reference: \sec{sec:MapsTo}}
 }
 
 \subsubsection*{Rules for the \class{SequenceAnnotation} class} 
@@ -520,13 +533,13 @@ Reference: \sec{sec:GenericLocation}}
 \\ Reference: \sec{sec:SequenceConstraint}}
 
 \twozeroone{
-\printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI} \url{http://sbols.org/v2\#precedes}, then the position of the \sbol{Component} referred to by the \sbol{subject} property of the \sbol{SequenceConstraint} MUST precede that of the \sbol{Component} referred to by its \sbol{object} property.
+\printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#precedes}, then the position of the \sbol{Component} referred to by the \sbol{subject} property of the \sbol{SequenceConstraint} MUST precede that of the \sbol{Component} referred to by its \sbol{object} property.
 \\ Reference: \sec{sec:SequenceConstraint}}
 
-\printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI} \url{http://sbols.org/v2\#sameOrientationAs}, then the orientation of the \sbol{Component} referred to by the \sbol{subject} property of the \sbol{SequenceConstraint} MUST be the same as that of the \sbol{Component} referred to by its \sbol{object} property.
+\printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#sameOrientationAs}, then the orientation of the \sbol{Component} referred to by the \sbol{subject} property of the \sbol{SequenceConstraint} MUST be the same as that of the \sbol{Component} referred to by its \sbol{object} property.
 \\ Reference: \sec{sec:SequenceConstraint}}
 
-\printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI} \url{http://sbols.org/v2\#oppositeOrientationAs}, then the orientation of the \sbol{Component} referred to by the \sbol{subject} property of the \sbol{SequenceConstraint} MUST be opposite that of the \sbol{Component} referred to by its \sbol{object} property.
+\printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#oppositeOrientationAs}, then the orientation of the \sbol{Component} referred to by the \sbol{subject} property of the \sbol{SequenceConstraint} MUST be opposite that of the \sbol{Component} referred to by its \sbol{object} property.
 \\ Reference: \sec{sec:SequenceConstraint}}
 }
 
@@ -534,7 +547,7 @@ Reference: \sec{sec:GenericLocation}}
 \\ Reference: \sec{sec:SequenceConstraint}}
 
 \twotwozero{
-\printValid{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI} \url{http://sbols.org/v2\#differentFrom}, then the \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT contain the same \sbol{URI} as the \sbolmult{definition:CI}{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
+\printValid{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#differentFrom}, then the \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT contain the same \sbol{URI} as the \sbolmult{definition:CI}{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
 \\ Reference: \sec{sec:SequenceConstraint}}
 }
 
@@ -589,7 +602,7 @@ Reference: \sec{sec:GenericLocation}}
 \twozeroone{
 \printComplete{Each \sbol{URI} contained by the \sbol{models} property of a \sbol{ModuleDefinition} MUST refer to a \sbol{Model}.\\ Reference: \sec{sec:ModuleDefinition}}
 
-\printValid{If multiple \sbol{MapsTo}s belonging to the \sbol{Module}s and \sbol{FunctionalComponent}s of a \sbol{ModuleDefinition} have \sbol{local} properties that refer to the same \sbol{FunctionalComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}.\\ Reference: \sec{sec:MapsTo}}}
+\printValid{If multiple \sbol{MapsTo}s belonging to the \sbol{Module}s and \sbol{FunctionalComponent}s of a \sbol{ModuleDefinition} have \sbol{local} properties that refer to the same \sbol{FunctionalComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#useRemote}.\\ Reference: \sec{sec:MapsTo}}}
 
 \subsubsection*{Rules for the \class{Module} class} 
 \setcounter{sbolCtr}{11701}
@@ -722,75 +735,77 @@ Reference: Section 7.11 on page 46}}
 \subsubsection*{Rules for the \class{Activity} class} 
 \setcounter{sbolCtr}{12401}
 
-\printValid{An \sbol{Activity} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations}, \sbol{startedAtTime}, \sbol{endedAtTime}, \sbol{wasInformedBys},\\ \sbol{usages}, and \sbol{associations}.\\ Reference: \sec{sec:provenance}}
+\printValid{An \sbol{Activity} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations}, \sbol{startedAtTime}, \sbol{endedAtTime}, \sbol{wasInformedBys},\\ \sbol{usages}, and \sbol{associations}.\\ Reference: \sec{sec:Activity}}
 
-\printValid{The \sbol{startedAtTime} property of an \sbol{Activity} object is OPTIONAL and MAY contain a \sbol{DateTime}.  \\ Reference: \sec{sec:provenance}}
+\printValid{The \sbol{startedAtTime} property of an \sbol{Activity} object is OPTIONAL and MAY contain a \sbol{DateTime}.  \\ Reference: \sec{sec:Activity}}
 
-\printValid{The \sbol{endedAtTime} property of an \sbol{Activity} object is OPTIONAL and MAY contain a \sbol{DateTime}.  \\ Reference: \sec{sec:provenance}}
+\printValid{The \sbol{endedAtTime} property of an \sbol{Activity} object is OPTIONAL and MAY contain a \sbol{DateTime}.  \\ Reference: \sec{sec:Activity}}
 
-\printValid{The \sbol{associations} property of an \sbol{Activity} is OPTIONAL and MAY contain a set of \sbol{Association} objects.\\ Reference: \sec{sec:provenance}}
+\printValid{The \sbol{associations} property of an \sbol{Activity} is OPTIONAL and MAY contain a set of \sbol{Association} objects.\\ Reference: \sec{sec:Activity}}
 
-\printValid{The \sbol{usages} property of an \sbol{Activity} is OPTIONAL and MAY contain a set of \sbol{Usage} objects.\\ Reference: \sec{sec:provenance}}
+\printValid{The \sbol{usages} property of an \sbol{Activity} is OPTIONAL and MAY contain a set of \sbol{Usage} objects.\\ Reference: \sec{sec:Activity}}
 
-\printValid{The \sbol{wasInformedBys} property of an \sbol{Activity} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:provenance}}
+\printValid{The \sbol{wasInformedBys} property of an \sbol{Activity} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Activity}}
 
-\printComplete{Each \sbol{URI} contained by the \sbol{wasInformedBys} property of an \sbol{Activity} MUST refer to a \sbol{Activity} object.\\ Reference: \sec{sec:provenance}}
+\printComplete{Each \sbol{URI} contained by the \sbol{wasInformedBys} property of an \sbol{Activity} MUST refer to a \sbol{Activity} object.\\ Reference: \sec{sec:Activity}}
 
-\printValid{An \sbol{Activity} with a child \sbol{Association} given a \sbolmult{roles:A}{roles} value of \url{http://sbols.org/v2\#design} MUST NOT have child \sbol{Usage}s with \sbolmult{roles:U}{roles} other than \url{http://sbols.org/v2\#learn} or \url{http://sbols.org/v2\#design}.\\ Reference: \sec{sec:Activity}}
+%% CHRIS: Not sure about these
+\printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#build} or~\url{http://sbols.org/v2\#test}.\\ Reference: \sec{sec:Activity}}
 
-\printValid{An \sbol{Activity} with a child \sbol{Association} given a \sbolmult{roles:A}{roles} value of \url{http://sbols.org/v2\#build} MUST NOT have child \sbol{Usage}s with \sbolmult{roles:U}{roles} other than \url{http://sbols.org/v2\#design} or \url{http://sbols.org/v2\#build}.\\ Reference: \sec{sec:Activity}}
+\printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#test} or~\url{http://sbols.org/v2\#learn}.\\ Reference: \sec{sec:Activity}}
 
-\printValid{An \sbol{Activity} with a child \sbol{Association} given a \sbolmult{roles:A}{roles} value of \url{http://sbols.org/v2\#test} MUST NOT have child \sbol{Usage}s with \sbolmult{roles:U}{roles}other than \url{http://sbols.org/v2\#build} or \url{http://sbols.org/v2\#test}.\\ Reference: \sec{sec:Activity} }
+\printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#design} or~\url{http://sbols.org/v2\#learn}.\\ Reference: \sec{sec:Activity}}
 
-\printValid{An \sbol{Activity} with a child \sbol{Association} given a \sbolmult{roles:A}{roles} value of \url{http://sbols.org/v2\#learn} MUST NOT have child \sbol{Usage}s with \sbolmult{roles:U}{roles} other than \url{http://sbols.org/v2\#test} or \url{http://sbols.org/v2\#learn}.\\ Reference: \sec{sec:Activity}}
+\printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#design} or~\url{http://sbols.org/v2\#build}.\\ Reference: \sec{sec:Activity}}
 }
 
 \twotwozero{
 \subsubsection*{Rules for the \class{Usage} class} 
 \setcounter{sbolCtr}{12501}
 
-\printValid{An \sbol{Usage} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations},  \sbol{entity}, and \sbolmult{roles:U}{roles}.\\ Reference: \sec{sec:provenance}}
+\printValid{An \sbol{Usage} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations},  \sbol{entity}, and \sbolmult{roles:U}{roles}.\\ Reference: \sec{sec:Usage}}
 
-\printValid{The \sbol{entity} property of an \sbol{Usage} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:provenance}}
+\printValid{The \sbol{entity} property of an \sbol{Usage} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Usage}}
 
-\printValid{The \sbolmult{roles:U}{roles} property of an \sbol{Usage} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:provenance}}
+\printValid{The \sbolmult{roles:U}{roles} property of an \sbol{Usage} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Usage}}
 
-\printWarning{A \sbol{Usage} with \sbolmult{roles:U}{roles} of \url{http://sbols.org/v2\#design} SHOULD refer to a ModuleDefinition, ComponentDefinition, or Sequence.\\ Reference: \sec{sec:Usage}}
+%% CHRIS: Not sure about these
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD refer to a \sbol{ModuleDefinition}, \sbol{ComponentDefinition}, or \sbol{Sequence}.\\ Reference: \sec{sec:Usage}}
 
-\printWarning{A \sbol{Usage} with \sbolmult{roles:U}{roles} of \url{http://sbols.org/v2\#build} SHOULD refer to an Implementation.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD refer to a \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
 
-\printWarning{A \sbol{Usage} with \sbolmult{roles:U}{roles} of \url{http://sbols.org/v2\#test} refer to an \sbol{Attachment} or \sbol{Collection} of \sbol{Attachment}s which refer to files containing raw, experimental data.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD refer to an \sbol{Attachment} or \sbol{Collection} of \sbol{Attachment} objects.\\ Reference: \sec{sec:Usage}}
 
-\printWarning{A \sbol{Usage} with \sbolmult{roles:U}{roles} of \url{http://sbols.org/v2\#learn} SHOULD refer to a Model derived from fitting experimental data, a consensus \sbol{Sequence} derived from sequence analysis of a construct, or \sbol{Attachment}s that reference files containing analyzed data (including graphs and tables).\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD refer to a \sbol{Model}, a \sbol{ModuleDefinition}, a \sbol{ComponentDefinition}, a \sbol{Sequence}, an \sbol{Attachment}, or a \sbol{Collection} of \sbol{Attachment} objects.\\ Reference: \sec{sec:Usage}}
 
 \subsubsection*{Rules for the \class{Association} class} 
 \setcounter{sbolCtr}{12601}
 
-\printValid{An \sbol{Association} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations},  \sbolmult{roles:A}{roles}, \sbol{plan}, and \sbol{agent}.\\ Reference: \sec{sec:provenance}}
+\printValid{An \sbol{Association} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations},  \sbolmult{roles:A}{roles}, \sbol{plan}, and \sbol{agent}.\\ Reference: \sec{sec:Association}}
 
-\printValid{The \sbolmult{roles:A}{roles} property of an \sbol{Association} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:provenance}}
+\printValid{The \sbolmult{roles:A}{roles} property of an \sbol{Association} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Association}}
 
-\printValid{The \sbol{plan} property of an \sbol{Association} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:provenance}}
+\printValid{The \sbol{plan} property of an \sbol{Association} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:Association}}
 
-\printComplete{The \sbol{URI} contained by the \sbol{plan} property MUST refer to a \sbol{Plan} object.\\ Reference: \sec{sec:provenance}}
+\printComplete{The \sbol{URI} contained by the \sbol{plan} property MUST refer to a \sbol{Plan} object.\\ Reference: \sec{sec:Association}}
 
-\printValid{The \sbol{agent} property of an \sbol{Association} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:provenance}}
+\printValid{The \sbol{agent} property of an \sbol{Association} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Association}}
 
-\printComplete{The \sbol{URI} contained by the \sbol{agent} property MUST refer to an \sbol{Agent} object.\\ Reference: \sec{sec:provenance}}
+\printComplete{The \sbol{URI} contained by the \sbol{agent} property MUST refer to an \sbol{Agent} object.\\ Reference: \sec{sec:Association}}
 }
 
 \twotwozero{
 \subsubsection*{Rules for the \class{Plan} class} 
 \setcounter{sbolCtr}{12701}
 
-\printValid{An \sbol{Plan} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:provenance}}
+\printValid{An \sbol{Plan} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:Plan}}
 }
 
 \twotwozero{
 \subsubsection*{Rules for the \class{Agent} class} 
 \setcounter{sbolCtr}{12801}
 
-\printValid{An \sbol{Agent} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:provenance}}
+\printValid{An \sbol{Agent} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:Agent}}
 }
 
 \twotwozero{
@@ -803,7 +818,7 @@ Reference: Section 7.11 on page 46}}
 \printValid{The \sbol{strategy} property of a \sbol{CombinatorialDerivation} MUST contain a \sbol{URI} from \ref{tbl:strategy} if the property is not empty.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printValid{If the \sbol{strategy} property of a \sbol{CombinatorialDerivation} contains the \sbol{URI} \url{http://sbols.org/v2\#enumerate}, then its \sbol{variableComponents} property MUST NOT contain a\\ \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2\#zeroOrMore} or the \sbol{URI} \url{http://sbols.org/v2\#oneOrMore}.
+\printValid{If the \sbol{strategy} property of a \sbol{CombinatorialDerivation} contains the \sbol{URI}~\url{http://sbols.org/v2\#enumerate}, then its \sbol{variableComponents} property MUST NOT contain a\\ \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#zeroOrMore} or the \sbol{URI}~\url{http://sbols.org/v2\#oneOrMore}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
 \printValid{The \sbol{template} property of a \sbol{CombinatorialDerivation} is REQUIRED and MUST contain a \sbol{URI}.
@@ -822,6 +837,7 @@ Reference: Section 7.11 on page 46}}
 \printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation} contains\\ \sbol{SequenceConstraint} objects, then any \sbol{Component} contained by the first \sbol{ComponentDefinition} that has a \sbol{wasDerivedFroms} property that refers to the \sbol{subject} or \sbol{object} \sbol{Component} of any of the \sbol{SequenceConstraint} objects MUST adhere to the \sbol{restriction} properties of these \sbol{SequenceConstraint} objects.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
+%% CHRIS: why is this best practice and not required?
 \printModeling{The \sbol{components} property of the template \sbol{ComponentDefinition} of a \sbol{CombinatorialDerivation} SHOULD contain one or more \sbol{Component} objects.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
@@ -866,6 +882,7 @@ Reference: Section 7.11 on page 46}}
 \printValid{The \sbol{variants} property of a \sbol{VariableComponent} is OPTIONAL and MAY contain a set of \sbol{URI}s.
 \\ Reference: \sec{sec:VariableComponent}}
 
+%% CHRIS: not sure we need this, since we treat these as sets
 \printValid{The \sbol{variants} property of a \sbol{VariableComponent} MUST NOT contain duplicate \sbol{URI}s.
 \\ Reference: \sec{sec:VariableComponent}}
 
@@ -875,6 +892,7 @@ Reference: Section 7.11 on page 46}}
 \printValid{The \sbol{variantCollections} property of a \sbol{VariableComponent} is OPTIONAL and MAY contain a set of \sbol{URI}s.
 \\ Reference: \sec{sec:VariableComponent}}
 
+%% CHRIS: not sure we need this, since we treat these as sets
 \printValid{The \sbol{variantCollections} property of a \sbol{VariableComponent} MUST NOT contain duplicate \sbol{URI}s.
 \\ Reference: \sec{sec:VariableComponent}}
 
@@ -890,6 +908,7 @@ Reference: Section 7.11 on page 46}}
 \printValid{The \sbol{variantDerivations} property of a \sbol{VariableComponent} is OPTIONAL and MAY contain a set of \sbol{URI}s.
 \\ Reference: \sec{sec:VariableComponent}}
 
+%% CHRIS: not sure we need this, since we treat these as sets
 \printValid{The \sbol{variantDerivations} property of a \sbol{VariableComponent} MUST NOT contain duplicate URIs.
 \\ Reference: \sec{sec:VariableComponent}}
 
@@ -900,33 +919,48 @@ Reference: Section 7.11 on page 46}}
 \\ Reference: \sec{sec:VariableComponent}}
 
 %% CHRIS: YIKES!  Do we really want to check this?  If so, I think there needs to be a good example in the specification.
-\printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the \sbol{wasDerivedFroms} property of a \sbol{Component} contained by the \sbol{ComponentDefinition} refers to a \sbol{Component} contained by the template \sbol{ComponentDefinition} of the\\ \sbol{CombinatorialDerivation}, then the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to a \sbol{ComponentDefinition} that is referred to by the \sbol{variants} or \sbol{variantCollections} properties of the \sbol{VariableComponent} with a \sbol{variable} property that refers to the second \sbol{Component}. Alternatively, the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to a \sbol{ComponentDefinition} with a \sbol{wasDerivedFroms} property that refers to a \sbol{CombinatorialDerivation} that is referred to by the \sbol{variantDerivations} property of the \sbol{VariableComponent}. If no such \sbol{VariableComponent} exists, then the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to the \sbol{ComponentDefinition} that is referred to by the \sbolmult{definition:CI}{definition} property of the second \sbol{Component}.
+\printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{wasDerivedFroms} property of a \sbol{Component} contained by the \sbol{ComponentDefinition} refers to a \sbol{Component} contained by the template \sbol{ComponentDefinition} of the\\ \sbol{CombinatorialDerivation}, then the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to a \sbol{ComponentDefinition} that is referred to by the \sbol{variants} or \sbol{variantCollections} properties of the \sbol{VariableComponent} with a \sbol{variable} property that refers to the second \sbol{Component}. Alternatively, the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to a \sbol{ComponentDefinition} with a \sbol{wasDerivedFroms} property that refers to a \sbol{CombinatorialDerivation} that is referred to by the \sbol{variantDerivations} property of the \sbol{VariableComponent}. If no such \sbol{VariableComponent} exists, then the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to the \sbol{ComponentDefinition} that is referred to by the \sbolmult{definition:CI}{definition} property of the second \sbol{Component}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 %% CHRIS: Types?
 \printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{wasDerivedFroms} property of a \sbol{Component} contained by the \sbol{ComponentDefinition} refers to a \sbol{Component} contained by the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation}, then the \sbolmult{types:CD}{roles} property of the first \sbol{Component} SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} property of the second \sbol{Component}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2\#zeroOrOne}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD NOT contain more than one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the variable \sbol{Component} of the \sbol{VariableComponent}.
+\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#zeroOrOne}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD NOT contain more than one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the variable \sbol{Component} of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2\#one}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{variable} \sbol{Component} of the \sbol{VariableComponent}.
+\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#one}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a\\
+\sbol{wasDerivedFroms} property that refers to the \sbol{variable} \sbol{Component} of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI} \url{http://sbols.org/v2\#oneOrMore}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD contain at least one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{variable} \sbol{Component} of the \sbol{VariableComponent}.
+\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#oneOrMore}, then the \sbol{components} property of the \sbol{ComponentDefinition} SHOULD contain at least one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{variable} \sbol{Component} of the\\ \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation} contains a \sbol{Component} that is not referred to by the \sbol{variable} property of any \sbol{VariableComponent} contained by the \sbol{CombinatorialDerivation}, then the first \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{Component} in the template \sbol{ComponentDefinition}.
+\printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation} and the template \sbol{ComponentDefinition} of the\\ \sbol{CombinatorialDerivation} contains a \sbol{Component} that is not referred to by the \sbol{variable} property of any \sbol{VariableComponent} contained by the \sbol{CombinatorialDerivation}, then the first \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the \sbol{Component} in the template \sbol{ComponentDefinition}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 }
 
 \twotwozero{
-\subsubsection*{Rules for the \class{Attachment} class} 
+\subsubsection*{Rules for the \class{Implementation} class} 
 \setcounter{sbolCtr}{13101}
 
+\printValid{An \sbol{Implementation} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, and \sbol{built}.\\ Reference: \sec{sec:Implementation}}
+
+\printValid{The \sbol{built} property of an \sbol{Implementation} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:Implementation}}
+
+\printComplete{The \sbol{built} property \sbol{URI}, if specified, MUST refer to either a \sbol{ComponentDefinition} or a \sbol{ModuleDefinition}.\\ Reference: \sec{sec:Implementation}}
+} 
+
+\twotwozero{
+\subsubsection*{Rules for the \class{Attachment} class} 
+\setcounter{sbolCtr}{13201}
+
 \printValid{An \sbol{Attachment} MUST NOT have properties other than the following: \sbol{identity}, \\
-\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, and \sbol{hash}.\\ Reference: \sec{sec:Attachment}}
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, and \sbol{hash}.\\ Reference: \sec{sec:Attachment}}
 %A \sbol{Model} MUST inherit all properties of the \sbol{TopLevel} class.
 
 \printValid{The \sbolmult{source:A}{source} property of an \sbol{Attachment} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
@@ -943,13 +977,3 @@ Reference: Section 7.11 on page 46}}
 
 \printValid{The \sbol{hash} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Attachment}}
 }
-
-\twotwozero{
-\subsubsection*{Rules for the \class{Implementation} class} 
-\setcounter{sbolCtr}{13201}
-
-\printValid{An \sbol{Implementation} MUST NOT have properties other than the following: \sbol{identity}, \\
-\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{built}.\\ Reference: \sec{sec:Implementation}}
-
-\printValid{The \sbol{built} property of an \sbol{Implementation} is OPTIONAL and MAY contain a \sbol{URI} that MUST reference either a \sbol{ComponentDefinition} or a \sbol{ModuleDefinition}.\\ Reference: \sec{sec:Implementation}}
-} 

@@ -128,18 +128,17 @@ Providers of provenance information are free to make use of more of PROV-O than 
 }
 
 \twotwozero{
-The PROV-O specification permits that any kind of SBOL object may be used to generate another. The meaning of these relationships are specified using ontology terms for the \sbolmult{roles:U}{roles} properties on \sbol{Usage} and \sbol{Association} classes.  This specification gives users the flexibility to construct and track provenance histories for their own custom applications, but this flexibility also presents an obstacle to standardized data exchange. Therefore a simple ontology (see Tables \ref{tbl:association_roles} and \ref{tbl:usage_roles} has been adopted to describe common provenance connections expected in synthetic biology workflows, based on the design-build-test-learn formalization of engineering.
+The PROV-O specification permits that any kind of SBOL object may be used to generate another. The meaning of these relationships are specified using ontology terms for the \sbolmult{roles:U}{roles} properties on \sbol{Usage} and \sbol{Association} classes.  This specification gives users the flexibility to construct and track provenance histories for their own custom applications, but this flexibility also presents an obstacle to standardized data exchange. Therefore a simple ontology (see \ref{tbl:association_roles} and \ref{tbl:usage_roles}) has been adopted to describe common provenance connections expected in synthetic biology workflows, based on the design-build-test-learn formalization of engineering.
 
 The design-build-test-learn cycle is a common theme in synthetic biology and engineering literature. The design-build-test-learn cycle is the scientific method applied to engineering. Stages of the cycle include designing an initial prototype, testing that prototype, analyzing its performance against specific metrics, learning what worked and what did not work, designing a new prototype based on what was learned, and completing the cycle again. Ideally each iteration of the cycle generates new understanding that feeds back into new cycles as alternative approaches or reformulated problems. Therefore, the design-build-test-learn cycle is a \textit{de facto} ontology upon which to base an SBOL data model for workflow abstraction. Other workflow activities in synthetic biology, such as analyzing, modeling, verifying, and evolving, by and large should fit into this design-build-test-learn abstraction. 
 
-It is expected that users will develop their own ontology terms to specify how SBOL objects are used in a recipe, protocol, or computational analysis. However, these home-made ontologies will be very domain specific, and may not be intelligible to users working in another domain. For example a modeler should not be expected to understand an ontology of \sbol{Usage} \sbolmult{roles:U}{roles} for DNA assembly. The terms "design", "build", "test", and "learn" provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. An example of how these terms are used is provided in Figure \ref{images:design-build-test-learn}.
+It is expected that users will develop their own ontology terms to specify how SBOL objects are used in a recipe, protocol, or computational analysis. However, these home-made ontologies will be very domain specific, and may not be intelligible to users working in another domain. For example a modeler should not be expected to understand an ontology of \sbol{Usage} \sbolmult{roles:U}{roles} for DNA assembly. The terms "design", "build", "test", and "learn" provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. An example of how these terms are used is provided in \ref{images:design-build-test-learn}.
 
-\subsection{Provenance vs. Versioning Semantics}
 Provenance semantics defined through \sbol{wasGeneratedBys} relationships are distinctly different from versioning semantics. Generation of a new object is defined by the W3C PROV-O specification as follows:
 \begin{quote}
 ...the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
 \end{quote}
-These semantics are somewhat different from the versioning semantics defined in section \ref{sec:version}. The SBOL specification defines a new version of an object as an update of a previously published object (and therefore a previously existing object). Therefore, an SBOL object which is "generated" from another SHOULD BE regarded as a new entity rather than a new version of an existing entity. However, this distinction is somewhat subjective (see Theseus paradox). Therefore we RECOMMEND as a best practice that objects linked by Activities not be successive versions of each other, though this is left to the discretion of users and library developers.
+These semantics are somewhat different from the versioning semantics defined in section \ref{sec:version}. The SBOL specification defines a new version of an object as an update of a previously published object (and therefore a previously existing object). Therefore, an SBOL object which is "generated" from another SHOULD BE regarded as a new entity rather than a new version of an existing entity. However, this distinction is somewhat subjective (see Theseus paradox). Therefore, we RECOMMEND as a best practice that objects linked by Activities not be successive versions of each other, though this is left to the discretion of users and library developers.
 } 
 
 \twotwozero{
@@ -184,15 +183,14 @@ The serialization of an \sbol{Activity} MUST have the following form:
   ... [\emph{properties inherited from identified}] ...
   [\emph{zero or more}]  <prov:qualifiedAssociation>
                    <prov:Association rdf:about="...">...</prov:Association>
-               </prov:qualifiedAssociation> [\emph{elements}]
+                </prov:qualifiedAssociation> [\emph{elements}]
   [\emph{zero or more}]  <prov:qualifiedUsage>
                    <prov:Usage rdf:about="...">...</prov:Usage>
-               </prov:qualifiedUsage> [\emph{elements}]             
+                </prov:qualifiedUsage> [\emph{elements}]             
   [\emph{zero or one}]  <prov:startedAtTime>...</prov:startedAtTime> [\emph{element}]
   [\emph{zero or one}]  <prov:endedAtTime>...</prov:startedAtTime> [\emph{element}] 
   [\emph{zero or one}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
- 
- </prov:Activity>
+</prov:Activity>
 \end{lstlisting}
 
 \twoonezero{
@@ -204,7 +202,10 @@ An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} rela
 The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{Agent} object.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:A}
-The \sbolmult{roles:A}{roles} property is REQUIRED and MUST contain a set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{agent} in the parent \sbol{Activity}. Recommended terms are defined in Table \ref{tbl:association_roles}.
+\twotwozero{ 
+The \sbolmult{roles:A}{roles} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{agent} in the parent \sbol{Activity}. 
+The recommended terms that are defined in Table \ref{tbl:association_roles} can be used to specify the kind of \sbol{Activity} performed by the \sbol{Agent}.
+}
 }
 
 \twotwozero{
@@ -216,7 +217,7 @@ The \sbolmult{roles:A}{roles} property is REQUIRED and MUST contain a set of \sb
     \url{http://sbols.org/v2\#design}	& Design describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is derived, possibly from a predictive model or by modifying a pre-existing design. In the context of an \sbol{Association}, the term design indicates that the \sbol{agent} performed the parent {Activity} to generate a design\\
     \url{http://sbols.org/v2\#build}		& Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory. In the context of an \sbol{Association}, the term build indicates that the \sbol{agent} performed the parent {Activity} to implement a design. More generally, the term may represent any kind of experimental manipulation of a biological sample, including propagating, passaging, or evolving cell lines.\\
     \url{http://sbols.org/v2\#test}		& Test describes the process of performing experimental measurements to characterize a synthetic biological construct. In the context of an \sbol{Association}, the \sbol{Agent} performed the parent {Activity} to perform experimental measurements resulting in raw data represented by \sbol{Attachment}s\\
-    \url{http://sbols.org/v2\#learn}	&  Learn describes the process of analyzing experimental measurements to produce a new entity that represents biological knowledge. In the context of an \sbol{Association}, the \sbol{Agent} processed raw experimental data to produce an analysis. This process generates a new entity that represents biological knowledge, including tables or graphs contained by \sbol{Attachment}, a  \sbol{Model} produced by a fitting process, a consensus  \sbol{Sequence} derived from sequencing results, or other entity.\\
+    \url{http://sbols.org/v2\#learn}	&  Learn describes the process of analyzing experimental measurements to produce a new entity that represents biological knowledge. In the context of an \sbol{Association}, the \sbol{Agent} processed raw experimental data to produce an analysis. This process generates a new entity that represents biological knowledge, including tables or graphs contained by \sbol{Attachment}, a  \sbol{Model} produced by a fitting process, a consensus  \sbol{Sequence} derived from sequencing results, etc.\\
     \bottomrule
   \end{edtable}
   \caption{Terms to specify the \sbolmult{roles:A}{roles} property of an \sbol{Association}.}
@@ -237,9 +238,9 @@ The serialization of an \sbol{Association} MUST have the following form:
 \begin{lstlisting}
 <prov:Association rdf:about="...">
   ... [\emph{properties inherited from identified}] ...
-  [\emph{one}]          <prov:hadRole rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}]  <prov:hadPlan rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]          <prov:agent rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}] <prov:hadRole rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}]   <prov:hadPlan rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]               <prov:agent rdf:resource="..."/> [\emph{element}]
  </prov:Association>
 \end{lstlisting}
 
@@ -253,7 +254,9 @@ How different entities are used in an \texttt{Activity} is specified with the \t
 The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an SBOL Identified object.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:U}
-The \sbolmult{roles:U}{roles} property is REQUIRED and MAY contain a set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms are defined in Table \ref{tbl:usage_roles}.
+\twotwozero{
+The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms that are defined in Table \ref{tbl:usage_roles} can be used to indicate how the referenced \sbol{entity} is being used in this \sbol{Activity}.
+}
 }
 
 \twotwozero{
@@ -262,10 +265,10 @@ The \sbolmult{roles:U}{roles} property is REQUIRED and MAY contain a set of \sbo
     \toprule
     \textbf{URI for Usage roles} & \textbf{Description} \\
     \midrule
-    \url{http://sbols.org/v2\#design}	& Design describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is derived, possibly from a predictive model or by modifying a pre-existing design. In the context of a \sbol{Usage}, the term indicates that the referenced object was generated by some previous design \sbol{Activity} and was used by the present \sbol{Activity} as a design for a new object.\\
-    \url{http://sbols.org/v2\#build}		& Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory. In the context of a \sbol{Usage}, the term  indicates that the referenced object was generated by some previous build \sbol{Activity} and was used by the present \sbol{Activity} as a built object.\\
-    \url{http://sbols.org/v2\#test}		& Test describes the process of performing experimental measurements to characterize a synthetic biological construct. In the context of a \sbol{Usage}, the term indicates that the referenced object was generated by some previous test \sbol{Activity} and is used as test data in the present \sbol{Activity}.\\
-    \url{http://sbols.org/v2\#learn}	&  Learn describes the process of analyzing experimental measurements to produce a new entity that represents biological knowledge. In the context of a \sbol{Usage}, the term indicates that the referenced object was generated by some previous learn \sbol{Activity} and is used in the present \sbol{Activity} as a source of scientifically verified knowledge.\\
+    \url{http://sbols.org/v2\#design}	& Design describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is derived, possibly from a predictive model or by modifying a pre-existing design. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous design \sbol{Activity} and was used by the present \sbol{Activity} as a design for a new object.\\
+    \url{http://sbols.org/v2\#build}		& Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory. In the context of a \sbol{Usage}, the term  indicates that the referenced \sbol{entity} was generated by some previous build \sbol{Activity} and was used by the present \sbol{Activity} as a built object.\\
+    \url{http://sbols.org/v2\#test}		& Test describes the process of performing experimental measurements to characterize a synthetic biological construct. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous test \sbol{Activity} and is used as test data in the present \sbol{Activity}.\\
+    \url{http://sbols.org/v2\#learn}	&  Learn describes the process of analyzing experimental measurements to produce a new entity that represents biological knowledge. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous learn \sbol{Activity} and is used in the present \sbol{Activity} as a source of scientifically verified knowledge.\\
     \bottomrule
   \end{edtable}
   \caption{Terms to specify the \sbolmult{roles:U}{roles} property of a \sbol{Usage}.}
@@ -282,8 +285,8 @@ The serialization of an \sbol{Usage} MUST have the following form:
 \begin{lstlisting}
 <prov:Association rdf:about="...">
   ... [\emph{properties inherited from identified}] ...
-  [\emph{one}]         <prov:hadRole rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]          <prov:entity rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}]         <prov:hadRole rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]                       <prov:entity rdf:resource="..."/> [\emph{element}]
  </prov:Association>
 \end{lstlisting}
 
@@ -436,7 +439,7 @@ Bacterial strains are often derived from other strains through modifications suc
 
 \twotwozero{
 \paragraph{Example - Design-build-test-learn Workflow}
-This particular example represents an idealized workflow for model-based design. The workflow begins with a Model which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (ModuleDefinition) is composed of biological parts which links back to its Model. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (Implementation). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an Attachment). Finally, a new Model is derived from these data using some a fitting algorithm implemented in the Python programming language. The final Model may not match the beginning Model, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in Figure \ref{images:design-build-test-learn}.
+This particular example represents an idealized workflow for model-based design. The workflow begins with a Model which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (ModuleDefinition) is composed of biological parts which links back to its Model. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (Implementation). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an Attachment). Finally, a new Model is derived from these data using some a fitting algorithm implemented in the Python programming language. The final Model may not match the beginning Model, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in  \ref{images:design-build-test-learn}.
 }%twotwozero end
 
 \begin{figure}[ht]
@@ -446,7 +449,6 @@ This particular example represents an idealized workflow for model-based design.
 \label{images:design-build-test-learn}
 \end{center}
 \end{figure}
-
 
 \lstsetsbol
 \begin{lstlisting}
