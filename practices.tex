@@ -196,7 +196,7 @@ The serialization of an \sbol{Activity} MUST have the following form:
 \twoonezero{
 \subsubsection{Association}
 \label{sec:Association}
-An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \texttt{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
+An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \sbolmult{roles:A}{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
 
 \paragraph{The \sbolheading{agent} property}\label{sec:agent}
 The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{Agent} object.
@@ -204,7 +204,7 @@ The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:A}
 \twotwozero{ 
 The \sbolmult{roles:A}{roles} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{agent} in the parent \sbol{Activity}. 
-The recommended terms that are defined in Table \ref{tbl:association_roles} can be used to specify the kind of \sbol{Activity} performed by the \sbol{Agent}.
+The recommended terms that are defined in \ref{tbl:association_roles} can be used to specify the kind of \sbol{Activity} performed by the \sbol{Agent}.
 }
 }
 
@@ -247,7 +247,7 @@ The serialization of an \sbol{Association} MUST have the following form:
 \twoonezero{
 \subsubsection{Usage}
 \label{sec:Usage}
-How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{usage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{roles} property. When the \sbol{wasDerivedFroms} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFroms} property MUST be included in a \sbol{Usage}.
+How different entities are used in an \sbol{Activity} is specified with the \sbol{Usage} class, which is linked from an \sbol{Activity} through the \sbol{usage} relationship. A \sbol{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \sbolmult{roles:U}{roles} property. When the \sbol{wasDerivedFroms} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFroms} property MUST be included in a \sbol{Usage}.
 
 
 \paragraph{The \sbolheading{entity} property}\label{sec:entity}
@@ -255,7 +255,7 @@ The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY r
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:U}
 \twotwozero{
-The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms that are defined in Table \ref{tbl:usage_roles} can be used to indicate how the referenced \sbol{entity} is being used in this \sbol{Activity}.
+The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms that are defined in \ref{tbl:usage_roles} can be used to indicate how the referenced \sbol{entity} is being used in this \sbol{Activity}.
 }
 }
 
@@ -445,7 +445,8 @@ This particular example represents an idealized workflow for model-based design.
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\linewidth]{images/design-build-test-learn}
-\caption[]{An example data structure representing an idealized workflow for model-baseddesign}
+\caption[]{An example data structure representing an idealized workflow for model-based
+design}
 \label{images:design-build-test-learn}
 \end{center}
 \end{figure}
