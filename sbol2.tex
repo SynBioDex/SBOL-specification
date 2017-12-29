@@ -1,13 +1,13 @@
 
 \documentclass[finalspec]{sbmlpkgspec}
 %% \documentclass[draftspec]{sbmlpkgspec}
+\usepackage{float}
 \usepackage{microtype}
 \usepackage{color}
 \usepackage{todonotes}
 \usepackage{changebar}
 \usepackage{xcolor}
 \usepackage{soul}
-
 %% ============================================================================
 %% Description:  Documentation for sbmlpkgspec.cls
 %% First author: Michael Hucka <mhucka@caltech.edu>
@@ -25,7 +25,7 @@
 
 % Macros just for this document:
 
-\newcommand{\rfcnum}{TBD}
+\newcommand{\rfcnum}{114}
 
 \newcommand{\sbmlpkg}{\texorpdfstring{%
     \textls[-25]{\textsc{SBMLPkgSpec}}}{%
@@ -64,7 +64,7 @@
 \definecolor{light-gray}{gray}{0.97}
 \lstdefinelanguage{sbol}
     {morekeywords={xmlns:sbol,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type,
-        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description},
+        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent},
      basicstyle=\fontsize{7}{9}\selectfont\ttfamily,
      backgroundcolor=\color{light-gray},
      keywordstyle=\color{blue},
@@ -145,6 +145,17 @@
 \cbend
 }
 
+%Commands to highlight SBOL versions
+\newcommand{\twothreezero}[1]{%
+\cbcolor{red}
+\cbstart%
+{\color{red}%
+\version{2.3.0}%
+#1
+}
+\cbend
+}
+
 % -----------------------------------------------------------------------------
 % Start of document
 % -----------------------------------------------------------------------------
@@ -153,7 +164,7 @@
 
 \packageTitle{\latex Class for SBML Package Specifications}
 \packageVersion{Version 2.2.0}
-\packageVersionDate{October 31, 2017}
+\packageVersionDate{December 31, 2017}
 
 \title{BBF RFC \rfcnum{}: Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~2.2.0}}
 
@@ -169,7 +180,7 @@ Nicholas Roehner & \emph{Raytheon BBN Technologies, USA}\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
 Anil Wipat		& \emph{Newcastle University, UK}\\[8pt]
 \end{tabular}\\
-\href{mailto:editors@sbolstandard.org}{\sffamily editors@sbolstandard.org}\\
+\href{mailto:sbol-editors@googlegroups.com}{\sffamily sbol-editors@googlegroups.com}\\
 \\
 {\bf Additional authors, by institution:}\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
