@@ -749,7 +749,7 @@ Reference: Section 7.11 on page 46}}
 
 \printComplete{Each \sbol{URI} contained by the \sbol{wasInformedBys} property of an \sbol{Activity} MUST refer to a \sbol{Activity} object.\\ Reference: \sec{sec:Activity}}
 
-%% CHRIS: Not sure about these
+%% CHRIS: should these be best practice or uncheckable required 
 \printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#build} or~\url{http://sbols.org/v2\#test}.\\ Reference: \sec{sec:Activity}}
 
 \printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#test} or~\url{http://sbols.org/v2\#learn}.\\ Reference: \sec{sec:Activity}}
@@ -769,7 +769,7 @@ Reference: Section 7.11 on page 46}}
 
 \printValid{The \sbolmult{roles:U}{roles} property of an \sbol{Usage} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Usage}}
 
-%% CHRIS: Not sure about these
+%% CHRIS: should these be best practice or uncheckable required  
 \printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD refer to a \sbol{ModuleDefinition}, \sbol{ComponentDefinition}, or \sbol{Sequence}.\\ Reference: \sec{sec:Usage}}
 
 \printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD refer to a \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
@@ -833,7 +833,6 @@ Reference: Section 7.11 on page 46}}
 \printValid{The \sbol{variableComponents} property of a \sbol{CombinatorialDerivation} MUST NOT contain two or more \sbol{VariableComponent} objects with \sbol{variable} properties that contain the same \sbol{URI}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-%% CHRIS: I'm not sure about this one, would like to discuss
 \printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a \sbol{CombinatorialDerivation} and the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation} contains\\ \sbol{SequenceConstraint} objects, then any \sbol{Component} contained by the first \sbol{ComponentDefinition} that has a \sbol{wasDerivedFroms} property that refers to the \sbol{subject} or \sbol{object} \sbol{Component} of any of the \sbol{SequenceConstraint} objects MUST adhere to the \sbol{restriction} properties of these \sbol{SequenceConstraint} objects.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
@@ -847,7 +846,6 @@ Reference: Section 7.11 on page 46}}
 \printModeling{If the \sbol{wasDerivedFroms} property of a \sbol{ComponentDefinition} refers to a\\ \sbol{CombinatorialDerivation}, then the \sbolmult{types:CD}{roles} property of this \sbol{ComponentDefinition} SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} property of the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-%% CHRIS: would like this one explained to me
 \printModeling{If the \sbol{members} property of a \sbol{Collection} refers only to objects with \sbol{wasDerivedFroms} properties that refer to a \sbol{CombinatorialDerivation}, then the \sbol{wasDerivedFroms} property of the \sbol{Collection} SHOULD also refer to the \sbol{CombinatorialDerivation}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
@@ -875,7 +873,6 @@ Reference: Section 7.11 on page 46}}
 \printComplete{The \sbol{URI} contained by the \sbol{variable} property of a \sbol{VariableComponent} MUST refer to a \sbol{Component} contained by the \sbol{components} property of the template \sbol{ComponentDefinition} of the \sbol{CombinatorialDerivation} that contains the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-%% CHRIS: should this be a best practice?
 \printValid{At least one of the \sbol{variants} property, \sbol{variantCollections} property, or \sbol{variantDerivations} property of a \sbol{VariableComponent} MUST NOT be empty.
 \\ Reference: \sec{sec:VariableComponent}}
 
