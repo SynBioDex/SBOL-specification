@@ -146,7 +146,7 @@ These semantics are somewhat different from the versioning semantics defined in 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/provenance}
-\caption[]{Relationships between SBOL and PROV-O classes. PROV-O specific classes and terms are prefixed with \texttt{provo}.}
+\caption[]{Relationships between SBOL and PROV-O classes. The PROV-O classes \external{Activity}, \external{Plan}, and \external{Agent} are all serialized as \sbol{TopLevel} classes in an SBOL document.
 \label{uml:provenance}
 \end{center}
 \end{figure}
@@ -463,7 +463,7 @@ design}
     <sbol:displayId>generate_build</sbol:displayId>
     <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_build"/>
     <sbol:version>1.0.0</sbol:version>
-    <prov:qualifedUsage>
+    <prov:qualifiedUsage>
       <prov:Usage rdf:about="http://examples.org/Activity/generate_build/design_usage/1.0.0">
         <sbol:displayId>design_usage</sbol:displayId>
         <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_build/design_usage"/>
@@ -471,14 +471,14 @@ design}
         <prov:entity rdf:resource="http://examples.org/ModuleDefinition/design/1.0.0"/>
         <prov:hadRole rdf:resource="http://sbols.org/v2#design"/>
       </prov:Usage>
-    </prov:qualifedUsage>
-    <prov:qualifedUsage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
       <prov:Usage rdf:about="http://examples.org/Activity/generate_build/usage/1.0.0">
         <sbol:displayId>usage</sbol:displayId>
         <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_build/usage"/>
         <sbol:version>1.0.0</sbol:version>
       </prov:Usage>
-    </prov:qualifedUsage>
+    </prov:qualifiedUsage>
     <prov:qualifiedAssociation>
       <prov:Association rdf:about="http://examples.org/Activity/generate_build/association/1.0.0">
         <sbol:displayId>association</sbol:displayId>
@@ -492,7 +492,7 @@ design}
     <sbol:displayId>generate_design</sbol:displayId>
     <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_design"/>
     <sbol:version>1.0.0</sbol:version>
-    <prov:qualifedUsage>
+    <prov:qualifiedUsage>
       <prov:Usage rdf:about="http://examples.org/Activity/generate_design/predicted_usage/1.0.0">
         <sbol:displayId>predicted_usage</sbol:displayId>
         <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_design/predicted_usage"/>
@@ -500,14 +500,14 @@ design}
         <prov:entity rdf:resource="http://examples.org/Model/predicted/1.0.0"/>
         <prov:hadRole rdf:resource="http://sbols.org/v2#learn"/>
       </prov:Usage>
-    </prov:qualifedUsage>
-    <prov:qualifedUsage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
       <prov:Usage rdf:about="http://examples.org/Activity/generate_design/usage/1.0.0">
         <sbol:displayId>usage</sbol:displayId>
         <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_design/usage"/>
         <sbol:version>1.0.0</sbol:version>
       </prov:Usage>
-    </prov:qualifedUsage>
+    </prov:qualifiedUsage>
     <prov:qualifiedAssociation>
       <prov:Association rdf:about="http://examples.org/Activity/generate_design/association/1.0.0">
         <sbol:displayId>association</sbol:displayId>
@@ -521,7 +521,7 @@ design}
     <sbol:displayId>generate_observed</sbol:displayId>
     <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_observed"/>
     <sbol:version>1.0.0</sbol:version>
-    <prov:qualifedUsage>
+    <prov:qualifiedUsage>
       <prov:Usage rdf:about="http://examples.org/Activity/generate_observed/test_data_usage/1.0.0">
         <sbol:displayId>test_data_usage</sbol:displayId>
         <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_observed/test_data_usage"/>
@@ -529,14 +529,14 @@ design}
         <prov:entity rdf:resource="http://examples.org/Attachment/test_data/1.0.0"/>
         <prov:hadRole rdf:resource="http://sbols.org/v2#test"/>
       </prov:Usage>
-    </prov:qualifedUsage>
-    <prov:qualifedUsage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
       <prov:Usage rdf:about="http://examples.org/Activity/generate_observed/usage/1.0.0">
         <sbol:displayId>usage</sbol:displayId>
         <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_observed/usage"/>
         <sbol:version>1.0.0</sbol:version>
       </prov:Usage>
-    </prov:qualifedUsage>
+    </prov:qualifiedUsage>
     <prov:qualifiedAssociation>
       <prov:Association rdf:about="http://examples.org/Activity/generate_observed/association/1.0.0">
         <sbol:displayId>association</sbol:displayId>
@@ -550,7 +550,7 @@ design}
     <sbol:displayId>generate_test_data</sbol:displayId>
     <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_test_data"/>
     <sbol:version>1.0.0</sbol:version>
-    <prov:qualifedUsage>
+    <prov:qualifiedUsage>
       <prov:Usage rdf:about="http://examples.org/Activity/generate_test_data/build_usage/1.0.0">
         <sbol:displayId>build_usage</sbol:displayId>
         <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_test_data/build_usage"/>
@@ -558,14 +558,14 @@ design}
         <prov:entity rdf:resource="http://examples.org/Implementation/build/1.0.0"/>
         <prov:hadRole rdf:resource="http://sbols.org/v2#build"/>
       </prov:Usage>
-    </prov:qualifedUsage>
-    <prov:qualifedUsage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
       <prov:Usage rdf:about="http://examples.org/Activity/generate_test_data/usage/1.0.0">
         <sbol:displayId>usage</sbol:displayId>
         <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_test_data/usage"/>
         <sbol:version>1.0.0</sbol:version>
       </prov:Usage>
-    </prov:qualifedUsage>
+    </prov:qualifiedUsage>
     <prov:qualifiedAssociation>
       <prov:Association rdf:about="http://examples.org/Activity/generate_test_data/association/1.0.0">
         <sbol:displayId>association</sbol:displayId>
