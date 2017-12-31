@@ -146,9 +146,9 @@ For a full explanation, see the linked resources.
 \subsubsection*{The \sbolheading{wasDerivedFroms} property}
 \label{sec:wasDerivedFroms}
 
-The \twotwozero{\sbol{wasDerivedFroms}} property is OPTIONAL \twotwozero{and MAY specify a set of \sbol{URI}s}. An SBOL object with this property refers to \twotwozero{one or more SBOL objects or non-SBOL resources} from which this object was derived.
-
 \twotwozero{
+ The \sbol{wasDerivedFroms} property is OPTIONAL and MAY specify a set of \sbol{URI}s. An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived.
+
 \twozeroone{The \sbol{wasDerivedFroms} property of a \sbol{TopLevel} SBOL object is subject to the following rules.}
 If any members of the \sbol{wasDerivedFroms} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$.
 In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFroms} property or form a cyclical chain of references via its \sbol{wasDerivedFroms} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
@@ -1151,7 +1151,7 @@ Just as a \sbol{Module} represents an instance of a subsystem in the overall sys
 
 The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the \sbol{ModuleDefinition}.
 
-The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a \sbol{ModuleDefinition} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
+The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a\\ \sbol{ModuleDefinition} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
 Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{FunctionalComponent} objects involved in the \sbol{Interaction}.
 
 \subsubsection*{The \sbolheading{models} property}\label{sec:models}
@@ -1328,7 +1328,7 @@ In the example below, the functional component is defined as a public input/outp
 \end{center}
 \end{figure}
 
-The \sbol{Interaction} class provides more detailed description of how the \sbol{FunctionalComponent} objects of a \sbol{ModuleDefinition} are intended to work together.
+The \sbol{Interaction} class provides more detailed description of how the \sbol{FunctionalComponent} objects of a\\ \sbol{ModuleDefinition} are intended to work together.
 For example, this class can be used to represent different forms of genetic regulation (e.g., transcriptional activation or repression), processes from the central dogma of biology (e.g. transcription and translation), and other basic molecular interactions (e.g., non-covalent binding or enzymatic phosphorylation).
 Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refers to descriptive ontology terms and a \sbol{participations} property that describes which \sbol{FunctionalComponent} objects participate in the \sbol{Interaction}.
 
@@ -1666,7 +1666,7 @@ The \sbol{variantCollections} property is OPTIONAL and MAY contain zero or more 
 
 \subsubsection*{ The \sbolheading{variantDerivations} property}\label{sec:variantDerivations}
 
-The \sbol{variantDerivations} property is OPTIONAL and MAY contain zero or more URIs that each refer to a\\ \sbol{CombinatorialDerivation}. This property enables the convenient specification of \sbol{ComponentDefinition} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \sbol{Component} from the template \sbol{Component}. The \sbol{variantDerivations} property of a \sbol{VariableComponent} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \sbol{VariableComponent}. Furthermore, \sbol{VariableComponent} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivations} properties and the \sbol{CombinatorialDerivation} objects that contain them. For example, consider the \sbol{VariableComponent} objects A and B and the \sbol{CombinatorialDerivation} objects X and Y. The reference chain X contains A, A has variant derivation Y, Y contains B, and B has variant derivation X is cyclical.
+The \sbol{variantDerivations} property is OPTIONAL and MAY contain zero or more URIs that each refer to a\\ \sbol{CombinatorialDerivation}. This property enables the convenient specification of \sbol{ComponentDefinition} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \sbol{Component} from the template \sbol{Component}. The \sbol{variantDerivations} property of a \sbol{VariableComponent} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \sbol{VariableComponent}. Furthermore, \sbol{VariableComponent} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivations} properties and the\\ \sbol{CombinatorialDerivation} objects that contain them. For example, consider the \sbol{VariableComponent} objects A and B and the \sbol{CombinatorialDerivation} objects X and Y. The reference chain X contains A, A has variant derivation Y, Y contains B, and B has variant derivation X is cyclical.
 
 \subsubsection*{ The \sbolheading{operator} property}\label{sec:operator}
 
@@ -1799,7 +1799,7 @@ The \sbol{hash} property is OPTIONAL and MAY contain a string used to retrieve f
 
 \subsubsection*{Serialization}
 
-The serialization of a \sbol{Attachment} MUST have the following form:
+The serialization of an \sbol{Attachment} MUST have the following form:
 
 }
 
@@ -1815,7 +1815,7 @@ The serialization of a \sbol{Attachment} MUST have the following form:
 \end{lstlisting}
 
 \twotwozero{
-The example below shows the serialization of a \sbol{Attachment} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbolmult{source:A}{source} \sbol{URI}, which is a \external{URL}.
+The example below shows the serialization of an \sbol{Attachment} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbolmult{source:A}{source} \sbol{URI}, which is a \external{URL}.
 }
 \lstsetsbol
 \begin{lstlisting}

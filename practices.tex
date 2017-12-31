@@ -81,7 +81,7 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
     & \textbf{More Information} \\
     \midrule
     \textbf{ComponentDefinition}  & types & BioPAX & \url{http://www.biopax.org}\\
-                                  & types & SequenceOntology (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
+                                  & types & SO (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
     						   	  & roles & SO (\textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
     						   	  & roles & CHEBI (\textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
 %    						   	  & roles & UniProt (if type is \textit{protein}??) \\   
@@ -147,7 +147,7 @@ These semantics are somewhat different from the versioning semantics defined in 
 \begin{center}
 \includegraphics[scale=0.6]{uml/provenance}
 \caption[]{Relationships between SBOL and PROV-O classes. The PROV-O classes \external{Activity}, \external{Plan}, and \external{Agent} are all serialized as \sbol{TopLevel} classes in an SBOL document.
-\label{uml:provenance}
+\label{uml:provenance}}
 \end{center}
 \end{figure}
 }
@@ -171,7 +171,7 @@ The \sbol{endedAtTime} property is OPTIONAL and contains a DateTime (see section
 The \sbol{startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
 
 \paragraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
-The \sbol{wasInformedBys} property is OPTIONAL and contains a URI of another activity.
+The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Activity} MUST have the following form:
@@ -190,9 +190,13 @@ The serialization of an \sbol{Activity} MUST have the following form:
                 </prov:qualifiedUsage> [\emph{elements}]             
   [\emph{zero or one}]  <prov:startedAtTime>...</prov:startedAtTime> [\emph{element}]
   [\emph{zero or one}]  <prov:endedAtTime>...</prov:startedAtTime> [\emph{element}] 
-  [\emph{zero or one}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
+  [\emph{zero or more}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
 </prov:Activity>
 \end{lstlisting}
+
+\twotwozero{
+Note that the tags prov:qualifiedUsage and prov:qualifiedAssociation are used for \sbol{usages} and \sbol{associations}, respectively.
+}
 
 \twoonezero{
 \subsubsection{Association}
@@ -239,11 +243,15 @@ The serialization of an \sbol{Association} MUST have the following form:
 \begin{lstlisting}
 <prov:Association rdf:about="...">
   ... [\emph{properties inherited from identified}] ...
-  [\emph{zero or more}] <prov:hadRole rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}]   <prov:hadPlan rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]               <prov:agent rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}]  <prov:hadRole rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}]  <prov:hadPlan rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]  <prov:agent rdf:resource="..."/> [\emph{element}]
  </prov:Association>
 \end{lstlisting}
+
+\twotwozero{
+Note that the tags prov:hadRole and prov:hadPlan are used for \sbolmult{roles:A}{roles} and \sbol{plan}, respectively.
+}
 
 \twoonezero{
 \subsubsection{Usage}
@@ -284,12 +292,16 @@ The serialization of an \sbol{Usage} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:Association rdf:about="...">
+<prov:Usage rdf:about="...">
   ... [\emph{properties inherited from identified}] ...
-  [\emph{zero or more}]         <prov:hadRole rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]                       <prov:entity rdf:resource="..."/> [\emph{element}]
- </prov:Association>
+  [\emph{zero or more}]  <prov:hadRole rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]  <prov:entity rdf:resource="..."/> [\emph{element}]
+ </prov:Usage>
 \end{lstlisting}
+
+\twotwozero{
+Note that the tag prov:hadPlan is used for \sbolmult{roles:U}{roles}.
+}
 
 \twoonezero{
 \subsubsection{Plan}
