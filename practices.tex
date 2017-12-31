@@ -385,7 +385,7 @@ Codon optimisation is a practical real-wold example where provenance properties 
 
 \twoonezero{
 \paragraph{Example - Deriving strains}
-Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the Ncib3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
+Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
 
 }%twoonezero end
 
@@ -393,17 +393,17 @@ Bacterial strains are often derived from other strains through modifications suc
 \begin{lstlisting}
 <?xml version="1.0" ?>
 <rdf:RDF xmlns:prov="http://www.w3.org/ns/prov#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:myapp="http://myapp.com/" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/">
-  <sbol:ComponentDefinition rdf:about="http://myapp.com/bsubtilisncib3610">
-    <sbol:persistentIdentity rdf:resource="http://myapp.com/bsubtilisncib3610"/>
-    <sbol:displayId>bsubtilisncib3610</sbol:displayId>
-    <dcterms:title>Bacillus subtilis Ncbi 3610</dcterms:title>
+  <sbol:ComponentDefinition rdf:about="http://myapp.com/bsubtilisncimb3610">
+    <sbol:persistentIdentity rdf:resource="http://myapp.com/bsubtilisncimb3610"/>
+    <sbol:displayId>bsubtilisncimb3610</sbol:displayId>
+    <dcterms:title>Bacillus subtilis NCIMB3610</dcterms:title>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
   </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://myapp.com/bsubtilis168">
     <sbol:persistentIdentity rdf:resource="http://myapp.com/bsubtilis168"/>
     <sbol:displayId>bsubtilis168</sbol:displayId>
-    <prov:wasDerivedFrom rdf:resource="http://myapp.com/bsubtilisncib3610"/>
+    <prov:wasDerivedFrom rdf:resource="http://myapp.com/bsubtilisncimb3610"/>
     <prov:wasGeneratedBy rdf:resource="http://myapp.com/xraymutagenesis"/>
     <dcterms:title>Bacillus subtilis 168</dcterms:title>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
@@ -426,7 +426,7 @@ Bacterial strains are often derived from other strains through modifications suc
         <sbol:persistentIdentity rdf:resource="http://myapp.com/xraymutagenesis/usage"/>
         <sbol:displayId>usage</sbol:displayId>
         <prov:hadRole rdf:resource="http://sbols.org/v2#source"/>
-        <prov:entity rdf:resource="http://myapp.com/bsubtilisncib3610"/>
+        <prov:entity rdf:resource="http://myapp.com/bsubtilisncimb3610"/>
       </prov:Usage>
     </prov:qualifiedUsage>
   </prov:Activity>
