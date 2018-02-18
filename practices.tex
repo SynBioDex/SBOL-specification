@@ -13,7 +13,8 @@ Thus, in order to avoid creating conflicting data, if a person wants to change t
 
 The relationship between the old and new objects (i.e., that the new object was derived from the old object), however, is not visible unless it is explicitly declared.  This is RECOMMENDED to be done using the \sbol{persistentIdentity}, and \sbol{version} properties. The preferred practice for declaring such a relationship is to use the same \sbol{persistentIdentity} for both objects, but give the newer object a later \sbol{version}. Then, when the new object is published, it can be clear to both humans and machines that this object is intended to update the previously published object. In this way, when a user wants the latest version of an object, they can obtain it by referencing the object via its \sbol{persistentIdentity} and rely on a tool to find the object with that \sbol{persistentIdentity} and the latest \sbol{version}.
 
-As stated in \ref{sec:version},  it is RECOMMENDED that version numbering follow the conventions of semantic versions (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).  
+As stated in \ref{sec:version},  it is RECOMMENDED that version numbering follow
+the conventions of semantic versions (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).
 This convention represents versions as sequences of numbers and qualifiers separated by the characters {\tt .} and {\tt -} and compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).  For a full explanation, see the linked resources.
 
 \subsection{Compliant SBOL Objects}
@@ -80,7 +81,7 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
     & \textbf{More Information} \\
     \midrule
     \textbf{ComponentDefinition}  & types & BioPAX & \url{http://www.biopax.org}\\
-                                  & types & SequenceOntology (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
+                                  & types & SO (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
     						   	  & roles & SO (\textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
     						   	  & roles & CHEBI (\textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
 %    						   	  & roles & UniProt (if type is \textit{protein}??) \\   
@@ -125,19 +126,33 @@ The PROV-O ontology (https://www.w3.org/TR/prov-o/) already defines a data model
 %Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}.  
 
 Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset and use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a ComponentDefinition may be derived from another ComponentDefinition, but it would probably not make sense for it to be derived from a Collection.
+}
 
-The adopted subset of PROV-O terms and their relationships to SBOL objects are defined below.
+\twotwozero{
+The PROV-O specification permits that any kind of SBOL object may be used to generate another. The meaning of these relationships are specified using ontology terms for the \sbolmult{roles:U}{roles} properties on \sbol{Usage} and \sbol{Association} classes.  This specification gives users the flexibility to construct and track provenance histories for their own custom applications, but this flexibility also presents an obstacle to standardized data exchange. Therefore a simple ontology (see \ref{tbl:association_roles} and \ref{tbl:usage_roles}) has been adopted to describe common provenance connections expected in synthetic biology workflows, based on the design-build-test-learn formalization of engineering.
+
+The design-build-test-learn cycle is a common theme in synthetic biology and engineering literature. The design-build-test-learn cycle is the scientific method applied to engineering. Stages of the cycle include designing an initial prototype, testing that prototype, analyzing its performance against specific metrics, learning what worked and what did not work, designing a new prototype based on what was learned, and completing the cycle again. Ideally each iteration of the cycle generates new understanding that feeds back into new cycles as alternative approaches or reformulated problems. Therefore, the design-build-test-learn cycle is a \textit{de facto} ontology upon which to base an SBOL data model for workflow abstraction. Other workflow activities in synthetic biology, such as analyzing, modeling, verifying, and evolving, by and large should fit into this design-build-test-learn abstraction. 
+
+It is expected that users will develop their own ontology terms to specify how SBOL objects are used in a recipe, protocol, or computational analysis. However, these home-made ontologies will be very domain specific, and may not be intelligible to users working in another domain. For example a modeler should not be expected to understand an ontology of \sbol{Usage} \sbolmult{roles:U}{roles} for DNA assembly. The terms "design", "build", "test", and "learn" provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. An example of how these terms are used is provided in \ref{images:design-build-test-learn}.
+
+Provenance semantics defined through \sbol{wasGeneratedBys} relationships are distinctly different from versioning semantics. Generation of a new object is defined by the W3C PROV-O specification as follows:
+\begin{quote}
+...the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+\end{quote}
+These semantics are somewhat different from the versioning semantics defined in section \ref{sec:version}. The SBOL specification defines a new version of an object as an update of a previously published object (and therefore a previously existing object). Therefore, an SBOL object which is "generated" from another SHOULD BE regarded as a new entity rather than a new version of an existing entity. However, this distinction is somewhat subjective (see Theseus paradox). Therefore, we RECOMMEND as a best practice that objects linked by Activities not be successive versions of each other, though this is left to the discretion of users and library developers.
+} 
 
 \twotwozero{
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/provenance}
-\caption[]{Relationships between SBOL and PROV-O classes. PROV-O specific classes and terms are prefixed with \texttt{provo}.}
-\label{uml:provenance}
+\caption[]{Relationships between SBOL and PROV-O classes. The PROV-O classes \external{Activity}, \external{Plan}, and \external{Agent} are all serialized as \sbol{TopLevel} classes in an SBOL document.
+\label{uml:provenance}}
 \end{center}
 \end{figure}
 }
 
+\twoonezero{
 \subsubsection{Activity}
 \label{sec:Activity}
 
@@ -156,7 +171,7 @@ The \sbol{endedAtTime} property is OPTIONAL and contains a DateTime (see section
 The \sbol{startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
 
 \paragraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
-The \sbol{wasInformedBys} property is OPTIONAL and contains a URI of another activity.
+The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Activity} MUST have the following form:
@@ -169,72 +184,124 @@ The serialization of an \sbol{Activity} MUST have the following form:
   ... [\emph{properties inherited from identified}] ...
   [\emph{zero or more}]  <prov:qualifiedAssociation>
                    <prov:Association rdf:about="...">...</prov:Association>
-               </prov:qualifiedAssociation> [\emph{elements}]
+                </prov:qualifiedAssociation> [\emph{elements}]
   [\emph{zero or more}]  <prov:qualifiedUsage>
                    <prov:Usage rdf:about="...">...</prov:Usage>
-               </prov:qualifiedUsage> [\emph{elements}]             
+                </prov:qualifiedUsage> [\emph{elements}]             
   [\emph{zero or one}]  <prov:startedAtTime>...</prov:startedAtTime> [\emph{element}]
   [\emph{zero or one}]  <prov:endedAtTime>...</prov:startedAtTime> [\emph{element}] 
-  [\emph{zero or one}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
- 
- </prov:Activity>
+  [\emph{zero or more}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
+</prov:Activity>
 \end{lstlisting}
+
+\twotwozero{
+Note that the tags prov:qualifiedUsage and prov:qualifiedAssociation are used for \sbol{usages} and \sbol{associations}, respectively.
+}
 
 \twoonezero{
 \subsubsection{Association}
 \label{sec:Association}
-An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \texttt{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
+An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \sbolmult{roles:A}{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
 
 \paragraph{The \sbolheading{agent} property}\label{sec:agent}
 The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{Agent} object.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:A}
-The \sbolmult{roles:A}{roles} property is REQUIRED and MUST contain a set of \sbol{URI}s that refers to particular term(s) describing the usage of the agent.
+\twotwozero{ 
+The \sbolmult{roles:A}{roles} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{agent} in the parent \sbol{Activity}. 
+The recommended terms that are defined in \ref{tbl:association_roles} can be used to specify the kind of \sbol{Activity} performed by the \sbol{Agent}.
+}
+}
 
+\twotwozero{
+\begin{table}[H]
+  \begin{edtable}{tabular}{lp{3.75in}}
+    \toprule
+    \textbf{URI for Association roles} & \textbf{Description} \\
+    \midrule
+    \url{http://sbols.org/v2\#design}	& Design describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is derived, possibly from a predictive model or by modifying a pre-existing design. In the context of an \sbol{Association}, the term design indicates that the \sbol{agent} performed the parent {Activity} to generate a design\\
+    \url{http://sbols.org/v2\#build}		& Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory. In the context of an \sbol{Association}, the term build indicates that the \sbol{agent} performed the parent {Activity} to implement a design. More generally, the term may represent any kind of experimental manipulation of a biological sample, including propagating, passaging, or evolving cell lines.\\
+    \url{http://sbols.org/v2\#test}		& Test describes the process of performing experimental measurements to characterize a synthetic biological construct. In the context of an \sbol{Association}, the \sbol{Agent} performed the parent {Activity} to perform experimental measurements resulting in raw data represented by \sbol{Attachment}s\\
+    \url{http://sbols.org/v2\#learn}	&  Learn describes the process of analyzing experimental measurements to produce a new entity that represents biological knowledge. In the context of an \sbol{Association}, the \sbol{Agent} processed raw experimental data to produce an analysis. This process generates a new entity that represents biological knowledge, including tables or graphs contained by \sbol{Attachment}, a  \sbol{Model} produced by a fitting process, a consensus  \sbol{Sequence} derived from sequencing results, etc.\\
+    \bottomrule
+  \end{edtable}
+  \caption{Terms to specify the \sbolmult{roles:A}{roles} property of an \sbol{Association}.}
+  \label{tbl:association_roles}
+\end{table}
+} 
+
+\twoonezero{
 \paragraph{The \sbolheading{plan} property}\label{sec:plan}
 The \sbol{plan} property is OPTIONAL and contains a URI that refers to a \sbol{Plan}.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Association} MUST have the following form:
 
-}%\twoonezero{ end
+} 
 
 \lstsetsbol
 \begin{lstlisting}
 <prov:Association rdf:about="...">
   ... [\emph{properties inherited from identified}] ...
-  [\emph{one}]          <prov:hadRole rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}]  <prov:hadRole rdf:resource="..."/> [\emph{element}]
   [\emph{zero or one}]  <prov:hadPlan rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]          <prov:agent rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]  <prov:agent rdf:resource="..."/> [\emph{element}]
  </prov:Association>
 \end{lstlisting}
+
+\twotwozero{
+Note that the tags prov:hadRole and prov:hadPlan are used for \sbolmult{roles:A}{roles} and \sbol{plan}, respectively.
+}
 
 \twoonezero{
 \subsubsection{Usage}
 \label{sec:Usage}
-How different entities are used in an \texttt{Activity} is specified with the \texttt{Usage} class, which is linked from an \texttt{Activity} through the \texttt{usage} relationship. A \texttt{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \texttt{roles} property. When the \sbol{wasDerivedFroms} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFroms} property MUST be included in a \sbol{Usage}.
+How different entities are used in an \sbol{Activity} is specified with the \sbol{Usage} class, which is linked from an \sbol{Activity} through the \sbol{Usage} relationship. A \sbol{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s URI and the role of this entity is qualified with the \sbolmult{roles:U}{roles} property. When the \sbol{wasDerivedFroms} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFroms} property MUST be included in a \sbol{Usage}.
 
 
 \paragraph{The \sbolheading{entity} property}\label{sec:entity}
 The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an SBOL Identified object.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:U}
-The \sbolmult{roles:U}{roles} property is REQUIRED and MAY contain a set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property.
+\twotwozero{
+The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms that are defined in \ref{tbl:usage_roles} can be used to indicate how the referenced \sbol{entity} is being used in this \sbol{Activity}.
+}
+}
 
+\twotwozero{
+\begin{table}[H]
+  \begin{edtable}{tabular}{lp{3.75in}}
+    \toprule
+    \textbf{URI for Usage roles} & \textbf{Description} \\
+    \midrule
+    \url{http://sbols.org/v2\#design}	& Design describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is derived, possibly from a predictive model or by modifying a pre-existing design. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous design \sbol{Activity} and was used by the present \sbol{Activity} as a design for a new object.\\
+    \url{http://sbols.org/v2\#build}		& Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory. In the context of a \sbol{Usage}, the term  indicates that the referenced \sbol{entity} was generated by some previous build \sbol{Activity} and was used by the present \sbol{Activity} as a built object.\\
+    \url{http://sbols.org/v2\#test}		& Test describes the process of performing experimental measurements to characterize a synthetic biological construct. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous test \sbol{Activity} and is used as test data in the present \sbol{Activity}.\\
+    \url{http://sbols.org/v2\#learn}	&  Learn describes the process of analyzing experimental measurements to produce a new entity that represents biological knowledge. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous learn \sbol{Activity} and is used in the present \sbol{Activity} as a source of scientifically verified knowledge.\\
+    \bottomrule
+  \end{edtable}
+  \caption{Terms to specify the \sbolmult{roles:U}{roles} property of a \sbol{Usage}.}
+  \label{tbl:usage_roles}
+\end{table}
+} 
 
+\twoonezero{
 \paragraph{Serialization}
 The serialization of an \sbol{Usage} MUST have the following form:
-
-}%\twoonezero{ end
+}
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:Association rdf:about="...">
+<prov:Usage rdf:about="...">
   ... [\emph{properties inherited from identified}] ...
-  [\emph{one}]         <prov:hadRole rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]          <prov:entity rdf:resource="..."/> [\emph{element}]
- </prov:Association>
+  [\emph{zero or more}]  <prov:hadRole rdf:resource="..."/> [\emph{element}]
+  [\emph{one}]  <prov:entity rdf:resource="..."/> [\emph{element}]
+ </prov:Usage>
 \end{lstlisting}
+
+\twotwozero{
+Note that the tag prov:hadPlan is used for \sbolmult{roles:U}{roles}.
+}
 
 \twoonezero{
 \subsubsection{Plan}
@@ -330,7 +397,7 @@ Codon optimisation is a practical real-wold example where provenance properties 
 
 \twoonezero{
 \paragraph{Example - Deriving strains}
-Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the Ncib3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
+Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
 
 }%twoonezero end
 
@@ -338,17 +405,17 @@ Bacterial strains are often derived from other strains through modifications suc
 \begin{lstlisting}
 <?xml version="1.0" ?>
 <rdf:RDF xmlns:prov="http://www.w3.org/ns/prov#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:myapp="http://myapp.com/" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/">
-  <sbol:ComponentDefinition rdf:about="http://myapp.com/bsubtilisncib3610">
-    <sbol:persistentIdentity rdf:resource="http://myapp.com/bsubtilisncib3610"/>
-    <sbol:displayId>bsubtilisncib3610</sbol:displayId>
-    <dcterms:title>Bacillus subtilis Ncbi 3610</dcterms:title>
+  <sbol:ComponentDefinition rdf:about="http://myapp.com/bsubtilisncimb3610">
+    <sbol:persistentIdentity rdf:resource="http://myapp.com/bsubtilisncimb3610"/>
+    <sbol:displayId>bsubtilisncimb3610</sbol:displayId>
+    <dcterms:title>Bacillus subtilis NCIMB3610</dcterms:title>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
   </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://myapp.com/bsubtilis168">
     <sbol:persistentIdentity rdf:resource="http://myapp.com/bsubtilis168"/>
     <sbol:displayId>bsubtilis168</sbol:displayId>
-    <prov:wasDerivedFrom rdf:resource="http://myapp.com/bsubtilisncib3610"/>
+    <prov:wasDerivedFrom rdf:resource="http://myapp.com/bsubtilisncimb3610"/>
     <prov:wasGeneratedBy rdf:resource="http://myapp.com/xraymutagenesis"/>
     <dcterms:title>Bacillus subtilis 168</dcterms:title>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
@@ -371,7 +438,7 @@ Bacterial strains are often derived from other strains through modifications suc
         <sbol:persistentIdentity rdf:resource="http://myapp.com/xraymutagenesis/usage"/>
         <sbol:displayId>usage</sbol:displayId>
         <prov:hadRole rdf:resource="http://sbols.org/v2#source"/>
-        <prov:entity rdf:resource="http://myapp.com/bsubtilisncib3610"/>
+        <prov:entity rdf:resource="http://myapp.com/bsubtilisncimb3610"/>
       </prov:Usage>
     </prov:qualifiedUsage>
   </prov:Activity>
@@ -383,6 +450,178 @@ Bacterial strains are often derived from other strains through modifications suc
 </rdf:RDF>
 \end{lstlisting}
 
+\twotwozero{
+\paragraph{Example - Design-build-test-learn Workflow}
+This particular example represents an idealized workflow for model-based design. The workflow begins with a Model which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (ModuleDefinition) is composed of biological parts which links back to its Model. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (Implementation). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an Attachment). Finally, a new Model is derived from these data using some a fitting algorithm implemented in the Python programming language. The final Model may not match the beginning Model, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in  \ref{images:design-build-test-learn}.
+}%twotwozero end
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\linewidth]{images/design-build-test-learn}
+\caption[]{An example data structure representing an idealized workflow for model-based
+design}
+\label{images:design-build-test-learn}
+\end{center}
+\end{figure}
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:prov="http://www.w3.org/ns/prov#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sbol="http://sbols.org/v2#">
+  <prov:Activity rdf:about="http://examples.org/Activity/generate_build/1.0.0">
+    <sbol:displayId>generate_build</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_build"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://examples.org/Activity/generate_build/design_usage/1.0.0">
+        <sbol:displayId>design_usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_build/design_usage"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:entity rdf:resource="http://examples.org/ModuleDefinition/design/1.0.0"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#design"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://examples.org/Activity/generate_build/usage/1.0.0">
+        <sbol:displayId>usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_build/usage"/>
+        <sbol:version>1.0.0</sbol:version>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://examples.org/Activity/generate_build/association/1.0.0">
+        <sbol:displayId>association</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_build/association"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#build"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+  </prov:Activity>
+  <prov:Activity rdf:about="http://examples.org/Activity/generate_design/1.0.0">
+    <sbol:displayId>generate_design</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_design"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://examples.org/Activity/generate_design/predicted_usage/1.0.0">
+        <sbol:displayId>predicted_usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_design/predicted_usage"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:entity rdf:resource="http://examples.org/Model/predicted/1.0.0"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#learn"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://examples.org/Activity/generate_design/usage/1.0.0">
+        <sbol:displayId>usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_design/usage"/>
+        <sbol:version>1.0.0</sbol:version>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://examples.org/Activity/generate_design/association/1.0.0">
+        <sbol:displayId>association</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_design/association"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#design"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+  </prov:Activity>
+  <prov:Activity rdf:about="http://examples.org/Activity/generate_observed/1.0.0">
+    <sbol:displayId>generate_observed</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_observed"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://examples.org/Activity/generate_observed/test_data_usage/1.0.0">
+        <sbol:displayId>test_data_usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_observed/test_data_usage"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:entity rdf:resource="http://examples.org/Attachment/test_data/1.0.0"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#test"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://examples.org/Activity/generate_observed/usage/1.0.0">
+        <sbol:displayId>usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_observed/usage"/>
+        <sbol:version>1.0.0</sbol:version>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://examples.org/Activity/generate_observed/association/1.0.0">
+        <sbol:displayId>association</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_observed/association"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#learn"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+  </prov:Activity>
+  <prov:Activity rdf:about="http://examples.org/Activity/generate_test_data/1.0.0">
+    <sbol:displayId>generate_test_data</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_test_data"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://examples.org/Activity/generate_test_data/build_usage/1.0.0">
+        <sbol:displayId>build_usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_test_data/build_usage"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:entity rdf:resource="http://examples.org/Implementation/build/1.0.0"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#build"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://examples.org/Activity/generate_test_data/usage/1.0.0">
+        <sbol:displayId>usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_test_data/usage"/>
+        <sbol:version>1.0.0</sbol:version>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://examples.org/Activity/generate_test_data/association/1.0.0">
+        <sbol:displayId>association</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://examples.org/Activity/generate_test_data/association"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#test"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+  </prov:Activity>
+  <sbol:Attachment rdf:about="http://examples.org/Attachment/test_data/1.0.0">
+    <sbol:displayId>test_data</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Attachment/test_data"/>
+    <sbol:size>0</sbol:size>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasGeneratedBy rdf:resource="http://examples.org/Activity/generate_observed/1.0.0"/>
+  </sbol:Attachment>
+  <sbol:Implementation rdf:about="http://examples.org/Implementation/build/1.0.0">
+    <sbol:displayId>build</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Implementation/build"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasGeneratedBy rdf:resource="http://examples.org/Activity/generate_test_data/1.0.0"/>
+  </sbol:Implementation>
+  <sbol:Model rdf:about="http://examples.org/Model/observed/1.0.0">
+    <sbol:displayId>observed</sbol:displayId>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Model/observed"/>
+    <sbol:version>1.0.0</sbol:version>
+  </sbol:Model>
+  <sbol:Model rdf:about="http://examples.org/Model/predicted/1.0.0">
+    <sbol:displayId>predicted</sbol:displayId>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Model/predicted"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasGeneratedBy rdf:resource="http://examples.org/Activity/generate_design/1.0.0"/>
+  </sbol:Model>
+  <sbol:ModuleDefinition rdf:about="http://examples.org/ModuleDefinition/design/1.0.0">
+    <sbol:displayId>design</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/ModuleDefinition/design"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasGeneratedBy rdf:resource="http://examples.org/Activity/generate_build/1.0.0"/>
+  </sbol:ModuleDefinition>
+</rdf:RDF>
+\end{lstlisting}
 
 

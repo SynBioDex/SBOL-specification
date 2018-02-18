@@ -11,9 +11,10 @@ Conceptually, the toggle switch is constructed from two mutually repressing gene
 With repressors LacI and TetR, this results in a bi-stable system that will tend to settle into a state where precisely one of the two repressors is strongly expressed, repressing the other.
 Each of these repressors can have its activity disrupted by a small molecule (IPTG for LacI, aTc for TetR), which enables the system to be ``toggled'' from one state to the other by dosing it with the appropriate small molecule.
 
+\twotwozero{
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=1.0]{images/toggle-highlevel.pdf}
+\includegraphics[width=0.33\textwidth]{images/toggle-highlevel2.pdf}
 \caption[]{Conceptual diagram of LacI/TetR toggle switch: the LacI 
   and TetR transcription factors are arranged to mutually repress each other's expression, 
   creating a bi-stable system.  Transition between the two states
@@ -22,14 +23,17 @@ Each of these repressors can have its activity disrupted by a small molecule (IP
 \label{images:toggle}
 \end{center}
 \end{figure}
+}
 
+\twotwozero{
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.4]{images/toggleswitch_modular}
+\includegraphics[width=\textwidth]{images/toggleswitch_modular2}
 \caption[]{Design of a LacI/TetR toggle switch. This design is composed of two inverter sub-designs, each containing a single gene. These genes mutually repress each other's expression via their encoded protein transcription factors, LacI and TetR. Furthermore, both LacI and TetR are bound by specific small molecules that sequester them and prevent them from acting as repressors. In this design, arrows represent different molecular interactions, including the repression of pLac via LacI, the non-covalent binding of IPTG to LacI, the transcription of TetR mRNA, and the translation of TetR. Dashed lines serve to map between transcription factors in the inverter sub-designs and those in the overall toggle switch design.}
 \label{images:toggleswitch_modular}
 \end{center}
 \end{figure}
+}
 
 The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of structure and function. The structural hierarchy of the toggle switch is represented using \sbol{ComponentDefinition}s:
 \begin{itemize}

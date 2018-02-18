@@ -25,8 +25,7 @@ SBOL uses existing Semantic Web practices and resources, such as \emph{Uniform R
 %Goksel: Removed this sentence: The ultimate utility of URIs in the SBOL standard is the ability to support flexible annotation with appropriate metadata while associating an authority with that annotation. 
 The definition of the data model and associated format, the rules on the addition of data within the format and the representation of this in electronic data files are intended to make the SBOL standard a useful means of promoting global data exchange between laboratories and between software programs.
 
-This document details version 2.1 of SBOL, a minor update to SBOL 2.0.
-The previous version 1.1 of the SBOL standard focused on representing the structural aspects of genetic designs. Users of the standard were able to exchange information on DNA designs, but they could not represent molecules other than DNA or the functional aspects of designs beyond DNA sequence features. The SBOL 2 data model defined in this specification extends the version 1.1 data model to provide for the most pressing data exchange needs identified by the SBOL community. In particular, the extended data model can:
+\twotwozero{This document details version 2.2 of SBOL that builds upon the previous version 2.1.  In particular, SBOL 2.2 includes improved description and validation rules for genetic design provenance, an extension to support combinatorial genetic designs, a new class to add non-SBOL data as attachments, a new class for genetic design implementations, and a description of a methodology to describe the entire design-build-test-learn cycle within the SBOL data model.  SBOL 2.x builds upon SBOL 1.1, which} focused on representing the structural aspects of genetic designs. Users of the standard were able to exchange information on DNA designs, but they could not represent molecules other than DNA or the functional aspects of designs beyond DNA sequence features. The SBOL 2 data model defined in this specification extends the version 1.1 data model to provide for the most pressing data exchange needs identified by the SBOL community. In particular, the extended data model can:
 \begin{itemize}
 
 \item Represent non-DNA structural components of a biological design, including RNA, proteins, small molecules and other physical components.
@@ -40,12 +39,14 @@ The previous version 1.1 of the SBOL standard focused on representing the struct
 \end{itemize}
 Taken together, these extensions enable SBOL to support the description and exchange of hierarchical, modular representations of both the intended structure and function of designed biological systems.
 
-\begin{figure}
+\twotwozero{
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=5in]{images/format-comparison.pdf}
+\includegraphics[width=\textwidth]{images/standard-evolution.pdf}
 \caption{SBOL 2 extends prior sequence description formats to represent both the structure and function of a genetic design in a modular, hierarchical manner.}
 \label{f:sequence}
 \end{figure}
+}
 
 While the ultimate goal of SBOL is to describe synthetic biological designs such that they can be reproduced in the lab with a high degree of fidelity, SBOL 2 does not yet provide a complete catalog of the different classes of data that are necessary to achieve this goal. 
 For example, SBOL 2 does not yet include data on environmental and host context, or details on how the performance of a design is measured. 

@@ -56,6 +56,7 @@ For example, if an SBOL property has five values, then its serialization contain
 \label{sec:datatypes}
 \label{sec:String}
 \label{sec:Integer}
+\label{sec:Long}
 \label{sec:Double}
 \label{sec:Boolean}
 \label{sec:URI}
@@ -67,6 +68,8 @@ When SBOL use simple ``primitive'' data types such as \sbol{String}s or \sbol{In
   {\em Example: ``LacI coding sequence''}
 \item \sbol{Integer}: \url{http://www.w3.org/TR/xmlschema11-2/#integer}\\
   {\em Example: 3}
+\item \twotwozero{\sbol{Long}:} \url{http://www.w3.org/TR/xmlschema11-2/#long}\\
+  \twotwozero{{\em Example: 9223372036854775806}}
 \item \sbol{Double}: \url{http://www.w3.org/TR/xmlschema11-2/#double}\\
   {\em Example: 3.14159}
 \item \sbol{Boolean}: \url{http://www.w3.org/TR/xmlschema11-2/#boolean}\\
@@ -92,7 +95,7 @@ It is important to realize that in RDF, a \sbol{URI} might or might not be a res
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
 This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
 
-As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, \twooneone{\sbol{wasDerivedFroms}}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
+As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
 
 When an SBOL resource reference takes the form of a \sbol{URI}, that \sbol{URI} can either be the value of an \sbol{identity} property or the value of a \sbol{persistentIdentity} property.
 If the \sbol{URI} is equal to the value of an \sbol{identity} property, then it is guaranteed to be unique, and it refers to precisely one SBOL object with that \sbol{URI}.
@@ -143,9 +146,9 @@ For a full explanation, see the linked resources.
 \subsubsection*{The \sbolheading{wasDerivedFroms} property}
 \label{sec:wasDerivedFroms}
 
-The \twooneone{\sbol{wasDerivedFroms}} property is OPTIONAL \twooneone{and MAY specify a set of \sbol{URI}s}. An SBOL object with this property refers to \twooneone{one or more SBOL objects or non-SBOL resources} from which this object was derived.
+\twotwozero{
+ The \sbol{wasDerivedFroms} property is OPTIONAL and MAY specify a set of \sbol{URI}s. An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived.
 
-\twooneone{
 \twozeroone{The \sbol{wasDerivedFroms} property of a \sbol{TopLevel} SBOL object is subject to the following rules.}
 If any members of the \sbol{wasDerivedFroms} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$.
 In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFroms} property or form a cyclical chain of references via its \sbol{wasDerivedFroms} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
@@ -185,7 +188,7 @@ replaced by the name of the class:
     [\emph{zero or one}] <sbol:persistentIdentity rdf:resource="..."/> [\emph{element}]
     [\emph{zero or one}] <sbol:displayId>...</sbol:displayId> [\emph{element}]
     [\emph{zero or one}] <sbol:version>...</sbol:version> [\emph{element}]
-    [\emph{zero or one}] <prov:wasDerivedFrom rdf:resource="..."/> [\emph{element}]
+    [\emph{zero or more}] <prov:wasDerivedFrom rdf:resource="..."/> [\emph{element}]
     [\emph{zero or one}] <dcterms:title>...</dcterms:title> [\emph{element}]
     [\emph{zero or one}] <dcterms:description>...</dcterms:description> [\emph{element}]
                ...
@@ -198,7 +201,7 @@ Note that several of the properties are not in the \external{sbol}
 namespace, but are mapped to standardized terms defined elsewhere:
 \begin{itemize}
 \item \sbol{identity} is serialized as \external{rdf:about}
-\item \twooneone{\sbol{wasDerivedFroms} are} serialized as \external{prov:wasDerivedFrom}
+\item \twotwozero{\sbol{wasDerivedFroms} are} serialized as \external{prov:wasDerivedFrom}
 \item \sbol{name} is serialized as \external{dcterms:title}
 \item \sbol{description} is serialized as \external{dcterms:description}
 \end{itemize}
@@ -706,7 +709,8 @@ In this way, many ``lower level'' \sbol{Component} objects can be linked togethe
 The same types of identity relationships can also be declared between \sbol{FunctionalComponent} objects contained by \sbol{ModuleDefinition} objects, or between \sbol{Component} objects and \sbol{FunctionalComponent} objects contained by \sbol{ComponentDefinition} objects and \sbol{ModuleDefinition} objects, respectively. See \ref{sec:examples} and \ref{ser:examples} for additional examples using the \sbol{MapsTo} class.
 
 \paragraph{The \sbolheading{local} property}\label{sec:local}
-This REQUIRED property has a data type of \sbol{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.
+This REQUIRED property has a data type of \sbol{URI} and is 
+d to refer to the \sbol{ComponentInstance} contained by the ``higher level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{local} \sbol{ComponentInstance} MUST be contained by the \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that contains the \sbol{ComponentInstance} or \sbol{Module} that owns the \sbol{MapsTo}.
 
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
 This REQUIRED property has a data type of \sbol{URI} and is used to refer to the \sbol{ComponentInstance} contained by the ``lower level'' \sbol{ComponentDefinition} or \sbol{ModuleDefinition}.
@@ -745,7 +749,7 @@ The serialization of \sbol{MapsTo} MUST have the following form.
 </sbol:MapsTo>
 \end{lstlisting}
 
-In the example below, a \sbol{FunctionalComponent} in a ``higher level'' \sbol{ModuleDefinition} of a genetic toggle switch is linked to a \sbol{FunctionalComponent} in a ``lower level'' LacI inverter \sbol{ModuleDefinition}. The full example can be found in \ref{ser:toggleswitch}.
+In the example below, a \sbol{FunctionalComponent} in a ``higher level'' \sbol{ModuleDefinition} of a genetic toggle switch is linked to a \sbol{FunctionalComponent} in a ``lower level'' LacI inverter \sbol{ModuleDefinition}. The full example can be found in \ref{sec:examples}.
 \lstsetsbol
 \begin{lstlisting}
 <sbol:MapsTo rdf:about="http://sbolstandard.org/example/toggle_switch/laci_inverter/LacI_mapping">
@@ -976,10 +980,11 @@ The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers
 
 \paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
-The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. This property MUST indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{subject} and \sbol{object} \sbol{Component} objects. The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI}s in  \ref{tbl:restriction_types}.
+The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. This property MUST indicate the type of structural restriction on the positions, orientations, or structural identities of the \sbol{subject} and \sbol{object} \sbol{Component} objects in relation to each other. The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI}s in \ref{tbl:restriction_types}.
 
 % Note: With regards to SBOL Version 1.1., this is a generalization of former \sbol{SequenceAnnotation} property \external{precedes}.
 
+\twotwozero{
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
@@ -988,11 +993,13 @@ The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. T
     \url{http://sbols.org/v2\#precedes} & The position of the \sbol{subject} \sbol{Component} MUST precede that of the \sbol{object} \sbol{Component}. If each one is associated with a \sbol{SequenceAnnotation}, then the \sbol{SequenceAnnotation} associated with the \sbol{subject} \sbol{Component} MUST specify a region that starts before the region specified by the \sbol{SequenceAnnotation} associated with the \sbol{object} \sbol{Component}. \\
     \url{http://sbols.org/v2\#sameOrientationAs} & The \sbol{subject} and \sbol{object} \sbol{Component} objects MUST have the same orientation. If each one is associated with a \sbol{SequenceAnnotation}, then the \sbol{orientation} \sbol{URI}s of the \sbol{Location} objects of the first \sbol{SequenceAnnotation} MUST be among those of the second \sbol{SequenceAnnotation}, and vice versa. \\
     \url{http://sbols.org/v2\#oppositeOrientationAs} & The \sbol{subject} and \sbol{object} \sbol{Component} objects MUST have opposite orientations. If each one is associated with a \sbol{SequenceAnnotation}, then the \sbol{orientation} \sbol{URI}s of the \sbol{Location} objects of one \sbol{SequenceAnnotation} MUST NOT be among those of the other \sbol{SequenceAnnotation}. \\
+    \url{http://sbols.org/v2\#differentFrom} & The \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} MUST NOT refer to the same \sbol{ComponentDefinition} as that of the \sbol{object} \sbol{Component}. \\
     \bottomrule
   \end{edtable}
   \caption{RECOMMENDED \sbol{URI}s for the \sbol{restriction} property.}
   \label{tbl:restriction_types}
 \end{table}
+}
 
 \paragraph{Serialization}
 
@@ -1033,10 +1040,10 @@ The example below shows the serialization of a \sbol{SequenceConstraint} belongi
 The purpose of the \sbol{Model} class is to serve as a placeholder for an external computational model and provide additional meta-data to enable better reasoning about the contents of this model.
 In this way, there is minimal duplication of standardization efforts and users of SBOL can formalize the function of a \sbol{ModuleDefinition} in the language of their choice.
 
-The meta-data provided by the \sbol{Model} class include the following properties: the \sbol{source} or location of the actual content of the model, the \sbol{language} in which the model is implemented, and the model's \sbol{framework}.
+The meta-data provided by the \sbol{Model} class include the following properties: the \sbolmult{source:M}{source} or location of the actual content of the model, the \sbol{language} in which the model is implemented, and the model's \sbol{framework}.
 
-\subsubsection*{ The \sbolheading{source} property}\label{sec:source}
-The \sbol{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file for a model.
+\subsubsection*{ The \sbolheading{source} property}\label{sec:source:M}
+The \sbolmult{source:M}{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file for a model.
 
 \subsubsection*{ The \sbolheading{language} property}\label{sec:language}
 The \sbol{language} property is REQUIRED and MUST contain a \sbol{URI} that specifies the language in which the model is implemented. It is RECOMMENDED that this \sbol{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology. \ref{tbl:model_types} provides a list of terms from this ontology and their \sbol{URI}s. If the \sbol{language} property of a \sbol{Model} is well-described by one these terms, then it MUST contain the \sbol{URI} for this term as its value.
@@ -1087,7 +1094,7 @@ The serialization of a \sbol{Model} MUST have the following form:
 </sbol:Model>
 \end{lstlisting}
 
-The example below shows the serialization of a \sbol{Model} object that refers to a quantitative model of a genetic toggle switch. The model is implemented in the SBML \sbol{language} and adheres to a continuous modeling \sbol{framework}. Lastly, the model can be retrieved from a model repository via its \sbol{source} \sbol{URI}, which is a \external{URL}.
+The example below shows the serialization of a \sbol{Model} object that refers to a quantitative model of a genetic toggle switch. The model is implemented in the SBML \sbol{language} and adheres to a continuous modeling \sbol{framework}. Lastly, the model can be retrieved from a model repository via its \sbolmult{source:M}{source} \sbol{URI}, which is a \external{URL}.
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1144,7 +1151,7 @@ Just as a \sbol{Module} represents an instance of a subsystem in the overall sys
 
 The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the \sbol{ModuleDefinition}.
 
-The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a \sbol{ModuleDefinition} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
+The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a\\ \sbol{ModuleDefinition} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
 Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{FunctionalComponent} objects involved in the \sbol{Interaction}.
 
 \subsubsection*{The \sbolheading{models} property}\label{sec:models}
@@ -1321,7 +1328,7 @@ In the example below, the functional component is defined as a public input/outp
 \end{center}
 \end{figure}
 
-The \sbol{Interaction} class provides more detailed description of how the \sbol{FunctionalComponent} objects of a \sbol{ModuleDefinition} are intended to work together.
+The \sbol{Interaction} class provides more detailed description of how the \sbol{FunctionalComponent} objects of a\\ \sbol{ModuleDefinition} are intended to work together.
 For example, this class can be used to represent different forms of genetic regulation (e.g., transcriptional activation or repression), processes from the central dogma of biology (e.g. transcription and translation), and other basic molecular interactions (e.g., non-covalent binding or enzymatic phosphorylation).
 Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refers to descriptive ontology terms and a \sbol{participations} property that describes which \sbol{FunctionalComponent} objects participate in the \sbol{Interaction}.
 
@@ -1523,6 +1530,309 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:Collection}
+
+\twotwozero{
+\subsection{CombinatorialDerivation}
+\label{sec:CombinatorialDerivation}
+
+The purpose of the \sbol{CombinatorialDerivation} class is to specify combinatorial genetic designs without having to specify every possible design variant. For example, a \sbol{CombinatorialDerivation} can be used to specify a library of reporter gene variants that include different promoters and RBSs without having to specify a \sbol{ComponentDefinition} for every possible combination of promoter, RBS, and CDS in the library. \sbol{ComponentDefinition} objects that realize a \sbol{CombinatorialDerivation} can be derived in accordance with the class properties \sbol{template}, \sbol{variableComponents}, and \sbol{strategy} (see \ref{uml:combinatorial_derivation}).
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/combinatorial_derivation}
+\caption[]{Diagram of the \sbol{CombinatorialDerivation} class and its associated properties.}
+\label{uml:combinatorial_derivation}
+\end{center}
+\end{figure}
+
+\subsubsection*{ The \sbolheading{template} property}\label{sec:template}
+
+The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{ComponentDefinition}. This \sbol{ComponentDefinition} is expected to serve as a template for the derivation of new \sbol{ComponentDefinition} objects. Consequently, its \sbol{components} property SHOULD contain one or more \sbol{Component} objects that describe its substructure (referred to hereafter as template \sbol{Component} objects), and its \sbol{sequenceConstraints} property MAY also contain one or more \sbol{SequenceConstraint} objects that constrain this substructure.
+
+When a \sbol{ComponentDefinition} is derived in accordance with a \sbol{CombinatorialDerivation}, the \sbol{wasDerivedFroms} property of the derived \sbol{ComponentDefinition} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{ComponentDefinition} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{members} property of a \sbol{Collection}, in which case the \sbol{wasDerivedFroms} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
+
+If the \sbolmult{types:CD}{types} property of the template \sbol{ComponentDefinition} contains one or more URIs, then the \sbolmult{types:CD}{types} property of the derived \sbol{ComponentDefinition} SHOULD also contain those URIs. The same holds true for the \sbolmult{roles:CD}{roles} properties of these \sbol{ComponentDefinition} objects.
+
+\subsubsection*{ The \sbolheading{variableComponents} property}\label{sec:variableComponents}
+
+The \sbol{variableComponents} property is OPTIONAL and MAY contain a set of \sbol{VariableComponent} objects. These \sbol{VariableComponent} objects are expected to denote the choices available when deriving the substructure of a new \sbol{ComponentDefinition} in accordance with a \sbol{CombinatorialDerivation}. The \sbol{variableComponents} property MUST NOT contain two or more \sbol{VariableComponent} objects that refer to the same template \sbol{Component} via their \sbol{variable} properties.
+
+If the \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{Component}, then the \sbol{components} property of the derived \sbol{ComponentDefinition} SHOULD contain as many \sbol{Component} objects derived from the template \sbol{Component} as specified by the \sbol{operator} property of the \sbol{VariableComponent} (see \ref{tbl:operator}). In addition, the \sbolmult{definition:CI}{definition} properties of these derived \sbol{Component} objects MUST refer to \sbol{ComponentDefinition} objects specified by the \sbol{variants}, \sbol{variantCollections}, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+
+If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{Component}, then the \sbol{components} property of the derived \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the template \sbol{Component}. The \sbolmult{definition:CI}{definition} property of this derived \sbol{Component} MUST refer to the \sbol{ComponentDefinition} referred to by the \sbolmult{definition:CI}{definition} property of the template \sbol{Component}.
+
+Finally, all of these derived \sbol{Component} objects MUST follow the \sbol{restriction} properties of any \sbol{SequenceConstraint} objects that refer to their corresponding template \sbol{Component} objects.
+
+\subsubsection*{ The \sbolheading{strategy} property}\label{sec:strategy}
+The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URIs. If the \sbol{strategy} property is not empty, then it MUST contain a URI from \ref{tbl:strategy}. This property recommends how many \sbol{ComponentDefinition} objects a user SHOULD derive from the template \sbol{ComponentDefinition}.
+
+}
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{lp{4in}}
+    \toprule
+    \textbf{Strategy URI} & \textbf{Description} \\
+    \midrule
+    \url{http://sbols.org/v2#enumerate}  &  A user SHOULD derive all possible \sbol{ComponentDefinition} objects specified by the \sbol{CombinatorialDerivation}. \\
+        \url{http://sbols.org/v2#sample}  & A user SHOULD derive a subset of all possible \sbol{ComponentDefinition} objects specified by \sbol{CombinatorialDerivation}. The manner in which this subset is chosen is for the user to decide. \\
+    \bottomrule
+  \end{edtable}
+  \caption{REQUIRED \sbol{URI}s for the \sbol{strategy} property.}
+  \label{tbl:strategy}
+\end{table}
+
+\twotwozero{
+\subsubsection*{Serialization}
+
+The serialization of a \sbol{CombinatorialDerivation} MUST have the following form:
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:CombinatorialDerivation rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  [\emph{one}] <sbol:template rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}]  <sbol:variableComponent>
+                 <sbol:VariableComponent rdf:about="...">...</sbol:VariableComponent>
+               </sbol:variableComponent> [\emph{elements}]
+  [\emph{zero or one}] <sbol:strategy rdf:resource="..."/> [\emph{element}]
+</sbol:CombinatorialDerivation>
+\end{lstlisting}
+
+\twotwozero{
+The example below shows the serialization of a \sbol{CombinatorialDerivation} that specifies the combinatorial design for a library of GFP reporter variants. Each GFP reporter \sbol{ComponentDefinition} sampled from this\\ \sbol{CombinatorialDerivation} would be driven by one of two possible glucose-sensitive promoters and contain one GFP variant from a library of CDSs.
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:CombinatorialDerivation rdf:about="http://www.sbolstandard.org/gfp_reporter_derivation/1.0.0">
+    <sbol:persistentIdentity rdf:resource="http://www.sbolstandard.org/gfp_reporter_derivation"/>
+    <sbol:displayId>gfp_reporter_derivation</sbol:displayId>
+    <dcterms:title>GFP Reporter Derivation</dcterms:title>
+    <sbol:template rdf:resource="http://www.sbolstandard.org/gfp_reporter_template/1.0.0"/>
+    <sbol:strategy rdf:resource="http://sbols.org/v2#sample"/>
+    <sbol:variableComponent>
+      <sbol:VariableComponent rdf:about="http://www.sbolstandard.org/gfp_reporter_derivation/promoter_variable/1.0.0">
+        <sbol:operator rdf:resource="http://sbols.org/v2#one"/>
+        <sbol:variable rdf:resource="http://www.sbolstandard.org/gfp_reporter_template/p1/1.0.0"/>
+        <sbol:variant rdf:resource="http://www.sbolstandard.org/glucose_sensitive_1/1.0.0"/>
+        <sbol:variant rdf:resource="http://www.sbolstandard.org/glucose_sensitive_2/1.0.0"/>
+      </sbol:VariableComponent>
+    </sbol:variableComponent>
+    <sbol:variableComponent>
+      <sbol:VariableComponent rdf:about="http://www.sbolstandard.org/gfp_reporter_derivation/cds_variable/1.0.0">
+        <sbol:operator rdf:resource="http://sbols.org/v2#one"/>
+        <sbol:variable rdf:resource="http://www.sbolstandard.org/gfp_reporter_template/c1/1.0.0"/>
+        <sbol:variantCollection rdf:resource="http://www.sbolstandard.org/gfp_cds_library/1.0.0"/>
+      </sbol:VariableComponent>
+    </sbol:variableComponent>
+  </sbol:CombinatorialDerivation>
+</rdf:RDF>
+\end{lstlisting}
+
+%\label{ser:Attachment}
+
+\twotwozero{
+\subsubsection{VariableComponent}
+\label{sec:VariableComponent}
+
+The \sbol{VariableComponent} class can be used to specify a choice of \sbol{ComponentDefinition} objects for any new \sbol{Component} derived from a template \sbol{Component} in the template \sbol{ComponentDefinition}. This specification is made using the class properties \sbol{variable}, \sbol{variants}, \sbol{variantCollections}, and \sbol{variantDerivations} (see \ref{uml:variable_component}). While the \sbol{variants}, \sbol{variantCollections}, and \sbol{variantDerivations} properties are OPTIONAL, at least one of them MUST NOT be empty. If these properties contain duplicate URIs, then they SHOULD be treated as a single URI for the purpose of selection. For example, if the \sbol{variants} property contains two copies of URI $A$ and one copy of URI $B$, $A$ SHOULD NOT be selected twice during enumeration, and it SHOULD NOT be selected twice as much as $B$ during sampling.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/variable_component}
+\caption[]{Diagram of the \sbol{VariableComponent} class and its associated properties.}
+\label{uml:variable_component}
+\end{center}
+\end{figure}
+
+\subsubsection*{ The \sbolheading{variable} property}\label{sec:variable}
+
+The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \sbol{Component} in the template \sbol{ComponentDefinition}. If the \sbol{wasDerivedFroms} property of a \sbol{Component} refers to this template \sbol{Component}, then the \sbolmult{definition:CI}{definition} property of the derived \sbol{Component} MUST refer to either (1) a \sbol{ComponentDefinition} referred to by the \sbol{variants} property of the \sbol{VariableComponent}, (2) a \sbol{ComponentDefinition} from a \sbol{Collection} referred to by the \sbol{variantCollections} property of the \sbol{VariableComponent}, or (3) a \sbol{ComponentDefinition} derived from a \sbol{CombinatorialDerivation} referred to by the \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+
+If the \sbolmult{roles:CD}{roles} property of the template \sbol{Component} contains one or more URIs, then the \sbolmult{roles:CD}{roles} property of the derived \sbol{Component} SHOULD also contain those URIs.
+
+\subsubsection*{ The \sbolheading{variants} property}\label{sec:variants}
+
+The \sbol{variants} property is OPTIONAL and MAY contain zero or more URIs that each refer to a \sbol{ComponentDefinition}. This property specifies individual \sbol{ComponentDefinition} objects to serve as options when deriving a new \sbol{Component} from the template \sbol{Component}.
+
+\subsubsection*{ The \sbolheading{variantCollections} property}\label{sec:variantCollections}
+
+The \sbol{variantCollections} property is OPTIONAL and MAY contain zero or more URIs that each refer to a \sbol{Collection}. The \sbol{members} property of each \sbol{Collection} referred to in this way MUST NOT be empty. This property enables the convenient specification of existing groups of \sbol{ComponentDefinition} objects to serve as options when deriving a new \sbol{Component} from the template \sbol{Component}.
+
+\subsubsection*{ The \sbolheading{variantDerivations} property}\label{sec:variantDerivations}
+
+The \sbol{variantDerivations} property is OPTIONAL and MAY contain zero or more URIs that each refer to a\\ \sbol{CombinatorialDerivation}. This property enables the convenient specification of \sbol{ComponentDefinition} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \sbol{Component} from the template \sbol{Component}. The \sbol{variantDerivations} property of a \sbol{VariableComponent} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \sbol{VariableComponent}. Furthermore, \sbol{VariableComponent} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivations} properties and the\\ \sbol{CombinatorialDerivation} objects that contain them. For example, consider the \sbol{VariableComponent} objects A and B and the \sbol{CombinatorialDerivation} objects X and Y. The reference chain X contains A, A has variant derivation Y, Y contains B, and B has variant derivation X is cyclical.
+
+\subsubsection*{ The \sbolheading{operator} property}\label{sec:operator}
+
+The \sbol{operator} property is REQUIRED and has a data type of URI. This property specifies how many \sbol{Component} objects SHOULD be derived from the template \sbol{Component} during the derivation of a new \sbol{ComponentDefinition}. The URI value of this property MUST come from the URIs provided in~\ref{tbl:operator}.
+
+}
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{lp{4in}}
+    \toprule
+    \textbf{Operator URI} & \textbf{Description} \\
+    \midrule
+    \url{http://sbols.org/v2#zeroOrOne} & No more than one \sbol{Component} in the derived \sbol{ComponentDefinition} SHOULD have a \sbol{wasDerivedFroms} property that refers to the template \sbol{Component}. \\
+        \url{http://sbols.org/v2#one} & Exactly one \sbol{Component} in the derived \sbol{ComponentDefinition} SHOULD have a \sbol{wasDerivedFroms} property that refers to the template \sbol{Component}. \\
+\url{http://sbols.org/v2#zeroOrMore} & Any number of \sbol{Component} objects in the derived \sbol{ComponentDefinition} MAY have \sbol{wasDerivedFroms} properties that refer to the template \sbol{Component}. \\
+\url{http://sbols.org/v2#oneOrMore} & At least one \sbol{Component} in the derived \sbol{ComponentDefinition} SHOULD have a \sbol{wasDerivedFroms} property that refers to the template \sbol{Component}. \\
+    \bottomrule
+  \end{edtable}
+  \caption{REQUIRED \sbol{URI}s for the \sbol{operator} property.}
+  \label{tbl:operator}
+\end{table}
+
+\twotwozero{
+\subsubsection*{Serialization}
+
+The serialization of a \sbol{VariableComponent} MUST have the following form:
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:VariableComponent rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  [\emph{one}] <sbol:variable rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}] <sbol:variant rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}] <sbol:variantCollection rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or more}] <sbol:variantDerivation rdf:resource="..."/> [\emph{element}]
+  [\emph{one}] <sbol:operator rdf:resource="..."/> [\emph{element}]
+</sbol:VariableComponent>
+\end{lstlisting}
+
+\twotwozero{
+The example below shows the serialization of a \sbol{VariableComponent} that specifies a choice of one or more operator sites from a library of variants for the derivation of a synthetic CMV promoter.
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:VariableComponent rdf:about="http://www.sbolstandard.org/cmv_promoter_derivation/operator_variable/1.0.0">
+  <sbol:operator rdf:resource="http://sbols.org/v2#oneOrMore"/>
+  <sbol:variable rdf:resource="http://www.sbolstandard.org/cmv_promoter_template/o1/1.0.0"/>
+  <sbol:variantCollection rdf:resource="http://www.sbolstandard.org/operator_library/1.0.0"/>
+</sbol:VariableComponent>
+\end{lstlisting}
+
+\twotwozero{
+\subsection{Implementation}
+\label{sec:Implementation}
+An \sbol{Implementation} represents a real, physical instance of a synthetic biological construct which may be associated with a laboratory sample. An \sbol{Implementation} describes the thing which was built during the build phase of a design-built-test-learn workflow. An \sbol{Implementation} may be linked back to its original design (either a \sbol{ModuleDefinition} or \sbol{ComponentDefinition}) using the \sbol{wasDerivedFroms} property inherited from the \sbol{Identified} superclass. An \sbol{Implementation} may also link to a \sbol{ModuleDefinition} or \sbol{ComponentDefinition} that specifies its realized structure and/or function.
+% as described in Section2.1.1.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.5]{uml/implementation}
+\caption[]{Diagram of the \sbol{Implementation} class and its associated properties.}
+\label{uml:implementation}
+\end{center}
+\end{figure}
+
+\subsubsection*{ The \sbolheading{built} property}\label{sec:built}
+The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a \sbol{TopLevel} object that is either a \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{ComponentDefinition} or \sbol{ModuleDefinition} is intended to describe the actual physical structure and/or functional behavior of the \sbol{Implementation}. When the built property refers to a \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is also linked to the \sbol{Implementation} via PROV-O properties such as \sbol{wasDerivedFroms} (see \ref{sec:provenance}), it can be inferred that the actual structure and/or function of the \sbol{Implementation} matches its original design. When the \sbol{built} property refers to a different \sbol{ComponentDefinition} or \sbol{ModuleDefinition}, it can be inferred that the \sbol{Implementation} has deviated from the original design. For example, the latter could be used to document when the DNA sequencing results for an assembled construct do not match the original target sequence.
+}
+
+\twotwozero{
+\subsubsection*{Serialization}
+
+The serialization of an \sbol{Implementation} has the following form:
+}
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Implementation rdf:about="...">
+  ... [\emph{properties inherited from Identified}] ...
+  [\emph{one}]          <sbol:built rdf:resource="..."/> [\emph{element}]
+</sbol:Implementation>
+\end{lstlisting}
+
+\twotwozero{
+ In the example below, an \sbol{Implementation} links back to its target design via the \sbol{wasDerivedFroms} property. Since this particular sample did not match its target structure when synthesized in the lab, a \sbol{ComponentDefinition} representing its mutated structure is linked by the \sbol{built} field.
+}
+
+\lstsetsbol
+\begin{lstlisting}
+  <sbol:Implementation rdf:about="http://examples.org/Implementation/build/1.0.0">
+   <sbol:displayId>build</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://examples.org/Implementation/build"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasDerivedFrom rdf:resource="http://examples.org/ComponentDefinition/design/1.0.0"/>
+    <sbol:built rdf:resource="http://examples.org/ComponentDefinition/mutant/1.0.0"/>
+  </sbol:Implementation>
+\end{lstlisting}
+
+\twotwozero{
+\subsection{Attachment}
+\label{sec:Attachment}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/attachment}
+\caption[]{Diagram of the \sbol{Attachment} class and its associated properties.}
+\label{uml:attachment}
+\end{center}
+\end{figure}
+
+The purpose of the \sbol{Attachment} class is to serve as a general container for data files, especially experimental data files.
+It provides a means for linking files and metadata to SBOL designs.
+
+The meta-data provided by the \sbol{Attachment} class include the following properties: the \sbolmult{source:A}{source} or location of the actual file of the attachment, the \sbol{format} of the file, the \sbol{size} of the file, and the \sbol{hash} for the file.
+
+\subsubsection*{ The \sbolheading{source} property}\label{sec:source:A}
+The \sbolmult{source:A}{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file.
+
+\subsubsection*{ The \sbolheading{format} property}\label{sec:format}
+The \sbol{format} property is OPTIONAL and MAY contain a \sbol{URI} that specifies the format of the attached file. It is RECOMMENDED that this \sbol{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology.
+
+\subsubsection*{ The \sbolheading{size} property}\label{sec:size}
+The \sbol{size} property is OPTIONAL and MAY contain a long indicating the file size in bytes. This may be used by client applications accessing files over RESTful APIs.
+
+\subsubsection*{ The \sbolheading{hash} property}\label{sec:hash}
+The \sbol{hash} property is OPTIONAL and MAY contain a string used to retrieve files from a cache.
+
+\subsubsection*{Serialization}
+
+The serialization of an \sbol{Attachment} MUST have the following form:
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Attachment rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  [\emph{one}] <sbol:source rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:format rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:size>...</sbol:size> [\emph{element}]
+  [\emph{zero or one}] <sbol:hash>...</sbol:hash> [\emph{element}]
+</sbol:Attachment>
+\end{lstlisting}
+
+\twotwozero{
+The example below shows the serialization of an \sbol{Attachment} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbolmult{source:A}{source} \sbol{URI}, which is a \external{URL}.
+}
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Attachment rdf:about="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6"/>
+    <sbol:displayId>attachment_00009Les8pDTQCmKA7A5T6</sbol:displayId>
+    <dcterms:title>NicePlot.png</dcterms:title>
+    <sbol:source rdf:resource="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6/1/download"/>
+    <sbol:format rdf:resource="http://identifiers.org/edam/format_3603"/>
+    <sbol:size>31399</sbol:size>
+    <sbol:hash>404966a5062857f63edb5c3ba16bb581d7fb6a1e</sbol:hash>
+  </sbol:Attachment>
+</rdf:RDF>
+\end{lstlisting}
+\label{ser:Attachment}
 
 \subsection{Annotation and Extension of SBOL}
 \label{sec:Annotations}
