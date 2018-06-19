@@ -336,7 +336,7 @@ for the purpose of engineering design. For DNA or RNA entities,
 additional \sbolmult{types:CD}{types} fields are used to describe nucleic acid
 topology (circular / linear) and strandedness (double- or single-stranded).
 
-The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the BioPAX ontology or the ontology of Chemical Entities of Biological Interest (ChEBI).
+The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the Biological Pathway Exchange (BioPAX) ontology ~\cite{biopax} or  the ontology of Chemical Entities of Biological Interest (ChEBI) ~\cite{chebi}.
 \ref{tbl:componentdefinition_types} provides a list of possible ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s.
 In order to maximize the compatibility of designs, \twozeroone{the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} SHOULD contain a \sbol{URI} from \ref{tbl:componentdefinition_types}, and} any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use the \sbol{URI} for that term as one of its \sbolmult{types:CD}{types}.
 Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it might not be clear how to interpret them). For example, the BioPAX terms provided by \ref{tbl:componentdefinition_types} would conflict because they specify classes of biochemical entities with different molecular structures.
