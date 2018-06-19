@@ -358,7 +358,7 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
 \end{table}
 
 \twoonezero{\emph{Nucleic Acid Topology types}
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 011: \url{https://github.com/SynBioDex/SEPs/issues/26}]
+\-\hspace{0.8cm}[New in 2.1.0; see SEP 011: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_011.md}]
 
 Any \sbol{ComponentDefinition} classified as DNA (see \ref{tbl:componentdefinition_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This
 (topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
@@ -597,7 +597,7 @@ The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
 \vspace{-7pt}
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/issues/4}]
+\-\hspace{0.8cm}[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_004.md}]
 
 The expected purpose and function of a genetic part are described by the
 \sbolmult{roles:CD}{roles} property of \sbol{ComponentDefinition}. However, the same building block might be used for a different purpose in an actual design. In other words, purpose and function are sometimes determined by context. 
@@ -612,7 +612,7 @@ It is RECOMMENDED that these \sbolmult{roles:C}{role} \sbol{URI}s identify terms
 \paragraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:C}
 \vspace{-7pt}
 \-\hspace{0.8cm}
-[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/issues/4}]
+[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_004.md}]
 
 A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship between a \sbol{Component} instance's own set of \sbolmult{roles:C}{roles} and the set of \sbolmult{roles:CD}{roles} on the included sub-\sbol{ComponentDefinition}.
 
@@ -787,8 +787,8 @@ The \sbol{component} property is OPTIONAL and has a data type of \sbol{URI}. Thi
 \twoonezero{
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:SA}
 \vspace{-7pt}
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/issues/4}]\\
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 010: \url{https://github.com/SynBioDex/SEPs/issues/10}]
+\-\hspace{0.8cm}[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_004.md}]\\
+\-\hspace{0.8cm}[New in 2.1.0; see SEP 010: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_010.md}]
 
 Alternatively to describing substructure, a \sbol{SequenceAnnotation} can be utilized to identify a feature, such as a GenBank feature, of a specified \sbol{Sequence}.  In this use case, the \sbol{SequenceAnnotation} MUST NOT have a \sbol{component} property, but instead it would have a \sbolmult{roles:SA}{roles} property.  
 
