@@ -106,7 +106,7 @@ Entities in an SBOL document can be annotated with creation and modification dat
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:pr="http://partsregistry.org" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
   <sbol:CLASS_NAME rdf:about="...">
     <dcterms:created>DATE_TIME_STRING</dcterms:created>
     <dcterms:modified>DATE_TIME_STRING</dcterms:modified>
@@ -115,6 +115,23 @@ Entities in an SBOL document can be annotated with creation and modification dat
   ...
 </rdf:RDF>
 \end{lstlisting}
+
+\twotwoone{\subsection{Annotating Entities with Authorship information}\label{sec:Authorship}
+Authorship information should ideally be added to \sbol{TopLevel} entities, where possible. It is RECOMMENDED that the \texttt{creator} DCMI Metadata term SHOULD be used to annotate SBOL entities with authorship information. This property can be repeated for each author. The example below shows the use of this property for two authors and the values shown are free text \texttt{String} literals.
+}
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:CLASS_NAME rdf:about="...">
+    <dcterms:creator>First author</dcterms:creator>
+    <dcterms:creator>Second author</dcterms:creator>
+               ...
+  </sbol:CLASS_NAME>
+  ...
+</rdf:RDF>
+\end{lstlisting}
+
 
 \twoonezero{\subsection{Adding Provenance}
 \label{sec:provenance}
