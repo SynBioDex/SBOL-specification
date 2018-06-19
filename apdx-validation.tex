@@ -899,10 +899,14 @@ Reference: Section 7.11 on page 46}}
 
 \printComplete{\sbol{VariableComponent} objects MUST NOT form circular reference chains via their\\ \sbol{variantDerivations} properties and parent \sbol{CombinatorialDerivation} objects.
 \\ Reference: \sec{sec:VariableComponent}}
+}
 
-\printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{Component} refers to the same \sbol{Component} as the \sbol{variable} property of a \sbol{VariableComponent}, then the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to a \sbol{ComponentDefinition} specified by the \sbol{variants} property, \sbol{variantCollections} property, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+\twotwoone{
+\printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{Component} refers to a \sbol{Component} in the \sbol{template} \sbol{ComponentDefinition} of a \sbol{CombinatorialDerivation}, and the second \sbol{Component} is referred to by the \sbol{variable} property of any \sbol{VariableComponent} in the \sbol{CombinatorialDerivation}, then the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to a \sbol{ComponentDefinition} specified by the \sbol{variants} property, \sbol{variantCollections} property, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
+}
 
+\twotwozero{
 \printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{Component} refers to a \sbol{Component} in the \sbol{template} \sbol{ComponentDefinition} of a \sbol{CombinatorialDerivation}, and the second \sbol{Component} is not referred to by the \sbol{variable} property of any \sbol{VariableComponent} in the \sbol{CombinatorialDerivation}, then the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to the same \sbol{ComponentDefinition} as the \sbolmult{definition:CI}{definition} property of the second \sbol{Component}.
 \\ Reference: \sec{sec:VariableComponent}}
 
