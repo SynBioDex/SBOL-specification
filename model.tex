@@ -92,8 +92,7 @@ It is important to realize that in RDF, a \sbol{URI} might or might not be a res
 \subsection{Identified}
 \label{sec:Identified}
 
-All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
-This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
+All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class. This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
 
 As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity},  \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
 
@@ -129,6 +128,16 @@ An \sbol{Identified} object MUST be referred to using either its \sbol{identity}
 \subsubsection*{The \sbolheading{displayId} property}
 \label{sec:displayId}
 The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between \sbol{name} and \sbol{identity} that is machine-readable, but more human-readable than the full \sbol{URI} of an \sbol{identity}.
+
+%%---------------
+%% Issue #55
+The purpose of a \sbol{displayId} is the following:
+\begin{itemize}
+\item The \sbol{displayId} property is considered as an identifier (see \url{http://purl.org/dc/elements/1.1/identifier}), allowing the unambiguous reference to an SBOL object within its context. A typical example of \sbol{displayId}s in action are the parts IDs given by partsregistry.org, such as \texttt{BBa\_P1010}.
+\item The \sbol{displayId} property should be human-readable in order to allow users to quickly locate a part in a registry or communicate about it.
+\item The URI, which is specified by a SBOL object's \sbol{identity} property, should use the \sbol{displayId} as their subject ID (see section \ref{} and rules \ref{}).
+\end{itemize}
+%%---------------
 
 If the \sbol{displayId} property is used, then its \sbol{String} value \twozeroone{\st{SHOULD be locally unique (global uniqueness is not necessary) and}} MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
 
