@@ -190,6 +190,16 @@ Reference: Section 7.5 on page 19}}
 \printWarning{If the \twotwozero{\sbol{wasDerivedFroms}} property of one \sbol{TopLevel} object refers to another \sbol{TopLevel} object with the same \sbol{persistentIdentity} property, then \sbol{version} property of the second \sbol{TopLevel} object MUST precede that of the first if both objects have a \sbol{version}.\\ Reference: \sec{sec:Identified}}
 }
 
+\twotwoone{
+\printValid{The \sbol{attachments} property of a \sbol{TopLevel} is OPTIONAL and MAY contain a set of \sbol{URI}s.
+\\ Reference: \sec{sec:TopLevel}}
+}
+
+\twotwoone{
+\printComplete{Each \sbol{URI} contained by the \sbol{attachments} property of a \sbol{TopLevel} MUST refer to an \sbol{Attachment} object.
+\\ Reference: \sec{sec:TopLevel}}
+}
+
 \subsubsection*{Rules for the \class{Sequence} class} 
 \setcounter{sbolCtr}{10401}
 
