@@ -1534,6 +1534,8 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 \twotwozero{
 \subsection{CombinatorialDerivation}
 \label{sec:CombinatorialDerivation}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.2.0; see SEP 007: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_007.md}]
 
 The purpose of the \sbol{CombinatorialDerivation} class is to specify combinatorial genetic designs without having to specify every possible design variant. For example, a \sbol{CombinatorialDerivation} can be used to specify a library of reporter gene variants that include different promoters and RBSs without having to specify a \sbol{ComponentDefinition} for every possible combination of promoter, RBS, and CDS in the library. \sbol{ComponentDefinition} objects that realize a \sbol{CombinatorialDerivation} can be derived in accordance with the class properties \sbol{template}, \sbol{variableComponents}, and \sbol{strategy} (see \ref{uml:combinatorial_derivation}).
 
@@ -1725,6 +1727,9 @@ The example below shows the serialization of a \sbol{VariableComponent} that spe
 \twotwozero{
 \subsection{Implementation}
 \label{sec:Implementation}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.2.0; see SEP 019: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_019.md}]
+
 An \sbol{Implementation} represents a real, physical instance of a synthetic biological construct which may be associated with a laboratory sample. An \sbol{Implementation} describes the thing which was built during the build phase of a design-built-test-learn workflow. An \sbol{Implementation} may be linked back to its original design (either a \sbol{ModuleDefinition} or \sbol{ComponentDefinition}) using the \sbol{wasDerivedFroms} property inherited from the \sbol{Identified} superclass. An \sbol{Implementation} may also link to a \sbol{ModuleDefinition} or \sbol{ComponentDefinition} that specifies its realized structure and/or function.
 % as described in Section2.1.1.
 
@@ -1771,6 +1776,8 @@ The serialization of an \sbol{Implementation} has the following form:
 \twotwozero{
 \subsection{Attachment}
 \label{sec:Attachment}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.2.0; see SEP 018: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_018.md}]
 
 \begin{figure}[ht]
 \begin{center}
