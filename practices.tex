@@ -324,7 +324,7 @@ The serialization of an \sbol{Usage} MUST have the following form:
 \twoonezero{
 \subsubsection{Agent}
 \label{sec:Agent}
-Examples of agents are person, organisation or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
+Examples of agents are person, organization or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Agent} MUST have the following form:
@@ -341,8 +341,8 @@ The serialization of an \sbol{Agent} MUST have the following form:
 
 
 \twoonezero{
-\paragraph{Example - Codon optimisation}
-Codon optimisation is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
+\paragraph{Example - Codon optimization}
+Codon optimization is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
 
 }%\twoonezero{ end
 
@@ -355,14 +355,14 @@ Codon optimisation is a practical real-wold example where provenance properties 
     <sbol:displayId>codon_optimized</sbol:displayId>
     <prov:wasDerivedFrom rdf:resource="http://myapp.com/non_codon_optimized"/>
     <prov:wasGeneratedBy rdf:resource="http://myapp.com/codon_optimization_activity"/>
-    <dcterms:title>Codon optimised CDS</dcterms:title>
+    <dcterms:title>Codon optimized CDS</dcterms:title>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
   </sbol:ComponentDefinition>
   <sbol:ComponentDefinition rdf:about="http://myapp.com/non_codon_optimized">
     <sbol:persistentIdentity rdf:resource="http://myapp.com/non_codon_optimized"/>
     <sbol:displayId>non_codon_optimized</sbol:displayId>
-    <dcterms:title>Non Codon optimised CDS</dcterms:title>
+    <dcterms:title>Non Codon optimized CDS</dcterms:title>
     <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
     <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
   </sbol:ComponentDefinition>
@@ -374,7 +374,7 @@ Codon optimisation is a practical real-wold example where provenance properties 
       <prov:Association rdf:about="http://myapp.com/codon_optimization_activity/association">
         <sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimization_activity/association"/>
         <sbol:displayId>association</sbol:displayId>
-        <prov:hadRole rdf:resource="http://myapp.com/codonoptimiser"/>
+        <prov:hadRole rdf:resource="http://myapp.com/codonoptimizer"/>
         <prov:agent rdf:resource="http://myapp.com/codon_optimization_software"/>
       </prov:Association>
     </prov:qualifiedAssociation>
