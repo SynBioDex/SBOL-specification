@@ -228,7 +228,7 @@ namespace, but are mapped to standardized terms defined elsewhere:
 
 \subsection {TopLevel}
 \label{sec:TopLevel}
-\sbol{TopLevel} is an abstract class that is extended by any \sbol{Identified} class that can be found at the top level of an SBOL document or file. In other words, \sbol{TopLevel} objects are not nested inside any other object via a composite aggregation or black diamond arrow association property. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their \sbol{URI}s using shared aggregation or white diamond arrow association properties. The \sbol{TopLevel} classes defined in this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, and \sbol{GenericTopLevel} (\ref{uml:toplevel}).
+\sbol{TopLevel} is an abstract class that is extended by any \sbol{Identified} class that can be found at the top level of an SBOL document or file. In other words, \sbol{TopLevel} objects are not nested inside any other object via a composite aggregation or black diamond arrow association property. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their \sbol{URI}s using shared aggregation or white diamond arrow association properties. The \sbol{TopLevel} classes defined in this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, \sbol{GenericTopLevel}, \sbol{CombinatorialDerivation}, and \sbol{Implementation}(\ref{uml:toplevel}).
 
 \begin{figure}[ht]
 \begin{center}
@@ -237,6 +237,9 @@ namespace, but are mapped to standardized terms defined elsewhere:
 \label{uml:toplevel}
 \end{center}
 \end{figure}
+
+\subsubsection*{The attachments property}
+The attachments property is OPTIONAL and MAY specify a set of Attachment objects that are referenced by the TopLevel object. The Attachment class is described in more detail in Section~\ref{sec:Attachment}.
 
 \subsubsection*{Serialization}
 
