@@ -358,7 +358,7 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
 \end{table}
 
 \twoonezero{\emph{Nucleic Acid Topology types}
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 011: \url{https://github.com/SynBioDex/SEPs/issues/26}]
+\-\hspace{0.8cm}[New in 2.1.0; see SEP 011: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_011.md}]
 
 Any \sbol{ComponentDefinition} classified as DNA (see \ref{tbl:componentdefinition_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This
 (topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
@@ -597,7 +597,7 @@ The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
 \vspace{-7pt}
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/issues/4}]
+\-\hspace{0.8cm}[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_004.md}]
 
 The expected purpose and function of a genetic part are described by the
 \sbolmult{roles:CD}{roles} property of \sbol{ComponentDefinition}. However, the same building block might be used for a different purpose in an actual design. In other words, purpose and function are sometimes determined by context. 
@@ -612,7 +612,7 @@ It is RECOMMENDED that these \sbolmult{roles:C}{role} \sbol{URI}s identify terms
 \paragraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:C}
 \vspace{-7pt}
 \-\hspace{0.8cm}
-[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/issues/4}]
+[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_004.md}]
 
 A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship between a \sbol{Component} instance's own set of \sbolmult{roles:C}{roles} and the set of \sbolmult{roles:CD}{roles} on the included sub-\sbol{ComponentDefinition}.
 
@@ -787,8 +787,8 @@ The \sbol{component} property is OPTIONAL and has a data type of \sbol{URI}. Thi
 \twoonezero{
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:SA}
 \vspace{-7pt}
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/issues/4}]\\
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 010: \url{https://github.com/SynBioDex/SEPs/issues/10}]
+\-\hspace{0.8cm}[New in 2.1.0; see SEP 004: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_004.md}]\\
+\-\hspace{0.8cm}[New in 2.1.0; see SEP 010: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_010.md}]
 
 Alternatively to describing substructure, a \sbol{SequenceAnnotation} can be utilized to identify a feature, such as a GenBank feature, of a specified \sbol{Sequence}.  In this use case, the \sbol{SequenceAnnotation} MUST NOT have a \sbol{component} property, but instead it would have a \sbolmult{roles:SA}{roles} property.  
 
@@ -1534,6 +1534,8 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 \twotwozero{
 \subsection{CombinatorialDerivation}
 \label{sec:CombinatorialDerivation}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.2.0; see SEP 007: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_007.md}]
 
 The purpose of the \sbol{CombinatorialDerivation} class is to specify combinatorial genetic designs without having to specify every possible design variant. For example, a \sbol{CombinatorialDerivation} can be used to specify a library of reporter gene variants that include different promoters and RBSs without having to specify a \sbol{ComponentDefinition} for every possible combination of promoter, RBS, and CDS in the library. \sbol{ComponentDefinition} objects that realize a \sbol{CombinatorialDerivation} can be derived in accordance with the class properties \sbol{template}, \sbol{variableComponents}, and \sbol{strategy} (see \ref{uml:combinatorial_derivation}).
 
@@ -1725,6 +1727,9 @@ The example below shows the serialization of a \sbol{VariableComponent} that spe
 \twotwozero{
 \subsection{Implementation}
 \label{sec:Implementation}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.2.0; see SEP 019: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_019.md}]
+
 An \sbol{Implementation} represents a real, physical instance of a synthetic biological construct which may be associated with a laboratory sample. An \sbol{Implementation} describes the thing which was built during the build phase of a design-built-test-learn workflow. An \sbol{Implementation} may be linked back to its original design (either a \sbol{ModuleDefinition} or \sbol{ComponentDefinition}) using the \sbol{wasDerivedFroms} property inherited from the \sbol{Identified} superclass. An \sbol{Implementation} may also link to a \sbol{ModuleDefinition} or \sbol{ComponentDefinition} that specifies its realized structure and/or function.
 % as described in Section2.1.1.
 
@@ -1771,6 +1776,8 @@ The serialization of an \sbol{Implementation} has the following form:
 \twotwozero{
 \subsection{Attachment}
 \label{sec:Attachment}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.2.0; see SEP 018: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_018.md}]
 
 \begin{figure}[ht]
 \begin{center}
