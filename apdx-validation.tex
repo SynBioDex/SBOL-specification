@@ -560,7 +560,12 @@ Reference: \sec{sec:GenericLocation}}
 \\ Reference: \sec{sec:SequenceConstraint}}
 
 \twotwozero{
-\printValid{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#differentFrom}, then the \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT contain the same \sbol{URI} as the \sbolmult{definition:CI}{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
+\printValid{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#differentFrom}, then the \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT refer to the the same \sbol{URI} as the \sbolmult{definition:CI}{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
+\\ Reference: \sec{sec:SequenceConstraint}}
+}
+
+\twotwoone{
+\printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#differentFrom}, then the \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT refer to the same object as the \sbolmult{definition:CI}{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
 \\ Reference: \sec{sec:SequenceConstraint}}
 }
 
