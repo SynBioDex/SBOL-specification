@@ -1733,7 +1733,7 @@ The example below shows the serialization of a \sbol{VariableComponent} that spe
 \vspace{-7pt}
 \-\hspace{0.8cm}[New in 2.2.0; see SEP 019: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_019.md}]
 
-An \sbol{Implementation} represents a real, physical instance of a synthetic biological construct which may be associated with a laboratory sample. An \sbol{Implementation} describes the thing which was built during the build phase of a design-built-test-learn workflow. An \sbol{Implementation} may be linked back to its original design (either a \sbol{ModuleDefinition} or \sbol{ComponentDefinition}) using the \sbol{wasDerivedFroms} property inherited from the \sbol{Identified} superclass. An \sbol{Implementation} may also link to a \sbol{ModuleDefinition} or \sbol{ComponentDefinition} that specifies its realized structure and/or function.
+An \sbol{Implementation} represents an instance of a synthetic biological construct, and describes the build phase of a design-built-test-learn workflow. Importantly, an \sbol{Implementation} can be associated with a laboratory sample that was already built, or that is to be built in the future. An \sbol{Implementation} can also represent virtual and simulated instances.  An \sbol{Implementation} may be linked back to its original design (either a \sbol{ModuleDefinition} or \sbol{ComponentDefinition}) using the \sbol{wasDerivedFroms} property inherited from the \sbol{Identified} superclass. An \sbol{Implementation} may also link to a \sbol{ModuleDefinition} or \sbol{ComponentDefinition} that specifies its realized structure and/or function.
 % as described in Section2.1.1.
 
 \begin{figure}[ht]
