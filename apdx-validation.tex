@@ -86,7 +86,7 @@ Reference: \sec{sec:serialization}}
 }
 
 \twotwoone{
-\printValid{All namespaces specified in an SBOL document MUST end with a valid delimiter (’/’, ’\#’, or ’:’).\\
+\printValid{All namespaces specified in an SBOL document MUST end with a delimiter  ('/', '\#', or ':').\\
 Reference: \sec{sec:serialization}}
 }
 
@@ -566,6 +566,11 @@ Reference: \sec{sec:GenericLocation}}
 \\ Reference: \sec{sec:SequenceConstraint}}
 }
 
+\twotwoone{
+\printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#differentFrom}, then the \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT refer to the same object as the \sbolmult{definition:CI}{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
+\\ Reference: \sec{sec:SequenceConstraint}}
+}
+
 \subsubsection*{Rules for the \class{Model} class} 
 \setcounter{sbolCtr}{11501}
 
@@ -872,7 +877,7 @@ Reference: Section 7.11 on page 46}}
 
 \twotwoone{
 \printValid{The \sbol{strategy} property of an \sbol{CombinatorialDerivation} is OPTIONAL and MAY contain a \sbol{URI}.
-\\ Reference: \sec{sec: CombinatorialDerivation}}
+\\ Reference: \sec{sec:CombinatorialDerivation}}
 }
 
 \twotwozero{
@@ -932,7 +937,7 @@ Reference: Section 7.11 on page 46}}
 
 \twotwoone{
 \printComplete{If the \sbol{wasDerivedFroms} property of a \sbol{Component} refers to a \sbol{Component} in the \sbol{template} \sbol{ComponentDefinition} of a \sbol{CombinatorialDerivation}, and the second \sbol{Component} is referred to by the \sbol{variable} property of any \sbol{VariableComponent} in the \sbol{CombinatorialDerivation}, then the \sbolmult{definition:CI}{definition} property of the first \sbol{Component} MUST refer to a \sbol{ComponentDefinition} specified by the \sbol{variants} property,
-a \sbol{ComponentDefinition} that is a \sbol{member} of a \sbol{Collection} specified by the \sbol{variantCollections} property, or a \sbol{ComponentDefinition} with a \sbol{wasDerivedFrom} property that refers to a \sbol{CombinatorialDerivation} specified by the \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+a \sbol{ComponentDefinition} that is one of the \sbol{members} of a \sbol{Collection} specified by the \sbol{variantCollections} property, or a \sbol{ComponentDefinition} with a \sbol{wasDerivedFroms} property that refers to a \sbol{CombinatorialDerivation} specified by the \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 }
 
