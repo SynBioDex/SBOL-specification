@@ -546,7 +546,7 @@ Package Specification Style]
     \vspace*{2em}
   \fi
   \vfill
-  \centerline{\includegraphics[width=2in]{\SBMLbadge}}
+  \centerline{\includegraphics[width=1.0in]{\SBMLbadge}}
   \clearpage
   \endgroup
   \setcounter{footnote}{0}%
