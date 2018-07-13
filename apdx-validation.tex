@@ -178,8 +178,13 @@ Reference: \sec{sec:provenance}}
 \printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD be an \sbol{Attachment} or a \sbol{Collection} of \sbol{Attachment} objects.\\ 
 Reference: \sec{sec:provenance}}
 
-\printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD not be an \sbol{Implementation}.]\\
+\printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD not be an \sbol{Implementation}.\\
 Reference: \sec{sec:provenance}}
+}
+
+\twotwoone{
+\printValid{An \sbol{Identified} object must have no more than one \sbol{rdfType} property in each of the\\ \uri{http://sbols.org/v2\#} and \uri{http://www.w3.org/ns/prov\#} namespaces. \\
+Reference: \sec{sec:Identified}}
 }
 
 \subsubsection*{Rules for the \class{TopLevel} class} 
