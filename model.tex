@@ -406,6 +406,7 @@ The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s that c
 
 The \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition} MAY contain one or more \sbol{URI}s that MUST identify terms from ontologies that are consistent with the \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition}.
 For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{ComponentDefinition} could contain URIs identifying terms from the Sequence Ontology (SO). \twozeroone{As a best practice, a DNA or RNA \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{URI} that refers to a term from the sequence feature branch of the SO.}
+\twotwoone{Similarly, the roles property of a Protein and SmallMolecule \sbol{ComponentDefinition} SHOULD respectively contain \sbol{URI}s identifying terms from the \texttt{MolecularFunction} branch (\texttt{GO:0003674}) of the Gene Ontology (GO) and the \texttt{role} branch (\texttt{CHEBI:50906}) of the CHEBI ontology.}
 \ref{tbl:componentdefinition_roles} contains a list of possible ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. These terms are organized by the type of \sbol{ComponentDefinition} to which they SHOULD apply (see \ref{tbl:componentdefinition_types}). Any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_roles} MUST use the \sbol{URI} for that term as one of its \sbolmult{roles:CD}{roles}.
 
 
@@ -423,6 +424,7 @@ For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{Compo
       Engineered Gene & \url{http://identifiers.org/so/SO:0000280} & DNA \\
       mRNA & \url{http://identifiers.org/so/SO:0000234} & RNA \\
       Effector & \url{http://identifiers.org/chebi/CHEBI:35224} & Small Molecule \\
+      Transcription Factor & \url{http://identifiers.org/go/GO:0003700} & Protein\\
     \bottomrule
   \end{edtable}
   \caption{Ontology terms to specify the \sbolmult{roles:CD}{roles} property of a \sbol{ComponentDefinition}, organized by the type of \sbol{ComponentDefinition} to which they are intended to apply (see \ref{tbl:componentdefinition_types}).}
