@@ -308,10 +308,10 @@ The serialization of an \sbol{Association} MUST have the following form:
 Note that the tags prov:hadRole and prov:hadPlan are used for \sbolmult{roles:A}{roles} and \sbol{plan}, respectively.
 }
 
-\twoonezero{
 \subsubsection{Plan}
 \label{sec:Plan}
-The Plan entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \sbol{Agent} is used in a particular \sbol{Activity}. 
+\twoonezero{
+ The Plan entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \sbol{Agent} is used in a particular \sbol{Activity}. 
 
 \paragraph{Serialization}
 The serialization of an \sbol{Usage} MUST have the following form:
@@ -326,10 +326,10 @@ The serialization of an \sbol{Usage} MUST have the following form:
  </prov:Plan>
 \end{lstlisting}
 
-\twoonezero{
 \subsubsection{Agent}
 \label{sec:Agent}
-Examples of agents are person, organization or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
+\twoonezero{
+ Examples of agents are person, organization or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Agent} MUST have the following form:
@@ -345,9 +345,9 @@ The serialization of an \sbol{Agent} MUST have the following form:
 \end{lstlisting}
 
 
-\twoonezero{
 \paragraph{Example - Codon optimization}
-Codon optimization is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
+\twoonezero{
+ Codon optimization is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
 
 }%\twoonezero{ end
 
@@ -400,9 +400,9 @@ Codon optimization is a practical real-wold example where provenance properties 
 </rdf:RDF>
 \end{lstlisting}
 
-\twoonezero{
 \paragraph{Example - Deriving strains}
-Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
+\twoonezero{
+ Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
 
 }%twoonezero end
 
@@ -455,9 +455,9 @@ Bacterial strains are often derived from other strains through modifications suc
 </rdf:RDF>
 \end{lstlisting}
 
-\twotwozero{
 \paragraph{Example - Design-build-test-learn Workflow}
-This particular example represents an idealized workflow for model-based design. The workflow begins with a Model which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (ModuleDefinition) is composed of biological parts which links back to its Model. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (Implementation). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an Attachment). Finally, a new Model is derived from these data using some a fitting algorithm implemented in the Python programming language. The final Model may not match the beginning Model, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in  \ref{images:design-build-test-learn}.
+\twotwozero{
+ This particular example represents an idealized workflow for model-based design. The workflow begins with a Model which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (ModuleDefinition) is composed of biological parts which links back to its Model. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (Implementation). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an Attachment). Finally, a new Model is derived from these data using some a fitting algorithm implemented in the Python programming language. The final Model may not match the beginning Model, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in  \ref{images:design-build-test-learn}.
 }%twotwozero end
 
 \begin{figure}[ht]

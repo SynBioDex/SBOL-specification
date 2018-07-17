@@ -361,8 +361,10 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
  \label{tbl:componentdefinition_types}
 \end{table}
 
-\twoonezero{\emph{Nucleic Acid Topology types}
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 011: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_011.md}]
+\twoonezero{\emph{Nucleic Acid Topology types}\\
+%\vspace{-7pt}
+\-\hspace{0.8cm}
+[New in 2.1.0; see SEP 011: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_011.md}]
 
 Any \sbol{ComponentDefinition} classified as DNA (see \ref{tbl:componentdefinition_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This
 (topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
@@ -394,7 +396,7 @@ that sequence features may be mapped or identified across this junction. \emph{D
     double-stranded & \url{http://identifiers.org/so/SO:0000985}\\
     \bottomrule
   \end{edtable}
-  \caption{Sequence Ontology terms to encode DNA or RNA topology information in \sbolmult{types:CD}{types} properties of a \sbol{ComponentDefinition}.}
+  \caption{Sequence Ontology terms to encode DNA or RNA topology information in the \sbolmult{types:CD}{types} properties of a \sbol{ComponentDefinition}.}
  \label{tbl:componentdefinition_topology}
 \end{table}
 }
@@ -624,8 +626,6 @@ If zero \sbol{Component} \sbolmult{roles:C}{roles} are given and no \sbol{Compon
 It is RECOMMENDED to specify a set of \sbol{Component} \sbolmult{roles:C}{roles} only if the integrated result set of roles would differ from the set of \sbolmult{roles:CD}{roles} belonging to this \sbol{Component}'s included sub-\sbol{ComponentDefinition}.
 }
 
-\clearpage
-
 \twoonezero{
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
@@ -695,7 +695,7 @@ In particular, a \sbol{MapsTo} object provides two pieces of information:
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=1]{images/MapsTo_Diagram3}
+\includegraphics[scale=0.95]{images/MapsTo_Diagram3}
 \caption{Linking \sbol{Component} objects using \sbol{MapsTo} entities. Boxes with diagrams represent \sbol{ComponentDefinition} objects, boxes with the C label represent \sbol{Component} objects, and boxes with the M label represent \sbol{MapsTo} objects. In both diagrams, a promoter-RBS \sbol{ComponentDefinition} and a RBS-CDS \sbol{ComponentDefinition} are being composed to form the \sbol{ComponentDefinition} of a complete transcriptional unit. In the left-hand diagram, the two \sbol{Component} objects inside the promoter-RBS \sbol{ComponentDefinition} and RBS-CDS \sbol{ComponentDefinition} objects both refer to an abstract RBS \sbol{ComponentDefinition} that lacks a sequence (white semicircle). Through the use of \sbol{MapsTo} objects with \sbol{refinement} set to useLocal, these ``lower level'' \sbol{ComponentDefinition} objects are effectively overridden by that of the green RBS in the \sbol{ComponentDefinition} of the complete transcriptional unit. In the right-hand diagram, however, the two ``lower level'' RBS \sbol{ComponentDefinition} objects do not lack sequences and it is the ``higher level'' RBS \sbol{ComponentDefinition} that is abstract. In this case, one of the \sbol{MapsTo} objects has a useRemote \sbol{refinement}, resulting in the green RBS \sbol{ComponentDefinition} overriding that of the abstract RBS in the ``higher level'' \sbol{ComponentDefinition}.}
 \label{image:maps_to_diagram2}
 \end{center}
@@ -726,7 +726,7 @@ The \sbol{refinement} property is REQUIRED and has a data type of \sbol{URI}. Ea
 
 
 \begin{table}[ht]
-  \begin{edtable}{tabular}{lp{4in}}
+  \begin{edtable}{tabular}{lp{3.95in}}
     \toprule
     \textbf{Refinement URI} & \textbf{Description} \\
     \midrule
@@ -767,7 +767,8 @@ In the example below, a \sbol{FunctionalComponent} in a ``higher level'' \sbol{M
 
 \subsubsection{SequenceAnnotation}
 \label{sec:SequenceAnnotation}
-The \sbol{SequenceAnnotation} class describes one or more regions of interest on the \sbol{Sequence} objects referred to by its parent \sbol{ComponentDefinition}. In addition, \sbol{SequenceAnnotation} objects can describe the substructure of their parent \sbol{ComponentDefinition} through association with the \sbol{Component} objects contained by this \sbol{ComponentDefinition}.
+The \sbol{SequenceAnnotation} class describes one or more regions of interest on the \sbol{Sequence} objects referred to by its parent \sbol{ComponentDefinition}. In addition, \sbol{SequenceAnnotation} objects can describe the substructure of their parent \sbol{ComponentDefinition} through association with the \sbol{Component} objects contained by this\\
+\sbol{ComponentDefinition}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -989,7 +990,7 @@ The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. T
 
 \twotwozero{
 \begin{table}[ht]
-  \begin{edtable}{tabular}{lp{4in}}
+  \begin{edtable}{tabular}{lp{3.25in}}
     \toprule
     \textbf{Restriction URI} & \textbf{Description} \\
     \midrule
@@ -1127,7 +1128,8 @@ The example below shows the serialization of a \sbol{Model} object that refers t
 
 The \sbol{ModuleDefinition} class represents a grouping of structural and functional entities in a biological design. The primary usage of this class is to assert the molecular interactions and abstract function of its child entities.
 
-As shown in \ref{uml:module_definition}, these child entities are aggregated via the \sbol{functionalComponents} \sbol{modules} properties, while representation of their abstract function is accomplished via the \sbolmult{roles:MD}{roles}  property. More detailed descriptions of the function of a \sbol{ModuleDefinition} are provided by its \sbol{interactions} and \sbol{models} properties. Lastly, since \sbol{ModuleDefinition} objects can be more abstract and represent entities of  engineering design rather than biology, they can have designated ``inputs'' and ``outputs'' expressed by the \sbol{direction} properties on its \sbol{FunctionalComponent} objects.
+As shown in \ref{uml:module_definition}, these child entities are aggregated via the \sbol{functionalComponents} \sbol{modules} properties, while representation of their abstract function is accomplished via the \sbolmult{roles:MD}{roles}  property. More detailed descriptions of the function of a \sbol{ModuleDefinition} are provided by its \sbol{interactions} and \sbol{models} properties. Lastly, since \sbol{ModuleDefinition} objects can be more abstract and represent entities of  engineering design rather than biology, they can have designated ``inputs'' and ``outputs'' expressed by the \sbol{direction} properties on its\\
+\sbol{FunctionalComponent} objects.
 
 \subsubsection*{The \sbolheading{roles} property}\label{sec:roles:MD}
 The \sbolmult{roles:MD}{roles} property is an OPTIONAL set of \sbol{URI}s that clarifies the intended function of a \sbol{ModuleDefinition}.
@@ -1152,7 +1154,8 @@ Just as a \sbol{Module} represents an instance of a subsystem in the overall sys
 
 \subsubsection*{The \sbolheading{interactions} property}\label{sec:interactions}
 
-The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the \sbol{ModuleDefinition}.
+The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the\\
+\sbol{ModuleDefinition}.
 
 The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a\\ \sbol{ModuleDefinition} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
 Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{FunctionalComponent} objects involved in the \sbol{Interaction}.
@@ -1437,8 +1440,8 @@ The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that
     Stimulated & \url{http://identifiers.org/biomodels.sbo/SBO:0000643}  & Stimulation\\
      Reactant & \url{http://identifiers.org/biomodels.sbo/SBO:0000010}  & Non-Covalent Binding, Degradation \\
      & & Biochemical Reaction \\
-    Product & \url{http://identifiers.org/biomodels.sbo/SBO:0000011}  & Non-Covalent Binding, Genetic Production, \\
-    & & Biochemical Reaction\\
+    Product & \url{http://identifiers.org/biomodels.sbo/SBO:0000011}  & Non-Covalent Binding, \\
+    & & Genetic Production, Biochemical Reaction\\
     Promoter  & \url{http://identifiers.org/biomodels.sbo/SBO:0000598} & Inhibition, Stimulation, Genetic Production\\
     Modifier  & \url{http://identifiers.org/biomodels.sbo/SBO:0000019} & Biochemical Reaction, Control\\
     Modified  & \url{http://identifiers.org/biomodels.sbo/SBO:0000644} & Biochemical Reaction, Control\\
@@ -1490,7 +1493,7 @@ Some examples of \sbol{Collection} objects:
 \begin{itemize}
 \item Results of a query to find all \sbol{ComponentDefinition} objects in a repository that function as promoters.
 \item A set of \sbol{ModuleDefinition} objects representing a library of genetic logic gates.
-\item A \sbol{ModuleDefinition} for a complex design, and all of the \sbol{ModuleDefinition}, \sbol{ComponentDefinition}, \sbol{Sequence}, and \sbol{Model} objects used to provide its full specification.
+\item A \sbol{ModuleDefinition} for a complex design, and all of the \sbol{ModuleDefinition}, \sbol{ComponentDefinition},\\ \sbol{Sequence}, and \sbol{Model} objects used to provide its full specification.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -1540,7 +1543,8 @@ The example below shows the serialization of a \sbol{Collection} object grouping
 \vspace{-7pt}
 \-\hspace{0.8cm}[New in 2.2.0; see SEP 007: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_007.md}]
 
-The purpose of the \sbol{CombinatorialDerivation} class is to specify combinatorial genetic designs without having to specify every possible design variant. For example, a \sbol{CombinatorialDerivation} can be used to specify a library of reporter gene variants that include different promoters and RBSs without having to specify a \sbol{ComponentDefinition} for every possible combination of promoter, RBS, and CDS in the library. \sbol{ComponentDefinition} objects that realize a \sbol{CombinatorialDerivation} can be derived in accordance with the class properties \sbol{template}, \sbol{variableComponents}, and \sbol{strategy} (see \ref{uml:combinatorial_derivation}).
+The purpose of the \sbol{CombinatorialDerivation} class is to specify combinatorial genetic designs without having to specify every possible design variant. For example, a \sbol{CombinatorialDerivation} can be used to specify a library of reporter gene variants that include different promoters and RBSs without having to specify a \sbol{ComponentDefinition} for every possible combination of promoter, RBS, and CDS in the library. \sbol{ComponentDefinition} objects that realize a \sbol{CombinatorialDerivation} can be derived in accordance with the class properties \sbol{template}, \\
+\sbol{variableComponents}, and \sbol{strategy} (see \ref{uml:combinatorial_derivation}).
 
 \begin{figure}[ht]
 \begin{center}
@@ -1566,7 +1570,8 @@ If the \sbol{variable} property of one of these \sbol{VariableComponent} objects
 
 If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{Component}, then the \sbol{components} property of the derived \sbol{ComponentDefinition} SHOULD contain exactly one \sbol{Component} with a \sbol{wasDerivedFroms} property that refers to the template \sbol{Component}. The \sbolmult{definition:CI}{definition} property of this derived \sbol{Component} MUST refer to the \sbol{ComponentDefinition} referred to by the \sbolmult{definition:CI}{definition} property of the template \sbol{Component}.
 
-Finally, all of these derived \sbol{Component} objects MUST follow the \sbol{restriction} properties of any \sbol{SequenceConstraint} objects that refer to their corresponding template \sbol{Component} objects.
+Finally, all of these derived \sbol{Component} objects MUST follow the \sbol{restriction} properties of any \\
+\sbol{SequenceConstraint} objects that refer to their corresponding template \sbol{Component} objects.
 
 \subsubsection*{ The \sbolheading{strategy} property}\label{sec:strategy}
 The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URIs. If the \sbol{strategy} property is not empty, then it MUST contain a URI from \ref{tbl:strategy}. This property recommends how many \sbol{ComponentDefinition} objects a user SHOULD derive from the template \sbol{ComponentDefinition}.
@@ -1663,11 +1668,13 @@ If the \sbolmult{roles:CD}{roles} property of the template \sbol{Component} cont
 
 \subsubsection*{ The \sbolheading{variants} property}\label{sec:variants}
 
-The \sbol{variants} property is OPTIONAL and MAY contain zero or more URIs that each refer to a \sbol{ComponentDefinition}. This property specifies individual \sbol{ComponentDefinition} objects to serve as options when deriving a new \sbol{Component} from the template \sbol{Component}.
+The \sbol{variants} property is OPTIONAL and MAY contain zero or more URIs that each refer to a \sbol{ComponentDefinition}. This property specifies individual \sbol{ComponentDefinition} objects to serve as options when deriving a new\\
+\sbol{Component} from the template \sbol{Component}.
 
 \subsubsection*{ The \sbolheading{variantCollections} property}\label{sec:variantCollections}
 
-The \sbol{variantCollections} property is OPTIONAL and MAY contain zero or more URIs that each refer to a \sbol{Collection}. The \sbol{members} property of each \sbol{Collection} referred to in this way MUST NOT be empty. This property enables the convenient specification of existing groups of \sbol{ComponentDefinition} objects to serve as options when deriving a new \sbol{Component} from the template \sbol{Component}.
+The \sbol{variantCollections} property is OPTIONAL and MAY contain zero or more URIs that each refer to a\\
+\sbol{Collection}. The \sbol{members} property of each \sbol{Collection} referred to in this way MUST NOT be empty. This property enables the convenient specification of existing groups of \sbol{ComponentDefinition} objects to serve as options when deriving a new \sbol{Component} from the template \sbol{Component}.
 
 \subsubsection*{ The \sbolheading{variantDerivations} property}\label{sec:variantDerivations}
 
@@ -1854,7 +1861,8 @@ To enable representation of these data, SBOL allows developers to embed custom d
 Several methods are supported for connecting the SBOL data model with other types of application-specific data:
 \begin{itemize}
 \item Custom data can be added to an SBOL object by annotating that object with non-conflicting properties. These properties could contain \sbol{literal} data types such as \sbol{String}s or \sbol{URI}s that require a resolution mechanism to obtain external data. An example is annotating a \sbol{ComponentDefinition} with  a property that contains a \sbol{String} description and \sbol{URI} for the parts registry from which its source data was originally imported.
-\item Custom data in the form of independent objects can be added to an SBOL document by  creating \sbol{GenericTopLevel} objects and annotating them as described above. An example is a \sbol{GenericTopLevel} object that is annotated such that it represents a data sheet that describes the performance of a \sbol{ModuleDefinition} in a particular context.
+\item Custom data in the form of independent objects can be added to an SBOL document by  creating\\
+\sbol{GenericTopLevel} objects and annotating them as described above. An example is a \sbol{GenericTopLevel} object that is annotated such that it represents a data sheet that describes the performance of a \sbol{ModuleDefinition} in a particular context.
 \item Finally, just as custom objects can be embedded in an  SBOL document, external documents can embed or refer to SBOL objects. Support for this last case is not explicitly provided in this specification. Rather, this case depends on the external non-SBOL system managing its relationship to SBOL and data serialized in RDF/XML, and is included here for completeness.
 \end{itemize}
 
@@ -1874,7 +1882,7 @@ The \sbol{value} property is also REQUIRED and MUST contain a \sbol{literal} (i.
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[scale=0.55]{uml/identified_annotations}
+\includegraphics[scale=0.525]{uml/identified_annotations}
 \caption[]{Diagram of the \sbol{Annotation} class and its association with \sbol{Identified} and \sbol{AnnotationValue} objects, which is used for annotating SBOL entities with application specific data.}
 \label{uml:identified_annotations}
 \end{center}
@@ -1947,7 +1955,7 @@ Custom data can also be embedded at the top level of an SBOL document. The \sbol
 Entities that have independent existence and are not recognized by the SBOL standard are deserialized to \sbol{GenericTopLevel} objects.
 These \sbol{GenericTopLevel} objects can be safely used by tools to exchange non-SBOL data.
 
-As with other \sbol{TopLevel} objects, \sbol{GenericTopLevel} objects MAY include the properties \sbol{displayId}, \sbol{name}, \sbol{description}, etc. The type of data annotating a \sbol{GenericTopLevel} object is indicated using the REQUIRED \sbol{rdfType} property, which MUST contain a \sbol{QName}. As before with the \sbol{qName} property, the \sbol{rdfType} property is used to set the namespace, prefix, and local part/name during serialization.
+As with other \sbol{TopLevel} objects, \sbol{GenericTopLevel} objects MAY include the properties \sbol{displayId}, \sbol{name},\\ \sbol{description}, etc. The type of data annotating a \sbol{GenericTopLevel} object is indicated using the REQUIRED \sbol{rdfType} property, which MUST contain a \sbol{QName}. As before with the \sbol{qName} property, the \sbol{rdfType} property is used to set the namespace, prefix, and local part/name during serialization.
 
 \begin{figure}[ht]
 \begin{center}
@@ -2021,7 +2029,8 @@ In particular:
 \item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \sbol{Collection} objects that contain \sbol{ComponentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
 \item SBOL 1.1 \external{DnaComponent} objects maps to SBOL 2.x \sbol{ComponentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
 \item SBOL 1.1 \external{DnaSequence} objects maps to an SBOL 2.x \sbol{Sequence} objects with \external{IUPAC DNA} \sbol{encoding} properties.
-\item SBOL 1.1 \external{SequenceAnnotation} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.x \sbol{SequenceAnnotation} objects that contain \sbol{Range} objects.
+\item SBOL 1.1 \external{SequenceAnnotation} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.x\\
+\sbol{SequenceAnnotation} objects that contain \sbol{Range} objects.
 \item SBOL 1.1 \external{SequenceAnnotation} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.x \sbol{SequenceAnnotation} objects that contain \sbol{GenericLocation} objects.
 \item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.x \sbol{Component}, which represents the instantiation or usage of the appropriate \sbol{ComponentDefinition}.
 \item Each SBOL 1.1 \external{precedes} property maps to an SBOL 2.x \sbol{SequenceConstraint} that specifies a precedes \sbol{restriction} property.
