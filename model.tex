@@ -230,6 +230,7 @@ namespace, but are mapped to standardized terms defined elsewhere:
 \label{sec:TopLevel}
 \sbol{TopLevel} is an abstract class that is extended by any \sbol{Identified} class that can be found at the top level of an SBOL document or file. In other words, \sbol{TopLevel} objects are not nested inside any other object via a composite aggregation or black diamond arrow association property. Instead of nesting, composite \sbol{TopLevel} objects refer to subordinate \sbol{TopLevel} objects by their \sbol{URI}s using shared aggregation or white diamond arrow association properties. The \sbol{TopLevel} classes defined in this specification are \sbol{Sequence}, \sbol{ComponentDefinition}, \sbol{Model}, \sbol{ModuleDefinition},  \sbol{Collection}, \sbol{GenericTopLevel}, \sbol{CombinatorialDerivation}, and \sbol{Implementation}(\ref{uml:toplevel}).
 
+\twotwoone{
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\textwidth]{uml/toplevel}
@@ -237,6 +238,7 @@ namespace, but are mapped to standardized terms defined elsewhere:
 \label{uml:toplevel}
 \end{center}
 \end{figure}
+}
 
 \subsubsection*{The attachments property}
 \label{sec:attachments}
