@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>330</x>
-      <y>170</y>
-      <w>160</w>
-      <h>50</h>
+      <x>390</x>
+      <y>240</y>
+      <w>170</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>/*Location*/
 --
 -orientation[0..1] : URI
-</panel_attributes>
+-sequence[0..1] : URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>200</x>
-      <y>190</y>
+      <x>260</x>
+      <y>280</y>
       <w>200</w>
-      <h>100</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>180;30;180;60;30;60;30;80</additional_attributes>
+    <additional_attributes>180;30;180;80;30;80;30;100</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>380</x>
-      <y>190</y>
+      <x>440</x>
+      <y>280</y>
       <w>50</w>
-      <h>100</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;80</additional_attributes>
+    <additional_attributes>30;30;30;120</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>330</x>
-      <y>270</y>
+      <x>390</x>
+      <y>400</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -52,10 +52,10 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>150</x>
-      <y>270</y>
+      <x>210</x>
+      <y>380</y>
       <w>160</w>
       <h>70</h>
     </coordinates>
@@ -67,10 +67,10 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>380</x>
-      <y>110</y>
+      <x>440</x>
+      <y>180</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -78,10 +78,10 @@
     <additional_attributes>30;30;30;60</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>360</x>
-      <y>110</y>
+      <x>420</x>
+      <y>180</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -93,10 +93,10 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>520</x>
-      <y>270</y>
+      <x>580</x>
+      <y>400</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -106,14 +106,14 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>410</x>
-      <y>190</y>
+      <x>470</x>
+      <y>280</y>
       <w>210</w>
-      <h>100</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;60;190;60;190;80</additional_attributes>
+    <additional_attributes>30;30;30;90;190;90;190;120</additional_attributes>
   </element>
 </diagram>
