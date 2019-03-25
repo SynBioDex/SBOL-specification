@@ -507,9 +507,11 @@ Reference: Section 7.7.5 on page 30}}
 
 \twozeroone{
 \printValid{A \sbol{Range} MUST NOT have properties other than the following: \sbol{identity}, \\
-\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{orientation}, \sbol{start}, and \sbol{end}.\\ Reference: \sec{sec:Range}}
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{sequence}, \sbol{orientation}, \sbol{start}, and \sbol{end}.\\ Reference: \sec{sec:Range}}
 % A \sbol{Range} MUST inherit all properties of the \sbol{Location} class.
 }
+
+\printValid{If the \sbol{sequence} property of a \sbol{Range} is specified, it MUST be the URI of a \sbol{Sequence} object referenced by the containing \sbol{ComponentDefinition}.}
 
 \printValid{The \sbol{start} property of a \sbol{Range} is REQUIRED and MUST contain an \sbol{Integer} greater than zero.\\ Reference: \sec{sec:Range}}
 
@@ -523,10 +525,12 @@ Reference: Section 7.7.5 on page 30}}
 
 \twozeroone{
 \printValid{A \sbol{Cut} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \\
-\sbol{annotations}, \sbol{orientation}, and \sbol{at}.\\ Reference: \sec{sec:Cut}}
+\sbol{annotations}, \sbol{orientation}, \sbol{sequence}, and \sbol{at}.\\ Reference: \sec{sec:Cut}}
 }
 
 \printValid{The \sbol{at} property of a \sbol{Cut} is REQUIRED and MUST contain an \sbol{Integer} greater than or equal to zero.  \\ Reference: \sec{sec:Cut}}
+
+\printValid{If the \sbol{sequence} property of a \sbol{Cut} is specified, it MUST be the URI of a \sbol{Sequence} object referenced by the containing \sbol{ComponentDefinition}.}
 
 \subsubsection*{Rules for the \class{GenericLocation} class} 
 \setcounter{sbolCtr}{11301}
@@ -534,10 +538,12 @@ Reference: Section 7.7.5 on page 30}}
 \twozeroone{
 \printValid{A \sbol{GenericLocation} MUST NOT have properties other than the following: 
 \sbol{identity},\\
-\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{orientation}.\\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{sequence}, and \sbol{orientation}.\\
 Reference: \sec{sec:GenericLocation}}
 %A \sbol{GenericLocation} MUST inherit all properties of the \sbol{Location} class.
 }
+
+\printValid{If the \sbol{sequence} property of a \sbol{GenericLocation} is specified, it MUST be the URI of a \sbol{Sequence} object referenced by the containing \sbol{ComponentDefinition}.}
 
 \subsubsection*{Rules for the \class{SequenceConstraint} class} 
 \setcounter{sbolCtr}{11401}
