@@ -897,6 +897,7 @@ The serialization of a \sbol{Range} MUST have the following form:
   [\emph{one}]         <sbol:start>...</sbol:start> [\emph{element}]
   [\emph{one}]         <sbol:end>...</sbol:end> [\emph{element}]
   [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:sequence rdf:resource="..."/> [\emph{element}]
 </sbol:Range>
 \end{lstlisting}
 
@@ -909,6 +910,7 @@ The example below shows the serialization of a \sbol{Range} object. It specifies
   <sbol:start>56</sbol:start>
   <sbol:end>68</sbol:end>
   <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+  <sbol:sequence rdf:resource="http://partsregistry.org/cd/BBa_F2620_sequence"/>
 </sbol:Range>
 \end{lstlisting}
 
@@ -930,6 +932,7 @@ The serialization of a \sbol{Cut} MUST have the following form:
   ... [\emph{properties inherited from identified}] ...
   [\emph{one}]         <sbol:at>...</sbol:at> [\emph{element}]
   [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:sequence rdf:resource="..."/> [\emph{element}]
 </sbol:Cut>
 \end{lstlisting}
 
@@ -941,6 +944,7 @@ The example below shows the serialization of a \sbol{Cut} object. It specifies a
   <sbol:displayId>cut</sbol:displayId>
   <sbol:at>10</sbol:at>
   <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+  <sbol:sequence rdf:resource="http://partsregistry.org/cd/BBa_J23119_sequence"/>
 </sbol:Cut>
 \end{lstlisting}
 
@@ -960,6 +964,7 @@ The serialization of a \sbol{GenericLocation} MUST have the following form:
 <sbol:GenericLocation rdf:about="...">
   ... [\emph{properties inherited from identified}] ...
   [\emph{zero or one}] <sbol:orientation rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:sequence rdf:resource="..."/> [\emph{element}]
 </sbol:GenericLocation>
 \end{lstlisting}
 
@@ -968,6 +973,7 @@ The example below shows the serialization of a \sbol{GenericLocation} object wit
 \begin{lstlisting}
 <sbol:GenericLocation rdf:about="http://www.partsregistry.org/Part:BBa_F2620/anno5/location">
   <sbol:orientation rdf:resource="http://sbols.org/v2#reverseComplement"/>
+  <sbol:sequence rdf:resource="http://www.partsregistry.org/Part:BBa_F2620#sequence"/>
 </sbol:GenericLocation>
 \end{lstlisting}
 
