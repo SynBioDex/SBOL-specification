@@ -1853,6 +1853,65 @@ The example below shows the serialization of an \sbol{Attachment} object that re
 \end{lstlisting}
 \label{ser:Attachment}
 
+\twothreezero{
+\subsection{ExperimentalData}
+\label{sec:ExperimentalData}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.3.0; see SEP 021: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_021.md}]
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/experimentalData}
+\caption[]{Diagram of the \sbol{ExperimentalData} class and its associated properties.}
+\label{uml:experimentalData}
+\end{center}
+\end{figure}
+
+The purpose of the \sbol{ExperimentalData} class is to represent a set of links to experimental data files (.
+It provides a means for linking files and metadata to SBOL designs.
+
+The meta-data provided by the \sbol{ExperimentalData} class include the following properties: the \sbolmult{source:A}{source} or location of the actual file of the attachment, the \sbol{format} of the file, the \sbol{size} of the file, and the \sbol{hash} for the file.
+
+\subsubsection*{ The \sbolheading{source} property}\label{sec:source:A}
+The \sbolmult{source:A}{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file.
+
+\subsubsection*{Serialization}
+
+The serialization of an \sbol{ExperimentalData} MUST have the following form:
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:ExperimentalData rdf:about="...">
+  ... [\emph{properties inherited from identified}] ...
+  [\emph{one}] <sbol:source rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:format rdf:resource="..."/> [\emph{element}]
+  [\emph{zero or one}] <sbol:size>...</sbol:size> [\emph{element}]
+  [\emph{zero or one}] <sbol:hash>...</sbol:hash> [\emph{element}]
+</sbol:ExperimentalData>
+\end{lstlisting}
+
+\twotwozero{
+The example below shows the serialization of an \sbol{ExperimentalData} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbolmult{source:A}{source} \sbol{URI}, which is a \external{URL}.
+}
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ExperimentalData rdf:about="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6"/>
+    <sbol:displayId>attachment_00009Les8pDTQCmKA7A5T6</sbol:displayId>
+    <dcterms:title>NicePlot.png</dcterms:title>
+    <sbol:source rdf:resource="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6/1/download"/>
+    <sbol:format rdf:resource="http://identifiers.org/edam/format_3603"/>
+    <sbol:size>31399</sbol:size>
+    <sbol:hash>404966a5062857f63edb5c3ba16bb581d7fb6a1e</sbol:hash>
+  </sbol:ExperimentalData>
+</rdf:RDF>
+\end{lstlisting}
+\label{ser:ExperimentalData}
+
 \subsection{Annotation and Extension of SBOL}
 \label{sec:Annotations}
 
