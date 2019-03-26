@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>260</x>
       <y>340</y>
       <w>180</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>*Seq	uenceAnnotation*
+    <panel_attributes>*SequenceAnnotation*
 --
-
+-roles[0..*] : URI
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>410</x>
       <y>320</y>
@@ -29,7 +29,7 @@ locations
     <additional_attributes>30;50;140;50</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>550</x>
       <y>360</y>
@@ -43,7 +43,7 @@ locations
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>300</x>
       <y>280</y>
@@ -54,7 +54,7 @@ locations
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>320</x>
       <y>280</y>
@@ -65,7 +65,7 @@ locations
     <additional_attributes>30;30;30;60</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>90</x>
       <y>410</y>
@@ -76,7 +76,7 @@ locations
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>80</x>
       <y>320</y>
