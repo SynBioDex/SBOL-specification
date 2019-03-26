@@ -4,44 +4,44 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>390</x>
-      <y>240</y>
+      <x>370</x>
+      <y>300</y>
       <w>170</w>
-      <h>70</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>/*Location*/
 --
 -orientation[0..1] : URI
--sequence[0..1] : URI</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>260</x>
-      <y>280</y>
+      <x>240</x>
+      <y>330</y>
       <w>200</w>
-      <h>120</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>180;30;180;80;30;80;30;100</additional_attributes>
+    <additional_attributes>180;30;180;90;30;90;30;110</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>440</x>
-      <y>280</y>
+      <x>420</x>
+      <y>330</y>
       <w>50</w>
-      <h>140</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;120</additional_attributes>
+    <additional_attributes>30;30;30;130</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>390</x>
-      <y>400</y>
+      <x>370</x>
+      <y>460</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -54,8 +54,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>210</x>
-      <y>380</y>
+      <x>190</x>
+      <y>440</y>
       <w>160</w>
       <h>70</h>
     </coordinates>
@@ -69,8 +69,8 @@
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>440</x>
-      <y>180</y>
+      <x>420</x>
+      <y>240</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -80,8 +80,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>420</x>
-      <y>180</y>
+      <x>400</x>
+      <y>240</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -95,8 +95,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>580</x>
-      <y>400</y>
+      <x>560</x>
+      <y>460</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -108,12 +108,36 @@
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>470</x>
-      <y>280</y>
+      <x>450</x>
+      <y>330</y>
       <w>210</w>
-      <h>140</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;90;190;90;190;120</additional_attributes>
+    <additional_attributes>30;30;30;100;190;100;190;130</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>620</x>
+      <y>300</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+*Sequence*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>300</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+0..1</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>
