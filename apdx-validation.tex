@@ -515,17 +515,17 @@ Reference: \sec{sec:sequence}
 % A \sbol{Range} MUST inherit all properties of the \sbol{Location} class.
 }
 
-\twothreezero{
-\printComplete{The \sbol{sequence} property of a \sbol{Range} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{ComponentDefinition} containing the \sbol{Range}.\\
-Reference: \sec{sec:sequence}
-}
-}
-
 \printValid{The \sbol{start} property of a \sbol{Range} is REQUIRED and MUST contain an \sbol{Integer} greater than zero.\\ Reference: \sec{sec:Range}}
 
 \printValid{The \sbol{end} property of a \sbol{Range} is REQUIRED and MUST contain an \sbol{Integer} greater than zero.\\ Reference: \sec{sec:Range}}
 
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property.\\ Reference: \sec{sec:Range}}
+
+\twothreezero{
+\printComplete{The \sbol{sequence} property of a \sbol{Range} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{ComponentDefinition} containing the \sbol{Range}.\\
+Reference: \sec{sec:sequence}
+}
+}
 
 
 \subsubsection*{Rules for the \class{Cut} class} 
