@@ -180,8 +180,8 @@ These semantics are somewhat different from the versioning semantics defined in 
 A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{associations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{usages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
 
 \twothreezero{
-\paragraph{The \sbolheading{type} property}\label{sec:activity_type}
-The \sbol{type} property is OPTIONAL and is used to explicitly specify the type of the provenance activity in more detail.
+\paragraph{The \sbolheading{types} property}\label{sec:activity_type}
+The \sbol{types} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail.
 }
 
 \paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
