@@ -181,8 +181,23 @@ A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relation
 
 \twothreezero{
 \paragraph{The \sbolheading{types} property}\label{sec:activity_types}
-The  \texttt{\hyperref[sec:activity_types]{types}} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail.
+The  \texttt{\hyperref[sec:activity_types]{types}} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail. If specified, it is RECOMMENDED that at least one \sbol{URI} of the \texttt{\hyperref[sec:activity_types]{types}} property of an \sbol{Activity} refers to a \sbol{URI} from \ref{tbl:activity_types}.
 }
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Activity Type} & \textbf{URI} \\
+    \midrule
+    Design  & \url{http://sbols.org/v2\#design}\\
+    Build  & \url{http://sbols.org/v2\#build}\\
+    Test  & \url{http://sbols.org/v2\#test}\\
+    Learn  & \url{http://sbols.org/v2\#learn}\\
+    \bottomrule
+  \end{edtable}
+  \caption{URIs to specify the  \texttt{\hyperref[sec:activity_types]{types}} property of an \sbol{Activity}.}
+ \label{tbl:activity_types}
+\end{table}
 
 \paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
 The \sbol{startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
