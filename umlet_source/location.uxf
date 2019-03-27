@@ -119,8 +119,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>620</x>
-      <y>300</y>
+      <x>650</x>
+      <y>310</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -129,15 +129,16 @@
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>530</x>
-      <y>300</y>
-      <w>110</w>
-      <h>40</h>
+      <x>510</x>
+      <y>270</y>
+      <w>160</w>
+      <h>94</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-0..1</panel_attributes>
-    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;-&gt;
+sequence
+ 0..1</panel_attributes>
+    <additional_attributes>30;50;140;50</additional_attributes>
   </element>
 </diagram>
