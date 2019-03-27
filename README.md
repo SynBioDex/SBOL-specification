@@ -36,6 +36,10 @@ Note that pdflatex is run several times. Each successive pass mows down unresolv
 
 The git status command will show you which intermediate build products and logs you need to delete for a clean build.
 
+You can also build with Docker if you don't want to install latex, but note that the Docker image is huge.
+
+    docker run -v $(pwd):/opt/spec jmcl/specbuild
+
 
 # LaTeX installation notes
 
