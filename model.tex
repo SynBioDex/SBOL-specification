@@ -1929,7 +1929,7 @@ The purpose of the \sbol{Experiment} class is to aggregate experimental data set
 As shown in \ref{uml:experimental_data}, the \sbol{Experiment} class aggregates \sbol{ExperimentalData} objects via the \sbol{experimentalData} property.
 
 \subsubsection*{ The \sbolheading{experimentalData} property}\label{sec:experimentalData}
-The \sbol{experimentalData} property is REQUIRED and MUST contain a \sbol{URI} reference to one or more \sbol{ExperimentalData} objects. The same \sbol{ExperimentalData} MAY be referred to by more than one \sbol{Experiment} in this way.
+The \sbol{experimentalData} property is OPTIONAL and MAY contain a set of \sbol{URI} references to \sbol{ExperimentalData} objects. The same \sbol{ExperimentalData} MAY be referred to by more than one \sbol{Experiment} in this way.
 
 \subsubsection*{Serialization}
 
