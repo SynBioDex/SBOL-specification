@@ -1,10 +1,5 @@
-% -----------------------------------------------------------------------------
+
 \section{SBOL Data Model}\label{sec:model}
-% * <nicholas.roehner@gmail.com> 2015-06-03T17:32:14.465Z:
-%
-%
-%
-% -----------------------------------------------------------------------------
 
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively.
 
@@ -242,7 +237,7 @@ namespace, but are mapped to standardized terms defined elsewhere:
 
 \subsubsection*{The attachments property}
 \label{sec:attachments}
-The attachments property is OPTIONAL and MAY specify a set of Attachment objects that are referenced by the TopLevel object. The Attachment class is described in more detail in Section~\ref{sec:Attachment}.
+The \sbol{attachments} property is OPTIONAL and MAY specify a set of Attachment objects that are referenced by the TopLevel object. The Attachment class is described in more detail in Section~\ref{sec:Attachment}.
 
 \subsubsection*{Serialization}
 
@@ -1864,6 +1859,111 @@ The example below shows the serialization of an \sbol{Attachment} object that re
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:Attachment}
+
+\twothreezero{
+\subsection{ExperimentalData}
+\label{sec:ExperimentalData}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.3.0; see SEP 021: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_021.md}]
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/experimental_data}
+\caption[]{Diagram of the \sbol{ExperimentalData} class and its associated properties.}
+\label{uml:experimental_data}
+\end{center}
+\end{figure}
+
+The purpose of the \sbol{ExperimentalData} class is to aggregate links to experimental data files. An \sbol{ExperimentalData} is typically associated with a single sample, lab instrument, or experimental condition and can be used to describe the output of the test phase of a design-build-test-learn workflow. For an example of the latter, see \ref{images:design-build-test-learn}.
+
+As shown in \ref{uml:experimental_data}, the \sbol{ExperimentalData} class aggregates links to experimental data files using the OPTIONAL \sbol{attachments} property that it inherits from the \sbol{TopLevel} class.
+
+\subsubsection*{Serialization}
+
+The serialization of an \sbol{ExperimentalData} MUST have the following form:
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:ExperimentalData rdf:about="...">
+  ... [\emph{properties inherited from TopLevel}] ...
+</sbol:ExperimentalData>
+\end{lstlisting}
+
+\twothreezero{
+The example below shows the serialization of an \sbol{ExperimentalData} that refers to a pair of \sbol{Attachment} objects for FASTQ files from a paired-end DNA sequencing experiment.
+}
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ExperimentalData rdf:about="http://sbolstandard.org/example/X1Y0A0C2286_S1_sequencing_data/1">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286_S1_sequencing_data"/>
+    <sbol:displayId>X1Y0A0C2286_S1_sequencing_data</sbol:displayId>
+    <dcterms:title>X1Y0A0C2286 Sequencing Data</dcterms:title>
+    <sbol:attachment rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286_S1_L001_R1/1"/>
+    <sbol:attachment rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286_S1_L001_R2/1"/>
+    <prov:wasDerivedFrom rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286/1"/>
+  </sbol:ExperimentalData>
+</rdf:RDF>
+\end{lstlisting}
+\label{ser:ExperimentalData}
+
+\twothreezero{
+\subsection{Experiment}
+\label{sec:Experiment}
+\vspace{-7pt}
+\-\hspace{0.8cm}[New in 2.3.0; see SEP 021: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_021.md}]
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/experiment}
+\caption[]{Diagram of the \sbol{Experiment} class and its associated properties.}
+\label{uml:experiment}
+\end{center}
+\end{figure}
+
+The purpose of the \sbol{Experiment} class is to aggregate experimental data sets for subsequent analysis, usually in accordance with an experimental design. 
+
+As shown in \ref{uml:experimental_data}, the \sbol{Experiment} class aggregates \sbol{ExperimentalData} objects via the \sbol{experimentalData} property.
+
+\subsubsection*{ The \sbolheading{experimentalData} property}\label{sec:experimentalData}
+The \sbol{experimentalData} property is OPTIONAL and MAY contain a set of \sbol{URI} references to \sbol{ExperimentalData} objects. The same \sbol{ExperimentalData} MAY be referred to by more than one \sbol{Experiment} in this way.
+
+\subsubsection*{Serialization}
+
+The serialization of an \sbol{Experiment} MUST have the following form:
+
+}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Experiment rdf:about="...">
+  ... [\emph{properties inherited from TopLevel}] ...
+  [\emph{zero or more}] <sbol:experimentalData rdf:resource="..."/> [\emph{element}]
+</sbol:Experiment>
+\end{lstlisting}
+
+\twothreezero{
+The example below shows the serialization of an \sbol{Experiment} that aggregates the DNA sequencing results for related samples (e.g. that implement related variants of the same genetic design).
+}
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Experiment rdf:about="http://sbolstandard.org/example/sequencing_exp_032619/1">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/sequencing_exp_032619"/>
+    <sbol:displayId>sequencing_exp_032619</sbol:displayId>
+    <dcterms:title>Sequencing Experiment 032619</dcterms:title>
+    <sbol:experimentalData rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286_S1_sequencing_data/1"/>
+    <sbol:experimentalData rdf:resource="http://sbolstandard.org/example/X1Y0A0C2288_S1_sequencing_data/1"/>
+    <sbol:experimentalData rdf:resource="http://sbolstandard.org/example/X1Y0A0C2290_S1_sequencing_data/1"/>
+    <sbol:experimentalData rdf:resource="http://sbolstandard.org/example/B1C0C0C1100_S1_sequencing_data/1"/>
+  </sbol:Experiment>
+</rdf:RDF>
+\end{lstlisting}
+\label{ser:Experiment}
 
 \subsection{Annotation and Extension of SBOL}
 \label{sec:Annotations}

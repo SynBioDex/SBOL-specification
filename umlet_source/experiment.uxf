@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>550</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*/TopLevel/*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>610</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>*Experiment*
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>570</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>620</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+experimentalData
+0..*</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0;170.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>670</y>
+      <w>160</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*ExperimentalData*</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
