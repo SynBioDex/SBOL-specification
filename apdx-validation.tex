@@ -299,7 +299,9 @@ Reference: Section 7.7 on page 21}}
 
 \printValid{The \sbol{components} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{Component} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 
+\twothreezero{
 \printModeling{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{ComponentDefinition} objects in the hierarchy. This mapping is further subject to any restrictions on the \sbol{sequences} property of \sbol{ComponentDefinition} objects implied by the \sbol{sourceLocations} property on the \sbol{Component} objects owned by those \sbol{ComponentDefinition} objects.\\ Reference: \sec{sec:ComponentDefinition}}
+}
 
 \printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 
