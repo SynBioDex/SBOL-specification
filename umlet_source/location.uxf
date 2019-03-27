@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>330</x>
-      <y>170</y>
-      <w>160</w>
-      <h>50</h>
+      <x>370</x>
+      <y>300</y>
+      <w>170</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>/*Location*/
 --
@@ -16,32 +16,32 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>200</x>
-      <y>190</y>
+      <x>240</x>
+      <y>330</y>
       <w>200</w>
-      <h>100</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>180;30;180;60;30;60;30;80</additional_attributes>
+    <additional_attributes>180;30;180;90;30;90;30;110</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>380</x>
-      <y>190</y>
+      <x>420</x>
+      <y>330</y>
       <w>50</w>
-      <h>100</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;80</additional_attributes>
+    <additional_attributes>30;30;30;130</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>330</x>
-      <y>270</y>
+      <x>370</x>
+      <y>460</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -52,10 +52,10 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>150</x>
-      <y>270</y>
+      <x>190</x>
+      <y>440</y>
       <w>160</w>
       <h>70</h>
     </coordinates>
@@ -67,10 +67,10 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>380</x>
-      <y>110</y>
+      <x>420</x>
+      <y>240</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -78,10 +78,10 @@
     <additional_attributes>30;30;30;60</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>360</x>
-      <y>110</y>
+      <x>400</x>
+      <y>240</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -93,10 +93,10 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>520</x>
-      <y>270</y>
+      <x>560</x>
+      <y>460</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -106,14 +106,39 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>410</x>
-      <y>190</y>
+      <x>450</x>
+      <y>330</y>
       <w>210</w>
-      <h>100</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;60;190;60;190;80</additional_attributes>
+    <additional_attributes>30;30;30;100;190;100;190;130</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>650</x>
+      <y>310</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+*Sequence*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>270</y>
+      <w>160</w>
+      <h>94</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-&gt;
+sequence
+ 0..1</panel_attributes>
+    <additional_attributes>30;50;140;50</additional_attributes>
   </element>
 </diagram>
