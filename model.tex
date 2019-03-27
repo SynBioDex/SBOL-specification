@@ -1,5 +1,10 @@
-
+% -----------------------------------------------------------------------------
 \section{SBOL Data Model}\label{sec:model}
+% * <nicholas.roehner@gmail.com> 2015-06-03T17:32:14.465Z:
+%
+%
+%
+% -----------------------------------------------------------------------------
 
 In this section, we describe the types of biological design data that can belong to an SBOL document and the relationships between these data types. The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. Subsections \ref{sec:umldiagrams}, \ref{sec:nameconventions}, \ref{sec:datatypes} review the basics of UML diagrams and explain the naming conventions and generic data types used in this specification. The remaining sections then describe the SBOL data model in detail. Complete SBOL examples and best practices when using the standard can be found in \ref{sec:examples} and \ref{sec:bestpractices}, respectively.
 
@@ -237,7 +242,7 @@ namespace, but are mapped to standardized terms defined elsewhere:
 
 \subsubsection*{The attachments property}
 \label{sec:attachments}
-The \sbol{attachments} property is OPTIONAL and MAY specify a set of Attachment objects that are referenced by the TopLevel object. The Attachment class is described in more detail in Section~\ref{sec:Attachment}.
+The attachments property is OPTIONAL and MAY specify a set of Attachment objects that are referenced by the TopLevel object. The Attachment class is described in more detail in Section~\ref{sec:Attachment}.
 
 \subsubsection*{Serialization}
 
