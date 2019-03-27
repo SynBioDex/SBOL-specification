@@ -181,7 +181,7 @@ A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relation
 
 \twothreezero{
 \paragraph{The \sbolheading{types} property}\label{sec:activity_types}
-The \sbol{types} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail.
+The  \texttt{\hyperref[sec:activity_types]{types}} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail.
 }
 
 \paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
@@ -201,8 +201,9 @@ The \sbol{usages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that
 The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
 
 \paragraph{Serialization}
+\twothreezero{
 The serialization of an \sbol{Activity} MUST have the following form:
-%\twoonezero -end
+}
 }
 
 \lstsetsbol
@@ -215,6 +216,7 @@ The serialization of an \sbol{Activity} MUST have the following form:
   [\emph{zero or more}]  <prov:qualifiedUsage>
                    <prov:Usage rdf:about="...">...</prov:Usage>
                 </prov:qualifiedUsage> [\emph{elements}]             
+  [\emph{zero or more}]  <sbol:type rdf:resource="... "/>  [\emph{elements}]
   [\emph{zero or one}]  <prov:startedAtTime>...</prov:startedAtTime> [\emph{element}]
   [\emph{zero or one}]  <prov:endedAtTime>...</prov:startedAtTime> [\emph{element}] 
   [\emph{zero or more}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
