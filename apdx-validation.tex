@@ -177,7 +177,7 @@ Reference: \sec{sec:provenance}}
 \printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD be an \sbol{Implementation}.\\ 
 Reference: \sec{sec:provenance}}
 
-\printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD be an \sbol{Attachment} or a \sbol{Collection} of \sbol{Attachment} objects.\\ 
+\printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD be an \sbol{ExperimentalData}.\\ 
 Reference: \sec{sec:provenance}}
 
 \printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD not be an \sbol{Implementation}.\\
@@ -849,7 +849,7 @@ Reference: Section 7.11 on page 46}}
 
 \printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} \\ SHOULD refer to an \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
 
-\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} \\ SHOULD refer to an \sbol{Attachment} or \sbol{Collection} of \sbol{Attachment} objects.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} \\ SHOULD refer to an \sbol{ExperimentalData}.\\ Reference: \sec{sec:Usage}}
 
 \printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} \\ SHOULD NOT refer to an \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
 
@@ -1075,4 +1075,27 @@ a \sbol{ComponentDefinition} that is one of the \sbol{members} of a \sbol{Collec
 \printValid{The \sbol{size} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{Long}.\\ Reference: \sec{sec:Attachment}}
 
 \printValid{The \sbol{hash} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Attachment}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{ExperimentalData} class} 
+\setcounter{sbolCtr}{13301}
+
+\printValid{An \sbol{ExperimentalData} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:ExperimentalData}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{Experiment} class} 
+\setcounter{sbolCtr}{13401}
+
+\printValid{An \sbol{Experiment} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, and \sbol{experimentalData}.\\ Reference: \sec{sec:Attachment}}
+
+\printValid{The \sbol{experimentalData} property of an \sbol{Experiment} is REQUIRED and MUST contain one or more \sbol{URI}s.\\ Reference: \sec{sec:Experiment}}
+
+\printComplete{The \sbol{URI}s contained by the \sbol{experimentalData} property of a \sbol{Experiment} MUST each refer to an \sbol{ExperimentalData}.
+\\ Reference: \sec{sec:Experiment}}
 }
