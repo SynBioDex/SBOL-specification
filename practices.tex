@@ -268,7 +268,7 @@ The recommended terms that are defined in \ref{tbl:association_roles} can be use
 }
 }
 
-\twotwozero{
+\twothreezero{
 \begin{table}[H]
   \begin{edtable}{tabular}{lp{3.75in}}
     \toprule
@@ -456,7 +456,7 @@ The serialization of an \sbol{Agent} MUST have the following form:
 \end{lstlisting}
 
 \paragraph{Example - Design-build-test-learn Workflow}
-\twotwozero{
+\twothreezero{
  This particular example represents an idealized workflow for model-based design. The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (\sbol{ModuleDefinition}) is composed of biological parts which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using some a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in \ref{images:design-build-test-learn}.
 }%twotwozero end
 
