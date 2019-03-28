@@ -179,46 +179,24 @@ These semantics are somewhat different from the versioning semantics defined in 
 
 A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{associations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{usages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
 
-\twothreezero{
-\paragraph{The \sbolheading{types} property}\label{sec:activity_types}
-The  \texttt{\hyperref[sec:activity_types]{types}} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail. If specified, it is RECOMMENDED that at least one \sbol{URI} of the \texttt{\hyperref[sec:activity_types]{types}} property of an \sbol{Activity} refers to a \sbol{URI} from \ref{tbl:activity_types}.
-}
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{ll}
-    \toprule
-    \textbf{Activity Type} & \textbf{URI} \\
-    \midrule
-    Design  & \url{http://sbols.org/v2\#design}\\
-    Build  & \url{http://sbols.org/v2\#build}\\
-    Test  & \url{http://sbols.org/v2\#test}\\
-    Learn  & \url{http://sbols.org/v2\#learn}\\
-    \bottomrule
-  \end{edtable}
-  \caption{URIs to specify the  \texttt{\hyperref[sec:activity_types]{types}} property of an \sbol{Activity}.}
- \label{tbl:activity_types}
-\end{table}
-
-\paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
-The \sbol{startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
-
-\paragraph{The \sbolheading{endedAtTime} property}\label{sec:endedAtTime}
-The \sbol{endedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity ended.
-
-
 \paragraph{The \sbolheading{associations} property}\label{sec:associations}
 The \sbol{associations} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
 
 \paragraph{The \sbolheading{usages} property}\label{sec:usages}
 The \sbol{usages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
 
+\paragraph{The \sbolheading{endedAtTime} property}\label{sec:endedAtTime}
+The \sbol{endedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity ended.
+
+\paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
+The \sbol{startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
+
 \paragraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
 The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
 
 \paragraph{Serialization}
-\twothreezero{
 The serialization of an \sbol{Activity} MUST have the following form:
-}
+%\twoonezero -end
 }
 
 \lstsetsbol
@@ -231,7 +209,6 @@ The serialization of an \sbol{Activity} MUST have the following form:
   [\emph{zero or more}]  <prov:qualifiedUsage>
                    <prov:Usage rdf:about="...">...</prov:Usage>
                 </prov:qualifiedUsage> [\emph{elements}]             
-  [\emph{zero or more}]  <sbol:type rdf:resource="... "/>  [\emph{elements}]
   [\emph{zero or one}]  <prov:startedAtTime>...</prov:startedAtTime> [\emph{element}]
   [\emph{zero or one}]  <prov:endedAtTime>...</prov:startedAtTime> [\emph{element}] 
   [\emph{zero or more}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
