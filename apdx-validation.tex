@@ -374,6 +374,11 @@ Reference: Section 7.7.1 on page 24}}
 
 \printValid{The \sbol{access} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \sbol{URI} from \ref{tbl:componentInstance_access} \\ Reference: \sec{sec:ComponentInstance}}
 
+\twothreezero{
+\printValid{The \sbolmult{measures:C}{measures} property of a \sbol{ComponentInstance} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:ComponentInstance}}
+}
+
 \subsubsection*{Rules for the \class{Component} class} 
 \setcounter{sbolCtr}{10701}
 
@@ -692,6 +697,11 @@ Reference: \sec{sec:sequence}
 
 \printValid{The \sbolmult{mapsTos:M}{mapsTos} property is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects.\\ Reference: \sec{sec:Module}}
 
+\twothreezero{
+\printValid{The \sbolmult{measures:M}{measures} property of a \sbol{Module} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:Module}}
+}
+
 \subsubsection*{Rules for the \class{FunctionalComponent} class} 
 \setcounter{sbolCtr}{11801}
 
@@ -729,6 +739,11 @@ Reference: \sec{sec:sequence}
 Reference: \sec{sec:Participation}}
 }
 
+\twothreezero{
+\printValid{The \sbolmult{measures:I}{measures} property of an \sbol{Interaction} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:Interaction}}
+}
+
 \subsubsection*{Rules for the \class{Participation} class} 
 \setcounter{sbolCtr}{12001}
 
@@ -751,6 +766,11 @@ Reference: \sec{sec:Participation}}
 
 \twozeroone{
 \printModeling{Exactly one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO (see \ref{tbl:participant_roles}).\\ Reference: \sec{sec:Participation}}
+}
+
+\twothreezero{
+\printValid{The \sbolmult{measures:P}{measures} property of a \sbol{Participation} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:Participation}}
 }
 
 \subsubsection*{Rules for the \class{Collection} class} 
@@ -1098,4 +1118,24 @@ a \sbol{ComponentDefinition} that is one of the \sbol{members} of a \sbol{Collec
 
 \printComplete{The \sbol{URI}s contained by the \sbol{experimentalData} property of a \sbol{Experiment} MUST each refer to an \sbol{ExperimentalData}.
 \\ Reference: \sec{sec:Experiment}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{Measure} class} 
+\setcounter{sbolCtr}{13501}
+
+\printValid{A \sbol{Measure} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{hasNumericalValue}, \sbol{hasUnit}, and \sbol{types}.\\ Reference: \sec{sec:Measure}}
+
+\printValid{The \sbol{hasNumericalValue} property of a \sbol{Measure} is REQUIRED and MUST contain an xsd:float.\\ Reference: \sec{sec:Measure}}
+
+\printValid{The \sbol{hasUnit} property of a \sbol{Measure} is REQUIRED and MUST contain a URI.\\ Reference: \sec{sec:Measure}}
+
+\printValid{The \sbolmult{types:Measure}{types} property of a \sbol{Measure} is OPTIONAL and MAY contain a set of URIs.\\ Reference: \sec{sec:Measure}}
+
+\printModeling{If the \sbolmult{types:Measure}{types} property of a \sbol{Measure} is non-empty, then exactly one of the URIs that this property contains SHOULD refer to a term from the systems description parameter branch of the SBO.\\ Reference: \sec{sec:Measure}}
+
+\printComplete{The \sbol{URI} contained by the \sbol{hasUnit} property of a \sbol{Measure} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:Measure}}
 }

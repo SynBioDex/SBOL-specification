@@ -1115,7 +1115,7 @@ The \sbol{hasNumericalValue} property is REQUIRED and MUST contain a single xsd:
 The \sbolmult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a URI reference to a \sbol{Unit}. The OM provides URIs for many existing instances of the \sbol{Unit} class for reference (for example, \url{http://www.ontology-of-units-of-measure.org/resource/om-2/gramPerLitre}).
 
 \paragraph{The \sbolheading{types} property}\label{sec:types:Measure}
-The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set of URIs. It is RECOMMENDED that these URIs identify terms from the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{types:Measure}{types} property is not specified in the OM and is added by SBOL to describe different types of parameters (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/biomodels.sbo/SBO:0000612}).
+The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set of URIs. It is RECOMMENDED that one of these URIs identify a term from the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{types:Measure}{types} property of the \sbol{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/biomodels.sbo/SBO:0000612}).
 
 \paragraph{Serialization}
 The serialization of a \sbol{Measure} MUST have the following form:
