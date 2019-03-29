@@ -177,7 +177,7 @@ Reference: \sec{sec:provenance}}
 \printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} SHOULD be an \sbol{Implementation}.\\ 
 Reference: \sec{sec:provenance}}
 
-\printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD be an \sbol{Attachment} or a \sbol{Collection} of \sbol{Attachment} objects.\\ 
+\printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} SHOULD be an \sbol{ExperimentalData}.\\ 
 Reference: \sec{sec:provenance}}
 
 \printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD not be an \sbol{Implementation}.\\
@@ -515,12 +515,18 @@ Reference: Section 7.7.5 on page 30}}
 \printValid{The \sbol{orientation} property of a \sbol{Location} is OPTIONAL and MAY contain a \sbol{URI} from \ref{tbl:orientation_types}.
 \\ Reference: \sec{sec:GenericLocation}}
 
+\twothreezero{
+\printComplete{The \sbol{sequence} property of a \sbol{Location} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{ComponentDefinition} containing the \sbol{Location}.\\
+Reference: \sec{sec:sequence}
+}
+}
+
 \subsubsection*{Rules for the \class{Range} class} 
 \setcounter{sbolCtr}{11101}
 
 \twozeroone{
 \printValid{A \sbol{Range} MUST NOT have properties other than the following: \sbol{identity}, \\
-\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{orientation}, \sbol{start}, and \sbol{end}.\\ Reference: \sec{sec:Range}}
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \twothreezero{\sbol{sequence},} \sbol{orientation}, \sbol{start}, and \sbol{end}.\\ Reference: \sec{sec:Range}}
 % A \sbol{Range} MUST inherit all properties of the \sbol{Location} class.
 }
 
@@ -530,16 +536,28 @@ Reference: Section 7.7.5 on page 30}}
 
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property.\\ Reference: \sec{sec:Range}}
 
+\twothreezero{
+\printComplete{The \sbol{sequence} property of a \sbol{Range} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{ComponentDefinition} containing the \sbol{Range}.\\
+Reference: \sec{sec:sequence}
+}
+}
+
 
 \subsubsection*{Rules for the \class{Cut} class} 
 \setcounter{sbolCtr}{11201}
 
 \twozeroone{
 \printValid{A \sbol{Cut} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \\
-\sbol{annotations}, \sbol{orientation}, and \sbol{at}.\\ Reference: \sec{sec:Cut}}
+\sbol{annotations}, \sbol{orientation}, \twothreezero{\sbol{sequence},} and \sbol{at}.\\ Reference: \sec{sec:Cut}}
 }
 
 \printValid{The \sbol{at} property of a \sbol{Cut} is REQUIRED and MUST contain an \sbol{Integer} greater than or equal to zero.  \\ Reference: \sec{sec:Cut}}
+
+\twothreezero{
+\printComplete{The \sbol{sequence} property of a \sbol{Cut} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{ComponentDefinition} containing the \sbol{Cut}.\\
+Reference: \sec{sec:sequence}
+}
+}
 
 \subsubsection*{Rules for the \class{GenericLocation} class} 
 \setcounter{sbolCtr}{11301}
@@ -547,9 +565,15 @@ Reference: Section 7.7.5 on page 30}}
 \twozeroone{
 \printValid{A \sbol{GenericLocation} MUST NOT have properties other than the following: 
 \sbol{identity},\\
-\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{orientation}.\\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description}, \sbol{annotations}, \twothreezero{\sbol{sequence},} and \sbol{orientation}.\\
 Reference: \sec{sec:GenericLocation}}
 %A \sbol{GenericLocation} MUST inherit all properties of the \sbol{Location} class.
+}
+
+\twothreezero{
+\printComplete{The \sbol{sequence} property of a \sbol{GenericLocation} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{ComponentDefinition} containing the \sbol{GenericLocation}.\\
+Reference: \sec{sec:sequence}
+}
 }
 
 \subsubsection*{Rules for the \class{SequenceConstraint} class} 
@@ -741,7 +765,7 @@ Reference: \sec{sec:Participation}}
 \printWarning{All \sbol{URI}s contained by the \sbolmult{roles:P}{roles} property of an \sbol{Participation} MUST refer to non-conflicting ontology terms.\\ Reference: \sec{sec:Participation}}
 
 \twozeroone{
-\printModeling{Exactly one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO.\\ Reference: \sec{sec:Participation}}
+\printModeling{Exactly one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO (see \ref{tbl:participant_roles}).\\ Reference: \sec{sec:Participation}}
 }
 
 \subsubsection*{Rules for the \class{Collection} class} 
@@ -840,7 +864,7 @@ Reference: Section 7.11 on page 46}}
 
 \printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} \\ SHOULD refer to an \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
 
-\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} \\ SHOULD refer to an \sbol{Attachment} or \sbol{Collection} of \sbol{Attachment} objects.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} \\ SHOULD refer to an \sbol{ExperimentalData}.\\ Reference: \sec{sec:Usage}}
 
 \printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} \\ SHOULD NOT refer to an \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
 
@@ -1066,4 +1090,27 @@ a \sbol{ComponentDefinition} that is one of the \sbol{members} of a \sbol{Collec
 \printValid{The \sbol{size} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{Long}.\\ Reference: \sec{sec:Attachment}}
 
 \printValid{The \sbol{hash} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Attachment}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{ExperimentalData} class} 
+\setcounter{sbolCtr}{13301}
+
+\printValid{An \sbol{ExperimentalData} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, and \sbol{attachments}.\\ Reference: \sec{sec:ExperimentalData}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{Experiment} class} 
+\setcounter{sbolCtr}{13401}
+
+\printValid{An \sbol{Experiment} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{attachments}, and \sbol{experimentalData}.\\ Reference: \sec{sec:Experiment}}
+
+\printValid{The \sbol{experimentalData} property of an \sbol{Experiment} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Experiment}}
+
+\printComplete{The \sbol{URI}s contained by the \sbol{experimentalData} property of a \sbol{Experiment} MUST each refer to an \sbol{ExperimentalData}.
+\\ Reference: \sec{sec:Experiment}}
 }
