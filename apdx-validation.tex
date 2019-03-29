@@ -8,7 +8,7 @@
 \label{validation}
 
 This section summarizes all the conditions that either MUST be or 
-are RECOMMENDED to be true of an SBOL Version~2.1 document. There are different degrees of rule strictness.  
+are RECOMMENDED to be true of an SBOL Version~2.3 document. There are different degrees of rule strictness.  
 Rules of the former kind are strict SBOL validation rules---data encoded in SBOL MUST conform to
 all of them in order to be considered valid. Rules of the latter kind
 are consistency rules that SBOL data are RECOMMENDED to adhere to as a best practice.  To help highlight these differences, we use the
@@ -32,7 +32,7 @@ following symbols next to the rule numbers:
 % (Mnemonic intention behind the choice of symbol: ``You're a star if you heed this.'')
 \end{description}
 
-We also include a fourth type of rule that represents a required condition for SBOL-compliance that cannot be checked by a machine. Therefore, violations of these rules are not expected to be reported as errors by any of the software libraries implementing SBOL 2.1. It is the user's responsibility to make sure that these validation rules are followed.
+We also include a fourth type of rule that represents a required condition for SBOL-compliance that cannot be checked by a machine. Therefore, violations of these rules are not expected to be reported as errors by any of the software libraries implementing SBOL 2.1 or above. It is the user's responsibility to make sure that these validation rules are followed.
 
 \begin{description}
 \item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a weak REQUIRED condition for SBOL conformance. While this rule MUST be followed, it is not possible in practice for a machine to automatically check whether the rule has been followed.
