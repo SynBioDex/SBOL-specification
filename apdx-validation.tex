@@ -299,7 +299,9 @@ Reference: Section 7.7 on page 21}}
 
 \printValid{The \sbol{components} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{Component} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 
-\printModeling{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{ComponentDefinition} objects in the hierarchy.\\ Reference: \sec{sec:ComponentDefinition}}
+\twothreezero{
+\printModeling{If a \sbol{ComponentDefinition} in a \sbol{ComponentDefinition}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{ComponentDefinition} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{ComponentDefinition} objects in the hierarchy. This mapping is further subject to any restrictions on the \sbol{sequences} property of \sbol{ComponentDefinition} objects implied by the \sbol{sourceLocations} property on the \sbol{Component} objects owned by those \sbol{ComponentDefinition} objects.\\ Reference: \sec{sec:ComponentDefinition}}
+}
 
 \printValid{The \sbol{sequenceAnnotations} property of a \sbol{ComponentDefinition} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects.\\ Reference: \sec{sec:ComponentDefinition}}
 
@@ -378,8 +380,9 @@ Reference: Section 7.7.1 on page 24}}
 \setcounter{sbolCtr}{10701}
 
 \twoonezero{
-\printValid{A \sbol{Component} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \sbol{name}, \sbol{description},
-\sbol{annotations}, \sbol{access}, \sbolmult{definition:CI}{definition}, \sbolmult{mapsTos:CI}{mapsTos}, \sbolmult{roles:C}{roles}, and\\ \sbolmult{roleIntegration:C}{roleIntegration}.\\ Reference: \sec{sec:Component}}
+\printValid{A \sbol{Component} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \twotwozero{\sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}}, \\
+\sbol{name}, \sbol{description},
+ \sbol{annotations}, \sbol{access}, \sbolmult{definition:CI}{definition}, \sbolmult{mapsTos:CI}{mapsTos}, \sbolmult{roles:C}{roles}, \sbolmult{roleIntegration:C}{roleIntegration}, and \twothreezero{\sbol{sourceLocations}}.\\ Reference: \sec{sec:Component}}
 % A \sbol{Component} MUST inherit all properties of the \sbol{ComponentInstance} class.
 }
 
@@ -418,6 +421,18 @@ Reference: \sec{sec:Component}}
 \twoonezero{
 \printValid{The \sbolmult{roleIntegration:C}{roleIntegration} property of a \sbol{Component} is REQUIRED, if \sbolmult{roles:C}{roles} property includes one or more roles.
 \\ Reference: \sec{sec:Component}}
+}
+
+\twothreezero{
+\printValid{The \sbol{sourceLocations} property of a \sbol{Component} is OPTIONAL and MAY contain a set of \sbol{Location} objects.\\ Reference: \sec{sec:Component}}
+}
+
+\twothreezero{
+\printModeling{The \sbol{Location} objects contained by the \sbol{sourceLocations} property of a single \sbol{Component} SHOULD NOT specify overlapping regions.\\ Reference: \sec{sec:Component}}
+}
+
+\twothreezero{
+\printModeling{If the \sbol{sourceLocations} property of a \sbol{Component} refers to a set of \sbol{Range}s, and that \sbol{Component} is referenced by the \sbol{component} property of a \sbol{SequenceAnnotation} whose \sbol{locations} property also refers to a set of \sbol{Range}s, then the sum of lengths of the two sets of \sbol{Range}s MUST be equal.\\ Reference: \sec{sec:Component}}
 }
 
 \subsubsection*{Rules for the \class{MapsTo} class} 
