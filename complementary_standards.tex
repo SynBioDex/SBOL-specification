@@ -1088,7 +1088,7 @@ design}
 
 There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitive models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
 
-The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications. As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \sbol{Measure}, \sbol{Unit} and \sbol{Prefix}. A \sbol{Measure} links a numerical value to a \sbol{Unit}, which may or may not have a \sbol{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \sbol{Measure} is treated as a subclass of \sbol{Identified}, while \sbol{Unit} and \sbol{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \sbol{Unit} subclasses from OM: \sbol{SingularUnit}, \sbol{CompoundUnit}, \sbol{UnitMultiplication}, \sbol{UnitDivision}, \sbol{UnitExponentiation}, and \sbol{PrefixedUnit}. Lastly, SBOL adopts the following \sbol{Prefix} subclasses from OM: \sbol{SIPrefix} and \sbol{BinaryPrefix}.
+The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications. As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \sbol{Measure}, \sbol{Unit} and \sbol{Prefix}. A \sbol{Measure} links a numerical value to a \sbol{Unit}, which may or may not have a \sbol{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \sbol{Measure} is treated as a subclass of \sbol{Identified}, while \sbol{Unit} and \sbol{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \sbol{Unit} subclasses: \sbol{SingularUnit}, \sbol{CompoundUnit}, \sbol{UnitMultiplication}, \sbol{UnitDivision}, \sbol{UnitExponentiation}, and \sbol{PrefixedUnit}. Lastly, SBOL adopts the following \sbol{Prefix} subclasses from OM: \sbol{SIPrefix} and \sbol{BinaryPrefix}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -1123,12 +1123,12 @@ The serialization of a \sbol{Measure} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:Measure rdf:about="...">
+<om:Measure rdf:about="...">
   ... [\emph{properties inherited from Identified}] ...
   [\emph{one}]  <om:hasNumericalValue>...</om:hasNumericalValue> [\emph{element}]
   [\emph{one}]  <om:hasUnit rdf:resource="..."/> [\emph{element}]
   [\emph{zero or more}]  <sbol:types rdf:resource="..."/> [\emph{element}]
-</prov:Measure>
+</om:Measure>
 \end{lstlisting}
 
 \twothreezero{
@@ -1138,14 +1138,14 @@ The example below shows the serialization of a \sbol{Measure} that describes the
 \begin{lstlisting}
 <?xml version="1.0" ?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:Measure rdf:about="http://sbolstandard.org/example/ribonuclease_michaelis_constant/1">
+  <om:Measure rdf:about="http://sbolstandard.org/example/ribonuclease_michaelis_constant/1">
     <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/ribonuclease_michaelis_constant"/>
     <sbol:displayId>ribonuclease_michaelis_constant</sbol:displayId>
     <dcterms:title>Ribonuclease Michaelis Constant</dcterms:title>
     <om:hasNumericalValue>"7.9"^^xsd:float<om:hasNumericalValue/>
     <om:hasUnit rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/millimolair"/>
     <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000027"/>
-  </sbol:Measure>
+  </om:Measure>
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:Measure}
@@ -1194,7 +1194,7 @@ The serialization of a \sbol{SingularUnit} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:SingularUnit rdf:about="...">
+<om:SingularUnit rdf:about="...">
   ... [\emph{properties inherited from TopLevel}] ...
   [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
   [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
@@ -1204,7 +1204,7 @@ The serialization of a \sbol{SingularUnit} MUST have the following form:
   [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
   [\emph{zero or one}]  <om:hasUnit rdf:resource="..."/> [\emph{element}]
   [\emph{zero or one}]  <om:hasFactor rdf:resource="..."/> [\emph{element}]
-</prov:SingularUnit>
+</om:SingularUnit>
 \end{lstlisting}
 
 \twothreezero{
@@ -1213,8 +1213,8 @@ The example below shows the serialization of a \sbol{SingularUnit} that describe
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:SingularUnit rdf:about="http://sbolstandard.org/example/base_pair/1">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
+  <om:SingularUnit rdf:about="http://sbolstandard.org/example/base_pair/1">
     <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/base_pair"/>
     <sbol:displayId>base_pair</sbol:displayId>
     <dcterms:title>Base Pair</dcterms:title>
@@ -1222,7 +1222,7 @@ The example below shows the serialization of a \sbol{SingularUnit} that describe
     <rdfs:label xml:lang="en">Base Pair</rdfs:label>
     <om:hasUnit rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/angstrom"/>
     <om:hasFactor rdf:datatype="&xsd;float">3.4</om:hasFactor>
-  </sbol:SingularUnit>
+  </om:SingularUnit>
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:SingularUnit}
@@ -1254,9 +1254,8 @@ The serialization of a \sbol{UnitMultiplication} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:UnitMultiplication rdf:about="...">
+<om:UnitMultiplication rdf:about="...">
   ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{zero or more}]  <prov: rdf:resource="..."/> [\emph{element}]
   [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
   [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
   [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
@@ -1265,7 +1264,7 @@ The serialization of a \sbol{UnitMultiplication} MUST have the following form:
   [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
   [\emph{one}]  <om:hasTerm1 rdf:resource="..."/> [\emph{element}]
   [\emph{one}]  <om:hasTerm2 rdf:resource="..."/> [\emph{element}]
-</prov:UnitMultiplication>
+</om:UnitMultiplication>
 \end{lstlisting}
 
 % \twothreezero{
@@ -1306,9 +1305,8 @@ The serialization of a \sbol{UnitDivision} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:UnitDivision rdf:about="...">
+<om:UnitDivision rdf:about="...">
   ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{zero or more}]  <prov: rdf:resource="..."/> [\emph{element}]
   [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
   [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
   [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
@@ -1317,7 +1315,7 @@ The serialization of a \sbol{UnitDivision} MUST have the following form:
   [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
   [\emph{one}]  <om:hasNumerator rdf:resource="..."/> [\emph{element}]
   [\emph{one}]  <om:hasDenominator rdf:resource="..."/> [\emph{element}]
-</prov:UnitDivision>
+</om:UnitDivision>
 \end{lstlisting}
 
 \twothreezero{
@@ -1326,8 +1324,8 @@ The example below shows the serialization of a \sbol{UnitDivision} that describe
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:UnitDivision rdf:about="http://sbolstandard.org/example/cfu_per_centimeter_squared/1">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:sbol="http://sbols.org/v2#">
+  <om:UnitDivision rdf:about="http://sbolstandard.org/example/cfu_per_centimeter_squared/1">
     <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/cfu_per_centimeter_squared"/>
     <sbol:displayId>cfu_per_centimeter_squared</sbol:displayId>
     <dcterms:title>CFU per Centimeter Squared</dcterms:title>
@@ -1335,7 +1333,7 @@ The example below shows the serialization of a \sbol{UnitDivision} that describe
     <rdfs:label xml:lang="en">CFU per Centimeter Squared</rdfs:label>
     <om:hasNumerator rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/colonyFormingUnit"/>
     <om:hasDenominator rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/colonyFormingUnitsquareCentimetre"/>
-  </sbol:UnitDivision>
+  </om:UnitDivision>
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:UnitDivision}
@@ -1350,7 +1348,7 @@ The purpose of the \sbol{UnitExponentiation} class is to describe a unit of meas
 The \sbol{hasBase} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}.
 
 \paragraph{The \sbolheading{hasExponent} property}\label{sec:hasExponent}
-The \sbol{hasExponent} property is REQUIRED and MUST refer to an xsd:integer.
+The \sbol{hasExponent} property is REQUIRED and MUST contain an xsd:integer.
 
 \paragraph{Serialization}
 The serialization of a \sbol{UnitExponentiation} MUST have the following form:
@@ -1358,9 +1356,8 @@ The serialization of a \sbol{UnitExponentiation} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:UnitExponentiation rdf:about="...">
+<om:UnitExponentiation rdf:about="...">
   ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{zero or more}]  <prov: rdf:resource="..."/> [\emph{element}]
   [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
   [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
   [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
@@ -1369,7 +1366,7 @@ The serialization of a \sbol{UnitExponentiation} MUST have the following form:
   [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
   [\emph{one}]  <om:hasBase rdf:resource="..."/> [\emph{element}]
   [\emph{one}]  <om:hasExponent>...<om:hasExponent/> [\emph{element}]
-</prov:UnitExponentiation>
+</om:UnitExponentiation>
 \end{lstlisting}
 
 % \twothreezero{
@@ -1410,7 +1407,7 @@ The serialization of a \sbol{PrefixedUnit} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:PrefixedUnit rdf:about="...">
+<om:PrefixedUnit rdf:about="...">
   ... [\emph{properties inherited from TopLevel}] ...
   [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
   [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
@@ -1420,7 +1417,7 @@ The serialization of a \sbol{PrefixedUnit} MUST have the following form:
   [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
   [\emph{one}]  <om:hasUnit rdf:resource="..."/> [\emph{element}]
   [\emph{one}]  <om:hasPrefix rdf:resource="..."/> [\emph{element}]
-</prov:PrefixedUnit>
+</om:PrefixedUnit>
 \end{lstlisting}
 
 \twothreezero{
@@ -1429,8 +1426,8 @@ The example below shows the serialization of a \sbol{PrefixedUnit} that describe
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:PrefixedUnit rdf:about="http://sbolstandard.org/example/kiloMEFL/1">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:sbol="http://sbols.org/v2#">
+  <om:PrefixedUnit rdf:about="http://sbolstandard.org/example/kiloMEFL/1">
     <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/kiloMEFL"/>
     <sbol:displayId>kiloMEFL</sbol:displayId>
     <dcterms:title>kilo-Molecules of Equivalent Fluorescein</dcterms:title>
@@ -1438,7 +1435,7 @@ The example below shows the serialization of a \sbol{PrefixedUnit} that describe
     <rdfs:label xml:lang="en">kilo-Molecules of Equivalent Fluorescein</rdfs:label>
     <om:hasUnit rdf:resource="http://sbolstandard.org/example/MEFL/1"/>
     <om:hasPrefix rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/kilo"/>
-  </sbol:PrefixedUnit>
+  </om:PrefixedUnit>
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:PrefixedUnit}
@@ -1483,7 +1480,7 @@ The serialization of a \sbol{SIPrefix} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:SIPrefix rdf:about="...">
+<om:SIPrefix rdf:about="...">
   ... [\emph{properties inherited from TopLevel}] ...
   [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
   [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
@@ -1492,7 +1489,7 @@ The serialization of a \sbol{SIPrefix} MUST have the following form:
   [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
   [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
   [\emph{one}]  <om:hasFactor rdf:resource="..."/> [\emph{element}]
-</prov:SIPrefix>
+</om:SIPrefix>
 \end{lstlisting}
 
 \twothreezero{
@@ -1507,7 +1504,7 @@ The serialization of a \sbol{BinaryPrefix} MUST have the following form:
 
 \lstsetsbol
 \begin{lstlisting}
-<prov:BinaryPrefix rdf:about="...">
+<om:BinaryPrefix rdf:about="...">
   ... [\emph{properties inherited from TopLevel}] ...
   [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
   [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
@@ -1516,12 +1513,12 @@ The serialization of a \sbol{BinaryPrefix} MUST have the following form:
   [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
   [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
   [\emph{one}]  <om:hasFactor rdf:resource="..."/> [\emph{element}] 
-</prov:BinaryPrefix>
+</om:BinaryPrefix>
 \end{lstlisting}
 
 \paragraph{Example - Growth Media Recipe}
 \twothreezero{
- \ref{} shows an example of using instances of the \sbol{Measure} and \sbol{Unit} classes in conjunction with instances of the SBOL \sbol{ModuleDefinition} and \sbol{ComponentDefinition} classes to specify a growth media recipe. Note that this specification for M9 Glucose CAA media is partly composed from the specification of another growth media, Teknova M1902. Namespace abbreviations used in this example include om for \url{http://www.ontology-of-units-of-measure.org/resource/om-2/}, obo for \url{http://purl.obolibrary.org/obo/}, chebi for \url{http://identifiers.org/chebi/}, and sbo for \url{http://identifiers.org/biomodels.sbo/}. C85504 codes for the term "growth medium" in the National Cancer Institute Thesaurus (NCIT). For specifying Measure types with SBO, 0000196 codes for "concentration of an entity pool", 0000226 codes for "density of an entity pool", and 0000470 codes for "mass fraction."
+ \ref{uml:media_example} shows an example of using instances of the \sbol{Measure} and \sbol{Unit} classes in conjunction with instances of the SBOL \sbol{ModuleDefinition} and \sbol{ComponentDefinition} classes to specify a growth media recipe. Note that this specification for M9 Glucose CAA media is partly composed from the specification of another growth media, Teknova M1902. Namespace abbreviations used in this example include om for \url{http://www.ontology-of-units-of-measure.org/resource/om-2/}, obo for \url{http://purl.obolibrary.org/obo/}, chebi for \url{http://identifiers.org/chebi/}, and sbo for \url{http://identifiers.org/biomodels.sbo/}. For specifying \sbol{ModuleDefinition} \sbolmult{roles:MD}{roles}, MC85504 codes for the term "growth medium" in the National Cancer Institute Thesaurus (NCIT). For specifying \sbol{Measure} \sbolmult{types:Measure}{types} with the SBO, 0000196 codes for ``concentration of an entity pool'', 0000226 codes for ``density of an entity pool'', and 0000470 codes for ``mass fraction.''
 }
 
 \twothreezero{
