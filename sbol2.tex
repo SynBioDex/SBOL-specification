@@ -64,7 +64,7 @@
 \definecolor{light-gray}{gray}{0.97}
 \lstdefinelanguage{sbol}
     {morekeywords={xmlns:sbol,xmlns:prov,xmlns:rdf,xmlns:dcterms,xmlns:myapp,rdf:RDF,rdf:resource,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type,
-        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
+        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sourceLocation, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
 sbol:experimentalData,sbol:Experiment,sbol:ExperimentalData,sbol:attachment,om:hasNumericalValue,om:symbol,om:alternativeSymbol,om:alternativeLabel,om:longcomment,om:hasFactor,
 om:hasTerm1,om:hasTerm2,om:hasNumerator,om:hasDenominator,om:hasBase,om:hasExponent,om:hasUnit,om:hasPrefix,rdfs:comment,rdfs:label,
 om:Measure,om:Unit,om:SingularUnit,om:CompoundUnit,om:om:UnitMultiplication,om:UnitDivision,om:Exponentiation,om:PrefixedUnit,om:Prefix,om:SIPrefix,
@@ -178,18 +178,18 @@ om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd},
 \begin{document}
 
 \packageTitle{\latex Class for SBML Package Specifications}
-\packageVersion{Version 2.2.1}
-\packageVersionDate{July 1, 2018}
+\packageVersion{Version 2.3}
+\packageVersionDate{April 1, 2019}
 
 \title{
   %BBF RFC \rfcnum{}:
-  Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~2.2.1}}
+  Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~2.3}}
 
 \author{{\bf Editors:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
 Curtis Madsen & \emph{Boston University, USA}\\   
-Angel Moreno & \emph{Newcastle University, UK}\\   
-Tramy Nguyen & \emph{University of Utah, USA}\\ 
+Angel Go\~{n}i Moreno & \emph{Newcastle University, UK}\\   
+Umesh P & \emph{Kerala Technological University, India}\\ 
 Zach Palchick & \emph{Zymergen, USA}\\
 Nicholas Roehner & \emph{Raytheon BBN Technologies, USA}\\ 
 \end{tabular}\\
@@ -205,19 +205,21 @@ Anil Wipat		& \emph{Newcastle University, UK}\\
 Jacob Beal & \emph{Raytheon BBN Technologies, USA}\\ 
 Michael Bissell & \emph{Amyris, Inc., USA}\\ 
 John H. Gennari, Herbert Sauro & \emph{University of Washington, USA}\\
-Kevin Clancy & \emph{Synthetic Genomics, Inc., USA}\\ 
+Kevin Clancy & \emph{BioCoder Consulting, USA}\\ 
 Goksel Misirli & \emph{Keele University, UK}\\ 
 Chris Myers & \emph{University of Utah, USA}\\   
 Ernst Oberortner & \emph{DOE Joint Genome Institute, USA}\\
 \end{tabular}\\
 \\
 {\bf Additional authors, by institution:}\\
-Chris Macklin (\emph{Amyris, USA}), Raik Gr\"unberg (\emph{KAUST, SA}) \\
+Chris Macklin, Ysis Tarter (\emph{Amyris, USA}),\\
+John Meng (\emph{DOE Joint Genome Institute, USA})
+Raik Gr\"unberg (\emph{KAUST, SA}),\\
 Christian Atallah, James McLaughlin (\emph{Newcastle, UK})\\ 
 Robert Sidney Cox (\emph{Prospect Bio, USA}), Bryan Bartley (\emph{Raytheon BBN, USA}) \\
 Matthew Pocock (\emph{Turing Ate My Hamster, UK}) \\
 Thomas Gorochowski (\emph{U. of Bristol, UK}), James Scott-Brown (\emph{U. of Oxford, UK})\\
-Meher Samineni, Michael Zhang, Zach Zundel (\emph{U. of Utah, USA})\\
+Tramy Nguyen, Meher Samineni, Michael Zhang, Zach Zundel (\emph{U. of Utah, USA})\\
 Kiri Choi (\emph{U. of Washington, USA}), Zhen Zhang (\emph{Utah State U., USA})\\
 %% \end{tabular}\\
 %% \begin{tabular}{l>{\hspace*{15pt}}r}
