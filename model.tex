@@ -589,6 +589,13 @@ can be referred to remotely by a \sbol{MapsTo} on another \sbol{ComponentInstanc
 
 In some cases, a designer might want to set the \sbol{access} property of a \sbol{ComponentInstance} such that others cannot map to the \sbol{ComponentInstance} when they reuse its parent \sbol{ComponentDefinition}. For example, a designer who is concerned about retroactivity might set the \sbol{access} of the \sbol{ComponentInstance} to ``private'' in order to prevent its mapping to another \sbol{ComponentInstance} that participates in a new \sbol{Interaction} as part of a composite design.
 
+\twothreezero{
+\paragraph{The \sbolheading{measures} property}
+\label{sec:measures:CI}
+
+The \sbolmult{measures:CI}{measures} property is OPTIONAL and MAY contain a set of \sbol{Measure} objects. \ref{sec:Measure} contains a more detailed description of the \sbol{Measure} class.
+}
+
 \paragraph{Serialization}
 
 No serialization is defined for the \sbol{ComponentInstance} class, since this class is only used indirectly through the \sbol{Component} and \sbol{FunctionalComponent} subclasses.
@@ -1272,6 +1279,13 @@ The \sbolmult{mapsTos:M}{mapsTos} property is an OPTIONAL set of \sbol{MapsTo} o
 
 \ref{sec:MapsTo} contains a detailed description of the \sbol{MapsTo} class.
 
+\twothreezero{
+\paragraph{The \sbolheading{measures} property}
+\label{sec:measures:M}
+
+The \sbolmult{measures:M}{measures} property is OPTIONAL and MAY contain a set of \sbol{Measure} objects. \ref{sec:Measure} contains a more detailed description of the \sbol{Measure} class.
+}
+
 \paragraph{Serialization}
 The serialization of \sbol{Module}s has the following form.
 \lstsetsbol
@@ -1403,6 +1417,13 @@ The \sbol{participations} property is an OPTIONAL and MAY contain a set of \sbol
 
 Even though an \sbol{Interaction} generally contains at least one \sbol{Participation}, the case of zero \sbol{Participation} objects is allowed because it is plausible that a designer might want to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s have not yet been determined.
 
+\twothreezero{
+\paragraph{The \sbolheading{measures} property}
+\label{sec:measures:I}
+
+The \sbolmult{measures:I}{measures} property is OPTIONAL and MAY contain a set of \sbol{Measure} objects. \ref{sec:Measure} contains a more detailed description of the \sbol{Measure} class.
+}
+
 \paragraph{Serialization}
 
 The serialization of an \sbol{Interaction} has the following form.
@@ -1494,6 +1515,12 @@ Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} cont
 
 The \sbol{participant} property MUST specify precisely one \sbol{FunctionalComponent} object that plays the designated role in its parent \sbol{Interaction} object.
 
+\twothreezero{
+\paragraph{The \sbolheading{measures} property}
+\label{sec:measures:P}
+
+The \sbolmult{measures:P}{measures} property is OPTIONAL and MAY contain a set of \sbol{Measure} objects. \ref{sec:Measure} contains a more detailed description of the \sbol{Measure} class.
+}
 
 \paragraph{Serialization}
 

@@ -376,6 +376,11 @@ Reference: Section 7.7.1 on page 24}}
 
 \printValid{The \sbol{access} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \sbol{URI} from \ref{tbl:componentInstance_access} \\ Reference: \sec{sec:ComponentInstance}}
 
+\twothreezero{
+\printValid{The \sbolmult{measures:CI}{measures} property of a \sbol{ComponentInstance} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:ComponentInstance}}
+}
+
 \subsubsection*{Rules for the \class{Component} class} 
 \setcounter{sbolCtr}{10701}
 
@@ -707,6 +712,11 @@ Reference: \sec{sec:sequence}
 
 \printValid{The \sbolmult{mapsTos:M}{mapsTos} property is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects.\\ Reference: \sec{sec:Module}}
 
+\twothreezero{
+\printValid{The \sbolmult{measures:M}{measures} property of a \sbol{Module} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:Module}}
+}
+
 \subsubsection*{Rules for the \class{FunctionalComponent} class} 
 \setcounter{sbolCtr}{11801}
 
@@ -744,6 +754,11 @@ Reference: \sec{sec:sequence}
 Reference: \sec{sec:Participation}}
 }
 
+\twothreezero{
+\printValid{The \sbolmult{measures:I}{measures} property of an \sbol{Interaction} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:Interaction}}
+}
+
 \subsubsection*{Rules for the \class{Participation} class} 
 \setcounter{sbolCtr}{12001}
 
@@ -766,6 +781,11 @@ Reference: \sec{sec:Participation}}
 
 \twozeroone{
 \printModeling{Exactly one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO (see \ref{tbl:participant_roles}).\\ Reference: \sec{sec:Participation}}
+}
+
+\twothreezero{
+\printValid{The \sbolmult{measures:P}{measures} property of a \sbol{Participation} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:Participation}}
 }
 
 \subsubsection*{Rules for the \class{Collection} class} 
@@ -823,7 +843,7 @@ Reference: Section 7.11 on page 46}}
 \setcounter{sbolCtr}{12401}
 
 \twothreezero{
-\printValid{An \sbol{Activity} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations}, \texttt{\hyperref[sec:activity_types]{types}}, \sbol{startedAtTime}, \sbol{endedAtTime}, \sbol{wasInformedBys},\\ \sbol{usages}, and \sbol{associations}.\\ Reference: \sec{sec:Activity}}
+\printValid{An \sbol{Activity} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations}, \sbolmult{types:Activity}{types}, \sbol{startedAtTime}, \sbol{endedAtTime}, \sbol{wasInformedBys},\\ \sbol{usages}, and \sbol{associations}.\\ Reference: \sec{sec:Activity}}
 }
 
 \printValid{The \sbol{startedAtTime} property of an \sbol{Activity} object is OPTIONAL and MAY contain a\\
@@ -854,7 +874,7 @@ Reference: Section 7.11 on page 46}}
 
 \twothreezero{
 %% EO: using the \hyperref here due to the specification of the \sbol command and the "types" property that appears in ComponentDefinition and Activity.
-\printValid{The \texttt{\hyperref[sec:activity_types]{types}} property of an \sbol{Activity} object is OPTIONAL and MAY contain a set of \sbol{URI}s.  \\ Reference: \sec{sec:Activity}}
+\printValid{The \sbolmult{types:Activity}{types} property of an \sbol{Activity} object is OPTIONAL and MAY contain a set of \sbol{URI}s.  \\ Reference: \sec{sec:Activity}}
 \printModeling{If an \sbol{Activity} has a types value of ~\url{http://sbols.org/v2\#design} and also contains an \sbol{Association}, then that \sbol{Association} MUST have a roles value of ~\url{http://sbols.org/v2\#design}. \\ Reference: \sec{sec:Activity}}
 \printModeling{If an \sbol{Activity} has a types value of ~\url{http://sbols.org/v2\#build} and also contains an \sbol{Association}, then that \sbol{Association} MUST have a roles value of ~\url{http://sbols.org/v2\#build}. \\ Reference: \sec{sec:Activity}}
 \printModeling{If an \sbol{Activity} has a types value of ~\url{http://sbols.org/v2\#test} and also contains an \\
@@ -1125,4 +1145,202 @@ a \sbol{ComponentDefinition} that is one of the \sbol{members} of a \sbol{Collec
 
 \printComplete{The \sbol{URI}s contained by the \sbol{experimentalData} property of a \sbol{Experiment} MUST each refer to an \sbol{ExperimentalData}.
 \\ Reference: \sec{sec:Experiment}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{Measure} class} 
+\setcounter{sbolCtr}{13501}
+
+\printValid{A \sbol{Measure} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{hasNumericalValue}, \sbolmult{hasUnit:Measure}{hasUnit}, and \sbolmult{types:Measure}{types}.\\ Reference: \sec{sec:Measure}}
+
+\printValid{The \sbol{hasNumericalValue} property of a \sbol{Measure} is REQUIRED and MUST contain an xsd:float.\\ Reference: \sec{sec:Measure}}
+
+\printValid{The \sbolmult{hasUnit:Measure}{hasUnit} property of a \sbol{Measure} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Measure}}
+
+\printValid{The \sbolmult{types:Measure}{types} property of a \sbol{Measure} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Measure}}
+
+\printModeling{If the \sbolmult{types:Measure}{types} property of a \sbol{Measure} is non-empty, then exactly one of the \sbol{URI}s that this property contains SHOULD refer to a term from the systems description parameter branch of the SBO.\\ Reference: \sec{sec:Measure}}
+
+\printComplete{The \sbol{URI} contained by the \sbolmult{hasUnit:Measure}{hasUnit} property of a \sbol{Measure} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:Measure}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{Unit} class} 
+\setcounter{sbolCtr}{13601}
+
+\printValid{The \sbolmult{symbol:Unit}{symbol} property of a \sbol{Unit} is REQUIRED and MUST contain a \sbol{String}.\\ Reference: \sec{sec:Unit}}
+
+\printValid{The \sbolmult{alternativeSymbols:Unit}{alternativeSymbols} property of a \sbol{Unit} is OPTIONAL and MAY contain a set of \sbol{String}s.\\ Reference: \sec{sec:Unit}}
+
+\printValid{The \sbolmult{label:Unit}{label} property of a \sbol{Unit} is REQUIRED and MUST contain a \sbol{String}.\\ Reference: \sec{sec:Unit}}
+
+\printValid{The \sbolmult{alternativeLabels:Unit}{alternativeLabels} property of a \sbol{Unit} is OPTIONAL and MAY contain a set of \sbol{String}s.\\ Reference: \sec{sec:Unit}}
+
+\printValid{The \sbolmult{comment:Unit}{comment} property of a \sbol{Unit} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Unit}}
+
+\printValid{The \sbolmult{longcomment:Unit}{longcomment} property of a \sbol{Unit} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Unit}}
+
+\printModeling{If both of the \sbol{name} property and \sbolmult{label:Unit}{label} properties of a \sbol{Unit} are non-empty, then they SHOULD contain identical \sbol{String}s.\\ Reference: \sec{sec:Unit}}
+
+\printModeling{If both of the \sbol{description} property and \sbolmult{comment:Unit}{comment} properties of a \sbol{Unit} are non-empty, then they SHOULD contain identical \sbol{String}s.\\ Reference: \sec{sec:Unit}}
+
+\printModeling{If both of the \sbolmult{comment:Unit}{comment} property and \sbolmult{longcomment:Unit}{longcomment} properties of a \sbol{Unit} are non-empty, then the \sbol{String} contained by the \sbolmult{longcomment:Unit}{longcomment} property SHOULD be longer than the \sbol{String} contained by the \sbolmult{comment:Unit}{comment} property.\\ Reference: \sec{sec:Unit}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{SingularUnit} class} 
+\setcounter{sbolCtr}{13701}
+
+\printValid{A \sbol{SingularUnit} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label},\\
+\sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbolmult{hasUnit:SingularUnit}{hasUnit}, and \sbolmult{hasFactor:SingularUnit}{hasFactor}.\\ Reference: \sec{sec:SingularUnit}}
+
+\printValid{The \sbolmult{hasUnit:SingularUnit}{hasUnit} property of a \sbol{SingularUnit} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:SingularUnit}}
+
+\printValid{The \sbolmult{hasFactor:SingularUnit}{hasFactor} property of a \sbol{SingularUnit} is OPTIONAL and MAY contain an xsd:float.\\ Reference: \sec{sec:SingularUnit}}
+
+\printValid{Any \sbol{URI} contained by the \sbolmult{hasUnit:SingularUnit}{hasUnit} property of a \sbol{SingularUnit} MUST NOT be identical to the \sbol{URI} contained by its \sbol{identity} property.\\ Reference: \sec{sec:SingularUnit}}
+
+\printModeling{If the \sbolmult{hasFactor:SingularUnit}{hasFactor} property of a \sbol{SingularUnit} is non-empty, then its \sbolmult{hasUnit:SingularUnit}{hasUnit} property \\SHOULD also be non-empty.\\ Reference: \sec{sec:SingularUnit}}
+
+\printComplete{The \sbol{URI} contained by the \sbolmult{hasUnit:SingularUnit}{hasUnit} property of a \sbol{SingularUnit} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:SingularUnit}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{UnitMultiplication} class} 
+\setcounter{sbolCtr}{13801}
+
+\printValid{A \sbol{UnitMultiplication} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label},\\
+\sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasTerm1}, and \sbol{hasTerm2}.\\ Reference: \sec{sec:UnitMultiplication}}
+
+\printValid{The \sbol{hasTerm1} property of a \sbol{UnitMultiplication} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:UnitMultiplication}}
+
+\printValid{The \sbol{hasTerm2} property of a \sbol{UnitMultiplication} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:UnitMultiplication}}
+
+\printValid{The \sbol{URI} contained by the \sbol{hasTerm1} property of a \sbol{UnitMultiplication} MUST NOT be identical to the \sbol{URI} contained by its \sbol{identity} property.\\ Reference: \sec{sec:UnitMultiplication}}
+
+\printValid{The \sbol{URI} contained by the \sbol{hasTerm2} property of a \sbol{UnitMultiplication} MUST NOT be identical to the \sbol{URI} contained by its \sbol{identity} property.\\ Reference: \sec{sec:UnitMultiplication}}
+
+\printComplete{The \sbol{URI} contained by the \sbol{hasTerm1} property of a \sbol{UnitMultiplication} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:UnitMultiplication}}
+
+\printComplete{The \sbol{URI} contained by the \sbol{hasTerm2} property of a \sbol{UnitMultiplication} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:UnitMultiplication}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{UnitDivision} class} 
+\setcounter{sbolCtr}{14001}
+
+\printValid{A \sbol{UnitDivision} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label},\\
+\sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasNumerator}, and \sbol{hasDenominator}.\\ Reference: \sec{sec:UnitDivision}}
+
+\printValid{The \sbol{hasNumerator} property of a \sbol{UnitDivision} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:UnitDivision}}
+
+\printValid{The \sbol{hasDenominator} property of a \sbol{UnitDivision} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:UnitDivision}}
+
+\printValid{The \sbol{URI} contained by the \sbol{hasNumerator} property of a \sbol{UnitDivision} MUST NOT be identical to the \sbol{URI} contained by its \sbol{identity} property.\\ Reference: \sec{sec:UnitDivision}}
+
+\printValid{The \sbol{URI} contained by the \sbol{hasDenominator} property of a \sbol{UnitDivision} MUST NOT be identical to the \sbol{URI} contained by its \sbol{identity} property.\\ Reference: \sec{sec:UnitDivision}}
+
+\printComplete{The \sbol{URI} contained by the \sbol{hasNumerator} property of a \sbol{UnitDivision} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:UnitDivision}}
+
+\printComplete{The \sbol{URI} contained by the \sbol{hasDenominator} property of a \sbol{UnitDivision} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:UnitDivision}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{UnitExponentiation} class} 
+\setcounter{sbolCtr}{14101}
+
+\printValid{A \sbol{UnitExponentiation} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label},\\
+\sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasBase}, and \sbol{hasExponent}.\\ Reference: \sec{sec:UnitExponentiation}}
+
+\printValid{The \sbol{hasBase} property of a \sbol{UnitExponentiation} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:UnitExponentiation}}
+
+\printValid{The \sbol{hasExponent} property of a \sbol{UnitExponentiation} is REQUIRED and MUST contain an xsd:integer.\\ Reference: \sec{sec:UnitExponentiation}}
+
+\printValid{The \sbol{URI} contained by the \sbol{hasBase} property of a \sbol{UnitExponentiation} MUST NOT be identical to the \sbol{URI} contained by its \sbol{identity} property.\\ Reference: \sec{sec:UnitExponentiation}}
+
+\printComplete{The \sbol{URI} contained by the \sbol{hasBase} property of a \sbol{UnitExponentiation} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:UnitExponentiation}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{PrefixedUnit} class} 
+\setcounter{sbolCtr}{14201}
+
+\printValid{A \sbol{PrefixedUnit} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label},\\
+\sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbolmult{hasUnit:PrefixedUnit}{hasUnit}, and \sbol{hasPrefix}.\\ Reference: \sec{sec:PrefixedUnit}}
+
+\printValid{The \sbolmult{hasUnit:PrefixedUnit}{hasUnit} property of a \sbol{PrefixedUnit} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:PrefixedUnit}}
+
+\printValid{The \sbol{hasPrefix} property of a \sbol{PrefixedUnit} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:PrefixedUnit}}
+
+\printValid{The \sbol{URI} contained by the \sbolmult{hasUnit:PrefixedUnit}{hasUnit} property of a \sbol{PrefixedUnit} MUST NOT be identical to the \sbol{URI} contained by its \sbol{identity} property.\\ Reference: \sec{sec:PrefixedUnit}}
+
+\printComplete{The \sbol{URI} contained by the \sbolmult{hasUnit:PrefixedUnit}{hasUnit} property of a \sbol{PrefixedUnit} MUST refer to a \sbol{Unit}.
+\\ Reference: \sec{sec:PrefixedUnit}}
+
+\printComplete{The \sbol{URI} contained by the \sbol{hasPrefix} property of a \sbol{PrefixedUnit} MUST refer to a \sbol{Prefix}.
+\\ Reference: \sec{sec:PrefixedUnit}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{Prefix} class} 
+\setcounter{sbolCtr}{14301}
+
+\printValid{The \sbolmult{symbol:Prefix}{symbol} property of a \sbol{Prefix} is REQUIRED and MUST contain a \sbol{String}.\\ Reference: \sec{sec:Prefix}}
+
+\printValid{The \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols} property of a \sbol{Prefix} is OPTIONAL and MAY contain a set of \sbol{String}s.\\ Reference: \sec{sec:Prefix}}
+
+\printValid{The \sbolmult{label:Prefix}{label} property of a \sbol{Prefix} is REQUIRED and MUST contain a \sbol{String}.\\ Reference: \sec{sec:Prefix}}
+
+\printValid{The \sbolmult{alternativeLabels:Prefix}{alternativeLabels} property of a \sbol{Prefix} is OPTIONAL and MAY contain a set of \sbol{String}s.\\ Reference: \sec{sec:Prefix}}
+
+\printValid{The \sbolmult{comment:Prefix}{comment} property of a \sbol{Prefix} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Prefix}}
+
+\printValid{The \sbolmult{longcomment:Prefix}{longcomment} property of a \sbol{Prefix} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Prefix}}
+
+\printValid{The \sbolmult{hasFactor:Prefix}{hasFactor} property of a \sbol{Prefix} is REQUIRED and MUST contain an xsd:float.\\ Reference: \sec{sec:Prefix}}
+
+\printModeling{If both of the \sbol{name} property and \sbolmult{label:Prefix}{label} properties of a \sbol{Prefix} are non-empty, then they SHOULD contain identical \sbol{String}s.\\ Reference: \sec{sec:Prefix}}
+
+\printModeling{If both of the \sbol{description} property and \sbolmult{comment:Prefix}{comment} properties of a \sbol{Prefix} are non-empty, then they SHOULD contain identical \sbol{String}s.\\ Reference: \sec{sec:Prefix}}
+
+\printModeling{If both of the \sbolmult{comment:Prefix}{comment} property and \sbolmult{longcomment:Prefix}{longcomment} properties of a \sbol{Prefix} are non-empty, then the \sbol{String} contained by the \sbolmult{longcomment:Prefix}{longcomment} property SHOULD be longer than the \sbol{String} contained by the \sbolmult{comment:Prefix}{comment} property.\\ Reference: \sec{sec:Prefix}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{SIPrefix} class} 
+\setcounter{sbolCtr}{14401}
+
+\printValid{A \sbol{SIPrefix} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Prefix}{symbol}, \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols}, \sbolmult{label:Prefix}{label},\\
+\sbolmult{alternativeLabels:Prefix}{alternativeLabels}, \sbolmult{comment:Prefix}{comment}, \sbolmult{longcomment:Prefix}{longcomment}, and \sbolmult{hasFactor:Prefix}{hasFactor}.\\ Reference: \sec{sec:SIPrefix}}
+}
+
+\twothreezero{
+\subsubsection*{Rules for the \class{BinaryPrefix} class} 
+\setcounter{sbolCtr}{14501}
+
+\printValid{A \sbol{BinaryPrefix} MUST NOT have properties other than the following: \sbol{identity}, \\
+\sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Prefix}{symbol}, \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols}, \sbolmult{label:Prefix}{label},\\
+\sbolmult{alternativeLabels:Prefix}{alternativeLabels}, \sbolmult{comment:Prefix}{comment}, \sbolmult{longcomment:Prefix}{longcomment}, and \sbolmult{hasFactor:Prefix}{hasFactor}.\\ Reference: \sec{sec:BinaryPrefix}}
 }
