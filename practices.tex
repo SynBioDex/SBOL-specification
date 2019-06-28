@@ -131,3 +131,66 @@ Authorship information should ideally be added to \sbol{TopLevel} entities, wher
   ...
 </rdf:RDF>
 \end{lstlisting}
+
+\twothreeone{\subsection{Host Context / Ontologies for Experiments}
+
+\subsubsection{Mixtures via ModuleDefinitions}
+
+Any \sbol{ModuleDefinition} can be interpreted as specifying a mixture of the \sbol{FunctionalComponent}s and \sbol{Module}s that it includes.
+
+The amount of each such instance included in the mixture SHOULD be specified by attaching a \sbol{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
+\begin{itemize}
+\item SBO:0000540: fraction of an entity pool (e.g., 1/3 CHO cells, 2/3 HEK cells)
+\item SBO:0000472: molar concentration of an entity (e.g., 1 mM Arabinose)
+\item SBO:0000361: amount of an entity pool (e.g., 200 uL M9 media)
+\end{itemize}
+
+\subsubsection{Media, Inducers, and Other Reagents}
+
+An ``atomic'' reagent, which is not expected to be divided further in designs, SHOULD be represented as a \\ \sbol{ComponentDefinition}. Examples: Arabinose, Kanamycin, Rainbow bead control
+
+A ``composite'' reagent, which might be defined as a mixture of other reagents, SHOULD be represented as a \sbol{ModuleDefinition} that defines it as a mixture of other reagents. This might be recursive, with mixtures of mixtures of mixtures, etc. Examples: M9 media, LB broth
+
+The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{roles:MD}{role} property of the \sbol{FunctionalComponent} or \sbol{Module}. Examples include:
+\begin{itemize}
+\item NCIT:C64356: Positive Control
+\item NCIT:C48694: Cell
+\item NCIT:C85504: Media
+\item NCIT:C14419: Strain
+\item NCIT:C120268: Inducer
+\end{itemize}
+
+Note that this also implies that the \sbolmult{roles:C}{role} property should be promoted from \sbol{Component} to \sbol{ComponentInstance} (so it can be used for \sbol{FunctionalComponent} as well) and also added to \sbol{Module}.
+
+\subsubsection{Strains, Genomes, and Plasmids}
+
+A cell strain SHOULD be represented as a \sbol{ModuleDefinition} containing at least:
+\begin{itemize}
+\item A \sbol{FunctionalComponent} for the cell, which is RECOMMENDED to have \sbolmult{types:CD}{type} cell (GO:0005623) and \sbolmult{roles:MD}{role} physical compartment (SBO:0000290).
+\item A representation of its genetic material (genome, plasmids, etc.) as a collection of \sbol{FunctionalComponent} and/or \sbol{Module} instances.
+\item An \sbol{Interaction} of type \texttt{FunctionalCompartment} (SBO:0000289) with the cell participating as physical compartment (SBO: 0000290) and the genetic material participating as contained entity (SBO:0000664).
+\end{itemize}
+
+\subsubsection{Samples}
+
+A complete specification of a sample SHOULD be a \sbol{ModuleDefinition} that includes at least:
+\begin{itemize}
+\item A \sbol{Module} instantiating each strain in the sample
+\item A \sbol{Module} or \sbol{FunctionalComponent} for the media or buffer
+\item A \sbol{Module} or \sbol{FunctionalComponent} for each additional reagent added to the media (e.g., inducers, antibiotics)
+\item \sbol{Measure}s on each of these specifying the amount in the sample
+\item \sbol{Measure}s on the \sbol{ModuleDefinition} for each environmental parameter (e.g., temperature, pH, culturing time)
+\end{itemize}
+
+\subsubsection{Other Experimental Parameters}
+
+In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, we need to add a \texttt{measures} property to \sbol{ModuleDefinition} (in addition to the ones already on \sbol{Module} and \sbol{ComponentInstance}) and to \sbol{ComponentDefinition}.
+
+The distinction is that the \texttt{measures} of a \texttt{Definition} provide context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \texttt{measures} on an \texttt{Instance} provide a measurement in context (e.g., the dosage of Arabinose in a sample).
+
+Values of these parameters SHOULD be specified by attaching a \sbol{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
+\begin{itemize}
+\item SBO:0000147: thermodynamic temperature (e.g., culturing at 27 C)
+\item SBO:0000332: half-life of an exponential decay (e.g., decay rate of a gRNA)
+\item SBO:0000304: pH (e.g., pH of M9 media)
+\end{itemize}}
