@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>720</w>
+      <h>430</h>
+    </coordinates>
+    <panel_attributes>*ModuleDefinition*
+--
+...
+name: System
+role: functional compartment [SBO:0000289]
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>120</y>
+      <w>700</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>*Interaction*
+--
+...
+type: URI
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>190</y>
+      <w>220</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>*Participation*
+--
+...
+name: Molecule A
+role: URI
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>190</y>
+      <w>220</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>*Participation*
+--
+...
+name: Molecule B
+role: URI
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>190</y>
+      <w>220</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>*Participation*
+--
+...
+name: Cell
+role: physical compartment
+        [SBO:0000290]
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>130</x>
+      <y>280</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+Participant
+fg=blue
+layer=2</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>280</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+Participant
+fg=blue
+layer=2</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>280</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+Participant
+fg=blue
+layer=2</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>350</y>
+      <w>220</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>*FunctionalComponent*
+--
+...
+name: Cell
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>350</y>
+      <w>220</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>*FunctionalComponent*
+--
+...
+name: Molecule B
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>350</y>
+      <w>220</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>*FunctionalComponent*
+--
+...
+name: Molecule A
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>420</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+Definition
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;50.0;220.0;50.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>490</y>
+      <w>310</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>*ComponentDefinition*
+--
+...
+name: Organism
+type: cell [GO:0005623]
+role: physical compartment [SBO:0000290]
+organism: NCBI URI
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
