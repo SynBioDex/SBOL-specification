@@ -189,6 +189,11 @@ Reference: \sec{sec:provenance}}
 Reference: \sec{sec:Identified}}
 }
 
+\twothreeone{
+\printValid{The \sbolmult{measures:CI}{measures} property of a \sbol{Identified} is OPTIONAL and may contain a set of \sbol{Measure} objects.
+\\ Reference: \sec{sec:Identified}}
+}
+
 \subsubsection*{Rules for the \class{TopLevel} class} 
 \setcounter{sbolCtr}{10301}
 
@@ -376,10 +381,12 @@ Reference: Section 7.7.1 on page 24}}
 
 \printValid{The \sbol{access} property of a \sbol{ComponentInstance} is REQUIRED and MUST contain a \sbol{URI} from \ref{tbl:componentInstance_access} \\ Reference: \sec{sec:ComponentInstance}}
 
-\twothreezero{
-\printValid{The \sbolmult{measures:CI}{measures} property of a \sbol{ComponentInstance} is OPTIONAL and may contain a set of \sbol{Measure} objects.
-\\ Reference: \sec{sec:ComponentInstance}}
+\twothreeone{
+\printValid{ \st{The measures property of a ComponentInstance is OPTIONAL and may contain a set of Measure objects.
+\\ Reference: ComponentInstance}
 }
+}
+
 
 \subsubsection*{Rules for the \class{Component} class} 
 \setcounter{sbolCtr}{10701}
@@ -712,9 +719,9 @@ Reference: \sec{sec:sequence}
 
 \printValid{The \sbolmult{mapsTos:M}{mapsTos} property is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects.\\ Reference: \sec{sec:Module}}
 
-\twothreezero{
-\printValid{The \sbolmult{measures:M}{measures} property of a \sbol{Module} is OPTIONAL and may contain a set of \sbol{Measure} objects.
-\\ Reference: \sec{sec:Module}}
+\twothreeone{
+\printValid{\st{The measures property of a Module is OPTIONAL and may contain a set of Measure objects.
+\\ Reference: Module}}
 }
 
 \subsubsection*{Rules for the \class{FunctionalComponent} class} 
@@ -754,9 +761,10 @@ Reference: \sec{sec:sequence}
 Reference: \sec{sec:Participation}}
 }
 
-\twothreezero{
-\printValid{The \sbolmult{measures:I}{measures} property of an \sbol{Interaction} is OPTIONAL and may contain a set of \sbol{Measure} objects.
-\\ Reference: \sec{sec:Interaction}}
+\twothreeone{
+
+\printValid{\st{The measures property of an Interaction is OPTIONAL and may contain a set of Measure objects.
+\\ Reference: Interaction}}
 }
 
 \subsubsection*{Rules for the \class{Participation} class} 
@@ -783,9 +791,9 @@ Reference: \sec{sec:Participation}}
 \printModeling{Exactly one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO (see \ref{tbl:participant_roles}).\\ Reference: \sec{sec:Participation}}
 }
 
-\twothreezero{
-\printValid{The \sbolmult{measures:P}{measures} property of a \sbol{Participation} is OPTIONAL and may contain a set of \sbol{Measure} objects.
-\\ Reference: \sec{sec:Participation}}
+\twothreeone{
+\printValid{\st{The measures property of a Participation is OPTIONAL and may contain a set of Measure objects.
+\\ Reference: Participation}}
 }
 
 \subsubsection*{Rules for the \class{Collection} class} 
