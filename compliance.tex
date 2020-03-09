@@ -1,12 +1,11 @@
 \section{SBOL Compliance}
 
-\twozeroone{
 There are different types of software compliance with respect to the SBOL specification.  First, a software tool can either support all classes of the SBOL 2.x data model or only its structural subset.  The structural subset includes the following classes:
 \begin{itemize}
 \item \sbol{Sequence}
-\item \sbol{ComponentDefinition}
-\begin{itemize}
 \item \sbol{Component}
+\begin{itemize}
+\item \sbol{SubComponent}
 \item \sbol{SequenceAnnotation}
 \item \sbol{SequenceConstraint}
 \end{itemize}
@@ -25,5 +24,5 @@ In order to test export compliance, developers are encouraged to validate SBOL f
 This validator can also be used to check lossless import/export support, since it can compare the data content of files imported and exported by a software tool.
 
 Finally, developers of SBOL-compliant tools are encouraged to notify the SBOL editors\\(sbol-editors@googlegroups.com) when they have determined that their tool is SBOL compliant, so their tool can be publicly categorized as such on the SBOL website.
-}
+
 
