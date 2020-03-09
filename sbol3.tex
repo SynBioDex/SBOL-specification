@@ -1,34 +1,17 @@
 
-\documentclass[finalspec]{sbmlpkgspec}
-%% \documentclass[draftspec]{sbmlpkgspec}
-%\usepackage{float}
+%% \documentclass[finalspec]{sbmlpkgspec}
+\documentclass[draftspec]{sbmlpkgspec}
 \usepackage{microtype}
 \usepackage{color}
 \usepackage{todonotes}
 \usepackage[color]{changebar}
 \usepackage{xcolor}
 \usepackage{soul}
-%% ============================================================================
-%% Description:  Documentation for sbmlpkgspec.cls
-%% First author: Michael Hucka <mhucka@caltech.edu>
-%% Organization: California Institute of Technology
-%% Date created: September 2011
-%% https://sbml.svn.sourceforge.net/svnroot/sbml/trunk/project/tex/sbmlpkgspec
-%%
-%% Copyright (C) 2011-2012 California Institute of Technology, Pasadena, CA.
-%%
-%% SBMLPkgSpec is free software; you can redistribute it and/or modify it
-%% under the terms of the GNU Lesser General Public License as published by
-%% the Free Software Foundation.  A copy of the license agreement is provided
-%% in the file named "LICENSE.txt" included with this software distribution.
-%% ============================================================================
 
 % Make changebars switchable to allow faster compilation:
 %\def\fullchangebars{} % comment this out to simplify changebars and speed up compilation
 
 % Macros just for this document:
-
-\newcommand{\rfcnum}{114}
 
 \newcommand{\sbmlpkg}{\texorpdfstring{%
     \textls[-25]{\textsc{SBMLPkgSpec}}}{%
@@ -67,7 +50,9 @@
 \definecolor{light-gray}{gray}{0.97}
 \lstdefinelanguage{sbol}
     {morekeywords={xmlns:sbol,xmlns:prov,xmlns:rdf,xmlns:dcterms,xmlns:myapp,rdf:RDF,rdf:resource,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type,
-        sbol:role, sbol:roleIntegration, sbol:Component, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:SubComponent,sbol:subComponent,sbol:SequenceAnnotation,sbol:subComponent,sbol:location, sbol:sourceLocation, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:instanceOf, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
+        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition,
+        sbol:SubComponent, sbol:instanceOf,
+        sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sourceLocation, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
 sbol:experimentalData,sbol:Experiment,sbol:ExperimentalData,sbol:attachment,om:hasNumericalValue,om:symbol,om:alternativeSymbol,om:alternativeLabel,om:longcomment,om:hasFactor,
 om:hasTerm1,om:hasTerm2,om:hasNumerator,om:hasDenominator,om:hasBase,om:hasExponent,om:hasUnit,om:hasPrefix,rdfs:comment,rdfs:label,
 om:Measure,om:Unit,om:SingularUnit,om:CompoundUnit,om:om:UnitMultiplication,om:UnitDivision,om:Exponentiation,om:PrefixedUnit,om:Prefix,om:SIPrefix,
@@ -118,18 +103,6 @@ om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd,xml:lang},
 
 %Command to format external terms in the document
 \newcommand{\external}[1]{\texttt{#1}}
-
-
-%Commands to highlight SBOL versions
-\newcommand{\three}[1]{%
-\cbcolor{red}
-\ifdefined\fullchangebars\cbstart\fi%
-{\color{red}%
-\version{3.0.0}%
-#1
-}
-\ifdefined\fullchangebars\cbend\fi
-}
 
 %Commands to highlight SBOL versions
 \newcommand{\twozeroone}[1]{%
@@ -204,75 +177,44 @@ om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd,xml:lang},
 
 \begin{document}
 
-\packageTitle{\latex Class for SBML Package Specifications}
-\packageVersion{Version 2.3}
-\packageVersionDate{April 1, 2019}
-
 \title{
-  %BBF RFC \rfcnum{}:
   Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~3.0}}
 
 \author{{\bf Editors:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
-Curtis Madsen & \emph{Boston University, USA}\\   
-Angel Go\~{n}i Moreno & \emph{Newcastle University, UK}\\   
-Umesh P & \emph{Kerala Technological University, India}\\ 
-Zach Palchick & \emph{Zymergen, USA}\\
-Nicholas Roehner & \emph{Raytheon BBN Technologies, USA}\\ 
+Hasan Baig & \emph{University of Connecticut, USA}\\   
+Pedro Fontanarrosa & \emph{University of Utah, USA}\\   
+Vishwesh Kulkarni, & \emph{University of Warwick, UK}\\ 
+James McLaughlin & \emph{Newcastle University, UK}\\
+Prashant Vaidyananthan & \emph{Microsoft Research, UK}\\ 
 \end{tabular}\\
 \href{mailto:sbol-editors@googlegroups.com}{\sffamily sbol-editors@googlegroups.com}\\
 \\
 {\bf Chair:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
-Anil Wipat		& \emph{Newcastle University, UK}\\
+Chris Myers		& \emph{University of Utah, USA}\\
 \end{tabular}\\
 \\
 {\bf Steering Committee:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
 Jacob Beal & \emph{Raytheon BBN Technologies, USA}\\ 
 Michael Bissell & \emph{Amyris, Inc., USA}\\ 
-John H. Gennari, Herbert Sauro & \emph{University of Washington, USA}\\
 Kevin Clancy & \emph{BioCoder Consulting, USA}\\ 
+Thomas Gorochowski & \emph{University of Bristol, UK}\\
 Goksel Misirli & \emph{Keele University, UK}\\ 
-Chris Myers & \emph{University of Utah, USA}\\   
 Ernst Oberortner & \emph{DOE Joint Genome Institute, USA}\\
+Herbert Sauro & \emph{University of Washington, USA}\\
+Anil Wipat & \emph{Newcastle University, UK}\\
 \end{tabular}\\
 \\
 {\bf Additional authors, by institution:}\\
-Chris Macklin, Ysis Tarter (\emph{Amyris, USA}),\\
-John Meng (\emph{DOE Joint Genome Institute, USA})
-Raik Gr\"unberg (\emph{KAUST, SA}),\\
-Christian Atallah, James McLaughlin (\emph{Newcastle, UK})\\ 
-Robert Sidney Cox (\emph{Prospect Bio, USA}), Bryan Bartley (\emph{Raytheon BBN, USA}) \\
-Matthew Pocock (\emph{Turing Ate My Hamster, UK}) \\
-Thomas Gorochowski (\emph{U. of Bristol, UK}), James Scott-Brown (\emph{U. of Oxford, UK})\\
-Tramy Nguyen, Meher Samineni, Michael Zhang, Zach Zundel (\emph{U. of Utah, USA})\\
-Kiri Choi (\emph{U. of Washington, USA}), Zhen Zhang (\emph{Utah State U., USA})\\
-%% \end{tabular}\\
-%% \begin{tabular}{l>{\hspace*{15pt}}r}
-%% Chris Macklin & \emph{Amyris, Inc., USA}\\  
-%% Raik Gr\"unberg & \emph{King Abdullah Univ. for Sci. and Tech., SA}\\ 
-%% Robert Sidney Cox & \emph{Kobe University, Japan}\\   %% TODO: Affiliation?  
-%% Christian Atallah, James McLaughlin & \emph{Newcastle University, UK}\\ 
-%% Bryan Bartley & \emph{Raytheon BBN Technologies, USA}\\ 
-%% Matthew Pocock & \emph{Turing Ate My Hamster LTD, UK}\\ 
-%% Thomas Gorochowski & \emph{University of Bristol, UK}\\  
-%% James Scott-Brown & \emph{University of Oxford, UK}\\ 
-%% Meher Samineni, Michael Zhang, Zach Zundel & \emph{University of Utah, USA}\\    
-%% Kiri Choi & \emph{University of Washington, USA}\\
-%% Zhen Zhang & \emph{Utah State University, USA}\\
-%% \end{tabular}\\
-{\bf Non-author contributors, by institution:}\\
-Douglas Densmore (\emph{Boston University, USA}), Paolo Missier (\emph{Newcastle University, UK}), \\
-Jacqueline Quinn (\emph{Google, USA}), Guy-Bart Stan (\emph{Imperial College London, UK})
-%% \begin{tabular}{l>{\hspace*{15pt}}r}
-%% Douglas Densmore & \emph{Boston University, USA}\\
-%% Paolo Missier & \emph{Newcastle University, UK}\\
-%% Jacqueline Quinn & \emph{Google, USA}\\
-%% Guy-Bart Stan & \emph{Imperial College London, UK}\\
-%% \end{tabular}
+\begin{tabular}{l>{\hspace*{15pt}}r}
+Raik Gr\"unberg & \emph{KAUST, SA}\\
+Bryan Bartley & \emph{Raytheon BBN, USA} \\
+Matthew Crowther & \emph{Newcastle University, UK} \\
+James Scott-Brown & \emph{U. of Oxford, UK} \\
+\end{tabular}\\
 }
-
 
 \maketitlepage
 \maketableofcontents
@@ -311,156 +253,3 @@ Jacqueline Quinn (\emph{Google, USA}), Guy-Bart Stan (\emph{Imperial College Lon
 \input{examples_serialization}
 
 \end{document}
-
-
-% -----------------------------------------------------------------------------
-% Random non-printing junk at the end: this section contains examples of potentially useful code for formatting tables, bullets, etc.
-
-\begin{table}[hb]
-  \begin{edtable}{tabular}{ll}
-    \toprule
-    \textbf{Item} & \textbf{Location} \\
-    \midrule
-    Distribution archive & \url{\distURL}\\
-    Web page		 & \url{\webURL}\\
-    Source tree (SVN)    & \url{\srcURL}\\
-    \bottomrule
-  \end{edtable}
-  \caption{Where to find \sbmlpkg on the Internet.}
-  \label{where}
-\end{table}
-
-\begin{table}[htb]
-  \rowcolors{2}{sbmlrowgray}{}
-  \renewcommand{\arraystretch}{1.05}
-  \begin{edtable}{tabular}{ll}
-    \toprule
-    \textbf{Command}                      & \textbf{Object} \\
-    \midrule
-    \cmd{AlgebraicRule}                   & \AlgebraicRule \\
-    \cmd{Annotation}                      & \Annotation \\
-    \cmd{AssignmentRule}                  & \AssignmentRule \\
-    \cmd{Compartment}                     & \Compartment \\
-    \cmd{Constraint}                      & \Constraint \\
-    \cmd{Delay}                           & \Delay \\
-    \cmd{EventAssignment}                 & \EventAssignment \\
-    \cmd{Event}                           & \Event \\
-    \cmd{FunctionDefinition}              & \FunctionDefinition \\
-    \cmd{InitialAssignment}               & \InitialAssignment \\
-    \cmd{KineticLaw}                      & \KineticLaw \\
-    \cmd{ListOfCompartments}              & \ListOfCompartments \\
-    \cmd{ListOfConstraints}               & \ListOfConstraints \\
-    \cmd{ListOfEventAssignments}          & \ListOfEventAssignments \\
-    \cmd{ListOfEvents}                    & \ListOfEvents \\
-    \cmd{ListOfFunctionDefinitions}       & \ListOfFunctionDefinitions \\
-    \cmd{ListOfInitialAssignments}        & \ListOfInitialAssignments \\
-    \cmd{ListOfLocalParameters}           & \ListOfLocalParameters \\
-    \cmd{ListOfModifierSpeciesReferences} & \ListOfModifierSpeciesReferences \\
-    \cmd{ListOfPackages}                  & \ListOfPackages \\
-    \cmd{ListOfParameters}                & \ListOfParameters \\
-    \cmd{ListOfReactions}                 & \ListOfReactions \\
-    \cmd{ListOfRules}                     & \ListOfRules \\
-    \cmd{ListOfSpeciesReferences}         & \ListOfSpeciesReferences \\
-    \cmd{ListOfSpecies}                   & \ListOfSpecies \\
-    \cmd{ListOfUnitDefinitions}           & \ListOfUnitDefinitions \\
-    \cmd{ListOfUnits}                     & \ListOfUnits \\
-    \cmd{LocalParameter}                  & \LocalParameter \\
-    \cmd{Message}                         & \Message \\
-    \cmd{Model}                           & \Model \\
-    \cmd{ModifierSpeciesReference}        & \ModifierSpeciesReference \\
-    \cmd{Notes}                           & \Notes \\
-    \cmd{Package}                         & \Package \\
-    \cmd{Parameter}                       & \Parameter \\
-    \cmd{Priority}                        & \Priority \\
-    \cmd{RateRule}                        & \RateRule \\
-    \cmd{Reaction}                        & \Reaction \\
-    \cmd{Rule}                            & \Rule \\
-    \cmd{SBML}                            & \SBML \\
-    \cmd{SBase}                           & \SBase \\
-    \cmd{SimpleSpeciesReference}          & \SimpleSpeciesReference \\
-    \cmd{SpeciesReference}                & \SpeciesReference \\
-    \cmd{Species}                         & \Species \\
-    \cmd{StoichiometryMath}               & \StoichiometryMath \\
-    \cmd{Trigger}                         & \Trigger \\
-    \cmd{UnitDefinition}                  & \UnitDefinition \\
-    \cmd{Unit}                            & \Unit \\
-    \bottomrule
-  \end{edtable}
-  \caption{Commands for the names of object classes defined in the SBML Level~3
-    Core specification.}
-  \label{sbmlcore}
-\end{table}
-
-\begin{example}[style=latex]
-\documentclass{sbmlpkgspec}
-\begin{document}
-
-\packageTitle{Example}
-\packageVersion{Version 1 (Draft)}
-\packageVersionDate{14 August 2011}
-\packageGeneralURL{http://sbml.org/Documents/Specifications/Example}
-\packageThisVersionURL{http://sbml.org/Documents/Specifications/Example_14_August_2011}
-
-\author{Michael Hucka\\[0.25em]
-  \mailto{mhucka@caltech.edu}\\[0.25em]
-  Computing and Mathematical Sciences\\
-  California Institute of Technology\\
-  Pasadena, CA, USA
-}
-
-\maketitlepage
-\maketableofcontents
-
-\section{...}
-...
-\end{document}
-\end{example}
-
-
-\begin{description}[font=\normalfont\ttfamily\color{black},style=nextline]
-
-\item[draftspec] This option causes the front page of the document to contain
-  the word ``DRAFT'' in large gray letters, and the footer of every page of
-  the document to contain the word ``(DRAFT)''.  Authors can use this
-  option until such time as the specification document is considered a
-  release candidate or a final release.
-
-\end{description}
-
-\begin{description}
-
-\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
-  \emph{requirement} for conformance. If a model fails to follow this rule,
-  it does not conform to the specification.  (Mnemonic intention behind the
-  choice of symbol: ``This MUST be checked.'')
-
-\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
-  \emph{recommendation} for model consistency.  If a model does not follow
-  this rule, it is not considered strictly invalid as far as the
-  specification is concerned; however, it indicates that the model contains
-  a physical or conceptual inconsistency.  (Mnemonic intention behind the
-  choice of symbol: ``This is a cause for warning.'')
-
-\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a strong
-  recommendation for good modeling practice.  This rule is not
-  strictly a matter of SBML encoding, but the recommendation comes
-  from logical reasoning.  As in the previous case, if a model does
-  not follow this rule, it is not strictly considered an invalid SBML
-  encoding.  (Mnemonic intention behind the choice of symbol: ``You're
-  a star if you heed this.'')
-
-\end{description}
-
-\begin{itemize}
-
-\item \texttt{amssymb}: This package defines many symbols and special
-  characters.  In \sbmlpkg, it is used to get the symbols defined by the
-  validation rule commands \cmd{validRule}, \cmd{consistencyRule} and
-  \cmd{modelingRule} described in \sec{validation-rules}.
-
-\end{itemize}
-% * <myers@ece.utah.edu> 2015-06-03T17:34:31.200Z:
-%
-%
-%
-qualifiedUsage
