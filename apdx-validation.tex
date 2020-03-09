@@ -363,7 +363,6 @@ Reference: Section 7.7.1 on page 24}}
 \printModeling{
 The \sbolmult{roles:C}{roles} property of a \sbol{SubComponent} SHOULD NOT contain a \sbol{URI} that refers to a term from the sequence feature branch of the SO unless the  \sbolmult{types:CD}{types} property of the \sbol{SubComponent} referred to by its \sbolmult{instanceOf:CI}{instanceOf} property contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:component_types}.
 \\ Reference: \sec{sec:SubComponent}}
-}
 
 \printModeling{If the \sbolmult{types:CD}{types} property of the \sbol{SubComponent} referred to by its \sbolmult{instanceOf:CI}{instanceOf} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{roles:C}{roles} property SHOULD contain no more than one \sbol{URI} that refers to a term from the sequence feature branch of the SO.\\ 
 Reference: \sec{sec:SubComponent}}
@@ -400,7 +399,7 @@ Reference: Section 7.7.3 on page 26}}
 \sbolmult{instanceOf:CI}{instanceOf} property of the \sbol{SubComponent}.\\ Reference: \sec{sec:MapsTo}} 
 
 \printComplete{If a \sbol{MapsTo} is contained by a \sbol{SubComponent}, then the \sbol{remote} property of the \sbol{MapsTo} MUST refer to a \sbol{SubComponent} in the \sbol{SubComponent} that is referenced by the \sbolmult{instanceOf:CI}{instanceOf} property of the \sbol{SubComponent}.\\ Reference: \sec{sec:MapsTo}} 
-}
+
 
 \printValid{The \sbol{refinement} property of a \sbol{MapsTo} is REQUIRED and MUST contain a \sbol{URI} from \ref{tbl:mapsto_refinement}.
 \\ Reference: \sec{sec:MapsTo}}
@@ -446,7 +445,7 @@ Reference: Section 7.7.5 on page 30}}
 \\ Reference: \sec{sec:GenericLocation}}
 
 \printComplete{The \sbol{sequence} property of a \sbol{Location} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{SubComponent} containing the \sbol{Location}.\\
-Reference: \sec{sec:sequence}
+Reference: \sec{sec:sequence}}
 
 \subsubsection*{Rules for the \class{Range} class} 
 \setcounter{sbolCtr}{11101}
@@ -464,7 +463,7 @@ Reference: \sec{sec:sequence}
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property.\\ Reference: \sec{sec:Range}}
 
 \printComplete{The \sbol{sequence} property of a \sbol{Range} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{SubComponent} containing the \sbol{Range}.\\
-Reference: \sec{sec:sequence}
+Reference: \sec{sec:sequence}}
 
 
 \subsubsection*{Rules for the \class{Cut} class} 
@@ -478,7 +477,7 @@ Reference: \sec{sec:sequence}
 \printValid{The \sbol{at} property of a \sbol{Cut} is REQUIRED and MUST contain an \sbol{Integer} greater than or equal to zero.  \\ Reference: \sec{sec:Cut}}
 
 \printComplete{The \sbol{sequence} property of a \sbol{Cut} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{SubComponent} containing the \sbol{Cut}.\\
-Reference: \sec{sec:sequence}
+Reference: \sec{sec:sequence}}
 
 \subsubsection*{Rules for the \class{GenericLocation} class} 
 \setcounter{sbolCtr}{11301}

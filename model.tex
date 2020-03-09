@@ -808,7 +808,6 @@ The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more
 If provided, these \sbolmult{roles:C}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{SubComponent}'s function in any domain for which an ontology exists.
 
 It is RECOMMENDED that these \sbolmult{roles:C}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both this \sbol{SubComponent}'s parent \sbol{Component} and its included sub-\sbol{Component}. For example, a \sbolmult{roles:C}{role} of a \sbol{SubComponent} which belongs to a \sbol{Component} of type DNA and includes a sub-\sbol{Component} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology terms for \sbolmult{roles:C}{roles} is given in \ref{tbl:component_roles}.
-}
 
 
 
@@ -820,7 +819,6 @@ A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship betwe
 The \sbolmult{roleIntegration:C}{roleIntegration} property has a data type of \sbol{URI}. A \sbol{SubComponent} instance with zero \sbolmult{roles:C}{roles} MAY OPTIONALLY specify a \sbolmult{roleIntegration:C}{roleIntegration}. A \sbol{SubComponent} instance with one or more \sbolmult{roles:C}{roles} MUST specify a \sbolmult{roleIntegration:C}{roleIntegration} from \ref{tbl:component_roleIntegration}.
 If zero \sbol{SubComponent} \sbolmult{roles:C}{roles} are given and no \sbol{SubComponent} \sbolmult{roleIntegration:C}{roleIntegration} is given, then \url{http://sbols.org/v2\#mergeRoles} is assumed.
 It is RECOMMENDED to specify a set of \sbol{SubComponent} \sbolmult{roles:C}{roles} only if the integrated result set of roles would differ from the set of \sbolmult{roles:CD}{roles} belonging to this \sbol{SubComponent}'s included sub-\sbol{Component}.
-}
 
 
 \begin{table}[ht]
@@ -1014,7 +1012,6 @@ Alternatively to describing substructure, a \sbol{SequenceAnnotation} can be uti
 The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more \sbol{URI}s describing the specified sequence feature being annotated.  If provided, these \sbolmult{roles:SA}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate \sbol{Sequence}s' function in any domain for which an ontology exists.
 
 It is RECOMMENDED that these \sbolmult{roles:SA}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of this \sbol{SequenceAnnotation}'s parent \sbol{Component}. For example, a \sbolmult{roles:SA}{role} of a \sbol{SequenceAnnotation} which belongs to a \sbol{Component} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology terms for \sbolmult{roles:SA}{roles} is given in \ref{tbl:component_roles}.
-}
 
 \paragraph{Serialization}
 
@@ -1071,7 +1068,6 @@ The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. A
 \paragraph{The \sbolheading{sequence} property}
 \label{sec:sequence}
 The \sbol{sequence} property is OPTIONAL and MAY contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
-}
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{3.75in}}
@@ -1598,7 +1594,6 @@ An \sbol{Implementation} represents an instance of a synthetic biological constr
 
 \subsubsection*{ The \sbolheading{built} property}\label{sec:built}
 The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a \sbol{TopLevel} object that is either a \sbol{Component} or \sbol{Component}. This \sbol{Component} or \sbol{Component} is intended to describe the actual physical structure and/or functional behavior of the \sbol{Implementation}. When the built property refers to a \sbol{Component} or \sbol{Component} that is also linked to the \sbol{Implementation} via PROV-O properties such as \sbol{wasDerivedFroms} (see \ref{sec:provenance}), it can be inferred that the actual structure and/or function of the \sbol{Implementation} matches its original design. When the \sbol{built} property refers to a different \sbol{Component} or \sbol{Component}, it can be inferred that the \sbol{Implementation} has deviated from the original design. For example, the latter could be used to document when the DNA sequencing results for an assembled construct do not match the original target sequence.
-}
 
 
 
