@@ -1,0 +1,92 @@
+\BOOKMARK [1][-]{section.1}{1 Purpose}{}% 1
+\BOOKMARK [1][-]{section.2}{2 Relation to other BBF RFCs}{}% 2
+\BOOKMARK [1][-]{section.3}{3 Copyright and License Statement}{}% 3
+\BOOKMARK [1][-]{section.4}{4 A Brief History of SBOL}{}% 4
+\BOOKMARK [1][-]{section.5}{5 SBOL Specification Vocabulary}{}% 5
+\BOOKMARK [2][-]{subsection.5.1}{5.1 Term Conventions}{section.5}% 6
+\BOOKMARK [2][-]{subsection.5.2}{5.2 SBOL Class Names}{section.5}% 7
+\BOOKMARK [1][-]{section.6}{6 Overview of SBOL}{}% 8
+\BOOKMARK [1][-]{section.7}{7 SBOL Data Model}{}% 9
+\BOOKMARK [2][-]{subsection.7.1}{7.1 Understanding the UML Diagrams}{section.7}% 10
+\BOOKMARK [2][-]{subsection.7.2}{7.2 Naming and Font Conventions}{section.7}% 11
+\BOOKMARK [2][-]{subsection.7.3}{7.3 Data Types}{section.7}% 12
+\BOOKMARK [2][-]{subsection.7.4}{7.4 Identified}{section.7}% 13
+\BOOKMARK [2][-]{subsection.7.5}{7.5 TopLevel}{section.7}% 14
+\BOOKMARK [2][-]{subsection.7.6}{7.6 Sequence}{section.7}% 15
+\BOOKMARK [2][-]{subsection.7.7}{7.7 ComponentDefinition}{section.7}% 16
+\BOOKMARK [3][-]{subsubsection.7.7.1}{7.7.1 ComponentInstance}{subsection.7.7}% 17
+\BOOKMARK [3][-]{subsubsection.7.7.2}{7.7.2 Component}{subsection.7.7}% 18
+\BOOKMARK [3][-]{subsubsection.7.7.3}{7.7.3 MapsTo}{subsection.7.7}% 19
+\BOOKMARK [3][-]{subsubsection.7.7.4}{7.7.4 SequenceAnnotation}{subsection.7.7}% 20
+\BOOKMARK [3][-]{subsubsection.7.7.5}{7.7.5 Location}{subsection.7.7}% 21
+\BOOKMARK [3][-]{subsubsection.7.7.6}{7.7.6 SequenceConstraint}{subsection.7.7}% 22
+\BOOKMARK [2][-]{subsection.7.8}{7.8 Model}{section.7}% 23
+\BOOKMARK [2][-]{subsection.7.9}{7.9 ModuleDefinition}{section.7}% 24
+\BOOKMARK [3][-]{subsubsection.7.9.1}{7.9.1 Module}{subsection.7.9}% 25
+\BOOKMARK [3][-]{subsubsection.7.9.2}{7.9.2 FunctionalComponent}{subsection.7.9}% 26
+\BOOKMARK [3][-]{subsubsection.7.9.3}{7.9.3 Interaction}{subsection.7.9}% 27
+\BOOKMARK [3][-]{subsubsection.7.9.4}{7.9.4 Participation}{subsection.7.9}% 28
+\BOOKMARK [2][-]{subsection.7.10}{7.10 Collection}{section.7}% 29
+\BOOKMARK [2][-]{subsection.7.11}{7.11 CombinatorialDerivation}{section.7}% 30
+\BOOKMARK [3][-]{subsubsection.7.11.1}{7.11.1 VariableComponent}{subsection.7.11}% 31
+\BOOKMARK [2][-]{subsection.7.12}{7.12 Implementation}{section.7}% 32
+\BOOKMARK [2][-]{subsection.7.13}{7.13 Attachment}{section.7}% 33
+\BOOKMARK [2][-]{subsection.7.14}{7.14 ExperimentalData}{section.7}% 34
+\BOOKMARK [2][-]{subsection.7.15}{7.15 Experiment}{section.7}% 35
+\BOOKMARK [2][-]{subsection.7.16}{7.16 Annotation and Extension of SBOL}{section.7}% 36
+\BOOKMARK [3][-]{subsubsection.7.16.1}{7.16.1 Annotating SBOL objects}{subsection.7.16}% 37
+\BOOKMARK [3][-]{subsubsection.7.16.2}{7.16.2 GenericTopLevel}{subsection.7.16}% 38
+\BOOKMARK [1][-]{section.8}{8 Mapping Between SBOL 1.1 and SBOL 2.x}{}% 39
+\BOOKMARK [1][-]{section.9}{9 Data Model Examples}{}% 40
+\BOOKMARK [1][-]{section.10}{10 SBOL RDF Serialization}{}% 41
+\BOOKMARK [1][-]{section.11}{11 SBOL Compliance}{}% 42
+\BOOKMARK [1][-]{section.12}{12 Recommended Best Practices}{}% 43
+\BOOKMARK [2][-]{subsection.12.1}{12.1 SBOL Namespaces}{section.12}% 44
+\BOOKMARK [2][-]{subsection.12.2}{12.2 Use of the Version Property}{section.12}% 45
+\BOOKMARK [2][-]{subsection.12.3}{12.3 Compliant SBOL Objects}{section.12}% 46
+\BOOKMARK [2][-]{subsection.12.4}{12.4 Annotations: Embedded Objects vs. External References}{section.12}% 47
+\BOOKMARK [2][-]{subsection.12.5}{12.5 Completeness and Validation}{section.12}% 48
+\BOOKMARK [2][-]{subsection.12.6}{12.6 Recommended Ontologies for External Terms}{section.12}% 49
+\BOOKMARK [2][-]{subsection.12.7}{12.7 Annotating Entities with Date \046 Time}{section.12}% 50
+\BOOKMARK [2][-]{subsection.12.8}{12.8 Annotating Entities with Authorship information}{section.12}% 51
+\BOOKMARK [2][-]{subsection.12.9}{12.9 Host Context / Ontologies for Experiments}{section.12}% 52
+\BOOKMARK [3][-]{subsubsection.12.9.1}{12.9.1 Mixtures via ModuleDefinitions}{subsection.12.9}% 53
+\BOOKMARK [3][-]{subsubsection.12.9.2}{12.9.2 Media, Inducers, and Other Reagents}{subsection.12.9}% 54
+\BOOKMARK [3][-]{subsubsection.12.9.3}{12.9.3 Strains, Genomes, and Plasmids}{subsection.12.9}% 55
+\BOOKMARK [3][-]{subsubsection.12.9.4}{12.9.4 Samples}{subsection.12.9}% 56
+\BOOKMARK [3][-]{subsubsection.12.9.5}{12.9.5 Other Experimental Parameters}{subsection.12.9}% 57
+\BOOKMARK [1][-]{section.13}{13 Complementary Standards}{}% 58
+\BOOKMARK [2][-]{subsection.13.1}{13.1 Adding Provenance with PROV-O}{section.13}% 59
+\BOOKMARK [3][-]{subsubsection.13.1.1}{13.1.1 Activity}{subsection.13.1}% 60
+\BOOKMARK [3][-]{subsubsection.13.1.2}{13.1.2 Usage}{subsection.13.1}% 61
+\BOOKMARK [3][-]{subsubsection.13.1.3}{13.1.3 Association}{subsection.13.1}% 62
+\BOOKMARK [3][-]{subsubsection.13.1.4}{13.1.4 Plan}{subsection.13.1}% 63
+\BOOKMARK [3][-]{subsubsection.13.1.5}{13.1.5 Agent}{subsection.13.1}% 64
+\BOOKMARK [2][-]{subsection.13.2}{13.2 Adding Measures/Parameters with OM}{section.13}% 65
+\BOOKMARK [3][-]{subsubsection.13.2.1}{13.2.1 Measure}{subsection.13.2}% 66
+\BOOKMARK [3][-]{subsubsection.13.2.2}{13.2.2 Unit}{subsection.13.2}% 67
+\BOOKMARK [3][-]{subsubsection.13.2.3}{13.2.3 SingularUnit}{subsection.13.2}% 68
+\BOOKMARK [3][-]{subsubsection.13.2.4}{13.2.4 CompoundUnit}{subsection.13.2}% 69
+\BOOKMARK [3][-]{subsubsection.13.2.5}{13.2.5 UnitMultiplication}{subsection.13.2}% 70
+\BOOKMARK [3][-]{subsubsection.13.2.6}{13.2.6 UnitDivision}{subsection.13.2}% 71
+\BOOKMARK [3][-]{subsubsection.13.2.7}{13.2.7 UnitExponentiation}{subsection.13.2}% 72
+\BOOKMARK [3][-]{subsubsection.13.2.8}{13.2.8 PrefixedUnit}{subsection.13.2}% 73
+\BOOKMARK [3][-]{subsubsection.13.2.9}{13.2.9 Prefix}{subsection.13.2}% 74
+\BOOKMARK [3][-]{subsubsection.13.2.10}{13.2.10 SIPrefix}{subsection.13.2}% 75
+\BOOKMARK [3][-]{subsubsection.13.2.11}{13.2.11 BinaryPrefix}{subsection.13.2}% 76
+\BOOKMARK [1][-]{section*.157}{References }{}% 77
+\BOOKMARK [1][-]{appendix.A}{A Validation Rules}{}% 78
+\BOOKMARK [1][-]{appendix.B}{B Examples of Serialization}{}% 79
+\BOOKMARK [2][-]{subsection.B.1}{B.1 Simple Examples}{appendix.B}% 80
+\BOOKMARK [3][-]{subsubsection.B.1.1}{B.1.1 Serializing Sequence Objects}{subsection.B.1}% 81
+\BOOKMARK [3][-]{subsubsection.B.1.2}{B.1.2 Serializing ComponentDefinition Objects}{subsection.B.1}% 82
+\BOOKMARK [3][-]{subsubsection.B.1.3}{B.1.3 Serializing SequenceConstraint Objects}{subsection.B.1}% 83
+\BOOKMARK [3][-]{subsubsection.B.1.4}{B.1.4 Serializing Cut Location Objects}{subsection.B.1}% 84
+\BOOKMARK [3][-]{subsubsection.B.1.5}{B.1.5 Serializing Model Objects}{subsection.B.1}% 85
+\BOOKMARK [3][-]{subsubsection.B.1.6}{B.1.6 Serializing ModuleDefinition Objects}{subsection.B.1}% 86
+\BOOKMARK [3][-]{subsubsection.B.1.7}{B.1.7 Serializing Application Specific Data Within SBOL Objects}{subsection.B.1}% 87
+\BOOKMARK [3][-]{subsubsection.B.1.8}{B.1.8 Serializing Application-Specific Data Outside SBOL Objects}{subsection.B.1}% 88
+\BOOKMARK [3][-]{subsubsection.B.1.9}{B.1.9 Serializing Collection Objects}{subsection.B.1}% 89
+\BOOKMARK [2][-]{subsection.B.2}{B.2 Complex Examples}{appendix.B}% 90
+\BOOKMARK [3][-]{subsubsection.B.2.1}{B.2.1 PoPS Receiver}{subsection.B.2}% 91
+\BOOKMARK [3][-]{subsubsection.B.2.2}{B.2.2 Toggle Switch}{subsection.B.2}% 92

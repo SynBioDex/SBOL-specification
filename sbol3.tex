@@ -1,0 +1,253 @@
+
+%% \documentclass[finalspec]{sbmlpkgspec}
+\documentclass[draftspec]{sbmlpkgspec}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{todonotes}
+\usepackage[color]{changebar}
+\usepackage{xcolor}
+\usepackage{soul}
+
+% Make changebars switchable to allow faster compilation:
+%\def\fullchangebars{} % comment this out to simplify changebars and speed up compilation
+
+% Macros just for this document:
+
+\newcommand{\sbmlpkg}{\texorpdfstring{%
+    \textls[-25]{\textsc{SBMLPkgSpec}}}{%
+    \textsc{SBMLPkgSpec}}\xspace}
+\newcommand{\sbmlpkghead}{\texorpdfstring{%
+    \textls[-50]{\textsc{SBMLPkgSpec}}}{%
+    \textsc{SBMLPkgSpec}}\xspace}
+\newcommand{\sbmlpkgfile}{\literalFont{sbmlpkgspec.cls}\xspace}
+\newcommand{\latex}{\LaTeX{}\xspace}
+\newcommand{\tex}{\TeX{}\xspace}
+\newcommand{\distURL}{http://sourceforge.net/projects/sbml/files/specifications/tex}
+\newcommand{\srcURL}{https://sbml.svn.sourceforge.net/svnroot/sbml/trunk/project/tex/sbmlpkgspec}
+\newcommand{\webURL}{http://sbml.org/Documents/Specifications/The_SBMLPkgSpec_LaTeX_class}
+\newcommand{\cmd}[1]{\literalFont{\textbackslash #1}}
+
+% Custom latex listing style, for use with the listings package.  The default
+% highlights far too many things, IMHO.  This keeps it simple and only adjusts
+% the appearance of comments within listings.
+
+\lstdefinelanguage{mylatex}{%
+  morekeywords={},%
+  sensitive,%
+  alsoother={0123456789$_},%$
+  morecomment=[l]\%%
+}[keywords,tex,comments]
+
+\lstdefinestyle{latex}{language=mylatex}
+
+
+%Listing style for SBOL RDF/XML serialization examples
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{light-gray}{gray}{0.97}
+\lstdefinelanguage{sbol}
+    {morekeywords={xmlns:sbol,xmlns:prov,xmlns:rdf,xmlns:dcterms,xmlns:myapp,rdf:RDF,rdf:resource,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type,
+        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sourceLocation, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
+sbol:experimentalData,sbol:Experiment,sbol:ExperimentalData,sbol:attachment,om:hasNumericalValue,om:symbol,om:alternativeSymbol,om:alternativeLabel,om:longcomment,om:hasFactor,
+om:hasTerm1,om:hasTerm2,om:hasNumerator,om:hasDenominator,om:hasBase,om:hasExponent,om:hasUnit,om:hasPrefix,rdfs:comment,rdfs:label,
+om:Measure,om:Unit,om:SingularUnit,om:CompoundUnit,om:om:UnitMultiplication,om:UnitDivision,om:Exponentiation,om:PrefixedUnit,om:Prefix,om:SIPrefix,
+om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd,xml:lang},
+     basicstyle=\fontsize{7}{9}\selectfont\ttfamily,
+     backgroundcolor=\color{light-gray},
+     keywordstyle=\color{blue},
+     commentstyle=\color{gray},
+     stringstyle=\color{dkgreen},
+     tabsize=2,
+     showspaces=false,
+     showstringspaces=false,
+     breaklines=true,                           % wrap text
+     sensitive=true,                            % keywords are case sensitive
+     %morecomment=[l][commentstyle]{\#},         % comment format
+     morestring=[b]",                           % string format
+     escapeinside={[}{]},
+     alsoletter=:
+     %breakatwhitespace=true,
+     %literate={\-}{}{0\discretionary{a}{\\}{}}
+}
+
+
+
+%Command to format the listings containing SBOL RDF/XML serialization examples
+\newcommand{\lstsetsbol}{
+ \lstset{language=sbol,
+        tabsize=2
+ }
+}
+
+%Commands to format SBOL terms in the document
+
+% Use sbolheading when you are referencing an SBOL data model class/field in a
+% section heading.
+\newcommand{\sbolheading}[1]{\texttt{#1}}
+
+% Use sbol when you are referencing an SBOL data model class/field in text.
+\newcommand{\sbol}[1]{\texttt{\hyperref[sec:#1]{#1}}}
+
+% Use sbolmult for SBOL fields that appear in multiple classes, for example
+% \sbolmult{types:CD}{types}. This ensures the reference links to the correct
+% section.
+\newcommand{\sbolmult}[2]{\texttt{\hyperref[sec:#1]{#2}}}
+
+% Rarely used. Use refObj you want to put the field in angle brackets.
+\newcommand{\refObj}[1]{$\langle$#1$\rangle$}
+
+%Command to format external terms in the document
+\newcommand{\external}[1]{\texttt{#1}}
+
+%Commands to highlight SBOL versions
+\newcommand{\twozeroone}[1]{%
+\cbcolor{red}
+\ifdefined\fullchangebars\cbstart\fi%
+{\color{red}%
+\version{2.0.1}%
+#1
+}
+\ifdefined\fullchangebars\cbend\fi
+}
+
+%Commands to highlight SBOL versions
+\newcommand{\twoonezero}[1]{%
+\cbcolor{red}
+\ifdefined\fullchangebars\cbstart\fi%
+{\color{red}%
+\version{2.1.0}%
+#1
+}
+\ifdefined\fullchangebars\cbend\fi
+}
+
+%Commands to highlight SBOL versions
+\newcommand{\twotwozero}[1]{%
+\cbcolor{red}
+\ifdefined\fullchangebars\cbstart\fi%
+{\color{red}%
+\version{2.2.0}%
+#1
+}
+\ifdefined\fullchangebars\cbend\fi
+}
+
+%Commands to highlight SBOL versions
+\newcommand{\twotwoone}[1]{%
+\cbcolor{red}
+\ifdefined\fullchangebars\cbstart\fi%
+{\color{red}%
+\version{2.2.1}%
+#1
+}
+\ifdefined\fullchangebars\cbend\fi
+}
+
+%Commands to highlight SBOL versions
+\newcommand{\twothreezero}[1]{%
+\cbcolor{red}
+\ifdefined\fullchangebars\cbstart\fi%
+{\color{red}%
+\version{2.3.0}%
+#1
+}
+\ifdefined\fullchangebars\cbend\fi
+}
+
+%Commands to highlight SBOL versions
+\newcommand{\twothreeone}[1]{%
+\cbcolor{red}
+\ifdefined\fullchangebars\cbstart\fi%
+{\color{red}%
+\version{2.3.1}%
+#1
+}
+\ifdefined\fullchangebars\cbend\fi
+}
+
+
+% -----------------------------------------------------------------------------
+% Start of document
+% -----------------------------------------------------------------------------
+
+\begin{document}
+
+\title{
+  Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~3.0}}
+
+\author{{\bf Editors:}\hfil\\
+\begin{tabular}{l>{\hspace*{15pt}}r}
+Hasan Baig & \emph{University of Connecticut, USA}\\   
+Pedro Fontanarrosa & \emph{University of Utah, USA}\\   
+Vishwesh Kulkarni, & \emph{University of Warwick, UK}\\ 
+James McLaughlin & \emph{Newcastle University, UK}\\
+Prashant Vaidyananthan & \emph{Microsoft Research, UK}\\ 
+\end{tabular}\\
+\href{mailto:sbol-editors@googlegroups.com}{\sffamily sbol-editors@googlegroups.com}\\
+\\
+{\bf Chair:}\hfil\\
+\begin{tabular}{l>{\hspace*{15pt}}r}
+Chris Myers		& \emph{University of Utah, USA}\\
+\end{tabular}\\
+\\
+{\bf Steering Committee:}\hfil\\
+\begin{tabular}{l>{\hspace*{15pt}}r}
+Jacob Beal & \emph{Raytheon BBN Technologies, USA}\\ 
+Michael Bissell & \emph{Amyris, Inc., USA}\\ 
+Kevin Clancy & \emph{BioCoder Consulting, USA}\\ 
+Thomas Gorochowski & \emph{University of Bristol, UK}\\
+Goksel Misirli & \emph{Keele University, UK}\\ 
+Ernst Oberortner & \emph{DOE Joint Genome Institute, USA}\\
+Herbert Sauro & \emph{University of Washington, USA}\\
+Anil Wipat & \emph{Newcastle University, UK}\\
+\end{tabular}\\
+\\
+{\bf Additional authors, by institution:}\\
+\begin{tabular}{l>{\hspace*{15pt}}r}
+Raik Gr\"unberg & \emph{KAUST, SA}\\
+Bryan Bartley & \emph{Raytheon BBN, USA} \\
+Matthew Crowther & \emph{Newcastle University, UK} \\
+James Scott-Brown & \emph{U. of Oxford, UK} \\
+\end{tabular}\\
+}
+
+\maketitlepage
+\maketableofcontents
+
+\input{purpose}
+
+\input{relation}
+
+\input{copyright}
+
+\input{history}
+
+\input{vocabulary}
+
+\input{overview}
+
+\input{model}
+
+\input{examples_model}
+
+\input{serialization}
+
+\input{compliance}
+
+\input{practices}
+
+\input{complementary_standards}
+
+\newpage
+\bibliography{sbol}
+
+\appendix
+
+\input{apdx-validation}
+
+\input{examples_serialization}
+
+\end{document}
