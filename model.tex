@@ -758,13 +758,13 @@ In the example below, the role of participating \sbol{SubComponent} is defined t
 The \sbol{SubComponent} class is used to compose \sbol{Component} objects into a structural or functional hierarchy. For example, the \sbol{Component} of a gene could contain four \sbol{SubComponent} objects: a promoter, RBS, CDS, and terminator. In turn, the \sbol{Component} of the promoter \sbol{SubComponent} could contain \sbol{SubComponent} objects defined as various operator sites.
 
 \paragraph{The \sbolheading{instanceOf} property}
-\label{sec:instanceOf:CI}
+\label{sec:instanceOf}
 
-The \sbolmult{instanceOf:CI}{instanceOf} property is a REQUIRED \sbol{URI} that refers to the \sbol{Component} of the \sbol{SubComponent}.
+The \sbol{instanceOf} property is a REQUIRED \sbol{URI} that refers to the \sbol{Component} of the \sbol{SubComponent}.
 As described in the previous section, this \sbol{Component} effectively provides information about the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} of the \sbol{SubComponent}.
 
-The \sbolmult{instanceOf:CI}{instanceOf} property MUST NOT refer to the same \sbol{Component} as the one that contains the \sbol{SubComponent}.
-Furthermore, \sbol{SubComponent} objects MUST NOT form a cyclical chain of references via their \sbolmult{instanceOf:CI}{instanceOf} properties and the \sbol{Component} objects that contain them.
+The \sbol{instanceOf} property MUST NOT refer to the same \sbol{Component} as the one that contains the \sbol{SubComponent}.
+Furthermore, \sbol{SubComponent} objects MUST NOT form a cyclical chain of references via their \sbol{instanceOf} properties and the \sbol{Component} objects that contain them.
 For example, consider the \sbol{SubComponent} objects $A$ and $B$ and the \sbol{Component} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is cyclical.
 
 \paragraph{The \sbolheading{mapsTos} property}\label{sec:mapsTos:CI}
@@ -953,21 +953,6 @@ Lastly, the \sbol{access} property of the \sbol{remote} \sbol{SubComponent} MUST
 The \sbol{refinement} property is REQUIRED and has a data type of \sbol{URI}. Each \sbol{MapsTo} object MUST specify the relationship between its \sbol{local} and \sbol{remote} \sbol{SubComponent} objects using one of the REQUIRED \sbol{refinement} \sbol{URI}s provided in \ref{tbl:mapsto_refinement}.
 Note that if multiple \sbol{MapsTo}s belonging to the \sbol{SubComponent}s of a \sbol{Component} have \sbol{local} properties that refer to the same \sbol{SubComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}. Similarly, if multiple \sbol{MapsTo}s belonging the \sbol{SubComponent}s and \sbol{SubComponent}s of a \sbol{Component} have \sbol{local} properties that refer to the same \sbol{SubComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}.
 
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{lp{3.95in}}
-    \toprule
-    \textbf{Refinement URI} & \textbf{Description} \\
-    \midrule
-    \url{http://sbols.org/v2#useRemote}  & All references to the \sbol{local}  \sbol{SubComponent} MUST dereference to the \sbol{remote} \sbol{SubComponent} instead.\\
-    \url{http://sbols.org/v2#useLocal}  & In the context of the \sbol{Component} or \sbol{Component} that contains the owner of the \sbol{MapsTo}, all references to the \sbol{remote}  \sbol{SubComponent} MUST dereference to the \sbol{local} \sbol{SubComponent} instead.\\
-    \url{http://sbols.org/v2#verifyIdentical}  & The \sbolmult{instanceOf:CI}{instanceOf} properties of the \sbol{local} and \sbol{remote} \sbol{SubComponent} objects MUST refer to the same \sbol{Component}.\\
-        \url{http://sbols.org/v2#merge}  & In the context of the \sbol{Component} or \sbol{Component} that contains the owner of the \sbol{MapsTo}, all references to the \sbol{local} \sbol{SubComponent} or the \sbol{remote} \sbol{SubComponent} MUST dereference to both objects.\\
-    \bottomrule
-  \end{edtable}
-  \caption{REQUIRED \sbol{URI}s for the \sbol{refinement} property.}
-  \label{tbl:mapsto_refinement}
-\end{table}
 
 \paragraph{Serialization}
 The serialization of \sbol{MapsTo} MUST have the following form.
@@ -1207,17 +1192,17 @@ Each \sbol{Constraint} includes the \sbol{restriction}, \sbol{subject}, and \sbo
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.6]{uml/sequence_constraint}
+\includegraphics[scale=0.6]{uml/constraint}
 \caption[]{Diagram of the \sbol{Constraint} class and its associated properties.}
 \label{uml:sequence_constraint}
 \end{center}
 \end{figure}
 
 \paragraph{The \sbolheading{subject} property}\label{sec:subject}
-The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{SubComponent} contained by the same parent \sbol{Component} that contains the \sbol{SequenceConstraint}.
+The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{ComponentInstance} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}.
 
 \paragraph{The \sbolheading{object} property}\label{sec:object}
-The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{SubComponent} contained by the same parent \sbol{Component} that contains the \sbol{SequenceConstraint}. This \sbol{SubComponent} MUST NOT be the same \sbol{SubComponent} that the \sbol{SequenceConstraint} refers to via its \sbol{subject} property.
+The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{ComponentInstance} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}. This \sbol{ComponentInstance} MUST NOT be the same \sbol{ComponentInstance} that the \sbol{Constraint} refers to via its \sbol{subject} property.
 
 \paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
@@ -1232,9 +1217,9 @@ The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI
     \textbf{Restriction URI} & \textbf{Description} \\
     \midrule
     % identity relations
-	\url{http://sbols.org/v3#replaces} &	In the context of the of their parent object of the \sbol{Constraint}, the \sbol{subject} should be used in place of all instances of the \sbol{object}. \emph{Example: the J23101 promoter replaces a generic promoter.} \\
-	\url{http://sbols.org/v3\#differentFrom} & The \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} MUST NOT refer to the same \sbol{ComponentDefinition} as that of the \sbol{object} \sbol{Component}. \emph{Example: two fluorescent reporters must be different.}\\
-	\url{http://sbols.org/v3#verifyIdentical}  & The \sbolmult{definition:CI}{definition} properties of the \sbol{subject} and \sbol{object} \sbol{ComponentInstance} objects MUST refer to the same \sbol{ComponentDefinition}.  \emph{Example: a promoter included via two different subsystems must be the identical.} \\
+	\url{http://sbols.org/v3#verifyIdentical}  & The \sbol{instanceOf} properties of the \sbol{subject} and \sbol{object} \sbol{ComponentInstance} objects MUST refer to the same \sbol{Component}.  \emph{Example: a promoter included via two different subsystems must be the identical.} \\
+	\url{http://sbols.org/v3\#differentFrom} & The \sbol{instanceOf} property of the \sbol{subject} \sbol{ComponentInstance} MUST NOT refer to the same \sbol{Component} as that of the \sbol{object} \sbol{Component}. \emph{Example: two fluorescent reporters must be different.}\\
+	\url{http://sbols.org/v3#replaces} &	In the context of the parent object of the \sbol{Constraint}, information about the \sbol{subject} should be used in place of all instances of the \sbol{object}. \emph{Example: the J23101 promoter replaces a generic promoter.} \\
     
     % orientation relations
 	\url{http://sbols.org/v3\#sameOrientationAs} & The \sbol{subject} and \sbol{object} \sbol{Component} objects MUST have the same orientation. \emph{Example: a promoter has the same orientation as the coding sequence it controls.}\\
@@ -1449,9 +1434,9 @@ If the \sbolmult{types:CD}{types} property of the template \sbol{Component} cont
 
 The \sbol{variableComponents} property is OPTIONAL and MAY contain a set of \sbol{VariableComponent} objects. These \sbol{VariableComponent} objects are expected to denote the choices available when deriving the substructure of a new \sbol{Component} in accordance with a \sbol{CombinatorialDerivation}. The \sbol{variableComponents} property MUST NOT contain two or more \sbol{VariableComponent} objects that refer to the same template \sbol{SubComponent} via their \sbol{variable} properties.
 
-If the \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain as many \sbol{SubComponent} objects derived from the template \sbol{SubComponent} as specified by the \sbol{operator} property of the \sbol{VariableComponent} (see \ref{tbl:operator}). In addition, the \sbolmult{instanceOf:CI}{instanceOf} properties of these derived \sbol{SubComponent} objects MUST refer to \sbol{Component} objects specified by the \sbol{variants}, \sbol{variantCollections}, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+If the \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain as many \sbol{SubComponent} objects derived from the template \sbol{SubComponent} as specified by the \sbol{operator} property of the \sbol{VariableComponent} (see \ref{tbl:operator}). In addition, the \sbol{instanceOf} properties of these derived \sbol{SubComponent} objects MUST refer to \sbol{Component} objects specified by the \sbol{variants}, \sbol{variantCollections}, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 
-If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain exactly one \sbol{SubComponent} with a \sbol{wasDerivedFroms} property that refers to the template \sbol{SubComponent}. The \sbolmult{instanceOf:CI}{instanceOf} property of this derived \sbol{SubComponent} MUST refer to the \sbol{Component} referred to by the \sbolmult{instanceOf:CI}{instanceOf} property of the template \sbol{SubComponent}.
+If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain exactly one \sbol{SubComponent} with a \sbol{wasDerivedFroms} property that refers to the template \sbol{SubComponent}. The \sbol{instanceOf} property of this derived \sbol{SubComponent} MUST refer to the \sbol{Component} referred to by the \sbol{instanceOf} property of the template \sbol{SubComponent}.
 
 Finally, all of these derived \sbol{SubComponent} objects MUST follow the \sbol{restriction} properties of any \\
 \sbol{SequenceConstraint} objects that refer to their corresponding template \sbol{SubComponent} objects.
@@ -1515,7 +1500,7 @@ The \sbol{VariableComponent} class can be used to specify a choice of \sbol{Comp
 
 \subsubsection*{ The \sbolheading{variable} property}\label{sec:variable}
 
-The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \sbol{SubComponent} in the template \sbol{Component}. If the \sbol{wasDerivedFroms} property of a \sbol{SubComponent} refers to this template \sbol{SubComponent}, then the \sbolmult{instanceOf:CI}{instanceOf} property of the derived \sbol{SubComponent} MUST refer to either (1) a \sbol{Component} referred to by the \sbol{variants} property of the \sbol{VariableComponent}, (2) a \sbol{Component} from a \sbol{Collection} referred to by the \sbol{variantCollections} property of the \sbol{VariableComponent}, or (3) a \sbol{Component} derived from a \sbol{CombinatorialDerivation} referred to by the \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \sbol{SubComponent} in the template \sbol{Component}. If the \sbol{wasDerivedFroms} property of a \sbol{SubComponent} refers to this template \sbol{SubComponent}, then the \sbol{instanceOf} property of the derived \sbol{SubComponent} MUST refer to either (1) a \sbol{Component} referred to by the \sbol{variants} property of the \sbol{VariableComponent}, (2) a \sbol{Component} from a \sbol{Collection} referred to by the \sbol{variantCollections} property of the \sbol{VariableComponent}, or (3) a \sbol{Component} derived from a \sbol{CombinatorialDerivation} referred to by the \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 
 If the \sbolmult{roles:CD}{roles} property of the template \sbol{SubComponent} contains one or more URIs, then the \sbolmult{roles:CD}{roles} property of the derived \sbol{SubComponent} SHOULD also contain those URIs.
 
