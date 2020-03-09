@@ -13,8 +13,7 @@ The PROV-O ontology (\url{https://www.w3.org/TR/prov-o/}) already defines a data
 
 %Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}.  
 
-Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset to use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a ComponentDefinition may be derived from another ComponentDefinition, but it would probably not make sense for it to be derived from a Collection.
-
+Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset to use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a Component may be derived from another Component, but it would probably not make sense for it to be derived from a Collection.
 
 The PROV-O specification permits that any kind of SBOL object may be used to generate another. The meaning of these relationships are specified using ontology terms for the \sbolmult{roles:U}{roles} properties on \sbol{Usage} and \sbol{Association} classes.  This specification gives users the flexibility to construct and track provenance histories for their own custom applications, but this flexibility also presents an obstacle to standardized data exchange. Therefore a simple ontology (see \ref{tbl:association_roles} and \ref{tbl:usage_roles}) has been adopted to describe common provenance connections expected in synthetic biology workflows, based on the design-build-test-learn formalization of engineering.
 
@@ -324,9 +323,7 @@ Bacterial strains are often derived from other strains through modifications suc
 \end{lstlisting}
 
 \paragraph{Example - Design-build-test-learn Workflow}
-
-This particular example represents an idealized workflow for model-based design. The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (\sbol{ModuleDefinition}) is composed of biological parts which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using some a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in \ref{images:design-build-test-learn}.
-
+ This particular example represents an idealized workflow for model-based design. The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (\sbol{Component}) is composed of biological parts which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using some a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in \ref{images:design-build-test-learn}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -588,7 +585,7 @@ design}
         <sbol:displayId>RBS_Component</sbol:displayId>
         <sbol:version>1</sbol:version>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/P1/1"/>
+        <sbol:instanceOf rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/P1/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:component>
@@ -597,7 +594,7 @@ design}
         <sbol:displayId>Ter_Component</sbol:displayId>
         <sbol:version>1</sbol:version>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="http://async.ece.utah.edu/Ter/1"/>
+        <sbol:instanceOf rdf:resource="http://async.ece.utah.edu/Ter/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:component>
@@ -606,7 +603,7 @@ design}
         <sbol:displayId>CDS_Component</sbol:displayId>
         <sbol:version>1</sbol:version>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/PhlF/1"/>
+        <sbol:instanceOf rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/PhlF/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:sequenceAnnotation>
@@ -726,7 +723,7 @@ design}
         <sbol:version>1</sbol:version>
         <prov:wasDerivedFrom rdf:resource="http://async.ece.utah.edu/Gen/Ter_Component/1"/>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/L3S3P31/1"/>
+        <sbol:instanceOf rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/L3S3P31/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:component>
@@ -736,7 +733,7 @@ design}
         <sbol:version>1</sbol:version>
         <prov:wasDerivedFrom rdf:resource="http://async.ece.utah.edu/Gen/RBS_Component/1"/>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/P1/1"/>
+        <sbol:instanceOf rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/P1/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:component>
@@ -746,7 +743,7 @@ design}
         <sbol:version>1</sbol:version>
         <prov:wasDerivedFrom rdf:resource="http://async.ece.utah.edu/Gen/CDS_Component/1"/>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/PhlF/1"/>
+        <sbol:instanceOf rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/PhlF/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:sequenceConstraint>
@@ -787,7 +784,7 @@ design}
         <sbol:displayId>Pro_Component</sbol:displayId>
         <sbol:version>1</sbol:version>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="http://async.ece.utah.edu/Pro/1"/>
+        <sbol:instanceOf rdf:resource="http://async.ece.utah.edu/Pro/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:component>
@@ -796,7 +793,7 @@ design}
         <sbol:displayId>Gen_Component</sbol:displayId>
         <sbol:version>1</sbol:version>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="http://async.ece.utah.edu/Gen/1"/>
+        <sbol:instanceOf rdf:resource="http://async.ece.utah.edu/Gen/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:sequenceAnnotation>
@@ -886,7 +883,7 @@ design}
         <sbol:version>1</sbol:version>
         <prov:wasDerivedFrom rdf:resource="http://async.ece.utah.edu/Derivation_example/Pro_Component/1"/>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/pAmtR/1"/>
+        <sbol:instanceOf rdf:resource="https://synbiohub.programmingbiology.org/public/Cello_Parts/pAmtR/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:component>
@@ -896,7 +893,7 @@ design}
         <sbol:version>1</sbol:version>
         <prov:wasDerivedFrom rdf:resource="http://async.ece.utah.edu/Derivation_example/Gen_Component/1"/>
         <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-        <sbol:definition rdf:resource="http://async.ece.utah.edu/Gen_GeneratedInstance1/1"/>
+        <sbol:instanceOf rdf:resource="http://async.ece.utah.edu/Gen_GeneratedInstance1/1"/>
       </sbol:Component>
     </sbol:component>
     <sbol:sequenceConstraint>
@@ -1082,7 +1079,6 @@ design}
 \subsection{Adding Measures/Parameters with OM}
 \label{sec:parameters}
 
-
 There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitive models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
 
 The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications. As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \sbol{Measure}, \sbol{Unit} and \sbol{Prefix}. A \sbol{Measure} links a numerical value to a \sbol{Unit}, which may or may not have a \sbol{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \sbol{Measure} is treated as a subclass of \sbol{Identified}, while \sbol{Unit} and \sbol{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \sbol{Unit} subclasses: \sbol{SingularUnit}, \sbol{CompoundUnit}, \sbol{UnitMultiplication}, \sbol{UnitDivision}, \sbol{UnitExponentiation}, and \sbol{PrefixedUnit}. Lastly, SBOL adopts the following \sbol{Prefix} subclasses from OM: \sbol{SIPrefix} and \sbol{BinaryPrefix}.
@@ -1125,7 +1121,6 @@ The serialization of a \sbol{Measure} MUST have the following form:
   [\emph{zero or more}]  <sbol:type rdf:resource="..."/> [\emph{element}]
 </om:Measure>
 \end{lstlisting}
-
 
 The example below shows the serialization of a \sbol{Measure} that describes the Michaelis constant for an enzymatic reaction.
 
@@ -1200,7 +1195,6 @@ The serialization of a \sbol{SingularUnit} MUST have the following form:
 </om:SingularUnit>
 \end{lstlisting}
 
-
 The example below shows the serialization of a \sbol{SingularUnit} that describes a genetic unit of length not present in the OM: the base pair (bp). One bp is equivalent to 3.4 angstroms.
 
 \lstsetsbol
@@ -1258,26 +1252,6 @@ The serialization of a \sbol{UnitMultiplication} MUST have the following form:
 </om:UnitMultiplication>
 \end{lstlisting}
 
-% \twothreezero{
-% The example below shows the serialization of a \sbol{UnitMultiplication} that captures .
-% }
-% \lstsetsbol
-% \begin{lstlisting}
-% <?xml version="1.0" ?>
-% <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-%   <sbol:UnitMultiplication rdf:about="http://sbolstandard.org/example//1">
-%     <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/"/>
-%     <sbol:displayId></sbol:displayId>
-%     <dcterms:title></dcterms:title>
-%     <om:symbol></om:symbol>
-%     <rdfs:label xml:lang="en"></rdfs:label>
-%     <om:hasTerm1 rdf:resource=""/>
-%     <om:hasTerm2 rdf:resource=""/>
-%   </sbol:UnitMultiplication>
-% </rdf:RDF>
-% \end{lstlisting}
-% \label{ser:UnitMultiplication}
-
 
 \subsubsection{UnitDivision}
 \label{sec:UnitDivision}
@@ -1308,7 +1282,6 @@ The serialization of a \sbol{UnitDivision} MUST have the following form:
   [\emph{one}]  <om:hasDenominator rdf:resource="..."/> [\emph{element}]
 </om:UnitDivision>
 \end{lstlisting}
-
 
 The example below shows the serialization of a \sbol{UnitDivision} that describes a unit of cell density not present in the OM: colony forming unit (CFU) per centimeter squared.
 
@@ -1359,26 +1332,6 @@ The serialization of a \sbol{UnitExponentiation} MUST have the following form:
 </om:UnitExponentiation>
 \end{lstlisting}
 
-% \twothreezero{
-% The example below shows the serialization of a \sbol{UnitExponentiation} that captures .
-% }
-% \lstsetsbol
-% \begin{lstlisting}
-% <?xml version="1.0" ?>
-% <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-%   <sbol:UnitExponentiation rdf:about="http://sbolstandard.org/example//1">
-%     <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/"/>
-%     <sbol:displayId></sbol:displayId>
-%     <dcterms:title></dcterms:title>
-%     <om:symbol></om:symbol>
-%     <rdfs:label xml:lang="en"></rdfs:label>
-%     <om:hasBase rdf:resource=""/>
-%     <om:hasExponent rdf:resource=""/>
-%   </sbol:UnitExponentiation>
-% </rdf:RDF>
-% \end{lstlisting}
-% \label{ser:UnitExponentiation}
-
 
 \subsubsection{PrefixedUnit}
 \label{sec:PrefixedUnit}
@@ -1410,7 +1363,6 @@ The serialization of a \sbol{PrefixedUnit} MUST have the following form:
 </om:PrefixedUnit>
 \end{lstlisting}
 
-
 The example below shows the serialization of a \sbol{PrefixedUnit} that describes an absolute unit of fluorescence not present in the OM: the kilo-Molecules of Equivalent Fluorescein (kilo-MEFL).
 
 \lstsetsbol
@@ -1429,7 +1381,6 @@ The example below shows the serialization of a \sbol{PrefixedUnit} that describe
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:PrefixedUnit}
-
 
 \subsubsection{Prefix}
 \label{sec:Prefix}
@@ -1506,8 +1457,7 @@ The serialization of a \sbol{BinaryPrefix} MUST have the following form:
 \end{lstlisting}
 
 \paragraph{Example - Growth Media Recipe}
-
-\ref{uml:media_example} shows an example of using instances of the \sbol{Measure} and \sbol{Unit} classes in conjunction with instances of the SBOL \sbol{ModuleDefinition} and \sbol{ComponentDefinition} classes to specify a growth media recipe. Note that this specification for M9 Glucose CAA media is partly composed from the specification of another growth media, Teknova M1902. Namespace abbreviations used in this example include om for \url{http://www.ontology-of-units-of-measure.org/resource/om-2/}, obo for \url{http://purl.obolibrary.org/obo/}, chebi for \url{http://identifiers.org/chebi/}, and sbo for \url{http://identifiers.org/biomodels.sbo/}. For specifying \sbol{ModuleDefinition} \sbolmult{roles:MD}{roles}, MC85504 codes for the term "growth medium" in the National Cancer Institute Thesaurus (NCIT). For specifying \sbol{Measure} \sbolmult{types:Measure}{types} with the SBO, 0000196 codes for ``concentration of an entity pool'', 0000226 codes for ``density of an entity pool'', and 0000470 codes for ``mass fraction.''
+ \ref{uml:media_example} shows an example of using instances of the \sbol{Measure} and \sbol{Unit} classes in conjunction with instances of the SBOL \sbol{Component} class to specify a growth media recipe. Note that this specification for M9 Glucose CAA media is partly composed from the specification of another growth media, Teknova M1902. Namespace abbreviations used in this example include om for \url{http://www.ontology-of-units-of-measure.org/resource/om-2/}, obo for \url{http://purl.obolibrary.org/obo/}, chebi for \url{http://identifiers.org/chebi/}, and sbo for \url{http://identifiers.org/biomodels.sbo/}. For specifying \sbol{Component} \sbolmult{roles:MD}{roles}, MC85504 codes for the term "growth medium" in the National Cancer Institute Thesaurus (NCIT). For specifying \sbol{Measure} \sbolmult{types:Measure}{types} with the SBO, 0000196 codes for ``concentration of an entity pool'', 0000226 codes for ``density of an entity pool'', and 0000470 codes for ``mass fraction.''
 
 
 \begin{figure}[ht]
@@ -1517,3 +1467,4 @@ The serialization of a \sbol{BinaryPrefix} MUST have the following form:
 \label{uml:media_example}}
 \end{center}
 \end{figure}
+

@@ -9,9 +9,9 @@
       <w>180</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>*Seq	uenceAnnotation*
+    <panel_attributes>*SequenceAnnotation*
 --
-
+-roles[0..*] : URI
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -24,7 +24,7 @@
       <h>94</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-location
+locations
 1..*</panel_attributes>
     <additional_attributes>30;50;140;50</additional_attributes>
   </element>
