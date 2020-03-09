@@ -339,26 +339,24 @@ for the purpose of engineering design. For DNA or RNA entities,
 additional \sbolmult{types:CD}{types} fields are used to describe nucleic acid
 topology (circular / linear) and strandedness (double- or single-stranded).
 
-The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the Biological Pathway Exchange (BioPAX) ontology ~\cite{biopax} or  the ontology of Chemical Entities of Biological Interest (ChEBI) ~\cite{chebi}.
+The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the Systems Biology Ontology ~\cite{SBO} or  the ontology of Chemical Entities of Biological Interest (ChEBI) ~\cite{chebi}.
 \ref{tbl:componentdefinition_types} provides a list of possible ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s.
 In order to maximize the compatibility of designs, the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} SHOULD contain a \sbol{URI} from \ref{tbl:componentdefinition_types}, and any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use the \sbol{URI} for that term as one of its \sbolmult{types:CD}{types}.
-Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it might not be clear how to interpret them). For example, the BioPAX terms provided by \ref{tbl:componentdefinition_types} would conflict because they specify classes of biochemical entities with different molecular structures.
+Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it might not be clear how to interpret them). For example, the SBO terms provided by \ref{tbl:componentdefinition_types} would conflict because they specify classes of biochemical entities with different molecular structures.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
     \toprule
-    \textbf{ComponentDefinition Type} & \textbf{URI for BioPAX Term} \\
+    \textbf{ComponentDefinition Type} & \textbf{URI for SBO Term} \\
     \midrule
-    DNA Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#Dna}\\
-    DNA Region  & \url{http://www.biopax.org/release/biopax-level3.owl#DnaRegion}\\
-    RNA Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#Rna}\\
-    RNA Region  & \url{http://www.biopax.org/release/biopax-level3.owl#RnaRegion}\\
-    Protein  & \url{http://www.biopax.org/release/biopax-level3.owl#Protein}\\
-    Small Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#SmallMolecule}\\
-    Complex  & \url{http://www.biopax.org/release/biopax-level3.owl#Complex}\\
+    DNA (Deoxyribonucleic acid)  & \url{https://identifiers.org/SBO:0000251}\\
+    RNA (Ribonucleic acid) & \url{https://identifiers.org/SBO:0000251}\\
+    Protein (Polypeptide chain)  & \url{https://identifiers.org/SBO:0000252}\\
+    Simple Chemical  & \url{https://identifiers.org/SBO:0000247}\\
+    Non-covalent complex  & \url{https://identifiers.org/SBO:0000253}\\
     \bottomrule
   \end{edtable}
-  \caption{BioPAX terms to specify the molecule type using the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
+  \caption{SBO terms to specify the molecule type using the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
  \label{tbl:componentdefinition_types}
 \end{table}
 
@@ -443,7 +441,7 @@ If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, 
 
 Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}.
 Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbolmult{types:CD}{types} property MUST refer to the term from \ref{tbl:componentdefinition_types} that is cross-listed with this \sbol{encoding} in \ref{tbl:sequence_encodings}.
-For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property MUST refer to the BioPAX term for DNA. These requirements are meant to provide for some degree of consistency between the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} and the \sbol{encoding} properties of the \sbol{Sequence} objects to which the \sbol{ComponentDefinition} refers.
+For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the SBO term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property MUST refer to the SBO term for DNA. These requirements are meant to provide for some degree of consistency between the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} and the \sbol{encoding} properties of the \sbol{Sequence} objects to which the \sbol{ComponentDefinition} refers.
 
 \subsubsection*{The \sbolheading{components} property}
 \label{sec:components}
@@ -1365,7 +1363,7 @@ Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refer
 
 The \sbolmult{types:I}{types} property is a REQUIRED set of \sbol{URI}s that describes the behavior represented by an \sbol{Interaction}.
 
-The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{types:I}{types} property refer to a term from the occurring entity branch of the Systems Biology Ontology (SBO). (See \url{http://www.ebi.ac.uk/sbo/main/}) \ref{tbl:interaction_types} provides a list of possible SBO terms for the \sbolmult{types:I}{types} property and their corresponding \sbol{URI}s.
+The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that \twozeroone{exactly one \sbol{URI}} contained by the \sbolmult{types:I}{types} property refer to a term from the occurring entity branch of the Systems Biology Ontology (SBO)~\cite{SBO}. \ref{tbl:interaction_types} provides a list of possible SBO terms for the \sbolmult{types:I}{types} property and their corresponding \sbol{URI}s.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
