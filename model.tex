@@ -566,15 +566,11 @@ The example below shows a simple \sbol{Component} containing two components, a \
   <sbol:component>
     <sbol:Component rdf:about="http://sbolstandard.org/example/md/GFP_expression/GFP_protein">
       <sbol:instanceOf rdf:resource="http://sbolstandard.org/example/GFP"/>
-      <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-      <sbol:direction rdf:resource="http://sbols.org/v2#output"/>
     </sbol:Component>
   </sbol:component>
   <sbol:component>
     <sbol:Component rdf:about="http://sbolstandard.org/example/md/GFP_expression/Constitutive_GFP">
       <sbol:instanceOf rdf:resource="http://sbolstandard.org/example/GFP_generator"/>
-      <sbol:access rdf:resource="http://sbols.org/v2#public"/>
-      <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
     </sbol:Component>
   </sbol:component>
   <sbol:interaction>
@@ -744,6 +740,31 @@ In the example below, the role of participating \sbol{SubComponent} is defined t
 </sbol:Participation>
 \end{lstlisting}
 
+\subsubsection{Interface}
+\label{sec:Interface}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/interface}
+\caption[]{Diagram of the \sbol{Interface} class and its associated properties.}
+\label{uml:interface}
+\end{center}
+\end{figure}
+
+The \sbol{Interface} class is a way of explicitly specifying the interface of a \sbol{Component}. 
+
+\paragraph{The \sbolheading{input} property}
+\label{sec:input:Interface}
+The \sbolmult{input:Interface}{input} property is OPTIONAL and MAY contain a set of \sbol{SubComponent} \sbol{URI}s in the same \sbol{Component}.
+\paragraph{The \sbolheading{output} property}
+\label{sec:output:Interface}
+The \sbolmult{output:Interface}{output} property is OPTIONAL and MAY contain a set of \sbol{SubComponent} \sbol{URI}s in the same \sbol{Component}.
+
+\paragraph{The \sbolheading{nondirectional} property}
+\label{sec:nondirectional:Interface}
+The \sbolmult{nondirectional:Interface}{nondirectional} property is OPTIONAL and MAY contain a set of \sbol{SubComponent} \sbol{URI}s in the same \sbol{Component}. Note that nondirectional can imply both bidirectional as well as situations where there are no flows (for instance - a physical interface).
+
+
 \subsubsection{SubComponent}
 \label{sec:SubComponent}
 
@@ -773,30 +794,6 @@ The \sbolmult{mapsTos:CI}{mapsTos} property is OPTIONAL and MAY contain a set of
 
 \ref{sec:MapsTo} contains a more detailed description of the \sbol{MapsTo} class.
 
-\paragraph{The \sbolheading{access} property}
-\label{sec:access}
-\label{sec:public}
-\label{sec:private}
-
-The \sbol{access} property is a REQUIRED \sbol{URI} that indicates whether the \sbol{SubComponent}
-can be referred to remotely by a \sbol{MapsTo} on another \sbol{SubComponent} or \sbol{SubComponent} contained by a different parent \sbol{Component} or \sbol{Component} (one that does not contain this \sbol{SubComponent}).
-
-\ref{tbl:componentInstance_access} provides a list of REQUIRED \sbol{access} \sbol{URI}s. The value of the \sbol{access} property MUST be one of these \sbol{URI}s.
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{lp{4in}}
-    \toprule
-    \textbf{Access URI} & \textbf{Description} \\
-    \midrule
-    \url{http://sbols.org/v2#public}  & The \sbol{SubComponent} MAY be referred to by remote \sbol{MapsTo} objects. \\
-        \url{http://sbols.org/v2#private}  & The \sbol{SubComponent} MUST NOT be referred to by remote \sbol{MapsTo} objects. \\
-    \bottomrule
-  \end{edtable}
-  \caption{REQUIRED \sbol{URI}s for the \sbol{access} property.}
-  \label{tbl:componentInstance_access}
-\end{table}
-
-In some cases, a designer might want to set the \sbol{access} property of a \sbol{SubComponent} such that others cannot map to the \sbol{SubComponent} when they reuse its parent \sbol{Component}. For example, a designer who is concerned about retroactivity might set the \sbol{access} of the \sbol{SubComponent} to ``private'' in order to prevent its mapping to another \sbol{SubComponent} that participates in a new \sbol{Interaction} as part of a composite design.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
 
@@ -835,31 +832,8 @@ sub-\sbol{Component}'s roles.}
 \end{table}
 
 
-\begin{table}[ht]
-  \begin{edtable}{tabular}{ll}
-    \toprule
-    \textbf{Direction URI} & \textbf{Description} \\
-    \midrule
-
-    \url{http://sbols.org/v2#in}  & Indicates that the \sbol{SubComponent} is an input.\\
-    \url{http://sbols.org/v2#out}  & Indicates that the \sbol{SubComponent} is an output.\\
-   \url{http://sbols.org/v2#inout}  & Indicates that the \sbol{SubComponent} is both an input and output\\ \url{http://sbols.org/v2#none}  & Indicates that the \sbol{SubComponent} is neither an input or output.\\
-    \bottomrule
-  \end{edtable}
-  \caption{REQUIRED \sbol{URI}s for the \sbol{direction} property.}
-  \label{tbl:functionalcomponent_directions}
-\end{table}
-
-The \sbol{direction} property is a means to encode how a  designer thinks about the ``purpose'' of a connection in a system.  In SBOL, such a connection is represented with a \sbol{SubComponent}, and a system is represented as  with a \sbol{Component}.
-For example, consider a system that has been designed to sense the concentration of the cell-to-cell signaling molecule 3OC$_6$HSL and report it via the concentration of another gene product.
-In this system, the concentration of 3OC$_6$HSL is being sensed by the system, so the \sbol{SubComponent} for 3OC$_6$HSL would have a \sbol{direction} of ``input.''
-In turn, the concentration of the reporter gene product is intended to be read/consumed by other biological systems, so the \sbol{SubComponent} for this product would have a \sbol{direction} of ``output.''
-The CDS encoding the product, however, is not intended to directly transfer information into or out of the \sbol{Component} for the system, so its \sbol{SubComponent} would have a \sbol{direction} of ``neither.''
-
-
 \paragraph{The \sbolheading{sourceLocations} property}\label{sec:sourceLocations}
-\vspace{-7pt}
-\-\hspace{0.8cm}[New in 2.3.0; see SEP 013: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_013.md}]
+
 
 The \sbol{sourceLocations} property is an OPTIONAL set of zero or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{ComponentDefinition}'s \sbol{Sequence} are to be included in the \sbol{Component}'s parent. The \sbol{sourceLocations} property
 allows for only a portion of a \sbol{ComponentDefinition}'s \sbol{Sequence} to be included, rather than its entirety.
@@ -878,7 +852,6 @@ The serialization of a \sbol{SubComponent} MUST have the following form:
 \begin{lstlisting}
 <sbol:Component rdf:about="...">
   ... [\emph{properties inherited from identified}] ...
-  [\emph{one}]          <sbol:access rdf:resource="..."/> [\emph{element}]
   [\emph{one}]          <sbol:instanceOf rdf:resource="..."/> [\emph{element}]
   [\emph{zero or more}] <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
   [\emph{zero or more}] <sbol:role rdf:resource="..."/> [\emph{elements}]
@@ -895,7 +868,6 @@ that represents an instance of a promoter:
 <sbol:SubComponent rdf:about="http://partsregistry.org/cd/BBa_F2620/pLuxR">
   <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/pLuxR"/>
   <sbol:displayId>pLuxR</sbol:displayId>
-  <sbol:access rdf:resource="http://sbols.org/v2#public"/>
   <sbol:instanceOf rdf:resource="http://partsregistry.org/cd/BBa_R0062"/>
 </sbol:SubComponent>
 \end{lstlisting}
@@ -947,7 +919,6 @@ d to refer to the \sbol{SubComponent} contained by the ``higher level'' \sbol{Co
 \paragraph{The \sbolheading{remote} property}\label{sec:remote}
 This REQUIRED property has a data type of \sbol{URI} and is used to refer to the \sbol{SubComponent} contained by the ``lower level'' \sbol{Component}.
 This \sbol{remote} \sbol{SubComponent} MUST be contained by the \sbol{Component} or \sbol{Component} that is the \sbolmult{definition:CI}{definition} of the \sbol{SubComponent} or \sbol{SubComponent} that owns the \sbol{MapsTo}.
-Lastly, the \sbol{access} property of the \sbol{remote} \sbol{SubComponent} MUST be set to ``public.''
 
 \paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
 The \sbol{refinement} property is REQUIRED and has a data type of \sbol{URI}. Each \sbol{MapsTo} object MUST specify the relationship between its \sbol{local} and \sbol{remote} \sbol{SubComponent} objects using one of the REQUIRED \sbol{refinement} \sbol{URI}s provided in \ref{tbl:mapsto_refinement}.
