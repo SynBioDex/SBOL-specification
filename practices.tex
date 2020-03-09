@@ -4,7 +4,7 @@
 % -----------------------------------------------------------------------------
 \subsection{SBOL Namespaces}
 
-Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 2.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.
+Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 3.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.
 
 \subsection{Use of the Version Property}
 
@@ -20,7 +20,7 @@ This convention represents versions as sequences of numbers and qualifiers separ
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
-Maintaining unique \sbol{identity} \sbol{URI}s for all SBOL objects can be a very challenging implementation task.  To reduce this burden, users of SBOL 2.x are encouraged to follow a few simple rules when constructing the \sbol{identity} properties and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
+Maintaining unique \sbol{identity} \sbol{URI}s for all SBOL objects can be a very challenging implementation task.  To reduce this burden, users of SBOL 3.x are encouraged to follow a few simple rules when constructing the \sbol{identity} properties and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
 \begin{enumerate}
 \item The \sbol{identity} of a compliant SBOL object MUST begin with a \emph{URI prefix} that maps to a domain over which the user has control. Namely, the user can guarantee uniqueness of identities within this domain.
 \item The \sbol{persistentIdentity} and \sbol{displayId} properties are REQUIRED of a compliant SBOL object.
@@ -63,7 +63,7 @@ contains valid SBOL. When an RDF document is deserialized to SBOL
 objects, the program doing so SHOULD verify that all of the property
 values encoded therein have the right data type (e.g., that the object
 pointed to by the \sbol{sequences} property of a
-\sbol{ComponentDefinition} is really a \sbol{Sequence}).
+\sbol{Component} is really a \sbol{Sequence}).
 For complete files, this validation can be carried out entirely locally. For files that are not complete, an implementation either needs to
 have a means of validating those external references (e.g., by
 retrieving them from various repositories), or it needs to mark them as
@@ -72,7 +72,7 @@ unverified and not depend on their correctness.
 \subsection{Recommended Ontologies for External Terms}
 \label{sec:recomm_ontologies}
 
-External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{ComponentDefinition} \sbolmult{types:CD}{types}, such as DNA or protein, are described using SBO terms. Similarly, the roles of a DNA \twozeroone{or RNA} \sbol{ComponentDefinition} are described via SO terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
+External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{Component} \sbolmult{types:CD}{types}, such as DNA or protein, are described using SBO terms. Similarly, the roles of a DNA or RNA \sbol{Component} are described via SO terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{p{3cm}p{1.5cm}p{4.5cm}p{6cm}}
@@ -80,7 +80,7 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
     \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}
     & \textbf{More Information} \\
     \midrule
-    \textbf{ComponentDefinition}  & types & SBO & \url{https://www.ebi.ac.uk/sbo/main/}\\
+    \textbf{Component}  & types & SBO & \url{https://www.ebi.ac.uk/sbo/main/}\\
                                   & types & SO (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
     						   	  & roles & SO (\textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
     						   	  & roles & CHEBI (\textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
@@ -134,9 +134,9 @@ Authorship information should ideally be added to \sbol{TopLevel} entities, wher
 
 \subsection{Host Context / Ontologies for Experiments}
 
-\subsubsection{Mixtures via ModuleDefinitions}
+\subsubsection{Mixtures via Components}
 
-Any \sbol{ModuleDefinition} can be interpreted as specifying a mixture of the \sbol{FunctionalComponent}s and \sbol{Module}s that it includes.
+Any \sbol{Component} can be interpreted as specifying a mixture of the \sbol{SubComponent}s that it includes.
 
 The amount of each such instance included in the mixture SHOULD be specified by attaching a \sbol{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
 \begin{itemize}
@@ -147,11 +147,11 @@ The amount of each such instance included in the mixture SHOULD be specified by 
 
 \subsubsection{Media, Inducers, and Other Reagents}
 
-An ``atomic'' reagent, which is not expected to be divided further in designs, SHOULD be represented as a \linebreak \sbol{ComponentDefinition}. Examples: Arabinose, Kanamycin, Rainbow bead control
+An ``atomic'' reagent, which is not expected to be divided further in designs, SHOULD be represented as a \linebreak \sbol{Component}. Examples: Arabinose, Kanamycin, Rainbow bead control
 
-A ``composite'' reagent, which might be defined as a mixture of other reagents, SHOULD be represented as a \sbol{ModuleDefinition} that defines it as a mixture of other reagents. This might be recursive, with mixtures of mixtures of mixtures, etc. Examples: M9 media, LB broth
+A ``composite'' reagent, which might be defined as a mixture of other reagents, SHOULD be represented as a \sbol{Component} that defines it as a mixture of other reagents. This might be recursive, with mixtures of mixtures of mixtures, etc. Examples: M9 media, LB broth
 
-The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{roles:MD}{role} property of the \sbol{FunctionalComponent} or \sbol{Module}. Examples include:
+The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{roles:MD}{role} property of the \sbol{SubComponent}. Examples include:
 \begin{itemize}
 \item NCIT:C64356: Positive Control
 \item NCIT:C48694: Cell
@@ -160,33 +160,33 @@ The roles of reagents may vary in context: for example, Arabinose may serve as a
 \item NCIT:C120268: Inducer
 \end{itemize}
 
-Note that this also implies that the \sbolmult{roles:C}{role} property should be promoted from \sbol{Component} to \sbol{ComponentInstance} (so it can be used for \sbol{FunctionalComponent} as well) and also added to \sbol{Module}.
+Note that this also implies that the \sbolmult{roles:C}{role} property should be promoted from \sbol{SubComponent} to \sbol{ComponentInstance} (so it can be used for \sbol{FunctionalComponent} as well) and also added to \sbol{Module}.
 
 \subsubsection{Strains, Genomes, and Plasmids}
 
-A cell strain SHOULD be represented as a \sbol{ModuleDefinition} containing at least:
+A cell strain SHOULD be represented as a \sbol{Component} containing at least:
 \begin{itemize}
-\item A \sbol{FunctionalComponent} for the cell, which is RECOMMENDED to have \sbolmult{types:CD}{type} cell (GO:0005623) and \sbolmult{roles:MD}{role} physical compartment (SBO:0000290).
-\item A representation of its genetic material (genome, plasmids, etc.) as a collection of \sbol{FunctionalComponent} and/or \sbol{Module} instances.
+\item A \sbol{SubComponent} for the cell, which is RECOMMENDED to have \sbolmult{types:CD}{type} cell (GO:0005623) and \sbolmult{roles:MD}{role} physical compartment (SBO:0000290).
+\item A representation of its genetic material (genome, plasmids, etc.) as a collection of \sbol{SubComponent} instances.
 \item An \sbol{Interaction} of type \texttt{FunctionalCompartment} (SBO:0000289) with the cell participating as physical compartment (SBO: 0000290) and the genetic material participating as contained entity (SBO:0000664).
 \end{itemize}
 
 \subsubsection{Samples}
 
-A complete specification of a sample SHOULD be a \sbol{ModuleDefinition} that includes at least:
+A complete specification of a sample SHOULD be a \sbol{Component} that includes at least:
 \begin{itemize}
 \item A \sbol{Module} instantiating each strain in the sample
-\item A \sbol{Module} or \sbol{FunctionalComponent} for the media or buffer
-\item A \sbol{Module} or \sbol{FunctionalComponent} for each additional reagent added to the media (e.g., inducers, antibiotics)
+\item A \sbol{SubComponent} for the media or buffer
+\item A \sbol{SubComponent} for each additional reagent added to the media (e.g., inducers, antibiotics)
 \item \sbol{Measure}s on each of these specifying the amount in the sample
-\item \sbol{Measure}s on the \sbol{ModuleDefinition} for each environmental parameter (e.g., temperature, pH, culturing time)
+\item \sbol{Measure}s on the \sbol{Component} for each environmental parameter (e.g., temperature, pH, culturing time)
 \end{itemize}
 
 \subsubsection{Other Experimental Parameters}
 
-In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, we need to add a \texttt{measures} property to \sbol{ModuleDefinition} (in addition to the ones already on \sbol{Module} and \sbol{ComponentInstance}) and to \sbol{ComponentDefinition}.
+In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, we need to add a \texttt{measures} property to \sbol{Component} (in addition to the ones already on \sbol{SubComponent}) and to \sbol{ComponentDefinition}.
 
-The distinction is that the \texttt{measures} of a \texttt{Definition} provide context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \texttt{measures} on an \texttt{Instance} provide a measurement in context (e.g., the dosage of Arabinose in a sample).
+The distinction is that the \texttt{measures} of a \texttt{Component} provide context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \texttt{measures} on an \texttt{SubComponent} provide a measurement in context (e.g., the dosage of Arabinose in a sample).
 
 Values of these parameters SHOULD be specified by attaching a \sbol{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
 \begin{itemize}
