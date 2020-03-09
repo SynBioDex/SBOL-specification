@@ -2,9 +2,9 @@
 \section{Recommended Best Practices}
 \label{sec:bestpractices}
 % -----------------------------------------------------------------------------
-\twozeroone{\subsection{SBOL Namespaces}
+\subsection{SBOL Namespaces}
 
-Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 2.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.}
+Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 2.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.
 
 \subsection{Use of the Version Property}
 
@@ -72,7 +72,7 @@ unverified and not depend on their correctness.
 \subsection{Recommended Ontologies for External Terms}
 \label{sec:recomm_ontologies}
 
-External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{ComponentDefinition} \sbolmult{types:CD}{types}, such as DNA or protein, are described using BioPAX terms. Similarly, the roles of a DNA \twozeroone{or RNA} \sbol{ComponentDefinition} are described via SO terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
+External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{ComponentDefinition} \sbolmult{types:CD}{types}, such as DNA or protein, are described using SBO terms. Similarly, the roles of a DNA \twozeroone{or RNA} \sbol{ComponentDefinition} are described via SO terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{p{3cm}p{1.5cm}p{4.5cm}p{6cm}}
@@ -80,7 +80,7 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
     \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}
     & \textbf{More Information} \\
     \midrule
-    \textbf{ComponentDefinition}  & types & BioPAX & \url{http://www.biopax.org}\\
+    \textbf{ComponentDefinition}  & types & SBO & \url{https://www.ebi.ac.uk/sbo/main/}\\
                                   & types & SO (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
     						   	  & roles & SO (\textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
     						   	  & roles & CHEBI (\textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
@@ -98,10 +98,10 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
   \label{tbl:preferred_external_resources}
 \end{table}
 
-\twoonezero{The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.}
+The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.
 
-\twozeroone{\subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
-Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:}
+\subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
+Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:
 
 \lstsetsbol
 \begin{lstlisting}
@@ -116,9 +116,9 @@ Entities in an SBOL document can be annotated with creation and modification dat
 </rdf:RDF>
 \end{lstlisting}
 
-\twotwoone{\subsection{Annotating Entities with Authorship information}\label{sec:Authorship}
+\subsection{Annotating Entities with Authorship information}\label{sec:Authorship}
 Authorship information should ideally be added to \sbol{TopLevel} entities, where possible. It is RECOMMENDED that the \texttt{creator} DCMI Metadata term SHOULD be used to annotate SBOL entities with authorship information. This property can be repeated for each author. The example below shows the use of this property for two authors and the values shown are free text \texttt{String} literals.
-}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -132,7 +132,7 @@ Authorship information should ideally be added to \sbol{TopLevel} entities, wher
 </rdf:RDF>
 \end{lstlisting}
 
-\twothreeone{\subsection{Host Context / Ontologies for Experiments}
+\subsection{Host Context / Ontologies for Experiments}
 
 \subsubsection{Mixtures via ModuleDefinitions}
 
@@ -193,4 +193,4 @@ Values of these parameters SHOULD be specified by attaching a \sbol{Measure} wit
 \item SBO:0000147: thermodynamic temperature (e.g., culturing at 27 C)
 \item SBO:0000332: half-life of an exponential decay (e.g., decay rate of a gRNA)
 \item SBO:0000304: pH (e.g., pH of M9 media)
-\end{itemize}}
+\end{itemize}
