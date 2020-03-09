@@ -317,7 +317,7 @@ The example below shows the serialization of the \sbol{Sequence} for a promoter.
 \subsection{Component}
 \label{sec:Component}
 
-The \sbol{Component} class represents the structural and/or functional entities of a biological design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as small molecules, molecular complexes, light, and abstract functional groupings of other entities.
+The \sbol{Component} class represents the structural and/or functional entities of a biological design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as small molecules, molecular complexes, strains, samples, light, and abstract functional groupings of other entities.
 
 As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \sbol{sequences}, \sbol{interactions}, and \sbol{models}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{subcomponents}, \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.
 
@@ -360,10 +360,8 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
  \label{tbl:component_types}
 \end{table}
 
-\twoonezero{\emph{Nucleic Acid Topology types}\\
-%\vspace{-7pt}
-\-\hspace{0.8cm}
-[New in 2.1.0; see SEP 011: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_011.md}]
+\emph{Nucleic Acid Topology types}\\
+\vspace{-7pt}
 
 Any \sbol{Component} classified as DNA (see \ref{tbl:component_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This
 (topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
@@ -398,7 +396,6 @@ that sequence features may be mapped or identified across this junction. \emph{D
   \caption{Sequence Ontology terms to encode DNA or RNA topology information in the \sbolmult{types:CD}{types} properties of a \sbol{Component}.}
  \label{tbl:component_topology}
 \end{table}
-}
 
 \subsubsection*{The \sbolheading{roles} property}
 \label{sec:roles:CD}
