@@ -16,7 +16,7 @@ Arbitrary RDF/XML, however, provides a sometimes problematically large amount of
 To address this issue, we define a canonical association between the nesting of data structures within the SBOL UML data model and the RDF/XML file. 
 For all ownership associations (filled diamonds), the RDF/XML for the owned entity is embedded within the owner's RDF/XML (note, however, that the property values MAY be listed in any order).
 For all associations that are by reference (open diamonds), the RDF/XML for the referenced property is linked via a resource \sbol{URI}.
-For example, the serialization of a \sbol{ComponentDefinition} embeds the serializations of the \sbol{SequenceConstraint} and \sbol{Component} objects associated with it. Those \sbol{SequenceConstraint} objects, however, link to the \sbol{Component} objects with a \sbol{URI} rather than embedding another copy.
+For example, the serialization of a \sbol{Component} embeds the serializations of the \sbol{SequenceConstraint} and \sbol{SubComponent} objects associated with it. Those \sbol{SequenceConstraint} objects, however, link to the \sbol{SubComponent} objects with a \sbol{URI} rather than embedding another copy.
 
 Every SBOL document MUST be a valid RDF/XML document. 
 Accordingly, each SBOL document starts with an XML declaration that has its XML version set to ``1.0.'' As shown in the example below, this declaration is then followed by an \external{rdf:RDF} XML element that includes the namespace declarations for RDF, Dublin Core, PROV, and SBOL. The SBOL namespace, which is \url{http://sbols.org/v2#}, is used to indicate which entities and properties in the SBOL document are defined by SBOL, and MUST NOT be used for any entities or properties not defined in this specification.
@@ -29,22 +29,22 @@ Accordingly, each SBOL document starts with an XML declaration that has its XML 
 </rdf:RDF>
 \end{lstlisting}
 
-All first-class SBOL data types (i.e., those enumerated in \ref{sec:model}) have an associated identifying \sbol{URI}. In the RDF, this is the resource \sbol{URI} used by instances of that type. For example, \sbol{ComponentDefinition} has the
-type \sbol{URI} \external{sbol:ComponentDefinition}.
+All first-class SBOL data types (i.e., those enumerated in \ref{sec:model}) have an associated identifying \sbol{URI}. In the RDF, this is the resource \sbol{URI} used by instances of that type. For example, \sbol{Component} has the
+type \sbol{URI} \external{sbol:Component}.
 Properties and associations are then asserted as nested RDF/XML assertions. 
 \ref{sec:model} provides the serialization template and an example at the end of its description of each data type.
 All of the data types that are \sbol{TopLevel} are so named because they always appear at the top-most level of the RDF/XML serialization. All other data types will always appear nested within their parent container and, ultimately, some \sbol{TopLevel} object.
-For example, a \sbol{ComponentDefinition} is a \sbol{TopLevel} and therefore listed at the top-most level of the RDF/XML serialization, and contains its  \sbol{SequenceConstraint} objects, since they are not \sbol{TopLevel}.  Its \sbol{Sequence}, however, is also \sbol{TopLevel} and is therefore not nested within and instead linked via a \sbol{URI}.
+For example, a \sbol{Component} is a \sbol{TopLevel} and therefore listed at the top-most level of the RDF/XML serialization, and contains its  \sbol{SequenceConstraint} objects, since they are not \sbol{TopLevel}.  Its \sbol{Sequence}, however, is also \sbol{TopLevel} and is therefore not nested within and instead linked via a \sbol{URI}.
 
 Each instance of a first-class SBOL data type MAY have annotations attached, as described in \ref{sec:Annotations}. These annotations are composed of a name and a value.  They are serialized to RDF as a conceptual triple with the subject being the identity of the instance they annotate, the predicate being the name of the annotation, and the object being the value of that annotation. Annotation values are always nested within the RDF/XML serialization of the instance that they annotate.
-For example, a \sbol{ModuleDefinition} might add a DOI annotation that links to the scientific article that first described the system that it represents.
+For example, a \sbol{Component} might add a DOI annotation that links to the scientific article that first described the system that it represents.
 
 SBOL also supports top-level, user-defined data, again as described in \ref{sec:Annotations}. This is to allow non-standardized but necessary information to be carried around as part of a design. For example, a particular sub-community might have an internal standard for genetic device characterization data sheets. 
 Such data can be represented as a \sbol{GenericTopLevel} object with internal structured annotations. 
 For example, each individual data sheet might be contained in its own \sbol{GenericTopLevel} instance.
 This custom data is serialized into the RDF/XML in the usual way, as an RDF/XML block at the top level of the file. 
 Other objects can refer to this entity through their annotations by reference, and this generic top-level entity can refer to other entities via references.
-For example, a \sbol{ModuleDefinition} might use an annotation to refer to the data sheet \sbol{GenericTopLevel} that documents its properties.
+For example, a \sbol{Component} might use an annotation to refer to the data sheet \sbol{GenericTopLevel} that documents its properties.
 
 \twozeroone{As previously stated, XML is the preferred RDF serialization for SBOL files, and these files should use the ".xml" file extension. While any RDF serialization is valid, as the contents of the triples and not their format determine the validity, restriction to XML enhances human ability to classify a document as SBOL easily. Furthermore, documents can be human-examined by using XML formatting tools and syntax highlighters. It should be noted that XML was chosen for no particular reason than the simple fact of its widespread use in the community and by existing libraries. The proposers are aware that many of these benefits apply to several serializations of SBOL. The choice of XML is simply a codification of the existent standard and practice.}
 

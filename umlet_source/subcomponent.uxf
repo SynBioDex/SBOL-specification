@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>310</x>
+      <y>250</y>
+      <w>200</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+-access[1] : URI
+-roles[0..*] : URI
+-roleIntegration[0..1] : URI
+-direction[1] : URI
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>340</x>
+      <y>190</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/*Identified*/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>360</x>
+      <y>190</y>
+      <w>50</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;60</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>650</x>
+      <y>270</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*MapsTo*
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>480</x>
+      <y>230</y>
+      <w>190</w>
+      <h>94</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+mapsTos
+0..*</panel_attributes>
+    <additional_attributes>30;50;170;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>40</x>
+      <y>230</y>
+      <w>290</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-&gt;
+definition
+ 1</panel_attributes>
+    <additional_attributes>270;50;70;50;70;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>320</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*Component*</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

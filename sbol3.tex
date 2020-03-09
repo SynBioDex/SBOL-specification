@@ -67,7 +67,7 @@
 \definecolor{light-gray}{gray}{0.97}
 \lstdefinelanguage{sbol}
     {morekeywords={xmlns:sbol,xmlns:prov,xmlns:rdf,xmlns:dcterms,xmlns:myapp,rdf:RDF,rdf:resource,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type,
-        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sourceLocation, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
+        sbol:role, sbol:roleIntegration, sbol:Component, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:SubComponent,sbol:subComponent,sbol:SequenceAnnotation,sbol:subComponent,sbol:location, sbol:sourceLocation, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:instanceOf, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
 sbol:experimentalData,sbol:Experiment,sbol:ExperimentalData,sbol:attachment,om:hasNumericalValue,om:symbol,om:alternativeSymbol,om:alternativeLabel,om:longcomment,om:hasFactor,
 om:hasTerm1,om:hasTerm2,om:hasNumerator,om:hasDenominator,om:hasBase,om:hasExponent,om:hasUnit,om:hasPrefix,rdfs:comment,rdfs:label,
 om:Measure,om:Unit,om:SingularUnit,om:CompoundUnit,om:om:UnitMultiplication,om:UnitDivision,om:Exponentiation,om:PrefixedUnit,om:Prefix,om:SIPrefix,
@@ -118,6 +118,18 @@ om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd,xml:lang},
 
 %Command to format external terms in the document
 \newcommand{\external}[1]{\texttt{#1}}
+
+
+%Commands to highlight SBOL versions
+\newcommand{\three}[1]{%
+\cbcolor{red}
+\ifdefined\fullchangebars\cbstart\fi%
+{\color{red}%
+\version{3.0.0}%
+#1
+}
+\ifdefined\fullchangebars\cbend\fi
+}
 
 %Commands to highlight SBOL versions
 \newcommand{\twozeroone}[1]{%
@@ -198,7 +210,7 @@ om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd,xml:lang},
 
 \title{
   %BBF RFC \rfcnum{}:
-  Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~2.3}}
+  Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~3.0}}
 
 \author{{\bf Editors:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
