@@ -4,7 +4,7 @@
 % -----------------------------------------------------------------------------
 \twozeroone{\subsection{SBOL Namespaces}
 
-Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 3.x \sbol{SubComponent} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.}
+Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 3.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.}
 
 \subsection{Use of the Version Property}
 
