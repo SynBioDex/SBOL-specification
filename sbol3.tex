@@ -1,17 +1,34 @@
 
-%% \documentclass[finalspec]{sbmlpkgspec}
-\documentclass[draftspec]{sbmlpkgspec}
+\documentclass[finalspec]{sbmlpkgspec}
+%% \documentclass[draftspec]{sbmlpkgspec}
+%\usepackage{float}
 \usepackage{microtype}
 \usepackage{color}
 \usepackage{todonotes}
 \usepackage[color]{changebar}
 \usepackage{xcolor}
 \usepackage{soul}
+%% ============================================================================
+%% Description:  Documentation for sbmlpkgspec.cls
+%% First author: Michael Hucka <mhucka@caltech.edu>
+%% Organization: California Institute of Technology
+%% Date created: September 2011
+%% https://sbml.svn.sourceforge.net/svnroot/sbml/trunk/project/tex/sbmlpkgspec
+%%
+%% Copyright (C) 2011-2012 California Institute of Technology, Pasadena, CA.
+%%
+%% SBMLPkgSpec is free software; you can redistribute it and/or modify it
+%% under the terms of the GNU Lesser General Public License as published by
+%% the Free Software Foundation.  A copy of the license agreement is provided
+%% in the file named "LICENSE.txt" included with this software distribution.
+%% ============================================================================
 
 % Make changebars switchable to allow faster compilation:
 %\def\fullchangebars{} % comment this out to simplify changebars and speed up compilation
 
 % Macros just for this document:
+
+\newcommand{\rfcnum}{114}
 
 \newcommand{\sbmlpkg}{\texorpdfstring{%
     \textls[-25]{\textsc{SBMLPkgSpec}}}{%
@@ -175,7 +192,12 @@ om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd,xml:lang},
 
 \begin{document}
 
+\packageTitle{\latex Class for SBML Package Specifications}
+\packageVersion{Version 3.0}
+\packageVersionDate{March 9, 2020}
+
 \title{
+  %BBF RFC \rfcnum{}:
   Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~3.0}}
 
 \author{{\bf Editors:}\hfil\\
@@ -183,7 +205,7 @@ om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd,xml:lang},
 Hasan Baig & \emph{University of Connecticut, USA}\\   
 Pedro Fontanarrosa & \emph{University of Utah, USA}\\   
 Vishwesh Kulkarni, & \emph{University of Warwick, UK}\\ 
-James McLaughlin & \emph{Newcastle University, UK}\\
+James McLaughlin & \emph{Newcastle University}\\
 Prashant Vaidyananthan & \emph{Microsoft Research, UK}\\ 
 \end{tabular}\\
 \href{mailto:sbol-editors@googlegroups.com}{\sffamily sbol-editors@googlegroups.com}\\
@@ -251,3 +273,156 @@ James Scott-Brown & \emph{U. of Oxford, UK} \\
 \input{examples_serialization}
 
 \end{document}
+
+
+% -----------------------------------------------------------------------------
+% Random non-printing junk at the end: this section contains examples of potentially useful code for formatting tables, bullets, etc.
+
+\begin{table}[hb]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Item} & \textbf{Location} \\
+    \midrule
+    Distribution archive & \url{\distURL}\\
+    Web page		 & \url{\webURL}\\
+    Source tree (SVN)    & \url{\srcURL}\\
+    \bottomrule
+  \end{edtable}
+  \caption{Where to find \sbmlpkg on the Internet.}
+  \label{where}
+\end{table}
+
+\begin{table}[htb]
+  \rowcolors{2}{sbmlrowgray}{}
+  \renewcommand{\arraystretch}{1.05}
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Command}                      & \textbf{Object} \\
+    \midrule
+    \cmd{AlgebraicRule}                   & \AlgebraicRule \\
+    \cmd{Annotation}                      & \Annotation \\
+    \cmd{AssignmentRule}                  & \AssignmentRule \\
+    \cmd{Compartment}                     & \Compartment \\
+    \cmd{Constraint}                      & \Constraint \\
+    \cmd{Delay}                           & \Delay \\
+    \cmd{EventAssignment}                 & \EventAssignment \\
+    \cmd{Event}                           & \Event \\
+    \cmd{FunctionDefinition}              & \FunctionDefinition \\
+    \cmd{InitialAssignment}               & \InitialAssignment \\
+    \cmd{KineticLaw}                      & \KineticLaw \\
+    \cmd{ListOfCompartments}              & \ListOfCompartments \\
+    \cmd{ListOfConstraints}               & \ListOfConstraints \\
+    \cmd{ListOfEventAssignments}          & \ListOfEventAssignments \\
+    \cmd{ListOfEvents}                    & \ListOfEvents \\
+    \cmd{ListOfFunctionDefinitions}       & \ListOfFunctionDefinitions \\
+    \cmd{ListOfInitialAssignments}        & \ListOfInitialAssignments \\
+    \cmd{ListOfLocalParameters}           & \ListOfLocalParameters \\
+    \cmd{ListOfModifierSpeciesReferences} & \ListOfModifierSpeciesReferences \\
+    \cmd{ListOfPackages}                  & \ListOfPackages \\
+    \cmd{ListOfParameters}                & \ListOfParameters \\
+    \cmd{ListOfReactions}                 & \ListOfReactions \\
+    \cmd{ListOfRules}                     & \ListOfRules \\
+    \cmd{ListOfSpeciesReferences}         & \ListOfSpeciesReferences \\
+    \cmd{ListOfSpecies}                   & \ListOfSpecies \\
+    \cmd{ListOfUnitDefinitions}           & \ListOfUnitDefinitions \\
+    \cmd{ListOfUnits}                     & \ListOfUnits \\
+    \cmd{LocalParameter}                  & \LocalParameter \\
+    \cmd{Message}                         & \Message \\
+    \cmd{Model}                           & \Model \\
+    \cmd{ModifierSpeciesReference}        & \ModifierSpeciesReference \\
+    \cmd{Notes}                           & \Notes \\
+    \cmd{Package}                         & \Package \\
+    \cmd{Parameter}                       & \Parameter \\
+    \cmd{Priority}                        & \Priority \\
+    \cmd{RateRule}                        & \RateRule \\
+    \cmd{Reaction}                        & \Reaction \\
+    \cmd{Rule}                            & \Rule \\
+    \cmd{SBML}                            & \SBML \\
+    \cmd{SBase}                           & \SBase \\
+    \cmd{SimpleSpeciesReference}          & \SimpleSpeciesReference \\
+    \cmd{SpeciesReference}                & \SpeciesReference \\
+    \cmd{Species}                         & \Species \\
+    \cmd{StoichiometryMath}               & \StoichiometryMath \\
+    \cmd{Trigger}                         & \Trigger \\
+    \cmd{UnitDefinition}                  & \UnitDefinition \\
+    \cmd{Unit}                            & \Unit \\
+    \bottomrule
+  \end{edtable}
+  \caption{Commands for the names of object classes defined in the SBML Level~3
+    Core specification.}
+  \label{sbmlcore}
+\end{table}
+
+\begin{example}[style=latex]
+\documentclass{sbmlpkgspec}
+\begin{document}
+
+\packageTitle{Example}
+\packageVersion{Version 1 (Draft)}
+\packageVersionDate{14 August 2011}
+\packageGeneralURL{http://sbml.org/Documents/Specifications/Example}
+\packageThisVersionURL{http://sbml.org/Documents/Specifications/Example_14_August_2011}
+
+\author{Michael Hucka\\[0.25em]
+  \mailto{mhucka@caltech.edu}\\[0.25em]
+  Computing and Mathematical Sciences\\
+  California Institute of Technology\\
+  Pasadena, CA, USA
+}
+
+\maketitlepage
+\maketableofcontents 
+
+\section{...}
+...
+\end{document}
+\end{example}
+
+
+\begin{description}[font=\normalfont\ttfamily\color{black},style=nextline]
+
+\item[draftspec] This option causes the front page of the document to contain
+  the word ``DRAFT'' in large gray letters, and the footer of every page of
+  the document to contain the word ``(DRAFT)''.  Authors can use this
+  option until such time as the specification document is considered a
+  release candidate or a final release.
+
+\end{description}
+
+\begin{description}
+
+\item[\hspace*{6.5pt}\vSymbol\vsp] A \vSymbolName indicates a
+  \emph{requirement} for conformance. If a model fails to follow this rule,
+  it does not conform to the specification.  (Mnemonic intention behind the
+  choice of symbol: ``This MUST be checked.'')
+
+\item[\hspace*{6.5pt}\cSymbol\csp] A \cSymbolName indicates a
+  \emph{recommendation} for model consistency.  If a model does not follow
+  this rule, it is not considered strictly invalid as far as the
+  specification is concerned; however, it indicates that the model contains
+  a physical or conceptual inconsistency.  (Mnemonic intention behind the
+  choice of symbol: ``This is a cause for warning.'')
+
+\item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a strong
+  recommendation for good modeling practice.  This rule is not
+  strictly a matter of SBML encoding, but the recommendation comes
+  from logical reasoning.  As in the previous case, if a model does
+  not follow this rule, it is not strictly considered an invalid SBML
+  encoding.  (Mnemonic intention behind the choice of symbol: ``You're
+  a star if you heed this.'')
+
+\end{description}
+
+\begin{itemize}
+
+\item \texttt{amssymb}: This package defines many symbols and special
+  characters.  In \sbmlpkg, it is used to get the symbols defined by the
+  validation rule commands \cmd{validRule}, \cmd{consistencyRule} and
+  \cmd{modelingRule} described in \sec{validation-rules}.
+
+\end{itemize}
+% * <myers@ece.utah.edu> 2015-06-03T17:34:31.200Z:
+%
+%
+%
+qualifiedUsage
