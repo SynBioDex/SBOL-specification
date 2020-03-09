@@ -319,7 +319,8 @@ The example below shows the serialization of the \sbol{Sequence} for a promoter.
 
 The \sbol{Component} class represents the structural and/or functional entities of a biological design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as small molecules, molecular complexes, strains, samples, light, and abstract functional groupings of other entities.
 
-As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \sbol{sequences}, \sbol{interactions}, and \sbol{models}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{subcomponents}, \sbol{sequenceAnnotations}, and \sbol{constraint}.
+As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \sbol{sequences}, \sbol{interactions}, and \sbol{models}. 
+In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{subcomponent}, \sbol{feature}, and \sbol{constraint}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -472,22 +473,23 @@ Just as a \sbol{SubComponent} represents an instance of a subsystem in the overa
 
 
 
-\subsubsection*{The \sbolheading{sequenceAnnotations} property}
-\label{sec:sequenceAnnotations}
+\subsubsection*{The \sbolheading{feature} property}
+\label{sec:feature}
 
-The \sbol{sequenceAnnotations} property is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects. Each \sbol{SequenceAnnotation} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{Component}.
+The \sbol{feature} property is OPTIONAL and MAY contain a set of \sbol{SequenceFeature} objects. Each \sbol{SequenceFeature} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{Component}.
 
-In addition, each \sbol{SequenceAnnotation} can  position a \sbol{SubComponent} of the \sbol{Component} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}). The \sbol{sequenceAnnotations} property MUST NOT contain two or more \sbol{SequenceAnnotation} objects that refer to the same \sbol{SubComponent} in this way.
+In addition, each \sbol{SequenceFeature} can  position a \sbol{SubComponent} of the \sbol{Component} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}). 
+The \sbol{feature} property MUST NOT contain two or more \sbol{SequenceFeature} objects that refer to the same \sbol{SubComponent} in this way.
 
-Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceAnnotation} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
-For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceAnnotation} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
+Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceFeature} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
+For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceFeature} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
 
 \subsubsection*{The \sbolheading{constraint} property}
 \label{sec:constraint}
 
 The \sbol{constraint} property is OPTIONAL and MAY contain a set of \sbol{Constraint} objects. 
 These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{SubComponent} objects contained by the \sbol{Component}.
-For example, the \sbol{Component} of a gene might specify that the position of its promoter \sbol{SubComponent} precedes that of its CDS \sbol{SubComponent}. This is particularly useful when a \sbol{Component} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{SubComponent} objects using \sbol{SequenceAnnotation} objects.
+For example, the \sbol{Component} of a gene might specify that the position of its promoter \sbol{SubComponent} precedes that of its CDS \sbol{SubComponent}. This is particularly useful when a \sbol{Component} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{SubComponent} objects using \sbol{SequenceFeature} objects.
 
 \subsubsection*{The \sbolheading{interactions} property}\label{sec:interactions}
 
@@ -505,7 +507,7 @@ A \sbol{Component} object can link to more than one \sbol{Model} since each migh
 
 \subsubsection*{Serialization}
 The serialization of a \sbol{Component} MUST have the form below.
-The \sbol{subcomponents},  \sbol{constraint},  \sbol{sequenceAnnotations}, and \sbol{sequences} properties of a \sbol{Component} contain or reference objects belonging to the appropriate SBOL classes as their values, while the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} properties contain \sbol{URI}s that identify ontology terms as their values.
+The \sbol{subcomponents},  \sbol{constraint},  \sbol{feature}, and \sbol{sequences} properties of a \sbol{Component} contain or reference objects belonging to the appropriate SBOL classes as their values, while the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} properties contain \sbol{URI}s that identify ontology terms as their values.
 
 As shown below, each of these objects and \sbol{URI}s are serialized as part of an implicit set of SBOL properties with singular rather then plural names.
 In particular, each object is serialized as an RDF/XML node nested within a property, while each \sbol{URI} (except the \sbol{identity}) is serialized as an \external{rdf:resource} on a property.
@@ -864,7 +866,7 @@ allows for only a portion of a \sbol{ComponentDefinition}'s \sbol{Sequence} to b
 If the \sbol{sourceLocations} property is not set, then the whole \sbol{Sequence} is assumed to be included. Alternatively,
 if the \sbol{sourceLocations} property is set, then the relationship between the original \sbol{Component}'s
 \sbol{Sequence} and the included \sbol{Sequence} is defined identically to the \sbol{locations}
-property on the \sbol{SequenceAnnotation} object.
+property on the \sbol{SequenceFeature} object.
 
 
 \paragraph{Serialization}
