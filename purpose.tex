@@ -25,14 +25,14 @@ SBOL uses existing Semantic Web practices and resources, such as \emph{Uniform R
 %Goksel: Removed this sentence: The ultimate utility of URIs in the SBOL standard is the ability to support flexible annotation with appropriate metadata while associating an authority with that annotation. 
 The definition of the data model and associated format, the rules on the addition of data within the format and the representation of this in electronic data files are intended to make the SBOL standard a useful means of promoting global data exchange between laboratories and between software programs.
 
-\twothreezero{
+
 This document details version 2.3 of SBOL that builds upon the previous version 2.2. In particular, SBOL 2.3 includes means of succinctly representing sequence modifications (such as insertion, deletion, and replacement), an extension to support organization and attachment of experimental data derived from designs,
 and an extension for describing numerical parameters of design elements. The new version also includes typing of activities, unambiguous locations for sequences with multiple encodings, refinement of a number of validation rules, improved figures and examples, and clarification on a number of issues related to ontology terms. 
-}
 
-\twotwozero{Version 2.2 of SBOL in turn builds upon SBOL version 2.1. SBOL 2.2 included improved description and validation rules for genetic design provenance, an extension to support combinatorial genetic designs, a new class to add non-SBOL data as attachments, a new class for genetic design implementations, and a description of a methodology to describe the entire design-build-test-learn cycle within the SBOL data model.}
 
-\twoonezero{Version 2.1 included improved rules for what constitutes a valid SBOL document, new role fields to simplify the expression of sequence features and how components are used in context, and new best practices descriptions to improve the exchange of basic sequence topology information and the description of genetic design provenance.}
+Version 2.2 of SBOL in turn builds upon SBOL version 2.1. SBOL 2.2 included improved description and validation rules for genetic design provenance, an extension to support combinatorial genetic designs, a new class to add non-SBOL data as attachments, a new class for genetic design implementations, and a description of a methodology to describe the entire design-build-test-learn cycle within the SBOL data model.
+
+Version 2.1 included improved rules for what constitutes a valid SBOL document, new role fields to simplify the expression of sequence features and how components are used in context, and new best practices descriptions to improve the exchange of basic sequence topology information and the description of genetic design provenance.
 
 SBOL 2.x builds upon SBOL 1.1, which focused on representing the structural aspects of genetic designs. Users of the standard were able to exchange information on DNA designs, but they could not represent molecules other than DNA or the functional aspects of designs beyond DNA sequence features. The SBOL 2 data model defined in this specification extends the version 1.1 data model to provide for the most pressing data exchange needs identified by the SBOL community. In particular, the extended data model can:
 \begin{itemize}
@@ -48,14 +48,13 @@ SBOL 2.x builds upon SBOL 1.1, which focused on representing the structural aspe
 \end{itemize}
 Taken together, these extensions enable SBOL to support the description and exchange of hierarchical, modular representations of both the intended structure and function of designed biological systems.
 
-\twotwozero{
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/standard-evolution.pdf}
 \caption{SBOL 2 extends prior sequence description formats to represent both the structure and function of a genetic design in a modular, hierarchical manner.}
 \label{f:sequence}
 \end{figure}
-}
+
 
 While the ultimate goal of SBOL is to describe synthetic biological designs such that they can be reproduced in the lab with a high degree of fidelity, SBOL 2 does not yet provide a complete catalog of the different classes of data that are necessary to achieve this goal. 
 For example, SBOL 2 does not yet include data on environmental and host context, or details on how the performance of a design is measured. 
