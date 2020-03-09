@@ -584,18 +584,10 @@ can be referred to remotely by a \sbol{MapsTo} on another \sbol{ComponentInstanc
 
 In some cases, a designer might want to set the \sbol{access} property of a \sbol{ComponentInstance} such that others cannot map to the \sbol{ComponentInstance} when they reuse its parent \sbol{ComponentDefinition}. For example, a designer who is concerned about retroactivity might set the \sbol{access} of the \sbol{ComponentInstance} to ``private'' in order to prevent its mapping to another \sbol{ComponentInstance} that participates in a new \sbol{Interaction} as part of a composite design.
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 \paragraph{The \sbolheading{measures} property}
 \label{sec:measures:CI}
 
 The \sbolmult{measures:CI}{measures} property is OPTIONAL and MAY contain a set of \sbol{Measure} objects. \ref{sec:Measure} contains a more detailed description of the \sbol{Measure} class.
-<<<<<<< HEAD
-
-=======
->>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 
 \paragraph{Serialization}
 
@@ -608,10 +600,6 @@ The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects
 % All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
-<<<<<<< HEAD
-=======
-
->>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 
 The expected purpose and function of a genetic part are described by the
 \sbolmult{roles:CD}{roles} property of \sbol{ComponentDefinition}. However, the same building block might be used for a different purpose in an actual design. In other words, purpose and function are sometimes determined by context.
@@ -1499,10 +1487,6 @@ Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} cont
 
 The \sbol{participant} property MUST specify precisely one \sbol{FunctionalComponent} object that plays the designated role in its parent \sbol{Interaction} object.
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 \paragraph{The \sbolheading{measures} property}
 \label{sec:measures:P}
 

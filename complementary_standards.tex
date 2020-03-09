@@ -1082,10 +1082,6 @@ design}
 \subsection{Adding Measures/Parameters with OM}
 \label{sec:parameters}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitive models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
 
 The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications. As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \sbol{Measure}, \sbol{Unit} and \sbol{Prefix}. A \sbol{Measure} links a numerical value to a \sbol{Unit}, which may or may not have a \sbol{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \sbol{Measure} is treated as a subclass of \sbol{Identified}, while \sbol{Unit} and \sbol{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \sbol{Unit} subclasses: \sbol{SingularUnit}, \sbol{CompoundUnit}, \sbol{UnitMultiplication}, \sbol{UnitDivision}, \sbol{UnitExponentiation}, and \sbol{PrefixedUnit}. Lastly, SBOL adopts the following \sbol{Prefix} subclasses from OM: \sbol{SIPrefix} and \sbol{BinaryPrefix}.
@@ -1101,10 +1097,6 @@ The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-meas
 SBOL-compliant tools are allowed to read, write, and modify data belonging to OM classes other than those described here, but this specification does not provide any guidance for the interpretation or use of these data in the context of SBOL.
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 \subsubsection{Measure}
 \label{sec:Measure}
 
@@ -1133,10 +1125,6 @@ The serialization of a \sbol{Measure} MUST have the following form:
 </om:Measure>
 \end{lstlisting}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 The example below shows the serialization of a \sbol{Measure} that describes the Michaelis constant for an enzymatic reaction.
 
 \lstsetsbol
@@ -1210,10 +1198,6 @@ The serialization of a \sbol{SingularUnit} MUST have the following form:
 </om:SingularUnit>
 \end{lstlisting}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 The example below shows the serialization of a \sbol{SingularUnit} that describes a genetic unit of length not present in the OM: the base pair (bp). One bp is equivalent to 3.4 angstroms.
 
 \lstsetsbol
