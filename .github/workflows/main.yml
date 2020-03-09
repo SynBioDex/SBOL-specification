@@ -20,6 +20,7 @@ jobs:
         uses: xu-cheng/latex-action@master
         with:
           root_file: sbol3.tex
+          args: -pdf -file-line-error -interaction=nonstopmode -f
           
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
