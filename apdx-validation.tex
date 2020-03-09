@@ -58,31 +58,6 @@ in the SBOL specification namespace.
 \subsubsection*{General rules for an SBOL document}
 \setcounter{sbolCtr}{10101} 
 
-\printValid{An SBOL document MUST declare the use of the following XML namespace: \\ \textls[-25]{\uri{http://sbols.org/v2\#}}.\\
-Reference: \sec{sec:serialization}}
-
-\printValid{\st{An SBOL document MUST declare the use of the following XML namespace: \\ {\tt http://www.w3.org/1999/02/22-rdf-syntax-ns\#}. \\ 
-Reference: Section 10 on page 54}}
-
-
-\printValid{\st{
-If an SBOL document includes any name or description properties, then it MUST declare the use of the following XML namespace: \\ {\tt http://purl.org/dc/terms/}. \\ 
-Reference: Section 10 on page 54}}
-
-
-\printValid{\st{
-If an SBOL document includes any wasDerivedFrom properties, then it MUST declare the use of the following XML namespace: \\ {\tt http://www.w3.org/ns/prov\#}.  \\ 
-Reference: Section 10 on page 54}}
-
-
-\printValid{An SBOL document MUST be serialized as a well-formed RDF/XML file that adheres to the grammar defined by:\\
-\uri{https://www.w3.org/TR/rdf-syntax-grammar/}.\\
-Reference: \sec{sec:serialization}}
-
-\printValid{All namespaces specified in an SBOL document MUST end with a delimiter  ('/', '\#', or ':').\\
-Reference: \sec{sec:serialization}}
-
-
 \subsubsection*{Rules for the \class{Identified} class} 
 \setcounter{sbolCtr}{10201}
 

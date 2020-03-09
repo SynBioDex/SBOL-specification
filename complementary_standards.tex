@@ -77,30 +77,6 @@ The \sbol{usages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that
 \paragraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
 The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
 
-\paragraph{Serialization}
-The serialization of an \sbol{Activity} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<prov:Activity rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  [\emph{zero or more}]  <prov:qualifiedAssociation>
-                   <prov:Association rdf:about="...">...</prov:Association>
-                </prov:qualifiedAssociation> [\emph{elements}]
-  [\emph{zero or more}]  <prov:qualifiedUsage>
-                   <prov:Usage rdf:about="...">...</prov:Usage>
-                </prov:qualifiedUsage> [\emph{elements}]
-  [\emph{zero or more}]  <sbol:type rdf:resource="... "/>  [\emph{elements}]             
-  [\emph{zero or one}]  <prov:startedAtTime>...</prov:startedAtTime> [\emph{element}]
-  [\emph{zero or one}]  <prov:endedAtTime>...</prov:startedAtTime> [\emph{element}] 
-  [\emph{zero or more}]  <prov:wasInformedBy rdf:resource="..."/> [\emph{element}] 
-</prov:Activity>
-\end{lstlisting}
-
-Note that the tags prov:qualifiedUsage and prov:qualifiedAssociation are used for \sbol{usages} and \sbol{associations}, respectively.
-
-
 
 \subsubsection{Usage}
 \label{sec:Usage}
@@ -161,57 +137,16 @@ The recommended terms that are defined in \ref{tbl:association_roles} can be use
 \paragraph{The \sbolheading{plan} property}\label{sec:plan}
 The \sbol{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a \sbol{Plan}.
 
-\paragraph{Serialization}
-The serialization of an \sbol{Association} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<prov:Association rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  [\emph{zero or more}]  <prov:hadRole rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}]  <prov:hadPlan rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]  <prov:agent rdf:resource="..."/> [\emph{element}]
- </prov:Association>
-\end{lstlisting}
-
-Note that the tags prov:hadRole and prov:hadPlan are used for \sbolmult{roles:A}{roles} and \sbol{plan}, respectively.
-
 
 \subsubsection{Plan}
 \label{sec:Plan}
 
  The Plan entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \sbol{Agent} is used in a particular \sbol{Activity}. 
 
-\paragraph{Serialization}
-The serialization of an \sbol{Usage} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<prov:Plan rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  ... [\emph{other annotations}] ...
- </prov:Plan>
-\end{lstlisting}
-
 \subsubsection{Agent}
 \label{sec:Agent}
 
  Examples of agents are person, organization or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
-
-\paragraph{Serialization}
-The serialization of an \sbol{Agent} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<prov:Agent rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  ... [\emph{other annotations}] ...
- </prov:Agent>
-\end{lstlisting}
-
 
 \paragraph{Example - Codon optimization}
 
@@ -1108,39 +1043,6 @@ The \sbolmult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a 
 \paragraph{The \sbolheading{types} property}\label{sec:types:Measure}
 The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set of \sbol{URI}s. It is RECOMMENDED that one of these \sbol{URI}s identify a term from the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{types:Measure}{types} property of the \sbol{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/biomodels.sbo/SBO:0000612}).
 
-\paragraph{Serialization}
-The serialization of a \sbol{Measure} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<om:Measure rdf:about="...">
-  ... [\emph{properties inherited from Identified}] ...
-  [\emph{one}]  <om:hasNumericalValue>...</om:hasNumericalValue> [\emph{element}]
-  [\emph{one}]  <om:hasUnit rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or more}]  <sbol:type rdf:resource="..."/> [\emph{element}]
-</om:Measure>
-\end{lstlisting}
-
-The example below shows the serialization of a \sbol{Measure} that describes the Michaelis constant for an enzymatic reaction.
-
-\lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-  <om:Measure rdf:about="http://sbolstandard.org/example/ribonuclease_michaelis_constant/1">
-    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/ribonuclease_michaelis_constant"/>
-    <sbol:displayId>ribonuclease_michaelis_constant</sbol:displayId>
-    <dcterms:title>Ribonuclease Michaelis Constant</dcterms:title>
-    <om:hasNumericalValue>"7.9"^^xsd:float<om:hasNumericalValue/>
-    <om:hasUnit rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/millimolair"/>
-    <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000027"/>
-  </om:Measure>
-</rdf:RDF>
-\end{lstlisting}
-\label{ser:Measure}
-
-
 \subsubsection{Unit}
 \label{sec:Unit}
 
@@ -1176,44 +1078,6 @@ The \sbolmult{hasUnit:SingularUnit}{hasUnit} is OPTIONAL and MAY contain a \sbol
 \paragraph{The \sbolheading{hasFactor} property}\label{sec:hasFactor:SingularUnit}
 The \sbolmult{hasFactor:SingularUnit}{hasFactor} property is OPTIONAL and MAY contain a xsd:float. If the \sbolmult{hasFactor:SingularUnit}{hasFactor} property of a \sbol{SingularUnit} is non-empty, then its \sbolmult{hasUnit:SingularUnit}{hasUnit} property SHOULD also be non-empty.
 
-\paragraph{Serialization}
-The serialization of a \sbol{SingularUnit} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<om:SingularUnit rdf:about="...">
-  ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
-  [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeLabel>...<om:alternativeLabel/> [\emph{element}]
-  [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
-  [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
-  [\emph{zero or one}]  <om:hasUnit rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}]  <om:hasFactor rdf:resource="..."/> [\emph{element}]
-</om:SingularUnit>
-\end{lstlisting}
-
-The example below shows the serialization of a \sbol{SingularUnit} that describes a genetic unit of length not present in the OM: the base pair (bp). One bp is equivalent to 3.4 angstroms.
-
-\lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-  <om:SingularUnit rdf:about="http://sbolstandard.org/example/base_pair/1">
-    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/base_pair"/>
-    <sbol:displayId>base_pair</sbol:displayId>
-    <dcterms:title>Base Pair</dcterms:title>
-    <om:symbol>bp</om:symbol>
-    <rdfs:label xml:lang="en">Base Pair</rdfs:label>
-    <om:hasUnit rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/angstrom"/>
-    <om:hasFactor rdf:datatype="&xsd;float">3.4</om:hasFactor>
-  </om:SingularUnit>
-</rdf:RDF>
-\end{lstlisting}
-\label{ser:SingularUnit}
-
 
 \subsubsection{CompoundUnit}
 \label{sec:CompoundUnit}
@@ -1233,26 +1097,6 @@ The \sbol{hasTerm1} property is REQUIRED and MUST contain a \sbol{URI} that refe
 \paragraph{The \sbolheading{hasTerm2} property}\label{sec:hasTerm2}
 The \sbol{hasTerm2} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}. This \sbol{Unit} is the second multiplication term. It is okay if the \sbol{Unit} referred to by \sbol{hasTerm1} is the same as that referred to by \sbol{hasTerm2}.
 
-\paragraph{Serialization}
-The serialization of a \sbol{UnitMultiplication} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<om:UnitMultiplication rdf:about="...">
-  ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
-  [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeLabel>...<om:alternativeLabel/> [\emph{element}]
-  [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
-  [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
-  [\emph{one}]  <om:hasTerm1 rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]  <om:hasTerm2 rdf:resource="..."/> [\emph{element}]
-</om:UnitMultiplication>
-\end{lstlisting}
-
-
 \subsubsection{UnitDivision}
 \label{sec:UnitDivision}
 
@@ -1263,44 +1107,6 @@ The \sbol{hasNumerator} property is REQUIRED and MUST contain a \sbol{URI} that 
 
 \paragraph{The \sbolheading{hasDenominator} property}\label{sec:hasDenominator}
 The \sbol{hasDenominator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}.
-
-\paragraph{Serialization}
-The serialization of a \sbol{UnitDivision} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<om:UnitDivision rdf:about="...">
-  ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
-  [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeLabel>...<om:alternativeLabel/> [\emph{element}]
-  [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
-  [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
-  [\emph{one}]  <om:hasNumerator rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]  <om:hasDenominator rdf:resource="..."/> [\emph{element}]
-</om:UnitDivision>
-\end{lstlisting}
-
-The example below shows the serialization of a \sbol{UnitDivision} that describes a unit of cell density not present in the OM: colony forming unit (CFU) per centimeter squared.
-
-\lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:sbol="http://sbols.org/v2#">
-  <om:UnitDivision rdf:about="http://sbolstandard.org/example/cfu_per_centimeter_squared/1">
-    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/cfu_per_centimeter_squared"/>
-    <sbol:displayId>cfu_per_centimeter_squared</sbol:displayId>
-    <dcterms:title>CFU per Centimeter Squared</dcterms:title>
-    <om:symbol>CFU/cm2</om:symbol>
-    <rdfs:label xml:lang="en">CFU per Centimeter Squared</rdfs:label>
-    <om:hasNumerator rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/colonyFormingUnit"/>
-    <om:hasDenominator rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/colonyFormingUnitsquareCentimetre"/>
-  </om:UnitDivision>
-</rdf:RDF>
-\end{lstlisting}
-\label{ser:UnitDivision}
 
 \subsubsection{UnitExponentiation}
 \label{sec:UnitExponentiation}
@@ -1313,26 +1119,6 @@ The \sbol{hasBase} property is REQUIRED and MUST contain a \sbol{URI} that refer
 \paragraph{The \sbolheading{hasExponent} property}\label{sec:hasExponent}
 The \sbol{hasExponent} property is REQUIRED and MUST contain an xsd:integer.
 
-\paragraph{Serialization}
-The serialization of a \sbol{UnitExponentiation} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<om:UnitExponentiation rdf:about="...">
-  ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
-  [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeLabel>...<om:alternativeLabel/> [\emph{element}]
-  [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
-  [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
-  [\emph{one}]  <om:hasBase rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]  <om:hasExponent>...<om:hasExponent/> [\emph{element}]
-</om:UnitExponentiation>
-\end{lstlisting}
-
-
 \subsubsection{PrefixedUnit}
 \label{sec:PrefixedUnit}
 
@@ -1343,44 +1129,6 @@ The \sbolmult{hasUnit:PrefixedUnit}{hasUnit} property is REQUIRED and MUST conta
 
 \paragraph{The \sbolheading{hasPrefix} property}\label{sec:hasPrefix}
 The \sbol{hasPrefix} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Prefix}.
-
-\paragraph{Serialization}
-The serialization of a \sbol{PrefixedUnit} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<om:PrefixedUnit rdf:about="...">
-  ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
-  [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeLabel>...<om:alternativeLabel/> [\emph{element}]
-  [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
-  [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
-  [\emph{one}]  <om:hasUnit rdf:resource="..."/> [\emph{element}]
-  [\emph{one}]  <om:hasPrefix rdf:resource="..."/> [\emph{element}]
-</om:PrefixedUnit>
-\end{lstlisting}
-
-The example below shows the serialization of a \sbol{PrefixedUnit} that describes an absolute unit of fluorescence not present in the OM: the kilo-Molecules of Equivalent Fluorescein (kilo-MEFL).
-
-\lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:sbol="http://sbols.org/v2#">
-  <om:PrefixedUnit rdf:about="http://sbolstandard.org/example/kiloMEFL/1">
-    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/kiloMEFL"/>
-    <sbol:displayId>kiloMEFL</sbol:displayId>
-    <dcterms:title>kilo-Molecules of Equivalent Fluorescein</dcterms:title>
-    <om:symbol>kMEFL</om:symbol>
-    <rdfs:label xml:lang="en">kilo-Molecules of Equivalent Fluorescein</rdfs:label>
-    <om:hasUnit rdf:resource="http://sbolstandard.org/example/MEFL/1"/>
-    <om:hasPrefix rdf:resource="http://www.ontology-of-units-of-measure.org/resource/om-2/kilo"/>
-  </om:PrefixedUnit>
-</rdf:RDF>
-\end{lstlisting}
-\label{ser:PrefixedUnit}
 
 \subsubsection{Prefix}
 \label{sec:Prefix}
@@ -1414,51 +1162,14 @@ The \sbolmult{hasFactor:Prefix}{hasFactor} property is REQUIRED and MUST contain
 
 The purpose of the \sbol{SIPrefix} class is to describe standard SI prefixes such as ``milli,'' ``centi,'' ``kilo,'' etc. 
 
-\paragraph{Serialization}
-The serialization of a \sbol{SIPrefix} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<om:SIPrefix rdf:about="...">
-  ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
-  [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeLabel>...<om:alternativeLabel/> [\emph{element}]
-  [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
-  [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
-  [\emph{one}]  <om:hasFactor rdf:resource="..."/> [\emph{element}]
-</om:SIPrefix>
-\end{lstlisting}
-
 
 \subsubsection{BinaryPrefix}
 \label{sec:BinaryPrefix}
 
 The purpose of the \sbol{BinaryPrefix} class is to describe standard binary prefixes such as ``kibi,'' ``mebi,'' ``gibi,'' etc. These prefixes commonly precede units of information such as ``bit'' and ``byte.''
 
-\paragraph{Serialization}
-The serialization of a \sbol{BinaryPrefix} MUST have the following form:
-
-
-\lstsetsbol
-\begin{lstlisting}
-<om:BinaryPrefix rdf:about="...">
-  ... [\emph{properties inherited from TopLevel}] ...
-  [\emph{one}]  <om:symbol>...<om:symbol/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeSymbol>...<om:alternativeSymbol/> [\emph{element}]
-  [\emph{one}]  <rdfs:label>...<rdfs:label/> [\emph{element}]
-  [\emph{zero or more}]  <om:alternativeLabel>...<om:alternativeLabel/> [\emph{element}]
-  [\emph{zero or one}]  <rdfs:comment>...<rdfs:comment/> [\emph{element}]
-  [\emph{zero or one}]  <om:longcomment>...<om:longcomment/> [\emph{element}]
-  [\emph{one}]  <om:hasFactor rdf:resource="..."/> [\emph{element}] 
-</om:BinaryPrefix>
-\end{lstlisting}
-
 \paragraph{Example - Growth Media Recipe}
  \ref{uml:media_example} shows an example of using instances of the \sbol{Measure} and \sbol{Unit} classes in conjunction with instances of the SBOL \sbol{Component} class to specify a growth media recipe. Note that this specification for M9 Glucose CAA media is partly composed from the specification of another growth media, Teknova M1902. Namespace abbreviations used in this example include om for \url{http://www.ontology-of-units-of-measure.org/resource/om-2/}, obo for \url{http://purl.obolibrary.org/obo/}, chebi for \url{http://identifiers.org/chebi/}, and sbo for \url{http://identifiers.org/biomodels.sbo/}. For specifying \sbol{Component} \sbolmult{roles:MD}{roles}, MC85504 codes for the term "growth medium" in the National Cancer Institute Thesaurus (NCIT). For specifying \sbol{Measure} \sbolmult{types:Measure}{types} with the SBO, 0000196 codes for ``concentration of an entity pool'', 0000226 codes for ``density of an entity pool'', and 0000470 codes for ``mass fraction.''
-
 
 \begin{figure}[ht]
 \begin{center}
