@@ -319,7 +319,7 @@ The example below shows the serialization of the \sbol{Sequence} for a promoter.
 
 The \sbol{Component} class represents the structural and/or functional entities of a biological design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as small molecules, molecular complexes, strains, samples, light, and abstract functional groupings of other entities.
 
-As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \sbol{sequences}, \sbol{interactions}, and \sbol{models}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{subcomponents}, \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.
+As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \sbol{sequences}, \sbol{interactions}, and \sbol{models}. In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{subcomponents}, \sbol{sequenceAnnotations}, and \sbol{constraint}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -453,7 +453,9 @@ The \sbol{subcomponents} property is OPTIONAL and MAY specify a set of \sbol{Sub
 While the \sbol{Component} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{SubComponent} class represents the specific occurrence of a part within a design.
 Hence, this class allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{Component}). For example, the \sbol{Component} of a polycistronic gene could contain two \sbol{SubComponent} objects that refer to the same \sbol{Component} of a CDS.
 
-The \sbol{subcomponents} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{SubComponent} and \sbol{Component} objects. If a \sbol{Component} in such a hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
+The \sbol{subcomponents} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{SubComponent} and \sbol{Component} objects. 
+If a \sbol{Component} in such a hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. 
+This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{Constraint} objects contained by the \sbol{Component} objects in the hierarchy.
 
 A DNA \sbol{Component}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{Component} could contain a \sbol{SubComponent} that refers to a ``lower level''  \sbol{Component} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, a consistent \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta},'' or perhaps ``{\tt tgta}'' if the \sbol{SubComponent} is positioned by a \sbol{SequenceAnnotation} that contains a \sbol{Location}  with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
 
@@ -470,12 +472,6 @@ Just as a \sbol{SubComponent} represents an instance of a subsystem in the overa
 
 
 
-% If the \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SubComponent} in its \sbol{subcomponents} property MUST refer to a \sbol{Component} that refers to a \sbol{Sequence} with the same \sbol{encoding}.
-% In addition, it MUST be possible to align the \sbol{elements} of the latter \sbol{Sequence} objects to the \sbol{elements} of the \sbol{Component}'s \sbol{Sequence}, subject to any restrictions imposed by the \sbol{SequenceAnnotation} and \sbol{SequenceConstraint} objects that refer to the contents of the \sbol{subcomponents} property.
-% A DNA \sbol{Component}, for example, could refer to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In this case, any \sbol{SubComponent} contained by this \sbol{Component} would itself need to have a \sbol{Component} that refers to a \sbol{Sequence} that has an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} that can be aligned with ``{\tt gattaca},'' such as ``{\tt gatta}," or perhaps ``{\tt tgta}'' in the case of a \sbol{SubComponent} that is positioned by a \sbol{SequenceAnnotation} with a \sbol{Location} \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
-
-% Furthermore, this \sbol{Sequence} MUST have the same \external{IUPAC} \sbol{encoding} as a \sbol{Sequence} of the parent \sbol{Component} that contains the \sbol{SequenceAnnotation}.
-
 \subsubsection*{The \sbolheading{sequenceAnnotations} property}
 \label{sec:sequenceAnnotations}
 
@@ -486,10 +482,11 @@ In addition, each \sbol{SequenceAnnotation} can  position a \sbol{SubComponent} 
 Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceAnnotation} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
 For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceAnnotation} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
 
-\subsubsection*{The \sbolheading{sequenceConstraints} property}
-\label{sec:sequenceConstraints}
+\subsubsection*{The \sbolheading{constraint} property}
+\label{sec:constraint}
 
-The \sbol{sequenceConstraints} property is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects. These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{SubComponent} objects contained by the \sbol{Component}.
+The \sbol{constraint} property is OPTIONAL and MAY contain a set of \sbol{Constraint} objects. 
+These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{SubComponent} objects contained by the \sbol{Component}.
 For example, the \sbol{Component} of a gene might specify that the position of its promoter \sbol{SubComponent} precedes that of its CDS \sbol{SubComponent}. This is particularly useful when a \sbol{Component} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{SubComponent} objects using \sbol{SequenceAnnotation} objects.
 
 \subsubsection*{The \sbolheading{interactions} property}\label{sec:interactions}
@@ -508,7 +505,7 @@ A \sbol{Component} object can link to more than one \sbol{Model} since each migh
 
 \subsubsection*{Serialization}
 The serialization of a \sbol{Component} MUST have the form below.
-The \sbol{subcomponents},  \sbol{sequenceConstraints},  \sbol{sequenceAnnotations}, and \sbol{sequences} properties of a \sbol{Component} contain or reference objects belonging to the appropriate SBOL classes as their values, while the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} properties contain \sbol{URI}s that identify ontology terms as their values.
+The \sbol{subcomponents},  \sbol{constraint},  \sbol{sequenceAnnotations}, and \sbol{sequences} properties of a \sbol{Component} contain or reference objects belonging to the appropriate SBOL classes as their values, while the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} properties contain \sbol{URI}s that identify ontology terms as their values.
 
 As shown below, each of these objects and \sbol{URI}s are serialized as part of an implicit set of SBOL properties with singular rather then plural names.
 In particular, each object is serialized as an RDF/XML node nested within a property, while each \sbol{URI} (except the \sbol{identity}) is serialized as an \external{rdf:resource} on a property.
@@ -1424,7 +1421,9 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 
 \subsubsection*{ The \sbolheading{template} property}\label{sec:template}
 
-The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. Consequently, its \sbol{subcomponents} property SHOULD contain one or more \sbol{SubComponent} objects that describe its substructure (referred to hereafter as template \sbol{SubComponent} objects), and its \sbol{sequenceConstraints} property MAY also contain one or more \sbol{SequenceConstraint} objects that constrain this substructure.
+The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
+This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
+Consequently, its \sbol{subcomponents} property SHOULD contain one or more \sbol{SubComponent} objects that describe its substructure (referred to hereafter as template \sbol{SubComponent} objects), and its \sbol{constraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
 
 When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \sbol{wasDerivedFroms} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{members} property of a \sbol{Collection}, in which case the \sbol{wasDerivedFroms} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
 
@@ -1439,7 +1438,7 @@ If the \sbol{variable} property of one of these \sbol{VariableComponent} objects
 If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain exactly one \sbol{SubComponent} with a \sbol{wasDerivedFroms} property that refers to the template \sbol{SubComponent}. The \sbol{instanceOf} property of this derived \sbol{SubComponent} MUST refer to the \sbol{Component} referred to by the \sbol{instanceOf} property of the template \sbol{SubComponent}.
 
 Finally, all of these derived \sbol{SubComponent} objects MUST follow the \sbol{restriction} properties of any \\
-\sbol{SequenceConstraint} objects that refer to their corresponding template \sbol{SubComponent} objects.
+\sbol{Constraint} objects that refer to their corresponding template \sbol{SubComponent} objects.
 
 \subsubsection*{ The \sbolheading{strategy} property}\label{sec:strategy}
 The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URIs. If the \sbol{strategy} property is not empty, then it MUST contain a URI from \ref{tbl:strategy}. This property recommends how many \sbol{Component} objects a user SHOULD derive from the template \sbol{Component}.
