@@ -2,12 +2,10 @@
 \section{Complementary Standards}
 \label{sec:complementaryStandards}
 % -----------------------------------------------------------------------------
-\twoonezero{\subsection{Adding Provenance with PROV-O}
+\subsection{Adding Provenance with PROV-O}
 \label{sec:provenance}
 \label{sec:wasGeneratedBys}
 
-\vspace{-7pt}
-\-\hspace{0.8cm}[New in 2.1.0; see SEP 009: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_009.md}]
 
 Provenance is central to a range of quality control and attribution tasks within the Synthetic Biology design process. Tracking attribution and derivation of one resource from another is paramount for managing intellectual property purposes. Source designs are often modified in systematic ways to generate derived designs, for example, by applying codon optimization or systematically removing all of a class of restriction enzyme sites.  Documenting the transformation used, and any associated parameters, makes this explicit and potentially allows the process to be reproduced systematically. If a design has been used within other designs, and is later found to be defective, it is paramount that all uses of it, including uses of edited versions of the design, can be identified, and ideally replaced with a non-defective alternative. When importing data from external sources, it is important not only to attribute the original source (for example, GenBank), but also the tool used to perform the import, as this may have made arbitrary choices as to how to represent the source knowledge as SBOL. All these activities have in common that it is necessary to track what resource, and what transformation process was applied by whom to derive an SBOL design.
 
@@ -16,9 +14,7 @@ The PROV-O ontology (\url{https://www.w3.org/TR/prov-o/}) already defines a data
 %Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}.  
 
 Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset to use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a Component may be derived from another Component, but it would probably not make sense for it to be derived from a Collection.
-}
 
-\twotwozero{
 The PROV-O specification permits that any kind of SBOL object may be used to generate another. The meaning of these relationships are specified using ontology terms for the \sbolmult{roles:U}{roles} properties on \sbol{Usage} and \sbol{Association} classes.  This specification gives users the flexibility to construct and track provenance histories for their own custom applications, but this flexibility also presents an obstacle to standardized data exchange. Therefore a simple ontology (see \ref{tbl:association_roles} and \ref{tbl:usage_roles}) has been adopted to describe common provenance connections expected in synthetic biology workflows, based on the design-build-test-learn formalization of engineering.
 
 The design-build-test-learn cycle is a common theme in synthetic biology and engineering literature. The design-build-test-learn cycle is the scientific method applied to engineering. Stages of the cycle include designing an initial prototype, testing that prototype, analyzing its performance against specific metrics, learning what worked and what did not work, designing a new prototype based on what was learned, and completing the cycle again. Ideally each iteration of the cycle generates new understanding that feeds back into new cycles as alternative approaches or reformulated problems. Therefore, the design-build-test-learn cycle is a \textit{de facto} ontology upon which to base an SBOL data model for workflow abstraction. Other workflow activities in synthetic biology, such as analyzing, modeling, verifying, and evolving, by and large should fit into this design-build-test-learn abstraction. 
@@ -30,9 +26,9 @@ Provenance semantics defined through \sbol{wasGeneratedBys} relationships are di
 ...the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
 \end{quote}
 These semantics are somewhat different from the versioning semantics defined in section \ref{sec:version}. The SBOL specification defines a new version of an object as an update of a previously published object (and therefore a previously existing object). Therefore, an SBOL object which is ``generated'' from another SHOULD BE regarded as a new entity rather than a new version of an existing entity. However, this distinction is somewhat subjective (see Theseus's paradox). Therefore, we RECOMMEND as a best practice that objects linked by Activities not be successive versions of each other, though this is left to the discretion of users and library developers.
-} 
 
-\twotwozero{
+
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/provenance}
@@ -40,18 +36,16 @@ These semantics are somewhat different from the versioning semantics defined in 
 \label{uml:provenance}}
 \end{center}
 \end{figure}
-}
 
-\twoonezero{
 \subsubsection{Activity}
 \label{sec:Activity}
 
 A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{associations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{usages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
 
-\twothreezero{
+
 \paragraph{The \sbolheading{types} property}\label{sec:types:Activity}
 The \sbolmult{types:Activity}{types} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail. If specified, it is RECOMMENDED that at least one \sbol{URI} of the \sbolmult{types:Activity}{types} property of an \sbol{Activity} refers to a \sbol{URI} from \ref{tbl:activity_types}.
-}
+
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -82,12 +76,10 @@ The \sbol{usages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that
 
 \paragraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
 The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
-}
 
-\twothreezero{
 \paragraph{Serialization}
 The serialization of an \sbol{Activity} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -106,11 +98,10 @@ The serialization of an \sbol{Activity} MUST have the following form:
 </prov:Activity>
 \end{lstlisting}
 
-\twotwozero{
 Note that the tags prov:qualifiedUsage and prov:qualifiedAssociation are used for \sbol{usages} and \sbol{associations}, respectively.
-}
 
-\twoonezero{
+
+
 \subsubsection{Usage}
 \label{sec:Usage}
 How different entities are used in an \sbol{Activity} is specified with the \sbol{Usage} class, which is linked from an \sbol{Activity} through the \sbol{Usage} relationship. A \sbol{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s \sbol{URI} and the role of this entity is qualified with the \sbolmult{roles:U}{roles} property. When the \sbol{wasDerivedFroms} property is used together with the full provenance described here, the entity pointed at by the \sbol{wasDerivedFroms} property MUST be included in a \sbol{Usage}.
@@ -120,12 +111,9 @@ How different entities are used in an \sbol{Activity} is specified with the \sbo
 The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an SBOL Identified object.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:U}
-\twotwozero{
 The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms that are defined in \ref{tbl:usage_roles} can be used to indicate how the referenced \sbol{entity} is being used in this \sbol{Activity}.
-}
-}
 
-\twotwozero{
+
 \begin{table}[H]
   \begin{edtable}{tabular}{lp{3.75in}}
     \toprule
@@ -140,11 +128,8 @@ The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that re
   \caption{Terms to specify the \sbolmult{roles:U}{roles} property of a \sbol{Usage}.}
   \label{tbl:usage_roles}
 \end{table}
-} 
 
 
-
-\twoonezero{
 \subsubsection{Association}
 \label{sec:Association}
 An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \sbolmult{roles:A}{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
@@ -152,14 +137,11 @@ An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} rela
 \paragraph{The \sbolheading{agent} property}\label{sec:agent}
 The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{Agent} object.
 
-\paragraph{The \sbolheading{roles} property}\label{sec:roles:A}
-\twotwozero{ 
+\paragraph{The \sbolheading{roles} property}\label{sec:roles:A} 
 The \sbolmult{roles:A}{roles} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{agent} in the parent \sbol{Activity}. 
 The recommended terms that are defined in \ref{tbl:association_roles} can be used to specify the kind of \sbol{Activity} performed by the \sbol{Agent}.
-}
-}
 
-\twothreezero{
+
 \begin{table}[H]
   \begin{edtable}{tabular}{lp{3.75in}}
     \toprule
@@ -174,16 +156,14 @@ The recommended terms that are defined in \ref{tbl:association_roles} can be use
   \caption{Terms to specify the \sbolmult{roles:A}{roles} property of an \sbol{Association}.}
   \label{tbl:association_roles}
 \end{table}
-} 
 
-\twoonezero{
+
 \paragraph{The \sbolheading{plan} property}\label{sec:plan}
 The \sbol{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a \sbol{Plan}.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Association} MUST have the following form:
 
-} 
 
 \lstsetsbol
 \begin{lstlisting}
@@ -195,19 +175,17 @@ The serialization of an \sbol{Association} MUST have the following form:
  </prov:Association>
 \end{lstlisting}
 
-\twotwozero{
 Note that the tags prov:hadRole and prov:hadPlan are used for \sbolmult{roles:A}{roles} and \sbol{plan}, respectively.
-}
+
 
 \subsubsection{Plan}
 \label{sec:Plan}
-\twoonezero{
+
  The Plan entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \sbol{Agent} is used in a particular \sbol{Activity}. 
 
 \paragraph{Serialization}
 The serialization of an \sbol{Usage} MUST have the following form:
 
-}%\twoonezero{ end
 
 \lstsetsbol
 \begin{lstlisting}
@@ -219,13 +197,12 @@ The serialization of an \sbol{Usage} MUST have the following form:
 
 \subsubsection{Agent}
 \label{sec:Agent}
-\twoonezero{
+
  Examples of agents are person, organization or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
 
 \paragraph{Serialization}
 The serialization of an \sbol{Agent} MUST have the following form:
 
-}%\twoonezero{ end
 
 \lstsetsbol
 \begin{lstlisting}
@@ -237,10 +214,9 @@ The serialization of an \sbol{Agent} MUST have the following form:
 
 
 \paragraph{Example - Codon optimization}
-\twoonezero{
+
  Codon optimization is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
 
-}%\twoonezero{ end
 
 \lstsetsbol
 \begin{lstlisting}
@@ -292,10 +268,10 @@ The serialization of an \sbol{Agent} MUST have the following form:
 \end{lstlisting}
 
 \paragraph{Example - Deriving strains}
-\twoonezero{
- Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
 
-}%twoonezero end
+Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
+
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -347,9 +323,7 @@ The serialization of an \sbol{Agent} MUST have the following form:
 \end{lstlisting}
 
 \paragraph{Example - Design-build-test-learn Workflow}
-\twothreezero{
  This particular example represents an idealized workflow for model-based design. The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (\sbol{Component}) is composed of biological parts which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using some a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in \ref{images:design-build-test-learn}.
-}%twotwozero end
 
 \begin{figure}[ht]
 \begin{center}
@@ -363,7 +337,7 @@ design}
 %% proposed by issue #137
 \clearpage
 
-\twotwoone{}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" encoding="utf-8"?>
@@ -576,10 +550,10 @@ design}
 </rdf:RDF>
 \end{lstlisting}
 
-\twotwoone{
+
   \paragraph{Example - Combinatorial Derivation}
   This example illustrates how the Prov ontology should be used to reference to link a generated design to the combinatorial derivation that it was generated from.  In this example, there is a top-level derivation (Promoter\_Derivation) which specifies two possible promoters for this design, as well as an additional derivation (Terminator\_Derivation) to be used for the Gen\_Component.  The second derivation (Terminator\_Derivation) specifies two possible terminators to used within the Gen\_Component.  The derived design (Derivation\_example\_GeneratedInstance11) has a reference in the \sbol{wasDerivedFroms} list to the \sbol{CombinatorialDerivation} that it was derived from (i.e., Promoter\_Derivation).  Also, each component has reference in the \sbol{wasDerivedFroms} list to the component within the \sbol{template} that it is derived from.  The Gen\_Component in this derived design refers to a derived design for it (i.e., Gen\_GeneratedInstance1).  This design has a reference in the \sbol{wasDerivedFroms} list that refers to the \sbol{CombinatorialDerivation} that is used to derive it (i.e., Terminator\_Derivation).  Once again, each component has a reference in the \sbol{wasDerivedFroms} list to the component within the \sbol{template} that it is derived from.  The advantage of these provenance links is that they provide sufficient information to validate that this derived design has been properly derived from the specified \sbol{CombinatorialDerivation}s.
-}
+
 
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1102,11 +1076,9 @@ design}
 </rdf:RDF>
 \end{lstlisting}
 
-\twothreezero{\subsection{Adding Measures/Parameters with OM}
+\subsection{Adding Measures/Parameters with OM}
 \label{sec:parameters}
 
-\vspace{-7pt}
-\-\hspace{0.8cm}[New in 2.3.0; see SEP 028: \url{https://github.com/SynBioDex/SEPs/blob/master/sep_028.md}]
 
 There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitive models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
 
@@ -1121,10 +1093,8 @@ The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-meas
 \end{figure}
 
 SBOL-compliant tools are allowed to read, write, and modify data belonging to OM classes other than those described here, but this specification does not provide any guidance for the interpretation or use of these data in the context of SBOL.
-}
 
 
-\twothreezero{
 \subsubsection{Measure}
 \label{sec:Measure}
 
@@ -1141,7 +1111,7 @@ The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set o
 
 \paragraph{Serialization}
 The serialization of a \sbol{Measure} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1153,9 +1123,9 @@ The serialization of a \sbol{Measure} MUST have the following form:
 </om:Measure>
 \end{lstlisting}
 
-\twothreezero{
+
 The example below shows the serialization of a \sbol{Measure} that describes the Michaelis constant for an enzymatic reaction.
-}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1173,7 +1143,6 @@ The example below shows the serialization of a \sbol{Measure} that describes the
 \label{ser:Measure}
 
 
-\twothreezero{
 \subsubsection{Unit}
 \label{sec:Unit}
 
@@ -1196,9 +1165,8 @@ The \sbolmult{comment:Unit}{comment} property is OPTIONAL and MAY contain a \sbo
 
 \paragraph{The \sbolheading{longcomment} property}\label{sec:longcomment:Unit}
 The \sbolmult{longcomment:Unit}{longcomment} property is OPTIONAL and MAY contain a \sbol{String}. This \sbol{String} is a long description of the unit of measure and SHOULD be longer than any \sbol{String} contained by the \sbolmult{comment:Unit}{comment} property.
-}
 
-\twothreezero{
+
 \subsubsection{SingularUnit}
 \label{sec:SingularUnit}
 
@@ -1212,7 +1180,7 @@ The \sbolmult{hasFactor:SingularUnit}{hasFactor} property is OPTIONAL and MAY co
 
 \paragraph{Serialization}
 The serialization of a \sbol{SingularUnit} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1229,9 +1197,9 @@ The serialization of a \sbol{SingularUnit} MUST have the following form:
 </om:SingularUnit>
 \end{lstlisting}
 
-\twothreezero{
+
 The example below shows the serialization of a \sbol{SingularUnit} that describes a genetic unit of length not present in the OM: the base pair (bp). One bp is equivalent to 3.4 angstroms.
-}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1250,15 +1218,13 @@ The example below shows the serialization of a \sbol{SingularUnit} that describe
 \label{ser:SingularUnit}
 
 
-\twothreezero{
 \subsubsection{CompoundUnit}
 \label{sec:CompoundUnit}
-}
+
 
 As adopted by SBOL, \sbol{CompoundUnit} is an abstract class that is extended by other classes to describe units of measure that can be represented as combinations of multiple other units of measure.
 
 
-\twothreezero{
 \subsubsection{UnitMultiplication}
 \label{sec:UnitMultiplication}
 
@@ -1272,7 +1238,7 @@ The \sbol{hasTerm2} property is REQUIRED and MUST contain a \sbol{URI} that refe
 
 \paragraph{Serialization}
 The serialization of a \sbol{UnitMultiplication} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1309,7 +1275,7 @@ The serialization of a \sbol{UnitMultiplication} MUST have the following form:
 % \end{lstlisting}
 % \label{ser:UnitMultiplication}
 
-\twothreezero{
+
 \subsubsection{UnitDivision}
 \label{sec:UnitDivision}
 
@@ -1323,7 +1289,7 @@ The \sbol{hasDenominator} property is REQUIRED and MUST contain a \sbol{URI} tha
 
 \paragraph{Serialization}
 The serialization of a \sbol{UnitDivision} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1340,9 +1306,9 @@ The serialization of a \sbol{UnitDivision} MUST have the following form:
 </om:UnitDivision>
 \end{lstlisting}
 
-\twothreezero{
+
 The example below shows the serialization of a \sbol{UnitDivision} that describes a unit of cell density not present in the OM: colony forming unit (CFU) per centimeter squared.
-}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1360,7 +1326,6 @@ The example below shows the serialization of a \sbol{UnitDivision} that describe
 \end{lstlisting}
 \label{ser:UnitDivision}
 
-\twothreezero{
 \subsubsection{UnitExponentiation}
 \label{sec:UnitExponentiation}
 
@@ -1374,7 +1339,7 @@ The \sbol{hasExponent} property is REQUIRED and MUST contain an xsd:integer.
 
 \paragraph{Serialization}
 The serialization of a \sbol{UnitExponentiation} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1411,7 +1376,7 @@ The serialization of a \sbol{UnitExponentiation} MUST have the following form:
 % \end{lstlisting}
 % \label{ser:UnitExponentiation}
 
-\twothreezero{
+
 \subsubsection{PrefixedUnit}
 \label{sec:PrefixedUnit}
 
@@ -1425,7 +1390,7 @@ The \sbol{hasPrefix} property is REQUIRED and MUST contain a \sbol{URI} that ref
 
 \paragraph{Serialization}
 The serialization of a \sbol{PrefixedUnit} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1442,9 +1407,9 @@ The serialization of a \sbol{PrefixedUnit} MUST have the following form:
 </om:PrefixedUnit>
 \end{lstlisting}
 
-\twothreezero{
+
 The example below shows the serialization of a \sbol{PrefixedUnit} that describes an absolute unit of fluorescence not present in the OM: the kilo-Molecules of Equivalent Fluorescein (kilo-MEFL).
-}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -1462,7 +1427,7 @@ The example below shows the serialization of a \sbol{PrefixedUnit} that describe
 \end{lstlisting}
 \label{ser:PrefixedUnit}
 
-\twothreezero{
+
 \subsubsection{Prefix}
 \label{sec:Prefix}
 
@@ -1488,9 +1453,8 @@ The \sbolmult{longcomment:Prefix}{longcomment} property is OPTIONAL and MAY cont
 
 \paragraph{The \sbolheading{hasFactor} property}\label{sec:hasFactor:Prefix}
 The \sbolmult{hasFactor:Prefix}{hasFactor} property is REQUIRED and MUST contain an xsd:float.
-}
 
-\twothreezero{
+
 \subsubsection{SIPrefix}
 \label{sec:SIPrefix}
 
@@ -1498,7 +1462,7 @@ The purpose of the \sbol{SIPrefix} class is to describe standard SI prefixes suc
 
 \paragraph{Serialization}
 The serialization of a \sbol{SIPrefix} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1514,7 +1478,7 @@ The serialization of a \sbol{SIPrefix} MUST have the following form:
 </om:SIPrefix>
 \end{lstlisting}
 
-\twothreezero{
+
 \subsubsection{BinaryPrefix}
 \label{sec:BinaryPrefix}
 
@@ -1522,7 +1486,7 @@ The purpose of the \sbol{BinaryPrefix} class is to describe standard binary pref
 
 \paragraph{Serialization}
 The serialization of a \sbol{BinaryPrefix} MUST have the following form:
-}
+
 
 \lstsetsbol
 \begin{lstlisting}
@@ -1539,11 +1503,9 @@ The serialization of a \sbol{BinaryPrefix} MUST have the following form:
 \end{lstlisting}
 
 \paragraph{Example - Growth Media Recipe}
-\twothreezero{
  \ref{uml:media_example} shows an example of using instances of the \sbol{Measure} and \sbol{Unit} classes in conjunction with instances of the SBOL \sbol{Component} class to specify a growth media recipe. Note that this specification for M9 Glucose CAA media is partly composed from the specification of another growth media, Teknova M1902. Namespace abbreviations used in this example include om for \url{http://www.ontology-of-units-of-measure.org/resource/om-2/}, obo for \url{http://purl.obolibrary.org/obo/}, chebi for \url{http://identifiers.org/chebi/}, and sbo for \url{http://identifiers.org/biomodels.sbo/}. For specifying \sbol{Component} \sbolmult{roles:MD}{roles}, MC85504 codes for the term "growth medium" in the National Cancer Institute Thesaurus (NCIT). For specifying \sbol{Measure} \sbolmult{types:Measure}{types} with the SBO, 0000196 codes for ``concentration of an entity pool'', 0000226 codes for ``density of an entity pool'', and 0000470 codes for ``mass fraction.''
-}
 
-\twothreezero{
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\linewidth]{uml/media_example}

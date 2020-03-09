@@ -2,9 +2,9 @@
 \section{Recommended Best Practices}
 \label{sec:bestpractices}
 % -----------------------------------------------------------------------------
-\twozeroone{\subsection{SBOL Namespaces}
+\subsection{SBOL Namespaces}
 
-Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 3.x \sbol{SubComponent} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.}
+Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 3.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.
 
 \subsection{Use of the Version Property}
 
@@ -98,10 +98,10 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
   \label{tbl:preferred_external_resources}
 \end{table}
 
-\twoonezero{The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.}
+The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.
 
-\twozeroone{\subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
-Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:}
+\subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
+Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:
 
 \lstsetsbol
 \begin{lstlisting}
@@ -116,9 +116,9 @@ Entities in an SBOL document can be annotated with creation and modification dat
 </rdf:RDF>
 \end{lstlisting}
 
-\twotwoone{\subsection{Annotating Entities with Authorship information}\label{sec:Authorship}
+\subsection{Annotating Entities with Authorship information}\label{sec:Authorship}
 Authorship information should ideally be added to \sbol{TopLevel} entities, where possible. It is RECOMMENDED that the \texttt{creator} DCMI Metadata term SHOULD be used to annotate SBOL entities with authorship information. This property can be repeated for each author. The example below shows the use of this property for two authors and the values shown are free text \texttt{String} literals.
-}
+
 \lstsetsbol
 \begin{lstlisting}
 <?xml version="1.0" ?>
@@ -132,3 +132,65 @@ Authorship information should ideally be added to \sbol{TopLevel} entities, wher
 </rdf:RDF>
 \end{lstlisting}
 
+\subsection{Host Context / Ontologies for Experiments}
+
+\subsubsection{Mixtures via Components}
+
+Any \sbol{Component} can be interpreted as specifying a mixture of the \sbol{SubComponent}s that it includes.
+
+The amount of each such instance included in the mixture SHOULD be specified by attaching a \sbol{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
+\begin{itemize}
+\item SBO:0000540: fraction of an entity pool (e.g., 1/3 CHO cells, 2/3 HEK cells)
+\item SBO:0000472: molar concentration of an entity (e.g., 1 mM Arabinose)
+\item SBO:0000361: amount of an entity pool (e.g., 200 uL M9 media)
+\end{itemize}
+
+\subsubsection{Media, Inducers, and Other Reagents}
+
+An ``atomic'' reagent, which is not expected to be divided further in designs, SHOULD be represented as a \linebreak \sbol{Component}. Examples: Arabinose, Kanamycin, Rainbow bead control
+
+A ``composite'' reagent, which might be defined as a mixture of other reagents, SHOULD be represented as a \sbol{Component} that defines it as a mixture of other reagents. This might be recursive, with mixtures of mixtures of mixtures, etc. Examples: M9 media, LB broth
+
+The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{roles:MD}{role} property of the \sbol{SubComponent}. Examples include:
+\begin{itemize}
+\item NCIT:C64356: Positive Control
+\item NCIT:C48694: Cell
+\item NCIT:C85504: Media
+\item NCIT:C14419: Strain
+\item NCIT:C120268: Inducer
+\end{itemize}
+
+Note that this also implies that the \sbolmult{roles:C}{role} property should be promoted from \sbol{SubComponent} to \sbol{ComponentInstance} (so it can be used for \sbol{FunctionalComponent} as well) and also added to \sbol{Module}.
+
+\subsubsection{Strains, Genomes, and Plasmids}
+
+A cell strain SHOULD be represented as a \sbol{Component} containing at least:
+\begin{itemize}
+\item A \sbol{SubComponent} for the cell, which is RECOMMENDED to have \sbolmult{types:CD}{type} cell (GO:0005623) and \sbolmult{roles:MD}{role} physical compartment (SBO:0000290).
+\item A representation of its genetic material (genome, plasmids, etc.) as a collection of \sbol{SubComponent} instances.
+\item An \sbol{Interaction} of type \texttt{FunctionalCompartment} (SBO:0000289) with the cell participating as physical compartment (SBO: 0000290) and the genetic material participating as contained entity (SBO:0000664).
+\end{itemize}
+
+\subsubsection{Samples}
+
+A complete specification of a sample SHOULD be a \sbol{Component} that includes at least:
+\begin{itemize}
+\item A \sbol{Module} instantiating each strain in the sample
+\item A \sbol{SubComponent} for the media or buffer
+\item A \sbol{SubComponent} for each additional reagent added to the media (e.g., inducers, antibiotics)
+\item \sbol{Measure}s on each of these specifying the amount in the sample
+\item \sbol{Measure}s on the \sbol{Component} for each environmental parameter (e.g., temperature, pH, culturing time)
+\end{itemize}
+
+\subsubsection{Other Experimental Parameters}
+
+In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, we need to add a \texttt{measures} property to \sbol{Component} (in addition to the ones already on \sbol{SubComponent}) and to \sbol{ComponentDefinition}.
+
+The distinction is that the \texttt{measures} of a \texttt{Component} provide context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \texttt{measures} on an \texttt{SubComponent} provide a measurement in context (e.g., the dosage of Arabinose in a sample).
+
+Values of these parameters SHOULD be specified by attaching a \sbol{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
+\begin{itemize}
+\item SBO:0000147: thermodynamic temperature (e.g., culturing at 27 C)
+\item SBO:0000332: half-life of an exponential decay (e.g., decay rate of a gRNA)
+\item SBO:0000304: pH (e.g., pH of M9 media)
+\end{itemize}
