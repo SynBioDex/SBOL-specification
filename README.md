@@ -74,4 +74,3 @@ Here is how one community member managed to install MacTex and BibTex on OS X 10
     defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Key Format Preset" -int 0
     defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Prepend Tilde" -int 1
     defaults write edu.ucsd.cs.mmccrack.bibdesk "Startup Behavior" -int 4
-
