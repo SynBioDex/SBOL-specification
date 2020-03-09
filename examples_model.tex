@@ -47,7 +47,7 @@ The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of st
 \end{center}
 \end{figure}
 
-\twozeroone{
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\textwidth]{example_uml/toggle_2}
@@ -55,7 +55,7 @@ The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of st
 \label{uml:ex_comp_def_compo}
 \end{center}
 \end{figure}
-}
+
 
 The functional hierarchy of the toggle switch is represented using
 \sbol{ModuleDefinition}s:
@@ -64,7 +64,6 @@ The functional hierarchy of the toggle switch is represented using
 \item Base elements are composed to form the toggle switch at the top of the hierarchy.  As an example, \ref{uml:ex_mod_def_compo} is a UML diagram of the \sbol{ModuleDefinition} that represents the toggle switch.
 \end{itemize}
 
-\twozeroone{
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\textwidth]{example_uml/toggle_3}
@@ -81,7 +80,7 @@ The functional hierarchy of the toggle switch is represented using
 \label{uml:ex_mod_def_compo}
 \end{center}
 \end{figure}
-}
+
 
 % Each \sbol{ModuleDefinition} also contains the \sbol{FunctionalComponent}s that participate in \sbol{Interaction}s and are defined by the same \sbol{ComponentDefinition}s as the parallel \sbol{Component}s in the structural hierarchy of the toggle switch. Finally, \sbol{MapsTo} entities are used to refine which \sbol{FunctionalComponent}s of the functional hierarchy are identical or map them to \sbol{Component}s in the structural hierarchy.
 
