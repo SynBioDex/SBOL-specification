@@ -24,22 +24,22 @@ SBOL defines the following ``top-level'' and dependent classes:
 \item \emph{\sbol{Collection}}:
 Represents a user-defined container for organizing a group of SBOL objects.
 
-\item \emph{\sbol{ComponentDefinition}}: Describes the structure of designed entities, such as DNA, RNA, and proteins, as well as other entities they interact with, such as small molecules or environmental properties.
+\item \emph{\sbol{Component}}: Describes the structure and/or function of designed entities, such as DNA, RNA, and proteins, as well as other entities they interact with, such as small molecules or environmental properties.
 
 \begin{itemize}
-\item \emph{\sbol{Component}}:
-Pointer class. Incorporates a child \sbol{ComponentDefinition} \textit{by reference} into exactly one parent \sbol{ComponentDefinition}. Represents a specific occurrence or instance of an entity within the design of a more complex entity. Because the same definition might appear in  multiple designs or multiple times in a single design, a single \sbol{ComponentDefinition} can have zero or more parent \sbol{ComponentDefinition}s, and each such parent-child link requires its own, distinct \sbol{Component}.
+\item \emph{\sbol{SubComponent}}:
+Pointer class. Incorporates a child \sbol{Component} \textit{by reference} into exactly one parent \sbol{Component}. Represents a specific occurrence or instance of an entity within the design of a more complex entity. Because the same definition might appear in  multiple designs or multiple times in a single design, a single \sbol{Component} can have zero or more parent \sbol{Component}s, and each such parent-child link requires its own, distinct \sbol{SubComponent}.
 % Mike Bissell - Clarified the role of this class to match changes below in section six. Introduced the term "pointer class" after consulting briefly with Chris M. The emphasis on pointer classes is on the definitions they point to. WAS: "Represents a specific occurrence or instance of a single entity within the design of a more complex component. Each Component is associated with a ComponentDefinition, and there might be many different instances at different locations in a design that share the same definition." I felt this was necessary because it is too easy for a novice to get confused about Component vs. ComponentDefinition here, where they first encounter Component, even before ComponentDefinition is defined.
 
 \item \emph{\sbol{Location}}:
 Specifies the base coordinates and orientation of a genetic feature on a DNA or RNA molecule or a residue or site on another sequential macromolecule such as a protein.
 
 \item \emph{\sbol{SequenceAnnotation}}:
-Describes the \sbol{Location} of a notable sub-sequence found within the \sbol{Sequence} of a \sbol{ComponentDefinition}. Can also link to and effectively position a child \sbol{Component}.
+Describes the \sbol{Location} of a notable sub-sequence found within the \sbol{Sequence} of a \sbol{Component}. Can also link to and effectively position a child \sbol{Component}.
 % Mike Bissell - Reworded for clarity of the relationship between ComponentDefinition and Sequence. Broke the original paragraph into two sentences for simplicity. Reworded second sentence to emphasize that a Component is a) a child entity, and b) a link (pointer). Old wording was vague on Component's job within SequenceAnnotation, and old wording made it sound as if the Component was the payload itself, rather than just a reference. WAS: "Describes the Location of a notable sub-sequence found within the Sequence linked to a ComponentDefinition, with an option al link to a Component."
 
 \item \emph{\sbol{SequenceConstraint}}:
-Describes the relative spatial position and orientation of two \sbol{Component} objects that are contained within the same \sbol{ComponentDefinition}.
+Describes the relative spatial position and orientation of two \sbol{SubComponent} objects that are contained within the same \sbol{Component}.
 \end{itemize}
 
 \item \emph{\sbol{GenericTopLevel}}:
@@ -49,27 +49,17 @@ Represents a data container that can contain custom data added by user applicati
 Links to quantitative or qualitative computational models that might be used to predict the functional behavior of a biological design.
 %Goksel - Updated as above: Links an SBOL representation of biological components and their interactions to quantitative, computational models that might be used to predict the functional behavior of a biological design.
 
-\item \emph{\sbol{ModuleDefinition}}:
-Describes a ``system'' design as a collection of biological components and their functional relationships.
-
 \begin{itemize}
-\item \emph{\sbol{FunctionalComponent}}:
-Pointer class. Incorporates a child \sbol{ComponentDefinition} \textit{by reference} into exactly one parent \sbol{ModuleDefinition}. Represents a specific occurrence or instance of an entity within the design of a system. Because the same definition might appear in multiple designs or multiple times in a single design, a single \sbol{ComponentDefinition} can have zero or more parent \sbol{ModuleDefinition}s, and each such parent-child link requires its own, distinct \sbol{FunctionalComponent}.
-% Mike Bissell - As above, reworded to clarify the structure of these relationships, with special attention to the pointer-like nature of this type. WAS: "Represents a specific occurrence or instance of an ComponentDefinition within a ModuleDefinition. Exactly like a Component, except that it can be associated with information about its context of use in the Module, rather than in the context of a containing ComponentDefinition." I eliminated the bit about it being "exactly like... except," because with those exceptions, the likeness is *inexact*. Instead, I deliberately reworked the paragraph's phrasing and contents to emphasize this class's similarity to the other two pointer classes. I felt this was necessary because it is easy for a novice to get confused about FunctionalComponent vs. Component vs. ComponentDefinition in this context.
 
 \item \emph{\sbol{Interaction}}:
 Describes a functional relationship between biological entities, such as regulatory activation or repression, or a biological process such as transcription or translation.
 
 \item \emph{\sbol{MapsTo}}:
-When a design (\sbol{ComponentDefinition} or \sbol{ModuleDefinition}) includes another design as a sub-design, the parent design might need to refer to a \sbol{ComponentInstance} (either a \sbol{Component} or \sbol{FunctionalComponent}) in the sub-design.
-In this case, a \sbol{MapsTo} needs to be added to the instance for the sub-design, and this \sbol{MapsTo} needs to link between the \sbol{ComponentInstance} in the sub-design and a \sbol{ComponentInstance} in the parent design.
-
-\item \emph{\sbol{Module}}:
-Pointer class. Incorporates a child \sbol{ModuleDefinition} \textit{by reference} into exactly one parent \sbol{ModuleDefinition}. Represents a specific occurrence or instance of a subsystem within the design of a larger system. Because the same definition might appear in multiple designs or multiple times in a single design, a single \sbol{ModuleDefinition} can have zero or more parent \sbol{ModuleDefinition}s, and each such parent-child link requires its own, distinct \sbol{Module}.
-% Mike Bissell - Reworked this paragraph like I did for Component and FunctionalComponent (see above). WAS: "Represents a specific occurrence or instance of a sub-system within a larger design. Each Module is associated with a ModuleDefinition, and there might be many different instances at different locations in a design that share the same definition." I felt this was necessary because it is way too easy for a novice to get confused about Module vs. ModuleDefinition in this (introductory) context.
+When a design \sbol{Component} includes another design as a sub-design, the parent design might need to refer to a \sbol{SubComponent} in the sub-design.
+In this case, a \sbol{MapsTo} needs to be added to the instance for the sub-design, and this \sbol{MapsTo} needs to link between the \sbol{SubComponent} in the sub-design and a \sbol{SubComponent} in the parent design.
 
 \item \emph{\sbol{Participation}}:
-Describes the role that a \sbol{FunctionalComponent} plays in an \sbol{Interaction}.
+Describes the role that a \sbol{SubComponent} plays in an \sbol{Interaction}.
 For example, a transcription factor might participate in an \sbol{Interaction} as a repressor or as an activator.
 
 \end{itemize}

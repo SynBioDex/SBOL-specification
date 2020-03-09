@@ -9,7 +9,7 @@ Synthetic biology designs can be described using:
 \end{itemize}
 % Mike Bissell - FIXME. "The way" and "the..behavior" are not really "terms" or "descriptions," so the preceding sentence could really use some work.
 In broad strokes, the prior SBOL 1.1 standard focused on conveying physical, structural information, whereas SBOL 2 expands the scope to include functional aspects as well. 
-The physical information about a designed genetic construct includes the order of its constituents and their descriptions. Specifying the exact locations of these constituents and their sequences allow genetic constructs to be defined unambiguously and reused in other designs. SBOL 2 extends SBOL 1.1 in several ways: it extends physical descriptions to include entities beyond DNA sequences, and it supports functional descriptions of designs. 
+The physical information about a designed genetic construct includes the order of its constituents and their descriptions. Specifying the exact locations of these constituents and their sequences allows genetic constructs to be defined unambiguously and reused in other designs. SBOL 2 extended SBOL 1.1 in several ways: it extends physical descriptions to include entities beyond DNA sequences, and it added support for functional descriptions of designs. 
 % Mike Bissell - Fixed what seemed to be missing words in the first half of the paragraph. Swapped in "supports" in place of "allows for". More consistent pluralization.
 
 As an example, consider the design of an expression cassette, such as the one found in the plasmid pUC18~\cite{L08752.1}. This device is designed to detect successful versus unsuccessful molecular cloning. 
@@ -18,25 +18,30 @@ These parts have specific component-level interactions with IPTG and X-gal, as w
 
 Knowledge of how such a device functions within the context of a host and how it might be adapted to new experimental applications has generally been passed on through working with fellow scientists or reading articles in papers and books. 
 But there has been no systematic way to communicate the integration of sequences with functional designs, so users typically have had to look in many different places to develop an understanding of a system.  
-The SBOL 2 standard allows designers to describe these functional characteristics and connect them to the physical parts and sequences that make up the design. 
+The SBOL 2 standard enabled designers to describe these functional characteristics and connect them to the physical parts and sequences that make up the design. 
 
-SBOL 2 includes two main classes that match the structural/functional distinction above:
+SBOL 2 included two main classes that match the structural/functional distinction above:
+
 \begin{itemize}
-\item The \sbol{ComponentDefinition} object describes the physical aspects of the designed system, such as its DNA or RNA sequences, and the physical relationships among sub-components, as when one sequence contains another as a sub-sequence.
-\item The \sbol{ModuleDefinition} object describes interactions of the designed system, such as specific binding relationships and repression and activation relationships. 
+\item The \sbol{ComponentDefinition} object described the physical aspects of the designed system, such as its DNA or RNA sequences, and the physical relationships among sub-components, as when one sequence contains another as a sub-sequence.
+\item The \sbol{ModuleDefinition} object described interactions of the designed system, such as specific binding relationships and repression and activation relationships. 
 \end{itemize}
 
-\ref{images:overview1} shows a simplified view of these classes, as well as other helper classes in SBOL. To continue with the pUC18 example, the description would begin with a top-level \sbol{ModuleDefinition}.  
-The \sbol{ModuleDefinition} specifies the structural elements that make up the cassette by referencing a number of \sbol{ComponentDefinition} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
-The \sbol{ComponentDefinition} objects can be organized hierarchically.  
-For example, the plasmid \sbol{ComponentDefinition} might reference \sbol{ComponentDefinition}s for the promoter, coding sequence, etc.  
-Each \sbol{ComponentDefinition} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceAnnotation} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
-In order to specify functional information, the \sbol{ModuleDefinition} can specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{ModuleDefinition} object can point to a \sbol{Model} object that provides a reference to a complete computational model using a language such as SBML  ~\cite{SBML}, CellML ~\cite{CellML}, MATLAB ~\cite{matlab}, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
+In SBOL 3, these classes are merged into a single object called \sbol{Component} which describes both structural and functional aspects.
+
+%\ref{images:overview1} shows a simplified view of these classes, as well as other helper classes in SBOL.
+
+To continue with the pUC18 example, the description would begin with a top-level \sbol{Component}.  
+The top-level \sbol{Component} specifies the structural elements that make up the cassette by referencing a number of \sbol{SubComponent} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
+The \sbol{Component} objects can be organized hierarchically.  
+For example, the plasmid \sbol{Component} might reference \sbol{Component}s for the promoter, coding sequence, etc.  
+Each \sbol{Component} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceAnnotation} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
+In order to specify functional information, the \sbol{Component} can also specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{Component} object can point to a \sbol{Model} object that provides a reference to a complete computational model using a language such as SBML  ~\cite{SBML}, CellML ~\cite{CellML}, MATLAB ~\cite{matlab}, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.7]{images/OverviewFigforSpec-v7.png}
-\caption{Main classes of information represented by the SBOL standard, and their relationships.  Red boxes are classes from the SBOL 1.1 that focused on structure, whereas blue classes are some of the new classes that support the functional aspects of designs.}
+\includegraphics[scale=0.7]{images/datamodel.pdf}
+\caption{Main classes of information represented by the SBOL standard, and their relationships.  Green boxes are ``top level'' objects, and yellow boxes are child objects.}
 \label{images:overview1}
 \end{center}
 \end{figure}
