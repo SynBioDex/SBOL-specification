@@ -27,7 +27,7 @@ Provenance semantics defined through \sbol{wasGeneratedBys} relationships are di
 ...the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
 \end{quote}
 These semantics are somewhat different from the versioning semantics defined in section \ref{sec:version}. The SBOL specification defines a new version of an object as an update of a previously published object (and therefore a previously existing object). Therefore, an SBOL object which is ``generated'' from another SHOULD BE regarded as a new entity rather than a new version of an existing entity. However, this distinction is somewhat subjective (see Theseus's paradox). Therefore, we RECOMMEND as a best practice that objects linked by Activities not be successive versions of each other, though this is left to the discretion of users and library developers.
- 
+
 
 
 \begin{figure}[ht]
@@ -37,8 +37,6 @@ These semantics are somewhat different from the versioning semantics defined in 
 \label{uml:provenance}}
 \end{center}
 \end{figure}
-
-
 
 \subsubsection{Activity}
 \label{sec:Activity}
@@ -80,8 +78,6 @@ The \sbol{usages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that
 \paragraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
 The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
 
-
-
 \paragraph{Serialization}
 The serialization of an \sbol{Activity} MUST have the following form:
 
@@ -103,7 +99,6 @@ The serialization of an \sbol{Activity} MUST have the following form:
 </prov:Activity>
 \end{lstlisting}
 
-
 Note that the tags prov:qualifiedUsage and prov:qualifiedAssociation are used for \sbol{usages} and \sbol{associations}, respectively.
 
 
@@ -117,9 +112,7 @@ How different entities are used in an \sbol{Activity} is specified with the \sbo
 The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an SBOL Identified object.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:U}
-
 The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms that are defined in \ref{tbl:usage_roles} can be used to indicate how the referenced \sbol{entity} is being used in this \sbol{Activity}.
-
 
 
 \begin{table}[H]
@@ -138,8 +131,6 @@ The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that re
 \end{table}
 
 
-
-
 \subsubsection{Association}
 \label{sec:Association}
 An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \sbolmult{roles:A}{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
@@ -147,11 +138,9 @@ An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} rela
 \paragraph{The \sbolheading{agent} property}\label{sec:agent}
 The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{Agent} object.
 
-\paragraph{The \sbolheading{roles} property}\label{sec:roles:A}
-
+\paragraph{The \sbolheading{roles} property}\label{sec:roles:A} 
 The \sbolmult{roles:A}{roles} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{agent} in the parent \sbol{Activity}. 
 The recommended terms that are defined in \ref{tbl:association_roles} can be used to specify the kind of \sbol{Activity} performed by the \sbol{Agent}.
-
 
 
 \begin{table}[H]
@@ -176,7 +165,6 @@ The \sbol{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a 
 \paragraph{Serialization}
 The serialization of an \sbol{Association} MUST have the following form:
 
- 
 
 \lstsetsbol
 \begin{lstlisting}
@@ -188,7 +176,6 @@ The serialization of an \sbol{Association} MUST have the following form:
  </prov:Association>
 \end{lstlisting}
 
-
 Note that the tags prov:hadRole and prov:hadPlan are used for \sbolmult{roles:A}{roles} and \sbol{plan}, respectively.
 
 
@@ -199,7 +186,6 @@ Note that the tags prov:hadRole and prov:hadPlan are used for \sbolmult{roles:A}
 
 \paragraph{Serialization}
 The serialization of an \sbol{Usage} MUST have the following form:
-
 
 
 \lstsetsbol
@@ -219,7 +205,6 @@ The serialization of an \sbol{Usage} MUST have the following form:
 The serialization of an \sbol{Agent} MUST have the following form:
 
 
-
 \lstsetsbol
 \begin{lstlisting}
 <prov:Agent rdf:about="...">
@@ -232,7 +217,6 @@ The serialization of an \sbol{Agent} MUST have the following form:
 \paragraph{Example - Codon optimization}
 
  Codon optimization is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
-
 
 
 \lstsetsbol
@@ -286,7 +270,7 @@ The serialization of an \sbol{Agent} MUST have the following form:
 
 \paragraph{Example - Deriving strains}
 
- Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
+Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
 
 
 
@@ -341,7 +325,7 @@ The serialization of an \sbol{Agent} MUST have the following form:
 
 \paragraph{Example - Design-build-test-learn Workflow}
 
- This particular example represents an idealized workflow for model-based design. The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (\sbol{ModuleDefinition}) is composed of biological parts which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using some a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in \ref{images:design-build-test-learn}.
+This particular example represents an idealized workflow for model-based design. The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (\sbol{ModuleDefinition}) is composed of biological parts which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using some a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in \ref{images:design-build-test-learn}.
 
 
 \begin{figure}[ht]
@@ -1098,6 +1082,10 @@ design}
 \subsection{Adding Measures/Parameters with OM}
 \label{sec:parameters}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitive models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
 
 The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications. As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \sbol{Measure}, \sbol{Unit} and \sbol{Prefix}. A \sbol{Measure} links a numerical value to a \sbol{Unit}, which may or may not have a \sbol{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \sbol{Measure} is treated as a subclass of \sbol{Identified}, while \sbol{Unit} and \sbol{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \sbol{Unit} subclasses: \sbol{SingularUnit}, \sbol{CompoundUnit}, \sbol{UnitMultiplication}, \sbol{UnitDivision}, \sbol{UnitExponentiation}, and \sbol{PrefixedUnit}. Lastly, SBOL adopts the following \sbol{Prefix} subclasses from OM: \sbol{SIPrefix} and \sbol{BinaryPrefix}.
@@ -1113,7 +1101,10 @@ The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-meas
 SBOL-compliant tools are allowed to read, write, and modify data belonging to OM classes other than those described here, but this specification does not provide any guidance for the interpretation or use of these data in the context of SBOL.
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 \subsubsection{Measure}
 \label{sec:Measure}
 
@@ -1142,6 +1133,10 @@ The serialization of a \sbol{Measure} MUST have the following form:
 </om:Measure>
 \end{lstlisting}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 The example below shows the serialization of a \sbol{Measure} that describes the Michaelis constant for an enzymatic reaction.
 
 \lstsetsbol
@@ -1215,6 +1210,10 @@ The serialization of a \sbol{SingularUnit} MUST have the following form:
 </om:SingularUnit>
 \end{lstlisting}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 The example below shows the serialization of a \sbol{SingularUnit} that describes a genetic unit of length not present in the OM: the base pair (bp). One bp is equivalent to 3.4 angstroms.
 
 \lstsetsbol
@@ -1429,7 +1428,6 @@ The \sbolmult{longcomment:Prefix}{longcomment} property is OPTIONAL and MAY cont
 The \sbolmult{hasFactor:Prefix}{hasFactor} property is REQUIRED and MUST contain an xsd:float.
 
 
-
 \subsubsection{SIPrefix}
 \label{sec:SIPrefix}
 
@@ -1479,8 +1477,7 @@ The serialization of a \sbol{BinaryPrefix} MUST have the following form:
 
 \paragraph{Example - Growth Media Recipe}
 
- \ref{uml:media_example} shows an example of using instances of the \sbol{Measure} and \sbol{Unit} classes in conjunction with instances of the SBOL \sbol{ModuleDefinition} and \sbol{ComponentDefinition} classes to specify a growth media recipe. Note that this specification for M9 Glucose CAA media is partly composed from the specification of another growth media, Teknova M1902. Namespace abbreviations used in this example include om for \url{http://www.ontology-of-units-of-measure.org/resource/om-2/}, obo for \url{http://purl.obolibrary.org/obo/}, chebi for \url{http://identifiers.org/chebi/}, and sbo for \url{http://identifiers.org/biomodels.sbo/}. For specifying \sbol{ModuleDefinition} \sbolmult{roles:MD}{roles}, MC85504 codes for the term "growth medium" in the National Cancer Institute Thesaurus (NCIT). For specifying \sbol{Measure} \sbolmult{types:Measure}{types} with the SBO, 0000196 codes for ``concentration of an entity pool'', 0000226 codes for ``density of an entity pool'', and 0000470 codes for ``mass fraction.''
-
+\ref{uml:media_example} shows an example of using instances of the \sbol{Measure} and \sbol{Unit} classes in conjunction with instances of the SBOL \sbol{ModuleDefinition} and \sbol{ComponentDefinition} classes to specify a growth media recipe. Note that this specification for M9 Glucose CAA media is partly composed from the specification of another growth media, Teknova M1902. Namespace abbreviations used in this example include om for \url{http://www.ontology-of-units-of-measure.org/resource/om-2/}, obo for \url{http://purl.obolibrary.org/obo/}, chebi for \url{http://identifiers.org/chebi/}, and sbo for \url{http://identifiers.org/biomodels.sbo/}. For specifying \sbol{ModuleDefinition} \sbolmult{roles:MD}{roles}, MC85504 codes for the term "growth medium" in the National Cancer Institute Thesaurus (NCIT). For specifying \sbol{Measure} \sbolmult{types:Measure}{types} with the SBO, 0000196 codes for ``concentration of an entity pool'', 0000226 codes for ``density of an entity pool'', and 0000470 codes for ``mass fraction.''
 
 
 \begin{figure}[ht]

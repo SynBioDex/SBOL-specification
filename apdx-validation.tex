@@ -310,14 +310,13 @@ Reference: \sec{sec:ComponentDefinition}}
 %Reference: \sec{sec:ComponentDefinition}}
 %}
 
-
 \printModeling{
 The \sbolmult{roles:CD}{types} property of a \sbol{ComponentDefinition} SHOULD NOT contain a \sbol{URI} that refers to a term from the topology attribute or strand attribute branches of the SO unless its \sbolmult{types:CD}{types} property contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:componentdefinition_types}.
 Reference: \sec{sec:ComponentDefinition}}
 
 
-
 \printWarning{If the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{types:CD}{types} property MUST contain a \sbol{URI} that refers to a term from the topology attribute branch of the SO, if the topology is known.\\ Reference: \sec{sec:ComponentDefinition}}
+
 
 
 
@@ -355,7 +354,6 @@ Reference: Section 7.7.1 on page 24}}
 % A \sbol{Component} MUST inherit all properties of the \sbol{ComponentInstance} class.
 
 
-
 \printValid{The \sbolmult{roles:C}{roles} property of a \sbol{Component} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Component}}
 
 
@@ -366,7 +364,6 @@ Reference: Section 7.7.1 on page 24}}
 
 
 \printWarning{The \sbolmult{roles:C}{roles} property of a \sbol{Component} MUST contain a \sbol{URI} from \ref{tbl:componentdefinition_roles} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:Component}}
-
 
 \printModeling{
 The \sbolmult{roles:C}{roles} property of a \sbol{Component} SHOULD NOT contain a \sbol{URI} that refers to a term from the sequence feature branch of the SO unless the  \sbolmult{types:CD}{types} property of the \sbol{ComponentDefinition} referred to by its \sbolmult{definition:CI}{definition} property contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:componentdefinition_types}.
@@ -445,7 +442,6 @@ Reference: Section 7.7.3 on page 26}}
 
 \printValid{The \sbol{Component} referenced by the \sbol{component} property of a \sbol{SequenceAnnotation} MUST be contained by the \sbol{ComponentDefinition} that contains the \sbol{SequenceAnnotation}.\\ Reference: \sec{sec:SequenceAnnotation}}
 
-
 \printValid{The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:SequenceAnnotation}}
 
 
@@ -461,7 +457,6 @@ Reference: \sec{sec:SequenceAnnotation}}
 
 \subsubsection*{Rules for the \class{Location} class} 
 \setcounter{sbolCtr}{11001}
-
 
 \printValid{\st{A Location MUST inherit all properties of the Identified class. \\ 
 Reference: Section 7.7.5 on page 30}}
@@ -566,10 +561,8 @@ Reference: \sec{sec:sequence}
 \\ Reference: \sec{sec:SequenceConstraint}}
 
 
-
 \printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#differentFrom}, then the \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT refer to the same object as the \sbolmult{definition:CI}{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
 \\ Reference: \sec{sec:SequenceConstraint}}
-
 
 
 \printComplete{If the \sbol{restriction} property of a \sbol{SequenceConstraint} contains the \sbol{URI}~\url{http://sbols.org/v2\#differentFrom}, then the \sbolmult{definition:CI}{definition} property of the \sbol{subject} \sbol{Component} of the \sbol{SequenceConstraint} MUST NOT refer to the same object as the \sbolmult{definition:CI}{definition} property of the \sbol{object} \sbol{Component} of the \sbol{SequenceConstraint}.
@@ -696,7 +689,8 @@ Reference: \sec{sec:Participation}}
 \subsubsection*{Rules for the \class{Participation} class} 
 \setcounter{sbolCtr}{12001}
 
-\printValid{A \sbol{Participation} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBy}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:P}{roles}, and \sbol{participant}.\\ Reference: \sec{sec:Participation}}
+
+\printValid{A \sbol{Participation} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:P}{roles}, and \sbol{participant}.\\ Reference: \sec{sec:Participation}}
 % A \sbol{Participation} MUST inherit all properties of the \sbol{Identified} class.
 
 
@@ -762,8 +756,10 @@ Reference: Section 7.11 on page 46}}
 \\ Reference: \sec{sec:GenericTopLevel}}
 
 
+
 \subsubsection*{Rules for the \class{Activity} class} 
 \setcounter{sbolCtr}{12401}
+
 
 \printValid{An \sbol{Activity} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations}, \sbolmult{types:Activity}{types}, \sbol{startedAtTime}, \sbol{endedAtTime}, \sbol{wasInformedBys},\\ \sbol{usages}, and \sbol{associations}.\\ Reference: \sec{sec:Activity}}
 
@@ -1073,7 +1069,6 @@ a \sbol{ComponentDefinition} that is one of the \sbol{members} of a \sbol{Collec
 \printComplete{The \sbol{URI} contained by the \sbolmult{hasUnit:Measure}{hasUnit} property of a \sbol{Measure} MUST refer to a \sbol{Unit}.
 \\ Reference: \sec{sec:Measure}}
 
-
 \subsubsection*{Rules for the \class{Unit} class} 
 \setcounter{sbolCtr}{13601}
 
@@ -1160,7 +1155,6 @@ a \sbol{ComponentDefinition} that is one of the \sbol{members} of a \sbol{Collec
 
 \printComplete{The \sbol{URI} contained by the \sbol{hasDenominator} property of a \sbol{UnitDivision} MUST refer to a \sbol{Unit}.
 \\ Reference: \sec{sec:UnitDivision}}
-
 
 
 \subsubsection*{Rules for the \class{UnitExponentiation} class} 

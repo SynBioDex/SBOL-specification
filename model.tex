@@ -142,7 +142,7 @@ For a full explanation, see the linked resources.
 \label{sec:wasDerivedFroms}
 
 
- The \sbol{wasDerivedFroms} property is OPTIONAL and MAY specify a set of \sbol{URI}s. An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived.
+The \sbol{wasDerivedFroms} property is OPTIONAL and MAY specify a set of \sbol{URI}s. An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived.
 
 The \sbol{wasDerivedFroms} property of a \sbol{TopLevel} SBOL object is subject to the following rules.
 If any members of the \sbol{wasDerivedFroms} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$.
@@ -339,32 +339,28 @@ for the purpose of engineering design. For DNA or RNA entities,
 additional \sbolmult{types:CD}{types} fields are used to describe nucleic acid
 topology (circular / linear) and strandedness (double- or single-stranded).
 
-The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the Biological Pathway Exchange (BioPAX) ontology ~\cite{biopax} or  the ontology of Chemical Entities of Biological Interest (ChEBI) ~\cite{chebi}.
+The \sbolmult{types:CD}{types} property of every \sbol{ComponentDefinition} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the Systems Biology Ontology ~\cite{SBO} or  the ontology of Chemical Entities of Biological Interest (ChEBI) ~\cite{chebi}.
 \ref{tbl:componentdefinition_types} provides a list of possible ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s.
 In order to maximize the compatibility of designs, the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} SHOULD contain a \sbol{URI} from \ref{tbl:componentdefinition_types}, and any \sbol{ComponentDefinition} that can be well-described by one of the terms in \ref{tbl:componentdefinition_types} MUST use the \sbol{URI} for that term as one of its \sbolmult{types:CD}{types}.
-Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it might not be clear how to interpret them). For example, the BioPAX terms provided by \ref{tbl:componentdefinition_types} would conflict because they specify classes of biochemical entities with different molecular structures.
+Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it might not be clear how to interpret them). For example, the SBO terms provided by \ref{tbl:componentdefinition_types} would conflict because they specify classes of biochemical entities with different molecular structures.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
     \toprule
-    \textbf{ComponentDefinition Type} & \textbf{URI for BioPAX Term} \\
+    \textbf{ComponentDefinition Type} & \textbf{URI for SBO Term} \\
     \midrule
-    DNA Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#Dna}\\
-    DNA Region  & \url{http://www.biopax.org/release/biopax-level3.owl#DnaRegion}\\
-    RNA Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#Rna}\\
-    RNA Region  & \url{http://www.biopax.org/release/biopax-level3.owl#RnaRegion}\\
-    Protein  & \url{http://www.biopax.org/release/biopax-level3.owl#Protein}\\
-    Small Molecule  & \url{http://www.biopax.org/release/biopax-level3.owl#SmallMolecule}\\
-    Complex  & \url{http://www.biopax.org/release/biopax-level3.owl#Complex}\\
+    DNA (Deoxyribonucleic acid)  & \url{https://identifiers.org/SBO:0000251}\\
+    RNA (Ribonucleic acid) & \url{https://identifiers.org/SBO:0000251}\\
+    Protein (Polypeptide chain)  & \url{https://identifiers.org/SBO:0000252}\\
+    Simple Chemical  & \url{https://identifiers.org/SBO:0000247}\\
+    Non-covalent complex  & \url{https://identifiers.org/SBO:0000253}\\
     \bottomrule
   \end{edtable}
-  \caption{BioPAX terms to specify the molecule type using the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
+  \caption{SBO terms to specify the molecule type using the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition}.}
  \label{tbl:componentdefinition_types}
 \end{table}
 
 \emph{Nucleic Acid Topology types}\\
-%\vspace{-7pt}
-\-\hspace{0.8cm}
 
 Any \sbol{ComponentDefinition} classified as DNA (see \ref{tbl:componentdefinition_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This
 (topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
@@ -445,7 +441,7 @@ If a \sbol{ComponentDefinition} refers to more than one \sbol{Sequence} object, 
 
 Finally, if a \sbol{ComponentDefinition} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:componentdefinition_types}, then one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}.
 Conversely, if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbolmult{types:CD}{types} property MUST refer to the term from \ref{tbl:componentdefinition_types} that is cross-listed with this \sbol{encoding} in \ref{tbl:sequence_encodings}.
-For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the BioPAX term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property MUST refer to the BioPAX term for DNA. These requirements are meant to provide for some degree of consistency between the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} and the \sbol{encoding} properties of the \sbol{Sequence} objects to which the \sbol{ComponentDefinition} refers.
+For example, if the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} refers to the SBO term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{ComponentDefinition} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property MUST refer to the SBO term for DNA. These requirements are meant to provide for some degree of consistency between the \sbolmult{types:CD}{types} property of a \sbol{ComponentDefinition} and the \sbol{encoding} properties of the \sbol{Sequence} objects to which the \sbol{ComponentDefinition} refers.
 
 \subsubsection*{The \sbolheading{components} property}
 \label{sec:components}
@@ -588,12 +584,18 @@ can be referred to remotely by a \sbol{MapsTo} on another \sbol{ComponentInstanc
 
 In some cases, a designer might want to set the \sbol{access} property of a \sbol{ComponentInstance} such that others cannot map to the \sbol{ComponentInstance} when they reuse its parent \sbol{ComponentDefinition}. For example, a designer who is concerned about retroactivity might set the \sbol{access} of the \sbol{ComponentInstance} to ``private'' in order to prevent its mapping to another \sbol{ComponentInstance} that participates in a new \sbol{Interaction} as part of a composite design.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 \paragraph{The \sbolheading{measures} property}
 \label{sec:measures:CI}
 
 The \sbolmult{measures:CI}{measures} property is OPTIONAL and MAY contain a set of \sbol{Measure} objects. \ref{sec:Measure} contains a more detailed description of the \sbol{Measure} class.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 
 \paragraph{Serialization}
 
@@ -606,6 +608,10 @@ The \sbol{Component} class is used to compose \sbol{ComponentDefinition} objects
 % All \sbol{Component} objects directly referenced within a \sbol{ComponentDefinition}'s \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} parts MUST be associated with that \sbol{ComponentDefinition} by means of its \sbol{components} property.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 
 The expected purpose and function of a genetic part are described by the
 \sbolmult{roles:CD}{roles} property of \sbol{ComponentDefinition}. However, the same building block might be used for a different purpose in an actual design. In other words, purpose and function are sometimes determined by context.
@@ -626,7 +632,6 @@ If zero \sbol{Component} \sbolmult{roles:C}{roles} are given and no \sbol{Compon
 It is RECOMMENDED to specify a set of \sbol{Component} \sbolmult{roles:C}{roles} only if the integrated result set of roles would differ from the set of \sbolmult{roles:CD}{roles} belonging to this \sbol{Component}'s included sub-\sbol{ComponentDefinition}.
 
 
-
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
@@ -643,6 +648,7 @@ sub-\sbol{ComponentDefinition}'s roles.}
 
 
 \paragraph{The \sbolheading{sourceLocations} property}\label{sec:sourceLocations}
+
 
 The \sbol{sourceLocations} property is an OPTIONAL set of zero or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{ComponentDefinition}'s \sbol{Sequence} are to be included in the \sbol{Component}'s parent. The \sbol{sourceLocations} property
 allows for only a portion of a \sbol{ComponentDefinition}'s \sbol{Sequence} to be included, rather than its entirety.
@@ -1367,7 +1373,7 @@ Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refer
 
 The \sbolmult{types:I}{types} property is a REQUIRED set of \sbol{URI}s that describes the behavior represented by an \sbol{Interaction}.
 
-The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{types:I}{types} property refer to a term from the occurring entity branch of the Systems Biology Ontology (SBO). (See \url{http://www.ebi.ac.uk/sbo/main/}) \ref{tbl:interaction_types} provides a list of possible SBO terms for the \sbolmult{types:I}{types} property and their corresponding \sbol{URI}s.
+The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{types:I}{types} property refer to a term from the occurring entity branch of the Systems Biology Ontology (SBO)~\cite{SBO}. \ref{tbl:interaction_types} provides a list of possible SBO terms for the \sbolmult{types:I}{types} property and their corresponding \sbol{URI}s.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -1493,6 +1499,10 @@ Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} cont
 
 The \sbol{participant} property MUST specify precisely one \sbol{FunctionalComponent} object that plays the designated role in its parent \sbol{Interaction} object.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 72d820d37832bc04bd00b31a8eb4993dc8c45f88
 \paragraph{The \sbolheading{measures} property}
 \label{sec:measures:P}
 
@@ -1584,7 +1594,6 @@ Finally, all of these derived \sbol{Component} objects MUST follow the \sbol{res
 The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URIs. If the \sbol{strategy} property is not empty, then it MUST contain a URI from \ref{tbl:strategy}. This property recommends how many \sbol{ComponentDefinition} objects a user SHOULD derive from the template \sbol{ComponentDefinition}.
 
 
-
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
@@ -1616,8 +1625,8 @@ The serialization of a \sbol{CombinatorialDerivation} MUST have the following fo
 </sbol:CombinatorialDerivation>
 \end{lstlisting}
 
-
 The example below shows the serialization of a \sbol{CombinatorialDerivation} that specifies the combinatorial design for a library of GFP reporter variants. Each GFP reporter \sbol{ComponentDefinition} sampled from this\\ \sbol{CombinatorialDerivation} would be driven by one of two possible glucose-sensitive promoters and contain one GFP variant from a library of CDSs.
+
 
 \lstsetsbol
 
@@ -1663,7 +1672,6 @@ The \sbol{variantDerivations} property is OPTIONAL and MAY contain zero or more 
 The \sbol{operator} property is REQUIRED and has a data type of URI. This property specifies how many \sbol{Component} objects SHOULD be derived from the template \sbol{Component} during the derivation of a new \sbol{ComponentDefinition}. The URI value of this property MUST come from the URIs provided in~\ref{tbl:operator}.
 
 
-
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
@@ -1697,8 +1705,8 @@ The serialization of a \sbol{VariableComponent} MUST have the following form:
 </sbol:VariableComponent>
 \end{lstlisting}
 
-The example below shows the serialization of a \sbol{VariableComponent} that specifies a choice of one or more operator sites from a library of variants for the derivation of a synthetic CMV promoter.
 
+The example below shows the serialization of a \sbol{VariableComponent} that specifies a choice of one or more operator sites from a library of variants for the derivation of a synthetic CMV promoter.
 
 
 \lstsetsbol
@@ -1725,12 +1733,26 @@ An \sbol{Implementation} represents an instance of a synthetic biological constr
 \end{figure}
 
 \subsubsection*{ The \sbolheading{built} property}\label{sec:built}
-The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a \sbol{TopLevel} object that is a \sbol{ComponentDefinition} This \sbol{ComponentDefinition} is intended to describe the actual physical structure and/or functional behavior of the \sbol{Implementation}. When the built property refers to a \sbol{ComponentDefinition} that is also linked to the \sbol{Implementation} via PROV-O properties such as \sbol{wasDerivedFrom} (see \ref{sec:provenance}), it can be inferred that the actual structure and/or function of the \sbol{Implementation} matches its original design. When the \sbol{built} property refers to a different \sbol{ComponentDefinition}, it can be inferred that the \sbol{Implementation} has deviated from the original design. For example, the latter could be used to document when the DNA sequencing results for an assembled construct do not match the original target sequence.
+The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a \sbol{TopLevel} object that is either a \sbol{ComponentDefinition} or \sbol{ModuleDefinition}. This \sbol{ComponentDefinition} or \sbol{ModuleDefinition} is intended to describe the actual physical structure and/or functional behavior of the \sbol{Implementation}. When the built property refers to a \sbol{ComponentDefinition} or \sbol{ModuleDefinition} that is also linked to the \sbol{Implementation} via PROV-O properties such as \sbol{wasDerivedFroms} (see \ref{sec:provenance}), it can be inferred that the actual structure and/or function of the \sbol{Implementation} matches its original design. When the \sbol{built} property refers to a different \sbol{ComponentDefinition} or \sbol{ModuleDefinition}, it can be inferred that the \sbol{Implementation} has deviated from the original design. For example, the latter could be used to document when the DNA sequencing results for an assembled construct do not match the original target sequence.
+
 
 
 \subsubsection*{Serialization}
+
+\subsubsection*{Serialization}
 The serialization of an \sbol{Implementation} has the following form:
-\textbf{TODO}
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Implementation rdf:about="...">
+  ... [\emph{properties inherited from Identified}] ...
+  [\emph{one}]          <sbol:built rdf:resource="..."/> [\emph{element}]
+</sbol:Implementation>
+\end{lstlisting}
+
+
+ In the example below, an \sbol{Implementation} links back to its target design via the \sbol{wasDerivedFroms} property. Since this particular sample did not match its target structure when synthesized in the lab, a \sbol{ComponentDefinition} representing its mutated structure is linked by the \sbol{built} field.
+
 
  In the example below, an \sbol{Implementation} links back to its target design via the \sbol{wasDerivedFrom} property. Since this particular sample did not match its target structure when synthesized in the lab, a \sbol{ComponentDefinition} representing its mutated structure is linked by the \sbol{built} field.
 
@@ -1767,10 +1789,28 @@ The \sbol{hash} property is OPTIONAL and MAY contain a SHA-1 hash of the file co
 The serialization of an \sbol{Attachment} MUST have the following form:
 \textbf{TODO}
 
+
+
+
 The example below shows the serialization of an \sbol{Attachment} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbolmult{source:A}{source} \sbol{URI}, which is a \external{URL}.
 
-
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Attachment rdf:about="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6"/>
+    <sbol:displayId>attachment_00009Les8pDTQCmKA7A5T6</sbol:displayId>
+    <dcterms:title>NicePlot.png</dcterms:title>
+    <sbol:source rdf:resource="https://synbiohub.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6/1/download"/>
+    <sbol:format rdf:resource="http://identifiers.org/edam/format_3603"/>
+    <sbol:size>31399</sbol:size>
+    <sbol:hash>404966a5062857f63edb5c3ba16bb581d7fb6a1e</sbol:hash>
+  </sbol:Attachment>
+</rdf:RDF>
+\end{lstlisting}
 \label{ser:Attachment}
+
 \subsection{ExperimentalData}
 \label{sec:ExperimentalData}
 
@@ -1793,11 +1833,36 @@ The serialization of an \sbol{ExperimentalData} MUST have the following form:
 \textbf{TODO}
 
 
+\lstsetsbol
+\begin{lstlisting}
+<sbol:ExperimentalData rdf:about="...">
+  ... [\emph{properties inherited from TopLevel}] ...
+</sbol:ExperimentalData>
+\end{lstlisting}
+
+
 The example below shows the serialization of an \sbol{ExperimentalData} that refers to a pair of \sbol{Attachment} objects for FASTQ files from a paired-end DNA sequencing experiment.
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:ExperimentalData rdf:about="http://sbolstandard.org/example/X1Y0A0C2286_S1_sequencing_data/1">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286_S1_sequencing_data"/>
+    <sbol:displayId>X1Y0A0C2286_S1_sequencing_data</sbol:displayId>
+    <dcterms:title>X1Y0A0C2286 Sequencing Data</dcterms:title>
+    <sbol:attachment rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286_S1_L001_R1/1"/>
+    <sbol:attachment rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286_S1_L001_R2/1"/>
+    <prov:wasDerivedFrom rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286/1"/>
+  </sbol:ExperimentalData>
+</rdf:RDF>
+\end{lstlisting}
 \label{ser:ExperimentalData}
+
 
 \subsection{Experiment}
 \label{sec:Experiment}
+
 
 \begin{figure}[ht]
 \begin{center}
@@ -1820,7 +1885,33 @@ The serialization of an \sbol{Experiment} MUST have the following form:
 \textbf{TODO}
 
 
+
+\lstsetsbol
+\begin{lstlisting}
+<sbol:Experiment rdf:about="...">
+  ... [\emph{properties inherited from TopLevel}] ...
+  [\emph{zero or more}] <sbol:experimentalData rdf:resource="..."/> [\emph{element}]
+</sbol:Experiment>
+\end{lstlisting}
+
+
 The example below shows the serialization of an \sbol{Experiment} that aggregates the DNA sequencing results for related samples (e.g. that implement related variants of the same genetic design).
+
+\lstsetsbol
+\begin{lstlisting}
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
+  <sbol:Experiment rdf:about="http://sbolstandard.org/example/sequencing_exp_032619/1">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/sequencing_exp_032619"/>
+    <sbol:displayId>sequencing_exp_032619</sbol:displayId>
+    <dcterms:title>Sequencing Experiment 032619</dcterms:title>
+    <sbol:experimentalData rdf:resource="http://sbolstandard.org/example/X1Y0A0C2286_S1_sequencing_data/1"/>
+    <sbol:experimentalData rdf:resource="http://sbolstandard.org/example/X1Y0A0C2288_S1_sequencing_data/1"/>
+    <sbol:experimentalData rdf:resource="http://sbolstandard.org/example/X1Y0A0C2290_S1_sequencing_data/1"/>
+    <sbol:experimentalData rdf:resource="http://sbolstandard.org/example/B1C0C0C1100_S1_sequencing_data/1"/>
+  </sbol:Experiment>
+</rdf:RDF>
+\end{lstlisting}
 
 \label{ser:Experiment}
 
