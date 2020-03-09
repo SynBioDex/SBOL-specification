@@ -16,7 +16,7 @@ Arbitrary RDF/XML, however, provides a sometimes problematically large amount of
 To address this issue, we define a canonical association between the nesting of data structures within the SBOL UML data model and the RDF/XML file. 
 For all ownership associations (filled diamonds), the RDF/XML for the owned entity is embedded within the owner's RDF/XML (note, however, that the property values MAY be listed in any order).
 For all associations that are by reference (open diamonds), the RDF/XML for the referenced property is linked via a resource \sbol{URI}.
-For example, the serialization of a \sbol{Component} embeds the serializations of the \sbol{SequenceConstraint} and \sbol{ComponentInstance} objects associated with it. Those \sbol{SequenceConstraint} objects, however, link to the \sbol{ComponentInstance} objects with a \sbol{URI} rather than embedding another copy.
+For example, the serialization of a \sbol{Component} embeds the serializations of the \sbol{SequenceConstraint} and \sbol{SubComponent} objects associated with it. Those \sbol{SequenceConstraint} objects, however, link to the \sbol{SubComponent} objects with a \sbol{URI} rather than embedding another copy.
 
 Every SBOL document MUST be a valid RDF/XML document. 
 Accordingly, each SBOL document starts with an XML declaration that has its XML version set to ``1.0.'' As shown in the example below, this declaration is then followed by an \external{rdf:RDF} XML element that includes the namespace declarations for RDF, Dublin Core, PROV, and SBOL. The SBOL namespace, which is \url{http://sbols.org/v2#}, is used to indicate which entities and properties in the SBOL document are defined by SBOL, and MUST NOT be used for any entities or properties not defined in this specification.
