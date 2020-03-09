@@ -1079,7 +1079,6 @@ design}
 \subsection{Adding Measures/Parameters with OM}
 \label{sec:parameters}
 
-
 There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitive models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
 
 The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications. As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \sbol{Measure}, \sbol{Unit} and \sbol{Prefix}. A \sbol{Measure} links a numerical value to a \sbol{Unit}, which may or may not have a \sbol{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \sbol{Measure} is treated as a subclass of \sbol{Identified}, while \sbol{Unit} and \sbol{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \sbol{Unit} subclasses: \sbol{SingularUnit}, \sbol{CompoundUnit}, \sbol{UnitMultiplication}, \sbol{UnitDivision}, \sbol{UnitExponentiation}, and \sbol{PrefixedUnit}. Lastly, SBOL adopts the following \sbol{Prefix} subclasses from OM: \sbol{SIPrefix} and \sbol{BinaryPrefix}.
@@ -1122,7 +1121,6 @@ The serialization of a \sbol{Measure} MUST have the following form:
   [\emph{zero or more}]  <sbol:type rdf:resource="..."/> [\emph{element}]
 </om:Measure>
 \end{lstlisting}
-
 
 The example below shows the serialization of a \sbol{Measure} that describes the Michaelis constant for an enzymatic reaction.
 
@@ -1197,7 +1195,6 @@ The serialization of a \sbol{SingularUnit} MUST have the following form:
 </om:SingularUnit>
 \end{lstlisting}
 
-
 The example below shows the serialization of a \sbol{SingularUnit} that describes a genetic unit of length not present in the OM: the base pair (bp). One bp is equivalent to 3.4 angstroms.
 
 \lstsetsbol
@@ -1255,26 +1252,6 @@ The serialization of a \sbol{UnitMultiplication} MUST have the following form:
 </om:UnitMultiplication>
 \end{lstlisting}
 
-% \twothreezero{
-% The example below shows the serialization of a \sbol{UnitMultiplication} that captures .
-% }
-% \lstsetsbol
-% \begin{lstlisting}
-% <?xml version="1.0" ?>
-% <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-%   <sbol:UnitMultiplication rdf:about="http://sbolstandard.org/example//1">
-%     <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/"/>
-%     <sbol:displayId></sbol:displayId>
-%     <dcterms:title></dcterms:title>
-%     <om:symbol></om:symbol>
-%     <rdfs:label xml:lang="en"></rdfs:label>
-%     <om:hasTerm1 rdf:resource=""/>
-%     <om:hasTerm2 rdf:resource=""/>
-%   </sbol:UnitMultiplication>
-% </rdf:RDF>
-% \end{lstlisting}
-% \label{ser:UnitMultiplication}
-
 
 \subsubsection{UnitDivision}
 \label{sec:UnitDivision}
@@ -1305,7 +1282,6 @@ The serialization of a \sbol{UnitDivision} MUST have the following form:
   [\emph{one}]  <om:hasDenominator rdf:resource="..."/> [\emph{element}]
 </om:UnitDivision>
 \end{lstlisting}
-
 
 The example below shows the serialization of a \sbol{UnitDivision} that describes a unit of cell density not present in the OM: colony forming unit (CFU) per centimeter squared.
 
@@ -1356,26 +1332,6 @@ The serialization of a \sbol{UnitExponentiation} MUST have the following form:
 </om:UnitExponentiation>
 \end{lstlisting}
 
-% \twothreezero{
-% The example below shows the serialization of a \sbol{UnitExponentiation} that captures .
-% }
-% \lstsetsbol
-% \begin{lstlisting}
-% <?xml version="1.0" ?>
-% <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#">
-%   <sbol:UnitExponentiation rdf:about="http://sbolstandard.org/example//1">
-%     <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/"/>
-%     <sbol:displayId></sbol:displayId>
-%     <dcterms:title></dcterms:title>
-%     <om:symbol></om:symbol>
-%     <rdfs:label xml:lang="en"></rdfs:label>
-%     <om:hasBase rdf:resource=""/>
-%     <om:hasExponent rdf:resource=""/>
-%   </sbol:UnitExponentiation>
-% </rdf:RDF>
-% \end{lstlisting}
-% \label{ser:UnitExponentiation}
-
 
 \subsubsection{PrefixedUnit}
 \label{sec:PrefixedUnit}
@@ -1407,7 +1363,6 @@ The serialization of a \sbol{PrefixedUnit} MUST have the following form:
 </om:PrefixedUnit>
 \end{lstlisting}
 
-
 The example below shows the serialization of a \sbol{PrefixedUnit} that describes an absolute unit of fluorescence not present in the OM: the kilo-Molecules of Equivalent Fluorescein (kilo-MEFL).
 
 \lstsetsbol
@@ -1426,7 +1381,6 @@ The example below shows the serialization of a \sbol{PrefixedUnit} that describe
 </rdf:RDF>
 \end{lstlisting}
 \label{ser:PrefixedUnit}
-
 
 \subsubsection{Prefix}
 \label{sec:Prefix}

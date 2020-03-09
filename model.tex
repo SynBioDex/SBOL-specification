@@ -800,7 +800,6 @@ In some cases, a designer might want to set the \sbol{access} property of a \sbo
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
 
-
 The expected purpose and function of a genetic part are described by the
 \sbolmult{roles:CD}{roles} property of \sbol{Component}. However, the same building block might be used for a different purpose in an actual design. In other words, purpose and function are sometimes determined by context. 
 
@@ -1420,31 +1419,7 @@ The \sbol{members} property of a \sbol{Collection} is OPTIONAL and MAY contain a
 \subsubsection*{Serialization}
 
 The serialization of a \sbol{Collection} has the following form:
-
-\lstsetsbol
-\begin{lstlisting}
-<sbol:Collection rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  [\emph{zero or more}] <sbol:member rdf:resource="..."/> [\emph{element}]
-</sbol:Collection>
-\end{lstlisting}
-
-The example below shows the serialization of a \sbol{Collection} object grouping together a library of constitutive promoters.
-\lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:Collection rdf:about="http://parts.igem.org/Promoters/Catalog/Anderson">
-    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Promoters/Catalog/Anderson"/>
-    <sbol:displayId>Anderson</sbol:displayId>
-    <dcterms:title>Anderson promoters</dcterms:title>
-    <dcterms:description>The Anderson promoter collection</dcterms:description>
-    <sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
-    ...
-    <sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23118"/>
-  </sbol:Collection>
-</rdf:RDF>
-\end{lstlisting}
+\textbf{TODO}
 \label{ser:Collection}
 
 
@@ -1504,7 +1479,6 @@ The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:st
 The serialization of a \sbol{CombinatorialDerivation} MUST have the following form:
 
 
-
 \lstsetsbol
 \begin{lstlisting}
 <sbol:CombinatorialDerivation rdf:about="...">
@@ -1521,33 +1495,7 @@ The example below shows the serialization of a \sbol{CombinatorialDerivation} th
 
 
 \lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:CombinatorialDerivation rdf:about="http://www.sbolstandard.org/gfp_reporter_derivation/1.0.0">
-    <sbol:persistentIdentity rdf:resource="http://www.sbolstandard.org/gfp_reporter_derivation"/>
-    <sbol:displayId>gfp_reporter_derivation</sbol:displayId>
-    <dcterms:title>GFP Reporter Derivation</dcterms:title>
-    <sbol:template rdf:resource="http://www.sbolstandard.org/gfp_reporter_template/1.0.0"/>
-    <sbol:strategy rdf:resource="http://sbols.org/v2#sample"/>
-    <sbol:variableComponent>
-      <sbol:VariableComponent rdf:about="http://www.sbolstandard.org/gfp_reporter_derivation/promoter_variable/1.0.0">
-        <sbol:operator rdf:resource="http://sbols.org/v2#one"/>
-        <sbol:variable rdf:resource="http://www.sbolstandard.org/gfp_reporter_template/p1/1.0.0"/>
-        <sbol:variant rdf:resource="http://www.sbolstandard.org/glucose_sensitive_1/1.0.0"/>
-        <sbol:variant rdf:resource="http://www.sbolstandard.org/glucose_sensitive_2/1.0.0"/>
-      </sbol:VariableComponent>
-    </sbol:variableComponent>
-    <sbol:variableComponent>
-      <sbol:VariableComponent rdf:about="http://www.sbolstandard.org/gfp_reporter_derivation/cds_variable/1.0.0">
-        <sbol:operator rdf:resource="http://sbols.org/v2#one"/>
-        <sbol:variable rdf:resource="http://www.sbolstandard.org/gfp_reporter_template/c1/1.0.0"/>
-        <sbol:variantCollection rdf:resource="http://www.sbolstandard.org/gfp_cds_library/1.0.0"/>
-      </sbol:VariableComponent>
-    </sbol:variableComponent>
-  </sbol:CombinatorialDerivation>
-</rdf:RDF>
-\end{lstlisting}
+
 
 %\label{ser:Attachment}
 
@@ -1636,7 +1584,6 @@ The example below shows the serialization of a \sbol{VariableComponent} that spe
 </sbol:VariableComponent>
 \end{lstlisting}
 
-
 \subsection{Implementation}
 \label{sec:Implementation}
 
@@ -1659,6 +1606,7 @@ The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a
 
 \subsubsection*{Serialization}
 
+\subsubsection*{Serialization}
 The serialization of an \sbol{Implementation} has the following form:
 
 \lstsetsbol
@@ -1684,7 +1632,6 @@ The serialization of an \sbol{Implementation} has the following form:
 
 \subsection{Attachment}
 \label{sec:Attachment}
-
 
 \begin{figure}[ht]
 \begin{center}
@@ -1714,18 +1661,9 @@ The \sbol{hash} property is OPTIONAL and MAY contain a SHA-1 hash of the file co
 \subsubsection*{Serialization}
 
 The serialization of an \sbol{Attachment} MUST have the following form:
+\textbf{TODO}
 
 
-\lstsetsbol
-\begin{lstlisting}
-<sbol:Attachment rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  [\emph{one}] <sbol:source rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}] <sbol:format rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}] <sbol:size>...</sbol:size> [\emph{element}]
-  [\emph{zero or one}] <sbol:hash>...</sbol:hash> [\emph{element}]
-</sbol:Attachment>
-\end{lstlisting}
 
 
 The example below shows the serialization of an \sbol{Attachment} object that refers to a PNG file containing a plot of simulation data.  The attachment in this example can be retrieved from a repository via its \sbolmult{source:A}{source} \sbol{URI}, which is a \external{URL}.
@@ -1766,6 +1704,7 @@ As shown in \ref{uml:experimental_data}, the \sbol{ExperimentalData} class aggre
 \subsubsection*{Serialization}
 
 The serialization of an \sbol{ExperimentalData} MUST have the following form:
+\textbf{TODO}
 
 
 \lstsetsbol
@@ -1817,6 +1756,8 @@ The \sbol{experimentalData} property is OPTIONAL and MAY contain a set of \sbol{
 \subsubsection*{Serialization}
 
 The serialization of an \sbol{Experiment} MUST have the following form:
+\textbf{TODO}
+
 
 
 \lstsetsbol
@@ -1845,6 +1786,7 @@ The example below shows the serialization of an \sbol{Experiment} that aggregate
   </sbol:Experiment>
 </rdf:RDF>
 \end{lstlisting}
+
 \label{ser:Experiment}
 
 \subsection{Annotation and Extension of SBOL}

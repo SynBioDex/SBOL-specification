@@ -61,7 +61,6 @@ in the SBOL specification namespace.
 \printValid{An SBOL document MUST declare the use of the following XML namespace: \\ \textls[-25]{\uri{http://sbols.org/v2\#}}.\\
 Reference: \sec{sec:serialization}}
 
-
 \printValid{\st{An SBOL document MUST declare the use of the following XML namespace: \\ {\tt http://www.w3.org/1999/02/22-rdf-syntax-ns\#}. \\ 
 Reference: Section 10 on page 54}}
 
@@ -79,7 +78,6 @@ Reference: Section 10 on page 54}}
 \printValid{An SBOL document MUST be serialized as a well-formed RDF/XML file that adheres to the grammar defined by:\\
 \uri{https://www.w3.org/TR/rdf-syntax-grammar/}.\\
 Reference: \sec{sec:serialization}}
-
 
 \printValid{All namespaces specified in an SBOL document MUST end with a delimiter  ('/', '\#', or ':').\\
 Reference: \sec{sec:serialization}}
@@ -100,6 +98,7 @@ Reference: \sec{sec:Identified}}
 \printValid{The \sbol{persistentIdentity} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{URI} that MUST adhere to the syntax defined by:\\ 
 \uri{http://www.w3.org/TR/xmlschema11-2/\#anyURI}\\
 Reference: \sec{sec:Identified}}
+
 
 \printValid{The \sbol{displayId} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String} that MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.\\ Reference: \sec{sec:Identified}}
 
@@ -130,7 +129,6 @@ Reference: Section 7.4 on page 16}}
 
 \printValid{The \sbol{description} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String}.  \\ Reference: \sec{sec:Identified}}
 
-
 \printWarning{The \sbol{annotations} property of an \sbol{Identified} object is OPTIONAL and MAY contain a set of \sbol{Annotation} objects.\\ Reference: \sec{sec:Identified}}
 
 
@@ -144,7 +142,6 @@ Reference: Section 7.4 on page 16}}
 \printModeling{If a compliant \sbol{Identified} object has no \sbol{version} property, then its \sbol{identity} property MUST contain the same \sbol{URI} as  its \sbol{persistentIdentity} property. Otherwise, the compliant object's \sbol{identity} property MUST contain a \sbol{URI} that begins with its \sbol{persistentIdentity} and is immediately followed by a delimiter ('/', '\#', or ':') and its \sbol{version}.\\ Reference: \sec{sec:compliant}}
 
 \printModeling{The \sbol{version} property of a compliant \sbol{Identified} object that is not also a \sbol{TopLevel} object is REQUIRED to contain the same \sbol{String} as the \sbol{version} property of the compliant object's parent.\\ Reference: \sec{sec:compliant}}
-
 
 \printValid{Objects with the same \sbol{persistentIdentity} MUST be instances of the same class.\\
 Reference: \sec{sec:Identified}}
@@ -171,7 +168,6 @@ Reference: \sec{sec:provenance}}
 
 \printModeling{An \sbol{Identified} with a \sbol{wasGeneratedBys} property that includes a reference to an \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD not be an \sbol{Implementation}.\\
 Reference: \sec{sec:provenance}}
-
 
 \printValid{An \sbol{Identified} object must have no more than one \sbol{rdfType} property in each of the\\ \uri{http://sbols.org/v2\#} and \uri{http://www.w3.org/ns/prov\#} namespaces. \\
 Reference: \sec{sec:Identified}}
@@ -204,7 +200,6 @@ Reference: Section 7.5 on page 19}}
 \subsubsection*{Rules for the \class{Sequence} class} 
 \setcounter{sbolCtr}{10401}
 
-
 \printValid{A \sbol{Sequence} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name},\\ \sbol{description}, \sbol{annotations}, \sbol{elements}, and \sbol{encoding}.\\ Reference: \sec{sec:Sequence}}
 % A \sbol{Sequence} MUST inherit all properties of the \sbol{TopLevel} class.
 
@@ -220,7 +215,6 @@ Reference: Section 7.5 on page 19}}
 
 
 \printWarning{The \sbol{encoding} property of a \sbol{Sequence} MUST contain a \sbol{URI} from \ref{tbl:sequence_encodings} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:Sequence}}
-
 
 \printModeling{The \sbol{encoding} property of a \sbol{Sequence} SHOULD contain a \sbol{URI} from \ref{tbl:sequence_encodings}.\\ Reference: \sec{sec:Sequence}}
 
@@ -249,7 +243,6 @@ Reference: \sec{sec:SubComponent}}
 \printWarning{Each \sbol{URI} contained by the \sbolmult{roles:CD}{roles} property of a \sbol{SubComponent} MUST refer to an ontology term that is consistent with its \sbolmult{types:CD}{types} property.\\ Reference: \sec{sec:Component}}
 
 \printWarning{The \sbolmult{roles:CD}{roles} property of a \sbol{SubComponent} MUST contain a \sbol{URI} from \ref{tbl:component_roles} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:Component}}
-
 
 \printModeling{
 The \sbolmult{roles:CD}{roles} property of a \sbol{SubComponent} SHOULD NOT contain a \sbol{URI} that refers to a term from the sequence feature branch of the SO unless its \sbolmult{types:CD}{types} property contains the DNA or RNA type \sbol{URI} listed in \ref{tbl:component_types}.
@@ -316,14 +309,6 @@ Reference: \sec{sec:Component}}
 
 \printWarning{If the \sbolmult{types:CD}{types} property of a \sbol{SubComponent} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{types:CD}{types} property MUST contain a \sbol{URI} that refers to a term from the topology attribute branch of the SO, if the topology is known.\\ Reference: \sec{sec:Component}}
 
-%\twoonezero{
-%\printValid{If the \sbolmult{types:CD}{types} property of
-%a \sbol{SubComponent} is pointing to anything other than DNA or RNA
-%type \sbol{URI}, then any additional \sbolmult{types:CD}{type} properties MUST
-%NOT point to SequenceOntology terms for double-stranded or single-stranded or
-%circular or linear nucleic acid \sbol{URI}.\\ 
-%Reference: \sec{sec:Component}}
-%}
 
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{10601}
@@ -469,7 +454,6 @@ Reference: \sec{sec:sequence}}
 \subsubsection*{Rules for the \class{Cut} class} 
 \setcounter{sbolCtr}{11201}
 
-
 \printValid{A \sbol{Cut} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \\
 \sbol{annotations}, \sbol{orientation}, \sbol{sequence}, and \sbol{at}.\\ Reference: \sec{sec:Cut}}
 
@@ -487,7 +471,6 @@ Reference: \sec{sec:sequence}}
 \sbol{identity},\\
 \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{sequence}, and \sbol{orientation}.\\
 Reference: \sec{sec:GenericLocation}}
-%A \sbol{GenericLocation} MUST inherit all properties of the \sbol{Location} class.
 
 \printComplete{The \sbol{sequence} property of a \sbol{GenericLocation} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{SubComponent} containing the \sbol{GenericLocation}.\\
 Reference: \sec{sec:sequence}
@@ -497,8 +480,6 @@ Reference: \sec{sec:sequence}
 
 
 \printValid{A \sbol{SequenceConstraint} MUST NOT have properties other than the following: \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{restriction}, \sbol{subject}, and \sbol{object}.\\ Reference: \sec{sec:SequenceConstraint}}
-%A \sbol{SequenceConstraint} MUST inherit all properties of the \sbol{Identified} class.
-
 
 \printValid{The \sbol{subject} property of a \sbol{SequenceConstraint} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{SubComponent}.\\ Reference: \sec{sec:SequenceConstraint}}
 
@@ -638,7 +619,6 @@ Reference: \sec{sec:sequence}
 
 \printValid{The \sbol{participations} property of an \sbol{Interaction} is OPTIONAL and MAY contain a set of \sbol{Participation} objects.\\ Reference: \sec{sec:Interaction}}
 
-
 \printModeling{If the \sbol{participations} property of an \sbol{Interaction} refers to one or more \sbol{Participation} objects, and one of the  \sbolmult{types:I}{types} of this \sbol{Interaction} comes from \ref{tbl:interaction_types}, then the \sbol{Participation} objects SHOULD have a role from the set of \sbolmult{roles:P}{roles} that is cross-listed with this type in \ref{tbl:participant_roles}.\\ 
 Reference: \sec{sec:Participation}}
 
@@ -659,7 +639,6 @@ Reference: \sec{sec:Participation}}
 
 \printValid{The \sbol{SubComponent} referenced by the \sbol{participant} property of a \sbol{Participation} MUST be contained by the \sbol{SubComponent} that contains the \sbol{Interaction} which contains the \sbol{Participation}.\\ Reference: \sec{sec:Participation}}
 
-
 \printValid{The \sbolmult{roles:P}{roles} property of a \sbol{Participation} is REQUIRED and MUST contain a non-empty set of \sbol{URI}s.\\ Reference: \sec{sec:Participation}}
 
 
@@ -671,7 +650,6 @@ Reference: \sec{sec:Participation}}
 \printModeling{Exactly one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO (see \ref{tbl:participant_roles}).\\ Reference: \sec{sec:Participation}}
 
 
-
 \printValid{The \sbolmult{measures:P}{measures} property of a \sbol{Participation} is OPTIONAL and may contain a set of \sbol{Measure} objects.
 \\ Reference: \sec{sec:Participation}}
 
@@ -679,12 +657,10 @@ Reference: \sec{sec:Participation}}
 \subsubsection*{Rules for the \class{Collection} class} 
 \setcounter{sbolCtr}{12101}
 
-
 \printValid{A \sbol{Collection} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{members}.\\Reference: \sec{sec:Collection}}
 
 
 \printValid{The \sbol{members} property of a \sbol{Collection} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Collection}}
-
 
 \printComplete{Each \sbol{URI} contained by the \sbol{members} property of a \sbol{Collection} MUST reference a \sbol{TopLevel} object.\\ Reference: \sec{sec:Collection}}
 
@@ -692,14 +668,12 @@ Reference: \sec{sec:Participation}}
 \subsubsection*{Rules for the \class{Annotation} class} 
 \setcounter{sbolCtr}{12201}
 
-
 \printValid{The name property of an Annotation is REQUIRED and MUST contain a QName. \\ 
 Reference: \sec{sec:Annotations}}
 
 
 \printValid{\st{The value property of an Annotation is REQUIRED and MUST contain an AnnotationValue. \\ 
 Reference: Section 7.11 on page 46}}
-
 
 
 \printValid{An  \sbol{AnnotationValue} MUST be a \sbol{literal} (a \sbol{String}, \sbol{Integer}, \sbol{Double}, or \sbol{Boolean}), \sbol{URI}, or a \sbol{NestedAnnotations} object.\\ Reference: \sec{sec:Annotations}}
@@ -714,12 +688,10 @@ Reference: Section 7.11 on page 46}}
 \subsubsection*{Rules for the \class{GenericTopLevel} class} 
 \setcounter{sbolCtr}{12301}
 
-
 \printValid{A \sbol{GenericTopLevel} MUST NOT have properties other than the following: \sbol{identity},\\ \sbol{persistentIdentity}, \sbol{displayId}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\Reference: \sec{sec:GenericTopLevel}}
 
 
 \printValid{The \sbol{rdfType} property of a \sbol{GenericTopLevel} object is REQUIRED and MUST contain a \sbol{QName}.\\ Reference: \sec{sec:GenericTopLevel}}
-
 
 \printValid{The \sbol{rdfType} property of a \sbol{GenericTopLevel} object MUST NOT contain a \sbol{QName} in the {\uri{http://sbols.org/v2\#}} namespace.
 \\ Reference: \sec{sec:GenericTopLevel}}
@@ -759,7 +731,6 @@ Reference: Section 7.11 on page 46}}
 \printModeling{An \sbol{Activity} with a child \sbol{Association} that has a \sbolmult{roles:A}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} SHOULD NOT have child \sbol{Usage} objects that have \sbolmult{roles:U}{roles} properties that contain the \sbol{URI}s~\url{http://sbols.org/v2\#design} or~\url{http://sbols.org/v2\#build}.\\ Reference: \sec{sec:Activity}}
 
 
-
 %% EO: using the \hyperref here due to the specification of the \sbol command and the "types" property that appears in ComponentDefinition and Activity.
 \printValid{The \sbolmult{types:Activity}{types} property of an \sbol{Activity} object is OPTIONAL and MAY contain a set of \sbol{URI}s.  \\ Reference: \sec{sec:Activity}}
 \printModeling{If an \sbol{Activity} has a types value of ~\url{http://sbols.org/v2\#design} and also contains an \sbol{Association}, then that \sbol{Association} MUST have a roles value of ~\url{http://sbols.org/v2\#design}. \\ Reference: \sec{sec:Activity}}
@@ -767,7 +738,6 @@ Reference: Section 7.11 on page 46}}
 \printModeling{If an \sbol{Activity} has a types value of ~\url{http://sbols.org/v2\#test} and also contains an \\
 \sbol{Association}, then that \sbol{Association} MUST have a roles value of ~\url{http://sbols.org/v2\#test}. \\ Reference: \sec{sec:Activity}}
 \printModeling{If an \sbol{Activity} has a types value of ~\url{http://sbols.org/v2\#learn} and also contains an \sbol{Association}, then that \sbol{Association} MUST have a roles value of ~\url{http://sbols.org/v2\#learn}. \\ Reference: \sec{sec:Activity}}
-
 
 
 \subsubsection*{Rules for the \class{Usage} class} 
@@ -872,7 +842,6 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} prope
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
 
-
 \subsubsection*{Rules for the \class{VariableComponent} class} 
 \setcounter{sbolCtr}{13001}
 
@@ -962,7 +931,6 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \sbol{SubComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-
 \subsubsection*{Rules for the \class{Implementation} class} 
 \setcounter{sbolCtr}{13101}
 
@@ -1019,7 +987,6 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 
 \printComplete{The \sbol{URI}s contained by the \sbol{experimentalData} property of a \sbol{Experiment} MUST each refer to an \sbol{ExperimentalData}.
 \\ Reference: \sec{sec:Experiment}}
-
 
 
 \subsubsection*{Rules for the \class{Measure} class} 
@@ -1144,7 +1111,6 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 
 \printComplete{The \sbol{URI} contained by the \sbol{hasBase} property of a \sbol{UnitExponentiation} MUST refer to a \sbol{Unit}.
 \\ Reference: \sec{sec:UnitExponentiation}}
-
 
 
 \subsubsection*{Rules for the \class{PrefixedUnit} class} 
