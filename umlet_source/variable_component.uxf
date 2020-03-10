@@ -48,7 +48,7 @@ variable
       <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;
-          variants
+          variant
           0..*</panel_attributes>
     <additional_attributes>150;50;60;50;60;100</additional_attributes>
   </element>
@@ -97,7 +97,7 @@ variable
       <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;
-           variantCollections
+           variantCollection
          0..*</panel_attributes>
     <additional_attributes>70;30;70;80;110;80;110;120</additional_attributes>
   </element>
@@ -136,7 +136,7 @@ variable
       <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;
-       variantDerivations
+       variantDerivation
              0..*</panel_attributes>
     <additional_attributes>50;30;50;80;120;80;120;120</additional_attributes>
   </element>
