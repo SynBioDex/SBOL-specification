@@ -1,4 +1,6 @@
 
+\errorcontextlines=200
+
 %% \documentclass[finalspec]{sbmlpkgspec}
 \documentclass[draftspec]{sbmlpkgspec}
 \usepackage{microtype}
@@ -49,8 +51,10 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{light-gray}{gray}{0.97}
 \lstdefinelanguage{sbol}
-    {morekeywords={xmlns:sbol,xmlns:prov,xmlns:rdf,xmlns:dcterms,xmlns:myapp,rdf:RDF,rdf:resource,rdf:about,sbol:displayId,sbol:persistentIdentity,sbol:version,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type,
-        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition, sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sourceLocation, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
+    {morekeywords={xmlns:sbol,xmlns:prov,xmlns:rdf,xmlns:dcterms,xmlns:myapp,rdf:RDF,rdf:resource,rdf:about,sbol:displayId,sbol:timeStamp,sbol:name,sbol:description,sbol:member,sbol:Collection,sbol:type,
+        sbol:role, sbol:roleIntegration, sbol:ComponentDefinition,
+        sbol:SubComponent, sbol:instanceOf,
+        sbol:MapsTo, sbol:sequence,sbol:wasDerivedFrom,sbol:Component,sbol:subComponent,sbol:SequenceAnnotation,sbol:component,sbol:location, sbol:sourceLocation, sbol:sequenceAnnotation, sbol:Range, sbol:start, sbol:end, sbol:orientation,sbol:SequenceConstraint, sbol:restriction, sbol:subject, sbol:object,sbol:Sequence, sbol:elements, sbol:encoding,sbol:Model, sbol:source, sbol:language, sbol:framework,sbol:FunctionalComponent, sbol:Module, sbol:Interaction, sbol:interaction, sbol:module, sbol:model,sbol:Model,sbol:definition, sbol:access, sbol:direction, sbol:mapsTo, sbol:refinement, sbol:local, sbol:remote, sbol:participation, sbol:Participation, sbol:participant,sbol:sequenceConstraint,sbol:at,sbol:Cut,sbol:functionalComponent,sbol:ModuleDefinition,prov:wasDerivedFrom,dcterms:title,dcterms:description,sbol:Implementation,sbol:built,sbol:CombinatorialDerivation,sbol:template,sbol:strategy,sbol:variableComponent,sbol:VariableComponent,sbol:operator,sbol:variable,sbol:variant,sbol:variantCollection,sbol:variantDerivations,sbol:format,sbol:size,sbol:hash,sbol:Attachment,sbol:NameSpace,prov:wasGeneratedBy,prov:Activity,prov:startedAtTime,prov:endedAtTime,prov:wasInformedBy,prov:qualifiedUsage,prov:Usage,prov:entity,prov:qualifiedAssociation,prov:Association,prov:hadRole,prov:hadPlan,prov:Plan,prov:agent,prov:Agent,
 sbol:experimentalData,sbol:Experiment,sbol:ExperimentalData,sbol:attachment,om:hasNumericalValue,om:symbol,om:alternativeSymbol,om:alternativeLabel,om:longcomment,om:hasFactor,
 om:hasTerm1,om:hasTerm2,om:hasNumerator,om:hasDenominator,om:hasBase,om:hasExponent,om:hasUnit,om:hasPrefix,rdfs:comment,rdfs:label,
 om:Measure,om:Unit,om:SingularUnit,om:CompoundUnit,om:om:UnitMultiplication,om:UnitDivision,om:Exponentiation,om:PrefixedUnit,om:Prefix,om:SIPrefix,
@@ -102,130 +106,61 @@ om:BinaryPrefix,xlmns:om,xlmns:rdfs,xlmns:xsd,xml:lang},
 %Command to format external terms in the document
 \newcommand{\external}[1]{\texttt{#1}}
 
-%Commands to highlight SBOL versions
-\newcommand{\twozeroone}[1]{%
-\cbcolor{red}
-\ifdefined\fullchangebars\cbstart\fi%
-{\color{red}%
-\version{2.0.1}%
-#1
-}
-\ifdefined\fullchangebars\cbend\fi
-}
-
-%Commands to highlight SBOL versions
-\newcommand{\twoonezero}[1]{%
-\cbcolor{red}
-\ifdefined\fullchangebars\cbstart\fi%
-{\color{red}%
-\version{2.1.0}%
-#1
-}
-\ifdefined\fullchangebars\cbend\fi
-}
-
-%Commands to highlight SBOL versions
-\newcommand{\twotwozero}[1]{%
-\cbcolor{red}
-\ifdefined\fullchangebars\cbstart\fi%
-{\color{red}%
-\version{2.2.0}%
-#1
-}
-\ifdefined\fullchangebars\cbend\fi
-}
-
-%Commands to highlight SBOL versions
-\newcommand{\twotwoone}[1]{%
-\cbcolor{red}
-\ifdefined\fullchangebars\cbstart\fi%
-{\color{red}%
-\version{2.2.1}%
-#1
-}
-\ifdefined\fullchangebars\cbend\fi
-}
-
-%Commands to highlight SBOL versions
-\newcommand{\twothreezero}[1]{%
-\cbcolor{red}
-\ifdefined\fullchangebars\cbstart\fi%
-{\color{red}%
-\version{2.3.0}%
-#1
-}
-\ifdefined\fullchangebars\cbend\fi
-}
-
-%Commands to highlight SBOL versions
-\newcommand{\twothreeone}[1]{%
-\cbcolor{red}
-\ifdefined\fullchangebars\cbstart\fi%
-{\color{red}%
-\version{2.3.1}%
-#1
-}
-\ifdefined\fullchangebars\cbend\fi
-}
-
-
 % -----------------------------------------------------------------------------
 % Start of document
 % -----------------------------------------------------------------------------
 
 \begin{document}
 
+\packageTitle{\latex Class for SBML Package Specifications}		
+\packageVersion{Version 3.0}		
+\packageVersionDate{March 9, 2020}
+ 
 \title{
   Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~3.0}}
 
 \author{{\bf Editors:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
-Curtis Madsen & \emph{Boston University, USA}\\   
-Angel Go\~{n}i Moreno & \emph{Newcastle University, UK}\\   
-Umesh P & \emph{Kerala Technological University, India}\\ 
-Zach Palchick & \emph{Zymergen, USA}\\
-Nicholas Roehner & \emph{Raytheon BBN Technologies, USA}\\ 
+Hasan Baig & \emph{University of Connecticut, USA}\\   
+Pedro Fontanarrosa & \emph{University of Utah, USA}\\   
+Vishwesh Kulkarni, & \emph{University of Warwick, UK}\\ 
+James McLaughlin & \emph{Newcastle University, UK}\\
+Prashant Vaidyanathan & \emph{Microsoft Research, UK}\\ 
 \end{tabular}\\
 \href{mailto:sbol-editors@googlegroups.com}{\sffamily sbol-editors@googlegroups.com}\\
 \\
 {\bf Chair:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
-Anil Wipat		& \emph{Newcastle University, UK}\\
+Chris Myers		& \emph{University of Utah, USA}\\
 \end{tabular}\\
 \\
 {\bf Steering Committee:}\hfil\\
 \begin{tabular}{l>{\hspace*{15pt}}r}
 Jacob Beal & \emph{Raytheon BBN Technologies, USA}\\ 
 Michael Bissell & \emph{Amyris, Inc., USA}\\ 
-John H. Gennari, Herbert Sauro & \emph{University of Washington, USA}\\
 Kevin Clancy & \emph{BioCoder Consulting, USA}\\ 
+Thomas Gorochowski & \emph{University of Bristol, UK}\\
 Goksel Misirli & \emph{Keele University, UK}\\ 
-Chris Myers & \emph{University of Utah, USA}\\   
 Ernst Oberortner & \emph{DOE Joint Genome Institute, USA}\\
+Herbert Sauro & \emph{University of Washington, USA}\\
+Anil Wipat & \emph{Newcastle University, UK}\\
 \end{tabular}\\
 \\
 {\bf Additional authors, by institution:}\\
-Chris Macklin, Ysis Tarter (\emph{Amyris, USA}),\\
-John Meng (\emph{DOE Joint Genome Institute, USA})
-Raik Gr\"unberg (\emph{KAUST, SA}),\\
-Christian Atallah, James McLaughlin (\emph{Newcastle, UK})\\ 
-Robert Sidney Cox (\emph{Prospect Bio, USA}), Bryan Bartley (\emph{Raytheon BBN, USA}) \\
-Matthew Pocock (\emph{Turing Ate My Hamster, UK}) \\
-Thomas Gorochowski (\emph{U. of Bristol, UK}), James Scott-Brown (\emph{U. of Oxford, UK})\\
-Tramy Nguyen, Meher Samineni, Michael Zhang, Zach Zundel (\emph{U. of Utah, USA})\\
-Kiri Choi (\emph{U. of Washington, USA}), Zhen Zhang (\emph{Utah State U., USA})\\
-%%
-% {\bf Non-author contributors, by institution:}\\
-% None at present
+\begin{tabular}{l>{\hspace*{15pt}}r}
+Raik Gr\"unberg & \emph{KAUST, SA}\\
+Bryan Bartley & \emph{Raytheon BBN, USA} \\
+Matthew Crowther & \emph{Newcastle University, UK} \\
+James Scott-Brown & \emph{U. of Oxford, UK} \\
+\end{tabular}\\
 }
-
 
 \maketitlepage
 \maketableofcontents
 
 \input{purpose}
 
-\input{relation}
+% \input{relation}
 
 \input{copyright}
 
@@ -253,7 +188,5 @@ Kiri Choi (\emph{U. of Washington, USA}), Zhen Zhang (\emph{Utah State U., USA})
 \appendix
 
 \input{apdx-validation}
-
-\input{examples_serialization}
 
 \end{document}
