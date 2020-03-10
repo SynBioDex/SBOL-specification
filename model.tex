@@ -780,10 +780,10 @@ Each \sbol{Constraint} includes the \sbol{restriction}, \sbol{subject}, and \sbo
 \end{figure}
 
 \paragraph{The \sbolheading{subject} property}\label{sec:subject}
-The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{ComponentInstance} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}.
+The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{ComponentInstance} or a \sbol{SequenceFeature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}.
 
 \paragraph{The \sbolheading{object} property}\label{sec:object}
-The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{ComponentInstance} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}. This \sbol{ComponentInstance} MUST NOT be the same \sbol{ComponentInstance} that the \sbol{Constraint} refers to via its \sbol{subject} property.
+The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{ComponentInstance} or a \sbol{SequenceFeature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}. This \sbol{ComponentInstance} or \sbol{SequenceFeature} MUST NOT be the same \sbol{ComponentInstance} or \sbol{SequenceFeature} that the \sbol{Constraint} refers to via its \sbol{subject} property.
 
 \paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
