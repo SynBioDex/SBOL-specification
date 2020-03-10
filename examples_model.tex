@@ -49,9 +49,9 @@ The LacI/TetR toggle switch is modeled in SBOL as two parallel hierarchies of st
 
 
 \begin{figure}[ht]
-\begin{center}
+\begin{center} \todo{Change SequenceAnnotations to SequenceFeatures}
 \includegraphics[width=\textwidth]{example_uml/toggle_2}
-\caption[]{Composite \sbol{Component} objects for the LacI inverter. In the case of the \sbol{Component} that represents the TetR gene, its sub-\sbol{SubComponent} objects are located as \sbol{Range}s along its \sbol{Sequence} using \sbol{SequenceAnnotation} objects. The \sbol{Component} that represents the IPTG-LacI complex, however, has no \sbol{Sequence} and its sub-\sbol{SubComponent} objects are composed without any data about their relative positions.}
+\caption[]{Composite \sbol{Component} objects for the LacI inverter. In the case of the \sbol{Component} that represents the TetR gene, its sub-\sbol{SubComponent} objects are located as \sbol{Range}s along its \sbol{Sequence} using \sbol{SequenceFeature} objects. The \sbol{Component} that represents the IPTG-LacI complex, however, has no \sbol{Sequence} and its sub-\sbol{SubComponent} objects are composed without any data about their relative positions.}
 \label{uml:ex_comp_def_compo}
 \end{center}
 \end{figure}
