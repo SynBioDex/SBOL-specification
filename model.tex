@@ -38,14 +38,7 @@ Finally, classes can inherit the properties of other classes. Inheritance relati
 \label{sec:nameconventions}
 
 SBOL classes are named using upper "camel case," meaning that each word is capitalized and all words are run together without spaces, e.g. \sbol{Identified}, \sbol{SequenceAnnotation}.
-Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbol{identity}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}).
-
-Within the SBOL data model, each property is given a singular or plural name in accordance with its data cardinalities.
-The forms of these names follow the usual rules of English grammar. For example, sequenceAnnotation is the singular form of \sbol{sequenceAnnotations}.
-
-SBOL properties are always given singular names, however, when SBOL objects are serialized (using \emph{Resource Description Framework} (RDF) as described in \ref{sec:serialization}).
-This is because the SBOL data model does not contain classes that correspond directly to the RDF elements that group other elements into ordered or unordered sets. Consequently, if an SBOL property has multiple values, then it is serialized as multiple property entries, each with a singular name and a single value.
-For example, if an SBOL property has five values, then its serialization contains five RDF triples, each with a singular predicate name and one of the five values as its object.
+Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbol{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}). SBOL properties are always given singular names irrespective of their cardinality, e.g. \sbol{role} is used rather than \sbol{roles} even though a component can have multiple roles.
 
 \subsection{Data Types}
 \label{sec:datatypes}
@@ -71,18 +64,8 @@ When SBOL use simple ``primitive'' data types such as \sbol{String}s or \sbol{In
   {\em Example: \external{true}}
 \end{itemize}
 The term \sbol{literal} is used to denote an object that can be any of the four types listed above.
-In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}) and \emph{XML Qualified Name} (\sbol{QName}):
-\begin{itemize}
-\item \sbol{URI}: \url{http://www.w3.org/TR/xmlschema11-2/#anyURI}\\
-  {\em Example: \external{http://www.partsregistry.org/Part:BBa\_J23119}}
-\item \sbol{QName}: \url{http://www.w3.org/TR/xmlschema11-2/#QName}\\
-  {\em Example: \external{myapp:Datasheet}} where  \external{myapp="http://www.myapp.org/"}
-\end{itemize}
 
-Note that, in compliance with RDF standards, \sbol{URI}s are generally serialized using an \external{rdf:resource} property, e.g.:
-\external{rdf:resource="http://www.partsregistry.org/Part:BBa\_J23119"}
-
-It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
+In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}). It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
 
 \subsection{Identified}
 \label{sec:Identified}
@@ -90,8 +73,7 @@ It is important to realize that in RDF, a \sbol{URI} might or might not be a res
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
 This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
 
-As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{wasDerivedFroms}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}. The value of an \sbol{identity} property is guaranteed to be unique, and it refers to precisely one SBOL object with that \sbol{URI}.
-
+As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{wasDerivedFroms}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -101,28 +83,18 @@ As shown in \ref{uml:identified}, the \sbol{Identified} class includes the follo
 \end{center}
 \end{figure}
 
-\subsubsection*{The \sbolheading{identity} property}
-\label{sec:identity}
-The \sbol{identity} property is REQUIRED by all \sbol{Identified} objects and has a data type of \sbol{URI}. A given \sbol{Identified} object's \sbol{identity} \sbol{URI} MUST be globally unique among all other \sbol{identity} \sbol{URI}s. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.
-
-Although most SBOL properties are defined by SBOL and serialized with its namespace, the \sbol{identity} property is defined by the analogous RDF \external{about} property and is serialized with the RDF namespace as follows:
-
-\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#about}.
-
-The use of \external{about} is expressly for the purpose of making SBOL compliant with pre-existing standards: when you see \external{about} in an SBOL document, you SHOULD interpret it as meaning \sbol{identity}.
-
-A \sbol{TopLevel} object's identity property is defined according to the following rules.
+A \sbol{TopLevel} object's URI is defined according to the following rules.
 
 \begin{itemize}
- \item A \sbol{TopLevel} \sbol{identity} has the following pattern:
+ \item A \sbol{TopLevel} URI has the following pattern:
   \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \texttt{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path. 
-  \item A \sbol{TopLevel} object's \sbol{identity} property cannot be included as prefix for other \sbol{TopLevel} objects.
-  \item The \sbol{identity} property of any child object of a \sbol{TopLevel} object has the following pattern:\\\texttt{[parent]/[displayId]}, where \texttt{parent} is the \sbol{identity} of a \sbol{TopLevel} object.  Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively.
+  \item A \sbol{TopLevel} object's URI property cannot be included as prefix for other \sbol{TopLevel} objects.
+  \item The URI of any child object of a \sbol{TopLevel} object has the following pattern:\\\texttt{[parent]/[displayId]}, where \texttt{parent} is the URI of a \sbol{TopLevel} object.  Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively.
   \end{itemize}
   
 \subsubsection*{The \sbolheading{displayId} property}
 \label{sec:displayId}
-The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between \sbol{name} and \sbol{identity} that is machine-readable, but more human-readable than the full \sbol{URI} of an \sbol{identity}.
+The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between a URI and the \sbol{name} property that is machine-readable, but more human-readable than the full URI of an object.
 
 If the \sbol{displayId} property is used, then its \sbol{String} value MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
 
@@ -142,7 +114,7 @@ An SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFroms} prope
 
 The \sbol{name} property is OPTIONAL and has a data type of \sbol{String}. This property is intended to be displayed to a human when visualizing an \sbol{Identified} object.
 
-If an \sbol{Identified} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or \sbol{identity}.
+If an \sbol{Identified} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or URI.
 It is RECOMMENDED that software tools give users the ability to switch perspectives between \sbol{name} properties that are human-readable and \sbol{displayId} properties that are less human-readable, but are more likely to be unique.
 
 \subsubsection*{The \sbolheading{description} property}
@@ -1136,23 +1108,23 @@ The \sbol{experimentalData} property is OPTIONAL and MAY contain a set of \sbol{
 
 \subsection{NameSpace}
 \label{sec:NameSpace}
-The \sbol{NameSpace} class is used to define member entities that share the same prefix in their \sbol{identity} properties. This class includes the \sbol{identity}  and \sbol{member} properties. 
+The \sbol{NameSpace} class is used to define member entities that share the same prefix in their URIs. This class includes the URI and \sbol{member} properties. 
 
 The \sbol{member} property of a \sbol{NameSpace} is OPTIONAL and MAY contain a set of URI references to zero or more \sbol{TopLevel} objects. All linked objects must have a URI prefix matching that of the \sbol{NameSpace}. 
 
 \subsection{Annotation and Extension of SBOL}
 \label{sec:Annotations}
 
-SBOL does not currently represent all types of biological design data, since many of these data types (e.g., biological context and design performance metrics) lack a clear consensus on their proper representation. In addition, some types of biological data are not directly relevant to design and are therefore outside of the scope of SBOL.
+SBOL intentionally does not attempt to describe how all types of biological design data should be captured, since many of these data types (e.g., biological context and design performance metrics) are already covered by other standards, or lack a clear consensus on their proper representation. In addition, some types of biological data are not directly relevant to design and are therefore outside of the scope of SBOL.
 
-To enable representation of these data, SBOL allows developers to embed custom data within SBOL objects and documents, such that these data can be exchanged without being damaged or lost. This annotation and extension mechanism is designed to enable new types of data to be easily incorporated into the SBOL standard once there is community consensus on their proper representation.
+SBOL is built upon the Resource Description Framework (RDF), and therefore can be used in conjunction with complementary standards as described in \autoref{sec:complementaryStandards}.  For example, use of the PROV-O ontology is recommended to capture provenance \autoref{sec:provenance}.  Additionally, user-defined RDF can be used in conjunction with SBOL objects to capture custom application-specific information which does not yet have a standardized representation.  This annotation and extension mechanism is designed to enable new types of data to be easily incorporated into the SBOL standard once there is community consensus on their proper representation.
 
 Several methods are supported for connecting the SBOL data model with other types of application-specific data:
+
 \begin{itemize}
 \item Custom data can be added to an SBOL object by annotating that object with non-conflicting properties. These properties could contain \sbol{literal} data types such as \sbol{String}s or \sbol{URI}s that require a resolution mechanism to obtain external data. An example is annotating a \sbol{Component} with  a property that contains a \sbol{String} description and \sbol{URI} for the parts registry from which its source data was originally imported.
-\item Custom data in the form of independent objects can be added to an SBOL document by  creating\\
-\sbol{GenericTopLevel} objects and annotating them as described above. An example is a \sbol{GenericTopLevel} object that is annotated such that it represents a data sheet that describes the performance of a \sbol{Component} in a particular context.
-\item Finally, just as custom objects can be embedded in an  SBOL document, external documents can embed or refer to SBOL objects. Support for this last case is not explicitly provided in this specification. Rather, this case depends on the external non-SBOL system managing its relationship to SBOL and data serialized in RDF/XML, and is included here for completeness.
+\item Custom data in the form of independent objects can be participate in the SBOL data model if they are assigned one of the SBOL types \sbol{Identified} or \sbol{TopLevel}.  An example is an RDF object that is annotated such that it represents a data sheet that describes the performance of a \sbol{Component} in a particular context.
+\item Finally, just as custom objects can be embedded in an  SBOL document, external documents can embed or refer to SBOL objects. Support for this last case is not explicitly provided in this specification. Rather, this case depends on the external non-SBOL system managing its relationship to SBOL and data serialized in RDF, and is included here for completeness.
 \end{itemize}
 
 \subsubsection{Annotating SBOL objects}
@@ -1166,34 +1138,14 @@ Several methods are supported for connecting the SBOL data model with other type
 \label{sec:nestedQName}
 \label{sec:nestedURI}
 
-Each \sbol{Identified} object MAY contain any number of \sbol{Annotation} objects that store data in the form of name/value property pairs. The \sbol{qName} is REQUIRED and MUST contain a \sbol{QName}, which is composed of a namespace, an OPTIONAL prefix, and a local name. The \sbol{qName} property MUST be stored in the data model to allow for proper serialization as described below.
-The \sbol{value} property is also REQUIRED and MUST contain a \sbol{literal} (i.e., a \sbol{String}, \sbol{Integer}, \sbol{Double}, \sbol{Boolean}), \sbol{URI}, or \sbol{NestedAnnotations} object. A \sbol{NestedAnnotations} object MUST contain \sbol{nestedQName} and \sbol{nestedURI} properties, and it MAY contain an \sbol{annotations} property that contains zero or more \sbol{Annotation} objects.
+Each \sbol{Identified} object MAY be annotated with application-specific properties, which MUST be labelled using RDF predicates outside of the SBOL namespace.  Additionally, application-specific types may be used in conjunction with the SBOL data model. These application-specific types MUST have two \sbol{rdf:type} properties: one type outside of the SBOL namespace AND an additional SBOL type of either:
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[scale=0.525]{uml/identified_annotations}
-\caption[]{Diagram of the \sbol{Annotation} class and its association with \sbol{Identified} and \sbol{AnnotationValue} objects, which is used for annotating SBOL entities with application specific data.}
-\label{uml:identified_annotations}
-\end{center}
-\end{figure}
+\begin{itemize}
+  \item \sbol{TopLevel}, if the object is to be considered an SBOL top level (i.e., not owned by another object)
+  \item \sbol{Identified}, if the object is not to be considered an SBOL top level (i.e., is owned by another object)
+\end{itemize}
 
-\subsubsection{GenericTopLevel}
-\label{sec:GenericTopLevel}
-\label{sec:rdfType}
-
-Custom data can also be embedded at the top level of an SBOL document. The \sbol{GenericTopLevel} class is used to represent top-level entities whose purpose is to contain a set of annotations that are independent of any other class of SBOL object.
-Entities that have independent existence and are not recognized by the SBOL standard are deserialized to \sbol{GenericTopLevel} objects.
-These \sbol{GenericTopLevel} objects can be safely used by tools to exchange non-SBOL data.
-
-As with other \sbol{TopLevel} objects, \sbol{GenericTopLevel} objects MAY include the properties \sbol{displayId}, \sbol{name},\\ \sbol{description}, etc. The type of data annotating a \sbol{GenericTopLevel} object is indicated using the REQUIRED \sbol{rdfType} property, which MUST contain a \sbol{QName}. As before with the \sbol{qName} property, the \sbol{rdfType} property is used to set the namespace, prefix, and local part/name during serialization.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/generictoplevel}
-\caption[]{Diagram of the \sbol{GenericTopLevel} class and its associated properties, which is used for embedding externally defined entities into SBOL documents.}
-\label{uml:generictoplevel}
-\end{center}
-\end{figure}
+As with SBOL \sbol{TopLevel} objects, custom \sbol{TopLevel} objects MAY include the properties \sbol{displayId}, \sbol{name},\\ \sbol{description}, etc. 
 
 \section{Mapping Between SBOL 1.1 and SBOL 2.x}
 \label{sec:mapping}
