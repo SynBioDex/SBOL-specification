@@ -1091,3 +1091,10 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 
 \printValid{A \sbol{BinaryPrefix} MUST NOT have properties other than the following: \sbol{identity}, \sbol{displayId}, \sbol{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Prefix}{symbol}, \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols}, \sbolmult{label:Prefix}{label}, \sbolmult{alternativeLabels:Prefix}{alternativeLabels}, \sbolmult{comment:Prefix}{comment}, \sbolmult{longcomment:Prefix}{longcomment}, and \sbolmult{hasFactor:Prefix}{hasFactor}.\\ Reference: \sec{sec:BinaryPrefix}}
 
+\subsubsection*{Rules for the \class{NameSpace} class} 
+\setcounter{sbolCtr}{14601}
+
+\printValid{A \sbol{NameSpace} MUST NOT have properties other than the following: \sbol{identity}, \sbol{member}.\\ Reference: \sec{sec:NameSpace}}
+
+\printValid{Each \sbol{TopLevel} object linked via the \sbol{member} property must have a URI prefix matching to the \sbol{identity} of the \sbol{NameSpace} object.}
+
