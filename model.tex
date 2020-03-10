@@ -111,6 +111,15 @@ Although most SBOL properties are defined by SBOL and serialized with its namesp
 
 The use of \external{about} is expressly for the purpose of making SBOL compliant with pre-existing standards: when you see \external{about} in an SBOL document, you SHOULD interpret it as meaning \sbol{identity}.
 
+A \sbol{TopLevel} object's identity property is defined according to the following rules.
+
+\begin{itemize}
+ \item A \sbol{TopLevel} \sbol{identity} has the following pattern:
+  \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \texttt{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path. 
+  \item A \sbol{TopLevel} object's \sbol{identity} property cannot be included as prefix for other \sbol{TopLevel} objects.
+  \item The \sbol{identity} property of any child object of a \sbol{TopLevel} object has the following pattern:\\\texttt{[parent]/[displayId]}, where \texttt{parent} is the \sbol{identity} of a \sbol{TopLevel} object.  Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively.
+  \end{itemize}
+  
 \subsubsection*{The \sbolheading{displayId} property}
 \label{sec:displayId}
 The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between \sbol{name} and \sbol{identity} that is machine-readable, but more human-readable than the full \sbol{URI} of an \sbol{identity}.
@@ -1147,6 +1156,12 @@ As shown in \ref{uml:experimental_data}, the \sbol{Experiment} class aggregates 
 
 \subsubsection*{ The \sbolheading{experimentalData} property}\label{sec:experimentalData}
 The \sbol{experimentalData} property is OPTIONAL and MAY contain a set of \sbol{URI} references to \sbol{ExperimentalData} objects. The same \sbol{ExperimentalData} MAY be referred to by more than one \sbol{Experiment} in this way.
+
+\subsection{NameSpace}
+\label{sec:NameSpace}
+The \sbol{NameSpace} class is used to define member entities that share the same prefix in their \sbol{identity} properties. This class includes the \sbol{identity}  and \sbol{member} properties. 
+
+The \sbol{member} property of a \sbol{NameSpace} is OPTIONAL and MAY contain a set of URI references to zero or more \sbol{TopLevel} objects. All linked objects must have a URI prefix matching that of the \sbol{NameSpace}. 
 
 \subsection{Annotation and Extension of SBOL}
 \label{sec:Annotations}
