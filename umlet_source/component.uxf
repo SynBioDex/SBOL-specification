@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
-  <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>40</x>
-      <y>220</y>
-      <w>120</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*SubComponent*</panel_attributes>
-    <additional_attributes/>
-  </element>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
@@ -27,46 +16,6 @@
 
 </panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>130</x>
-      <y>180</y>
-      <w>180</w>
-      <h>94</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-components
-0..*</panel_attributes>
-    <additional_attributes>160;50;30;50</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>90</x>
-      <y>340</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*Sequence*
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>110</x>
-      <y>240</y>
-      <w>200</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-&gt;
-          sequences
-    0..*</panel_attributes>
-    <additional_attributes>180;30;30;100</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Class</type>
@@ -89,60 +38,6 @@ components
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;60</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>480</x>
-      <y>360</y>
-      <w>180</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*Model*
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>590</x>
-      <y>280</y>
-      <w>180</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*Interaction*
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>410</x>
-      <y>240</y>
-      <w>106</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-&gt;
-          models
-           0..*</panel_attributes>
-    <additional_attributes>40;30;80;120</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>430</x>
-      <y>220</y>
-      <w>180</w>
-      <h>94</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-interactions
-0..*</panel_attributes>
-    <additional_attributes>30;40;160;60</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -171,25 +66,73 @@ constraint
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>340</y>
-      <w>140</w>
+      <x>180</x>
+      <y>320</y>
+      <w>80</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>*SequenceFeature*</panel_attributes>
+    <panel_attributes>*Feature*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
+      <x>250</x>
       <y>260</y>
-      <w>80</w>
-      <h>100</h>
+      <w>120</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
 feature
 0..*</panel_attributes>
+    <additional_attributes>50.0;10.0;50.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>260</y>
+      <w>70</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+model
+0..*</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>320</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*Interaction*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>340</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*Model*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>430</x>
+      <y>260</y>
+      <w>100</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+interaction
+0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;60.0;70.0</additional_attributes>
   </element>
 </diagram>

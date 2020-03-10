@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>7</zoom_level>
   <element>
     <type>com.baselet.element.old.element.Class</type>
@@ -68,25 +68,11 @@
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>406</x>
-      <y>329</y>
+      <y>357</y>
       <w>63</w>
       <h>21</h>
     </coordinates>
     <panel_attributes>*Sequence*
-
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>406</x>
-      <y>357</y>
-      <w>126</w>
-      <h>21</h>
-    </coordinates>
-    <panel_attributes>*ComponentDefinition*
 
 
 </panel_attributes>
@@ -114,21 +100,10 @@
       <w>98</w>
       <h>21</h>
     </coordinates>
-    <panel_attributes>*ModuleDefinition*
+    <panel_attributes>*Module*
 
 </panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>511</x>
-      <y>273</y>
-      <w>69</w>
-      <h>104</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>56;21;56;63;56;91;21;91</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Class</type>
@@ -163,7 +138,7 @@
       <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-attachments
+attachment
 0..*</panel_attributes>
     <additional_attributes>10.0;10.0;200.0;10.0;200.0;90.0;160.0;90.0</additional_attributes>
   </element>
@@ -221,10 +196,10 @@ attachments
       <x>448</x>
       <y>273</y>
       <w>118</w>
-      <h>76</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>105;21;105;63;21;63</additional_attributes>
+    <additional_attributes>105;21;105;91;21;91</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>

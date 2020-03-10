@@ -27,13 +27,14 @@ To continue with the pUC18 example, the description would begin with a top-level
 The \sbol{Component} objects can be organized hierarchically.  For example, the plasmid \sbol{Component} might reference \sbol{SubComponent}s for the promoter, coding sequence, etc.  Each \sbol{Component} object can also include the actual \sbol{Sequence} information (if available) via an entire \sbol{Location} \sbol{SequenceFeature}, as well as \sbol{SubComponent} objects that identify the \sbol{Location}s of the promoters, coding sequences, etc., on the \sbol{Sequence}.  In order to specify functional information, the \sbol{Component} can also specify \sbol{Interaction} objects that describe any qualitative relationships among \sbol{SubComponent} \sbol{Participations}, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{Component} object can point to a \sbol{Model} object that provides a reference to a complete computational model using a language such as SBML~\cite{SBML}, CellML~\cite{CellML}, MATLAB~\cite{matlab}, etc.
 %Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
 
-\begin{figure}[ht]
+
+\begin{sidewaysfigure}[ht]
 \begin{center}
   \includegraphics[scale=0.7]{images/OverviewFigforSpec-v7.png}
 \caption{Main classes of information represented by the SBOL standard, and their relationships.  Green boxes are ``top level'' objects, and yellow boxes are child objects.}
 \label{images:overview1}
 \end{center}
-\end{figure}
+\end{sidewaysfigure}
 
 Whereas \ref{images:overview1} provides a broad overview of SBOL, \ref{images:overview2} provides a detailed, implementation-level overview of the class structure for the SBOL 3 data model. This figure relies on the semantics of the \emph{Unified Modeling Language} (UML), which will be presented in more detail in the next section. \ref{images:overview2} distinguishes between \emph{top level} classes, in green, and other supporting classes (note that \ref{images:overview1} also includes all of the top level classes). In \ref{images:overview2}, dashed arcs represent ``refersTo'', whereas a solid arrow represents ownership. In UML, the meaning of ownership is that if a parent class is deleted, so are all of its owned children. Thus, a \sbol{Collection} does not own its \sbol{Component} objects, because these can stand on their own. All of the supporting classes (in orange) have to be owned by some top-level class, directly or indirectly. 
 
