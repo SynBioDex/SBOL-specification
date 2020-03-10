@@ -718,6 +718,10 @@ While the \sbol{Range} and \sbol{Cut} classes are best suited to
 specifying regions on \sbol{Sequence} objects with \external{IUPAC} encodings, the
 \sbol{GenericLocation} class is included as a starting point for specifying regions on \sbol{Sequence} objects with different \sbol{encoding} properties and potentially nonlinear structure. This class can also be used to set the \sbol{orientation} of a \sbol{SequenceFeature} and any associated \sbol{SubComponent} when their parent \sbol{Component} is a partial design that lacks a \sbol{Sequence}.
 
+\paragraph{EntireSequence}
+\label{sec:EntireSequence}
+The \sbol{EntireSequence} class does not have any additional properties. Use of this class indicates that the linked Sequence describes the entirety of the \sbol{Component} or \sbol{SubComponent} parent of this Location object.
+
 \subsubsection{Constraint}
 \label{sec:Constraint}
 The \sbol{Constraint} class can be used to assert restrictions on the relationships of pairs of \sbol{ComponentInstance} objects contained by the same parent \sbol{Component}.
