@@ -605,7 +605,6 @@ sub-\sbol{Component}'s roles.}
 
 \paragraph{The \sbolheading{sourceLocations} property}\label{sec:sourceLocations}
 
-
 The \sbol{sourceLocations} property is an OPTIONAL set of zero or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{ComponentDefinition}'s \sbol{Sequence} are to be included in the \sbol{Component}'s parent. The \sbol{sourceLocations} property
 allows for only a portion of a \sbol{ComponentDefinition}'s \sbol{Sequence} to be included, rather than its entirety.
 
@@ -614,6 +613,12 @@ if the \sbol{sourceLocations} property is set, then the relationship between the
 \sbol{Sequence} and the included \sbol{Sequence} is defined identically to the \sbol{locations}
 property on the \sbol{SequenceFeature} object.
 
+\paragraph{The \sbolheading{location} property}\label{sec:location}
+The \sbol{location} property is OPTIONAL set which points to a \sbol{Location} on the parent \sbol{Component} sequence; if \sbol{location} is missing, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined.
+
+The \sbol{Location} record(s) specified by a \sbol{SubComponent} are subject to the same restrictions currently in place for SequenceAnnotation Location. Concretely, two \sbol{Location} records attached to the same \sbol{SubComponent} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{SubComponents} may overlap.
+
+\todo{add best practice here talking about EntireComponent?}
 
 \subsubsection{MapsTo}
 \label{sec:MapsTo}
@@ -666,9 +671,9 @@ The \sbol{refinement} property is REQUIRED and has a data type of \sbol{URI}. Ea
 Note that if multiple \sbol{MapsTo}s belonging to the \sbol{SubComponent}s of a \sbol{Component} have \sbol{local} properties that refer to the same \sbol{SubComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}. Similarly, if multiple \sbol{MapsTo}s belonging the \sbol{SubComponent}s and \sbol{SubComponent}s of a \sbol{Component} have \sbol{local} properties that refer to the same \sbol{SubComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}.
 
 
-\subsubsection{SequenceAnnotation}
-\label{sec:SequenceAnnotation}
-The \sbol{SequenceAnnotation} class describes one or more regions of interest on the \sbol{Sequence} objects referred to by its parent \sbol{Component}. In addition, \sbol{SequenceAnnotation} objects can describe the substructure of their parent \sbol{Component} through association with the \sbol{SubComponent} objects contained by this\\
+\subsubsection{SequenceFeature}
+\label{sec:SequenceFeature}
+The \sbol{SequenceFeature} class describes one or more regions of interest on the \sbol{Sequence} objects referred to by its parent \sbol{Component}. In addition, \sbol{SequenceFeature} objects can describe the substructure of their parent \sbol{Component} through association with the \sbol{SubComponent} objects contained by this\\
 \sbol{Component}.
 
 \begin{figure}[ht]
@@ -677,7 +682,7 @@ The \sbol{SequenceAnnotation} class describes one or more regions of interest on
 \caption[]{Diagram of the \sbol{SequenceAnnotation} class and its associated properties.}
 \label{uml:sequence_annotation}
 \end{center}
-\end{figure}
+\end{figure} \todo{change figure for SequenceFeature instead of SequenceAnnotation}
 
 \paragraph{The \sbolheading{locations} property}\label{sec:locations}
 The \sbol{locations} property is a REQUIRED set of one or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Sequence} are described by the \sbol{SequenceAnnotation}.
