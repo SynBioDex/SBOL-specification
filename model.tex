@@ -691,9 +691,6 @@ Allowing multiple \sbol{Location} objects on a single \sbol{SequenceFeature} is 
 As such, the \sbol{Location} objects of a single \sbol{SequenceFeature} SHOULD NOT specify overlapping regions, since it is not clear what this would mean.
 There is no such concern with different \sbol{SequenceFeature} objects, however, which can freely overlap in \sbol{Location} (for example, specifying overlapping linkers for sequence assembly).
 
-\paragraph{The \sbolheading{SubComponent} property}\label{sec:component}
-The \sbol{SubComponent} property is OPTIONAL and has a data type of \sbol{URI}. This \sbol{URI} MUST refer to a \sbol{SubComponent} that is contained by the same parent \sbol{Component} that contains the \sbol{SequenceFeature}. In this way, the properties of the \sbol{SequenceFeature}, such as its \sbol{description} and \sbol{locations}, are associated with part of the substructure of its parent \sbol{Component}.
-
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:SA}
 
@@ -702,6 +699,8 @@ Alternatively to describing substructure, a \sbol{SequenceFeature} can be utiliz
 The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more \sbol{URI}s describing the specified sequence feature being annotated.  If provided, these \sbolmult{roles:SA}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate \sbol{Sequence}s' function in any domain for which an ontology exists.
 
 It is RECOMMENDED that these \sbolmult{roles:SA}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of this \sbol{SequenceFeature}'s parent \sbol{Component}. For example, a \sbolmult{roles:SA}{role} of a \sbol{SequenceFeature} which belongs to a \sbol{Component} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology terms for \sbolmult{roles:SA}{roles} is given in \ref{tbl:component_roles}.
+
+
 
 \subsubsection{Location}
 \label{sec:Location}
