@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <type>com.baselet.element.old.element.Class</type>
@@ -66,12 +66,12 @@ constraint
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
+      <x>180</x>
       <y>320</y>
-      <w>140</w>
+      <w>80</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>*SequenceFeature*</panel_attributes>
+    <panel_attributes>*Feature*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -90,19 +90,6 @@ feature
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
-      <y>210</y>
-      <w>160</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-subComponent
-0..*</panel_attributes>
-    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>360</x>
       <y>260</y>
       <w>70</w>
@@ -112,17 +99,6 @@ subComponent
 model
 0..*</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>40</x>
-      <y>220</y>
-      <w>120</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*SubComponent*</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
