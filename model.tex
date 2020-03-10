@@ -114,10 +114,12 @@ The use of \external{about} is expressly for the purpose of making SBOL complian
 A \sbol{TopLevel} object's identity property is defined according to the following rules.
 
 \begin{itemize}
+ 
  \item A \sbol{TopLevel} \sbol{identity} has the following pattern:
-  \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \texttt{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path. 
-  \item A \sbol{TopLevel} object's \sbol{identity} property cannot be included as prefix for other \sbol{TopLevel} objects.
-  \item The \sbol{identity} property of any child object of a \sbol{TopLevel} object has the following pattern:\\\texttt{[parent]/[displayId]}, where \texttt{parent} is the \sbol{identity} of a \sbol{TopLevel} object.  Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively.
+  \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \texttt{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path. E.g. \path{https://synbiohub.org/public/igem/BBa_J23070}, where \texttt{namespace}=\path{https://synbiohub.org}, \texttt{local}=\path{public/igem}, and \texttt{displayId}=\path{BBa_J23070}.
+ 
+  \item A \sbol{TopLevel} object's \sbol{identity} property cannot be included as prefix for other \sbol{TopLevel} objects. E.g. The \path{BBa_J23070_seq} \sbol{Sequence} object cannot have the \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq} \sbol{identity}, since the \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as an \sbol{identity} for the \path{BBa_J23070} \sbol{ComponentDefinition} object.
+  \item The \sbol{identity} property of any child or nested object has the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the \sbol{identity} of a parent object. Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively. E.g. The \texttt{annotation1} \sbol{SequenceAnnotation} object of the \path{BBa_J23070} \sbol{Component} entity will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1} \sbol{identity}. Similarly, the \texttt{loc1} \sbol{Location} of the \texttt{annotation1} \sbol{SequenceAnnotation} object will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1} \sbol{identity}.
   \end{itemize}
   
 \subsubsection*{The \sbolheading{displayId} property}
@@ -944,6 +946,18 @@ Some examples of \sbol{Collection} objects:
 \subsubsection*{The \sbolheading{members} property}\label{sec:members}
 The \sbol{members} property of a \sbol{Collection} is OPTIONAL and MAY contain a set of \sbol{URI} references to zero or more \sbol{TopLevel} objects.
 
+\subsection{Namespace}
+\label{sec:Namespace}
+The \sbol{Namespace} class is a subclass of \sbol{Collection} and is used to define \sbol{member} entities that share the same prefix in their \sbol{identity} properties. All linked objects must have a URI prefix matching the identity of a \sbol{Namespace} object. 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/namespace}
+\caption[]{\sbol{Namespace} is a special case of \sbol{Collection}.}
+\label{uml:namespace}
+\end{center}
+\end{figure}
+
 \subsection{CombinatorialDerivation}
 \label{sec:CombinatorialDerivation}
 
@@ -1133,12 +1147,6 @@ As shown in \ref{uml:experimental_data}, the \sbol{Experiment} class aggregates 
 
 \subsubsection*{ The \sbolheading{experimentalData} property}\label{sec:experimentalData}
 The \sbol{experimentalData} property is OPTIONAL and MAY contain a set of \sbol{URI} references to \sbol{ExperimentalData} objects. The same \sbol{ExperimentalData} MAY be referred to by more than one \sbol{Experiment} in this way.
-
-\subsection{NameSpace}
-\label{sec:NameSpace}
-The \sbol{NameSpace} class is used to define member entities that share the same prefix in their \sbol{identity} properties. This class includes the \sbol{identity}  and \sbol{member} properties. 
-
-The \sbol{member} property of a \sbol{NameSpace} is OPTIONAL and MAY contain a set of URI references to zero or more \sbol{TopLevel} objects. All linked objects must have a URI prefix matching that of the \sbol{NameSpace}. 
 
 \subsection{Annotation and Extension of SBOL}
 \label{sec:Annotations}
