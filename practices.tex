@@ -4,24 +4,35 @@
 % -----------------------------------------------------------------------------
 \subsection{SBOL Namespaces}
 
-Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 3.x \sbol{Subcomponent} SHOULD NOT refer to an SBOL 2.x \sbol{ComponentInstance}, and, likewise, an SBOL 2.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.
+Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in the same document. For example, an SBOL 3.x \sbol{SubComponent} SHOULD NOT refer to an SBOL 2.x \sbol{ComponentInstance}, and, likewise, an SBOL 2.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x DNAComponent. However, namespaces for different versions MAY be present in the same document so long as they are semantically independent (that is, so long as objects belonging to these namespaces do not refer to each other). When multiple SBOL namespaces are present in a document, libraries SHOULD default to interpreting as SBOL only those objects belonging to the namespace for the most recent version of SBOL in the document. Any remaining objects belonging to any other SBOL namespace SHOULD be interpreted as \sbol{GenericTopLevel}s and custom \sbol{Annotation}s.
 
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
-Maintaining unique \sbol{identity} \sbol{URI}s for all SBOL objects can be a very challenging implementation task.  To reduce this burden, users of SBOL 2.x are encouraged to follow a few simple rules when constructing the \sbol{identity} properties and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
-\begin{enumerate}
-\item The \sbol{identity} of a compliant SBOL object MUST begin with a \emph{URI prefix} that maps to a domain over which the user has control. Namely, the user can guarantee uniqueness of identities within this domain.
-\item The \sbol{persistentIdentity} and \sbol{displayId} properties are REQUIRED of a compliant SBOL object.
-\item The \sbol{persistentIdentity} of a compliant \sbol{TopLevel} object MUST end with a delimiter (`/', `\#', or `:') followed by the \sbol{displayId} of the object. 
-\item The \sbol{persistentIdentity} of a compliant SBOL object that is not also a \sbol{TopLevel} object MUST begin with the \sbol{persistentIdentity} of its parent object and be immediately followed by a delimiter (`/', `\#', or `:') and the \sbol{displayId} of the compliant object.
-\item If a compliant SBOL object is not given a \sbol{version}, then its \sbol{identity} and \sbol{persistentIdentity} properties MUST contain the same \sbol{URI}.
-\item If a compliant SBOL object has a \sbol{version}, then its \sbol{identity} property MUST contain a \sbol{URI} of the form  ``\refObj{persistentIdentity}/\refObj{version}''.
-\item The \sbol{version} of a compliant SBOL object that is not also a \sbol{TopLevel} object MUST contain the same \sbol{String} as the \sbol{version} property of the compliant object's parent object.
-\item The \sbol{identity}, \sbol{persistentIdentity}, \sbol{displayId}, and \sbol{version} properties of a compliant SBOL object MUST NOT be changed once set.
-\end{enumerate}
+Maintaining unique \sbol{identity} \sbol{URI}s for all SBOL objects can be a very challenging implementation task.  To reduce this burden, users of SBOL 3.x are encouraged to follow a few simple rules when constructing the \sbol{identity} properties and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
+
+Compliant URIs for \sbol{TopLevel} objects MUST conform to the following pattern:
+\begin{quotation} 
+\refObj{namespace}/\refObj{collection\_structure}/\refObj{displayId}
+\end{quotation}
+
+The \refObj{namespace} token itself may further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \sbol{URI}s can be automatically decomposed with the aid of a \sbol{NameSpace}. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
+
+For example, the SBOL-compliant \sbol{URI}  ``https://synbiohub.org/igem/2017\_distribution/promoters/constitutive/BBa\_J23101'' can be decomposed into: 
+\begin{quote} 
+namespace: ``https://synbiohub.org/igem/2017\_distribution'' \linebreak
+domain: ``https://synbiohub.org'' \linebreak
+root: ``igem/2017\_distribution'' \linebreak
+collection: ``promoters/constitutive'' \linebreak
+displayId: ``BBa\_J23101'' \linebreak
+\end{quote}
+
+SBOL-compliant URIs greatly facilitate auto-construction of child objects with unique \sbol{URI}s. Child objects of \sbol{TopLevel} with compliant \sbol{URI}s MUST conform to the following pattern: ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the \sbol{identity} of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. The \refObj{child\_type\_counter} of a new object will generally be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_uri}/SequenceAnnotation37''. Note that numbering is independent for each type, so a \sbol{Component} can have children ``SubComponent37'' and ``Constraint37''.
 
 All examples in this specification use compliant \sbol{URI}s.
+
+\subsection{Versioning SBOL Objects}
+SBOL 3.x does not specify an explicit scheme. Rather it is left for experimentation across different tools. This allows version information to be included in the root (e.g., GitHub style: ``igem/HEAD/''), collection structure (e.g., ``promoters/constitutive/2/''), in tool-specific conventions on \sbol{displayId} (e.g., ``BBa\_J23101\_v2'') or in information outside of the \sbol{URI} (e.g., by attaching \sbol{prov:RevisionOf} properties).
 
 \subsection{Annotations: Embedded Objects vs. External References}
 
