@@ -61,17 +61,18 @@ in the SBOL specification namespace.
 \subsubsection*{Rules for the \class{Identified} class} 
 \setcounter{sbolCtr}{10201}
 
-\printValid{The \sbol{identity} property of an \sbol{Identified} object is REQUIRED and MUST contain a \sbol{URI} that adheres to the syntax defined by:\\
-\uri{http://www.w3.org/TR/xmlschema11-2/\#anyURI}\\
-Reference: \sec{sec:Identified}}
+\printValid{The \sbol{displayId} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String} that MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.\\ Reference: \sec{sec:Identified}}
 
+\printValid{The \sbol{displayId} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String} that MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.\\ Reference: \sec{sec:Identified}}
 
 \printComplete{The \sbol{identity} property of an \sbol{Identified} object MUST be globally unique. \\ 
 Reference: \sec{sec:Identified}}
 
+\printValid{A \sbol{TopLevel} object's \sbol{identity} property cannot be included as prefix for other \sbol{TopLevel} objects.\\
+Reference: \sec{sec:Identified}}
 
-\printValid{The \sbol{displayId} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String} that MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.\\ Reference: \sec{sec:Identified}}
-
+\printValid{Each child or nested object MUST have the \path{[parent]/[displayId]} pattern, where \path{[parent]} is the \sbol{identity} of a parent entity.\\
+Reference: \sec{sec:Identified}}
 
 \printModeling{\st{The displayId property of an Identified object SHOULD be locally unique. \\ 
 Reference: Section 7.4 on page 16}}
@@ -1094,7 +1095,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{NameSpace} class} 
 \setcounter{sbolCtr}{14601}
 
-\printValid{A \sbol{NameSpace} MUST NOT have properties other than the following: \sbol{identity}, \sbol{member}.\\ Reference: \sec{sec:NameSpace}}
+\printValid{A \sbol{Namespace} MUST NOT have properties other than the following: \sbol{identity}, \sbol{member}.\\ Reference: \sec{sec:NameSpace}}
 
-\printValid{Each \sbol{TopLevel} object linked via the \sbol{member} property must have a URI prefix matching to the \sbol{identity} of the \sbol{NameSpace} object.}
+\printValid{Each \sbol{TopLevel} object linked via the \sbol{member} property must have a URI prefix matching to the \sbol{identity} of the \sbol{Namespace} object.}
 
