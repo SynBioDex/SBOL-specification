@@ -15,7 +15,7 @@
 -persistentIdentity[0..1] : URI
 -displayId[0..1] : String
 -version[0..1] : String
--wasDerivedFroms[0..*] : URI
+-wasDerivedFrom[0..*] : URI
 -name[0..1] : String
 -description[0..1] : String
 </panel_attributes>
@@ -30,7 +30,7 @@
       <h>94</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-annotations
+annotation
 0..*</panel_attributes>
     <additional_attributes>30;50;160;50</additional_attributes>
   </element>

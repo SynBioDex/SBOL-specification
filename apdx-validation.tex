@@ -172,7 +172,9 @@ Reference: Section 7.5 on page 19}}
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{10501}
 
-\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{identity}, \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \\ \sbol{components}, \sbol{sequences},  \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.\\ 
+
+\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{identity}, \sbol{displayId}, \sbol{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \\ \sbol{components}, \sbol{sequences},  \sbol{sequenceFeatures}, and \sbol{sequenceConstraints}.\\ 
+
 Reference: \sec{sec:SubComponent}}
 %A \sbol{SubComponent} MUST inherit all properties of the \sbol{TopLevel} class.}
 
@@ -223,13 +225,13 @@ Reference: Section 7.7 on page 21}}
 
 \printValid{The \sbol{components} property of a \sbol{SubComponent} is OPTIONAL and MAY contain a set of \sbol{SubComponent} objects.\\ Reference: \sec{sec:Component}}
 
-\printModeling{If a \sbol{SubComponent} in a \sbol{SubComponent}-\sbol{SubComponent} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{SubComponent} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{SubComponent} objects in the hierarchy.\\ Reference: \sec{sec:Component}}
+\printModeling{If a \sbol{SubComponent} in a \sbol{SubComponent}-\sbol{SubComponent} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{SubComponent} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceFeature} or \sbol{SequenceConstraint} objects contained by the \sbol{SubComponent} objects in the hierarchy.\\ Reference: \sec{sec:Component}}
 
-\printValid{The \sbol{sequenceAnnotations} property of a \sbol{SubComponent} is OPTIONAL and MAY contain a set of \sbol{SequenceAnnotation} objects.\\ Reference: \sec{sec:Component}}
+\printValid{The \sbol{sequenceFeatures} property of a \sbol{SubComponent} is OPTIONAL and MAY contain a set of \sbol{SequenceFeature} objects.\\ Reference: \sec{sec:Component}}
 
-\printValid{The \sbol{sequenceAnnotations} property of a \sbol{SubComponent} MUST NOT contain two or more \sbol{SequenceAnnotation} objects that refer to the same \sbol{SubComponent}.\\ Reference: \sec{sec:Component}}
+\printValid{The \sbol{sequenceFeatures} property of a \sbol{SubComponent} MUST NOT contain two or more \sbol{SequenceFeature} objects that refer to the same \sbol{SubComponent}.\\ Reference: \sec{sec:Component}}
 
-\printModeling{If the \sbol{sequences} property of a \sbol{SubComponent} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceAnnotation} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceAnnotations} property of the \sbol{SubComponent} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.\\ Reference: \sec{sec:Component}}
+\printModeling{If the \sbol{sequences} property of a \sbol{SubComponent} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceFeature} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceFeatures} property of the \sbol{SubComponent} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.\\ Reference: \sec{sec:Component}}
 
 \printValid{The \sbol{sequenceConstraints} property of a \sbol{SubComponent} is OPTIONAL and MAY contain a set of \sbol{SequenceConstraint} objects.  \\ Reference: \sec{sec:Component}}
 
@@ -340,32 +342,35 @@ Reference: Section 7.7.3 on page 26}}
 
 \printComplete{If the \sbol{refinement} property of a \sbol{MapsTo} contains the \sbol{URI}\\ \url{http://sbols.org/v2\#verifyIdentical}, then the \sbol{SubComponent} objects referred to by \sbol{local} and \sbol{remote} properties of the \sbol{MapsTo} MUST refer to the same \sbol{SubComponent} via their \sbolmult{instanceOf:CI}{instanceOf} properties.\\ Reference: \sec{sec:MapsTo}}
 
-\subsubsection*{Rules for the \class{SequenceAnnotation} class} 
+\subsubsection*{Rules for the \class{SequenceFeature} class} 
 \setcounter{sbolCtr}{10901}
 
 
-\printValid{A \sbol{SequenceAnnotation} MUST NOT have properties other than the following: \sbol{identity}, \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, \sbol{locations}, and \sbolmult{roles:SA}{roles}.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{A \sbol{SequenceFeature} MUST NOT have properties other than the following: \sbol{identity}, \sbol{displayId}, \sbol{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, \sbol{locations}, and \sbolmult{roles:SA}{roles}.\\ Reference: \sec{sec:SequenceFeature}}
+
 %A \sbol{SequenceAnnotation} MUST inherit all properties of the \sbol{Identified} class.
 
 
-\printValid{The \sbol{locations} property of a \sbol{SequenceAnnotation} is REQUIRED and MUST contain a non-empty set of \sbol{Location} objects.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{The \sbol{locations} property of a \sbol{SequenceFeature} is REQUIRED and MUST contain a non-empty set of \sbol{Location} objects.\\ Reference: \sec{sec:SequenceFeature}}
 
-\printModeling{The \sbol{Location} objects contained by the \sbol{locations} property of a single \sbol{SequenceAnnotation} SHOULD NOT specify overlapping regions.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printModeling{The \sbol{Location} objects contained by the \sbol{locations} property of a single \sbol{SequenceFeature} SHOULD NOT specify overlapping regions.\\ Reference: \sec{sec:SequenceFeature}}
 
-\printValid{The \sbol{component} property is OPTIONAL and MAY contain a \sbol{URI} reference to a \sbol{SubComponent}.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{The \sbol{component} property is OPTIONAL and MAY contain a \sbol{URI} reference to a \sbol{SubComponent}.\\ Reference: \sec{sec:SequenceFeature}}
 
-\printValid{The \sbol{SubComponent} referenced by the \sbol{component} property of a \sbol{SequenceAnnotation} MUST be contained by the \sbol{SubComponent} that contains the \sbol{SequenceAnnotation}.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{The \sbol{SubComponent} referenced by the \sbol{component} property of a \sbol{SequenceFeature} MUST be contained by the \sbol{SubComponent} that contains the \sbol{SequenceFeature}.\\ Reference: \sec{sec:SequenceFeature}}
 
-\printValid{The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:SequenceAnnotation}}
-
-
-\printWarning{Each \sbol{URI} contained by the \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} MUST refer to an ontology term that clarifies the potential function of the \sbol{SequenceAnnotation} in a biochemical or physical context.\\ Reference: \sec{sec:SequenceAnnotation}}
-
-\printWarning{The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceAnnotation} MUST contain a \sbol{URI} from \ref{tbl:component_roles} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceFeature} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:SequenceFeature}}
 
 
-\printValid{A \sbol{SequenceAnnotation} MUST NOT include both a \sbol{component} property and a \sbolmult{roles:SA}{roles} property.\\ 
-Reference: \sec{sec:SequenceAnnotation}}
+\printWarning{Each \sbol{URI} contained by the \sbolmult{roles:SA}{roles} property of a \sbol{SequenceFeature} MUST refer to an ontology term that clarifies the potential function of the \sbol{SequenceFeature} in a biochemical or physical context.\\ Reference: \sec{sec:SequenceFeature}}
+
+\printWarning{The \sbolmult{roles:SA}{roles} property of a \sbol{SequenceFeature} MUST contain a \sbol{URI} from \ref{tbl:component_roles} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:SequenceFeature}}
+
+
+\printValid{A \sbol{SequenceFeature} MUST NOT include both a \sbol{component} property and a \sbolmult{roles:SA}{roles} property.\\ 
+Reference: \sec{sec:SequenceFeature}}
+
+\todo{Moreover, a validation rule is needed: SequenceFeature can only be used if an actual sequence record is specified for the parent ComponentDefinition.}
 
 
 \subsubsection*{Rules for the \class{Location} class} 
