@@ -72,7 +72,7 @@ instanceOf
     </coordinates>
     <panel_attributes>*SubComponent*
 --
--roles[0..*] : URI
+-role[0..*] : URI
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -97,7 +97,7 @@ instanceOf
     </coordinates>
     <panel_attributes>*ExternalReference*
 --
--types[1..*] : URI
+-type[1..*] : URI
 -definition[1] : URI</panel_attributes>
     <additional_attributes/>
   </element>
