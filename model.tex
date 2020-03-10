@@ -330,9 +330,6 @@ For example, consider the \sbol{Component} for a network of two-input repressor 
 
 Just as a \sbol{SubComponent} represents an instance of a subsystem in the overall system represented by a  \sbol{Component}, a \sbol{SubComponent} represents an instance of a structural entity (represented by a \sbol{Component}) in the system. This concept allows a \sbol{Component} to assert different interactions for separate copies of the same structural entity if needed. For example, a \sbol{Component} might contain multiple \sbol{SubComponent}  objects that refer to the same promoter \sbol{Component}, but assert different interactions for these promoter copies based on their separate positions in another \sbol{Component} that represents the structure of the entire system.
 
-\subsubsection*{The \sbolheading{Location} property}
-\label{sec:Location}
-The \sbol{Location} property is OPTIONAL and 
 
 The \sbol{feature} property is OPTIONAL and MAY contain a set of \sbol{SequenceFeature} objects. Each \sbol{SequenceFeature} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{Component}.
 
