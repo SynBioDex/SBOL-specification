@@ -406,81 +406,6 @@ The \sbol{models} property is OPTIONAL and MAY specify a set of \sbol{URI} refer
 \sbol{Model} objects are placeholders that link \sbol{Component} objects to computational models of any format.
 A \sbol{Component} object can link to more than one \sbol{Model} since each might encode system behavior in a different way or at a different level of detail.
 
-\subsubsection*{Serialization}
-The serialization of a \sbol{Component} MUST have the form below.
-The \sbol{subcomponents},  \sbol{sequenceConstraints},  \sbol{sequenceAnnotations}, and \sbol{sequences} properties of a \sbol{Component} contain or reference objects belonging to the appropriate SBOL classes as their values, while the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} properties contain \sbol{URI}s that identify ontology terms as their values.
-
-As shown below, each of these objects and \sbol{URI}s are serialized as part of an implicit set of SBOL properties with singular rather then plural names.
-In particular, each object is serialized as an RDF/XML node nested within a property, while each \sbol{URI} (except the \sbol{identity}) is serialized as an \external{rdf:resource} on a property.
-
-\lstsetsbol
-\begin{lstlisting}
-<sbol:Component rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  [\emph{zero or more}]  <sbol:sequence rdf:resource="..."/> [\emph{element}]
-  [\emph{one or more}]   <sbol:type rdf:resource="..."/> [\emph{elements}]
-  [\emph{zero or more}]  <sbol:role rdf:resource="..."/> [\emph{elements}]
-  [\emph{zero or more}]  <sbol:component>
-                 <sbol:Component rdf:about="...">...</sbol:Component>
-               </sbol:component> [\emph{elements}]
-  [\emph{zero or more}] <sbol:sequenceAnnotation>
-                 <sbol:SequenceAnnotation rdf:about="...">...</sbol:SequenceAnnotation>
-               </sbol:sequenceAnnotation> [\emph{elements}]
-  [\emph{zero or more}] <sbol:sequenceConstraint>
-                 <sbol:SequenceConstraint rdf:about="...">...</sbol:SequenceConstraint>
-               </sbol:sequenceConstraint> [\emph{elements}]
-  [\emph{zero or more}] <sbol:interaction>
-                 <sbol:Interaction rdf:about="...">...</sbol:Interaction>
-               </sbol:interaction> [\emph{elements}]
-  [\emph{zero or more}]  <sbol:model rdf:resource="..."/> [\emph{elements}]
-</sbol:Component>
-\end{lstlisting}
-
-
-The example below shows the serialization for the \sbol{Component} of a promoter. The BioPAX term \external{DnaRegion} and the ChEBI term \external{CHEBI:4705} (\external{double-stranded DNA}) are used to indicate that the type of biological entity represented by this \sbol{Component} is DNA. Its role is specified using the SO terms \external{SO:0000167} (\external{promoter}) and the more specific \external{SO:0000613} (\external{bacterial\_RNApol\_promoter}).
-
-\lstsetsbol
-\begin{lstlisting}
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#">
-  <sbol:Component rdf:about="http://partsregistry.org/cd/BBa_J23119">
-    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119"/>
-    <sbol:displayId>BBa_J23119</sbol:displayId>
-    <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
-    <dcterms:title>J23119 promoter</dcterms:title>
-    <dcterms:description>Constitutive promoter</dcterms:description>
-    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987">
-    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
-    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000613"/>
-    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
-  </sbol:Component>
-</rdf:RDF>
-\end{lstlisting}
-
-The example below shows a simple \sbol{Component} containing two components, a \sbol{SubComponent} for a DNA sequence encoding constitutive expression of GFP and another for the GFP protein expressed from this sequence, plus an interaction describing that relation.
-
-\lstsetsbol
-\begin{lstlisting}
-<sbol:Component rdf:about="http://sbolstandard.org/example/md/GFP_expression">
-  <sbol:component>
-    <sbol:Component rdf:about="http://sbolstandard.org/example/md/GFP_expression/GFP_protein">
-      <sbol:instanceOf rdf:resource="http://sbolstandard.org/example/GFP"/>
-    </sbol:Component>
-  </sbol:component>
-  <sbol:component>
-    <sbol:Component rdf:about="http://sbolstandard.org/example/md/GFP_expression/Constitutive_GFP">
-      <sbol:instanceOf rdf:resource="http://sbolstandard.org/example/GFP_generator"/>
-    </sbol:Component>
-  </sbol:component>
-  <sbol:interaction>
-    <sbol:Interaction rdf:about="http://sbolstandard.org/example/md/GFP_expression/express_GFP">
-      ...
-    </sbol:Interaction>
-  </sbol:interaction>
-</sbol:Component>
-\end{lstlisting}
-
 \subsubsection{Interaction}
 \label{sec:Interaction}
 
@@ -584,28 +509,6 @@ Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} cont
 
 The \sbol{participant} property MUST specify precisely one \sbol{SubComponent} object that plays the designated role in its parent \sbol{Interaction} object.
 
-
-\paragraph{Serialization}
-
-The serialization of \sbol{Participation} objects has the following form.
-\lstsetsbol
-\begin{lstlisting}
-<sbol:Participation rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  [\emph{zero or more}] <sbol:role rdf:resource="..."/> [\emph{elements}]
-  [\emph{one}]          <sbol:participant rdf:resource="..."/> [\emph{element}]
-</sbol:Participation>
-\end{lstlisting}
-
-In the example below, the role of participating \sbol{SubComponent} is defined to be \external{inhibitor}, using the \external{SBO:0000020} term. This component is specified using the \sbol{participant} property of the \sbol{Participation} entity.
-\lstsetsbol
-\begin{lstlisting}
-<sbol:Participation rdf:about="http://sbolstandard.org/example/laci_inverter/LacI_pLacI/P03023">
-  <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000020"/>
-  <sbol:participant rdf:resource="http://sbolstandard.org/example/laci_inverter/TF"/>
-</sbol:Participation>
-\end{lstlisting}
-
 \subsubsection{Interface}
 \label{sec:Interface}
 
@@ -707,37 +610,7 @@ allows for only a portion of a \sbol{ComponentDefinition}'s \sbol{Sequence} to b
 If the \sbol{sourceLocations} property is not set, then the whole \sbol{Sequence} is assumed to be included. Alternatively,
 if the \sbol{sourceLocations} property is set, then the relationship between the original \sbol{Component}'s
 \sbol{Sequence} and the included \sbol{Sequence} is defined identically to the \sbol{locations}
-property on the \sbol{SequenceAnnotation} object.
-
-
-\paragraph{Serialization}
-
-The serialization of a \sbol{SubComponent} MUST have the following form:
-
-\lstsetsbol
-\begin{lstlisting}
-<sbol:Component rdf:about="...">
-  ... [\emph{properties inherited from identified}] ...
-  [\emph{one}]          <sbol:instanceOf rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or more}] <sbol:mapsTo rdf:resource="..."/> [\emph{elements}]
-  [\emph{zero or more}] <sbol:role rdf:resource="..."/> [\emph{elements}]
-  [\emph{zero or one}]  <sbol:roleIntegration rdf:resource="..."/> [\emph{element}]
-  [\emph{zero or one}]  <sbol:sourceLocation rdf:resource="..."/> [\emph{element}]
-</sbol:Component>
-\end{lstlisting}
-
-The example below shows the serialization of a \sbol{SubComponent}
-that represents an instance of a promoter:
-
-\lstsetsbol
-\begin{lstlisting}
-<sbol:SubComponent rdf:about="http://partsregistry.org/cd/BBa_F2620/pLuxR">
-  <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/pLuxR"/>
-  <sbol:displayId>pLuxR</sbol:displayId>
-  <sbol:instanceOf rdf:resource="http://partsregistry.org/cd/BBa_R0062"/>
-</sbol:SubComponent>
-\end{lstlisting}
-
+property on the \sbol{SequenceFeature} object.
 
 
 \subsubsection{MapsTo}
