@@ -571,6 +571,9 @@ The \sbol{location} property is an OPTIONAL set which points to a \sbol{Location
 
 The \sbol{Location} record(s) specified by a \sbol{SubComponent} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbol{Location}. Concretely, two \sbol{Location} records attached to the same \sbol{SubComponent} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{SubComponents} may overlap.
 
+\paragraph{The \sbolheading{orientation} property}\label{sec:orientation2}
+The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Feature} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{SubComponent} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Feature} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
+
 \todo{add best practice here talking about EntireComponent?}
 
 \subsubsection{MapsTo}
@@ -711,16 +714,14 @@ This specification is accomplished using the \sbol{at} property, which specifies
 \label{sec:at}
 The \sbol{at} property is REQUIRED and MUST contain an \sbol{Integer} value greater than or equal to zero. The region specified by the \sbol{Cut} is between the position specified by this property and the position that immediately follows it. When the \sbol{at} property is equal to zero, the specified region is immediately before the first discrete position or character in the \sbol{elements} \sbol{String} of a \sbol{Sequence}.
 
-\paragraph{GenericLocation}
-\label{sec:GenericLocation}
-
-While the \sbol{Range} and \sbol{Cut} classes are best suited to
-specifying regions on \sbol{Sequence} objects with \external{IUPAC} encodings, the
-\sbol{GenericLocation} class is included as a starting point for specifying regions on \sbol{Sequence} objects with different \sbol{encoding} properties and potentially nonlinear structure. This class can also be used to set the \sbol{orientation} of a \sbol{SequenceFeature} and any associated \sbol{SubComponent} when their parent \sbol{Component} is a partial design that lacks a \sbol{Sequence}.
 
 \paragraph{EntireSequence}
 \label{sec:EntireSequence}
 The \sbol{EntireSequence} class does not have any additional properties. Use of this class indicates that the linked Sequence describes the entirety of the \sbol{Component} or \sbol{SubComponent} parent of this Location object.
+
+\paragraph{The \sbolheading{order} property}
+\label{sec:order}
+
 
 \subsubsection{Constraint}
 \label{sec:Constraint}
