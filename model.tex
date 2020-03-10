@@ -38,7 +38,7 @@ Finally, classes can inherit the properties of other classes. Inheritance relati
 \label{sec:nameconventions}
 
 SBOL classes are named using upper "camel case," meaning that each word is capitalized and all words are run together without spaces, e.g. \sbol{Identified}, \sbol{SequenceAnnotation}.
-Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbol{identity}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{persistentIdentity}).
+Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbol{identity}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}).
 
 Within the SBOL data model, each property is given a singular or plural name in accordance with its data cardinalities.
 The forms of these names follow the usual rules of English grammar. For example, sequenceAnnotation is the singular form of \sbol{sequenceAnnotations}.
@@ -90,12 +90,8 @@ It is important to realize that in RDF, a \sbol{URI} might or might not be a res
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
 This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
 
-As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{persistentIdentity}, \sbol{version}, \sbol{wasDerivedFroms}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}.
+As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{identity}, \sbol{wasDerivedFroms}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}. The value of an \sbol{identity} property is guaranteed to be unique, and it refers to precisely one SBOL object with that \sbol{URI}.
 
-When an SBOL resource reference takes the form of a \sbol{URI}, that \sbol{URI} can either be the value of an \sbol{identity} property or the value of a \sbol{persistentIdentity} property.
-If the \sbol{URI} is equal to the value of an \sbol{identity} property, then it is guaranteed to be unique, and it refers to precisely one SBOL object with that \sbol{URI}.
-If the \sbol{URI} is equal to the value of a \sbol{persistentIdentity} property, then it MAY refer to multiple SBOL objects that are different ``versions'' of each other. These objects SHOULD be compared to one another to determine which single object the \sbol{URI} resolves to (normally the most recent version - see \ref{sec:version}).
-Throughout this document, when a \sbol{URI} is used to refer to an SBOL object, it could fall into either of these cases.
 
 \begin{figure}[ht]
 \begin{center}
@@ -115,12 +111,6 @@ Although most SBOL properties are defined by SBOL and serialized with its namesp
 
 The use of \external{about} is expressly for the purpose of making SBOL compliant with pre-existing standards: when you see \external{about} in an SBOL document, you SHOULD interpret it as meaning \sbol{identity}.
 
-\subsubsection*{The \sbolheading{persistentIdentity} property}
-\label{sec:persistentIdentity}
-The \sbol{persistentIdentity} property is OPTIONAL and has a data type of \sbol{URI}. This \sbol{URI} serves to uniquely refer to a set of SBOL objects of the same class that are different versions of each other.
-
-An \sbol{Identified} object MUST be referred to using either its \sbol{identity} \sbol{URI} or its \sbol{persistentIdentity} \sbol{URI}.
-
 \subsubsection*{The \sbolheading{displayId} property}
 \label{sec:displayId}
 The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between \sbol{name} and \sbol{identity} that is machine-readable, but more human-readable than the full \sbol{URI} of an \sbol{identity}.
@@ -129,24 +119,13 @@ If the \sbol{displayId} property is used, then its \sbol{String} value MUST be c
 
 % compliant with the type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}, except that it MUST not include the characters "-" and ".".
 
-\subsubsection*{The \sbolheading{version} property}
-\label{sec:version}
-
-The \sbol{version} property is OPTIONAL and has a data type of \sbol{String}. This property can be used to compare two SBOL objects with the same \sbol{persistentIdentity}.
-
-If the \sbol{version} property is used, then it is RECOMMENDED that version numbering follow the conventions of semantic versioning (\url{http://semver.org/}), particularly as implemented by Maven (\url{http://maven.apache.org/}).
-This convention represents versions as sequences of numbers and qualifiers that are separated by the characters ``{\tt .}'' and ``{\tt -}'' and are compared in lexicographical order (for example, 1 < 1.3.1 < 2.0-beta).
-For a full explanation, see the linked resources.
-
 \subsubsection*{The \sbolheading{wasDerivedFroms} property}
 \label{sec:wasDerivedFroms}
 
 
 The \sbol{wasDerivedFroms} property is OPTIONAL and MAY specify a set of \sbol{URI}s. An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived.
 
-The \sbol{wasDerivedFroms} property of a \sbol{TopLevel} SBOL object is subject to the following rules.
-If any members of the \sbol{wasDerivedFroms} property of an SBOL object $A$ that refers to an SBOL object $B$ has an identical \sbol{persistentIdentity}, and both $A$ and $B$ have a \sbol{version}, then the \sbol{version} of $B$ MUST precede that of $A$.
-In addition, an SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFroms} property or form a cyclical chain of references via its \sbol{wasDerivedFroms} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
+An SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFroms} property or form a cyclical chain of references via its \sbol{wasDerivedFroms} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
 
 
 \subsubsection*{The \sbolheading{name} property}
