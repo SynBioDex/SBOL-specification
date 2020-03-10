@@ -9,7 +9,7 @@ Namespaces for different versions of SBOL SHOULD NOT be semantically mixed in th
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
-Maintaining unique \sbol{identity} \sbol{URI}s for all SBOL objects can be a very challenging implementation task.  To reduce this burden, users of SBOL 3.x are encouraged to follow a few simple rules when constructing the \sbol{identity} properties and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
+Maintaining unique URIs for all SBOL objects can be a very challenging implementation task.  To reduce this burden, users of SBOL 3.x are encouraged to follow a few simple rules when constructing the URIs and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
 
 Compliant URIs for \sbol{TopLevel} objects MUST conform to the following pattern:
 \begin{quotation} 
@@ -27,7 +27,7 @@ collection: ``promoters/constitutive'' \linebreak
 displayId: ``BBa\_J23101'' \linebreak
 \end{quote}
 
-SBOL-compliant URIs greatly facilitate auto-construction of child objects with unique \sbol{URI}s. Child objects of \sbol{TopLevel} with compliant \sbol{URI}s MUST conform to the following pattern: ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the \sbol{identity} of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. The \refObj{child\_type\_counter} of a new object will generally be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_uri}/SequenceAnnotation37''. Note that numbering is independent for each type, so a \sbol{Component} can have children ``SubComponent37'' and ``Constraint37''.
+SBOL-compliant URIs greatly facilitate auto-construction of child objects with unique \sbol{URI}s. Child objects of \sbol{TopLevel} with compliant \sbol{URI}s MUST conform to the following pattern: ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the URI of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. The \refObj{child\_type\_counter} of a new object will generally be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_uri}/SequenceAnnotation37''. Note that numbering is independent for each type, so a \sbol{Component} can have children ``SubComponent37'' and ``Constraint37''.
 
 All examples in this specification use compliant \sbol{URI}s.
 
@@ -101,7 +101,7 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
 The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.
 
 \subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
-Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time). An example serialization is shown below:
+Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time).
 
 \subsection{Annotating Entities with Authorship information}\label{sec:Authorship}
 Authorship information should ideally be added to \sbol{TopLevel} entities, where possible. It is RECOMMENDED that the \texttt{creator} DCMI Metadata term SHOULD be used to annotate SBOL entities with authorship information. This property can be repeated for each author. The example below shows the use of this property for two authors and the values shown are free text \texttt{String} literals.
