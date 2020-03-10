@@ -386,6 +386,7 @@ The \sbol{feature} property MUST NOT contain two or more \sbol{SequenceFeature} 
 
 Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceFeature} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
 For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceFeature} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
+\todo{Prashant: Delete the feature property from the Component (now Feature) class.}
 
 \subsubsection*{The \sbolheading{constraint} property}
 \label{sec:constraint}
@@ -780,10 +781,10 @@ Each \sbol{Constraint} includes the \sbol{restriction}, \sbol{subject}, and \sbo
 \end{figure}
 
 \paragraph{The \sbolheading{subject} property}\label{sec:subject}
-The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{ComponentInstance} or a \sbol{SequenceFeature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}.
+The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Feature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}.
 
 \paragraph{The \sbolheading{object} property}\label{sec:object}
-The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{ComponentInstance} or a \sbol{SequenceFeature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}. This \sbol{ComponentInstance} or \sbol{SequenceFeature} MUST NOT be the same \sbol{ComponentInstance} or \sbol{SequenceFeature} that the \sbol{Constraint} refers to via its \sbol{subject} property.
+The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Feature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}. This \sbol{Feature} MUST NOT be the same \sbol{Feature} that the \sbol{Constraint} refers to via its \sbol{subject} property.
 
 \paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
