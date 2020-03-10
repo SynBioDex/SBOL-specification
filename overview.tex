@@ -35,7 +35,7 @@ To continue with the pUC18 example, the description would begin with a top-level
 The top-level \sbol{Component} specifies the structural elements that make up the cassette by referencing a number of \sbol{SubComponent} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
 The \sbol{Component} objects can be organized hierarchically.  
 For example, the plasmid \sbol{Component} might reference \sbol{Component}s for the promoter, coding sequence, etc.  
-Each \sbol{Component} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceAnnotation} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
+Each \sbol{Component} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceFeature} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
 In order to specify functional information, the \sbol{Component} can also specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{Component} object can point to a \sbol{Model} object that provides a reference to a complete computational model using a language such as SBML  ~\cite{SBML}, CellML ~\cite{CellML}, MATLAB ~\cite{matlab}, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
 
 \begin{sidewaysfigure}[ht]
