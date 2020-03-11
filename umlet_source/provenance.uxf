@@ -11,7 +11,7 @@
     </coordinates>
     <panel_attributes>/Identified/
 --
-- wasDerivedFroms [0..*] : URI</panel_attributes>
+- wasDerivedFrom [0..*] : URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -73,7 +73,7 @@
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-wasGeneratedBys 
+wasGeneratedBy 
            0..*</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;170.0;110.0;170.0</additional_attributes>
   </element>
@@ -87,7 +87,7 @@ wasGeneratedBys
     </coordinates>
     <panel_attributes>Association
 --
-- roles [0..*]: URI</panel_attributes>
+- role [0..*]: URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -125,7 +125,7 @@ agent
     <panel_attributes>Usage
 --
 - entity [1]: URI
-- roles [0..*]: URI</panel_attributes>
+- role [0..*]: URI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -185,7 +185,7 @@ plan
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-wasInformedBys
+wasInformedBy
 0..*</panel_attributes>
     <additional_attributes>30.0;60.0;30.0;20.0;90.0;20.0;90.0;60.0</additional_attributes>
   </element>
