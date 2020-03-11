@@ -1,49 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>200</x>
       <y>190</y>
-      <w>220</w>
-      <h>150</h>
+      <w>250</w>
+      <h>120</h>
     </coordinates>
-    <panel_attributes>/*Identified*/
+    <panel_attributes>*Identified*
 --
--identity[1] : URI
--persistentIdentity[0..1] : URI
 -displayId[0..1] : String
--version[0..1] : String
--wasDerivedFrom[0..*] : URI
 -name[0..1] : String
 -description[0..1] : String
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>390</x>
-      <y>220</y>
-      <w>180</w>
-      <h>94</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-annotation
-0..*</panel_attributes>
-    <additional_attributes>30;50;160;50</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>550</x>
-      <y>260</y>
-      <w>110</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*/Annotation/*
-
+-prov:wasDerivedFrom[0..*] : URI
+-prov:wasGeneratedBy[0..*] : URI
 </panel_attributes>
     <additional_attributes/>
   </element>
