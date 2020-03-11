@@ -74,9 +74,10 @@ Reference: \sec{sec:Identified}}
 
 \printModeling{\st{The displayId property of an Identified object SHOULD be locally unique. \\ 
 Reference: Section 7.4 on page 16}}
+\todo[inline]{fix this static reference to not be static}
 
-%\printModeling{The \sbol{version} property of an \sbol{Identified} object SHOULD follow the conventions of semantic versioning as implemented by Maven. \\ 
-%Reference: \sec{sec:Identified}}
+\printValid{The \sbol{measure} property of an \sbol{Identified} object is OPTIONAL and may contain a set of \sbol{Measure} objects. \\ 
+Reference: \sec{sec:Identified}}
 
 \printModeling{(moved to sbol-10302)}
 
@@ -570,10 +571,6 @@ Reference: \sec{sec:sequence}}
 Reference: \sec{sec:Participation}}
 
 
-\printValid{The \sbolmult{measures:I}{measures} property of an \sbol{Interaction} is OPTIONAL and may contain a set of \sbol{Measure} objects.
-\\ Reference: \sec{sec:Interaction}}
-
-
 \subsubsection*{Rules for the \class{Participation} class} 
 \setcounter{sbolCtr}{12001}
 
@@ -595,10 +592,6 @@ Reference: \sec{sec:Participation}}
 
 
 \printModeling{Exactly one role in the set of \sbolmult{roles:P}{roles} SHOULD be a \sbol{URI} from the participant role branch of the SBO (see \ref{tbl:participant_roles}).\\ Reference: \sec{sec:Participation}}
-
-
-\printValid{The \sbolmult{measures:P}{measures} property of a \sbol{Participation} is OPTIONAL and may contain a set of \sbol{Measure} objects.
-\\ Reference: \sec{sec:Participation}}
 
 
 \subsubsection*{Rules for the \class{Collection} class} 
