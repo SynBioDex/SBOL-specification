@@ -163,135 +163,6 @@ The \sbol{models} property is OPTIONAL and MAY specify a set of \sbol{URI} refer
 \sbol{Model} objects are placeholders that link \sbol{Component} objects to computational models of any format.
 A \sbol{Component} object can link to more than one \sbol{Model} since each might encode system behavior in a different way or at a different level of detail.
 
-\subsubsection{Interaction}
-\label{sec:Interaction}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/interaction}
-\caption[]{Diagram of the \sbol{Interaction} class and its associated properties.}
-\label{uml:interaction}
-\end{center}
-\end{figure}
-
-The \sbol{Interaction} class provides more detailed description of how the \sbol{Feature} objects of a\\ \sbol{Component} are intended to work together.
-For example, this class can be used to represent different forms of genetic regulation (e.g., transcriptional activation or repression), processes from the central dogma of biology (e.g. transcription and translation), and other basic molecular interactions (e.g., non-covalent binding or enzymatic phosphorylation).
-Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refers to descriptive ontology terms and a \sbol{participations} property that describes which \sbol{Feature} objects participate in the \sbol{Interaction}.
-
-\subparagraph{The \sbolheading{types} property}\label{sec:types:I}
-
-The \sbolmult{types:I}{types} property is a REQUIRED set of \sbol{URI}s that describes the behavior represented by an \sbol{Interaction}.
-
-The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{types:I}{types} property refer to a term from the occurring entity branch of the Systems Biology Ontology (SBO). (See \url{http://www.ebi.ac.uk/sbo/main/}) \ref{tbl:interaction_types} provides a list of possible SBO terms for the \sbolmult{types:I}{types} property and their corresponding \sbol{URI}s.
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{ll}
-    \toprule
-    \textbf{Interaction Type} & \textbf{URI for SBO Term} \\
-    \midrule
-    Inhibition  & \url{http://identifiers.org/biomodels.sbo/SBO:0000169}\\
-    Stimulation & \url{http://identifiers.org/biomodels.sbo/SBO:0000170}\\
-    Biochemical Reaction & \url{http://identifiers.org/biomodels.sbo/SBO:0000176}\\
-    Non-Covalent Binding & \url{http://identifiers.org/biomodels.sbo/SBO:0000177}\\
-    Degradation & \url{http://identifiers.org/biomodels.sbo/SBO:0000179}\\
-    Genetic Production & \url{http://identifiers.org/biomodels.sbo/SBO:0000589}\\
-    Control  & \url{http://identifiers.org/biomodels.sbo/SBO:0000168} \\
-    \bottomrule
-  \end{edtable}
-  \caption{SBO terms to specify the \sbolmult{types:I}{types} property of an \sbol{Interaction}.}
-  \label{tbl:interaction_types}
-\end{table}
-
-If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:interaction_types}, then its \sbolmult{types:I}{types} property MUST contain the \sbol{URI} that identifies this term. Lastly, if the \sbolmult{types:I}{types} property of an \sbol{Interaction} contains multiple
- \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulation'' and ``inhibition'' would conflict.
-
-\subparagraph{The \sbolheading{participations} property}\label{sec:participations}
-
-The \sbol{participations} property is an OPTIONAL and MAY contain a set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that its referenced \sbol{Feature} plays in the \sbol{Interaction}.
-
-Even though an \sbol{Interaction} generally contains at least one \sbol{Participation}, the case of zero \sbol{Participation} objects is allowed because it is plausible that a designer might want to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s have not yet been determined.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/participation}
-\caption[]{Diagram of the \sbol{Participation} class and its associated properties.}
-\label{uml:participation}
-\end{center}
-\end{figure}
-
-\subsubsection{Participation}
-\label{sec:Participation}
-
-Each \sbol{Participation} represents how a particular \sbol{Feature} behaves in its parent
-\sbol{Interaction}.
-
-\subparagraph{The \sbolheading{roles} property}\label{sec:roles:P}
-
-The \sbolmult{roles:P}{roles} property is a REQUIRED set of \sbol{URI}s that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{Feature}) in the context of its parent \sbol{Interaction}.
-
-The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{roles:P}{roles} property refer to a term from the participant role branch of the SBO. \ref{tbl:participant_roles} provides a list of possible SBO terms for the \sbolmult{roles:P}{roles} property and their corresponding \sbol{URI}s.
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{lll}
-    \toprule
-    \textbf{Participation Role} & \textbf{URI for SBO Term} & \textbf{Interaction Types}\\
-    \midrule
-    Inhibitor  & \url{http://identifiers.org/biomodels.sbo/SBO:0000020} & Inhibition\\
-    Inhibited  & \url{http://identifiers.org/biomodels.sbo/SBO:0000642} & Inhibition\\
-    Stimulator & \url{http://identifiers.org/biomodels.sbo/SBO:0000459}  & Stimulation\\
-    Stimulated & \url{http://identifiers.org/biomodels.sbo/SBO:0000643}  & Stimulation\\
-     Reactant & \url{http://identifiers.org/biomodels.sbo/SBO:0000010}  & Non-Covalent Binding, Degradation \\
-     & & Biochemical Reaction \\
-    Product & \url{http://identifiers.org/biomodels.sbo/SBO:0000011}  & Non-Covalent Binding, \\
-    & & Genetic Production, Biochemical Reaction\\
-    Promoter  & \url{http://identifiers.org/biomodels.sbo/SBO:0000598} & Inhibition, Stimulation, Genetic Production\\
-    Modifier  & \url{http://identifiers.org/biomodels.sbo/SBO:0000019} & Biochemical Reaction, Control\\
-    Modified  & \url{http://identifiers.org/biomodels.sbo/SBO:0000644} & Biochemical Reaction, Control\\
-    Template  & \url{http://identifiers.org/biomodels.sbo/SBO:0000645} & Genetic Production\\
-%    Ligand & \url{http://identifiers.org/biomodels.sbo/SBO:0000280}\\
-%    Non-Covalent Complex & \url{http://identifiers.org/biomodels.sbo/SBO:0000253}\\
-    \bottomrule
-  \end{edtable}
-  \caption{SBO terms to specify the \sbolmult{roles:P}{roles} property of a \sbol{Participation}.}
-  \label{tbl:participant_roles}
-\end{table}
-
-If a \sbol{Participation} is well described by one of the terms from \ref{tbl:participant_roles}, then its \sbolmult{roles:P}{roles} property MUST contain the \sbol{URI} that identifies this term.
-Also, if a \sbol{Participation} belongs to an \sbol{Interaction} that has a type listed in \ref{tbl:interaction_types}, then the \sbol{Participation} SHOULD have a role that is cross-listed with this type in \ref{tbl:participant_roles}.
-Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} contains multiple
- \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulator'' and ``inhibitor'' would conflict.
-
-
-\subparagraph{The \sbolheading{participant} property}\label{sec:participant}
-
-The \sbol{participant} property MUST specify precisely one \sbol{Feature} object that plays the designated role in its parent \sbol{Interaction} object.
-
-
-\subsubsection{Interface}
-\label{sec:Interface}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/interface}
-\caption[]{Diagram of the \sbol{Interface} class and its associated properties.}
-\label{uml:interface}
-\end{center}
-\end{figure}
-
-The \sbol{Interface} class is a way of explicitly specifying the interface of a \sbol{Component}. 
-
-\subparagraph{The \sbolheading{input} property}
-\label{sec:input:Interface}
-The \sbolmult{input:Interface}{input} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}.
-\subparagraph{The \sbolheading{output} property}
-\label{sec:output:Interface}
-The \sbolmult{output:Interface}{output} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}.
-
-\subparagraph{The \sbolheading{nondirectional} property}
-\label{sec:nondirectional:Interface}
-The \sbolmult{nondirectional:Interface}{nondirectional} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}. Note that nondirectional can imply both bidirectional as well as situations where there are no flows (for instance - a physical interface).
-
-
 \subsubsection{Feature}
 \label{sec:Feature}
 
@@ -597,5 +468,135 @@ The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI
   \caption{RECOMMENDED \sbol{URI}s for expressing sequential relations with the \sbol{restriction} property.}
   \label{tbl:restriction_types_sequence}
 \end{table}
+
+
+\subsubsection{Interaction}
+\label{sec:Interaction}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/interaction}
+\caption[]{Diagram of the \sbol{Interaction} class and its associated properties.}
+\label{uml:interaction}
+\end{center}
+\end{figure}
+
+The \sbol{Interaction} class provides more detailed description of how the \sbol{Feature} objects of a\\ \sbol{Component} are intended to work together.
+For example, this class can be used to represent different forms of genetic regulation (e.g., transcriptional activation or repression), processes from the central dogma of biology (e.g. transcription and translation), and other basic molecular interactions (e.g., non-covalent binding or enzymatic phosphorylation).
+Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refers to descriptive ontology terms and a \sbol{participations} property that describes which \sbol{Feature} objects participate in the \sbol{Interaction}.
+
+\subparagraph{The \sbolheading{types} property}\label{sec:types:I}
+
+The \sbolmult{types:I}{types} property is a REQUIRED set of \sbol{URI}s that describes the behavior represented by an \sbol{Interaction}.
+
+The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{types:I}{types} property refer to a term from the occurring entity branch of the Systems Biology Ontology (SBO). (See \url{http://www.ebi.ac.uk/sbo/main/}) \ref{tbl:interaction_types} provides a list of possible SBO terms for the \sbolmult{types:I}{types} property and their corresponding \sbol{URI}s.
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Interaction Type} & \textbf{URI for SBO Term} \\
+    \midrule
+    Inhibition  & \url{http://identifiers.org/biomodels.sbo/SBO:0000169}\\
+    Stimulation & \url{http://identifiers.org/biomodels.sbo/SBO:0000170}\\
+    Biochemical Reaction & \url{http://identifiers.org/biomodels.sbo/SBO:0000176}\\
+    Non-Covalent Binding & \url{http://identifiers.org/biomodels.sbo/SBO:0000177}\\
+    Degradation & \url{http://identifiers.org/biomodels.sbo/SBO:0000179}\\
+    Genetic Production & \url{http://identifiers.org/biomodels.sbo/SBO:0000589}\\
+    Control  & \url{http://identifiers.org/biomodels.sbo/SBO:0000168} \\
+    \bottomrule
+  \end{edtable}
+  \caption{SBO terms to specify the \sbolmult{types:I}{types} property of an \sbol{Interaction}.}
+  \label{tbl:interaction_types}
+\end{table}
+
+If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:interaction_types}, then its \sbolmult{types:I}{types} property MUST contain the \sbol{URI} that identifies this term. Lastly, if the \sbolmult{types:I}{types} property of an \sbol{Interaction} contains multiple
+ \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulation'' and ``inhibition'' would conflict.
+
+\subparagraph{The \sbolheading{participations} property}\label{sec:participations}
+
+The \sbol{participations} property is an OPTIONAL and MAY contain a set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that its referenced \sbol{Feature} plays in the \sbol{Interaction}.
+
+Even though an \sbol{Interaction} generally contains at least one \sbol{Participation}, the case of zero \sbol{Participation} objects is allowed because it is plausible that a designer might want to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s have not yet been determined.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/participation}
+\caption[]{Diagram of the \sbol{Participation} class and its associated properties.}
+\label{uml:participation}
+\end{center}
+\end{figure}
+
+\subsubsection{Participation}
+\label{sec:Participation}
+
+Each \sbol{Participation} represents how a particular \sbol{Feature} behaves in its parent
+\sbol{Interaction}.
+
+\subparagraph{The \sbolheading{roles} property}\label{sec:roles:P}
+
+The \sbolmult{roles:P}{roles} property is a REQUIRED set of \sbol{URI}s that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{Feature}) in the context of its parent \sbol{Interaction}.
+
+The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{roles:P}{roles} property refer to a term from the participant role branch of the SBO. \ref{tbl:participant_roles} provides a list of possible SBO terms for the \sbolmult{roles:P}{roles} property and their corresponding \sbol{URI}s.
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{lll}
+    \toprule
+    \textbf{Participation Role} & \textbf{URI for SBO Term} & \textbf{Interaction Types}\\
+    \midrule
+    Inhibitor  & \url{http://identifiers.org/biomodels.sbo/SBO:0000020} & Inhibition\\
+    Inhibited  & \url{http://identifiers.org/biomodels.sbo/SBO:0000642} & Inhibition\\
+    Stimulator & \url{http://identifiers.org/biomodels.sbo/SBO:0000459}  & Stimulation\\
+    Stimulated & \url{http://identifiers.org/biomodels.sbo/SBO:0000643}  & Stimulation\\
+     Reactant & \url{http://identifiers.org/biomodels.sbo/SBO:0000010}  & Non-Covalent Binding, Degradation \\
+     & & Biochemical Reaction \\
+    Product & \url{http://identifiers.org/biomodels.sbo/SBO:0000011}  & Non-Covalent Binding, \\
+    & & Genetic Production, Biochemical Reaction\\
+    Promoter  & \url{http://identifiers.org/biomodels.sbo/SBO:0000598} & Inhibition, Stimulation, Genetic Production\\
+    Modifier  & \url{http://identifiers.org/biomodels.sbo/SBO:0000019} & Biochemical Reaction, Control\\
+    Modified  & \url{http://identifiers.org/biomodels.sbo/SBO:0000644} & Biochemical Reaction, Control\\
+    Template  & \url{http://identifiers.org/biomodels.sbo/SBO:0000645} & Genetic Production\\
+%    Ligand & \url{http://identifiers.org/biomodels.sbo/SBO:0000280}\\
+%    Non-Covalent Complex & \url{http://identifiers.org/biomodels.sbo/SBO:0000253}\\
+    \bottomrule
+  \end{edtable}
+  \caption{SBO terms to specify the \sbolmult{roles:P}{roles} property of a \sbol{Participation}.}
+  \label{tbl:participant_roles}
+\end{table}
+
+If a \sbol{Participation} is well described by one of the terms from \ref{tbl:participant_roles}, then its \sbolmult{roles:P}{roles} property MUST contain the \sbol{URI} that identifies this term.
+Also, if a \sbol{Participation} belongs to an \sbol{Interaction} that has a type listed in \ref{tbl:interaction_types}, then the \sbol{Participation} SHOULD have a role that is cross-listed with this type in \ref{tbl:participant_roles}.
+Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} contains multiple
+ \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulator'' and ``inhibitor'' would conflict.
+
+
+\subparagraph{The \sbolheading{participant} property}\label{sec:participant}
+
+The \sbol{participant} property MUST specify precisely one \sbol{Feature} object that plays the designated role in its parent \sbol{Interaction} object.
+
+
+\subsubsection{Interface}
+\label{sec:Interface}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/interface}
+\caption[]{Diagram of the \sbol{Interface} class and its associated properties.}
+\label{uml:interface}
+\end{center}
+\end{figure}
+
+The \sbol{Interface} class is a way of explicitly specifying the interface of a \sbol{Component}. 
+
+\subparagraph{The \sbolheading{input} property}
+\label{sec:input:Interface}
+The \sbolmult{input:Interface}{input} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}.
+\subparagraph{The \sbolheading{output} property}
+\label{sec:output:Interface}
+The \sbolmult{output:Interface}{output} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}.
+
+\subparagraph{The \sbolheading{nondirectional} property}
+\label{sec:nondirectional:Interface}
+The \sbolmult{nondirectional:Interface}{nondirectional} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}. Note that nondirectional can imply both bidirectional as well as situations where there are no flows (for instance - a physical interface).
+
 
 
