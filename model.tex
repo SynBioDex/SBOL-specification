@@ -98,7 +98,7 @@ In addition to the simple types listed above, SBOL also uses objects with types 
 \end{figure}
 
 
-\subsubsection*{The hasAttachment property}
+\subparagraph{The hasAttachment property}
 \label{sec:hasAttachment}
 A \sbol{TopLevel} object can have zero or more \sbol{hasAttachment} properties, each of type URI specifying an \sbol{Attachment} object. The \sbol{Attachment} class is described in more detail in Section~\ref{sec:Attachment}.
 
@@ -115,11 +115,11 @@ The purpose of the \sbol{Sequence} class is to represent the primary structure o
 \end{figure}
 
 
-\subsubsection*{The \sbolheading{elements} property}
+\subparagraph{The \sbolheading{elements} property}
 \label{sec:elements}
 The \sbol{elements} property is a REQUIRED \sbol{String} of characters that represents the constituents of a biological or chemical molecule. For example, these characters could represent the nucleotide bases of a molecule of DNA, the amino acid residues of a protein, or the atoms and chemical bonds of a small molecule.
 
-\subsubsection*{The \sbolheading{encoding} property}
+\subparagraph{The \sbolheading{encoding} property}
 \label{sec:encoding}
 The \sbol{encoding} property is REQUIRED and has a data type of \sbol{URI}. This property MUST indicate how the \sbol{elements} property of a \sbol{Sequence} MUST be formed and interpreted.
 
@@ -160,7 +160,7 @@ In addition, this class has properties for describing and organizing the substru
 \end{center}
 \end{figure} \todo{change diagram to reflect changes from SEP 41}
 
-\subsubsection*{The \sbolheading{types} property}
+\subparagraph{The \sbolheading{types} property}
 \label{sec:types:CD}
 
 The \sbolmult{types:CD}{types} property is a REQUIRED set of \sbol{URI}s that
@@ -228,7 +228,7 @@ that sequence features may be mapped or identified across this junction. \emph{D
  \label{tbl:component_topology}
 \end{table}
 
-\subsubsection*{The \sbolheading{roles} property}
+\subparagraph{The \sbolheading{roles} property}
 \label{sec:roles:CD}
 
 The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s that clarifies the potential function of the entity represented by a \sbol{Component} in a biochemical or physical context.
@@ -263,7 +263,7 @@ These \sbol{URI}s might identify descriptive biological roles, such as ``metabol
 \end{table}
 
 
-\subsubsection*{The \sbolheading{feature} property}
+\subparagraph{The \sbolheading{feature} property}
 \label{sec:feature}
 
 The \sbol{feature} property MAY have one or more \sbol{Feature} properties. The set of relations between \sbol{Feature} and \sbol{Component} objects is strictly acyclic (see \ref{sec:Feature}).
@@ -289,21 +289,21 @@ Just as a \sbol{Feature} represents an instance of a subsystem in the overall sy
 %Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceFeature} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
 %For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceFeature} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
 
-\subsubsection*{The \sbolheading{constraint} property}
+\subparagraph{The \sbolheading{constraint} property}
 \label{sec:constraint}
 
 The \sbol{constraint} property is OPTIONAL and MAY contain a set of \sbol{Constraint} objects. 
 These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{Feature} objects contained by the \sbol{Component}.
 For example, the \sbol{Component} of a gene might specify that the position of its promoter \sbol{Feature} precedes that of its CDS \sbol{Feature}. This is particularly useful when a \sbol{Component} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{Feature} objects using \sbol{SubComponent} objects using \sbol{Location} objects.
 
-\subsubsection*{The \sbolheading{interactions} property}\label{sec:interactions}
+\subparagraph{The \sbolheading{interactions} property}\label{sec:interactions}
 
 The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the \sbol{Component}.
 
 The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a \sbol{Component} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
 Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{Feature} objects involved in the \sbol{Interaction}.
 
-\subsubsection*{The \sbolheading{models} property}\label{sec:models}
+\subparagraph{The \sbolheading{models} property}\label{sec:models}
 The \sbol{models} property is OPTIONAL and MAY specify a set of \sbol{URI} references to \sbol{Model} objects.
 
 \sbol{Model} objects are placeholders that link \sbol{Component} objects to computational models of any format.
@@ -762,10 +762,10 @@ In this way, there is minimal duplication of standardization efforts and users o
 
 The meta-data provided by the \sbol{Model} class include the following properties: the \sbolmult{source:M}{source} or location of the actual content of the model, the \sbol{language} in which the model is implemented, and the model's \sbol{framework}.
 
-\subsubsection*{ The \sbolheading{source} property}\label{sec:source:M}
+\subparagraph{ The \sbolheading{source} property}\label{sec:source:M}
 The \sbolmult{source:M}{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file for a model.
 
-\subsubsection*{ The \sbolheading{language} property}\label{sec:language}
+\subparagraph{ The \sbolheading{language} property}\label{sec:language}
 The \sbol{language} property is REQUIRED and MUST contain a \sbol{URI} that specifies the language in which the model is implemented. It is RECOMMENDED that this \sbol{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology. \ref{tbl:model_types} provides a list of terms from this ontology and their \sbol{URI}s. If the \sbol{language} property of a \sbol{Model} is well-described by one these terms, then it MUST contain the \sbol{URI} for this term as its value.
 
 \begin{table}[ht]
@@ -783,7 +783,7 @@ The \sbol{language} property is REQUIRED and MUST contain a \sbol{URI} that spec
 \end{table}
 
 
-\subsubsection*{ The \sbolheading{framework} property}\label{sec:framework}
+\subparagraph{ The \sbolheading{framework} property}\label{sec:framework}
 The \sbol{framework} property is REQUIRED and MUST contain a \sbol{URI} that specifies the framework in which the model is implemented.
 It is RECOMMENDED this \sbol{URI} refer to a term from the modeling framework branch of the SBO when possible. A few suggested modeling frameworks and their corresponding \sbol{URI}s are shown in \ref{tbl:model_frameworks}. If the \sbol{framework} property of a \sbol{Model} is well-described by one these terms, then it MUST contain the \sbol{URI} for this term as its value.
 
@@ -818,7 +818,7 @@ Some examples of \sbol{Collection} objects:
 \end{center}
 \end{figure}
 
-\subsubsection*{The \sbolheading{members} property}\label{sec:members}
+\subparagraph{The \sbolheading{members} property}\label{sec:members}
 The \sbol{members} property of a \sbol{Collection} is OPTIONAL and MAY contain a set of \sbol{URI} references to zero or more \sbol{TopLevel} objects.
 
 \subsection{Namespace}
@@ -847,7 +847,7 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 \end{center}
 \end{figure}
 
-\subsubsection*{ The \sbolheading{template} property}\label{sec:template}
+\subparagraph{ The \sbolheading{template} property}\label{sec:template}
 
 The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
@@ -857,7 +857,7 @@ When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDeriv
 
 If the \sbolmult{types:CD}{types} property of the template \sbol{Component} contains one or more URIs, then the \sbolmult{types:CD}{types} property of the derived \sbol{Component} SHOULD also contain those URIs. The same holds true for the \sbolmult{roles:CD}{roles} properties of these \sbol{Component} objects.
 
-\subsubsection*{ The \sbolheading{variableComponents} property}\label{sec:variableComponents}
+\subparagraph{ The \sbolheading{variableComponents} property}\label{sec:variableComponents}
 
 The \sbol{variableComponents} property is OPTIONAL and MAY contain a set of \sbol{VariableComponent} objects. These \sbol{VariableComponent} objects are expected to denote the choices available when deriving the substructure of a new \sbol{Component} in accordance with a \sbol{CombinatorialDerivation}. The \sbol{variableComponents} property MUST NOT contain two or more \sbol{VariableComponent} objects that refer to the same template \sbol{Feature} via their \sbol{variable} properties.
 
@@ -868,7 +868,7 @@ If no \sbol{variable} property of one of these \sbol{VariableComponent} objects 
 Finally, all of these derived \sbol{Feature} objects MUST follow the \sbol{restriction} properties of any \\
 \sbol{Constraint} objects that refer to their corresponding template \sbol{Feature} objects.
 
-\subsubsection*{ The \sbolheading{strategy} property}\label{sec:strategy}
+\subparagraph{ The \sbolheading{strategy} property}\label{sec:strategy}
 The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URIs. If the \sbol{strategy} property is not empty, then it MUST contain a URI from \ref{tbl:strategy}. This property recommends how many \sbol{Component} objects a user SHOULD derive from the template \sbol{Component}.
 
 
@@ -899,27 +899,27 @@ The \sbol{VariableComponent} class can be used to specify a choice of \sbol{Comp
 \end{center}
 \end{figure}
 
-\subsubsection*{ The \sbolheading{variable} property}\label{sec:variable}
+\subparagraph{ The \sbolheading{variable} property}\label{sec:variable}
 
 The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \sbol{SubComponent} in the template \sbol{Component}. If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to this template \sbol{SubComponent}, then the \sbol{instanceOf} property of the derived \sbol{SubComponent} MUST refer to either (1) a \sbol{Component} referred to by the \sbol{variants} property of the \sbol{VariableComponent}, (2) a \sbol{Component} from a \sbol{Collection} referred to by the \sbol{variantCollections} property of the \sbol{VariableComponent}, or (3) a \sbol{Component} derived from a \sbol{CombinatorialDerivation} referred to by the \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 
 If the \sbolmult{roles:CD}{roles} property of the template \sbol{SubComponent} contains one or more URIs, then the \sbolmult{roles:CD}{roles} property of the derived \sbol{SubComponent} SHOULD also contain those URIs.
 
-\subsubsection*{ The \sbolheading{variants} property}\label{sec:variants}
+\subparagraph{ The \sbolheading{variants} property}\label{sec:variants}
 
 The \sbol{variants} property is OPTIONAL and MAY contain zero or more URIs that each refer to a \sbol{Component}. This property specifies individual \sbol{Component} objects to serve as options when deriving a new\\
 \sbol{SubComponent} from the template \sbol{SubComponent}.
 
-\subsubsection*{ The \sbolheading{variantCollections} property}\label{sec:variantCollections}
+\subparagraph{ The \sbolheading{variantCollections} property}\label{sec:variantCollections}
 
 The \sbol{variantCollections} property is OPTIONAL and MAY contain zero or more URIs that each refer to a\\
 \sbol{Collection}. The \sbol{members} property of each \sbol{Collection} referred to in this way MUST NOT be empty. This property enables the convenient specification of existing groups of \sbol{Component} objects to serve as options when deriving a new \sbol{SubComponent} from the template \sbol{SubComponent}.
 
-\subsubsection*{ The \sbolheading{variantDerivations} property}\label{sec:variantDerivations}
+\subparagraph{ The \sbolheading{variantDerivations} property}\label{sec:variantDerivations}
 
 The \sbol{variantDerivations} property is OPTIONAL and MAY contain zero or more URIs that each refer to a\\ \sbol{CombinatorialDerivation}. This property enables the convenient specification of \sbol{Component} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \sbol{SubComponent} from the template \sbol{SubComponent}. The \sbol{variantDerivations} property of a \sbol{VariableComponent} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \sbol{VariableComponent}. Furthermore, \sbol{VariableComponent} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivations} properties and the\\ \sbol{CombinatorialDerivation} objects that contain them. For example, consider the \sbol{VariableComponent} objects A and B and the \sbol{CombinatorialDerivation} objects X and Y. The reference chain X contains A, A has variant derivation Y, Y contains B, and B has variant derivation X is cyclical.
 
-\subsubsection*{ The \sbolheading{operator} property}\label{sec:operator}
+\subparagraph{ The \sbolheading{operator} property}\label{sec:operator}
 
 The \sbol{operator} property is REQUIRED and has a data type of URI. This property specifies how many \sbol{SubComponent} objects SHOULD be derived from the template \sbol{SubComponent} during the derivation of a new \sbol{Component}. The URI value of this property MUST come from the URIs provided in~\ref{tbl:operator}.
 
@@ -955,7 +955,7 @@ An \sbol{Implementation} represents an instance of a synthetic biological constr
 \end{center}
 \end{figure}
 
-\subsubsection*{ The \sbolheading{built} property}\label{sec:built}
+\subparagraph{ The \sbolheading{built} property}\label{sec:built}
 The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a \sbol{TopLevel} object that is either a \sbol{Component} or \sbol{Component}. This \sbol{Component} or \sbol{Component} is intended to describe the actual physical structure and/or functional behavior of the \sbol{Implementation}. When the built property refers to a \sbol{Component} or \sbol{Component} that is also linked to the \sbol{Implementation} via PROV-O properties such as \sbol{prov:wasDerivedFrom} (see \ref{sec:provenance}), it can be inferred that the actual structure and/or function of the \sbol{Implementation} matches its original design. When the \sbol{built} property refers to a different \sbol{Component} or \sbol{Component}, it can be inferred that the \sbol{Implementation} has deviated from the original design. For example, the latter could be used to document when the DNA sequencing results for an assembled construct do not match the original target sequence.
 
 
@@ -976,16 +976,16 @@ It provides a means for linking files and metadata to SBOL designs.
 
 The meta-data provided by the \sbol{Attachment} class include the following properties: the \sbolmult{source:A}{source} or location of the actual file of the attachment, the \sbol{format} of the file, the \sbol{size} of the file, and the \sbol{hash} for the file.
 
-\subsubsection*{ The \sbolheading{source} property}\label{sec:source:A}
+\subparagraph{ The \sbolheading{source} property}\label{sec:source:A}
 The \sbolmult{source:A}{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file.
 
-\subsubsection*{ The \sbolheading{format} property}\label{sec:format}
+\subparagraph{ The \sbolheading{format} property}\label{sec:format}
 The \sbol{format} property is OPTIONAL and MAY contain a \sbol{URI} that specifies the format of the attached file. It is RECOMMENDED that this \sbol{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology.
 
-\subsubsection*{ The \sbolheading{size} property}\label{sec:size}
+\subparagraph{ The \sbolheading{size} property}\label{sec:size}
 The \sbol{size} property is OPTIONAL and MAY contain a long indicating the file size in bytes.
 
-\subsubsection*{ The \sbolheading{hash} property}\label{sec:hash}
+\subparagraph{ The \sbolheading{hash} property}\label{sec:hash}
 The \sbol{hash} property is OPTIONAL and MAY contain a SHA-1 hash of the file contents represented as a hexadecimal digest.
 
 \subsection{ExperimentalData}
@@ -1020,7 +1020,7 @@ The purpose of the \sbol{Experiment} class is to aggregate experimental data set
 
 As shown in \ref{uml:experimental_data}, the \sbol{Experiment} class aggregates \sbol{ExperimentalData} objects via the \sbol{experimentalData} property.
 
-\subsubsection*{ The \sbolheading{experimentalData} property}\label{sec:experimentalData}
+\subparagraph{ The \sbolheading{experimentalData} property}\label{sec:experimentalData}
 The \sbol{experimentalData} property is OPTIONAL and MAY contain a set of \sbol{URI} references to \sbol{ExperimentalData} objects. The same \sbol{ExperimentalData} MAY be referred to by more than one \sbol{Experiment} in this way.
 
 \subsection{Annotation and Extension of SBOL}
