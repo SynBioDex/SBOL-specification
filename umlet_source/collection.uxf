@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>330</x>
       <y>130</y>
@@ -15,7 +15,7 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>350</x>
       <y>130</y>
@@ -26,7 +26,7 @@
     <additional_attributes>30;30;30;60</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>330</x>
       <y>190</y>
@@ -41,16 +41,64 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>390</x>
       <y>110</y>
-      <w>150</w>
+      <w>156</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;
          member
     0..*</panel_attributes>
     <additional_attributes>40;110;80;110;80;30;40;30</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>290</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*Namespace*
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>290</y>
+      <w>110</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*Experiment*
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>230</y>
+      <w>80</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;60.0;40.0;10.0;40.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>230</y>
+      <w>90</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;70.0;40.0;70.0;60.0</additional_attributes>
   </element>
 </diagram>
