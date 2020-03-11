@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
+      <x>400</x>
       <y>480</y>
       <w>100</w>
       <h>30</h>
@@ -15,7 +15,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
+      <x>370</x>
       <y>540</y>
       <w>160</w>
       <h>50</h>
@@ -28,7 +28,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>550</x>
+      <x>440</x>
       <y>500</y>
       <w>30</w>
       <h>60</h>
@@ -39,20 +39,20 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
+      <x>490</x>
       <y>470</y>
       <w>170</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-attachment
+hasAttachment
 0..*</panel_attributes>
     <additional_attributes>10.0;20.0;150.0;20.0;150.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
+      <x>570</x>
       <y>600</y>
       <w>140</w>
       <h>30</h>
