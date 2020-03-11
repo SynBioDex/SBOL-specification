@@ -683,19 +683,19 @@ Package Specification Style]
   {1.2ex}{\clearpage\thispagestyle{footeronly}%
     \hspace*{-24.25pt}\color{sbmlgray}{\rule[1.8em]{6.84in}{0.6em}}\color{normaltextcolor}%
     \hspace*{-6.84in}\color{sbmlgray}{\rule[-0.8em]{6.84in}{0.1em}}\color{normaltextcolor}%
-    \noindent\normalfont\LARGE\bfseries\sffamily\hspace*{-6.84in}}}
+    \noindent\normalfont\huge\bfseries\sffamily\hspace*{-6.84in}}}
 
 \renewcommand{\subsection}{\@startsection%
   {subsection}{2}{0pt}{-1.25ex \@plus 2ex \@minus -.2ex}%
-  {0.1ex}{\Large\bfseries\sffamily}}
+  {0.1ex}{\LARGE\bfseries\sffamily}}
 
 \renewcommand{\subsubsection}{\@startsection%
   {subsubsection}{3}{0pt}{-1ex \@plus 2ex \@minus -.2ex}%
-  {0.4ex}{\large\bfseries\sffamily\slshape}}
+  {0.4ex}{\Large\bfseries\sffamily\slshape}}
 
 \renewcommand{\paragraph}{\@startsection%
   {paragraph}{4}{0pt}{-0.75ex \@plus 2ex \@minus -.2ex}%
-  {0.4ex}{\normalsize\bfseries\sffamily\slshape}}
+  {0.4ex}{\large\bfseries\sffamily\slshape}}
   
 \renewcommand{\subparagraph}{\@startsection%
   {subparagraph}{5}{0pt}{-0.75ex \@plus 2ex \@minus -.2ex}%
