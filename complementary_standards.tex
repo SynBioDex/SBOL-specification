@@ -37,7 +37,7 @@ These semantics are somewhat different from the versioning semantics defined in 
 \end{figure}
 
 \subsubsection{Activity}
-\label{sec:Activity}
+\label{sec:prov:Activity}
 
 A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{associations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{usages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
 
@@ -130,12 +130,12 @@ The recommended terms that are defined in \ref{tbl:association_roles} can be use
 The \sbol{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a \sbol{Plan}.
 
 \subsubsection{Plan}
-\label{sec:Plan}
+\label{sec:prov:Plan}
 
  The Plan entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \sbol{Agent} is used in a particular \sbol{Activity}. 
 
 \subsubsection{Agent}
-\label{sec:Agent}
+\label{sec:prov:Agent}
 
  Examples of agents are person, organization or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
 
