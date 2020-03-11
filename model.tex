@@ -560,8 +560,8 @@ sub-\sbol{Component}'s roles.}
 
 \paragraph{The \sbolheading{sourceLocations} property}\label{sec:sourceLocations}
 
-The \sbol{sourceLocations} property is an OPTIONAL set of zero or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{ComponentDefinition}'s \sbol{Sequence} are to be included in the \sbol{Component}'s parent. The \sbol{sourceLocations} property
-allows for only a portion of a \sbol{ComponentDefinition}'s \sbol{Sequence} to be included, rather than its entirety.
+The \sbol{sourceLocations} property is an OPTIONAL set of zero or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Component}'s \sbol{Sequence} are to be included in the \sbol{Component}'s parent. The \sbol{sourceLocations} property
+allows for only a portion of a \sbol{Component}'s \sbol{Sequence} to be included, rather than its entirety.
 
 If the \sbol{sourceLocations} property is not set, then the whole \sbol{Sequence} is assumed to be included. Alternatively,
 if the \sbol{sourceLocations} property is set, then the relationship between the original \sbol{Component}'s
@@ -571,7 +571,7 @@ property on the \sbol{SequenceFeature} object.
 \paragraph{The \sbolheading{location} property}\label{sec:location}
 The \sbol{location} property is an OPTIONAL set which points to a \sbol{Location} on the parent \sbol{Component} sequence; if \sbol{location} is missing, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined.
 
-The \sbol{Location} record(s) specified by a \sbol{SubComponent} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbol{Location}. Concretely, two \sbol{Location} records attached to the same \sbol{SubComponent} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{SubComponents} may overlap.
+The \sbol{Location} record(s) specified by a \sbol{SubComponent} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbol{Location}. Concretely, two \sbol{Location} records attached to the same \sbol{SubComponent} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{SubComponent}s may overlap.
 
 \paragraph{The \sbolheading{orientation} property}\label{sec:orientation2}
 The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Feature} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{SubComponent} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Feature} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
