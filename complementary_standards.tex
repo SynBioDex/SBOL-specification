@@ -41,7 +41,7 @@ These semantics are somewhat different from the versioning semantics defined in 
 
 A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{associations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{usages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
 
-\paragraph{The \sbolheading{types} property}\label{sec:types:Activity}
+\subparagraph{The \sbolheading{types} property}\label{sec:types:Activity}
 The \sbolmult{types:Activity}{types} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail. If specified, it is RECOMMENDED that at least one \sbol{URI} of the \sbolmult{types:Activity}{types} property of an \sbol{Activity} refers to a \sbol{URI} from \ref{tbl:activity_types}.
 
 \begin{table}[ht]
@@ -59,29 +59,29 @@ The \sbolmult{types:Activity}{types} property is an OPTIONAL set of \sbol{URI}s 
  \label{tbl:activity_types}
 \end{table}
 
-\paragraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
+\subparagraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
 The \sbol{startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
 
-\paragraph{The \sbolheading{endedAtTime} property}\label{sec:endedAtTime}
+\subparagraph{The \sbolheading{endedAtTime} property}\label{sec:endedAtTime}
 The \sbol{endedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity ended.
 
-\paragraph{The \sbolheading{associations} property}\label{sec:associations}
+\subparagraph{The \sbolheading{associations} property}\label{sec:associations}
 The \sbol{associations} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
 
-\paragraph{The \sbolheading{usages} property}\label{sec:usages}
+\subparagraph{The \sbolheading{usages} property}\label{sec:usages}
 The \sbol{usages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
 
-\paragraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
+\subparagraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
 The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
 
 \subsubsection{Usage}
 \label{sec:Usage}
 How different entities are used in an \sbol{Activity} is specified with the \sbol{Usage} class, which is linked from an \sbol{Activity} through the \sbol{Usage} relationship. A \sbol{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s \sbol{URI} and the role of this entity is qualified with the \sbolmult{roles:U}{roles} property. When the \sbol{prov:wasDerivedFrom} property is used together with the full provenance described here, the entity pointed at by the \sbol{prov:wasDerivedFrom} property MUST be included in a \sbol{Usage}.
 
-\paragraph{The \sbolheading{entity} property}\label{sec:entity}
+\subparagraph{The \sbolheading{entity} property}\label{sec:entity}
 The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an SBOL Identified object.
 
-\paragraph{The \sbolheading{roles} property}\label{sec:roles:U}
+\subparagraph{The \sbolheading{roles} property}\label{sec:roles:U}
 The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms that are defined in \ref{tbl:usage_roles} can be used to indicate how the referenced \sbol{entity} is being used in this \sbol{Activity}.
 
 \begin{table}[H]
@@ -103,10 +103,10 @@ The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that re
 \label{sec:Association}
 An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \sbolmult{roles:A}{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
 
-\paragraph{The \sbolheading{agent} property}\label{sec:agent}
+\subparagraph{The \sbolheading{agent} property}\label{sec:agent}
 The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{Agent} object.
 
-\paragraph{The \sbolheading{roles} property}\label{sec:roles:A}
+\subparagraph{The \sbolheading{roles} property}\label{sec:roles:A}
 The \sbolmult{roles:A}{roles} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{agent} in the parent \sbol{Activity}. 
 The recommended terms that are defined in \ref{tbl:association_roles} can be used to specify the kind of \sbol{Activity} performed by the \sbol{Agent}.
 
@@ -126,7 +126,7 @@ The recommended terms that are defined in \ref{tbl:association_roles} can be use
 \end{table}
 
 
-\paragraph{The \sbolheading{plan} property}\label{sec:plan}
+\subparagraph{The \sbolheading{plan} property}\label{sec:plan}
 The \sbol{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a \sbol{Plan}.
 
 \subsubsection{Plan}
@@ -139,15 +139,15 @@ The \sbol{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a 
 
  Examples of agents are person, organization or software. These agents should be annotated with additional information, such as software version, needed to be able to run the same software again.
 
-\paragraph{Example - Codon optimization}
+\subparagraph{Example - Codon optimization}
 
  Codon optimization is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
 
-\paragraph{Example - Deriving strains}
+\subparagraph{Example - Deriving strains}
 
 Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \texttt{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. Particularly, the 168 strain is easy to transform and is not motile, facilitating the analysis of engineered cells. The parent strain, on the other hand, is motile but more difficult to transform. The example below shows the derivation of the 168 strain using the new provenance classes.
 
-\paragraph{Example - Design-build-test-learn Workflow}
+\subparagraph{Example - Design-build-test-learn Workflow}
 
 This particular example represents an idealized workflow for model-based design. The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device. Using a computational tool, a new Design (\sbol{Component}) is composed of biological parts which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using some a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction. This example illustrates one complete iteration through a design-build-test-learn cycle, as shown in \ref{images:design-build-test-learn}.
 
@@ -163,7 +163,7 @@ design}
 %% proposed by issue #137
 \clearpage
 
-\paragraph{Example - Combinatorial Derivation}
+\subparagraph{Example - Combinatorial Derivation}
 This example illustrates how the Prov ontology should be used to reference to link a generated design to the combinatorial derivation that it was generated from.  In this example, there is a top-level derivation (Promoter\_Derivation) which specifies two possible promoters for this design, as well as an additional derivation (Terminator\_Derivation) to be used for the Gen\_Component.  The second derivation (Terminator\_Derivation) specifies two possible terminators to used within the Gen\_Component.  The derived design (Derivation\_example\_GeneratedInstance11) has a reference in the \sbol{prov:wasDerivedFrom} list to the \sbol{CombinatorialDerivation} that it was derived from (i.e., Promoter\_Derivation).  Also, each component has reference in the \sbol{prov:wasDerivedFrom} list to the component within the \sbol{template} that it is derived from.  The Gen\_Component in this derived design refers to a derived design for it (i.e., Gen\_GeneratedInstance1).  This design has a reference in the \sbol{prov:wasDerivedFrom} list that refers to the \sbol{CombinatorialDerivation} that is used to derive it (i.e., Terminator\_Derivation).  Once again, each component has a reference in the \sbol{prov:wasDerivedFrom} list to the component within the \sbol{template} that it is derived from.  The advantage of these provenance links is that they provide sufficient information to validate that this derived design has been properly derived from the specified \sbol{CombinatorialDerivation}s.
 
 \subsection{Adding Measures/Parameters with OM}
@@ -188,13 +188,13 @@ SBOL-compliant tools are allowed to read, write, and modify data belonging to OM
 
 The purpose of the \sbol{Measure} class is to link a numerical value to a \sbol{Unit}. 
 
-\paragraph{The \sbolheading{hasNumericalValue} property}\label{sec:hasNumericalValue}
+\subparagraph{The \sbolheading{hasNumericalValue} property}\label{sec:hasNumericalValue}
 The \sbol{hasNumericalValue} property is REQUIRED and MUST contain a single xsd:float.
 
-\paragraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:Measure}
+\subparagraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:Measure}
 The \sbolmult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Unit}. The OM provides \sbol{URI}s for many existing instances of the \sbol{Unit} class for reference (for example, \url{http://www.ontology-of-units-of-measure.org/resource/om-2/gramPerLitre}).
 
-\paragraph{The \sbolheading{types} property}\label{sec:types:Measure}
+\subparagraph{The \sbolheading{types} property}\label{sec:types:Measure}
 The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set of \sbol{URI}s. It is RECOMMENDED that one of these \sbol{URI}s identify a term from the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{types:Measure}{types} property of the \sbol{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/biomodels.sbo/SBO:0000612}).
 
 \subsubsection{Unit}
@@ -202,22 +202,22 @@ The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set o
 
 As adopted by SBOL, \sbol{Unit} is an abstract class that is extended by other classes to describe units of measure using a shared set of properties. 
 
-\paragraph{The \sbolheading{symbol} property}\label{sec:symbol:Unit}
+\subparagraph{The \sbolheading{symbol} property}\label{sec:symbol:Unit}
 The \sbolmult{symbol:Unit}{symbol} property is REQUIRED and MUST contain a \sbol{String}. This \sbol{String} is commonly used to abbreviate the unit of measure's name. For example, the unit of measure named ``gram per liter'' is commonly abbreviated using the \sbol{String} ``g/l''.
 
-\paragraph{The \sbolheading{alternativeSymbols} property}\label{sec:alternativeSymbols:Unit}
+\subparagraph{The \sbolheading{alternativeSymbols} property}\label{sec:alternativeSymbols:Unit}
 The \sbolmult{alternativeSymbols:Unit}{alternativeSymbols} property is OPTIONAL and MAY contain a set of \sbol{String}s. This property can be used to specify alternative abbreviations other than that specified using the \sbolmult{symbol:Unit}{symbol} property.
 
-\paragraph{The \sbolheading{label} property}\label{sec:label:Unit}
+\subparagraph{The \sbolheading{label} property}\label{sec:label:Unit}
 The \sbolmult{label:Unit}{label} property is REQUIRED and MUST contain a \sbol{String}. This \sbol{String} is a common name for the unit of measure and SHOULD be identical to any \sbol{String} contained by the \sbol{name} property inherited from \sbol{Identified}.
 
-\paragraph{The \sbolheading{alternativeLabels} property}\label{sec:alternativeLabels:Unit}
+\subparagraph{The \sbolheading{alternativeLabels} property}\label{sec:alternativeLabels:Unit}
 The \sbolmult{alternativeLabels:Unit}{alternativeLabels} property is OPTIONAL and MAY contain a set of \sbol{String}s. This property can be used to specify alternative common names other than that specified using the \sbolmult{label:Unit}{label} property.
 
-\paragraph{The \sbolheading{comment} property}\label{sec:comment:Unit}
+\subparagraph{The \sbolheading{comment} property}\label{sec:comment:Unit}
 The \sbolmult{comment:Unit}{comment} property is OPTIONAL and MAY contain a \sbol{String}. This \sbol{String} is a description of the unit of measure and SHOULD be identical to any \sbol{String} contained by the \sbol{description} property inherited from \sbol{Identified}.
 
-\paragraph{The \sbolheading{longcomment} property}\label{sec:longcomment:Unit}
+\subparagraph{The \sbolheading{longcomment} property}\label{sec:longcomment:Unit}
 The \sbolmult{longcomment:Unit}{longcomment} property is OPTIONAL and MAY contain a \sbol{String}. This \sbol{String} is a long description of the unit of measure and SHOULD be longer than any \sbol{String} contained by the \sbolmult{comment:Unit}{comment} property.
 
 \subsubsection{SingularUnit}
@@ -225,10 +225,10 @@ The \sbolmult{longcomment:Unit}{longcomment} property is OPTIONAL and MAY contai
 
 The purpose of the \sbol{SingularUnit} class is to describe a unit of measure that is not explicitly represented as a combination of multiple units, but could be equivalent to such a representation. For example, a joule is considered to be a \sbol{SingularUnit}, but it is equivalent to the multiplication of a newton and a meter.  
 
-\paragraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:SingularUnit}
+\subparagraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:SingularUnit}
 The \sbolmult{hasUnit:SingularUnit}{hasUnit} is OPTIONAL and MAY contain a \sbol{URI}. This \sbol{URI} MUST refer to another \sbol{Unit}. The \sbolmult{hasUnit:SingularUnit}{hasUnit} propery can be used in conjunction with the \sbolmult{hasFactor:SingularUnit}{hasFactor} property to specify whether a \sbol{SingularUnit} is equivalent to another \sbol{Unit} multiplied by a factor. For example, an angstrom is equivalent to $10^{-10}$ meters.
 
-\paragraph{The \sbolheading{hasFactor} property}\label{sec:hasFactor:SingularUnit}
+\subparagraph{The \sbolheading{hasFactor} property}\label{sec:hasFactor:SingularUnit}
 The \sbolmult{hasFactor:SingularUnit}{hasFactor} property is OPTIONAL and MAY contain a xsd:float. If the \sbolmult{hasFactor:SingularUnit}{hasFactor} property of a \sbol{SingularUnit} is non-empty, then its \sbolmult{hasUnit:SingularUnit}{hasUnit} property SHOULD also be non-empty.
 
 \subsubsection{CompoundUnit}
@@ -241,10 +241,10 @@ As adopted by SBOL, \sbol{CompoundUnit} is an abstract class that is extended by
 
 The purpose of the \sbol{UnitMultiplication} class is to describe a unit of measure that is the multiplication of two other units of measure. 
 
-\paragraph{The \sbolheading{hasTerm1} property}\label{sec:hasTerm1}
+\subparagraph{The \sbolheading{hasTerm1} property}\label{sec:hasTerm1}
 The \sbol{hasTerm1} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}. This \sbol{Unit} is the first multiplication term.
 
-\paragraph{The \sbolheading{hasTerm2} property}\label{sec:hasTerm2}
+\subparagraph{The \sbolheading{hasTerm2} property}\label{sec:hasTerm2}
 The \sbol{hasTerm2} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}. This \sbol{Unit} is the second multiplication term. It is okay if the \sbol{Unit} referred to by \sbol{hasTerm1} is the same as that referred to by \sbol{hasTerm2}.
 
 \subsubsection{UnitDivision}
@@ -252,10 +252,10 @@ The \sbol{hasTerm2} property is REQUIRED and MUST contain a \sbol{URI} that refe
 
 The purpose of the \sbol{UnitDivision} class is to describe a unit of measure that is the division of one unit of measure by another.
 
-\paragraph{The \sbolheading{hasNumerator} property}\label{sec:hasNumerator}
+\subparagraph{The \sbolheading{hasNumerator} property}\label{sec:hasNumerator}
 The \sbol{hasNumerator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}.
 
-\paragraph{The \sbolheading{hasDenominator} property}\label{sec:hasDenominator}
+\subparagraph{The \sbolheading{hasDenominator} property}\label{sec:hasDenominator}
 The \sbol{hasDenominator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}.
 
 \subsubsection{UnitExponentiation}
@@ -263,10 +263,10 @@ The \sbol{hasDenominator} property is REQUIRED and MUST contain a \sbol{URI} tha
 
 The purpose of the \sbol{UnitExponentiation} class is to describe a unit of measure that is raised to an integer power.
 
-\paragraph{The \sbolheading{hasBase} property}\label{sec:hasBase}
+\subparagraph{The \sbolheading{hasBase} property}\label{sec:hasBase}
 The \sbol{hasBase} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}.
 
-\paragraph{The \sbolheading{hasExponent} property}\label{sec:hasExponent}
+\subparagraph{The \sbolheading{hasExponent} property}\label{sec:hasExponent}
 The \sbol{hasExponent} property is REQUIRED and MUST contain an xsd:integer.
 
 \subsubsection{PrefixedUnit}
@@ -274,10 +274,10 @@ The \sbol{hasExponent} property is REQUIRED and MUST contain an xsd:integer.
 
 The purpose of the \sbol{PrefixedUnit} class is to describe a unit of measure that is the multiplication of another unit of measure and a factor represented by a standard prefix such as ``milli,'' ``centi,'' ``kilo,'' etc. 
 
-\paragraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:PrefixedUnit}
+\subparagraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:PrefixedUnit}
 The \sbolmult{hasUnit:PrefixedUnit}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}. 
 
-\paragraph{The \sbolheading{hasPrefix} property}\label{sec:hasPrefix}
+\subparagraph{The \sbolheading{hasPrefix} property}\label{sec:hasPrefix}
 The \sbol{hasPrefix} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Prefix}.
 
 \subsubsection{Prefix}
@@ -285,25 +285,25 @@ The \sbol{hasPrefix} property is REQUIRED and MUST contain a \sbol{URI} that ref
 
 As adopted by SBOL, \sbol{Prefix} is an abstract class that is extended by other classes to describe factors that are commonly represented by standard unit prefixes. For example, the factor $10^{-3}$ is represented by the standard unit prefix ``milli.'' 
 
-\paragraph{The \sbolheading{symbol} property}\label{sec:symbol:Prefix}
+\subparagraph{The \sbolheading{symbol} property}\label{sec:symbol:Prefix}
 The \sbolmult{symbol:Prefix}{symbol} property is REQUIRED and MUST contain a \sbol{String}. This \sbol{String} is commonly used to abbreviate the name of the unit prefix. For example, the \sbol{String} ``m'' is commonly used to abbreviate the name ``milli.''
 
-\paragraph{The \sbolheading{alternativeSymbols} property}\label{sec:alternativeSymbols:Prefix}
+\subparagraph{The \sbolheading{alternativeSymbols} property}\label{sec:alternativeSymbols:Prefix}
 The \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols} property is OPTIONAL and MAY contain a set of \sbol{String}s. This property can be used to specify alternative abbreviations other than that specified using the \sbolmult{symbol:Prefix}{symbol} property.
 
-\paragraph{The \sbolheading{label} property}\label{sec:label:Prefix}
+\subparagraph{The \sbolheading{label} property}\label{sec:label:Prefix}
 The \sbolmult{label:Prefix}{label} property is REQUIRED and MUST contain a \sbol{String}. This \sbol{String} is a common name for the unit prefix and SHOULD be identical to any \sbol{String} contained by the \sbol{name} property inherited from \sbol{Identified}.
 
-\paragraph{The \sbolheading{alternativeLabels} property}\label{sec:alternativeLabels:Prefix}
+\subparagraph{The \sbolheading{alternativeLabels} property}\label{sec:alternativeLabels:Prefix}
 The \sbolmult{alternativeLabels:Prefix}{alternativeLabels} property is OPTIONAL and MAY contain a set of \sbol{String}s. This property can be used to specify alternative common names other than that specified using the \sbolmult{label:Prefix}{label} property.
 
-\paragraph{The \sbolheading{comment} property}\label{sec:comment:Prefix}
+\subparagraph{The \sbolheading{comment} property}\label{sec:comment:Prefix}
 The \sbolmult{comment:Prefix}{comment} property is OPTIONAL and MAY contain a \sbol{String}. This \sbol{String} is a description of the unit prefix and SHOULD be identical to any \sbol{String} contained by the \sbol{description} property inherited from \sbol{Identified}.
 
-\paragraph{The \sbolheading{longcomment} property}\label{sec:longcomment:Prefix}
+\subparagraph{The \sbolheading{longcomment} property}\label{sec:longcomment:Prefix}
 The \sbolmult{longcomment:Prefix}{longcomment} property is OPTIONAL and MAY contain a \sbol{String}. This \sbol{String} is a long description of the unit of measure and SHOULD be longer than any \sbol{String} contained by the \sbolmult{comment:Prefix}{comment} property.
 
-\paragraph{The \sbolheading{hasFactor} property}\label{sec:hasFactor:Prefix}
+\subparagraph{The \sbolheading{hasFactor} property}\label{sec:hasFactor:Prefix}
 The \sbolmult{hasFactor:Prefix}{hasFactor} property is REQUIRED and MUST contain an xsd:float.
 
 \subsubsection{SIPrefix}
