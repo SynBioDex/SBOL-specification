@@ -3,8 +3,8 @@
 % -----------------------------------------------------------------------------
 
 Synthetic biology builds upon the techniques and successes of genetics, molecular biology, and metabolic engineering by applying engineering principles to the design of biological systems. 
-When designing a synthetic system, synthetic biologists need to exchange information about multiple types of molecules and their expected behavior.
-Furthermore, there are often multiple degrees of separation between a specified nucleic acid sequence (e.g., a sequence that encodes an enzyme or transcription factor), the molecular interactions that a designer intends to result from said sequence (e.g., chemical modification of metabolites or regulation of gene expression), and the experiments and data involving the system, yet all these perspectives need to be connected together in the engineering of biological systems.
+When designing a synthetic system, synthetic biologists need to exchange information about multiple types of molecules and their expected/actual behavior.
+Furthermore, there are often multiple aspects to a design such as a specified nucleic acid sequence (e.g. a sequence that encodes an enzyme or transcription factor), the molecular interactions that a designer intends to result from the introduction of the said sequence (e.g., chemical modification of metabolites or regulation of gene expression), and the experiments and data associated with the system. Yet all these perspectives need to be connected together in the engineering of biological systems.
 
 The \emph{Synthetic Biology Open Language} (SBOL) has been developed as a standard to support the specification and exchange of biological design information in synthetic biology, 
 following an open community process involving both ``wet'' bench scientists and ``dry'' scientific modelers and software developers across academia, industry, and other institutions.
@@ -17,11 +17,11 @@ SBOL covers both of these needs, representing both the structure and function of
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=0.8\textwidth]{images/SBOL3-evolution.pdf}
-\caption{SBOL extends prior sequence description formats to represent both the structure and function of a genetic design in a modular, hierarchical manner, as well as its relationship to and use within experiment plans, data, models, etc.}
+\caption{SBOL extends prior sequence description formats to represent both the structure and function of a genetic design in a modular, hierarchical manner, as well as its relationship to, and use within, experiments, plans, data, models, etc.}
 \label{f:sequence}
 \end{figure}
 
-SBOL further uses existing Semantic Web practices and resources, such as \emph{Uniform Resource Identifiers} (\sbol{URI}s) and ontologies, to unambiguously identify and define biological system elements,
+SBOL uses existing Semantic Web practices and resources, such as \emph{Uniform Resource Identifiers} (\sbol{URI}s) and ontologies, to unambiguously identify and define biological system elements,
 and to provide serialization formats for encoding this information in electronic data files.
 The SBOL standard further describes the rules and best practices on how to use this data model and populate it with relevant design details. 
 The definition of the data model, the rules on the addition of data within the format, and the representation of this in electronic data files are intended to make the SBOL standard a useful means of promoting data exchange between laboratories and between software programs.
