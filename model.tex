@@ -307,10 +307,10 @@ These \sbol{URI}s might identify descriptive biological roles, such as ``metabol
 \end{table}
 
 
-\subsubsection*{The \sbolheading{subcomponent} property}
-\label{sec:subcomponent}
+\subsubsection*{The \sbolheading{feature} property}
+\label{sec:feature}
 
-The \sbol{subcomponent} property MAY have one or more \sbol{feature} properties. The set of relations between \sbol{Feature} and \sbol{Component} objects is strictly acyclic (see \ref{sec:SubComponent}).
+The \sbol{feature} property MAY have one or more \sbol{Feature} properties. The set of relations between \sbol{Feature} and \sbol{Component} objects is strictly acyclic (see \ref{sec:Feature}).
 
 While the \sbol{Component} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Feature} class represents the specific occurrence of a part within a design.
 Hence, this class allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{Component}). For example, the \sbol{Component} of a polycistronic gene could contain two \sbol{Feature} objects that refer to the same \sbol{Component} of a CDS.
@@ -326,16 +326,11 @@ For example, consider the \sbol{Component} for a network of two-input repressor 
 
 Just as a \sbol{Feature} represents an instance of a subsystem in the overall system represented by a  \sbol{Component}, a \sbol{Feature} represents an instance of a structural entity (represented by a \sbol{Component}) in the system. This concept allows a \sbol{Component} to assert different interactions for separate copies of the same structural entity if needed. For example, a \sbol{Component} might contain multiple \sbol{Feature}  objects that refer to the same promoter \sbol{Component}, but assert different interactions for these promoter copies based on their separate positions in another \sbol{Component} that represents the structure of the entire system.
 
-\subsubsection*{The \sbolheading{feature} property}
-\label{sec:feature}
+%In addition, each \sbol{SubComponent} can  position a \sbol{Feature} of the \sbol{Component} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}).
+%The \sbol{feature} property MUST NOT contain two or more \sbol{SequenceFeature} objects that refer to the same \sbol{Feature} in this way.
 
-The \sbol{feature} property is OPTIONAL and MAY contain a set of \sbol{SequenceFeature} objects. Each \sbol{SequenceFeature} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{Component}.
-
-In addition, each \sbol{SubComponent} can  position a \sbol{Feature} of the \sbol{Component} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}).
-The \sbol{feature} property MUST NOT contain two or more \sbol{SequenceFeature} objects that refer to the same \sbol{Feature} in this way.
-
-Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceFeature} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
-For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceFeature} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
+%Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceFeature} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
+%For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceFeature} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
 
 \subsubsection*{The \sbolheading{constraint} property}
 \label{sec:constraint}
@@ -899,7 +894,7 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 
 The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
-Consequently, its \sbol{subcomponent}s property SHOULD contain one or more \sbol{Feature} objects that describe its substructure (referred to hereafter as template \sbol{Feature} objects), and its \sbol{constraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
+Consequently, its \sbol{feature}s property SHOULD contain one or more \sbol{Feature} objects that describe its substructure (referred to hereafter as template \sbol{Feature} objects), and its \sbol{constraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
 
 When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \sbol{prov:wasDerivedFrom} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{members} property of a \sbol{Collection}, in which case the \sbol{prov:wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
 
@@ -909,7 +904,7 @@ If the \sbolmult{types:CD}{types} property of the template \sbol{Component} cont
 
 The \sbol{variableComponents} property is OPTIONAL and MAY contain a set of \sbol{VariableComponent} objects. These \sbol{VariableComponent} objects are expected to denote the choices available when deriving the substructure of a new \sbol{Component} in accordance with a \sbol{CombinatorialDerivation}. The \sbol{variableComponents} property MUST NOT contain two or more \sbol{VariableComponent} objects that refer to the same template \sbol{Feature} via their \sbol{variable} properties.
 
-If the \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{Feature}, then the \sbol{subcomponent}s property of the derived \sbol{Component} SHOULD contain as many \sbol{Feature} objects derived from the template \sbol{Feature} as specified by the \sbol{operator} property of the \sbol{VariableComponent} (see \ref{tbl:operator}). In addition, the \sbol{instanceOf} properties of these derived \sbol{Feature} objects MUST refer to \sbol{Component} objects specified by the \sbol{variants}, \sbol{variantCollections}, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+If the \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{Feature}, then the \sbol{feature}s property of the derived \sbol{Component} SHOULD contain as many \sbol{Feature} objects derived from the template \sbol{Feature} as specified by the \sbol{operator} property of the \sbol{VariableComponent} (see \ref{tbl:operator}). In addition, the \sbol{instanceOf} properties of these derived \sbol{Feature} objects MUST refer to \sbol{Component} objects specified by the \sbol{variants}, \sbol{variantCollections}, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 
 If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{Feature}, then the \sbol{feature}s property of the derived \sbol{Component} SHOULD contain exactly one \sbol{Feature} with a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{Feature}. The \sbol{instanceOf} property of this derived \sbol{Feature} MUST refer to the \sbol{Component} referred to by the \sbol{instanceOf} property of the template \sbol{Feature}.
 
