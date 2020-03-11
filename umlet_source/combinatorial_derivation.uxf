@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <type>com.baselet.element.old.element.Class</type>
@@ -31,26 +31,26 @@
     <coordinates>
       <x>470</x>
       <y>230</y>
-      <w>230</w>
+      <w>260</w>
       <h>94</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-variableComponent
+hasVariableComponent
 0..*</panel_attributes>
-    <additional_attributes>30;50;210;50</additional_attributes>
+    <additional_attributes>30;50;240;50</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>150</x>
+      <x>130</x>
       <y>230</y>
-      <w>180</w>
+      <w>200</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;
           template
          1</panel_attributes>
-    <additional_attributes>160;50;60;50;60;100</additional_attributes>
+    <additional_attributes>180;50;80;50;80;100</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Class</type>
@@ -77,7 +77,7 @@ variableComponent
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>680</x>
+      <x>710</x>
       <y>270</y>
       <w>150</w>
       <h>30</h>
