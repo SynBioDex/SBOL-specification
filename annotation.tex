@@ -4,7 +4,7 @@
 
 SBOL intentionally does not attempt to describe how all types of biological design data should be captured, since many of these data types (e.g., biological context and design performance metrics) are already covered by other standards, or lack a clear consensus on their proper representation. In addition, some types of biological data are not directly relevant to design and are therefore outside of the scope of SBOL.
 
-SBOL is built upon the Resource Description Framework (RDF), and therefore can be used in conjunction with complementary standards as described in \autoref{sec:complementaryStandards}.  For example, use of the PROV-O ontology is recommended to capture provenance \autoref{sec:provenance}.  Additionally, user-defined RDF can be used in conjunction with SBOL objects to capture custom application-specific information which does not yet have a standardized representation.  This annotation and extension mechanism is designed to enable new types of data to be easily incorporated into the SBOL standard once there is community consensus on their proper representation.
+SBOL is built upon the Resource Description Framework (RDF), and therefore can be used in conjunction with complementary standards as described in \ref{sec:complementaryStandards}.  For example, use of the PROV-O ontology is recommended to capture provenance (see \ref{sec:provenance}).  Additionally, user-defined RDF can be used in conjunction with SBOL objects to capture custom application-specific information which does not yet have a standardized representation.  This annotation and extension mechanism is designed to enable new types of data to be easily incorporated into the SBOL standard once there is community consensus on their proper representation.
 
 Several methods are supported for connecting the SBOL data model with other types of application-specific data:
 
@@ -13,17 +13,6 @@ Several methods are supported for connecting the SBOL data model with other type
 \item Custom data in the form of independent objects can be participate in the SBOL data model if they are assigned one of the SBOL types \sbol{Identified} or \sbol{TopLevel}.  An example is an RDF object that is annotated such that it represents a data sheet that describes the performance of a \sbol{Component} in a particular context.
 \item Finally, just as custom objects can be embedded in an  SBOL document, external documents can embed or refer to SBOL objects. Support for this last case is not explicitly provided in this specification. Rather, this case depends on the external non-SBOL system managing its relationship to SBOL and data serialized in RDF, and is included here for completeness.
 \end{itemize}
-
-\subsubsection{Annotating SBOL objects}
-% whole set of labels for the properties defined herein
-\label{sec:qName}
-\label{sec:QName}
-\label{sec:value}
-\label{sec:Annotation}
-\label{sec:AnnotationValue}
-\label{sec:NestedAnnotations}
-\label{sec:nestedQName}
-\label{sec:nestedURI}
 
 Each \sbol{Identified} object MAY be annotated with application-specific properties, which MUST be labelled using RDF predicates outside of the SBOL namespace.  Additionally, application-specific types may be used in conjunction with the SBOL data model. These application-specific types MUST have two \sbol{rdf:type} properties: one type outside of the SBOL namespace AND an additional SBOL type of either:
 
