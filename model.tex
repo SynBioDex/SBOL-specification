@@ -73,7 +73,7 @@ In addition to the simple types listed above, SBOL also uses objects with types 
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
 This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
 
-As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{wasDerivedFroms}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}. 
+As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{prov:wasDerivedFrom}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -104,14 +104,11 @@ If the \sbol{displayId} property is used, then its \sbol{String} value MUST be c
 
 % compliant with the type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}, except that it MUST not include the characters "-" and ".".
 
-\subsubsection*{The \sbolheading{wasDerivedFroms} property}
-\label{sec:wasDerivedFroms}
+\subsubsection*{The \sbolheading{prov:wasDerivedFrom} property}
+\label{sec:prov:wasDerivedFrom}
+An \sbol{Identified} object can have zero or more \sbol{prov:wasDerivedFrom} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/TR/prov-o/} namespace (Reference: \sec{sec:provenance}).
 
-
-The \sbol{wasDerivedFroms} property is OPTIONAL and MAY specify a set of \sbol{URI}s. An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived.
-
-An SBOL object MUST NOT refer to itself via its own \sbol{wasDerivedFroms} property or form a cyclical chain of references via its \sbol{wasDerivedFroms} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
-
+ An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived. An SBOL object MUST NOT refer to itself via its own \sbol{prov:wasDerivedFrom} property or form a cyclical chain of references via its \sbol{prov:wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
 
 \subsubsection*{The \sbolheading{name} property}
 \label{sec:name}
@@ -145,9 +142,9 @@ The \sbol{annotations} property is OPTIONAL and MAY specify a set of \sbol{Annot
 \end{figure}
 
 
-\subsubsection*{The attachments property}
-\label{sec:attachments}
-The \sbol{attachments} property is OPTIONAL and MAY specify a set of Attachment objects that are referenced by the TopLevel object. The Attachment class is described in more detail in Section~\ref{sec:Attachment}.
+\subsubsection*{The hasAttachment property}
+\label{sec:hasAttachment}
+A \sbol{TopLevel} object can have zero or more \sbol{hasAttachment} properties, each of type URI specifying an \sbol{Attachment} object. The \sbol{Attachment} class is described in more detail in Section~\ref{sec:Attachment}.
 
 \subsection{Sequence}
 \label{sec:Sequence}
@@ -958,7 +955,7 @@ The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
 Consequently, its \sbol{subcomponents} property SHOULD contain one or more \sbol{SubComponent} objects that describe its substructure (referred to hereafter as template \sbol{SubComponent} objects), and its \sbol{constraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
 
-When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \sbol{wasDerivedFroms} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{members} property of a \sbol{Collection}, in which case the \sbol{wasDerivedFroms} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
+When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \sbol{prov:wasDerivedFrom} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{members} property of a \sbol{Collection}, in which case the \sbol{prov:wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
 
 If the \sbolmult{types:CD}{types} property of the template \sbol{Component} contains one or more URIs, then the \sbolmult{types:CD}{types} property of the derived \sbol{Component} SHOULD also contain those URIs. The same holds true for the \sbolmult{roles:CD}{roles} properties of these \sbol{Component} objects.
 
@@ -968,7 +965,7 @@ The \sbol{variableComponents} property is OPTIONAL and MAY contain a set of \sbo
 
 If the \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain as many \sbol{SubComponent} objects derived from the template \sbol{SubComponent} as specified by the \sbol{operator} property of the \sbol{VariableComponent} (see \ref{tbl:operator}). In addition, the \sbol{instanceOf} properties of these derived \sbol{SubComponent} objects MUST refer to \sbol{Component} objects specified by the \sbol{variants}, \sbol{variantCollections}, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 
-If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain exactly one \sbol{SubComponent} with a \sbol{wasDerivedFroms} property that refers to the template \sbol{SubComponent}. The \sbol{instanceOf} property of this derived \sbol{SubComponent} MUST refer to the \sbol{Component} referred to by the \sbol{instanceOf} property of the template \sbol{SubComponent}.
+If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain exactly one \sbol{SubComponent} with a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}. The \sbol{instanceOf} property of this derived \sbol{SubComponent} MUST refer to the \sbol{Component} referred to by the \sbol{instanceOf} property of the template \sbol{SubComponent}.
 
 Finally, all of these derived \sbol{SubComponent} objects MUST follow the \sbol{restriction} properties of any \\
 \sbol{Constraint} objects that refer to their corresponding template \sbol{SubComponent} objects.
@@ -1006,7 +1003,7 @@ The \sbol{VariableComponent} class can be used to specify a choice of \sbol{Comp
 
 \subsubsection*{ The \sbolheading{variable} property}\label{sec:variable}
 
-The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \sbol{SubComponent} in the template \sbol{Component}. If the \sbol{wasDerivedFroms} property of a \sbol{SubComponent} refers to this template \sbol{SubComponent}, then the \sbol{instanceOf} property of the derived \sbol{SubComponent} MUST refer to either (1) a \sbol{Component} referred to by the \sbol{variants} property of the \sbol{VariableComponent}, (2) a \sbol{Component} from a \sbol{Collection} referred to by the \sbol{variantCollections} property of the \sbol{VariableComponent}, or (3) a \sbol{Component} derived from a \sbol{CombinatorialDerivation} referred to by the \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \sbol{SubComponent} in the template \sbol{Component}. If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to this template \sbol{SubComponent}, then the \sbol{instanceOf} property of the derived \sbol{SubComponent} MUST refer to either (1) a \sbol{Component} referred to by the \sbol{variants} property of the \sbol{VariableComponent}, (2) a \sbol{Component} from a \sbol{Collection} referred to by the \sbol{variantCollections} property of the \sbol{VariableComponent}, or (3) a \sbol{Component} derived from a \sbol{CombinatorialDerivation} referred to by the \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 
 If the \sbolmult{roles:CD}{roles} property of the template \sbol{SubComponent} contains one or more URIs, then the \sbolmult{roles:CD}{roles} property of the derived \sbol{SubComponent} SHOULD also contain those URIs.
 
@@ -1034,10 +1031,10 @@ The \sbol{operator} property is REQUIRED and has a data type of URI. This proper
     \toprule
     \textbf{Operator URI} & \textbf{Description} \\
     \midrule
-    \url{http://sbols.org/v2#zeroOrOne} & No more than one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{wasDerivedFroms} property that refers to the template \sbol{SubComponent}. \\
-        \url{http://sbols.org/v2#one} & Exactly one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{wasDerivedFroms} property that refers to the template \sbol{SubComponent}. \\
-\url{http://sbols.org/v2#zeroOrMore} & Any number of \sbol{SubComponent} objects in the derived \sbol{Component} MAY have \sbol{wasDerivedFroms} properties that refer to the template \sbol{SubComponent}. \\
-\url{http://sbols.org/v2#oneOrMore} & At least one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{wasDerivedFroms} property that refers to the template \sbol{SubComponent}. \\
+    \url{http://sbols.org/v2#zeroOrOne} & No more than one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
+        \url{http://sbols.org/v2#one} & Exactly one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
+\url{http://sbols.org/v2#zeroOrMore} & Any number of \sbol{SubComponent} objects in the derived \sbol{Component} MAY have \sbol{prov:wasDerivedFrom} properties that refer to the template \sbol{SubComponent}. \\
+\url{http://sbols.org/v2#oneOrMore} & At least one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
     \bottomrule
   \end{edtable}
   \caption{REQUIRED \sbol{URI}s for the \sbol{operator} property.}
@@ -1049,7 +1046,7 @@ The \sbol{operator} property is REQUIRED and has a data type of URI. This proper
 \label{sec:Implementation}
 
 
-An \sbol{Implementation} represents an instance of a synthetic biological construct, and describes the build phase of a design-built-test-learn workflow. Importantly, an \sbol{Implementation} can be associated with a laboratory sample that was already built, or that is to be built in the future. An \sbol{Implementation} can also represent virtual and simulated instances.  An \sbol{Implementation} may be linked back to its original design (either a \sbol{Component} or \sbol{Component}) using the \sbol{wasDerivedFroms} property inherited from the \sbol{Identified} superclass. An \sbol{Implementation} may also link to a \sbol{Component} or \sbol{Component} that specifies its realized structure and/or function.
+An \sbol{Implementation} represents an instance of a synthetic biological construct, and describes the build phase of a design-built-test-learn workflow. Importantly, an \sbol{Implementation} can be associated with a laboratory sample that was already built, or that is to be built in the future. An \sbol{Implementation} can also represent virtual and simulated instances.  An \sbol{Implementation} may be linked back to its original design (either a \sbol{Component} or \sbol{Component}) using the \sbol{prov:wasDerivedFrom} property inherited from the \sbol{Identified} superclass. An \sbol{Implementation} may also link to a \sbol{Component} or \sbol{Component} that specifies its realized structure and/or function.
 % as described in Section2.1.1.
 
 \begin{figure}[ht]
@@ -1061,7 +1058,7 @@ An \sbol{Implementation} represents an instance of a synthetic biological constr
 \end{figure}
 
 \subsubsection*{ The \sbolheading{built} property}\label{sec:built}
-The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a \sbol{TopLevel} object that is either a \sbol{Component} or \sbol{Component}. This \sbol{Component} or \sbol{Component} is intended to describe the actual physical structure and/or functional behavior of the \sbol{Implementation}. When the built property refers to a \sbol{Component} or \sbol{Component} that is also linked to the \sbol{Implementation} via PROV-O properties such as \sbol{wasDerivedFroms} (see \ref{sec:provenance}), it can be inferred that the actual structure and/or function of the \sbol{Implementation} matches its original design. When the \sbol{built} property refers to a different \sbol{Component} or \sbol{Component}, it can be inferred that the \sbol{Implementation} has deviated from the original design. For example, the latter could be used to document when the DNA sequencing results for an assembled construct do not match the original target sequence.
+The \sbol{built} property is OPTIONAL and MAY contain a URI that MUST refer to a \sbol{TopLevel} object that is either a \sbol{Component} or \sbol{Component}. This \sbol{Component} or \sbol{Component} is intended to describe the actual physical structure and/or functional behavior of the \sbol{Implementation}. When the built property refers to a \sbol{Component} or \sbol{Component} that is also linked to the \sbol{Implementation} via PROV-O properties such as \sbol{prov:wasDerivedFrom} (see \ref{sec:provenance}), it can be inferred that the actual structure and/or function of the \sbol{Implementation} matches its original design. When the \sbol{built} property refers to a different \sbol{Component} or \sbol{Component}, it can be inferred that the \sbol{Implementation} has deviated from the original design. For example, the latter could be used to document when the DNA sequencing results for an assembled construct do not match the original target sequence.
 
 
 
@@ -1107,7 +1104,7 @@ The \sbol{hash} property is OPTIONAL and MAY contain a SHA-1 hash of the file co
 
 The purpose of the \sbol{ExperimentalData} class is to aggregate links to experimental data files. An \sbol{ExperimentalData} is typically associated with a single sample, lab instrument, or experimental condition and can be used to describe the output of the test phase of a design-build-test-learn workflow. For an example of the latter, see \ref{images:design-build-test-learn}.
 
-As shown in \ref{uml:experimental_data}, the \sbol{ExperimentalData} class aggregates links to experimental data files using the OPTIONAL \sbol{attachments} property that it inherits from the \sbol{TopLevel} class.
+As shown in \ref{uml:experimental_data}, the \sbol{ExperimentalData} class aggregates links to experimental data files using the OPTIONAL \sbol{hasAttachment} property that it inherits from the \sbol{TopLevel} class.
 
 \subsection{Experiment}
 \label{sec:Experiment}
