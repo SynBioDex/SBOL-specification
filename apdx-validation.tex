@@ -167,11 +167,14 @@ Reference: Section 7.5 on page 19}}
 
 \printModeling{The \sbol{encoding} property of a \sbol{Sequence} SHOULD contain a \sbol{URI} from \ref{tbl:sequence_encodings}.\\ Reference: \sec{sec:Sequence}}
 
+\subsubsection*{Rules for the \class{Component} class}
+\todo[inline]{Add: If a Component has a SequenceAnnotation that refers to Sequence X, then either the Component or one of its SubComponents must also have a SequenceAnnotation that gives Sequence X an EntireComponent Location.}
+
 
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{10501}
 
-
+\todo[inline]{Add: If a SubComponent has a Location that refers to Sequence X, then the either the SubComponent or its parent Component must also have a SequenceAnnotation that gives Sequence X an EntireComponent Location.}
 \printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \\ \sbol{components}, \sbol{sequences},  \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.}
 
 %A \sbol{SubComponent} MUST inherit all properties of the \sbol{TopLevel} class.}

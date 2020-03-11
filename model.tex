@@ -202,7 +202,7 @@ In addition, this class has properties for describing and organizing the substru
 \caption[]{Diagram of the \sbol{Component} class and its associated properties.}
 \label{uml:component}
 \end{center}
-\end{figure}
+\end{figure} \todo{change diagram to reflect changes from SEP 41}
 
 \subsubsection*{The \sbolheading{types} property}
 \label{sec:types:CD}
@@ -306,19 +306,6 @@ These \sbol{URI}s might identify descriptive biological roles, such as ``metabol
   \label{tbl:component_roles}
 \end{table}
 
-\subsubsection*{The \sbolheading{sequences} property}
-\label{sec:sequences}
-The \sbol{sequences} property is OPTIONAL and MAY include a set of \sbol{URI}s that refer to \sbol{Sequence} objects. These objects define the primary structure of the \sbol{Component}.
-
-Many \sbol{Component} objects will refer to precisely one \sbol{Sequence} object.
-For certain use cases, however, it can be appropriate to refer to multiple \sbol{Sequence} objects.
-For example, a user might wish to provide two different representations of the structure of a DNA \sbol{Component}, one that represents its structure at the level of nucleotide bases and one that represents its structure at the level of atoms and bonds.
-
-If a \sbol{Component} refers to more than one \sbol{Sequence} object, then these objects MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties. Furthermore, these objects MUST NOT have conflicting \sbol{encoding} properties. For example, the \external{IUPAC} \sbol{encoding} properties provided by \ref{tbl:sequence_encodings} conflict with each other because they do not specify how to encode the same class of biochemical entity. The \external{SMILES} \sbol{encoding}, however, does not conflict with them because it specifies how to encode biochemical entities in general, which includes DNA, RNA, and proteins. If a \sbol{Component} refers to more than one \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths. These requirements and best practices are intended to make it easier for software tools to locate any regions specified by the \sbol{SequenceFeature} objects of a \sbol{Component} on its associated \sbol{Sequence} objects, as well as validate whether its \sbol{Sequence} objects are consistent with those associated with any \sbol{Component} objects that it composes via its \sbol{SubComponent} objects. \todo{Update this as part of SEP 41}
-
-Finally, if a \sbol{Component} refers to one or more \sbol{Sequence} objects and its \sbolmult{types:CD}{types} property refers to a term from \ref{tbl:component_types}, then one of these \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}.
-Conversely, if a \sbol{Component} refers to a \sbol{Sequence} with an \sbol{encoding} from \ref{tbl:sequence_encodings}, then its \sbolmult{types:CD}{types} property MUST refer to the term from \ref{tbl:component_types} that is cross-listed with this \sbol{encoding} in \ref{tbl:sequence_encodings}.
-For example, if the \sbolmult{types:CD}{types} property of a \sbol{Component} refers to the SBO term for DNA, then one of the \sbol{Sequence} objects to which it refers (if any) MUST have an \external{IUPAC DNA} \sbol{encoding}, and if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}, then its \sbolmult{types:CD}{types} property MUST refer to the SBO term for DNA. These requirements are meant to provide for some degree of consistency between the \sbolmult{types:CD}{types} property of a \sbol{Component} and the \sbol{encoding} properties of the \sbol{Sequence} objects to which the \sbol{Component} refers.
 
 \subsubsection*{The \sbolheading{subcomponents} property}
 \label{sec:components}
@@ -328,24 +315,20 @@ The \sbol{subcomponents} property is OPTIONAL and MAY specify a set of \sbol{Sub
 While the \sbol{Component} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{SubComponent} class represents the specific occurrence of a part within a design.
 Hence, this class allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{Component}). For example, the \sbol{Component} of a polycistronic gene could contain two \sbol{SubComponent} objects that refer to the same \sbol{Component} of a CDS.
 
-The \sbol{subcomponents} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{SubComponent} and \sbol{Component} objects. 
-If a \sbol{Component} in such a hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. 
-This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceFeature} or \sbol{Constraint} objects contained by the \sbol{Component} objects in the hierarchy.
+The \sbol{subcomponents} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{SubComponent} and \sbol{Component} objects.
+If a \sbol{Component} in such a hierarchy refers to a \sbol{Location} object, and there exist a \sbol{Component} objects lower in the hierarchy that refer to \sbol{Location} object that referes to the same \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
+%If a \sbol{Component} in such a hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
 
-A DNA \sbol{Component}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{Component} could contain a \sbol{SubComponent} that refers to a ``lower level''  \sbol{Component} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, a consistent \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta},'' or perhaps ``{\tt tgta}'' if the \sbol{SubComponent} is positioned by a \sbol{SequenceFeature} that contains a \sbol{Location}  with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
-\todo{Update this in SEP 41}
+A DNA \sbol{Component}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{Component} could contain a \sbol{SubComponent} that refers to a ``lower level''  \sbol{Component} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, a consistent \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta},'' or perhaps ``{\tt tgta}'' if the \sbol{SubComponent} is positioned by a \sbol{SequenceAnnotation} that contains a \sbol{Location}  with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
 
-%%%%MODULE
-The \sbol{modules} property is OPTIONAL and MAY specify a set of \sbol{SubComponent} objects contained by the \sbol{Component}.
-Note that the set of relations between \sbol{SubComponent} and \sbol{Component} objects is strictly acyclic. \todo{update this in SEP 41}
+The \sbol{SubComponent} property is OPTIONAL and MAY specify a set of \sbol{SubComponent} objects contained by the \sbol{Component}.
+Note that the set of relations between \sbol{SubComponent} and \sbol{Component} objects is strictly acyclic.
 
 While the \sbol{Component} class is analogous to a specification sheet for a system of interacting biological elements, the \sbol{SubComponent} class represents the occurrence of a particular subsystem within the system.
 Hence, this class allows a system design to include multiple instances of a subsystem, all defined by reference to the same \sbol{Component}.
 For example, consider the \sbol{Component} for a network of two-input repressor devices in which the particular repressors have not been chosen yet. This \sbol{Component} could contain multiple \sbol{SubComponent} objects that refer to the same \sbol{Component} of an abstract two-input repressor device.
 
 Just as a \sbol{SubComponent} represents an instance of a subsystem in the overall system represented by a  \sbol{Component}, a \sbol{SubComponent} represents an instance of a structural entity (represented by a \sbol{Component}) in the system. This concept allows a \sbol{Component} to assert different interactions for separate copies of the same structural entity if needed. For example, a \sbol{Component} might contain multiple \sbol{SubComponent}  objects that refer to the same promoter \sbol{Component}, but assert different interactions for these promoter copies based on their separate positions in another \sbol{Component} that represents the structure of the entire system.
-
-
 
 \subsubsection*{The \sbolheading{feature} property}
 \label{sec:feature}
@@ -590,6 +573,9 @@ The \sbol{location} property is an OPTIONAL set which points to a \sbol{Location
 
 The \sbol{Location} record(s) specified by a \sbol{SubComponent} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbol{Location}. Concretely, two \sbol{Location} records attached to the same \sbol{SubComponent} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{SubComponents} may overlap.
 
+\paragraph{The \sbolheading{orientation} property}\label{sec:orientation2}
+The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Feature} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{SubComponent} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Feature} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
+
 \todo{add best practice here talking about EntireComponent?}
 
 \subsubsection{MapsTo}
@@ -685,7 +671,7 @@ The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol
 \caption[]{Diagram of the \sbol{Location} class and its associated properties.}
 \label{uml:location}
 \end{center}
-\end{figure}
+\end{figure} \todo{change diagram to reflect changes from SEP 41}
 
 \paragraph{The \sbolheading{orientation} property}
 \label{sec:orientation}
@@ -693,7 +679,7 @@ The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. A
 
 \paragraph{The \sbolheading{sequence} property}
 \label{sec:sequence}
-The \sbol{sequence} property is OPTIONAL and MAY contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
+The \sbol{sequence} property is REQUIRED and MUST contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{3.75in}}
@@ -730,12 +716,14 @@ This specification is accomplished using the \sbol{at} property, which specifies
 \label{sec:at}
 The \sbol{at} property is REQUIRED and MUST contain an \sbol{Integer} value greater than or equal to zero. The region specified by the \sbol{Cut} is between the position specified by this property and the position that immediately follows it. When the \sbol{at} property is equal to zero, the specified region is immediately before the first discrete position or character in the \sbol{elements} \sbol{String} of a \sbol{Sequence}.
 
-\paragraph{GenericLocation}
-\label{sec:GenericLocation}
 
-While the \sbol{Range} and \sbol{Cut} classes are best suited to
-specifying regions on \sbol{Sequence} objects with \external{IUPAC} encodings, the
-\sbol{GenericLocation} class is included as a starting point for specifying regions on \sbol{Sequence} objects with different \sbol{encoding} properties and potentially nonlinear structure. This class can also be used to set the \sbol{orientation} of a \sbol{SequenceFeature} and any associated \sbol{SubComponent} when their parent \sbol{Component} is a partial design that lacks a \sbol{Sequence}.
+\paragraph{EntireSequence}
+\label{sec:EntireSequence}
+The \sbol{EntireSequence} class does not have any additional properties. Use of this class indicates that the linked Sequence describes the entirety of the \sbol{Component} or \sbol{Feature} parent of this Location object.
+
+\paragraph{The \sbolheading{order} property}
+\label{sec:order}
+
 
 \subsubsection{Constraint}
 \label{sec:Constraint}
