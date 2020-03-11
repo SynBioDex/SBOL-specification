@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="14.2">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -9,7 +9,7 @@
       <w>720</w>
       <h>430</h>
     </coordinates>
-    <panel_attributes>*ModuleDefinition*
+    <panel_attributes>*Component*
 --
 ...
 name: System
@@ -86,11 +86,11 @@ layer=1</panel_attributes>
     <coordinates>
       <x>130</x>
       <y>280</y>
-      <w>90</w>
+      <w>120</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Participant
+hasParticipant
 fg=blue
 layer=2</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
@@ -100,11 +100,11 @@ layer=2</panel_attributes>
     <coordinates>
       <x>370</x>
       <y>280</y>
-      <w>90</w>
+      <w>120</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Participant
+hasParticipant
 fg=blue
 layer=2</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
@@ -114,11 +114,11 @@ layer=2</panel_attributes>
     <coordinates>
       <x>600</x>
       <y>280</y>
-      <w>90</w>
+      <w>120</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Participant
+hasParticipant
 fg=blue
 layer=2</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
@@ -131,7 +131,7 @@ layer=2</panel_attributes>
       <w>220</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>*FunctionalComponent*
+    <panel_attributes>*SubComponent*
 --
 ...
 name: Cell
@@ -146,7 +146,7 @@ layer=1</panel_attributes>
       <w>220</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>*FunctionalComponent*
+    <panel_attributes>*SubComponent*
 --
 ...
 name: Molecule B
@@ -161,7 +161,7 @@ layer=1</panel_attributes>
       <w>220</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>*FunctionalComponent*
+    <panel_attributes>*SubComponent*
 --
 ...
 name: Molecule A
@@ -177,7 +177,7 @@ layer=1</panel_attributes>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Definition
+instanceOf
 fg=red</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;50.0;220.0;50.0;220.0;10.0</additional_attributes>
   </element>
@@ -189,7 +189,7 @@ fg=red</panel_attributes>
       <w>310</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>*ComponentDefinition*
+    <panel_attributes>*Component*
 --
 ...
 name: Organism

@@ -176,37 +176,60 @@ SBOL has been used extensively to represent designs in homogeneous systems, wher
 
 \subsubsection{Representing Cells}
 
-To represent multicellular systems using SBOL, it is first necessary to represent cells properly. When doing so, it is important to be able to capture the following information: (i) taxonomy, (ii) interactions occurring within the cell, and (iii) components inside the cell (e.g. DNA Molecules). The proposed approach described in this section, depicted in \ref{uml:cell_representation}, is capable of capturing this information. It uses an instance of the \sbol{ModuleDefinition} class to represent a system which contains the cell. The cell is represented by an instance of the \sbol{FunctionalComponent} class inside the \sbol{ModuleDefinition}. A separate \sbol{ComponentDefinition} instance is used to capture information about the species and strain of the cell in the design. This \sbol{ComponentDefinition} has a \sbolmult{types:CD}{type} of ?cell? from the Gene Ontology (GO:0005623), and a \sbolmult{roles:CD}{role} of ?physical compartment? (SBO:0000290). Taxonomic information is captured by annotating the class instance with a URI for an entry in the NCBI Taxonomy Database. The \sbol{ComponentDefinition} instance is used as the value of the \sbolmult{definition:CI}{definition} property of the \sbol{FunctionalComponent} which represents the cell in the design to specify information about its taxonomy. Other entities which are relevant to this aspect of the design are also captured using instances of the \sbol{FunctionalComponent} class. Interactions which occur in this system are captured using the \sbol{Interaction} and \sbol{Participation} classes. Interactions which occur within the cell are specified by \sbol{Interaction} classes which contain the \sbol{FunctionalComponent} instance representing the cell as a \sbol{participant} with a \sbolmult{roles:P}{role} of 'physical compartment'.
+To represent multicellular systems using SBOL, it is first necessary to represent cells properly. 
+When doing so, it is important to be able to capture the following information: (i) taxonomy, (ii) interactions occurring within the cell, and (iii) components inside the cell (e.g. DNA Molecules). 
+The proposed approach described in this section, as shown in the example in \ref{uml:cell_representation}, is capable of capturing this information. 
+It uses a \sbol{Component} to represent a system that contains the cell. 
+The cell is represented by a \sbol{SubComponent} inside the \sbol{Component}. 
+A separate \sbol{Component} is used to capture information about the species and strain of the cell in the design. 
+This \sbol{Component} has a \sbolmult{types:CD}{type} of ``cell'' from the Gene Ontology (GO:0005623), and a \sbolmult{roles:CD}{role} of ``physical compartment'' (SBO:0000290).
+Taxonomic information is captured by annotating the class instance with a URI for an entry in the NCBI Taxonomy Database. 
+The \sbol{Component} is used as the value of the \sbolmult{definition:CI}{definition} property of the \sbol{SubComponent} that represents the cell in the design to specify information about its taxonomy. 
+Other entities which are relevant to this aspect of the design are also captured using instances of the \sbol{SubComponent} class. 
+Interactions which occur in this system are captured using the \sbol{Interaction} and \sbol{Participation} classes. 
+Interactions which occur within the cell are specified by \sbol{Interaction} classes which contain the \sbol{SubComponent} instance representing the cell as a \sbol{participant} with a \sbolmult{roles:P}{role} of ``physical compartment.''
 
-With this approach, an additional \sbol{Interaction} class instance could be used to define entities which are only present within the cell, i.e. they are not available to the rest of the system. This interaction has a \sbolmult{types:I}{type} of ?containment? (SBO:0000469), and has at least two participants. One of these \sbol{participant}s is the cell, which has a \sbolmult{roles:P}{role} of ?physical compartment?, whilst the others are the contained entities, which have \sbolmult{roles:P}{roles} of ?contained?
+With this approach, an additional \sbol{Interaction} class instance could be used to define entities which are only present within the cell, i.e. they are not available to the rest of the system. 
+This interaction has a \sbolmult{types:I}{type} of ``containment'' (SBO:0000469), and has at least two participants. 
+One of these \sbol{participant}s is the cell, which has a \sbolmult{roles:P}{role} of ``physical compartment'', whilst the others are the contained entities, which have \sbolmult{roles:P}{roles} of ?contained?
 (SBO:0000064).
 
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics[width=\textwidth]{uml/cell_representation}
-		\caption[Repressenting a cell]{This is a proposed approach for capturing cell designs in SBOL. A \sbol{ComponentDefinition} annotated with a URI pointing to an entry in the NCBI Taxonomy Database is used to capture information about the cell's strain/species. The \sbol{ComponentDefinition} instance has a type of 'Cell' from the Gene Ontology (GO), and a role of 'physical compartment'. An instance of the \sbol{ModuleDefinition} class is used to represent a system in which the cell is implemented. Entities, including the cell, are instantiated as \sbol{FunctionalComponent}s, and process are captured using the \sbol{Interaction} class. Process which are contained within the cell are represented by including the cell as a participant with a role of 'physical compartment'. C) Example of how the \sbol{Interaction} class can be used to explicitly confer that an entity is contained inside a cell. Here a plasmid is specified as being contained within a cell.
-		}
+		\caption[Repressenting a cell]{This is a proposed approach for capturing cell designs in SBOL. A \sbol{Component} annotated with a URI pointing to an entry in the NCBI Taxonomy Database is used to capture information about the cell's strain/species. 
+		The \sbol{Component} has a type of ``Cell'' from the Gene Ontology (GO), and a role of ``physical compartment''. 
+		Another \sbol{Component} is used to represent a system in which the cell is implemented. 
+		Entities, including the cell, are instantiated as \sbol{SubComponent}s, and process are captured using the \sbol{Interaction} class.
+		Process which are contained within the cell are represented by including the cell as a participant with a role of ``physical compartment''. }
 		\label{uml:cell_representation}
 	\end{center}
 \end{figure}
 
 \subsubsection{Multiple Cells in a Single Design}
 
-The approach to represent multiple cells in SBOL uses both \sbol{Module} and \sbol{FunctionalComponent} classes to represent cells, and any non-cell entities must also be instantiated as \sbol{FunctionalComponent} classes. 
-The \sbol{Module} instances are defined by the \sbol{ModuleDefinition} classes used to represent cells/cell systems as in the first approach. \sbol{FunctionalComponent} classes are also used to represent taxonomic information about the cell, and are defined by the \sbol{ComponentDefinition} classes which capture this information. Finally, the \sbol{Module} classes contain instances of the \sbol{MapsTo} class, which are used to explicitly capture links between the same entities present in multiple parts of the same design. Here, a \sbol{MapsTo} class with a \sbol{refinement} value of ?merge? is used to link \sbol{FunctionalComponent} classes which represent a cell in the multicellular system to the \sbol{FunctionalComponent} class used to represent the same cell in the lower-level cell system design. Instances of the \sbol{MapsTo} class are also used to capture that non-cell entities in the multicellular system are identical to entities used in the cell system design. This is demonstrated in \ref{uml:multiple_cell_representation}.
+The same approach can be extended to represent systems with multiple cells, using one \sbol{Component} to represent the system for each cells.
+The multicellular system can then be represented as a \sbol{Component} that includes the system description for each strain of cell as a \sbol{SubComponent}.
+Interactions and constraints, such as a molecule that both strains interact with, are implemented using \sbol{ComponentReference}s to link to the definitions within each cell system description.
+An example is shown in \ref{uml:multiple_cell_representation}.
 
 \begin{figure}[ht]
 	\begin{center}
 		\includegraphics[width=\textwidth]{uml/two_cell_representation}
-		\caption[]{Captured here is a design involving two cells which both interact with the small molecule 'Molecule A'. Designs for Cell 1 and Cell are captured using the approach depicted in \ref{uml:cell_representation}. The overall multicellular system is represented by a \sbol{ModuleDefinition} with a \sbolmult{roles:MD}{role} of 'functional compartment', which is an SBO term. The two systems involving Cell 1 and Cell 2 are included in this multicellular design as instances of the \sbol{Module} class. Entities in the multicellular design, including those in the Cell 1 and Cell 2 system designs, are instantiated as a \sbol{FunctionalComponent}. Instances of the \sbol{MapsTo} class are used to map entities specified in both the individual cell systems, and the multicellular system.
-		}
+		\caption[]{Captured here is a design involving two cells which both interact with the small molecule ``Molecule A''. 
+		Designs for the sender and receiver systems are captured using constraint to show that each of these cells interacts with the Molecule A contained within it.
+		The overall multicellular system is represented by a \sbol{Component} with a \sbolmult{roles:C}{role} of ``functional compartment'', which is an SBO term.
+		The two systems are included in this multicellular design as \sbol{SubComponent}s, and the fact that Molecule A is shared between systems is indicated with a constraint.}
 		\label{uml:multiple_cell_representation}
 	\end{center}
 \end{figure}
 
 \subsubsection{Cell Ratios}
 
-The proportion of cell types present in a multicellular system has been captured through the use of an instance of the \sbol{Measure} class on classes which represent cell systems in the multicellular design. As a best practice, the value of these measure classes is a number less than or equal to 100\%. These values are the percentage of a cell type present in the system compared to all other cell types present. Therefore, the sum of all these values specified in the system should be equal to 100\%. These approaches are shown in \ref{uml:cell_ratios}.
+The proportion of cell types present in a multicellular system can be captured using \sbol{Measure} on the representations of cells in the design.
+As a best practice, the value of these measure classes is a percentage less than or equal to 100\%, representing the amount of a cell type present in the system compared to all other cell types present. 
+Therefore, the sum of all these values specified in the system will typically be equal to 100\%, though this may not be the case if the system is not completely defined. 
+An example is shown in \ref{uml:cell_ratios}.
 
 \begin{figure}[ht]
 	\begin{center}

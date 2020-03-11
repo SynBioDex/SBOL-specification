@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="14.2">
   <help_text>// Uncomment the following lines to change the fontsize and font:
 // fontsize=14
 // fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
@@ -24,705 +24,158 @@
 
 
 // This text will be stored with each diagram;  use it for notes.</help_text>
-  <zoom_level>3</zoom_level>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>144</x>
-      <y>30</y>
-      <w>57</w>
-      <h>21</h>
-    </coordinates>
-    <panel_attributes>*FunctionalComponent*
---
-...
-name: Molecule A
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
+  <zoom_level>7</zoom_level>
   <element>
     <id>Relation</id>
-    <coordinates>
-      <x>147</x>
-      <y>48</y>
-      <w>18</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-
-Local
-fg=#B27300
-group=3</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>198</x>
-      <y>39</y>
-      <w>39</w>
-      <h>39</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Local
-fg=#B27300
-group=3</panel_attributes>
-    <additional_attributes>10.0;20.0;110.0;20.0;110.0;110.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>87</x>
-      <y>54</y>
-      <w>84</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>*Module*
---
-...
-name: Cell System 1
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>177</x>
-      <y>54</y>
-      <w>84</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>*Module*
---
-...
-name: Cell System 2
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>90</x>
-      <y>72</y>
-      <w>78</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>*MapsTo*
---
-...
-refinement: merge
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>180</x>
-      <y>72</y>
-      <w>78</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>*MapsTo*
---
-...
-refinement: merge
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>90</x>
-      <y>99</y>
-      <w>78</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>*MapsTo*
---
-...
-refinement: merge
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>180</x>
-      <y>99</y>
-      <w>78</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>*MapsTo*
---
-...
-refinement: merge
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>138</x>
-      <y>120</y>
-      <w>18</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Local
-fg=#B27300
-group=3</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>204</x>
-      <y>120</y>
-      <w>18</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Local
-fg=#B27300
-group=3</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>111</x>
-      <y>138</y>
-      <w>60</w>
-      <h>21</h>
-    </coordinates>
-    <panel_attributes>*FunctionalComponent*
---
-...
-name: Cell 1
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>177</x>
-      <y>138</y>
-      <w>60</w>
-      <h>21</h>
-    </coordinates>
-    <panel_attributes>*FunctionalComponent*
---
-...
-name: Cell 2
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>84</x>
-      <y>6</y>
-      <w>180</w>
-      <h>156</h>
-    </coordinates>
-    <panel_attributes>*ModuleDefinition*
---
-...
-name: Multicellular System
-role: functional compartment [SBO:0000289]
-layer=-1
-group=3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>171</x>
-      <y>48</y>
-      <w>27</w>
-      <h>273</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- Definition
-fg=red</panel_attributes>
-    <additional_attributes>10.0;890.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>12</x>
-      <y>81</y>
-      <w>105</w>
-      <h>234</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-fg=#B27300</panel_attributes>
-    <additional_attributes>330.0;720.0;330.0;760.0;10.0;760.0;10.0;10.0;260.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>18</x>
-      <y>108</y>
-      <w>78</w>
-      <h>186</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-fg=#B27300</panel_attributes>
-    <additional_attributes>40.0;600.0;10.0;600.0;10.0;10.0;240.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>234</x>
-      <y>81</y>
-      <w>102</w>
-      <h>234</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-fg=#B27300</panel_attributes>
-    <additional_attributes>10.0;720.0;10.0;760.0;320.0;760.0;320.0;10.0;80.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>255</x>
-      <y>108</y>
-      <w>78</w>
-      <h>183</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-fg=#B27300</panel_attributes>
-    <additional_attributes>210.0;590.0;240.0;590.0;240.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>249</x>
-      <y>123</y>
-      <w>27</w>
-      <h>57</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-
-
-
-
-
-
-
-Definition
-fg=red</panel_attributes>
-    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>90</x>
-      <y>123</y>
-      <w>27</w>
-      <h>57</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-
-
-
-
-
-
-
-Definition
-fg=red</panel_attributes>
-    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>6</x>
-      <y>147</y>
-      <w>111</w>
-      <h>192</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Definition
-fg=red
-layer=4</panel_attributes>
-    <additional_attributes>60.0;620.0;10.0;620.0;10.0;10.0;350.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>234</x>
-      <y>147</y>
-      <w>123</w>
-      <h>192</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Definition
-fg=red
-layer=4</panel_attributes>
-    <additional_attributes>290.0;620.0;330.0;620.0;330.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>99</x>
-      <y>225</y>
-      <w>66</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*Participation*
---
-...
-name: Molecule A
-role: URI
-layer=1
-group=2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>129</x>
-      <y>252</y>
-      <w>27</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Participant
-fg=blue
-layer=2
-group=2</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>99</x>
-      <y>273</y>
-      <w>66</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>*FunctionalComponent*
---
-...
-name: Molecule A
-layer=1
-group=2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>30</x>
-      <y>225</y>
-      <w>66</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*Participation*
---
-...
-name: Cell 1
-role: physical compartment
-        [SBO:0000290]
-layer=1
-group=2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>30</x>
-      <y>273</y>
-      <w>66</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>*FunctionalComponent*
---
-...
-name: Cell 1
-layer=1
-group=2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>24</x>
-      <y>174</y>
-      <w>147</w>
-      <h>126</h>
-    </coordinates>
-    <panel_attributes>*ModuleDefinition*
---
-...
-name: Cell System 1
-role: functional compartment [SBO:0000289]
-layer=-1
-group=2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>27</x>
-      <y>204</y>
-      <w>141</w>
-      <h>57</h>
-    </coordinates>
-    <panel_attributes>*Interaction*
---
-...
-type: URI
-layer=1
-group=2</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>183</x>
-      <y>225</y>
-      <w>66</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*Participation*
---
-...
-name: Molecule A
-role: URI
-layer=1
-group=1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
     <coordinates>
       <x>252</x>
-      <y>225</y>
-      <w>66</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*Participation*
---
-...
-name: Cell 2
-role: physical compartment
-        [SBO:0000290]
-layer=1
-group=1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>213</x>
-      <y>252</y>
-      <w>27</w>
-      <h>27</h>
+      <y>357</y>
+      <w>245</w>
+      <h>371</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Participant
-fg=blue
-layer=2
-group=1</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+fg=#B27300</panel_attributes>
+    <additional_attributes>330.0;490.0;330.0;510.0;10.0;510.0;10.0;10.0;290.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>282</x>
-      <y>252</y>
-      <w>27</w>
-      <h>27</h>
+      <x>756</x>
+      <y>357</y>
+      <w>245</w>
+      <h>371</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Participant
-fg=blue
-layer=2
-group=1</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>252</x>
-      <y>273</y>
-      <w>66</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>*FunctionalComponent*
---
-...
-name: Cell 2
-layer=1
-group=1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>183</x>
-      <y>273</y>
-      <w>66</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>*FunctionalComponent*
---
-...
-name: Molecule A
-layer=1
-group=1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>177</x>
-      <y>174</y>
-      <w>147</w>
-      <h>126</h>
-    </coordinates>
-    <panel_attributes>*ModuleDefinition*
---
-...
-name: Cell System 2
-role: functional compartment [SBO:0000289]
-layer=-1
-group=1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>180</x>
-      <y>204</y>
-      <w>141</w>
-      <h>57</h>
-    </coordinates>
-    <panel_attributes>*Interaction*
---
-...
-type: URI
-layer=1
-group=1</panel_attributes>
-    <additional_attributes/>
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;490.0;10.0;510.0;330.0;510.0;330.0;10.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>60</x>
-      <y>294</y>
-      <w>27</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Definition
-fg=red</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>123</x>
-      <y>294</y>
-      <w>39</w>
+      <x>728</x>
+      <y>469</y>
+      <w>70</w>
       <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Definition
+
+instanceOf
 fg=red</panel_attributes>
-    <additional_attributes>110.0;160.0;110.0;190.0;10.0;190.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>511</x>
+      <y>469</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>144</x>
-      <y>315</y>
-      <w>54</w>
-      <h>27</h>
+      <x>455</x>
+      <y>644</y>
+      <w>154</w>
+      <h>56</h>
     </coordinates>
-    <panel_attributes>*ComponentDefinition*
+    <panel_attributes>*SubComponent*
+--
+...
+name: Molecule A
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>294</x>
+      <y>644</y>
+      <w>154</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Cell 1
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>518</y>
+      <w>343</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Sender System
+role: functional compartment [SBO:0000289]
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>812</x>
+      <y>644</y>
+      <w>154</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Cell 2
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>651</x>
+      <y>644</y>
+      <w>154</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Molecule A
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>693</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>742</y>
+      <w>133</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>*Component*
 --
 ...
 name: Molecule A
@@ -733,38 +186,26 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>189</x>
-      <y>294</y>
-      <w>36</w>
+      <x>875</x>
+      <y>693</y>
+      <w>70</w>
       <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Definition
-fg=red</panel_attributes>
-    <additional_attributes>10.0;160.0;10.0;190.0;100.0;190.0;100.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>279</x>
-      <y>294</y>
-      <w>27</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-Definition
+
+instanceOf
 fg=red</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>225</x>
-      <y>315</y>
-      <w>96</w>
-      <h>36</h>
+      <x>749</x>
+      <y>742</y>
+      <w>224</w>
+      <h>84</h>
     </coordinates>
-    <panel_attributes>*ComponentDefinition*
+    <panel_attributes>*Component*
 --
 ...
 name: Organism 2
@@ -777,12 +218,12 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>24</x>
-      <y>315</y>
-      <w>96</w>
-      <h>36</h>
+      <x>280</x>
+      <y>742</y>
+      <w>224</w>
+      <h>84</h>
     </coordinates>
-    <panel_attributes>*ComponentDefinition*
+    <panel_attributes>*Component*
 --
 ...
 name: Organism 1
@@ -795,13 +236,13 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>63</x>
-      <y>78</y>
-      <w>18</w>
-      <h>6</h>
+      <x>308</x>
+      <y>350</y>
+      <w>105</w>
+      <h>14</h>
     </coordinates>
     <panel_attributes>halign=center
-Remote
+componentInstance
 lw=0
 fg=#B27300</panel_attributes>
     <additional_attributes/>
@@ -809,13 +250,153 @@ fg=#B27300</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>63</x>
-      <y>105</y>
-      <w>18</w>
-      <h>6</h>
+      <x>560</x>
+      <y>266</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*Constraint*
+--
+...
+restriction: verifyIdentical</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>427</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Sender System</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>665</x>
+      <y>427</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Receiver System</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>336</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*ComponentReference*
+--
+...
+name: Molecule A in Cell 1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>665</x>
+      <y>336</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*ComponentReference*
+--
+...
+name: Molecule A in Cell 2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>210</y>
+      <w>420</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Multicellular System
+role: functional compartment [SBO:0000289]
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>378</y>
+      <w>63</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+inChildOf
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>287</y>
+      <w>56</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+subject
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>378</y>
+      <w>63</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+inChildOf
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>693</x>
+      <y>287</y>
+      <w>84</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+object
+fg=#B27300</panel_attributes>
+    <additional_attributes>60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>847</x>
+      <y>350</y>
+      <w>105</w>
+      <h>14</h>
     </coordinates>
     <panel_attributes>halign=center
-Remote
+componentInstance
 lw=0
 fg=#B27300</panel_attributes>
     <additional_attributes/>
@@ -823,43 +404,129 @@ fg=#B27300</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>267</x>
-      <y>78</y>
-      <w>18</w>
-      <h>6</h>
+      <x>385</x>
+      <y>574</y>
+      <w>140</w>
+      <h>49</h>
     </coordinates>
-    <panel_attributes>halign=center
-Remote
-lw=0
+    <panel_attributes>*Constraint*
+--
+...
+restriction: contains</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>595</y>
+      <w>56</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+subject
 fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>595</y>
+      <w>84</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+object
+fg=#B27300</panel_attributes>
+    <additional_attributes>60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>637</x>
+      <y>518</y>
+      <w>343</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Receiver System
+role: functional compartment [SBO:0000289]
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>267</x>
-      <y>105</y>
-      <w>18</w>
-      <h>6</h>
+      <x>742</x>
+      <y>574</y>
+      <w>140</w>
+      <h>49</h>
     </coordinates>
-    <panel_attributes>halign=center
-Remote
-lw=0
-fg=#B27300</panel_attributes>
+    <panel_attributes>*Constraint*
+--
+...
+restriction: contains</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
+    <id>Relation</id>
     <coordinates>
-      <x>312</x>
-      <y>309</y>
-      <w>21</w>
-      <h>6</h>
+      <x>875</x>
+      <y>595</y>
+      <w>84</w>
+      <h>63</h>
     </coordinates>
-    <panel_attributes>halign=center
-Definition
-lw=0
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+object
+fg=#B27300</panel_attributes>
+    <additional_attributes>60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>595</y>
+      <w>56</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+subject
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>693</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
 fg=red</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>665</x>
+      <y>693</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
