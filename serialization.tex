@@ -8,15 +8,15 @@ First, SBOL needs to support ad-hoc annotations and extensions.
 Second, SBOL needs to support processing by general database and semantic web software tools that have little or no knowledge of the SBOL data model. 
 Finally, it ought to be relatively simple to write a new software implementation, so that SBOL can be readily used even in software environments where community-maintained implementations are not available.
 
-To meet these goals, SBOL builds upon the Resource Description Framework (RDF).  RDF is an abstract language for describing conceptual graph-oriented data models, and therefore does not mandate any specific serialization format.  Instead, a number of different serialization formats are provided as separate specifications, such as RDF/XML, N-Triples, JSON-LD, and Turtle.  These serialization formats are widely supported by RDF libraries such as rdflib for Python and Apache Jena for Java.   For example, a simple SBOL definition of pLac can be serialized in Turtle as follows:
-
-\vspace{3mm}
-\includegraphics{example_serialization/example_turtle.pdf}
-
-Alternatively, the same example can be serialized in RDF/XML as follows:
+To meet these goals, SBOL builds upon the Resource Description Framework (RDF).  RDF is an abstract language for describing conceptual graph-oriented data models, and therefore does not mandate any specific serialization format.  Instead, a number of different serialization formats are provided as separate specifications, such as RDF/XML, N-Triples, JSON-LD, and Turtle.  These serialization formats are widely supported by RDF libraries such as rdflib for Python and Apache Jena for Java.   For example, a simple SBOL definition of pLac can be serialized in RDF/XML as follows:
 
 \vspace{3mm}
 \includegraphics{example_serialization/example_rdfxml.pdf}
+
+Alternatively, the same example can be serialized in Turtle as follows:
+
+\vspace{3mm}
+\includegraphics{example_serialization/example_turtle.pdf}
 
 The SBOL namespace, which is \url{http://sbols.org/v3\#}, is used to indicate which entities and properties in the SBOL document are defined by SBOL. For example, the URI of the type \sbol{Component} is \url{http://sbols.org/v3\#Component}. The SBOL namespace MUST NOT be used for any entities or properties not defined in this specification.  Where possible, we have re-used predicates from widely-used terminologies (such as Dublin Core~\cite{dcmi2012}) to expose as much of the data as practical to such standard RDF tooling.
 
