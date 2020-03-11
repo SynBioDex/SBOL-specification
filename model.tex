@@ -12,6 +12,21 @@ Classes can be connected to other classes by association properties, which are r
 
 In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, in which the owner of the association property exists independently of its value. In the SBOL data model, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.
 
+\todo{Weave this into above paragraph JAMES}
+A given \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.
+
+A \sbol{TopLevel} object's URI is defined according to the following rules.
+
+\begin{itemize}
+ 
+ \item A \sbol{TopLevel} URI has the following pattern:
+  \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \texttt{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path. E.g. \path{https://synbiohub.org/public/igem/BBa_J23070}, where \texttt{namespace}=\path{https://synbiohub.org}, \texttt{local}=\path{public/igem}, and \texttt{displayId}=\path{BBa_J23070}.
+ 
+  \item A \sbol{TopLevel} object's URI property cannot be included as prefix for other \sbol{TopLevel} objects. E.g. The \path{BBa_J23070_seq} \sbol{Sequence} object cannot have the \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq} URI, since the \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URI for the \path{BBa_J23070} \sbol{ComponentDefinition} object.
+  \item The URI property of any child or nested object has the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URI of a parent object. Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively. E.g. The \texttt{annotation1} \sbol{SequenceAnnotation} object of the \path{BBa_J23070} \sbol{Component} entity will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1} URI. Similarly, the \texttt{loc1} \sbol{Location} of the \texttt{annotation1} \sbol{SequenceAnnotation} object will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1} URI.
+  \end{itemize}
+
+
 By contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which the value of the association property MUST NOT exist independently of its owner.
 In addition, in the SBOL data model, it is REQUIRED that the value of each composite aggregation property is a unique SBOL object (that is, not the value for more than one such property).
 Note that in all cases, composite aggregation is used in such a way that there SHOULD NOT be duplication of such objects.
@@ -63,70 +78,11 @@ When SBOL use simple ``primitive'' data types such as \sbol{String}s or \sbol{In
 \item \sbol{Boolean}: \url{http://www.w3.org/TR/xmlschema11-2/#boolean}\\
   {\em Example: \external{true}}
 \end{itemize}
-The term \sbol{literal} is used to denote an object that can be any of the four types listed above.
+The term \sbol{literal} is used to denote an object that can be any of the five types listed above.
 
 In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}). It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
 
-\subsection{Identified}
-\label{sec:Identified}
-
-All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
-This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
-
-As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{prov:wasDerivedFrom}, \sbol{name}, \sbol{description}, and \sbol{annotations}. The latter property is described separately in \ref{sec:Annotations}. 
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/identified}
-\caption[]{Diagram of the \sbol{Identified} abstract class and its associated properties}
-\label{uml:identified}
-\end{center}
-\end{figure}
-
-A given \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.
-
-A \sbol{TopLevel} object's URI is defined according to the following rules.
-
-\begin{itemize}
- 
- \item A \sbol{TopLevel} URI has the following pattern:
-  \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \texttt{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path. E.g. \path{https://synbiohub.org/public/igem/BBa_J23070}, where \texttt{namespace}=\path{https://synbiohub.org}, \texttt{local}=\path{public/igem}, and \texttt{displayId}=\path{BBa_J23070}.
- 
-  \item A \sbol{TopLevel} object's URI property cannot be included as prefix for other \sbol{TopLevel} objects. E.g. The \path{BBa_J23070_seq} \sbol{Sequence} object cannot have the \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq} URI, since the \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URI for the \path{BBa_J23070} \sbol{ComponentDefinition} object.
-  \item The URI property of any child or nested object has the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URI of a parent object. Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively. E.g. The \texttt{annotation1} \sbol{SequenceAnnotation} object of the \path{BBa_J23070} \sbol{Component} entity will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1} URI. Similarly, the \texttt{loc1} \sbol{Location} of the \texttt{annotation1} \sbol{SequenceAnnotation} object will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1} URI.
-  \end{itemize}
-  
-\subsubsection*{The \sbolheading{displayId} property}
-\label{sec:displayId}
-The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between a URI and the \sbol{name} property that is machine-readable, but more human-readable than the full URI of an object.
-
-If the \sbol{displayId} property is used, then its \sbol{String} value MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
-
-% compliant with the type \external{http://www.w3.org/TR/xmlschema-2/\#NCName}, except that it MUST not include the characters "-" and ".".
-
-\subsubsection*{The \sbolheading{prov:wasDerivedFrom} property}
-\label{sec:prov:wasDerivedFrom}
-An \sbol{Identified} object can have zero or more \sbol{prov:wasDerivedFrom} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/TR/prov-o/} namespace (Reference: \sec{sec:provenance}).
-
- An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived. An SBOL object MUST NOT refer to itself via its own \sbol{prov:wasDerivedFrom} property or form a cyclical chain of references via its \sbol{prov:wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
-
-\subsubsection*{The \sbolheading{name} property}
-\label{sec:name}
-
-The \sbol{name} property is OPTIONAL and has a data type of \sbol{String}. This property is intended to be displayed to a human when visualizing an \sbol{Identified} object.
-
-If an \sbol{Identified} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or URI.
-It is RECOMMENDED that software tools give users the ability to switch perspectives between \sbol{name} properties that are human-readable and \sbol{displayId} properties that are less human-readable, but are more likely to be unique.
-
-\subsubsection*{The \sbolheading{description} property}
-\label{sec:description}
-
-The \sbol{description} property is OPTIONAL and has a data type of \sbol{String}. This property is intended to contain a more thorough text description of an \sbol{Identified} object.
-
-\subsubsection*{The \sbolheading{annotations} property}
-\label{sec:annotations}
-
-The \sbol{annotations} property is OPTIONAL and MAY specify a set of \sbol{Annotation} objects that are contained by the \sbol{Identified} object. The \sbol{Annotation} class is described in more detail in Section~\ref{sec:Annotation}.
+\input{identified}
 
 \subsection {TopLevel}
 \label{sec:TopLevel}
