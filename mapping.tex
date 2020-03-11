@@ -1,6 +1,14 @@
 \section{Mapping Between SBOL 1, SBOL 2, and SBOL3}
 \label{sec:mapping}
 
+In broad strokes, the SBOL 1 standard focused on conveying physical, structural information, whereas SBOL 2 expanded the scope to include functional aspects as well.  
+The physical information about a designed genetic construct includes the order of its constituents and their descriptions. 
+Specifying the exact locations of these constituents and their sequences allows genetic constructs to be defined unambiguously and reused in other designs. 
+SBOL 2 extended SBOL 1 in several ways: it extends physical descriptions to include entities beyond DNA sequences, and it added support for functional descriptions of designs.  
+SBOL 3 refined the data model to simplify the representation of common use cases.
+
+\subsection{Mapping between SBOL 1 and SBOL 2}
+
 \ref{SBOL1TO2} depicts the mapping of SBOL 1.1 classes to SBOL 2.x classes, indicating corresponding classes/properties by color.
 The SBOL 2.x \sbol{Model} and \sbol{CompenentDefinition} classes have no SBOL 1.1 equivalent, and thus are not shown.
 In particular:
@@ -21,3 +29,5 @@ In particular:
 \end{center}
 \caption{\label{SBOL1TO2}The mapping from the SBOL 1.1 data model to the SBOL 2.x  data model, indicating corresponding classes/properties by color.}
 \end{figure*}
+
+\subsection{Mapping between SBOL 2 and SBOL 3}
