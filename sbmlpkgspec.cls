@@ -395,8 +395,8 @@ Package Specification Style]
 \renewcommand{\baselinestretch}{\normalbaselinestretch}
 
 % Set the table of contents depth
-
-\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
 
 % Title page macros.  Severly hacked from originals in LaTeX's article.cls.
 
@@ -695,6 +695,10 @@ Package Specification Style]
 
 \renewcommand{\paragraph}{\@startsection%
   {paragraph}{4}{0pt}{-0.75ex \@plus 2ex \@minus -.2ex}%
+  {0.4ex}{\normalsize\bfseries\sffamily\slshape}}
+  
+\renewcommand{\subparagraph}{\@startsection%
+  {subparagraph}{5}{0pt}{-0.75ex \@plus 2ex \@minus -.2ex}%
   {0.4ex}{\normalsize\bfseries\sffamily\slshape}}
 
 % The References heading needs to be fixed up to account for shift

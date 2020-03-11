@@ -324,7 +324,7 @@ The \sbol{Interaction} class provides more detailed description of how the \sbol
 For example, this class can be used to represent different forms of genetic regulation (e.g., transcriptional activation or repression), processes from the central dogma of biology (e.g. transcription and translation), and other basic molecular interactions (e.g., non-covalent binding or enzymatic phosphorylation).
 Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refers to descriptive ontology terms and a \sbol{participations} property that describes which \sbol{Feature} objects participate in the \sbol{Interaction}.
 
-\paragraph{The \sbolheading{types} property}\label{sec:types:I}
+\subparagraph{The \sbolheading{types} property}\label{sec:types:I}
 
 The \sbolmult{types:I}{types} property is a REQUIRED set of \sbol{URI}s that describes the behavior represented by an \sbol{Interaction}.
 
@@ -351,7 +351,7 @@ The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that
 If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:interaction_types}, then its \sbolmult{types:I}{types} property MUST contain the \sbol{URI} that identifies this term. Lastly, if the \sbolmult{types:I}{types} property of an \sbol{Interaction} contains multiple
  \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulation'' and ``inhibition'' would conflict.
 
-\paragraph{The \sbolheading{participations} property}\label{sec:participations}
+\subparagraph{The \sbolheading{participations} property}\label{sec:participations}
 
 The \sbol{participations} property is an OPTIONAL and MAY contain a set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that its referenced \sbol{Feature} plays in the \sbol{Interaction}.
 
@@ -371,7 +371,7 @@ Even though an \sbol{Interaction} generally contains at least one \sbol{Particip
 Each \sbol{Participation} represents how a particular \sbol{Feature} behaves in its parent
 \sbol{Interaction}.
 
-\paragraph{The \sbolheading{roles} property}\label{sec:roles:P}
+\subparagraph{The \sbolheading{roles} property}\label{sec:roles:P}
 
 The \sbolmult{roles:P}{roles} property is a REQUIRED set of \sbol{URI}s that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{Feature}) in the context of its parent \sbol{Interaction}.
 
@@ -408,7 +408,7 @@ Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} cont
  \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulator'' and ``inhibitor'' would conflict.
 
 
-\paragraph{The \sbolheading{participant} property}\label{sec:participant}
+\subparagraph{The \sbolheading{participant} property}\label{sec:participant}
 
 The \sbol{participant} property MUST specify precisely one \sbol{Feature} object that plays the designated role in its parent \sbol{Interaction} object.
 
@@ -426,14 +426,14 @@ The \sbol{participant} property MUST specify precisely one \sbol{Feature} object
 
 The \sbol{Interface} class is a way of explicitly specifying the interface of a \sbol{Component}. 
 
-\paragraph{The \sbolheading{input} property}
+\subparagraph{The \sbolheading{input} property}
 \label{sec:input:Interface}
 The \sbolmult{input:Interface}{input} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}.
-\paragraph{The \sbolheading{output} property}
+\subparagraph{The \sbolheading{output} property}
 \label{sec:output:Interface}
 The \sbolmult{output:Interface}{output} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}.
 
-\paragraph{The \sbolheading{nondirectional} property}
+\subparagraph{The \sbolheading{nondirectional} property}
 \label{sec:nondirectional:Interface}
 The \sbolmult{nondirectional:Interface}{nondirectional} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}. Note that nondirectional can imply both bidirectional as well as situations where there are no flows (for instance - a physical interface).
 
@@ -451,7 +451,7 @@ The \sbolmult{nondirectional:Interface}{nondirectional} property is OPTIONAL and
 
 The \sbol{Feature} class is used to compose \sbol{Component} objects into a structural or functional hierarchy. 
 
-\paragraph{The \sbolheading{role} property}\label{sec:roles:C}
+\subparagraph{The \sbolheading{role} property}\label{sec:roles:C}
 
 The expected purpose and function of a genetic part are described by the
 \sbolmult{roles:CD}{roles} property of \sbol{Component}. However, the same building block might be used for a different purpose in an actual design. In other words, purpose and function are sometimes determined by context. 
@@ -466,7 +466,7 @@ It is RECOMMENDED that these \sbolmult{roles:C}{role} \sbol{URI}s identify terms
 
 The \sbol{SubComponent} class a subclass of the \sbol{Feature} class that can be used to specify structural hierarchy. For example, the \sbol{Component} of a gene could contain four \sbol{SubComponent} objects: a promoter, RBS, CDS, and terminator. In turn, the \sbol{Component} of the promoter \sbol{SubComponent} could contain \sbol{SubComponent} objects defined as various operator sites.
 
-\paragraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:C}
+\subparagraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:C}
 
 
 A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship between a \sbol{Feature} instance's own set of \sbolmult{roles:C}{roles} and the set of \sbolmult{roles:CD}{roles} on the included sub-\sbol{Component}.
@@ -491,7 +491,7 @@ sub-\sbol{Component}'s roles.}
 \end{table}
 
 
-\paragraph{The \sbolheading{instanceOf} property}
+\subparagraph{The \sbolheading{instanceOf} property}
 \label{sec:instanceOf}
 
 The \sbol{instanceOf} property is a REQUIRED \sbol{URI} that refers to the \sbol{Component} of the \sbol{Feature}.
@@ -510,12 +510,12 @@ if the \sbol{sourceLocation} property is set, then the relationship between the 
 property on the \sbol{SequenceFeature} object.
 
 
-\paragraph{The \sbolheading{location} property}\label{sec:location}
+\subparagraph{The \sbolheading{location} property}\label{sec:location}
 The \sbol{location} property is an OPTIONAL set which points to a \sbol{Location} on the parent \sbol{Component} sequence; if \sbol{location} is missing, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined.
 
 The \sbol{Location} record(s) specified by a \sbol{Feature} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbol{Location}. Concretely, two \sbol{Location} records attached to the same \sbol{Feature} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{Feature}s may overlap.
 
-\paragraph{The \sbolheading{orientation} property}\label{sec:orientation2}
+\subparagraph{The \sbolheading{orientation} property}\label{sec:orientation2}
 The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Feature} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{SubComponent} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Feature} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
 
 \todo{add best practice here talking about EntireComponent?}
@@ -527,11 +527,11 @@ The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. A
 The \sbol{ComponentReference} class is a subclass of \sbol{Feature} and a sibling of the \sbol{SubComponent} class. 
 
 
-\paragraph{The \sbolheading{inChildOf} property}\label{sec:inChildOf}
+\subparagraph{The \sbolheading{inChildOf} property}\label{sec:inChildOf}
 
 The \sbol{inChildOf} property is a REQUIRED \sbol{URI} that refers to a SubComponent. \sbol{inChildOf} must refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference} (i.e., as a \sbol{subComponent} of \sbol{Component}, or an \sbol{inChildOf} of \sbol{ComponentReference}). If the \sbol{Feature} is a \sbol{SubComponent}, then it must be a child of the \sbol{SubComponent} pointed to by \sbol{inChildOf}.
 
-\paragraph{The \sbolheading{feature} property}\label{sec:feature:CR}
+\subparagraph{The \sbolheading{feature} property}\label{sec:feature:CR}
 
 The \sbolmult{feature:CR}{feature} property is an OPTIONAL \sbol{URI} that refers to a \sbol{Feature}.
 
@@ -540,7 +540,7 @@ The \sbolmult{feature:CR}{feature} property is an OPTIONAL \sbol{URI} that refer
 
 The \sbol{LocalSubComponent} class a subclass of \sbol{Feature}. This class was serves as a way to create an ``empty'' \sbol{Component} to serve as a placeholder in more complex \sbol{Component}s. 
 
-\paragraph{The \sbolheading{type} property}\label{sec:type:ER}
+\subparagraph{The \sbolheading{type} property}\label{sec:type:ER}
 
 The \sbolmult{type:ER}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ER}{type} property is identical to its use in \sbol{Component}
 
@@ -549,11 +549,11 @@ The \sbolmult{type:ER}{type} property is REQUIRED and contains one or more \sbol
 
 The \sbol{ExternallyDefined} class has been introduced so that external definitions in databases like CHEBI or UniProt can be referenced.
 
-\paragraph{The \sbolheading{type} property}\label{sec:type:ER}
+\subparagraph{The \sbolheading{type} property}\label{sec:type:ER}
 
 The \sbolmult{type:ER}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ER}{type} property is identical to its use in \sbol{Component}
 
-\paragraph{The \sbolheading{definition} property}\label{sec:definition:ER}
+\subparagraph{The \sbolheading{definition} property}\label{sec:definition:ER}
 
 The \sbolmult{definition:ER}{definition} property is REQUIRED and contains one \sbol{URI} that links to a cononical definition external to SBOL.
 
@@ -564,7 +564,7 @@ The \sbolmult{definition:ER}{definition} property is REQUIRED and contains one \
 The \sbol{SequenceFeature} class describes one or more regions of interest on the \sbol{Sequence} objects referred to by its parent \sbol{Component}. 
 %In addition, \sbol{SequenceFeature} objects can describe the substructure of their parent \sbol{Component} through association with the \sbol{Feature} objects contained by this \sbol{Component}.
 
-\paragraph{The \sbolheading{locations} property}\label{sec:locations}
+\subparagraph{The \sbolheading{locations} property}\label{sec:locations}
 The \sbol{locations} property is a REQUIRED set of one or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Sequence} are described by the \sbol{SequenceFeature}.
 
 Allowing multiple \sbol{Location} objects on a single \sbol{SequenceFeature} is intended to enable representation of discontinuous regions (for example, a \sbol{Feature} encoded across a set of exons with interspersed introns).
@@ -583,11 +583,11 @@ The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol
 \end{center}
 \end{figure} \todo{change diagram to reflect changes from SEP 41}
 
-\paragraph{The \sbolheading{orientation} property}
+\subparagraph{The \sbolheading{orientation} property}
 \label{sec:orientation}
 The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Location} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
 
-\paragraph{The \sbolheading{sequence} property}
+\subparagraph{The \sbolheading{sequence} property}
 \label{sec:sequence}
 The \sbol{sequence} property is REQUIRED and MUST contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
 
@@ -611,10 +611,10 @@ A \sbol{Range} object specifies a region via discrete, inclusive \sbol{start} an
 
 Note that the index of the first location is 1, as is typical practice in biology, rather than 0, as is typical practice in computer science.
 
-\paragraph{The \sbolheading{start} property}\label{sec:start}
+\subparagraph{The \sbolheading{start} property}\label{sec:start}
 The \sbol{start} property specifies the inclusive starting position of the \sbol{Range}. This property is REQUIRED and MUST contain an \sbol{Integer} value greater than zero.
 
-\paragraph{The \sbolheading{end} property}\label{sec:end}
+\subparagraph{The \sbolheading{end} property}\label{sec:end}
 The \sbol{end} property specifies the inclusive ending position of the \sbol{Range}. This property is REQUIRED and MUST contain an \sbol{Integer} value greater than zero. In addition, this \sbol{Integer} value MUST be greater than or equal to that of the \sbol{start} property.
 
 \paragraph{Cut}
@@ -622,7 +622,7 @@ The \sbol{end} property specifies the inclusive ending position of the \sbol{Ran
 The \sbol{Cut} class has been introduced to enable the specification of a region between two discrete positions.
 This specification is accomplished using the \sbol{at} property, which specifies a discrete position that that corresponds to the index of a character in the \sbol{elements} \sbol{String} of a \sbol{Sequence} (except in the case when \sbol{at} is equal to zero---see below).
 
-\paragraph{The \sbolheading{at} property}
+\subparagraph{The \sbolheading{at} property}
 \label{sec:at}
 The \sbol{at} property is REQUIRED and MUST contain an \sbol{Integer} value greater than or equal to zero. The region specified by the \sbol{Cut} is between the position specified by this property and the position that immediately follows it. When the \sbol{at} property is equal to zero, the specified region is immediately before the first discrete position or character in the \sbol{elements} \sbol{String} of a \sbol{Sequence}.
 
@@ -631,7 +631,7 @@ The \sbol{at} property is REQUIRED and MUST contain an \sbol{Integer} value grea
 \label{sec:EntireSequence}
 The \sbol{EntireSequence} class does not have any additional properties. Use of this class indicates that the linked Sequence describes the entirety of the \sbol{Component} or \sbol{Feature} parent of this Location object.
 
-\paragraph{The \sbolheading{order} property}
+\subparagraph{The \sbolheading{order} property}
 \label{sec:order}
 
 
@@ -649,13 +649,13 @@ Each \sbol{Constraint} includes the \sbol{restriction}, \sbol{subject}, and \sbo
 \end{center}
 \end{figure}
 
-\paragraph{The \sbolheading{subject} property}\label{sec:subject}
+\subparagraph{The \sbolheading{subject} property}\label{sec:subject}
 The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Feature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}.
 
-\paragraph{The \sbolheading{object} property}\label{sec:object}
+\subparagraph{The \sbolheading{object} property}\label{sec:object}
 The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Feature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}. This \sbol{Feature} MUST NOT be the same \sbol{Feature} that the \sbol{Constraint} refers to via its \sbol{subject} property.
 
-\paragraph{The \sbolheading{restriction} property}\label{sec:restriction}
+\subparagraph{The \sbolheading{restriction} property}\label{sec:restriction}
 
 The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. 
 This property MUST indicate the type of restriction on the locations, orientations, or identities of the \sbol{subject} and \sbol{object} \sbol{ComponentInstance} objects in relation to each other. 
