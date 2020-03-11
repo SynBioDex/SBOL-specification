@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v3#">
+  <sbol:Component rdf:about="http://example.com#pLac">
+    <sbol:name>pLac</sbol:name>
+    <sbol:description>lactose inducible promoter</sbol:description>
+    <sbol:sequence rdf:resource="http://example.com#sequence"/>
+  </sbol:Component>
+  <sbol:Sequence rdf:about="http://example.com#sequence">
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacga
+caggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccagg
+ctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacaca</sbol:elements>
+  </sbol:Sequence>
+</rdf:RDF>
