@@ -194,7 +194,7 @@ More information on IUPAC encoding can be found at \url{http://www.bioinformatic
 The \sbol{Component} class represents the structural and/or functional entities of a biological design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as small molecules, molecular complexes, strains, samples, light, and abstract functional groupings of other entities.
 
 As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \sbol{sequences}, \sbol{interactions}, and \sbol{models}. 
-In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{subcomponent}, \sbol{feature}, and \sbol{constraint}.
+In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{feature} and \sbol{constraint}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -307,55 +307,45 @@ These \sbol{URI}s might identify descriptive biological roles, such as ``metabol
 \end{table}
 
 
-\subsubsection*{The \sbolheading{subcomponents} property}
-\label{sec:components}
-
-The \sbol{subcomponents} property is OPTIONAL and MAY specify a set of \sbol{SubComponent} objects that are contained by the \sbol{Component}. The set of relations between \sbol{SubComponent} and \sbol{Component} objects is strictly acyclic (see \ref{sec:SubComponent}).
-
-While the \sbol{Component} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{SubComponent} class represents the specific occurrence of a part within a design.
-Hence, this class allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{Component}). For example, the \sbol{Component} of a polycistronic gene could contain two \sbol{SubComponent} objects that refer to the same \sbol{Component} of a CDS.
-
-The \sbol{subcomponents} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{SubComponent} and \sbol{Component} objects.
-If a \sbol{Component} in such a hierarchy refers to a \sbol{Location} object, and there exist a \sbol{Component} objects lower in the hierarchy that refer to \sbol{Location} object that referes to the same \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
-%If a \sbol{Component} in such a hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{SubComponent} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
-
-A DNA \sbol{Component}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{Component} could contain a \sbol{SubComponent} that refers to a ``lower level''  \sbol{Component} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, a consistent \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta},'' or perhaps ``{\tt tgta}'' if the \sbol{SubComponent} is positioned by a \sbol{SequenceAnnotation} that contains a \sbol{Location}  with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
-
-The \sbol{SubComponent} property is OPTIONAL and MAY specify a set of \sbol{SubComponent} objects contained by the \sbol{Component}.
-Note that the set of relations between \sbol{SubComponent} and \sbol{Component} objects is strictly acyclic.
-
-While the \sbol{Component} class is analogous to a specification sheet for a system of interacting biological elements, the \sbol{SubComponent} class represents the occurrence of a particular subsystem within the system.
-Hence, this class allows a system design to include multiple instances of a subsystem, all defined by reference to the same \sbol{Component}.
-For example, consider the \sbol{Component} for a network of two-input repressor devices in which the particular repressors have not been chosen yet. This \sbol{Component} could contain multiple \sbol{SubComponent} objects that refer to the same \sbol{Component} of an abstract two-input repressor device.
-
-Just as a \sbol{SubComponent} represents an instance of a subsystem in the overall system represented by a  \sbol{Component}, a \sbol{SubComponent} represents an instance of a structural entity (represented by a \sbol{Component}) in the system. This concept allows a \sbol{Component} to assert different interactions for separate copies of the same structural entity if needed. For example, a \sbol{Component} might contain multiple \sbol{SubComponent}  objects that refer to the same promoter \sbol{Component}, but assert different interactions for these promoter copies based on their separate positions in another \sbol{Component} that represents the structure of the entire system.
-
 \subsubsection*{The \sbolheading{feature} property}
 \label{sec:feature}
 
-The \sbol{feature} property is OPTIONAL and MAY contain a set of \sbol{SequenceFeature} objects. Each \sbol{SequenceFeature} specifies and describes a potentially discontiguous region on the \sbol{Sequence} objects referred to by the \sbol{Component}.
+The \sbol{feature} property MAY have one or more \sbol{Feature} properties. The set of relations between \sbol{Feature} and \sbol{Component} objects is strictly acyclic (see \ref{sec:Feature}).
 
-In addition, each \sbol{SequenceFeature} can  position a \sbol{SubComponent} of the \sbol{Component} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}). 
-The \sbol{feature} property MUST NOT contain two or more \sbol{SequenceFeature} objects that refer to the same \sbol{SubComponent} in this way.
+While the \sbol{Component} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Feature} class represents the specific occurrence of a part within a design.
+Hence, this class allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{Component}). For example, the \sbol{Component} of a polycistronic gene could contain two \sbol{Feature} objects that refer to the same \sbol{Component} of a CDS.
 
-Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceFeature} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
-For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceFeature} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
-\todo{Prashant: Delete the feature property from the Component (now Feature) class.}
+The \sbol{feature} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{Feature} and \sbol{Component} objects.
+If a \sbol{Component} in such a hierarchy refers to a \sbol{Location} object, and there exist a \sbol{Component} objects lower in the hierarchy that refer to \sbol{Location} object that referes to the same \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Feature} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
+
+A DNA \sbol{Component}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{Component} could contain a \sbol{Feature} that refers to a ``lower level''  \sbol{Component} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, a consistent \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta},'' or perhaps ``{\tt tgta}'' if the \sbol{Feature} is positioned by a \sbol{SequenceAnnotation} that contains a \sbol{Location}  with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
+
+While the \sbol{Component} class is analogous to a specification sheet for a system of interacting biological elements, the \sbol{Feature} class represents the occurrence of a particular subsystem within the system.
+Hence, this class allows a system design to include multiple instances of a subsystem, all defined by reference to the same \sbol{Component}.
+For example, consider the \sbol{Component} for a network of two-input repressor devices in which the particular repressors have not been chosen yet. This \sbol{Component} could contain multiple \sbol{Feature} objects that refer to the same \sbol{Component} of an abstract two-input repressor device.
+
+Just as a \sbol{Feature} represents an instance of a subsystem in the overall system represented by a  \sbol{Component}, a \sbol{Feature} represents an instance of a structural entity (represented by a \sbol{Component}) in the system. This concept allows a \sbol{Component} to assert different interactions for separate copies of the same structural entity if needed. For example, a \sbol{Component} might contain multiple \sbol{Feature}  objects that refer to the same promoter \sbol{Component}, but assert different interactions for these promoter copies based on their separate positions in another \sbol{Component} that represents the structure of the entire system.
+
+\todo{Do not delete commented out section. we may need part of it later.}
+%In addition, each \sbol{SubComponent} can  position a \sbol{Feature} of the \sbol{Component} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}).
+%The \sbol{feature} property MUST NOT contain two or more \sbol{SequenceFeature} objects that refer to the same \sbol{Feature} in this way.
+
+%Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceFeature} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
+%For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceFeature} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
 
 \subsubsection*{The \sbolheading{constraint} property}
 \label{sec:constraint}
 
 The \sbol{constraint} property is OPTIONAL and MAY contain a set of \sbol{Constraint} objects. 
-These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{SubComponent} objects contained by the \sbol{Component}.
-For example, the \sbol{Component} of a gene might specify that the position of its promoter \sbol{SubComponent} precedes that of its CDS \sbol{SubComponent}. This is particularly useful when a \sbol{Component} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{SubComponent} objects using \sbol{SequenceFeature} objects.
+These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{Feature} objects contained by the \sbol{Component}.
+For example, the \sbol{Component} of a gene might specify that the position of its promoter \sbol{Feature} precedes that of its CDS \sbol{Feature}. This is particularly useful when a \sbol{Component} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{Feature} objects using \sbol{SubComponent} objects using \sbol{Location} objects.
 
 \subsubsection*{The \sbolheading{interactions} property}\label{sec:interactions}
 
-The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the\\
-\sbol{Component}.
+The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the \sbol{Component}.
 
-The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a\\ \sbol{Component} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
-Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{SubComponent} objects involved in the \sbol{Interaction}.
+The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a \sbol{Component} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
+Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{Feature} objects involved in the \sbol{Interaction}.
 
 \subsubsection*{The \sbolheading{models} property}\label{sec:models}
 The \sbol{models} property is OPTIONAL and MAY specify a set of \sbol{URI} references to \sbol{Model} objects.
@@ -374,9 +364,9 @@ A \sbol{Component} object can link to more than one \sbol{Model} since each migh
 \end{center}
 \end{figure}
 
-The \sbol{Interaction} class provides more detailed description of how the \sbol{SubComponent} objects of a\\ \sbol{Component} are intended to work together.
+The \sbol{Interaction} class provides more detailed description of how the \sbol{Feature} objects of a\\ \sbol{Component} are intended to work together.
 For example, this class can be used to represent different forms of genetic regulation (e.g., transcriptional activation or repression), processes from the central dogma of biology (e.g. transcription and translation), and other basic molecular interactions (e.g., non-covalent binding or enzymatic phosphorylation).
-Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refers to descriptive ontology terms and a \sbol{participations} property that describes which \sbol{SubComponent} objects participate in the \sbol{Interaction}.
+Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refers to descriptive ontology terms and a \sbol{participations} property that describes which \sbol{Feature} objects participate in the \sbol{Interaction}.
 
 \paragraph{The \sbolheading{types} property}\label{sec:types:I}
 
@@ -407,7 +397,7 @@ If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:int
 
 \paragraph{The \sbolheading{participations} property}\label{sec:participations}
 
-The \sbol{participations} property is an OPTIONAL and MAY contain a set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that its referenced \sbol{SubComponent} plays in the \sbol{Interaction}.
+The \sbol{participations} property is an OPTIONAL and MAY contain a set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that its referenced \sbol{Feature} plays in the \sbol{Interaction}.
 
 Even though an \sbol{Interaction} generally contains at least one \sbol{Participation}, the case of zero \sbol{Participation} objects is allowed because it is plausible that a designer might want to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s have not yet been determined.
 
@@ -422,12 +412,12 @@ Even though an \sbol{Interaction} generally contains at least one \sbol{Particip
 \subsubsection{Participation}
 \label{sec:Participation}
 
-Each \sbol{Participation} represents how a particular \sbol{SubComponent} behaves in its parent
+Each \sbol{Participation} represents how a particular \sbol{Feature} behaves in its parent
 \sbol{Interaction}.
 
 \paragraph{The \sbolheading{roles} property}\label{sec:roles:P}
 
-The \sbolmult{roles:P}{roles} property is a REQUIRED set of \sbol{URI}s that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{SubComponent}) in the context of its parent \sbol{Interaction}.
+The \sbolmult{roles:P}{roles} property is a REQUIRED set of \sbol{URI}s that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{Feature}) in the context of its parent \sbol{Interaction}.
 
 The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{roles:P}{roles} property refer to a term from the participant role branch of the SBO. \ref{tbl:participant_roles} provides a list of possible SBO terms for the \sbolmult{roles:P}{roles} property and their corresponding \sbol{URI}s.
 
@@ -464,7 +454,8 @@ Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} cont
 
 \paragraph{The \sbolheading{participant} property}\label{sec:participant}
 
-The \sbol{participant} property MUST specify precisely one \sbol{SubComponent} object that plays the designated role in its parent \sbol{Interaction} object.
+The \sbol{participant} property MUST specify precisely one \sbol{Feature} object that plays the designated role in its parent \sbol{Interaction} object.
+
 
 \subsubsection{Interface}
 \label{sec:Interface}
@@ -481,66 +472,52 @@ The \sbol{Interface} class is a way of explicitly specifying the interface of a 
 
 \paragraph{The \sbolheading{input} property}
 \label{sec:input:Interface}
-The \sbolmult{input:Interface}{input} property is OPTIONAL and MAY contain a set of \sbol{SubComponent} \sbol{URI}s in the same \sbol{Component}.
+The \sbolmult{input:Interface}{input} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}.
 \paragraph{The \sbolheading{output} property}
 \label{sec:output:Interface}
-The \sbolmult{output:Interface}{output} property is OPTIONAL and MAY contain a set of \sbol{SubComponent} \sbol{URI}s in the same \sbol{Component}.
+The \sbolmult{output:Interface}{output} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}.
 
 \paragraph{The \sbolheading{nondirectional} property}
 \label{sec:nondirectional:Interface}
-The \sbolmult{nondirectional:Interface}{nondirectional} property is OPTIONAL and MAY contain a set of \sbol{SubComponent} \sbol{URI}s in the same \sbol{Component}. Note that nondirectional can imply both bidirectional as well as situations where there are no flows (for instance - a physical interface).
+The \sbolmult{nondirectional:Interface}{nondirectional} property is OPTIONAL and MAY contain a set of \sbol{Feature} \sbol{URI}s in the same \sbol{Component}. Note that nondirectional can imply both bidirectional as well as situations where there are no flows (for instance - a physical interface).
 
 
-\subsubsection{SubComponent}
-\label{sec:SubComponent}
+\subsubsection{Feature}
+\label{sec:Feature}
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=\textwidth]{uml/subcomponent}
-\caption[]{Diagram of the \sbol{SubComponent} class and its associated properties.}
+\includegraphics[width=\textwidth]{uml/feature}
+\caption[]{Diagram of the \sbol{Feature} class and its associated properties.}
 \label{uml:subcomponent}
 \end{center}
 \end{figure}
 
-The \sbol{SubComponent} class is used to compose \sbol{Component} objects into a structural or functional hierarchy. For example, the \sbol{Component} of a gene could contain four \sbol{SubComponent} objects: a promoter, RBS, CDS, and terminator. In turn, the \sbol{Component} of the promoter \sbol{SubComponent} could contain \sbol{SubComponent} objects defined as various operator sites.
+The \sbol{Feature} class is used to compose \sbol{Component} objects into a structural or functional hierarchy. 
 
-\paragraph{The \sbolheading{instanceOf} property}
-\label{sec:instanceOf}
-
-The \sbol{instanceOf} property is a REQUIRED \sbol{URI} that refers to the \sbol{Component} of the \sbol{SubComponent}.
-As described in the previous section, this \sbol{Component} effectively provides information about the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} of the \sbol{SubComponent}.
-
-The \sbol{instanceOf} property MUST NOT refer to the same \sbol{Component} as the one that contains the \sbol{SubComponent}.
-Furthermore, \sbol{SubComponent} objects MUST NOT form a cyclical chain of references via their \sbol{instanceOf} properties and the \sbol{Component} objects that contain them.
-For example, consider the \sbol{SubComponent} objects $A$ and $B$ and the \sbol{Component} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is cyclical.
-
-\paragraph{The \sbolheading{mapsTos} property}\label{sec:mapsTos:CI}
-
-The \sbolmult{mapsTos:CI}{mapsTos} property is OPTIONAL and MAY contain a set of \sbol{MapsTo} objects that refer to and link together \sbol{SubComponent} objects (both \sbol{SubComponent} objects and \sbol{SubComponent} objects) within a larger design.
-
-\ref{sec:MapsTo} contains a more detailed description of the \sbol{MapsTo} class.
-
-
-\paragraph{The \sbolheading{roles} property}\label{sec:roles:C}
+\paragraph{The \sbolheading{role} property}\label{sec:roles:C}
 
 The expected purpose and function of a genetic part are described by the
 \sbolmult{roles:CD}{roles} property of \sbol{Component}. However, the same building block might be used for a different purpose in an actual design. In other words, purpose and function are sometimes determined by context. 
 
-The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more \sbolmult{roles:C}{role} \sbol{URI}s describing the purpose or potential function of this \sbol{SubComponent}'s included sub-\sbol{Component} in the \textit{context} of its parent \sbol{Component}.
-If provided, these \sbolmult{roles:C}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{SubComponent}'s function in any domain for which an ontology exists.
+The \sbolmult{roles:C}{roles} property comprises an OPTIONAL set of zero or more \sbolmult{roles:C}{role} \sbol{URI}s describing the purpose or potential function of this \sbol{Feature}'s included sub-\sbol{Component} in the \textit{context} of its parent \sbol{Component}.
+If provided, these \sbolmult{roles:C}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{Feature}'s function in any domain for which an ontology exists.
 
-It is RECOMMENDED that these \sbolmult{roles:C}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both this \sbol{SubComponent}'s parent \sbol{Component} and its included sub-\sbol{Component}. For example, a \sbolmult{roles:C}{role} of a \sbol{SubComponent} which belongs to a \sbol{Component} of type DNA and includes a sub-\sbol{Component} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology terms for \sbolmult{roles:C}{roles} is given in \ref{tbl:component_roles}.
+It is RECOMMENDED that these \sbolmult{roles:C}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of both this \sbol{Feature}'s parent \sbol{Component} and its included sub-\sbol{Component}. For example, a \sbolmult{roles:C}{role} of a \sbol{Feature} which belongs to a \sbol{Component} of type DNA and includes a sub-\sbol{Component} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology terms for \sbolmult{roles:C}{roles} is given in \ref{tbl:component_roles}.
 
+\paragraph{SubComponent}
+\label{sec:SubComponent}
 
+The \sbol{SubComponent} class a subclass of the \sbol{Feature} class that can be used to specify structural hierarchy. For example, the \sbol{Component} of a gene could contain four \sbol{SubComponent} objects: a promoter, RBS, CDS, and terminator. In turn, the \sbol{Component} of the promoter \sbol{SubComponent} could contain \sbol{SubComponent} objects defined as various operator sites.
 
 \paragraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration:C}
 
 
-A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship between a \sbol{SubComponent} instance's own set of \sbolmult{roles:C}{roles} and the set of \sbolmult{roles:CD}{roles} on the included sub-\sbol{Component}.
+A \sbolmult{roleIntegration:C}{roleIntegration} specifies the relationship between a \sbol{Feature} instance's own set of \sbolmult{roles:C}{roles} and the set of \sbolmult{roles:CD}{roles} on the included sub-\sbol{Component}.
 
-The \sbolmult{roleIntegration:C}{roleIntegration} property has a data type of \sbol{URI}. A \sbol{SubComponent} instance with zero \sbolmult{roles:C}{roles} MAY OPTIONALLY specify a \sbolmult{roleIntegration:C}{roleIntegration}. A \sbol{SubComponent} instance with one or more \sbolmult{roles:C}{roles} MUST specify a \sbolmult{roleIntegration:C}{roleIntegration} from \ref{tbl:component_roleIntegration}.
-If zero \sbol{SubComponent} \sbolmult{roles:C}{roles} are given and no \sbol{SubComponent} \sbolmult{roleIntegration:C}{roleIntegration} is given, then \url{http://sbols.org/v2\#mergeRoles} is assumed.
-It is RECOMMENDED to specify a set of \sbol{SubComponent} \sbolmult{roles:C}{roles} only if the integrated result set of roles would differ from the set of \sbolmult{roles:CD}{roles} belonging to this \sbol{SubComponent}'s included sub-\sbol{Component}.
+The \sbolmult{roleIntegration:C}{roleIntegration} property has a data type of \sbol{URI}. A \sbol{Feature} instance with zero \sbolmult{roles:C}{roles} MAY OPTIONALLY specify a \sbolmult{roleIntegration:C}{roleIntegration}. A \sbol{Feature} instance with one or more \sbolmult{roles:C}{roles} MUST specify a \sbolmult{roleIntegration:C}{roleIntegration} from \ref{tbl:component_roleIntegration}.
+If zero \sbol{Feature} \sbolmult{roles:C}{roles} are given and no \sbol{Feature} \sbolmult{roleIntegration:C}{roleIntegration} is given, then \url{http://sbols.org/v2\#mergeRoles} is assumed.
+It is RECOMMENDED to specify a set of \sbol{Feature} \sbolmult{roles:C}{roles} only if the integrated result set of roles would differ from the set of \sbolmult{roles:CD}{roles} belonging to this \sbol{Feature}'s included sub-\sbol{Component}.
 
 
 \begin{table}[ht]
@@ -548,118 +525,95 @@ It is RECOMMENDED to specify a set of \sbol{SubComponent} \sbolmult{roles:C}{rol
     \toprule
     \textbf{roleIntegration URI} & \textbf{Description} \\
     \midrule
-    \url{http://sbols.org/v2\#overrideRoles} & In the context of this \sbol{SubComponent}, ignore any \sbolmult{roles:CD}{roles} given for the included sub-\sbol{Component}. Instead use only the set of zero or more \sbolmult{roles:C}{roles} given for this \sbol{SubComponent}. \\
-    \url{http://sbols.org/v2\#mergeRoles} & Use the union of the two sets: both the set of zero or more \sbolmult{roles:C}{roles} given for this \sbol{SubComponent} as well as the set of zero or more \sbolmult{roles:CD}{roles} given for the included sub-\sbol{Component}. \\
+    \url{http://sbols.org/v2\#overrideRoles} & In the context of this \sbol{Feature}, ignore any \sbolmult{roles:CD}{roles} given for the included sub-\sbol{Component}. Instead use only the set of zero or more \sbolmult{roles:C}{roles} given for this \sbol{Feature}. \\
+    \url{http://sbols.org/v2\#mergeRoles} & Use the union of the two sets: both the set of zero or more \sbolmult{roles:C}{roles} given for this \sbol{Feature} as well as the set of zero or more \sbolmult{roles:CD}{roles} given for the included sub-\sbol{Component}. \\
     \bottomrule
   \end{edtable}
-  \caption{Each \sbolmult{roleIntegration:C}{roleIntegration} mode is associated with a rule governing how a \sbol{SubComponent}'s roles are to be combined with the included 
+  \caption{Each \sbolmult{roleIntegration:C}{roleIntegration} mode is associated with a rule governing how a \sbol{Feature}'s roles are to be combined with the included 
 sub-\sbol{Component}'s roles.}
   \label{tbl:component_roleIntegration}
 \end{table}
 
 
-\paragraph{The \sbolheading{sourceLocations} property}\label{sec:sourceLocations}
+\paragraph{The \sbolheading{instanceOf} property}
+\label{sec:instanceOf}
+
+The \sbol{instanceOf} property is a REQUIRED \sbol{URI} that refers to the \sbol{Component} of the \sbol{Feature}.
+As described in the previous section, this \sbol{Component} effectively provides information about the \sbolmult{types:CD}{types} and \sbolmult{roles:CD}{roles} of the \sbol{Feature}.
+
+The \sbol{instanceOf} property MUST NOT refer to the same \sbol{Component} as the one that contains the \sbol{Feature}.
+Furthermore, \sbol{Feature} objects MUST NOT form a cyclical chain of references via their \sbol{instanceOf} properties and the \sbol{Component} objects that contain them.
+For example, consider the \sbol{Feature} objects $A$ and $B$ and the \sbol{Component} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is cyclical.
 
 The \sbol{sourceLocations} property is an OPTIONAL set of zero or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Component}'s \sbol{Sequence} are to be included in the \sbol{Component}'s parent. The \sbol{sourceLocations} property
 allows for only a portion of a \sbol{Component}'s \sbol{Sequence} to be included, rather than its entirety.
 
-If the \sbol{sourceLocations} property is not set, then the whole \sbol{Sequence} is assumed to be included. Alternatively,
-if the \sbol{sourceLocations} property is set, then the relationship between the original \sbol{Component}'s
+If the \sbol{sourceLocation} property is not set, then the whole \sbol{Sequence} is assumed to be included. Alternatively,
+if the \sbol{sourceLocation} property is set, then the relationship between the original \sbol{Component}'s
 \sbol{Sequence} and the included \sbol{Sequence} is defined identically to the \sbol{locations}
 property on the \sbol{SequenceFeature} object.
+
 
 \paragraph{The \sbolheading{location} property}\label{sec:location}
 The \sbol{location} property is an OPTIONAL set which points to a \sbol{Location} on the parent \sbol{Component} sequence; if \sbol{location} is missing, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined.
 
-The \sbol{Location} record(s) specified by a \sbol{SubComponent} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbol{Location}. Concretely, two \sbol{Location} records attached to the same \sbol{SubComponent} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{SubComponent}s may overlap.
+The \sbol{Location} record(s) specified by a \sbol{Feature} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbol{Location}. Concretely, two \sbol{Location} records attached to the same \sbol{Feature} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{Feature}s may overlap.
 
 \paragraph{The \sbolheading{orientation} property}\label{sec:orientation2}
 The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Feature} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{SubComponent} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Feature} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
 
 \todo{add best practice here talking about EntireComponent?}
 
-\subsubsection{MapsTo}
-\label{sec:MapsTo}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/maps_to}
-\caption[]{Diagram of the \sbol{MapsTo} class and its associated properties.}
-\label{uml:maps_to}
-\end{center}
-\end{figure}
+\paragraph{ComponentReference}
+\label{sec:ComponentReference}
 
-When \sbol{Component} objects are composed into structural and functional hierarchies using \sbol{SubComponent} objects, it is often the case that some \sbol{SubComponent} objects are intended to represent the same entity in the overall design. The purpose of the \sbol{MapsTo} class is to make these identity relationships clear and explicit.  For example, consider a \sbol{Component} for a genetic inverter that includes a \sbol{SubComponent} for an abstract repressor protein.  When this \sbol{Component} is instantiated within a ``higher level'' \sbol{Component} that includes a \sbol{SubComponent} for a LacI protein, the \sbol{MapsTo} object can be used to indicate that the repressor protein in the first \sbol{Component} is LacI in the context of the composite design.
-
-In particular, a \sbol{MapsTo} object provides two pieces of information:
-\begin{itemize}
-\item An identity relationship between two \sbol{SubComponent} objects, the first contained by the ``lower level'' definition of the \sbol{SubComponent} that owns the
-  \sbol{MapsTo}, and the second contained by the ``higher level'' definition that contains the \sbol{SubComponent} that owns the \sbol{MapsTo}. The \sbol{remote} property of a \sbol{MapsTo} refers to the first ``lower level'' \sbol{SubComponent}, while the \sbol{local} property refers to the second ``higher level'' \sbol{SubComponent}.
-\item Instructions on how to interpret \sbol{local} and \sbol{remote} \sbol{SubComponent} objects that refer to different \sbol{Component} objects (that is, non-identical objects). These are specified using the \sbol{refinement} property of the \sbol{MapsTo} class.
-\end{itemize}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.95]{images/MapsTo_Diagram3}
-\caption{Linking \sbol{SubComponent} objects using \sbol{MapsTo} entities. Boxes with diagrams represent \sbol{Component} objects, boxes with the C label represent \sbol{SubComponent} objects, and boxes with the M label represent \sbol{MapsTo} objects. In both diagrams, a promoter-RBS \sbol{Component} and a RBS-CDS \sbol{Component} are being composed to form the \sbol{Component} of a complete transcriptional unit. In the left-hand diagram, the two \sbol{SubComponent} objects inside the promoter-RBS \sbol{Component} and RBS-CDS \sbol{Component} objects both refer to an abstract RBS \sbol{Component} that lacks a sequence (white semicircle). Through the use of \sbol{MapsTo} objects with \sbol{refinement} set to useLocal, these ``lower level'' \sbol{Component} objects are effectively overridden by that of the green RBS in the \sbol{Component} of the complete transcriptional unit. In the right-hand diagram, however, the two ``lower level'' RBS \sbol{Component} objects do not lack sequences and it is the ``higher level'' RBS \sbol{Component} that is abstract. In this case, one of the \sbol{MapsTo} objects has a useRemote \sbol{refinement}, resulting in the green RBS \sbol{Component} overriding that of the abstract RBS in the ``higher level'' \sbol{Component}.}
-\label{image:maps_to_diagram2}
-\end{center}
-\end{figure}
-
-To illustrate this concept, two examples are provided in \ref{image:maps_to_diagram2}, in which the \sbol{Component} of a transcriptional unit is specified by composing two ``lower level'' \sbol{Component} objects.
-In both examples, the two ``lower level'' \sbol{Component} objects each contain a RBS \sbol{SubComponent} that is intended to represent the same design entity in the ``higher level'' \sbol{Component} of the transcriptional unit.
-
-In order to explicitly represent the identity relationships in this example, a new RBS \sbol{SubComponent} needs to be created inside the ``higher level'' \sbol{Component}.
-This ``higher level'' \sbol{SubComponent} then needs to be linked to the equivalent ``lower level'' \sbol{SubComponent} objects by means of the \sbol{MapsTo} class, using one \sbol{MapsTo} object per link.
-For example, in order to link the ``higher level'' RBS \sbol{SubComponent} to the ``lower level'' RBS \sbol{SubComponent} of the promoter-RBS \sbol{Component}, a \sbol{MapsTo} has to be created on the ``higher level'' promoter-RBS \sbol{SubComponent}. The \sbol{local} property of this \sbol{MapsTo} then has to refer to the ``higher level'' RBS \sbol{SubComponent}, while its \sbol{remote} property has to refer to the ``lower level'' RBS \sbol{SubComponent}.
-In this way, many ``lower level'' \sbol{SubComponent} objects can be linked together at the ``higher level'' using as an equal number of \sbol{MapsTo} objects, each one referring to a different \sbol{remote} \sbol{SubComponent}, but all referring to the same \sbol{local} \sbol{SubComponent}.
-
-See \ref{sec:examples} and \ref{ser:examples} for additional examples using the \sbol{MapsTo} class.
-
-\paragraph{The \sbolheading{local} property}\label{sec:local}
-This REQUIRED property has a data type of \sbol{URI} and is 
-d to refer to the \sbol{SubComponent} contained by the ``higher level'' \sbol{Component} or \sbol{Component}. This \sbol{local} \sbol{SubComponent} MUST be contained by the \sbol{Component} or \sbol{Component} that contains the \sbol{SubComponent} or \sbol{SubComponent} that owns the \sbol{MapsTo}.
-
-\paragraph{The \sbolheading{remote} property}\label{sec:remote}
-This REQUIRED property has a data type of \sbol{URI} and is used to refer to the \sbol{SubComponent} contained by the ``lower level'' \sbol{Component}.
-This \sbol{remote} \sbol{SubComponent} MUST be contained by the \sbol{Component} or \sbol{Component} that is the \sbolmult{definition:CI}{definition} of the \sbol{SubComponent} or \sbol{SubComponent} that owns the \sbol{MapsTo}.
-
-\paragraph{The \sbolheading{refinement} property}\label{sec:refinement}
-The \sbol{refinement} property is REQUIRED and has a data type of \sbol{URI}. Each \sbol{MapsTo} object MUST specify the relationship between its \sbol{local} and \sbol{remote} \sbol{SubComponent} objects using one of the REQUIRED \sbol{refinement} \sbol{URI}s provided in \ref{tbl:mapsto_refinement}.
-Note that if multiple \sbol{MapsTo}s belonging to the \sbol{SubComponent}s of a \sbol{Component} have \sbol{local} properties that refer to the same \sbol{SubComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}. Similarly, if multiple \sbol{MapsTo}s belonging the \sbol{SubComponent}s and \sbol{SubComponent}s of a \sbol{Component} have \sbol{local} properties that refer to the same \sbol{SubComponent}, then there MUST NOT be more than one such \sbol{MapsTo} that has a \sbol{refinement} property that contains the \sbol{URI} \url{http://sbols.org/v2\#useRemote}.
+The \sbol{ComponentReference} class is a subclass of \sbol{Feature} and a sibling of the \sbol{SubComponent} class. 
 
 
-\subsubsection{SequenceFeature}
+\paragraph{The \sbolheading{inChildOf} property}\label{sec:inChildOf}
+
+The \sbol{inChildOf} property is a REQUIRED \sbol{URI} that refers to a SubComponent. \sbol{inChildOf} must refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference} (i.e., as a \sbol{subComponent} of \sbol{Component}, or an \sbol{inChildOf} of \sbol{ComponentReference}). If the \sbol{Feature} is a \sbol{SubComponent}, then it must be a child of the \sbol{SubComponent} pointed to by \sbol{inChildOf}.
+
+\paragraph{The \sbolheading{feature} property}\label{sec:feature:CR}
+
+The \sbolmult{feature:CR}{feature} property is an OPTIONAL \sbol{URI} that refers to a \sbol{Feature}.
+
+\paragraph{LocalSubComponent}
+\label{sec:LocalSubComponent}
+
+The \sbol{LocalSubComponent} class a subclass of \sbol{Feature}. This class was serves as a way to create an ``empty'' \sbol{Component} to serve as a placeholder in more complex \sbol{Component}s. 
+
+\paragraph{The \sbolheading{type} property}\label{sec:type:ER}
+
+The \sbolmult{type:ER}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ER}{type} property is identical to its use in \sbol{Component}
+
+\paragraph{ExternallyDefined}
+\label{sec:ExternallyDefined}
+
+The \sbol{ExternallyDefined} class has been introduced so that external definitions in databases like CHEBI or UniProt can be referenced.
+
+\paragraph{The \sbolheading{type} property}\label{sec:type:ER}
+
+The \sbolmult{type:ER}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ER}{type} property is identical to its use in \sbol{Component}
+
+\paragraph{The \sbolheading{definition} property}\label{sec:definition:ER}
+
+The \sbolmult{definition:ER}{definition} property is REQUIRED and contains one \sbol{URI} that links to a cononical definition external to SBOL.
+
+
+\paragraph{SequenceFeature}
 \label{sec:SequenceFeature}
-The \sbol{SequenceFeature} class describes one or more regions of interest on the \sbol{Sequence} objects referred to by its parent \sbol{Component}. In addition, \sbol{SequenceFeature} objects can describe the substructure of their parent \sbol{Component} through association with the \sbol{SubComponent} objects contained by this\\
-\sbol{Component}.
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/sequence_annotation}
-\caption[]{Diagram of the \sbol{SequenceAnnotation} class and its associated properties.}
-\label{uml:sequence_annotation}
-\end{center}
-\end{figure}
-\todo{change figure for SequenceFeature instead of SequenceAnnotation}
+The \sbol{SequenceFeature} class describes one or more regions of interest on the \sbol{Sequence} objects referred to by its parent \sbol{Component}. 
+%In addition, \sbol{SequenceFeature} objects can describe the substructure of their parent \sbol{Component} through association with the \sbol{Feature} objects contained by this \sbol{Component}.
 
 \paragraph{The \sbolheading{locations} property}\label{sec:locations}
 The \sbol{locations} property is a REQUIRED set of one or more \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Sequence} are described by the \sbol{SequenceFeature}.
 
-Allowing multiple \sbol{Location} objects on a single \sbol{SequenceFeature} is intended to enable representation of discontinuous regions (for example, a \sbol{SubComponent} encoded across a set of exons with interspersed introns).
+Allowing multiple \sbol{Location} objects on a single \sbol{SequenceFeature} is intended to enable representation of discontinuous regions (for example, a \sbol{Feature} encoded across a set of exons with interspersed introns).
 As such, the \sbol{Location} objects of a single \sbol{SequenceFeature} SHOULD NOT specify overlapping regions, since it is not clear what this would mean.
 There is no such concern with different \sbol{SequenceFeature} objects, however, which can freely overlap in \sbol{Location} (for example, specifying overlapping linkers for sequence assembly).
-
-
-\paragraph{The \sbolheading{roles} property}\label{sec:roles:SA}
-
-Alternatively to describing substructure, a \sbol{SequenceFeature} can be utilized to identify a feature, such as a GenBank feature, of a specified \sbol{Sequence}.  In this use case, the \sbol{SequenceFeature} MUST NOT have a \sbol{SubComponent} property, but instead it would have a \sbolmult{roles:SA}{roles} property.  
-
-The \sbolmult{roles:SA}{roles} property comprises an OPTIONAL set of zero or more \sbol{URI}s describing the specified sequence feature being annotated.  If provided, these \sbolmult{roles:SA}{role} \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate \sbol{Sequence}s' function in any domain for which an ontology exists.
-
-It is RECOMMENDED that these \sbolmult{roles:SA}{role} \sbol{URI}s identify terms that are compatible with the \sbolmult{types:CD}{type} properties of this \sbol{SequenceFeature}'s parent \sbol{Component}. For example, a \sbolmult{roles:SA}{role} of a \sbol{SequenceFeature} which belongs to a \sbol{Component} of type DNA might refer to terms from the Sequence Ontology. A table of recommended ontology terms for \sbolmult{roles:SA}{roles} is given in \ref{tbl:component_roles}.
-
-
 
 \subsubsection{Location}
 \label{sec:Location}
@@ -675,7 +629,7 @@ The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol
 
 \paragraph{The \sbolheading{orientation} property}
 \label{sec:orientation}
-The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{SubComponent} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Location} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
+The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Location} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
 
 \paragraph{The \sbolheading{sequence} property}
 \label{sec:sequence}
@@ -941,7 +895,7 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 
 The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
-Consequently, its \sbol{subcomponents} property SHOULD contain one or more \sbol{SubComponent} objects that describe its substructure (referred to hereafter as template \sbol{SubComponent} objects), and its \sbol{constraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
+Consequently, its \sbol{feature}s property SHOULD contain one or more \sbol{Feature} objects that describe its substructure (referred to hereafter as template \sbol{Feature} objects), and its \sbol{constraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
 
 When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \sbol{prov:wasDerivedFrom} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{members} property of a \sbol{Collection}, in which case the \sbol{prov:wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
 
@@ -949,14 +903,14 @@ If the \sbolmult{types:CD}{types} property of the template \sbol{Component} cont
 
 \subsubsection*{ The \sbolheading{variableComponents} property}\label{sec:variableComponents}
 
-The \sbol{variableComponents} property is OPTIONAL and MAY contain a set of \sbol{VariableComponent} objects. These \sbol{VariableComponent} objects are expected to denote the choices available when deriving the substructure of a new \sbol{Component} in accordance with a \sbol{CombinatorialDerivation}. The \sbol{variableComponents} property MUST NOT contain two or more \sbol{VariableComponent} objects that refer to the same template \sbol{SubComponent} via their \sbol{variable} properties.
+The \sbol{variableComponents} property is OPTIONAL and MAY contain a set of \sbol{VariableComponent} objects. These \sbol{VariableComponent} objects are expected to denote the choices available when deriving the substructure of a new \sbol{Component} in accordance with a \sbol{CombinatorialDerivation}. The \sbol{variableComponents} property MUST NOT contain two or more \sbol{VariableComponent} objects that refer to the same template \sbol{Feature} via their \sbol{variable} properties.
 
-If the \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain as many \sbol{SubComponent} objects derived from the template \sbol{SubComponent} as specified by the \sbol{operator} property of the \sbol{VariableComponent} (see \ref{tbl:operator}). In addition, the \sbol{instanceOf} properties of these derived \sbol{SubComponent} objects MUST refer to \sbol{Component} objects specified by the \sbol{variants}, \sbol{variantCollections}, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
+If the \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{Feature}, then the \sbol{feature}s property of the derived \sbol{Component} SHOULD contain as many \sbol{Feature} objects derived from the template \sbol{Feature} as specified by the \sbol{operator} property of the \sbol{VariableComponent} (see \ref{tbl:operator}). In addition, the \sbol{instanceOf} properties of these derived \sbol{Feature} objects MUST refer to \sbol{Component} objects specified by the \sbol{variants}, \sbol{variantCollections}, or \sbol{variantDerivations} property of the \sbol{VariableComponent}.
 
-If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then the \sbol{subcomponents} property of the derived \sbol{Component} SHOULD contain exactly one \sbol{SubComponent} with a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}. The \sbol{instanceOf} property of this derived \sbol{SubComponent} MUST refer to the \sbol{Component} referred to by the \sbol{instanceOf} property of the template \sbol{SubComponent}.
+If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{Feature}, then the \sbol{feature}s property of the derived \sbol{Component} SHOULD contain exactly one \sbol{Feature} with a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{Feature}. The \sbol{instanceOf} property of this derived \sbol{Feature} MUST refer to the \sbol{Component} referred to by the \sbol{instanceOf} property of the template \sbol{Feature}.
 
-Finally, all of these derived \sbol{SubComponent} objects MUST follow the \sbol{restriction} properties of any \\
-\sbol{Constraint} objects that refer to their corresponding template \sbol{SubComponent} objects.
+Finally, all of these derived \sbol{Feature} objects MUST follow the \sbol{restriction} properties of any \\
+\sbol{Constraint} objects that refer to their corresponding template \sbol{Feature} objects.
 
 \subsubsection*{ The \sbolheading{strategy} property}\label{sec:strategy}
 The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URIs. If the \sbol{strategy} property is not empty, then it MUST contain a URI from \ref{tbl:strategy}. This property recommends how many \sbol{Component} objects a user SHOULD derive from the template \sbol{Component}.
@@ -1152,16 +1106,16 @@ As with SBOL \sbol{TopLevel} objects, custom \sbol{TopLevel} objects MAY include
 \label{sec:mapping}
 
 \ref{SBOL1TO2} depicts the mapping of SBOL 1.1 classes to SBOL 2.x classes, indicating corresponding classes/properties by color.
-The SBOL 2.x \sbol{Model} and \sbol{Component} classes have no SBOL 1.1 equivalent, and thus are not shown.
+The SBOL 2.x \sbol{Model} and \sbol{CompenentDefinition} classes have no SBOL 1.1 equivalent, and thus are not shown.
 In particular:
 \begin{itemize}
-\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \sbol{Collection} objects that contain \sbol{Component} objects with DNA \sbolmult{types:CD}{types} properties.
-\item SBOL 1.1 \external{DnaComponent} objects maps to SBOL 2.x \sbol{Component} objects with DNA \sbolmult{types:CD}{types} properties.
+\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \sbol{Collection} objects that contain \sbol{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
+\item SBOL 1.1 \external{DnaComponent} objects maps to SBOL 2.x \sbol{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
 \item SBOL 1.1 \external{DnaSequence} objects maps to an SBOL 2.x \sbol{Sequence} objects with \external{IUPAC DNA} \sbol{encoding} properties.
-\item SBOL 1.1 \external{SequenceFeature} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.x\\
-\sbol{SequenceFeature} objects that contain \sbol{Range} objects.
-\item SBOL 1.1 \external{SequenceFeature} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.x \sbol{SequenceFeature} objects that contain \sbol{GenericLocation} objects.
-\item Each SBOL 1.1 \external{SequenceFeature} also maps to an SBOL 2.x \sbol{SubComponent}, which represents the instantiation or usage of the appropriate \sbol{Component}.
+\item SBOL 1.1 \external{SequenceAnnotation} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.x\\
+\sbol{SequenceAnnotation} objects that contain \sbol{Range} objects.
+\item SBOL 1.1 \external{SequenceAnnotation} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.x \sbol{SequenceFeature} objects that contain \sbol{GenericLocation} objects.
+\item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.x \sbol{Component}, which represents the instantiation or usage of the appropriate \sbol{CompenentDefinition}.
 \item Each SBOL 1.1 \external{precedes} property maps to an SBOL 2.x \sbol{SequenceConstraint} that specifies a precedes \sbol{restriction} property.
 \end{itemize}
 
