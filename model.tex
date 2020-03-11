@@ -14,10 +14,10 @@ In this way, there is minimal duplication of standardization efforts and users o
 
 The meta-data provided by the \sbol{Model} class include the following properties: the \sbolmult{source:M}{source} or location of the actual content of the model, the \sbol{language} in which the model is implemented, and the model's \sbol{framework}.
 
-\subparagraph{ The \sbolheading{source} property}\label{sec:source:M}
+\subparagraph{The \sbolheading{source} property}\label{sec:source:M}
 The \sbolmult{source:M}{source} property is REQUIRED and MUST contain a \sbol{URI} reference to the source file for a model.
 
-\subparagraph{ The \sbolheading{language} property}\label{sec:language}
+\subparagraph{The \sbolheading{language} property}\label{sec:language}
 The \sbol{language} property is REQUIRED and MUST contain a \sbol{URI} that specifies the language in which the model is implemented. It is RECOMMENDED that this \sbol{URI} refer to a term from the EMBRACE Data and Methods (EDAM) ontology. \ref{tbl:model_types} provides a list of terms from this ontology and their \sbol{URI}s. If the \sbol{language} property of a \sbol{Model} is well-described by one these terms, then it MUST contain the \sbol{URI} for this term as its value.
 
 \begin{table}[ht]
@@ -35,7 +35,7 @@ The \sbol{language} property is REQUIRED and MUST contain a \sbol{URI} that spec
 \end{table}
 
 
-\subparagraph{ The \sbolheading{framework} property}\label{sec:framework}
+\subparagraph{The \sbolheading{framework} property}\label{sec:framework}
 The \sbol{framework} property is REQUIRED and MUST contain a \sbol{URI} that specifies the framework in which the model is implemented.
 It is RECOMMENDED this \sbol{URI} refer to a term from the modeling framework branch of the SBO when possible. A few suggested modeling frameworks and their corresponding \sbol{URI}s are shown in \ref{tbl:model_frameworks}. If the \sbol{framework} property of a \sbol{Model} is well-described by one these terms, then it MUST contain the \sbol{URI} for this term as its value.
 
