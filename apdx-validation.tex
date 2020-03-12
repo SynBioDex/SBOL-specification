@@ -698,7 +698,7 @@ Reference: \sec{sec:Annotations}}
 \printValid{The \sbol{strategy} property of a \sbol{CombinatorialDerivation} MUST contain a \sbol{URI} from \ref{tbl:strategy} if the property is not empty.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printValid{If the \sbol{strategy} property of a \sbol{CombinatorialDerivation} contains the \sbol{URI}~\url{http://sbols.org/v2\#enumerate}, then its \sbol{variableComponents} property MUST NOT contain a\\ \sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#zeroOrMore} or the \sbol{URI}~\url{http://sbols.org/v2\#oneOrMore}.
+\printValid{If the \sbol{strategy} property of a \sbol{CombinatorialDerivation} contains the \sbol{URI}~\url{http://sbols.org/v2\#enumerate}, then its \sbol{variableComponents} property MUST NOT contain a\\ \sbol{VariableComponent} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#zeroOrMore} or the \sbol{URI}~\url{http://sbols.org/v2\#oneOrMore}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
 \printValid{The \sbol{template} property of a \sbol{CombinatorialDerivation} is REQUIRED and MUST contain a \sbol{URI}.
@@ -747,14 +747,14 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} prope
 \subsubsection*{Rules for the \class{VariableComponent} class} 
 \setcounter{sbolCtr}{13001}
 
-\printValid{A \sbol{VariableComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{operator}, \sbol{variable}, \sbol{variants}, \sbol{variantCollections}, and \sbol{variantDerivations}.
+\printValid{A \sbol{VariableComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{cardinality}, \sbol{variable}, \sbol{variants}, \sbol{variantCollections}, and \sbol{variantDerivations}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printValid{The \sbol{operator} property of a \sbol{VariableComponent} is REQUIRED and MUST contain a \sbol{URI}.
+\printValid{The \sbol{cardinality} property of a \sbol{VariableComponent} is REQUIRED and MUST contain a \sbol{URI}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printValid{The \sbol{URI} contained by the \sbol{operator} property of a \sbol{VariableComponent} MUST come from 
-\ref{tbl:operator}.
+\printValid{The \sbol{URI} contained by the \sbol{cardinality} property of a \sbol{VariableComponent} MUST come from 
+\ref{tbl:cardinality}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printValid{The \sbol{variable} property of a \sbol{VariableComponent} is REQUIRED and MUST contain a \sbol{URI}.
@@ -762,12 +762,6 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} prope
 
 \printComplete{The \sbol{URI} contained by the \sbol{variable} property of a \sbol{VariableComponent} MUST refer to a \sbol{SubComponent} contained by the \sbol{components} property of the template \sbol{SubComponent} of the \sbol{CombinatorialDerivation} that contains the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
-
-
-\printModeling{At least one of the \sbol{variants} property, \sbol{variantCollections} property, or\\
-\sbol{variantDerivations} property of a \sbol{VariableComponent} MUST NOT be empty.
-\\ Reference: \sec{sec:VariableComponent}}
-
 
 \printValid{The \sbol{variants} property of a \sbol{VariableComponent} is OPTIONAL and MAY contain a set of \sbol{URI}s.
 \\ Reference: \sec{sec:VariableComponent}}
@@ -781,10 +775,7 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} prope
 \printComplete{The \sbol{URI}s contained by the \sbol{variantCollections} property of a \sbol{VariableComponent} MUST refer to \sbol{Collection} objects.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printComplete{The \sbol{members} property of a \sbol{Collection} that is referred to by the \sbol{variantCollections} property of a \sbol{VariableComponent} MUST NOT be empty.
-\\ Reference: \sec{sec:VariableComponent}}
-
-\printComplete{The \sbol{members} property of a \sbol{Collection} that is referred to by the \sbol{variantCollections} property of a \sbol{VariableComponent} MUST refer only to \sbol{SubComponent} objects.
+\printComplete{The \sbol{members} property of a \sbol{Collection} that is referred to by the \sbol{variantCollection} property of a \sbol{VariableComponent} MUST refer only to \sbol{Component} objects or to \sbol{Collection} objects that themselves contain only \sbol{Component} or \sbol{Collection} objects.
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printValid{The \sbol{variantDerivations} property of a \sbol{VariableComponent} is OPTIONAL and MAY contain a set of \sbol{URI}s.
@@ -796,6 +787,7 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} prope
 \printComplete{\sbol{VariableComponent} objects MUST NOT form circular reference chains via their\\ \sbol{variantDerivations} properties and parent \sbol{CombinatorialDerivation} objects.
 \\ Reference: \sec{sec:VariableComponent}}
 
+\todo[inline]{This wasDerivedFrom rule is overly strong, and needs to be weakened to match the algorithm in the definition.  Probably all the other wasDerivedFrom rules too.}
 \printComplete{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a \sbol{SubComponent} in the \sbol{template} \sbol{SubComponent} of a \sbol{CombinatorialDerivation}, and the second \sbol{SubComponent} is referred to by the \sbol{variable} property of any \sbol{VariableComponent} in the \\
 \sbol{CombinatorialDerivation}, then the \sbolmult{instanceOf:CI}{instanceOf} property of the first \sbol{SubComponent} MUST refer to a \sbol{SubComponent} specified by the \sbol{variants} property,
 a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} specified by the \sbol{variantCollections} property, or a \sbol{SubComponent} with a \sbol{prov:wasDerivedFrom} property that refers to a\\
@@ -812,19 +804,19 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a\\
-\sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#zeroOrOne}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD NOT contain more than one \sbol{SubComponent} with a \sbol{prov:wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableComponent}.
+\sbol{VariableComponent} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#zeroOrOne}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD NOT contain more than one \sbol{SubComponent} with a \sbol{prov:wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\
 \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a\\
-\sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#one}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD contain exactly one \sbol{SubComponent} with a\\
+\sbol{VariableComponent} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#one}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD contain exactly one \sbol{SubComponent} with a\\
 \sbol{prov:wasDerivedFrom} property that refers to the same\\
 \sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\
 \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a\\
-\sbol{VariableComponent} with an \sbol{operator} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#oneOrMore}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD contain at least one \sbol{SubComponent} with a\\
+\sbol{VariableComponent} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#oneOrMore}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD contain at least one \sbol{SubComponent} with a\\
 \sbol{prov:wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the\\ \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
