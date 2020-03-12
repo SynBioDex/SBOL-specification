@@ -1,0 +1,110 @@
+
+\subsubsection{Constraint}
+\label{sec:Constraint}
+The \sbol{Constraint} class can be used to assert restrictions on the relationships of pairs of \sbol{Feature} objects contained by the same parent \sbol{Component}.
+Uses of this class include expressing containment (e.g., a plasmid transformed into a chassis strain), identity mappings (e.g., replacing a placeholder value with a complete definition), and expressing relative, sequence-based positions (e.g., the ordering of features within a template).
+Each \sbol{Constraint} includes the \sbol{restriction}, \sbol{subject}, and \sbol{object} properties.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/constraint}
+\caption[]{Diagram of the \sbol{Constraint} class and its associated properties.}
+\label{uml:sequence_constraint}
+\end{center}
+\end{figure}
+
+\subparagraph{The \sbolheading{subject} property}\label{sec:subject}
+The \sbol{subject} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Feature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}.
+
+\subparagraph{The \sbolheading{object} property}\label{sec:object}
+The \sbol{object} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Feature} contained by the same parent \sbol{Component} that contains the \sbol{Constraint}. This \sbol{Feature} MUST NOT be the same \sbol{Feature} that the \sbol{Constraint} refers to via its \sbol{subject} property.
+
+\subparagraph{The \sbolheading{restriction} property}\label{sec:restriction}
+
+The \sbol{restriction} property is REQUIRED and has a data type of \sbol{URI}. 
+This property MUST indicate the type of restriction on the locations, orientations, or identities of the \sbol{subject} and \sbol{object} \sbol{ComponentInstance} objects in relation to each other. 
+The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI}s in \ref{tbl:restriction_types_identity}, \ref{tbl:restriction_types_topology}, and \ref{tbl:restriction_types_sequence}.
+
+% identify and orientation
+\begin{table}[ht]
+  \begin{edtable}{tabular}{lp{3.25in}}
+    \toprule
+    \textbf{Restriction URI} & \textbf{Description} \\
+    \midrule
+    % identity relations
+	\url{http://sbols.org/v3#verifyIdentical}  & The \sbol{instanceOf} properties of the \sbol{subject} and \sbol{object} \sbol{Feature} objects MUST refer to the same \sbol{Component}.  \emph{Example: a promoter included via two different subsystems must be the identical.} \\
+	\url{http://sbols.org/v3\#differentFrom} & The \sbol{instanceOf} property of the \sbol{subject} \sbol{Feature} MUST NOT refer to the same \sbol{Component} as that of the \sbol{object} \sbol{Component}. \emph{Example: two fluorescent reporters must be different.}\\
+	\url{http://sbols.org/v3#replaces} &	In the context of the parent object of the \sbol{Constraint}, information about the \sbol{subject} should be used in place of all instances of the \sbol{object}. \emph{Example: the J23101 promoter replaces a generic promoter.} \\
+    
+    % orientation relations
+	\url{http://sbols.org/v3\#sameOrientationAs} & The \sbol{subject} and \sbol{object} \sbol{Component} objects MUST have the same orientation. \emph{Example: a promoter has the same orientation as the coding sequence it controls.}\\
+	\url{http://sbols.org/v2\#oppositeOrientationAs} & The \sbol{subject} and \sbol{object} \sbol{Component} objects MUST have opposite orientations. \emph{Example: a promoter has the opposite orientation as an invertase-activated coding sequence it controls.}\\
+
+    \bottomrule
+  \end{edtable}
+  \caption{RECOMMENDED \sbol{URI}s for expressing identity and orientation with the \sbol{restriction} property.}
+  \label{tbl:restriction_types_identity}
+\end{table}
+
+    % topology relations
+\begin{table}[ht]
+  \begin{edtable}{tabular}{lp{3.25in}}
+    \toprule
+    \textbf{Restriction URI} & \textbf{Description} \\
+    \midrule
+	\url{http://sbols.org/v3#isDisjointFrom}	& The \sbol{subject} and \sbol{object} do not overlap in space. \emph{Example: a plasmid is disjoint from a chromosome.} \\
+	\url{http://sbols.org/v3#strictlyContains} &	The \sbol{subject} entirely contains the \sbol{object}: they do not share a boundary. \emph{Example: a cell contains a plasmid} \\
+	\url{http://sbols.org/v3#contains} &	The \sbol{subject} contains the \sbol{object} and they might or might not share a boundary (i.e., union of {\tt strictlyContains}, {\tt equals}, and {\tt covers}. \emph{Example: a cell contains a protein that may or may not bind to its membrane.} \\
+	\url{http://sbols.org/v3#equals} &	The \sbol{subject} and \sbol{object} occupy the same location in space. \emph{Example: a small molecule is distributed throughour an entire sample.} \\
+	\url{http://sbols.org/v3#meets} &	The \sbol{subject} and \sbol{object} are connected at a shared boundary. \emph{Example: two strains of adherent cells meet at their membranes.} \\
+	\url{http://sbols.org/v3#covers} &	The \sbol{subject} contains the \sbol{object} but also shares a boundary. \emph{Example: a cell covers its transmembrane proteins.} \\
+	\url{http://sbols.org/v3#overlaps} &	The \sbol{subject} and \sbol{object} overlap in space, but portions of each are outside of the other. \emph{Example: a transmembrane protein overlaps the cell membrane.} \\
+    \bottomrule
+  \end{edtable}
+  \caption{RECOMMENDED \sbol{URI}s for expressing topological relations with the \sbol{restriction} property.}
+  \label{tbl:restriction_types_topology}
+\end{table}
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{lp{3.25in}}
+    \toprule
+    \textbf{Restriction URI} & \textbf{Description} \\
+    \midrule
+    % linear relations
+	\url{http://sbols.org/v3#precedes} &	The start of the location for \sbol{subject} is less than the start of the location for \sbol{object} (i.e., union of \sbol{strictlyPrecedes}, \sbol{meets}, and \sbol{overlaps}). 
+	\emph{Example: a promoter precedes a ribosome entry site, but the exact boundary between the two will be determined by sequence optimization and assembly planning}. \\
+	
+	\url{http://sbols.org/v3#strictlyPrecedes} &	The end of the location for \sbol{subject} is less than the start of the location for \sbol{object}. 
+	\emph{Example: a promoter strictly precedes a terminator (with a CDS between them).} \\
+	
+	\url{http://sbols.org/v3#meets} &	The end of the location for \sbol{subject} is equal to the start of the location for \sbol{object}. 
+	Note: this is a stronger interpretation of {\tt meets} from \ref{tbl:restriction_types_topology} in the context of a linear sequence.
+	\emph{Example: the 3' region adjacent to a blunt restriction site meets the 5' region adjacent to the site.} \\
+	
+	\url{http://sbols.org/v3#overlaps} &	The start of the location for \sbol{subject} is before the start of the location for \sbol{object} and the end of the location for \sbol{subject} is before the end of the location for \sbol{object}. 
+	Note: this is a stronger interpretation of {\tt overlaps} from \ref{tbl:restriction_types_topology} in the context of a linear sequence.
+	\emph{Example: two oligos in a Gibson assembly plan} \\
+	
+	\url{http://sbols.org/v3#contains} &	The start of the location for \sbol{subject} is less than or equal to the start of the location for \sbol{object} and the end of the location for \sbol{subject} is greater than or equal to the end of the location for \sbol{object} (i.e., union of {\tt strictlyContains}, {\tt equals}, {\tt finishes}, and {\tt starts}). 
+	Note: this is a stronger interpretation of {\tt contains} from \ref{tbl:restriction_types_topology} in the context of a linear sequence.
+	\emph{Example: a composite part contains a promoter} \\
+	
+	\url{http://sbols.org/v3#strictlyContains} &	The start of the location for \sbol{subject} is before the start of the location for \sbol{object} and the end of the location for \sbol{subject} is after the end of the location for \sbol{object}. 
+	Note: this is a stronger interpretation of {\tt strictlyContains} from \ref{tbl:restriction_types_topology} in the context of a linear sequence.
+	\emph{Example: an RNA transcript strictly contains an intron.} \\
+	
+	\url{http://sbols.org/v3#equals} &	The start and end of the location for \sbol{subject} are equal to the start and end of the location for \sbol{object}. 
+	Note: this is a stronger interpretation of {\tt equals} from \ref{tbl:restriction_types_topology} in the context of a linear sequence.
+	\emph{Example: the transcribed region of a CDS part equals the entire part.} \\
+	
+	\url{http://sbols.org/v3#finishes} &	The start of the location for \sbol{subject} is after the start of the location for \sbol{object} and the end of the location for \sbol{subject} is equal to the end of the location for \sbol{object}. 
+	\emph{Example: a terminator finishes an expression cassette.} \\
+	
+	\url{http://sbols.org/v3#starts} &	The start of the location for \sbol{subject} is equal to the start of the location for \sbol{object} and the end of the location for \sbol{subject} is before the end of the location for \sbol{object}. 
+	\emph{Example: a promoter starts an expression cassette.} \\
+    \bottomrule
+  \end{edtable}
+  \caption{RECOMMENDED \sbol{URI}s for expressing sequential relations with the \sbol{restriction} property.}
+  \label{tbl:restriction_types_sequence}
+\end{table}
+
