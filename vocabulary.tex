@@ -33,8 +33,8 @@ As SBOL is built upon the Resource Description Framework (RDF), all class instan
  \item A \sbol{TopLevel} URI has the following pattern:
   \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \texttt{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path. E.g. \path{https://synbiohub.org/public/igem/BBa_J23070}, where \texttt{namespace}=\path{https://synbiohub.org}, \texttt{local}=\path{public/igem}, and \texttt{displayId}=\path{BBa_J23070}.
  
-  \item A \sbol{TopLevel} object's URI property cannot be included as prefix for other \sbol{TopLevel} objects. E.g. The \path{BBa_J23070_seq} \sbol{Sequence} object cannot have the \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq} URI, since the \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URI for the \path{BBa_J23070} \sbol{ComponentDefinition} object.
-  \item The URI property of any child or nested object has the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URI of a parent object. Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively. E.g. The \texttt{annotation1} \sbol{SequenceAnnotation} object of the \path{BBa_J23070} \sbol{Component} entity will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1} URI. Similarly, the \texttt{loc1} \sbol{Location} of the \texttt{annotation1} \sbol{SequenceAnnotation} object will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1} URI.
+  \item A \sbol{TopLevel} object's URI property cannot be included as prefix for other \sbol{TopLevel} objects. E.g. The \path{BBa_J23070_seq} \sbol{Sequence} object cannot have the \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq} URI, since the \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URI for the \path{BBa_J23070} \sbol{Component} object.
+  \item The URI property of any child or nested object has the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URI of a parent object. Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively. E.g. The \texttt{annotation1} \sbol{SequenceFeature} object of the \path{BBa_J23070} \sbol{Component} entity will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1} URI. Similarly, the \texttt{loc1} \sbol{Location} of the \texttt{annotation1} \sbol{SequenceFeature} object will have the \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1} URI.
   \end{itemize}
 
 
@@ -64,7 +64,7 @@ Finally, classes can inherit the properties of other classes. Inheritance relati
 \label{sec:nameconventions}
 
 SBOL classes are named using upper "camel case," meaning that each word is capitalized and all words are run together without spaces, e.g. \sbol{Identified}, \sbol{SequenceFeature}.
-Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbol{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}). SBOL properties are always given singular names irrespective of their cardinality, e.g. \sbol{role} is used rather than \sbol{roles} even though a component can have multiple roles.
+Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbolmult{roles:C}{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbolmult{roleIntegration:C}{roleIntegration}). SBOL properties are always given singular names irrespective of their cardinality, e.g. \sbolmult{roles:C}{role} is used rather than \sbolmult{roles:C}{role}s even though a component can have multiple roles.
 
 \subsection{Data Types}
 \label{sec:datatypes}

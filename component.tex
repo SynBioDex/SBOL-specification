@@ -383,7 +383,7 @@ The \sbol{ComponentReference} class is a subclass of \sbol{Feature} and a siblin
 
 \subparagraph{The \sbolheading{inChildOf} property}\label{sec:inChildOf}
 
-The \sbol{inChildOf} property is a REQUIRED \sbol{URI} that refers to a SubComponent. \sbol{inChildOf} must refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference} (i.e., as a \sbol{subComponent} of \sbol{Component}, or an \sbol{inChildOf} of \sbol{ComponentReference}). If the \sbol{Feature} is a \sbol{SubComponent}, then it must be a child of the \sbol{SubComponent} pointed to by \sbol{inChildOf}.
+The \sbol{inChildOf} property is a REQUIRED \sbol{URI} that refers to a SubComponent. \sbol{inChildOf} must refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference} (i.e., as a \sbol{SubComponent} of \sbol{Component}, or an \sbol{inChildOf} of \sbol{ComponentReference}). If the \sbol{Feature} is a \sbol{SubComponent}, then it must be a child of the \sbol{SubComponent} pointed to by \sbol{inChildOf}.
 
 \subparagraph{The \sbolheading{feature} property}\label{sec:feature:CR}
 
@@ -394,18 +394,18 @@ The \sbolmult{feature:CR}{feature} property is an OPTIONAL \sbol{URI} that refer
 
 The \sbol{LocalSubComponent} class a subclass of \sbol{Feature}. This class was serves as a way to create an ``empty'' \sbol{Component} to serve as a placeholder in more complex \sbol{Component}s. 
 
-\subparagraph{The \sbolheading{type} property}\label{sec:type:ER}
+\subparagraph{The \sbolheading{type} property}\label{sec:type:LSC}
 
-The \sbolmult{type:ER}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ER}{type} property is identical to its use in \sbol{Component}
+The \sbolmult{type:LSC}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:LSC}{type} property is identical to its use in \sbol{Component}
 
 \paragraph{ExternallyDefined}
 \label{sec:ExternallyDefined}
 
 The \sbol{ExternallyDefined} class has been introduced so that external definitions in databases like CHEBI or UniProt can be referenced.
 
-\subparagraph{The \sbolheading{type} property}\label{sec:type:ER}
+\subparagraph{The \sbolheading{type} property}\label{sec:type:ED}
 
-The \sbolmult{type:ER}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ER}{type} property is identical to its use in \sbol{Component}
+The \sbolmult{type:ED}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ED}{type} property is identical to its use in \sbol{Component}
 
 \subparagraph{The \sbolheading{definition} property}\label{sec:definition:ER}
 
@@ -427,7 +427,7 @@ There is no such concern with different \sbol{SequenceFeature} objects, however,
 
 \subsubsection{Location}
 \label{sec:Location}
-The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol{GenericLocation} classes.
+The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol{EntireSequence} classes.
 
 \begin{figure}[ht]
 \begin{center}
@@ -491,7 +491,7 @@ The \sbol{EntireSequence} class does not have any additional properties. Use of 
 
 \subsubsection{Constraint}
 \label{sec:Constraint}
-The \sbol{Constraint} class can be used to assert restrictions on the relationships of pairs of \sbol{ComponentInstance} objects contained by the same parent \sbol{Component}.
+The \sbol{Constraint} class can be used to assert restrictions on the relationships of pairs of \sbol{Feature} objects contained by the same parent \sbol{Component}.
 Uses of this class include expressing containment (e.g., a plasmid transformed into a chassis strain), identity mappings (e.g., replacing a placeholder value with a complete definition), and expressing relative, sequence-based positions (e.g., the ordering of features within a template).
 Each \sbol{Constraint} includes the \sbol{restriction}, \sbol{subject}, and \sbol{object} properties.
 
@@ -522,8 +522,8 @@ The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI
     \textbf{Restriction URI} & \textbf{Description} \\
     \midrule
     % identity relations
-	\url{http://sbols.org/v3#verifyIdentical}  & The \sbol{instanceOf} properties of the \sbol{subject} and \sbol{object} \sbol{ComponentInstance} objects MUST refer to the same \sbol{Component}.  \emph{Example: a promoter included via two different subsystems must be the identical.} \\
-	\url{http://sbols.org/v3\#differentFrom} & The \sbol{instanceOf} property of the \sbol{subject} \sbol{ComponentInstance} MUST NOT refer to the same \sbol{Component} as that of the \sbol{object} \sbol{Component}. \emph{Example: two fluorescent reporters must be different.}\\
+	\url{http://sbols.org/v3#verifyIdentical}  & The \sbol{instanceOf} properties of the \sbol{subject} and \sbol{object} \sbol{Feature} objects MUST refer to the same \sbol{Component}.  \emph{Example: a promoter included via two different subsystems must be the identical.} \\
+	\url{http://sbols.org/v3\#differentFrom} & The \sbol{instanceOf} property of the \sbol{subject} \sbol{Feature} MUST NOT refer to the same \sbol{Component} as that of the \sbol{object} \sbol{Component}. \emph{Example: two fluorescent reporters must be different.}\\
 	\url{http://sbols.org/v3#replaces} &	In the context of the parent object of the \sbol{Constraint}, information about the \sbol{subject} should be used in place of all instances of the \sbol{object}. \emph{Example: the J23101 promoter replaces a generic promoter.} \\
     
     % orientation relations
