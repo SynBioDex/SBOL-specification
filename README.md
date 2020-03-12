@@ -54,36 +54,3 @@ You can also build with Docker if you don't want to install latex, but note that
     docker run -v $(pwd):/opt/spec jmcl/specbuild
 
 
-### LaTeX installation notes
-
-Installing LaTeX on your system is beyond the scope of this README, however we will collect some tips here, in the interest of fostering collaboration.
-
-
-### MacTex installation notes
-
-Here is how one community member managed to install MacTex and BibTex on OS X 10.10.5 Yosemite in August 2016. This recipe was found on StackOverflow. Not all of these commands may be strictly necessary to build the SBOL2 pdf at this time. The bibdesk settings especially need curation. Please note that BasicTex alone did not suffice.
-
-    # First install homebrew from http://brew.sh then...
-    brew update
-    brew upgrade
-    brew tap caskroom/cask
-    brew install brew-cask
-    brew cask install mactex
-    brew cask install bibtex
-    brew cask install bibdesk
-    brew cask install texshop
-    brew cask install mendeley-desktop
-    sudo chown -R $USER  /usr/local/texlive
-    tlmgr update --self
-    tlmgr update --all
-    defaults write TeXShop NSUserKeyEquivalents -dict-add "Typeset" "@t"
-    defaults write TeXShop "BibTeXengine" -string "biber"
-    defaults write TeXShop "Encoding"  -string  "IsoLatin"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Key Format" -string %y%u0"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk BDSKLocalFileFormatKey -string Cite Key}%n0%e"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Path to the papers folder" ing "Biblio"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite String" -string "citep"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Key Autogenerate" -int 1
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Key Format Preset" -int 0
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Prepend Tilde" -int 1
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Startup Behavior" -int 4
