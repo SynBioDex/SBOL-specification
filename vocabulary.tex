@@ -7,7 +7,7 @@ The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagr
 
 \subsection{Terminology Conventions}
 
-This document indicates requirement levels using the controlled vocabulary specified in IETF RFC 2119.
+This document indicates requirement levels using the controlled vocabulary specified in \href{https://tools.ietf.org/html/rfc2119}{IETF RFC 2119}.
 In particular, the key words ``MUST'', ``MUST NOT'', ``REQUIRED'', ``SHALL'', ``SHALL NOT'', ``SHOULD'', ``SHOULD NOT'', ``RECOMMENDED'', ``MAY'', and ``OPTIONAL'' in this document are to be interpreted as described in RFC 2119.
 
 \begin{itemize}
@@ -50,7 +50,7 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 
 Finally, classes can inherit the properties of other classes. Inheritance relationships are represented in UML diagrams as open-faced, triangular arrows that point from the inheriting class to the inherited class. Some classes in the SBOL data model cannot be instantiated as objects and exist only to group common properties for inheritance. These classes have italicized names and are known as abstract classes.
 
-\subsection{Naming and Font Conventions}
+\subsection{Naming and Typographic Conventions}
 \label{sec:nameconventions}
 
 SBOL classes are named using upper ``camel case,'' meaning that each word is capitalized and all words are run together without spaces, e.g., \sbol{Identified}, \sbol{SequenceFeature}.
@@ -61,9 +61,9 @@ This is because each relation can potentially stand on its own, irrespective of 
 
 \subsection{RDF and URIs}
 
-As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the SBOL data model, therefore, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  A given \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.  
+As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the SBOL data model, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.  
 
-Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following conventions of HTTP(S) and not UUID), its structure MUST comply with the following rules:
+Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
 
 \begin{itemize}
  
