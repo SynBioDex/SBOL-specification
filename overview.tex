@@ -49,7 +49,7 @@ A \sbol{CombinatorialDerivation} allows one to specify a design pattern where in
 The \sbol{Implementation} class is the build class, and it is used to represent physical artifacts like an actual sample of a plasmid.  
 The \sbol{Experiment} and \sbol{ExperimentalData} classes are the test classes, allowing description of a collection of data generated in an experiment.  
 The \sbol{Model} class, discussed earlier, associates learned information with a design.
-The \prov{Activity} class is taken from the provenance ontology (PROV-O), which is described in Section~\ref{sec:provenance}.  For example, a build \prov{Activity} describes how an \sbol{Implementation} is constructed using a \sbol{Component} description.  On the other hand, a test \prov{Activity} describes how an \sbol{Experiment} is conducted using an \sbol{Implementation} artifact.  The \sbol{Collection} class has members, which can be of any of these types or \sbol{Collection}s themselves.  
+The \prov{Activity} class is taken from the provenance ontology (PROV-O), which is described in~\ref{sec:provenance}.  For example, a build \prov{Activity} describes how an \sbol{Implementation} is constructed using a \sbol{Component} description.  On the other hand, a test \prov{Activity} describes how an \sbol{Experiment} is conducted using an \sbol{Implementation} artifact.  The \sbol{Collection} class has members, which can be of any of these types or \sbol{Collection}s themselves.  
 Finally, all of these objects can refer to objects of the \sbol{Attachment} class, which are used to link out to external data (images, spreadsheets, textual documents, etc.). 
 The next sections provide complete definitions and details for all of these classes.
 
