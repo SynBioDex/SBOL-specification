@@ -41,14 +41,14 @@ Finally, if the \sbolmult{type:CD}{type} property contains multiple \sbol{URI}s,
 
 \emph{Nucleic Acid Topology types}\\
 Any \sbol{Component} classified as DNA (see \ref{tbl:component_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This (topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
-(this is currently just 'linear' or 'circular' as given in \ref{tbl:component_topology}). Topology information SHOULD be specified for DNA \sbol{Component} records with a fully specified sequence, except in three scenarios: if the DNA record does not have sequence information, or if the DNA record has incomplete sequence information, or if topology is genuinely unknown. For any \sbol{Component} classified as RNA (see \ref{tbl:component_types}), a topology type field is OPTIONAL. The default
+(this is currently just `linear' or `circular' as given in \ref{tbl:component_topology}). Topology information SHOULD be specified for DNA \sbol{Component} records with a fully specified sequence, except in three scenarios: if the DNA record does not have sequence information, or if the DNA record has incomplete sequence information, or if topology is genuinely unknown. For any \sbol{Component} classified as RNA (see \ref{tbl:component_types}), a topology type field is OPTIONAL. The default
 assumption in this case is linear topology.  In any case, no more than one topology should be specified.
 
 Any \sbol{Component} classified as DNA or RNA MAY also have strand
 information encoded in an additional (third) type field using a URI from the Strand Attribute branch of the SO (currently there are only two possible terms for single or double-stranded nucleic
 acids given in \ref{tbl:component_topology}). In absence of this field, the
-default strand information assumed for DNA is 'double-stranded' and for RNA is
-'single-stranded'. 
+default strand information assumed for DNA is `double-stranded' and for RNA is
+`single-stranded'. 
 
 Any other type of \sbol{Component} record (protein, simple chemical, etc) SHOULD NOT
 have any type field pointing to SO terms from the topology or strand attribute branches of SO.
@@ -118,7 +118,6 @@ This \sbol{Sequence} is implicitly the entire sequence for this \sbol{Component}
 A \sbol{Component} MAY have one or more \sbol{hasFeature} properties, each of type \sbol{URI} that MUST reference a \sbol{Feature} object (see \ref{sec:Feature}). The set of relations between \sbol{Feature} and \sbol{Component} objects MUST be strictly acyclic.
 
 While the \sbol{Component} class is analogous to a blueprint or specification sheet for a biological part or a system of interacting biological elements, the \sbol{Feature} class represents, among other things, the specific occurrence of a part or subsystem within a design.  For example, this mechanism allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{Component}). For example, the \sbol{Component} of a polycistronic gene could contain two \sbol{SubComponent} objects that refer to the same \sbol{Component} of a CDS.  As another example, consider the \sbol{Component} for a network of two-input repressor devices in which the particular repressors have not been chosen yet. This \sbol{Component} could contain multiple \sbol{SubComponent} objects that refer to the same \sbol{Component} of an abstract two-input repressor device.
-% Just as a \sbol{Feature} represents an instance of a subsystem in the overall system represented by a \sbol{Component}, a \sbol{Feature} represents an instance of a structural entity (represented by a \sbol{Component}) in the system. This concept allows a \sbol{Component} to assert different interactions for separate copies of the same structural entity if needed. For example, a \sbol{Component} might contain multiple \sbol{Feature}  objects that refer to the same promoter \sbol{Component}, but assert different interactions for these promoter copies based on their separate positions in another \sbol{Component} that represents the structure of the entire system.
 
 The \sbol{hasFeature} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{SubComponent} and \sbol{Component} objects.  If a \sbol{Component} in such a hierarchy refers to a \sbol{Location} object, and there exists a \sbol{Component} object lower in the hierarchy that refers to a \sbol{Location} object that refers to the same \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Feature} objects in the hierarchy that are imposed by the \sbol{SubComponent}, \sbol{SequenceFeature}, or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
 
