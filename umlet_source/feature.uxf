@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>11</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>352</x>
-      <y>462</y>
-      <w>121</w>
-      <h>99</h>
+      <x>369</x>
+      <y>414</y>
+      <w>117</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-location
+hasLocation
    0..*</panel_attributes>
     <additional_attributes>40.0;10.0;40.0;70.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>209</x>
-      <y>462</y>
-      <w>132</w>
-      <h>99</h>
+      <x>252</x>
+      <y>414</y>
+      <w>108</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
 sourceLocation
@@ -30,10 +30,10 @@ sourceLocation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>253</x>
-      <y>528</y>
-      <w>110</w>
-      <h>33</h>
+      <x>288</x>
+      <y>468</y>
+      <w>90</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>*Location*</panel_attributes>
     <additional_attributes/>
@@ -41,10 +41,10 @@ sourceLocation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>506</y>
-      <w>187</w>
-      <h>33</h>
+      <x>81</x>
+      <y>450</y>
+      <w>153</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>*Component*</panel_attributes>
     <additional_attributes/>
@@ -52,10 +52,10 @@ sourceLocation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>77</x>
-      <y>429</y>
-      <w>143</w>
-      <h>99</h>
+      <x>144</x>
+      <y>387</y>
+      <w>117</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 instanceOf
@@ -65,24 +65,25 @@ instanceOf
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>605</x>
-      <y>297</y>
-      <w>187</w>
-      <h>55</h>
+      <x>576</x>
+      <y>270</y>
+      <w>153</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>*Feature*
 --
 -role[0..*] : URI
+-order[0..1] : Integer
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>649</x>
-      <y>231</y>
-      <w>110</w>
-      <h>33</h>
+      <x>612</x>
+      <y>207</y>
+      <w>90</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>*Identified*</panel_attributes>
     <additional_attributes/>
@@ -90,10 +91,10 @@ instanceOf
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
-      <y>418</y>
-      <w>187</w>
-      <h>66</h>
+      <x>711</x>
+      <y>378</y>
+      <w>153</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>*ExternallyDefined*
 --
@@ -104,21 +105,21 @@ instanceOf
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>253</y>
-      <w>33</w>
-      <h>66</h>
+      <x>648</x>
+      <y>225</y>
+      <w>27</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>297</x>
-      <y>308</y>
-      <w>330</w>
-      <h>132</h>
+      <x>324</x>
+      <y>288</y>
+      <w>270</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>280.0;10.0;10.0;10.0;10.0;100.0</additional_attributes>
@@ -126,10 +127,10 @@ instanceOf
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>781</x>
-      <y>319</y>
-      <w>99</w>
-      <h>121</h>
+      <x>720</x>
+      <y>297</y>
+      <w>81</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0;70.0;90.0</additional_attributes>
@@ -137,10 +138,10 @@ instanceOf
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>198</x>
-      <y>418</y>
-      <w>220</w>
-      <h>55</h>
+      <x>243</x>
+      <y>378</y>
+      <w>180</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>*SubComponent*
 --
@@ -151,10 +152,10 @@ instanceOf
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>671</x>
-      <y>341</y>
-      <w>33</w>
-      <h>99</h>
+      <x>630</x>
+      <y>315</y>
+      <w>27</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
@@ -162,10 +163,10 @@ instanceOf
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>407</x>
-      <y>429</y>
-      <w>121</w>
-      <h>55</h>
+      <x>414</x>
+      <y>387</y>
+      <w>99</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 inChildOf
@@ -175,10 +176,10 @@ inChildOf
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>506</x>
-      <y>418</y>
-      <w>187</w>
-      <h>55</h>
+      <x>495</x>
+      <y>378</y>
+      <w>153</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>*ComponentReference*
 --
@@ -188,23 +189,23 @@ inChildOf
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>506</x>
-      <y>330</y>
-      <w>121</w>
-      <h>110</h>
+      <x>495</x>
+      <y>306</y>
+      <w>99</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-feature
+hasFeature
     1</panel_attributes>
     <additional_attributes>10.0;80.0;10.0;10.0;90.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>726</x>
-      <y>341</y>
-      <w>33</w>
-      <h>209</h>
+      <x>675</x>
+      <y>315</y>
+      <w>27</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
@@ -212,10 +213,10 @@ feature
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>627</x>
-      <y>528</y>
-      <w>187</w>
-      <h>55</h>
+      <x>594</x>
+      <y>468</y>
+      <w>153</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>*LocalSubComponent*
 --
@@ -226,10 +227,10 @@ feature
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>902</x>
-      <y>528</y>
-      <w>187</w>
-      <h>55</h>
+      <x>819</x>
+      <y>468</y>
+      <w>153</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>*SequenceFeature*
 --
@@ -240,10 +241,10 @@ feature
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>902</x>
-      <y>616</y>
-      <w>110</w>
-      <h>33</h>
+      <x>819</x>
+      <y>540</y>
+      <w>90</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>*Location*</panel_attributes>
     <additional_attributes/>
@@ -251,23 +252,23 @@ feature
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1001</x>
-      <y>572</y>
-      <w>121</w>
-      <h>77</h>
+      <x>900</x>
+      <y>504</y>
+      <w>126</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-  location
+  hasLocation
    1..*</panel_attributes>
     <additional_attributes>40.0;10.0;40.0;50.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>781</x>
-      <y>297</y>
-      <w>242</w>
-      <h>253</h>
+      <x>720</x>
+      <y>279</y>
+      <w>198</w>
+      <h>207</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;200.0;10.0;200.0;210.0</additional_attributes>
@@ -275,10 +276,10 @@ feature
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>627</x>
-      <y>616</y>
-      <w>110</w>
-      <h>33</h>
+      <x>594</x>
+      <y>540</y>
+      <w>90</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>*Location*</panel_attributes>
     <additional_attributes/>
@@ -286,13 +287,13 @@ feature
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>726</x>
-      <y>572</y>
-      <w>121</w>
-      <h>77</h>
+      <x>675</x>
+      <y>504</y>
+      <w>126</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-  location
+  hasLocation
    0..*</panel_attributes>
     <additional_attributes>40.0;10.0;40.0;50.0;10.0;50.0</additional_attributes>
   </element>
