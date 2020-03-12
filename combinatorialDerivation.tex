@@ -18,7 +18,7 @@ The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
 Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \sbol{SubComponent} objects that describe its substructure (referred to hereafter as template \sbol{SubComponent} objects), and its \sbol{constraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
 
-When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \sbol{prov:wasDerivedFrom} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{member} property of a \sbol{Collection}, in which case the \sbol{prov:wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
+When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \prov{wasDerivedFrom} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{member} property of a \sbol{Collection}, in which case the \prov{wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
 
 If the \sbolmult{types:CD}{type} property of the template \sbol{Component} contains one or more URIs, then the \sbolmult{types:CD}{type} property of any derived \sbol{Component} SHOULD also contain those URIs. 
 The same holds true for the \sbolmult{roles:CD}{role} properties of these \sbol{Component} objects.
@@ -31,7 +31,7 @@ The set of  \sbol{hasVariableComponent} properties MUST NOT contain two or more 
 
 The \sbol{variable} properties of these \sbol{VariableComponent} objects control which \sbol{SubComponent} objects in the \sbol{template} are modified in a derived \sbol{Component}.
 If no \sbol{variable} property of one of these \sbol{VariableComponent} objects refers to a template \sbol{SubComponent}, then it is not a variable and the derived object SHOULD have a \sbol{SubComponent} with identical \sbol{instanceOf} and \sbol{sourceLocation} properties
-and a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}.
+and a \prov{wasDerivedFrom} property that refers to the template \sbol{SubComponent}.
 
 If a \sbol{SubComponent} in the \sbol{template} is referred to by some \sbol{variable} in a \sbol{VariableComponent}, then it is a variable and it SHOULD be replaced in the derived \sbol{Component} by a number of \sbol{SubComponent} objects constrained by the number specified by the \sbol{cardinality} property of the \sbol{VariableComponent} (see \ref{tbl:cardinality}).
 The \sbol{instanceOf} properties of these \sbol{SubComponent} objects in the derived \sbol{Component} MUST refer to a \sbol{Component} objects specified by a \sbol{variant}, contained within a \sbol{variantCollection}, or derived from a \sbol{variantDerivation} of the \sbol{VariableComponent}.
@@ -106,10 +106,10 @@ The \sbol{cardinality} property is REQUIRED and has a data type of URI. This pro
     \toprule
     \textbf{Cardinality URI} & \textbf{Description} \\
     \midrule
-    \url{http://sbols.org/v2#zeroOrOne} & No more than one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
-        \url{http://sbols.org/v2#one} & Exactly one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
-\url{http://sbols.org/v2#zeroOrMore} & Any number of \sbol{SubComponent} objects in the derived \sbol{Component} MAY have \sbol{prov:wasDerivedFrom} properties that refer to the template \sbol{SubComponent}. \\
-\url{http://sbols.org/v2#oneOrMore} & At least one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \sbol{prov:wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
+    \url{http://sbols.org/v2#zeroOrOne} & No more than one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \prov{wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
+        \url{http://sbols.org/v2#one} & Exactly one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \prov{wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
+\url{http://sbols.org/v2#zeroOrMore} & Any number of \sbol{SubComponent} objects in the derived \sbol{Component} MAY have \prov{wasDerivedFrom} properties that refer to the template \sbol{SubComponent}. \\
+\url{http://sbols.org/v2#oneOrMore} & At least one \sbol{SubComponent} in the derived \sbol{Component} SHOULD have a \prov{wasDerivedFrom} property that refers to the template \sbol{SubComponent}. \\
     \bottomrule
   \end{edtable}
   \caption{REQUIRED \sbol{URI}s for the \sbol{cardinality} property.}

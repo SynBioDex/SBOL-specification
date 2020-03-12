@@ -75,7 +75,7 @@ Reference: \sec{sec:Identified}}
 \printValid{The \sbol{measure} property of an \sbol{Identified} object is OPTIONAL and may contain a set of \sbol{Measure} objects. \\ 
 Reference: \sec{sec:Identified}}
 
-\printValid{The \sbol{prov:wasDerivedFrom} property of an \sbol{Identified} object is OPTIONAL and MAY contain a set of \sbol{URI}s.  \\ Reference: \sec{sec:Identified}}
+\printValid{The \prov{wasDerivedFrom} property of an \sbol{Identified} object is OPTIONAL and MAY contain a set of \sbol{URI}s.  \\ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbol{name} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String}.  \\ Reference: \sec{sec:Identified}}
 
@@ -115,9 +115,9 @@ Reference: \sec{sec:Identified}}
 \subsubsection*{Rules for the \class{TopLevel} class} 
 \setcounter{sbolCtr}{10301}
 
-\printValid{The \sbol{prov:wasDerivedFrom} property of an \sbol{TopLevel} object MUST NOT contain a \sbol{URI} reference to the \sbol{TopLevel} object itself.\\ Reference: \sec{sec:Identified}}
+\printValid{The \prov{wasDerivedFrom} property of an \sbol{TopLevel} object MUST NOT contain a \sbol{URI} reference to the \sbol{TopLevel} object itself.\\ Reference: \sec{sec:Identified}}
 
-\printComplete{\sbol{TopLevel} objects MUST NOT form circular reference chains via their \sbol{prov:wasDerivedFrom} properties.\\ Reference: \sec{sec:Identified}}
+\printComplete{\sbol{TopLevel} objects MUST NOT form circular reference chains via their \prov{wasDerivedFrom} properties.\\ Reference: \sec{sec:Identified}}
 
 \printValid{The \sbol{hasAttachment} property of a \sbol{TopLevel} is OPTIONAL and MAY contain a set of \sbol{URI}s.
 \\ Reference: \sec{sec:TopLevel}}
@@ -131,7 +131,7 @@ Reference: \sec{sec:Identified}}
 \setcounter{sbolCtr}{10401}
 
 
-\printValid{A \sbol{Sequence} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{elements}, and \\ \sbol{encoding}.\\ Reference: \sec{sec:Sequence}}
+\printValid{A \sbol{Sequence} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{elements}, and \\ \sbol{encoding}.\\ Reference: \sec{sec:Sequence}}
 % A \sbol{Sequence} MUST inherit all properties of the \sbol{TopLevel} class.
 
 
@@ -157,7 +157,7 @@ Reference: \sec{sec:Identified}}
 \setcounter{sbolCtr}{10501}
 
 \todo[inline]{Add: If a SubComponent has a Location that refers to Sequence X, then the either the SubComponent or its parent Component must also have a SequenceAnnotation that gives Sequence X an EntireComponent Location.}
-\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \\ \sbol{components}, \sbol{sequences},  \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.}
+\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \\ \sbol{components}, \sbol{sequences},  \sbol{sequenceAnnotations}, and \sbol{sequenceConstraints}.}
 
 %A \sbol{SubComponent} MUST inherit all properties of the \sbol{TopLevel} class.}
 
@@ -259,7 +259,7 @@ Reference: \sec{sec:Component}}
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{10701}
 
-\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description},
+\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFroms}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description},
 
 \sbol{annotations}, \sbol{access}, \sbolmult{instanceOf:CI}{instanceOf}, \sbolmult{mapsTos:CI}{mapsTos}, \sbolmult{roles:C}{roles}, and \sbolmult{roleIntegration:C}{roleIntegration}.\\ Reference: \sec{sec:SubComponent}}
 % A \sbol{SubComponent} MUST inherit all properties of the \sbol{SubComponent} class.
@@ -288,7 +288,7 @@ Reference: \sec{sec:SubComponent}}
 \subsubsection*{Rules for the \class{MapsTo} class} 
 \setcounter{sbolCtr}{10801}
 
-\printValid{A \sbol{MapsTo} MUST NOT have properties other than the following: \sbol{displayId}, \\ \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{refinement}, \sbol{local}, and  \sbol{remote}\\ Reference: \sec{sec:MapsTo}}
+\printValid{A \sbol{MapsTo} MUST NOT have properties other than the following: \sbol{displayId}, \\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{refinement}, \sbol{local}, and  \sbol{remote}\\ Reference: \sec{sec:MapsTo}}
 %A \sbol{MapsTo} MUST inherit all properties of the \sbol{Identified} class.
 
 
@@ -317,7 +317,7 @@ Reference: \sec{sec:SubComponent}}
 \setcounter{sbolCtr}{10901}
 
 
-\printValid{A \sbol{SequenceFeature} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, \sbol{locations}, and \sbolmult{roles:SA}{roles}.\\ Reference: \sec{sec:SequenceAnnotation}}
+\printValid{A \sbol{SequenceFeature} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{component}, \sbol{locations}, and \sbolmult{roles:SA}{roles}.\\ Reference: \sec{sec:SequenceAnnotation}}
 %A \sbol{SequenceAnnotation} MUST inherit all properties of the \sbol{Identified} class.
 
 \printValid{The \sbol{locations} property of a \sbol{SequenceFeature} is REQUIRED and MUST contain a non-empty set of \sbol{Location} objects.\\ Reference: \sec{sec:SequenceFeature}}
@@ -355,7 +355,7 @@ Reference: \sec{sec:sequence}}
 \setcounter{sbolCtr}{11101}
 
 
-\printValid{A \sbol{Range} MUST NOT have properties other than the following: \sbol{displayId},\\ \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{sequence}, \sbol{orientation}, \sbol{start}, and \sbol{end}.\\ Reference: \sec{sec:Range}}
+\printValid{A \sbol{Range} MUST NOT have properties other than the following: \sbol{displayId},\\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{sequence}, \sbol{orientation}, \sbol{start}, and \sbol{end}.\\ Reference: \sec{sec:Range}}
 % A \sbol{Range} MUST inherit all properties of the \sbol{Location} class.
 
 
@@ -372,7 +372,7 @@ Reference: \sec{sec:sequence}}
 \subsubsection*{Rules for the \class{Cut} class} 
 \setcounter{sbolCtr}{11201}
 
-\printValid{A \sbol{Cut} MUST NOT have properties other than the following: \sbol{displayId},\\ \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{orientation}, \sbol{sequence}, and \sbol{at}.\\ Reference: \sec{sec:Cut}}
+\printValid{A \sbol{Cut} MUST NOT have properties other than the following: \sbol{displayId},\\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{orientation}, \sbol{sequence}, and \sbol{at}.\\ Reference: \sec{sec:Cut}}
 
 
 \printValid{The \sbol{at} property of a \sbol{Cut} is REQUIRED and MUST contain an \sbol{Integer} greater than or equal to zero.  \\ Reference: \sec{sec:Cut}}
@@ -385,7 +385,7 @@ Reference: \sec{sec:sequence}}
 
 
 \printValid{A \sbol{GenericLocation} MUST NOT have properties other than the following: 
-\sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{sequence}, and\\ \sbol{orientation}.\\
+\sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{sequence}, and\\ \sbol{orientation}.\\
 Reference: \sec{sec:GenericLocation}}
 
 \printComplete{The \sbol{sequence} property of a \sbol{GenericLocation} is OPTIONAL. If present, it MUST contain the URI of a \sbol{Sequence} referenced by the \sbol{SubComponent} containing the \sbol{GenericLocation}.\\
@@ -395,7 +395,7 @@ Reference: \sec{sec:sequence}}
 \setcounter{sbolCtr}{11401}
 
 
-\printValid{A \sbol{SequenceConstraint} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{restriction}, \sbol{subject}, and \sbol{object}.\\ Reference: \sec{sec:SequenceConstraint}}
+\printValid{A \sbol{SequenceConstraint} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{restriction}, \sbol{subject}, and \sbol{object}.\\ Reference: \sec{sec:SequenceConstraint}}
 
 \printValid{The \sbol{subject} property of a \sbol{SequenceConstraint} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{SubComponent}.\\ Reference: \sec{sec:SequenceConstraint}}
 
@@ -440,7 +440,7 @@ Reference: \sec{sec:sequence}}
 \setcounter{sbolCtr}{11501}
 
 
-\printValid{A \sbol{Model} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{source:M}{source}, \sbol{language}, and \sbol{framework}.\\ Reference: \sec{sec:Model}}
+\printValid{A \sbol{Model} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{source:M}{source}, \sbol{language}, and \sbol{framework}.\\ Reference: \sec{sec:Model}}
 %A \sbol{Model} MUST inherit all properties of the \sbol{TopLevel} class.
 
 
@@ -467,7 +467,7 @@ Reference: \sec{sec:sequence}}
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{11601}
 
-\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:MD}{roles}, \sbol{modules}, \sbol{interactions}, \sbol{functionalComponents}, and\\ \sbol{models}.\\ Reference: \sec{sec:Component}}
+\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:MD}{roles}, \sbol{modules}, \sbol{interactions}, \sbol{functionalComponents}, and\\ \sbol{models}.\\ Reference: \sec{sec:Component}}
 % A \sbol{SubComponent} MUST inherit all properties of the \sbol{TopLevel} class.
 
 \printValid{The \sbolmult{roles:MD}{roles} property is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Component}}
@@ -491,7 +491,7 @@ Reference: \sec{sec:sequence}}
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{11701}
 
-\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{instanceOf:M}{instanceOf}, and \sbolmult{mapsTos:M}{mapsTos}.\\ Reference: \sec{sec:SubComponent}}
+\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{instanceOf:M}{instanceOf}, and \sbolmult{mapsTos:M}{mapsTos}.\\ Reference: \sec{sec:SubComponent}}
 
 \printValid{The \sbolmult{instanceOf:M}{instanceOf} property of a \sbol{SubComponent} is REQUIRED and MUST contain a \sbol{URI}. \\ Reference: \sec{sec:SubComponent}}
 
@@ -507,7 +507,7 @@ Reference: \sec{sec:sequence}}
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{11801}
 
-\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{access}, \sbolmult{instanceOf:M}{instanceOf}, and \sbolmult{mapsTos:M}{mapsTos}, and \sbol{direction}.\\ Reference: \sec{sec:ComponentInstance}}
+\printValid{A \sbol{SubComponent} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{access}, \sbolmult{instanceOf:M}{instanceOf}, and \sbolmult{mapsTos:M}{mapsTos}, and \sbol{direction}.\\ Reference: \sec{sec:ComponentInstance}}
 %A \sbol{SubComponent} MUST inherit all properties of the \sbol{SubComponent} class.
 
 \printValid{The \sbol{direction} property of a \sbol{SubComponent} is REQUIRED and MUST contain a \sbol{URI} from \ref{tbl:functionalcomponent_directions}.
@@ -517,7 +517,7 @@ Reference: \sec{sec:sequence}}
 \setcounter{sbolCtr}{11901}
 
 
-\printValid{An \sbol{Interaction} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description},
+\printValid{An \sbol{Interaction} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description},
 \sbol{annotations}, \sbolmult{types:I}{types}, and \sbol{participations}.\\ Reference: \sec{sec:Interaction}}
 %An \sbol{Interaction} MUST inherit all properties of the \sbol{Identified} class.
 
@@ -542,7 +542,7 @@ Reference: \sec{sec:Participation}}
 \setcounter{sbolCtr}{12001}
 
 
-\printValid{A \sbol{Participation} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:P}{roles}, and \sbol{participant}.\\ Reference: \sec{sec:Participation}}
+\printValid{A \sbol{Participation} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{roles:P}{roles}, and \sbol{participant}.\\ Reference: \sec{sec:Participation}}
 % A \sbol{Participation} MUST inherit all properties of the \sbol{Identified} class.
 
 
@@ -564,7 +564,7 @@ Reference: \sec{sec:Participation}}
 \subsubsection*{Rules for the \class{Collection} class} 
 \setcounter{sbolCtr}{12101}
 
-\printValid{A \sbol{Collection} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{members}.\\Reference: \sec{sec:Collection}}
+\printValid{A \sbol{Collection} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{members}.\\Reference: \sec{sec:Collection}}
 
 
 \printValid{The \sbol{members} property of a \sbol{Collection} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Collection}}
@@ -590,7 +590,7 @@ Reference: \sec{sec:Annotations}}
 \subsubsection*{Rules for the \class{GenericTopLevel} class} 
 \setcounter{sbolCtr}{12301}
 
-\printValid{A \sbol{GenericTopLevel} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\Reference: \sec{sec:GenericTopLevel}}
+\printValid{A \sbol{GenericTopLevel} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\Reference: \sec{sec:GenericTopLevel}}
 
 
 \printValid{The \sbol{rdfType} property of a \sbol{GenericTopLevel} object is REQUIRED and MUST contain a \sbol{QName}.\\ Reference: \sec{sec:GenericTopLevel}}
@@ -604,7 +604,7 @@ Reference: \sec{sec:Annotations}}
 \setcounter{sbolCtr}{12401}
 
 
-\printValid{An \sbol{Activity} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:Activity}{types}, \sbol{startedAtTime}, \sbol{endedAtTime}, \sbol{wasInformedBys}, \sbol{usages}, and \sbol{associations}.\\ Reference: \sec{sec:Activity}}
+\printValid{An \sbol{Activity} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:Activity}{types}, \sbol{startedAtTime}, \sbol{endedAtTime}, \sbol{wasInformedBys}, \sbol{usages}, and \sbol{associations}.\\ Reference: \sec{sec:Activity}}
 
 
 \printValid{The \sbol{startedAtTime} property of an \sbol{Activity} object is OPTIONAL and MAY contain a\\
@@ -645,53 +645,53 @@ Reference: \sec{sec:Annotations}}
 \subsubsection*{Rules for the \class{Usage} class} 
 \setcounter{sbolCtr}{12501}
 
-\printValid{An \sbol{Usage} MUST NOT have properties other than the following: \sbol{displayId},\\ \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations},  \sbol{entity}, and \sbolmult{roles:U}{roles}.\\ Reference: \sec{sec:Usage}}
+\printValid{An \sbol{Usage} MUST NOT have properties other than the following: \sbol{displayId},\\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations},  \sbol{entity}, and \sbolmult{roles:U}{roles}.\\ Reference: \sec{sec:prov:Usage}}
 
-\printValid{The \sbol{entity} property of an \sbol{Usage} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Usage}}
+\printValid{The \sbol{entity} property of an \sbol{Usage} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:prov:Usage}}
 
-\printValid{The \sbolmult{roles:U}{roles} property of an \sbol{Usage} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Usage}}
+\printValid{The \sbolmult{roles:U}{roles} property of an \sbol{Usage} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:prov:Usage}}
 
-\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD refer to a \sbol{TopLevel} other than \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#design} SHOULD refer to a \sbol{TopLevel} other than \sbol{Implementation}.\\ Reference: \sec{sec:prov:Usage}}
 
-\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} \\ SHOULD refer to an \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#build} \\ SHOULD refer to an \sbol{Implementation}.\\ Reference: \sec{sec:prov:Usage}}
 
-\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} \\ SHOULD refer to an \sbol{ExperimentalData}.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#test} \\ SHOULD refer to an \sbol{ExperimentalData}.\\ Reference: \sec{sec:prov:Usage}}
 
-\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} \\ SHOULD NOT refer to an \sbol{Implementation}.\\ Reference: \sec{sec:Usage}}
+\printModeling{A \sbol{Usage} that has a \sbolmult{roles:U}{roles} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#learn} \\ SHOULD NOT refer to an \sbol{Implementation}.\\ Reference: \sec{sec:prov:Usage}}
 
 \subsubsection*{Rules for the \class{Association} class} 
 \setcounter{sbolCtr}{12601}
 
-\printValid{An \sbol{Association} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations},  \sbolmult{roles:A}{roles}, \sbol{plan}, and \sbol{agent}.\\ Reference: \sec{sec:Association}}
+\printValid{An \sbol{Association} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations},  \sbolmult{roles:A}{roles}, \sbol{plan}, and \sbol{agent}.\\ Reference: \sec{sec:prov:Association}}
 
-\printValid{The \sbolmult{roles:A}{roles} property of an \sbol{Association} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Association}}
+\printValid{The \sbolmult{roles:A}{roles} property of an \sbol{Association} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:prov:Association}}
 
-\printValid{The \sbol{plan} property of an \sbol{Association} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:Association}}
+\printValid{The \sbol{plan} property of an \sbol{Association} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:prov:Association}}
 
-\printComplete{The \sbol{URI} contained by the \sbol{plan} property MUST refer to a \sbol{Plan} object.\\ Reference: \sec{sec:Association}}
+\printComplete{The \sbol{URI} contained by the \sbol{plan} property MUST refer to a \sbol{Plan} object.\\ Reference: \sec{sec:prov:Association}}
 
-\printValid{The \sbol{agent} property of an \sbol{Association} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Association}}
+\printValid{The \sbol{agent} property of an \sbol{Association} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:prov:Association}}
 
-\printComplete{The \sbol{URI} contained by the \sbol{agent} property MUST refer to an \sbol{Agent} object.\\ Reference: \sec{sec:Association}}
+\printComplete{The \sbol{URI} contained by the \sbol{agent} property MUST refer to an \sbol{Agent} object.\\ Reference: \sec{sec:prov:Association}}
 
 
 \subsubsection*{Rules for the \class{Plan} class} 
 \setcounter{sbolCtr}{12701}
 
-\printValid{A \sbol{Plan} MUST NOT have properties other than the following: \sbol{displayId},\\ \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:Plan}}
+\printValid{A \sbol{Plan} MUST NOT have properties other than the following: \sbol{displayId},\\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:Plan}}
 
 
 \subsubsection*{Rules for the \class{Agent} class} 
 \setcounter{sbolCtr}{12801}
 
-\printValid{An \sbol{Agent} MUST NOT have properties other than the following: \sbol{displayId},\\ \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:Agent}}
+\printValid{An \sbol{Agent} MUST NOT have properties other than the following: \sbol{displayId},\\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:Agent}}
 
 
 \subsubsection*{Rules for the \class{CombinatorialDerivation} class} 
 \setcounter{sbolCtr}{12901}
 
 \printValid{A \sbol{CombinatorialDerivation} MUST NOT have properties other than the following: \\
-\sbol{displayId}, \sbol{prov:wasDerivedFrom},
+\sbol{displayId}, \prov{wasDerivedFrom},
 \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{strategy}, \sbol{template}, and \sbol{variableComponents}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
@@ -713,30 +713,30 @@ Reference: \sec{sec:Annotations}}
 \printValid{The \sbol{variableComponents} property of a \sbol{CombinatorialDerivation} MUST NOT contain two or more \sbol{VariableComponent} objects with \sbol{variable} properties that contain the same \sbol{URI}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printComplete{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\
+\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\
 \sbol{CombinatorialDerivation} and the template \sbol{SubComponent} of the\\
 \sbol{CombinatorialDerivation} contains \sbol{SequenceConstraint} objects, then any \sbol{SubComponent}\\
-contained by the first \sbol{SubComponent} that has a \sbol{prov:wasDerivedFrom} property that refers to the \sbol{subject} or \sbol{object} \sbol{SubComponent} of any of the \sbol{SequenceConstraint} objects MUST adhere to the \sbol{restriction} properties of these \sbol{SequenceConstraint} objects.
+contained by the first \sbol{SubComponent} that has a \prov{wasDerivedFrom} property that refers to the \sbol{subject} or \sbol{object} \sbol{SubComponent} of any of the \sbol{SequenceConstraint} objects MUST adhere to the \sbol{restriction} properties of these \sbol{SequenceConstraint} objects.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
 \printModeling{The \sbol{components} property of the template \sbol{SubComponent} of a\\
 \sbol{CombinatorialDerivation} SHOULD contain one or more \sbol{SubComponent} objects.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation}, then the \sbolmult{types:CD}{types} property of this \sbol{SubComponent} \\
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation}, then the \sbolmult{types:CD}{types} property of this \sbol{SubComponent} \\
 SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{types} property of the template\\
 \sbol{SubComponent} of the \sbol{CombinatorialDerivation}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation}, then the \sbolmult{types:CD}{roles} property of this \sbol{SubComponent} \\
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation}, then the \sbolmult{types:CD}{roles} property of this \sbol{SubComponent} \\
 SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} property of the template\\
 \sbol{SubComponent} of the \sbol{CombinatorialDerivation}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printModeling{If the \sbol{members} property of a \sbol{Collection} refers only to objects with \sbol{prov:wasDerivedFrom} properties that refer to a \sbol{CombinatorialDerivation}, then the \sbol{prov:wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to the \sbol{CombinatorialDerivation}.
+\printModeling{If the \sbol{members} property of a \sbol{Collection} refers only to objects with \prov{wasDerivedFrom} properties that refer to a \sbol{CombinatorialDerivation}, then the \prov{wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to the \sbol{CombinatorialDerivation}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{Collection} refers to a \sbol{CombinatorialDerivation}, then the \sbol{prov:wasDerivedFrom} properties of the objects that are referred to by its \sbol{members} property SHOULD also refer to the \sbol{CombinatorialDerivation}.
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Collection} refers to a \sbol{CombinatorialDerivation}, then the \prov{wasDerivedFrom} properties of the objects that are referred to by its \sbol{members} property SHOULD also refer to the \sbol{CombinatorialDerivation}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
 
@@ -747,7 +747,7 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} prope
 \subsubsection*{Rules for the \class{VariableComponent} class} 
 \setcounter{sbolCtr}{13001}
 
-\printValid{A \sbol{VariableComponent} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{cardinality}, \sbol{variable}, \sbol{variants}, \sbol{variantCollections}, and \sbol{variantDerivations}.
+\printValid{A \sbol{VariableComponent} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{cardinality}, \sbol{variable}, \sbol{variants}, \sbol{variantCollections}, and \sbol{variantDerivations}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 \printValid{The \sbol{cardinality} property of a \sbol{VariableComponent} is REQUIRED and MUST contain a \sbol{URI}.
@@ -788,47 +788,47 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} prope
 \\ Reference: \sec{sec:VariableComponent}}
 
 \todo[inline]{This wasDerivedFrom rule is overly strong, and needs to be weakened to match the algorithm in the definition.  Probably all the other wasDerivedFrom rules too.}
-\printComplete{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a \sbol{SubComponent} in the \sbol{template} \sbol{SubComponent} of a \sbol{CombinatorialDerivation}, and the second \sbol{SubComponent} is referred to by the \sbol{variable} property of any \sbol{VariableComponent} in the \\
+\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a \sbol{SubComponent} in the \sbol{template} \sbol{SubComponent} of a \sbol{CombinatorialDerivation}, and the second \sbol{SubComponent} is referred to by the \sbol{variable} property of any \sbol{VariableComponent} in the \\
 \sbol{CombinatorialDerivation}, then the \sbolmult{instanceOf:CI}{instanceOf} property of the first \sbol{SubComponent} MUST refer to a \sbol{SubComponent} specified by the \sbol{variants} property,
-a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} specified by the \sbol{variantCollections} property, or a \sbol{SubComponent} with a \sbol{prov:wasDerivedFrom} property that refers to a\\
+a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} specified by the \sbol{variantCollections} property, or a \sbol{SubComponent} with a \prov{wasDerivedFrom} property that refers to a\\
 \sbol{CombinatorialDerivation} specified by the \sbol{variantDerivations} property of the\\
 \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printComplete{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a \sbol{SubComponent} in the \sbol{template} \sbol{SubComponent} of a \sbol{CombinatorialDerivation}, and the second \sbol{SubComponent} is not referred to by the \sbol{variable} property of any \sbol{VariableComponent} in the\\
+\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a \sbol{SubComponent} in the \sbol{template} \sbol{SubComponent} of a \sbol{CombinatorialDerivation}, and the second \sbol{SubComponent} is not referred to by the \sbol{variable} property of any \sbol{VariableComponent} in the\\
 \sbol{CombinatorialDerivation}, then the \sbolmult{instanceOf:CI}{instanceOf} property of the first \sbol{SubComponent} MUST refer to the same \sbol{SubComponent} as the \sbolmult{instanceOf:CI}{instanceOf} property of the second \sbol{SubComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} contained by the \sbol{SubComponent} refers to a \sbol{SubComponent} contained by the template\\
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation} and the \prov{wasDerivedFrom} property of a \sbol{SubComponent} contained by the \sbol{SubComponent} refers to a \sbol{SubComponent} contained by the template\\
 \sbol{SubComponent} of the \sbol{CombinatorialDerivation}, then the \sbolmult{types:CD}{roles} property of the first \sbol{SubComponent} SHOULD contain all \sbol{URI}s contained by the \sbolmult{types:CD}{roles} property of the second \sbol{SubComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a\\
-\sbol{VariableComponent} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#zeroOrOne}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD NOT contain more than one \sbol{SubComponent} with a \sbol{prov:wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableComponent}.
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a\\
+\sbol{VariableComponent} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#zeroOrOne}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD NOT contain more than one \sbol{SubComponent} with a \prov{wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\
 \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a\\
 \sbol{VariableComponent} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#one}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD contain exactly one \sbol{SubComponent} with a\\
-\sbol{prov:wasDerivedFrom} property that refers to the same\\
+\prov{wasDerivedFrom} property that refers to the same\\
 \sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\
 \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a\\
 \sbol{VariableComponent} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v2\#oneOrMore}, then the \sbol{components} property of the \sbol{SubComponent} SHOULD contain at least one \sbol{SubComponent} with a\\
-\sbol{prov:wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the\\ \sbol{VariableComponent}.
+\prov{wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the\\ \sbol{VariableComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
-\printModeling{If the \sbol{prov:wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation} and the template \sbol{SubComponent} of the\\ \sbol{CombinatorialDerivation} contains a \sbol{SubComponent} that is not referred to by the \sbol{variable} property of any \sbol{VariableComponent} contained by the \sbol{CombinatorialDerivation}, then the first \sbol{SubComponent} SHOULD contain exactly one \sbol{SubComponent} with a\\
-\sbol{prov:wasDerivedFrom} property that refers to the \sbol{SubComponent} in the template\\
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{SubComponent} refers to a\\ \sbol{CombinatorialDerivation} and the template \sbol{SubComponent} of the\\ \sbol{CombinatorialDerivation} contains a \sbol{SubComponent} that is not referred to by the \sbol{variable} property of any \sbol{VariableComponent} contained by the \sbol{CombinatorialDerivation}, then the first \sbol{SubComponent} SHOULD contain exactly one \sbol{SubComponent} with a\\
+\prov{wasDerivedFrom} property that refers to the \sbol{SubComponent} in the template\\
 \sbol{SubComponent}.
 \\ Reference: \sec{sec:VariableComponent}}
 
 \subsubsection*{Rules for the \class{Implementation} class} 
 \setcounter{sbolCtr}{13101}
 
-\printValid{An \sbol{Implementation} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{built}.\\ Reference: \sec{sec:Implementation}}
+\printValid{An \sbol{Implementation} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{built}.\\ Reference: \sec{sec:Implementation}}
 
 \printValid{The \sbol{built} property of an \sbol{Implementation} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:Implementation}}
 
@@ -839,7 +839,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \setcounter{sbolCtr}{13201}
 
 \printValid{An \sbol{Attachment} MUST NOT have properties other than the following: \\
-\sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, and \sbol{hash}.\\ Reference: \sec{sec:Attachment}}
+\sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, and \sbol{hash}.\\ Reference: \sec{sec:Attachment}}
 %A \sbol{Model} MUST inherit all properties of the \sbol{TopLevel} class.
 
 \printValid{The \sbolmult{source:A}{source} property of an \sbol{Attachment} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
@@ -861,7 +861,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{ExperimentalData} class} 
 \setcounter{sbolCtr}{13301}
 
-\printValid{An \sbol{ExperimentalData} MUST NOT have properties other than the following: \\ \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{attachments}.\\ Reference: \sec{sec:ExperimentalData}}
+\printValid{An \sbol{ExperimentalData} MUST NOT have properties other than the following: \\ \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, and \sbol{attachments}.\\ Reference: \sec{sec:ExperimentalData}}
 
 
 
@@ -869,7 +869,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \setcounter{sbolCtr}{13401}
 
 \printValid{An \sbol{Experiment} MUST NOT have properties other than the following: \\
-\sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name},\\
+\sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name},\\
 \sbol{description}, \sbol{annotations}, \sbol{attachments}, and \sbol{experimentalData}.\\ Reference: \sec{sec:Experiment}}
 
 \printValid{The \sbol{experimentalData} property of an \sbol{Experiment} is OPTIONAL and MAY contain a set of \sbol{URI}s.\\ Reference: \sec{sec:Experiment}}
@@ -881,7 +881,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{Measure} class} 
 \setcounter{sbolCtr}{13501}
 
-\printValid{A \sbol{Measure} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{hasNumericalValue}, \sbolmult{hasUnit:Measure}{hasUnit}, and \sbolmult{types:Measure}{types}.\\ Reference: \sec{sec:Measure}}
+\printValid{A \sbol{Measure} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{hasNumericalValue}, \sbolmult{hasUnit:Measure}{hasUnit}, and \sbolmult{types:Measure}{types}.\\ Reference: \sec{sec:Measure}}
 
 \printValid{The \sbol{hasNumericalValue} property of a \sbol{Measure} is REQUIRED and MUST contain an xsd:float.\\ Reference: \sec{sec:Measure}}
 
@@ -919,7 +919,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{SingularUnit} class} 
 \setcounter{sbolCtr}{13701}
 
-\printValid{A \sbol{SingularUnit} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbolmult{hasUnit:SingularUnit}{hasUnit}, and \sbolmult{hasFactor:SingularUnit}{hasFactor}.\\ Reference: \sec{sec:SingularUnit}}
+\printValid{A \sbol{SingularUnit} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbolmult{hasUnit:SingularUnit}{hasUnit}, and \sbolmult{hasFactor:SingularUnit}{hasFactor}.\\ Reference: \sec{sec:SingularUnit}}
 
 \printValid{The \sbolmult{hasUnit:SingularUnit}{hasUnit} property of a \sbol{SingularUnit} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:SingularUnit}}
 
@@ -936,7 +936,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{UnitMultiplication} class} 
 \setcounter{sbolCtr}{13801}
 
-\printValid{A \sbol{UnitMultiplication} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasTerm1}, and \sbol{hasTerm2}.\\ Reference: \sec{sec:UnitMultiplication}}
+\printValid{A \sbol{UnitMultiplication} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasTerm1}, and \sbol{hasTerm2}.\\ Reference: \sec{sec:UnitMultiplication}}
 
 \printValid{The \sbol{hasTerm1} property of a \sbol{UnitMultiplication} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:UnitMultiplication}}
 
@@ -956,7 +956,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{UnitDivision} class} 
 \setcounter{sbolCtr}{14001}
 
-\printValid{A \sbol{UnitDivision} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasNumerator}, and \sbol{hasDenominator}.\\ Reference: \sec{sec:UnitDivision}}
+\printValid{A \sbol{UnitDivision} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasNumerator}, and \sbol{hasDenominator}.\\ Reference: \sec{sec:UnitDivision}}
 
 \printValid{The \sbol{hasNumerator} property of a \sbol{UnitDivision} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:UnitDivision}}
 
@@ -976,7 +976,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{UnitExponentiation} class} 
 \setcounter{sbolCtr}{14101}
 
-\printValid{A \sbol{UnitExponentiation} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasBase}, and \sbol{hasExponent}.\\ Reference: \sec{sec:UnitExponentiation}}
+\printValid{A \sbol{UnitExponentiation} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbol{hasBase}, and \sbol{hasExponent}.\\ Reference: \sec{sec:UnitExponentiation}}
 
 \printValid{The \sbol{hasBase} property of a \sbol{UnitExponentiation} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:UnitExponentiation}}
 
@@ -991,7 +991,7 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{PrefixedUnit} class} 
 \setcounter{sbolCtr}{14201}
 
-\printValid{A \sbol{PrefixedUnit} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbolmult{hasUnit:PrefixedUnit}{hasUnit}, and \sbol{hasPrefix}.\\ Reference: \sec{sec:PrefixedUnit}}
+\printValid{A \sbol{PrefixedUnit} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbolmult{hasUnit:PrefixedUnit}{hasUnit}, and \sbol{hasPrefix}.\\ Reference: \sec{sec:PrefixedUnit}}
 
 \printValid{The \sbolmult{hasUnit:PrefixedUnit}{hasUnit} property of a \sbol{PrefixedUnit} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:PrefixedUnit}}
 
@@ -1033,13 +1033,13 @@ a \sbol{SubComponent} that is one of the \sbol{members} of a \sbol{Collection} s
 \subsubsection*{Rules for the \class{SIPrefix} class} 
 \setcounter{sbolCtr}{14401}
 
-\printValid{A \sbol{SIPrefix} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Prefix}{symbol}, \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols}, \sbolmult{label:Prefix}{label}, \sbolmult{alternativeLabels:Prefix}{alternativeLabels}, \sbolmult{comment:Prefix}{comment}, \sbolmult{longcomment:Prefix}{longcomment}, and \sbolmult{hasFactor:Prefix}{hasFactor}.\\ Reference: \sec{sec:SIPrefix}}
+\printValid{A \sbol{SIPrefix} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Prefix}{symbol}, \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols}, \sbolmult{label:Prefix}{label}, \sbolmult{alternativeLabels:Prefix}{alternativeLabels}, \sbolmult{comment:Prefix}{comment}, \sbolmult{longcomment:Prefix}{longcomment}, and \sbolmult{hasFactor:Prefix}{hasFactor}.\\ Reference: \sec{sec:SIPrefix}}
 
 
 \subsubsection*{Rules for the \class{BinaryPrefix} class} 
 \setcounter{sbolCtr}{14501}
 
-\printValid{A \sbol{BinaryPrefix} MUST NOT have properties other than the following: \sbol{displayId}, \sbol{prov:wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Prefix}{symbol}, \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols}, \sbolmult{label:Prefix}{label}, \sbolmult{alternativeLabels:Prefix}{alternativeLabels}, \sbolmult{comment:Prefix}{comment}, \sbolmult{longcomment:Prefix}{longcomment}, and \sbolmult{hasFactor:Prefix}{hasFactor}.\\ Reference: \sec{sec:BinaryPrefix}}
+\printValid{A \sbol{BinaryPrefix} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Prefix}{symbol}, \sbolmult{alternativeSymbols:Prefix}{alternativeSymbols}, \sbolmult{label:Prefix}{label}, \sbolmult{alternativeLabels:Prefix}{alternativeLabels}, \sbolmult{comment:Prefix}{comment}, \sbolmult{longcomment:Prefix}{longcomment}, and \sbolmult{hasFactor:Prefix}{hasFactor}.\\ Reference: \sec{sec:BinaryPrefix}}
 
 \subsubsection*{Rules for the \class{NameSpace} class} 
 \setcounter{sbolCtr}{14601}
