@@ -35,13 +35,13 @@ The \sbol{description} property is OPTIONAL and has a data type of \sbol{String}
 
 \subparagraph{The \sbolheading{prov:wasDerivedFrom} property}
 \label{sec:prov:wasDerivedFrom}
-An \sbol{Identified} object can have zero or more \sbol{prov:wasDerivedFrom} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/TR/prov-o/} namespace (Reference: \sec{sec:provenance}).
+An \sbol{Identified} object can have zero or more \sbol{prov:wasDerivedFrom} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/TR/prov-o/} namespace (Reference: \ref{sec:provenance}).
 
  An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived. An SBOL object MUST NOT refer to itself via its own \sbol{prov:wasDerivedFrom} property or form a cyclical chain of references via its \sbol{prov:wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
 
 \subparagraph{The \sbolheading{prov:wasGeneratedBy} property}
 \label{sec:prov:wasGeneratedBy}
-An \sbol{Identified} object can have zero or more \sbol{prov:wasGeneratedBy} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/TR/prov-o/} namespace (Reference: \sec{sec:provenance}).
+An \sbol{Identified} object can have zero or more \sbol{prov:wasGeneratedBy} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/TR/prov-o/} namespace (Reference: \ref{sec:provenance}).
 
 An SBOL object with this property refers to one or more \sbol{prov:Activity} objects that describe how this object was generated.
 Provenance history formed by \sbol{prov:wasGeneratedBy} properties of \sbol{Identified} objects and entity references in \sbol{prov:Usage} objects MUST NOT form circular reference chains.
