@@ -2,6 +2,10 @@
 \subsubsection{Interaction}
 \label{sec:Interaction}
 
+The \sbol{Interaction} class (as shown in \ref{uml:interaction} provides more detailed description of how the \sbol{Feature} objects of a \sbol{Component} are intended to work together.  
+For example, this class can be used to represent different forms of genetic regulation (e.g., transcriptional activation or repression), processes from the central dogma of biology (e.g. transcription and translation), and other basic molecular interactions (e.g., non-covalent binding or enzymatic phosphorylation).
+Each \sbol{Interaction} includes \sbolmult{type:I}{type} properties that refer to descriptive ontology terms and a \sbol{hasParticipation} properties that describe which \sbol{Feature} objects participate in the \sbol{Interaction}.
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/interaction}
@@ -10,15 +14,11 @@
 \end{center}
 \end{figure}
 
-The \sbol{Interaction} class provides more detailed description of how the \sbol{Feature} objects of a\\ \sbol{Component} are intended to work together.
-For example, this class can be used to represent different forms of genetic regulation (e.g., transcriptional activation or repression), processes from the central dogma of biology (e.g. transcription and translation), and other basic molecular interactions (e.g., non-covalent binding or enzymatic phosphorylation).
-Each \sbol{Interaction} includes a \sbolmult{types:I}{types} property that refers to descriptive ontology terms and a \sbol{participations} property that describes which \sbol{Feature} objects participate in the \sbol{Interaction}.
+\subparagraph{The \sbolheading{type} property}\label{sec:type:I}
 
-\subparagraph{The \sbolheading{types} property}\label{sec:types:I}
+An \sbol{Interaction} is REQUIRED to have one or more \sbolmult{type:I}{type} properties, each of type \sbol{URI} that describes the behavior represented by an \sbol{Interaction}.
 
-The \sbolmult{types:I}{types} property is a REQUIRED set of \sbol{URI}s that describes the behavior represented by an \sbol{Interaction}.
-
-The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{types:I}{types} property refer to a term from the occurring entity branch of the Systems Biology Ontology (SBO). (See \url{http://www.ebi.ac.uk/sbo/main/}) \ref{tbl:interaction_types} provides a list of possible SBO terms for the \sbolmult{types:I}{types} property and their corresponding \sbol{URI}s.
+Each \sbolmult{type:I}{type} property MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} specified by a \sbolmult{type:I}{type} property refer to a term from the occurring entity branch of the Systems Biology Ontology (SBO). (See \url{http://www.ebi.ac.uk/sbo/main/}) \ref{tbl:interaction_types} provides a partial list of possible SBO terms for the \sbolmult{type:I}{type} property and their corresponding \sbol{URI}s.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -34,23 +34,14 @@ The \sbolmult{types:I}{types} property MUST contain one or more \sbol{URI}s that
     Control  & \url{http://identifiers.org/biomodels.sbo/SBO:0000168} \\
     \bottomrule
   \end{edtable}
-  \caption{SBO terms to specify the \sbolmult{types:I}{types} property of an \sbol{Interaction}.}
+  \caption{Partial list of SBO terms to specify the \sbolmult{type:I}{type} property of an \sbol{Interaction}.}
   \label{tbl:interaction_types}
 \end{table}
 
-If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:interaction_types}, then its \sbolmult{types:I}{types} property MUST contain the \sbol{URI} that identifies this term. Lastly, if the \sbolmult{types:I}{types} property of an \sbol{Interaction} contains multiple
- \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulation'' and ``inhibition'' would conflict.
+If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:interaction_types}, then a \sbolmult{type:I}{type} property MUST refer to the \sbol{URI} that identifies this term. Lastly, if there are multiple \sbolmult{type:I}{type} properties for an \sbol{Interaction}, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulation'' and ``inhibition'' would conflict.
 
-\subparagraph{The \sbolheading{participations} property}\label{sec:participations}
+\subparagraph{The \sbolheading{hasParticipation} property}\label{sec:hasParticipation}
 
-The \sbol{participations} property is an OPTIONAL and MAY contain a set of \sbol{Participation} objects, each of which identifies the \sbolmult{roles:P}{roles} that its referenced \sbol{Feature} plays in the \sbol{Interaction}.
+An \sbol{Interaction} MAY have one or more \sbol{hasParticipation} properties, each of type \sbol{URI} that MUST reference a \sbol{Participation} object (see \ref{sec:Participation}), each of which identifies the \sbolmult{role:P}{role} that its referenced \sbol{Feature} plays in the \sbol{Interaction}.
 
 Even though an \sbol{Interaction} generally contains at least one \sbol{Participation}, the case of zero \sbol{Participation} objects is allowed because it is plausible that a designer might want to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s have not yet been determined.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[scale=0.6]{uml/participation}
-\caption[]{Diagram of the \sbol{Participation} class and its associated properties.}
-\label{uml:participation}
-\end{center}
-\end{figure}
