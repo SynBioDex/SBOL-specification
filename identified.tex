@@ -45,3 +45,10 @@ An \sbol{Identified} object can have zero or more \sbol{prov:wasGeneratedBy} pro
 
 An SBOL object with this property refers to one or more \sbol{prov:Activity} objects that describe how this object was generated.
 Provenance history formed by \sbol{prov:wasGeneratedBy} properties of \sbol{Identified} objects and entity references in \sbol{prov:Usage} objects MUST NOT form circular reference chains.
+
+\subparagraph{The \sbolheading{hasMeasure} property}
+\label{sec:prov:wasGeneratedBy}
+An \sbol{Identified} object can have zero or more \sbol{hasMeasure} properties, each of type URI. This property is defined by the OM ontology and is located in the \url{http://www.ontology-of-units-of-measure.org/resource/om-2/} namespace (Reference: \ref{sec:parameters}).
+
+An SBOL object with this property refers to one or more \sbol{om:Measure} objects that describe measured parameters for this object.
+
