@@ -73,7 +73,7 @@ instanceOf
     <panel_attributes>*Feature*
 --
 -role[0..*] : URI
--order[0..1] : Integer
+-orientation[0..1] : URI
 </panel_attributes>
     <additional_attributes/>
   </element>
