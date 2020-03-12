@@ -18,11 +18,9 @@
       <x>250</x>
       <y>590</y>
       <w>160</w>
-      <h>50</h>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>*Experiment*
---
-</panel_attributes>
+    <panel_attributes>*Experiment*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -40,14 +38,14 @@
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>600</y>
+      <y>580</y>
       <w>230</w>
-      <h>70</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 hasExperimentalData
 0..*</panel_attributes>
-    <additional_attributes>10.0;20.0;210.0;20.0;210.0;50.0</additional_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0;210.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
