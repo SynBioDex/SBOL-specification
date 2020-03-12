@@ -1,15 +1,21 @@
-
 \subsubsection{Participation}
 \label{sec:Participation}
 
-Each \sbol{Participation} represents how a particular \sbol{Feature} behaves in its parent
-\sbol{Interaction}.
+Each \sbol{Participation} (as shown in \ref{uml:participation}) represents how a particular \sbol{Feature} behaves in its parent \sbol{Interaction}.
 
-\subparagraph{The \sbolheading{roles} property}\label{sec:roles:P}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{uml/participation}
+\caption[]{Diagram of the \sbol{Participation} class and its associated properties.}
+\label{uml:participation}
+\end{center}
+\end{figure}
 
-The \sbolmult{roles:P}{roles} property is a REQUIRED set of \sbol{URI}s that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{Feature}) in the context of its parent \sbol{Interaction}.
+\subparagraph{The \sbolheading{role} property}\label{sec:role:P}
 
-The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} contained by the \sbolmult{roles:P}{roles} property refer to a term from the participant role branch of the SBO. \ref{tbl:participant_roles} provides a list of possible SBO terms for the \sbolmult{roles:P}{roles} property and their corresponding \sbol{URI}s.
+A \sbol{Participation} is REQUIRED to have one or more \sbolmult{role:I}{role} properties, each of type \sbol{URI} that describes the behavior of a \sbol{Participation} (and by extension its referenced \sbol{Feature}) in the context of its parent \sbol{Interaction}.
+
+Each \sbolmult{role:P}{role} property MUST identify terms from appropriate ontologies. It is RECOMMENDED that exactly one \sbol{URI} specified by a \sbolmult{role:P}{role} property refer to a term from the participant role branch of the SBO. \ref{tbl:participant_roles} provides a partial list of possible SBO terms for the \sbolmult{role:P}{role} properties and their corresponding \sbol{URI}s.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -32,15 +38,11 @@ The \sbolmult{roles:P}{roles} property MUST contain one or more \sbol{URI}s that
 %    Non-Covalent Complex & \url{http://identifiers.org/biomodels.sbo/SBO:0000253}\\
     \bottomrule
   \end{edtable}
-  \caption{SBO terms to specify the \sbolmult{roles:P}{roles} property of a \sbol{Participation}.}
+  \caption{Partial list of SBO terms to specify the \sbolmult{role:P}{role} properties of a \sbol{Participation}.}
   \label{tbl:participant_roles}
 \end{table}
 
-If a \sbol{Participation} is well described by one of the terms from \ref{tbl:participant_roles}, then its \sbolmult{roles:P}{roles} property MUST contain the \sbol{URI} that identifies this term.
-Also, if a \sbol{Participation} belongs to an \sbol{Interaction} that has a type listed in \ref{tbl:interaction_types}, then the \sbol{Participation} SHOULD have a role that is cross-listed with this type in \ref{tbl:participant_roles}.
-Lastly, if the \sbolmult{roles:P}{roles} property of a \sbol{Participation} contains multiple
- \sbol{URI}s, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulator'' and ``inhibitor'' would conflict.
-
+If a \sbol{Participation} is well described by one of the terms from \ref{tbl:participant_roles}, then a \sbolmult{role:P}{role} property MUST refer to the \sbol{URI} that identifies this term.  Also, if a \sbol{Participation} belongs to an \sbol{Interaction} that has a type listed in \ref{tbl:interaction_types}, then the \sbol{Participation} SHOULD have a role that is cross-listed with this type in \ref{tbl:participant_roles}.  Lastly, if there are multiple \sbolmult{role:P}{role} properties for a \sbol{Participation}, then they MUST identify non-conflicting terms. For example, the SBO terms ``stimulator'' and ``inhibitor'' would conflict.
 
 \subparagraph{The \sbolheading{participant} property}\label{sec:participant}
 

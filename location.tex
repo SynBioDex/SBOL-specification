@@ -1,7 +1,8 @@
 
 \subsubsection{Location}
 \label{sec:Location}
-The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol{EntireSequence} classes.
+
+The \sbol{Location} class (as shown in \ref{uml:location}) is used to represent the location of \sbol{Feature}s within \sbol{Sequence}s.  This class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol{EntireSequence} classes
 
 \begin{figure}[ht]
 \begin{center}
@@ -9,15 +10,11 @@ The \sbol{Location} class is extended by the \sbol{Range}, \sbol{Cut}, and \sbol
 \caption[]{Diagram of the \sbol{Location} class and its associated properties.}
 \label{uml:location}
 \end{center}
-\end{figure} \todo{change diagram to reflect changes from SEP 41}
+\end{figure} 
 
 \subparagraph{The \sbolheading{orientation} property}
 \label{sec:orientation}
-The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how the region specified by the \sbol{SequenceFeature} and any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence}  from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Location} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
-
-\subparagraph{The \sbolheading{sequence} property}
-\label{sec:sequence}
-The \sbol{sequence} property is REQUIRED and MUST contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
+The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Location} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{3.75in}}
@@ -32,6 +29,13 @@ The \sbol{sequence} property is REQUIRED and MUST contain the \sbol{URI} of a \s
   \label{tbl:orientation_types}
 \end{table}
 
+\subparagraph{The \sbolheading{order} property}
+\label{sec:order}
+The \sbol{order} property is OPTIONAL and has a data type of \sbol{Integer}.  If there are multiple \sbol{Location} objects associated with a \sbol{Feature}, the \sbol{order} property is used to specify the order (in increasing value) in which the specified \sbol{Location}s are to be joined to form the sequence of the \sbol{Feature}.
+
+\subparagraph{The \sbolheading{hasSequence} property}
+\label{sec:hasSequence}
+The \sbol{hasSequence} property is REQUIRED and MUST contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
 
 \paragraph{Range}
 \label{sec:Range}
@@ -48,7 +52,7 @@ The \sbol{end} property specifies the inclusive ending position of the \sbol{Ran
 \paragraph{Cut}
 \label{sec:Cut}
 The \sbol{Cut} class has been introduced to enable the specification of a region between two discrete positions.
-This specification is accomplished using the \sbol{at} property, which specifies a discrete position that that corresponds to the index of a character in the \sbol{elements} \sbol{String} of a \sbol{Sequence} (except in the case when \sbol{at} is equal to zero---see below).
+This specification is accomplished using the \sbol{at} property, which specifies a discrete position that corresponds to the index of a character in the \sbol{elements} \sbol{String} of a \sbol{Sequence} (except in the case when \sbol{at} is equal to zero---see below).
 
 \subparagraph{The \sbolheading{at} property}
 \label{sec:at}
@@ -58,7 +62,4 @@ The \sbol{at} property is REQUIRED and MUST contain an \sbol{Integer} value grea
 \paragraph{EntireSequence}
 \label{sec:EntireSequence}
 The \sbol{EntireSequence} class does not have any additional properties. Use of this class indicates that the linked Sequence describes the entirety of the \sbol{Component} or \sbol{Feature} parent of this Location object.
-
-\subparagraph{The \sbolheading{order} property}
-\label{sec:order}
 

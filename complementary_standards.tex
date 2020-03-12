@@ -6,32 +6,42 @@
 \label{sec:provenance}
 \label{sec:wasGeneratedBys}
 
+The PROV-O ontology (\url{https://www.w3.org/TR/prov-o/}) defines a complementary data model that is leveraged by SBOL to describe provenance. Provenance is central to a range of workflow management, quality control, and attribution tasks within the Synthetic Biology design process. Tracking attribution and derivation of one resource from another is paramount for managing intellectual property purposes. Source designs are often modified in systematic ways to generate derived designs, for example, by applying codon optimization or systematically removing all of a class of restriction enzyme sites.  Documenting the transformation used, and any associated parameters, makes this explicit and potentially allows the process to be reproduced systematically. If a design has been used within other designs, and is later found to be defective, it is paramount that all uses of it, including uses of edited versions of the design, can be identified, and ideally replaced with a non-defective alternative. When importing data from external sources, it is important not only to attribute the original source (for example, GenBank), but also the tool used to perform the import, as this may have made arbitrary choices as to how to represent the source knowledge as SBOL. All these activities have in common that it is necessary to track what resource, and what transformation process was applied by whom to derive an SBOL design.
 
-Provenance is central to a range of quality control and attribution tasks within the Synthetic Biology design process. Tracking attribution and derivation of one resource from another is paramount for managing intellectual property purposes. Source designs are often modified in systematic ways to generate derived designs, for example, by applying codon optimization or systematically removing all of a class of restriction enzyme sites.  Documenting the transformation used, and any associated parameters, makes this explicit and potentially allows the process to be reproduced systematically. If a design has been used within other designs, and is later found to be defective, it is paramount that all uses of it, including uses of edited versions of the design, can be identified, and ideally replaced with a non-defective alternative. When importing data from external sources, it is important not only to attribute the original source (for example, GenBank), but also the tool used to perform the import, as this may have made arbitrary choices as to how to represent the source knowledge as SBOL. All these activities have in common that it is necessary to track what resource, and what transformation process was applied by whom to derive an SBOL design.
+This section describes a minimal subset of PROV-O terms and classes that may be used by SBOL tools to support representation of provenance\footnote{We thank Dr Paolo Missier from the School of Computing Science, Newcastle University for discussions regarding the use of PROV-O.}. Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}. Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset to use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a \sbol{Component} may be derived from another \sbol{Component}, but it would probably not make sense for it to be derived from a \sbol{Collection}.
 
-The PROV-O ontology (\url{https://www.w3.org/TR/prov-o/}) already defines a data model for provenance. PROV-O's \sbol{prov:wasDerivedFrom} property was adopted in SBOL 2.x to describe the derivation of an SBOL entity from another in a light-weight provenance scheme.  Here, a subset of PROV-O is adopted for SBOL as a best practice to describe these activities in more detail\footnote{We thank Dr Paolo Missier from the School of Computing Science, Newcastle University for discussions regarding the use of PROV-O.}. PROV-O defines three core classes: \texttt{Entity}, \texttt{Activity} and \texttt{Agent}. An Agent (for example a software or a person) runs an Activity (according to a Plan) to generate one Entity from another. Although, PROV-O provides many other classes and rich set of terms. this specification describes the minimal subset of PROV-O that a provenance-aware SBOL tool should handle. This subset (\ref{uml:provenance}) includes the PROV-O's \sbol{Activity}, \sbol{Usage}, \sbol{Association}, \sbol{Agent} and \sbol{Plan} classes. Any SBOL's \sbol{Identified} object implicitly can act as an instance of PROV-O's \texttt{Entity} class and can include provenance through relationships to different activities. Resources representing \sbol{Agent}, \sbol{Activity} and \sbol{Plan} classes should be handled as \sbol{GenericTopLevel}, whilst \sbol{Usage} and \sbol{Association} resources should be nested within their parent activities. 
-
-%Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in Figure \ref{uml:provenance}.  
-
-Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset to use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all must maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a Component may be derived from another Component, but it would probably not make sense for it to be derived from a Collection.
-
-The PROV-O specification permits that any kind of SBOL object may be used to generate another. The meaning of these relationships are specified using ontology terms for the \sbolmult{roles:U}{roles} properties on \sbol{Usage} and \sbol{Association} classes.  This specification gives users the flexibility to construct and track provenance histories for their own custom applications, but this flexibility also presents an obstacle to standardized data exchange. Therefore a simple ontology (see \ref{tbl:association_roles} and \ref{tbl:usage_roles}) has been adopted to describe common provenance connections expected in synthetic biology workflows, based on the design-build-test-learn formalization of engineering.
-
-The design-build-test-learn cycle is a common theme in synthetic biology and engineering literature. The design-build-test-learn cycle is the scientific method applied to engineering. Stages of the cycle include designing an initial prototype, testing that prototype, analyzing its performance against specific metrics, learning what worked and what did not work, designing a new prototype based on what was learned, and completing the cycle again. Ideally each iteration of the cycle generates new understanding that feeds back into new cycles as alternative approaches or reformulated problems. Therefore, the design-build-test-learn cycle is a \textit{de facto} ontology upon which to base an SBOL data model for workflow abstraction. Other workflow activities in synthetic biology, such as analyzing, modeling, verifying, and evolving, by and large should fit into this design-build-test-learn abstraction. 
-
-It is expected that users will develop their own ontology terms to specify how SBOL objects are used in a recipe, protocol, or computational analysis. However, these home-made ontologies will be very domain specific, and may not be intelligible to users working in another domain. For example a modeler should not be expected to understand an ontology of \sbol{Usage} \sbolmult{roles:U}{roles} for DNA assembly. The terms ``design'', ``build'', ``test'', and ``learn'' provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. An example of how these terms are used is provided in \ref{images:design-build-test-learn}.
-
-Provenance semantics defined through \sbol{wasGeneratedBys} relationships are distinctly different from versioning semantics. Generation of a new object is defined by the W3C PROV-O specification as follows:
+The most basic and general type of provenance relationship can be represented using the \sbol{prov:wasDerivedFrom} property. This relationship describes derivation of an SBOL entity from another. 
+Any \sbol{Identified} object may be annotated with this property. More specific provenance relationships can also be defined using PROV-O, such as \sbol{prov:wasGeneratedBy}. Generation of a new object is defined by the W3C PROV-O specification as follows:
 \begin{quote}
-...the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+	...the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
 \end{quote}
+These relationships are leveraged in SBOL tooling for describing multi-stage synthetic biology workflows.
 
-These semantics are somewhat different from the versioning semantics defined in section \ref{sec:version}. The SBOL specification defines a new version of an object as an update of a previously published object (and therefore a previously existing object). Therefore, an SBOL object which is ``generated'' from another SHOULD BE regarded as a new entity rather than a new version of an existing entity. However, this distinction is somewhat subjective (see Theseus's paradox). Therefore, we RECOMMEND as a best practice that objects linked by Activities not be successive versions of each other, though this is left to the discretion of users and library developers. 
+Synthetic biology workflows may involve multiple stages, multiple users, multiple organizations, and interdisciplinary collaborations. These workflows can be described using four core PROV-O classes: \texttt{Entity}, \texttt{Activity}, \texttt{Agent}, and \texttt{Plan}. Any SBOL \sbol{Identified} object can implicitly act as an instance of PROV-O's \texttt{Entity} class. Workflow histories (retrospective provenance) and workflow specifications (prospective provenance) can be described in SBOL using \sbol{prov:Activity} objects to link \sbol{Identified} objects into workflows. An \texttt{prov:Agent} (for example a software or a person) runs an \sbol{prov:Activity} according to a \texttt{prov:Plan} to generate new entities. Resources representing \sbol{prov:Agent}, \sbol{prov:Activity} and \sbol{prov:Plan} classes should be handled as \sbol{TopLevel}, whilst \sbol{prov:Usage} and \sbol{prov:Association} resources should be treated as child \sbol{Identified} objects within their parent \texttt{prov:Activity} objects.  
+
+A design-build-test-learn SBOL ontology has been adopted for use with PROV-O classes(see \ref{tbl:activity_types}). The terms \sbol{design}, \sbol{build}, \sbol{test}, and \sbol{learn} provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. These terms SHOULD BE used on the \sbol{sbol:type} property of the \sbol{prov:Activity} class. (Note that this property is a special property added by the SBOL specification, and is not part of the original PROV-O specification.) Additionally, these terms SHOULD BE used in the \sbolmult{roles:U}{hadRole} properties on \sbol{prov:Usage} to qualify how the referenced \sbol{prov:entity} is used by the parent \sbol{prov:Activity}. The validation rules in \ref{validation} place some logical constraints on the order in which different types of \sbol{Activity} are chained into design-build-test-learn workflows. These rules additionally place constraints on the types of objects which may be used an inputs for a particular type of  \sbol{Activity}. For example, a \sbol{design} \sbol{Usage} may be used as an input for either a \sbol{design} or \sbol{build} {Activity} but MUST NOT be used as an input for a \sbol{test} \sbol{Activity}. An example of how these terms are used is provided in \ref{images:design-build-test-learn}. 
+
+\begin{table}[ht]
+	\begin{edtable}{tabular}{llp{3.75in}}
+		\toprule
+		\textbf{Activity Type} & \textbf{URI}  & \textbf{Description}\\
+		\midrule
+		Design  & \url{http://sbols.org/v3\#design}  & A \sbol{prov:Activity} describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is created or derived.\\
+		Build  & \url{http://sbols.org/v3\#build}  & Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory.\\
+		Test  & \url{http://sbols.org/v3\#test} & Test describes the process of performing experimental measurements to characterize a synthetic biological construct.\\
+		Learn  & \url{http://sbols.org/v3\#learn} & Learn describes the process of analyzing experimental measurements to produce a new entity that represents biological knowledge.\\
+		\bottomrule
+	\end{edtable}
+	\caption{Synthetic biology workflow ontology}
+	\label{tbl:activity_types}
+\end{table}
+
+In addition to the design-build-test-learn terms, users may also wish to include more specific terms to specify how SBOL objects are used in-house in their own recipes, protocols, or computational analyses. In fact, it is expected that the SBOL workflow ontology will be expanded in time, as users experiment with and develop their own custom ontologies. For now, however, it is recommended that SBOL tools also include the high-level terms in \ref{tbl:activity_types} to support data exchange across interdisciplinary boundaries.
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/provenance}
-\caption[]{Relationships between SBOL and PROV-O classes. The PROV-O classes \external{Activity}, \external{Plan}, and \external{Agent} all derive from \sbol{TopLevel} in the context of the SBOL data model.
+\caption[]{Relationships between SBOL and PROV-O classes. The PROV-O classes \external{prov:Activity}, \external{prov:Plan}, and \external{prov:Agent} all derive from \sbol{TopLevel} in the context of the SBOL data model.
 \label{uml:provenance}}
 \end{center}
 \end{figure}
@@ -39,100 +49,53 @@ These semantics are somewhat different from the versioning semantics defined in 
 \subsubsection{Activity}
 \label{sec:prov:Activity}
 
-A generated \texttt{Entity} is linked through a \texttt{wasGeneratedBy} relationship to an \sbol{Activity}, which is used to describe how different \sbol{Agent}s and other entities were used. An \sbol{Activity} is linked through a \sbol{associations} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{usages} to \sbol{Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{Activity} includes optional startedAtTime and endedAtTime properties. When using \sbol{Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{wasInformedBys} relationship to provide dependency without explicitly specifying start and end times.
+A generated \texttt{Entity} is linked through a \texttt{prov:wasGeneratedBy} relationship to an \sbol{prov:Activity}, which is used to describe how different \sbol{prov:Agent}s and other entities were used. An \sbol{prov:Activity} is linked through a \sbol{prov:qualifiedUsage} to \sbol{Association}s, to describe the role of agents, and is linked through \sbol{prov:qualifiedUsage} to \sbol{prov:Usage}s to describe the role of other entities used as part of the activity. Moreover, each \sbol{prov:Activity} includes optional \sbol{prov:startedAtTime} and \sbol{prov:endedAtTime} properties. When using \sbol{prov:Activity} to capture how an entity was derived, it is expected that any additional information needed will be attached as annotations. This may include software settings or textual notes. Activities can also be linked together using the \sbol{prov:wasInformedBy} relationship to provide dependency without explicitly specifying start and end times.
 
-\subparagraph{The \sbolheading{types} property}\label{sec:types:Activity}
-The \sbolmult{types:Activity}{types} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{Activity} in more detail. If specified, it is RECOMMENDED that at least one \sbol{URI} of the \sbolmult{types:Activity}{types} property of an \sbol{Activity} refers to a \sbol{URI} from \ref{tbl:activity_types}.
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{ll}
-    \toprule
-    \textbf{Activity Type} & \textbf{URI} \\
-    \midrule
-    Design  & \url{http://sbols.org/v2\#design}\\
-    Build  & \url{http://sbols.org/v2\#build}\\
-    Test  & \url{http://sbols.org/v2\#test}\\
-    Learn  & \url{http://sbols.org/v2\#learn}\\
-    \bottomrule
-  \end{edtable}
-  \caption{URIs to specify the \sbolmult{types:Activity}{types} property of an \sbol{Activity}.}
- \label{tbl:activity_types}
-\end{table}
+\subparagraph{The \sbolheading{type} property}\label{sec:types:Activity}
+The \sbolmult{types:Activity}{type} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \sbol{prov:Activity} in more detail. If specified, it is RECOMMENDED that at least one \sbol{URI} of the \sbolmult{types:Activity}{type} property of an \sbol{prov:Activity} refers to a \sbol{URI} from \ref{tbl:activity_types}.
 
 \subparagraph{The \sbolheading{startedAtTime} property}\label{sec:startedAtTime}
-The \sbol{startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
+The \sbol{prov:startedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
 
 \subparagraph{The \sbolheading{endedAtTime} property}\label{sec:endedAtTime}
-The \sbol{endedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity ended.
+The \sbol{prov:endedAtTime} property is OPTIONAL and contains a DateTime (see section \ref{sec:DateTime}) value, indicating when the activity ended.
 
-\subparagraph{The \sbolheading{associations} property}\label{sec:associations}
-The \sbol{associations} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Association} objects.
+\subparagraph{The \sbolheading{qualifiedAssociation} property}\label{sec:associations}
+The \sbol{prov:qualifiedAssociation} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{prov:Association} objects.
 
-\subparagraph{The \sbolheading{usages} property}\label{sec:usages}
-The \sbol{usages} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
+\subparagraph{The \sbolheading{qualifiedUsage} property}\label{sec:usages}
+The \sbol{prov:qualifiedUsage} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
 
-\subparagraph{The \sbolheading{wasInformedBys} property}\label{sec:wasInformedBys}
-The \sbol{wasInformedBys} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{Activity} objects.
+\subparagraph{The \sbolheading{wasInformedBy} property}\label{sec:wasInformedBys}
+The \sbol{prov:wasInformedBy} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \sbol{prov:Activity} objects.
 
 \subsubsection{Usage}
 \label{sec:Usage}
-How different entities are used in an \sbol{Activity} is specified with the \sbol{Usage} class, which is linked from an \sbol{Activity} through the \sbol{Usage} relationship. A \sbol{Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s \sbol{URI} and the role of this entity is qualified with the \sbolmult{roles:U}{roles} property. When the \sbol{prov:wasDerivedFrom} property is used together with the full provenance described here, the entity pointed at by the \sbol{prov:wasDerivedFrom} property MUST be included in a \sbol{Usage}.
+How different entities are used in an \sbol{prov:Activity} is specified with the \sbol{prov:Usage} class, which is linked from an \sbol{prov:Activity} through the \sbol{prov:Usage} relationship. A \sbol{prov:Usage} is then linked to an \texttt{Entity} through the \texttt{Entity}'s \sbol{URI} and the role of this entity is qualified with the \sbolmult{roles:U}{prov:hadRole} property. When the \sbol{prov:wasDerivedFrom} property is used together with the full provenance described here, the entity pointed at by the \sbol{prov:wasDerivedFrom} property MUST be included in a \sbol{prov:Usage}.
 
 \subparagraph{The \sbolheading{entity} property}\label{sec:entity}
-The \sbol{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an SBOL Identified object.
+The \sbol{prov:entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an SBOL Identified object.
 
-\subparagraph{The \sbolheading{roles} property}\label{sec:roles:U}
-The \sbolmult{roles:U}{roles} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{entity} referenced by the \sbol{entity} property. Recommended terms that are defined in \ref{tbl:usage_roles} can be used to indicate how the referenced \sbol{entity} is being used in this \sbol{Activity}.
-
-\begin{table}[H]
-  \begin{edtable}{tabular}{lp{3.75in}}
-    \toprule
-    \textbf{URI for Usage roles} & \textbf{Description} \\
-    \midrule
-    \url{http://sbols.org/v2\#design}	& Design describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is derived, possibly from a predictive model or by modifying a pre-existing design. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous design \sbol{Activity} and was used by the present \sbol{Activity} as a design for a new object.\\
-    \url{http://sbols.org/v2\#build}		& Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory. In the context of a \sbol{Usage}, the term  indicates that the referenced \sbol{entity} was generated by some previous build \sbol{Activity} and was used by the present \sbol{Activity} as a built object.\\
-    \url{http://sbols.org/v2\#test}		& Test describes the process of performing experimental measurements to characterize a synthetic biological construct. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous test \sbol{Activity} and is used as test data in the present \sbol{Activity}.\\
-    \url{http://sbols.org/v2\#learn}	&  Learn describes the process of analyzing experimental measurements to produce a new entity that represents biological knowledge. In the context of a \sbol{Usage}, the term indicates that the referenced \sbol{entity} was generated by some previous learn \sbol{Activity} and is used in the present \sbol{Activity} as a source of scientifically verified knowledge.\\
-    \bottomrule
-  \end{edtable}
-  \caption{Terms to specify the \sbolmult{roles:U}{roles} property of a \sbol{Usage}.}
-  \label{tbl:usage_roles}
-\end{table}
+\subparagraph{The \sbolheading{hadRole} property}\label{sec:roles:U}
+The \sbolmult{roles:U}{prov:hadRole} property is an OPTIONAL set of \sbol{URI}s that refer to particular term(s) describing the usage of an \sbol{prov:entity} referenced by the \sbol{prov:entity} property. Recommended terms that are defined in \ref{tbl:activity_types} can be used to indicate how the referenced \sbol{prov:entity} is being used in this \sbol{prov:Activity}.
 
 \subsubsection{Association}
 \label{sec:Association}
-An \sbol{Association} is linked to an \sbol{Agent} through the \sbol{agent} relationship. The \sbol{Association} includes the \sbolmult{roles:A}{roles} property to qualify the role of the \sbol{Agent} in the \sbol{Activity}.
+An \sbol{prov:Association} is linked to an \sbol{prov:Agent} through the \sbol{prov:agent} relationship. The \sbol{prov:Association} includes the \sbolmult{roles:A}{prov:hadRole} property to qualify the role of the \sbol{prov:Agent} in the \sbol{prov:Activity}.
 
 \subparagraph{The \sbolheading{agent} property}\label{sec:agent}
-The \sbol{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{Agent} object.
+The \sbol{prov:agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \sbol{prov:Agent} object.
 
-\subparagraph{The \sbolheading{roles} property}\label{sec:roles:A}
-The \sbolmult{roles:A}{roles} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{agent} in the parent \sbol{Activity}. 
-The recommended terms that are defined in \ref{tbl:association_roles} can be used to specify the kind of \sbol{Activity} performed by the \sbol{Agent}.
+\subparagraph{The \sbolheading{hadRole} property}\label{sec:roles:A}
+The \sbolmult{roles:A}{prov:hadRole} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \sbol{prov:agent} in the parent \sbol{prov:Activity}. 
 
-\begin{table}[H]
-  \begin{edtable}{tabular}{lp{3.75in}}
-    \toprule
-    \textbf{URI for Association roles} & \textbf{Description} \\
-    \midrule
-    \url{http://sbols.org/v2\#design}	& Design describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is derived, possibly from a predictive model or by modifying a pre-existing design. In the context of an \sbol{Association}, the term design indicates that the \sbol{Agent} performed the parent \sbol{Activity} to generate a design.\\
-    \url{http://sbols.org/v2\#build}		& Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory. In the context of an \sbol{Association}, the term build indicates that the \sbol{Agent} performed the parent \sbol{Activity} to implement a design. More generally, the term may represent any kind of experimental manipulation of a biological sample, including propagating, passaging, or evolving cell lines.\\
-    \url{http://sbols.org/v2\#test}		& Test describes the process of performing experimental measurements to characterize a synthetic biological construct. In the context of an \sbol{Association}, the \sbol{Agent} performed the parent \sbol{Activity} to perform experimental measurements resulting in raw data represented by an \sbol{ExperimentalData}.\\
-    \url{http://sbols.org/v2\#learn}	&  Learn describes the process of analyzing the experimental measurements in order to produce a new entity that represents biological knowledge. In the context of an \sbol{Association}, the \sbol{Agent} processed the raw experimental data to produce an analysis. This process generates a new entity that represents biological knowledge, including tables or graphs referenced by the \sbol{Attachment}s of an \sbol{ExperimentalData}, a \sbol{Model} produced by a fitting process, a consensus \sbol{Sequence} derived from sequencing results, etc.\\
-    \bottomrule
-  \end{edtable}
-  \caption{Terms to specify the \sbolmult{roles:A}{roles} property of an \sbol{Association}.}
-  \label{tbl:association_roles}
-\end{table}
-
-
-\subparagraph{The \sbolheading{plan} property}\label{sec:plan}
-The \sbol{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a \sbol{Plan}.
+\subparagraph{The \sbolheading{hadPlan} property}\label{sec:plan}
+The \sbol{prov:hadPlan} property is OPTIONAL and contains a \sbol{URI} that refers to a \sbol{prov:Plan}.
 
 \subsubsection{Plan}
 \label{sec:prov:Plan}
 
- The Plan entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \sbol{Agent} is used in a particular \sbol{Activity}. 
+ The \sbol{prov:Plan} entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \sbol{prov:Agent} is used in a particular \sbol{prov:Activity}. 
 
 \subsubsection{Agent}
 \label{sec:prov:Agent}
@@ -141,7 +104,7 @@ The \sbol{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a 
 
 \subparagraph{Example - Codon optimization}
 
- Codon optimization is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the prov:wasDerivedFrom predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{Activity}. This \sbol{Activity} can then include additional information, such as the \sbol{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
+ Codon optimization is a practical real-wold example where provenance properties can be applied. Using the current specification, the relationship between an original CDS and the codon-optimized version could simply be represented using the \sbol{prov:wasDerivedFrom} predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \sbol{prov:Activity}. This \sbol{prov:Activity} can then include additional information, such as the \sbol{prov:Agent} responsible (in this case, codon-optimizing software), and additional parameters.
 
 \subparagraph{Example - Deriving strains}
 
