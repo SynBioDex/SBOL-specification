@@ -4,7 +4,7 @@ This repository contains the master specification document for the SBOL data mod
 
 Members of the SBOL Development Community may use the issue tracker to flag problems with the existing specification and review ongoing issues under consideration.
 
-# Submitting changes to the specification
+## Submitting changes to the specification
 
 Before writing text for a non-trivial change, please have it approved by discussion as an Issue and/or SEP.
 
@@ -23,7 +23,20 @@ Here is an example of git commands to achieve this:
 When you are ready for your changes to be reviewed for incorporation, create a pull request.
 If you need help on pull requests see: https://help.github.com/articles/about-pull-requests/
 
-# Building the PDF from LateX
+## Automation
+
+This repository uses a [Github Action](https://github.com/features/actions) to automatically build the project when a pull request is made to the `SBOL3` branch, or a push is made to the branch (inlcuding when a PR is merged).
+This creates a PDF and uploads it as as a [workflow artefact](https://help.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts); GitHub retains these for 90 days.
+You can download this PDF by clicking on the green check mark beside a commit, then clicking 'details' in the popover; this will navigate to a different page, where you can click on 'Artefacts' and then 'PDF'.
+
+If building the PDF fails, then this is shown by a red cross. 
+This does not necessarily mean that there is a problem with the specification document: automated builds will also fail if they are for a pull request that has already been closed, or are from a different repository (i.e., a fork rather than a branch). 
+
+The action is defined by the file [`.github/workflows/main.yml`](./.github/workflows/main.yml)
+
+## Using LaTeX
+
+### Building the PDF from LateX
 
 To build, run these commands and check the output for errors. If there are errors, resolve them and re-run the failed build step before proceeding.
 
@@ -41,36 +54,3 @@ You can also build with Docker if you don't want to install latex, but note that
     docker run -v $(pwd):/opt/spec jmcl/specbuild
 
 
-# LaTeX installation notes
-
-Installing LaTeX on your system is beyond the scope of this README, however we will collect some tips here, in the interest of fostering collaboration.
-
-
-# MacTex installation notes
-
-Here is how one community member managed to install MacTex and BibTex on OS X 10.10.5 Yosemite in August 2016. This recipe was found on StackOverflow. Not all of these commands may be strictly necessary to build the SBOL2 pdf at this time. The bibdesk settings especially need curation. Please note that BasicTex alone did not suffice.
-
-    # First install homebrew from http://brew.sh then...
-    brew update
-    brew upgrade
-    brew tap caskroom/cask
-    brew install brew-cask
-    brew cask install mactex
-    brew cask install bibtex
-    brew cask install bibdesk
-    brew cask install texshop
-    brew cask install mendeley-desktop
-    sudo chown -R $USER  /usr/local/texlive
-    tlmgr update --self
-    tlmgr update --all
-    defaults write TeXShop NSUserKeyEquivalents -dict-add "Typeset" "@t"
-    defaults write TeXShop "BibTeXengine" -string "biber"
-    defaults write TeXShop "Encoding"  -string  "IsoLatin"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Key Format" -string %y%u0"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk BDSKLocalFileFormatKey -string Cite Key}%n0%e"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Path to the papers folder" ing "Biblio"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite String" -string "citep"
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Key Autogenerate" -int 1
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Key Format Preset" -int 0
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Cite Prepend Tilde" -int 1
-    defaults write edu.ucsd.cs.mmccrack.bibdesk "Startup Behavior" -int 4
