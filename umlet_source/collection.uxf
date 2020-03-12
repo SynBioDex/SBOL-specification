@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <type>com.baselet.element.old.element.Class</type>
@@ -31,10 +31,9 @@
       <x>330</x>
       <y>190</y>
       <w>100</w>
-      <h>50</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes>*Collection*
---
 
 
 </panel_attributes>
@@ -46,11 +45,9 @@
       <x>250</x>
       <y>290</y>
       <w>120</w>
-      <h>60</h>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>*Namespace*
---
-</panel_attributes>
+    <panel_attributes>*Namespace*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -59,34 +56,32 @@
       <x>400</x>
       <y>290</y>
       <w>110</w>
-      <h>60</h>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>*Experiment*
---
-</panel_attributes>
+    <panel_attributes>*Experiment*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>300</x>
-      <y>230</y>
+      <y>210</y>
       <w>80</w>
-      <h>80</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>60.0;10.0;60.0;40.0;10.0;40.0;10.0;60.0</additional_attributes>
+    <additional_attributes>60.0;10.0;60.0;60.0;10.0;60.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>390</x>
-      <y>230</y>
+      <y>210</y>
       <w>90</w>
-      <h>80</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0;70.0;40.0;70.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;70.0;60.0;70.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
