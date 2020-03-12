@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="14.2">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
+      <x>280</x>
       <y>540</y>
-      <w>150</w>
-      <h>100</h>
+      <w>200</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>*Attachment*
 --
@@ -15,6 +15,7 @@ source[1]: URI
 format[0..1]: URI
 size[0..1]: Long
 hash[0..1]: String
+hashAlgorithm[0..1]: String
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -52,6 +53,6 @@ hash[0..1]: String
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 hasAttachment
 0..*</panel_attributes>
-    <additional_attributes>140.0;10.0;10.0;10.0;10.0;100.0;110.0;100.0</additional_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0;10.0;100.0;90.0;100.0</additional_attributes>
   </element>
 </diagram>
