@@ -13,21 +13,8 @@ The \sbol{Location} class (as shown in \ref{uml:location}) is used to represent 
 \end{figure} 
 
 \subparagraph{The \sbolheading{orientation} property}
-\label{sec:orientation}
-The \sbol{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Location} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
-
-\begin{table}[ht]
-  \begin{edtable}{tabular}{lp{3.75in}}
-    \toprule
-    \textbf{Orientation URI} & \textbf{Description} \\
-    \midrule
-    \url{http://sbols.org/v2\#inline} & The region specified by this \sbol{Location} is on the \sbol{elements} of a \sbol{Sequence}. \\
-    \url{http://sbols.org/v2\#reverseComplement} & The region specified by this \sbol{Location} is on the reverse-complement translation of the \sbol{elements} of a \sbol{Sequence}. The exact nature of this translation depends on the \sbol{encoding} of the \sbol{Sequence}. \\
-    \bottomrule
-  \end{edtable}
-  \caption{REQUIRED \sbol{URI}s for the \sbol{orientation} property}
-  \label{tbl:orientation_types}
-\end{table}
+\label{sec:orientation:L}
+The \sbolmult{orientation:L}{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbolmult{orientation:L}{orientation} \sbol{URI}s. If a \sbol{Location} object has an \sbolmult{orientation:L}{orientation}, then it MUST come from \ref{tbl:orientation_types}.
 
 \subparagraph{The \sbolheading{order} property}
 \label{sec:order}
