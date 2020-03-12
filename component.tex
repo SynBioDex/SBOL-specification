@@ -1,10 +1,9 @@
 \subsection{Component}
 \label{sec:Component}
 
-The \sbol{Component} class represents the structural and/or functional entities of a biological design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as small molecules, molecular complexes, strains, samples, light, and abstract functional groupings of other entities.
+The \sbol{Component} class represents the structural and/or functional entities of a biological design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as simple chemicals, molecular complexes, strains, samples, light, and abstract functional groupings of other entities.
 
-As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{types:CD}{types}, \sbolmult{roles:CD}{roles}, \sbol{sequences}, \sbol{interactions}, and \sbol{models}. 
-In addition, this class has properties for describing and organizing the substructure of said design entity, including \sbol{feature} and \sbol{constraint}.
+As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{type:CD}{type}, \sbolmult{role:CD}{role}, \sbol{hasSequence}, \sbol{hasFeature}, \sbol{hasConstraint}, \sbol{hasInteraction}, and \sbol{hasModel}.  The \sbol{hasSequence}, \sbol{hasFeature}, and \sbol{hasConstraint} properties are used to represent structural relationships, while the \sbol{hasInteraction} and \sbol{hasModel} are used to represent functional relationships.
 
 \begin{figure}[ht]
 \begin{center}
@@ -12,22 +11,16 @@ In addition, this class has properties for describing and organizing the substru
 \caption[]{Diagram of the \sbol{Component} class and its associated properties.}
 \label{uml:component}
 \end{center}
-\end{figure} \todo{change diagram to reflect changes from SEP 41}
+\end{figure} 
 
-\subparagraph{The \sbolheading{types} property}
-\label{sec:types:CD}
+\subparagraph{The \sbolheading{type} property}
+\label{sec:type:CD}
 
-The \sbolmult{types:CD}{types} property is a REQUIRED set of \sbol{URI}s that
-specifies the category of biochemical or physical entity (for example DNA,
-protein, or small molecule) that a \sbol{Component} object abstracts
-for the purpose of engineering design. For DNA or RNA entities,
-additional \sbolmult{types:CD}{types} fields are used to describe nucleic acid
-topology (circular / linear) and strandedness (double- or single-stranded).
+A \sbol{Component} is REQUIRED to have one or more \sbolmult{type:CD}{type} properties, each of type \sbol{URI} specifying the category of biochemical or physical entity (for example DNA, protein, or simple chemical) that a \sbol{Component} object abstracts
+for the purpose of engineering design. For DNA or RNA entities, additional \sbolmult{type:CD}{type} properties are used to describe nucleic acid topology (circular / linear) and strandedness (double- or single-stranded).
 
-The \sbolmult{types:CD}{types} property of every \sbol{Component} MUST contain one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the Systems Biology Ontology ~\cite{SBO} or  the ontology of Chemical Entities of Biological Interest (ChEBI) ~\cite{chebi}.
-\ref{tbl:component_types} provides a list of possible ontology terms for the \sbolmult{types:CD}{types} property and their \sbol{URI}s.
-In order to maximize the compatibility of designs, the \sbolmult{types:CD}{types} property of a \sbol{Component} SHOULD contain a \sbol{URI} from \ref{tbl:component_types}, and any \sbol{Component} that can be well-described by one of the terms in \ref{tbl:component_types} MUST use the \sbol{URI} for that term as one of its \sbolmult{types:CD}{types}.
-Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it might not be clear how to interpret them). For example, the SBO terms provided by \ref{tbl:component_types} would conflict because they specify classes of biochemical entities with different molecular structures.
+The \sbolmult{type:CD}{type} properties of every \sbol{Component} MUST include one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the physical entity representation branch of the Systems Biology Ontology~\cite{SBO} or the ontology of Chemical Entities of Biological Interest (ChEBI)~\cite{chebi}.  \ref{tbl:component_types} provides a partial list of possible ontology terms for the \sbolmult{type:CD}{type} property and their \sbol{URI}s.  In order to maximize the compatibility of designs, the \sbolmult{type:CD}{type} property of a \sbol{Component} SHOULD contain a \sbol{URI} from the physical entity representation branch of the Systems Biology Ontology~\cite{SBO}, and any \sbol{Component} that can be well-described by one of the terms in \ref{tbl:component_types} MUST use the \sbol{URI} for that term as one of its \sbolmult{type:CD}{type}.
+Finally, if the \sbolmult{type:CD}{type} property contains multiple \sbol{URI}s, then they MUST identify non-conflicting terms (otherwise, it might not be clear how to interpret them). For example, the SBO terms provided by \ref{tbl:component_types} would conflict because they specify classes of biochemical entities with different molecular structures.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{ll}
@@ -35,22 +28,20 @@ Finally, if the \sbolmult{types:CD}{types} property contains multiple \sbol{URI}
     \textbf{Component Type} & \textbf{URI for SBO Term} \\
     \midrule
     DNA (Deoxyribonucleic acid)  & \url{https://identifiers.org/SBO:0000251}\\
-    RNA (Ribonucleic acid) & \url{https://identifiers.org/SBO:0000251}\\
+    RNA (Ribonucleic acid) & \url{https://identifiers.org/SBO:0000250}\\
     Protein (Polypeptide chain)  & \url{https://identifiers.org/SBO:0000252}\\
     Simple Chemical  & \url{https://identifiers.org/SBO:0000247}\\
     Non-covalent complex  & \url{https://identifiers.org/SBO:0000253}\\
+    Functional Entity  & \url{https://identifiers.org/SBO:0000241}\\
     \bottomrule
   \end{edtable}
-  \caption{SBO terms to specify the molecule type using the \sbolmult{types:CD}{types} property of a \sbol{Component}.}
+  \caption{Partial list of the most common SBO terms to specify the molecule type using the \sbolmult{type:CD}{type} property of a \sbol{Component}.  Systems composed of multiple molecules composed together to perform a function should use the functional entity type.}
  \label{tbl:component_types}
 \end{table}
 
 \emph{Nucleic Acid Topology types}\\
-\vspace{-7pt}
-
-Any \sbol{Component} classified as DNA (see \ref{tbl:component_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This
-(topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
-(this is currently just 'linear' or 'circular' as given in \ref{tbl:component_topology}). Topology information SHOULD be specified for DNA \sbol{Component} records with a fully specified sequence, except in three scenarios: if the DNA record doesn't have sequence information, or if the DNA record has incomplete sequence information, or if topology is genuinely unknown. For any \sbol{Component} classified as RNA (see \ref{tbl:component_types}), a topology type field is OPTIONAL. The default
+Any \sbol{Component} classified as DNA (see \ref{tbl:component_types}) is RECOMMENDED to encode circular/linear topology information in an additional type field. This (topology) type field SHOULD specify a URI from the Topology Attribute branch of the SO
+(this is currently just 'linear' or 'circular' as given in \ref{tbl:component_topology}). Topology information SHOULD be specified for DNA \sbol{Component} records with a fully specified sequence, except in three scenarios: if the DNA record does not have sequence information, or if the DNA record has incomplete sequence information, or if topology is genuinely unknown. For any \sbol{Component} classified as RNA (see \ref{tbl:component_types}), a topology type field is OPTIONAL. The default
 assumption in this case is linear topology.  In any case, no more than one topology should be specified.
 
 Any \sbol{Component} classified as DNA or RNA MAY also have strand
@@ -59,7 +50,7 @@ acids given in \ref{tbl:component_topology}). In absence of this field, the
 default strand information assumed for DNA is 'double-stranded' and for RNA is
 'single-stranded'. 
 
-Any other type of \sbol{Component} record (protein, small molecule, etc) SHOULD NOT
+Any other type of \sbol{Component} record (protein, simple chemical, etc) SHOULD NOT
 have any type field pointing to SO terms from the topology or strand attribute branches of SO.
 
 Note that a \emph{circular} topology instructs software to interpret the
@@ -82,18 +73,14 @@ that sequence features may be mapped or identified across this junction. \emph{D
  \label{tbl:component_topology}
 \end{table}
 
-\subparagraph{The \sbolheading{roles} property}
-\label{sec:roles:CD}
+\subparagraph{The \sbolheading{role} property}
+\label{sec:role:CD}
 
-The \sbolmult{roles:CD}{roles} property is an OPTIONAL set of \sbol{URI}s that clarifies the potential function of the entity represented by a \sbol{Component} in a biochemical or physical context.
-
-The \sbolmult{roles:CD}{roles} property of a \sbol{Component} MAY contain one or more \sbol{URI}s that MUST identify terms from ontologies that are consistent with the \sbolmult{types:CD}{types} property of the \sbol{Component}.
-For example, the \sbolmult{roles:CD}{roles} property of a DNA or RNA \sbol{Component} could contain URIs identifying terms from the Sequence Ontology (SO). As a best practice, a DNA or RNA \sbol{Component} SHOULD contain exactly one \sbol{URI} that refers to a term from the sequence feature branch of the SO.
-Similarly, the roles property of a Protein and SmallMolecule \sbol{Component} SHOULD respectively contain \sbol{URI}s identifying terms from the \texttt{MolecularFunction} branch (\texttt{GO:0003674}) of the Gene Ontology (GO) and the \texttt{role} branch (\texttt{CHEBI:50906}) of the CHEBI ontology.
-\ref{tbl:component_roles} contains a list of possible ontology terms for the \sbolmult{roles:CD}{roles} property and their \sbol{URI}s. These terms are organized by the type of \sbol{Component} to which they SHOULD apply (see \ref{tbl:component_types}). Any \sbol{Component} that can be well-described by one of the terms in \ref{tbl:component_roles} MUST use the \sbol{URI} for that term as one of its \sbolmult{roles:CD}{roles}.
+A \sbol{Component} MAY have one or more \sbolmult{role:CD}{role} properties, each of type \sbol{URI} that MUST identify terms from ontologies that are consistent with the \sbolmult{type:CD}{type} property of the \sbol{Component}.  For example, the \sbolmult{role:CD}{role} property of a DNA or RNA \sbol{Component} could contain URIs identifying terms from SO. As a best practice, a DNA or RNA \sbol{Component} SHOULD contain exactly one \sbol{URI} that refers to a term from the sequence feature branch of the SO.
+Similarly, the role properties of a protein and simple chemical \sbol{Component} SHOULD respectively contain \sbol{URI}s identifying terms from the \texttt{MolecularFunction} branch (\texttt{GO:0003674}) of the Gene Ontology (GO) and the \texttt{role} branch (\texttt{CHEBI:50906}) of the CHEBI ontology.
+\ref{tbl:component_roles} contains a partial list of possible ontology terms for the \sbolmult{role:CD}{role} properties and their \sbol{URI}s. These terms are organized by the type of \sbol{Component} to which they SHOULD apply (see \ref{tbl:component_types}). Any \sbol{Component} that can be well-described by one of the terms in \ref{tbl:component_roles} MUST use the \sbol{URI} for that term as one of its \sbolmult{role:CD}{role}.
 
 These \sbol{URI}s might identify descriptive biological roles, such as ``metabolic pathway'' and ``signaling cascade,'' but they can also identify identify ``logical'' roles, such as ``inverter'' or ``AND gate'', or other abstract roles for describing the function of design. Interpretation of the meaning of such roles currently depends on the software tools that read and write them.
-
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
@@ -112,53 +99,47 @@ These \sbol{URI}s might identify descriptive biological roles, such as ``metabol
       Transcription Factor & \url{http://identifiers.org/go/GO:0003700} & Protein\\
     \bottomrule
   \end{edtable}
-  \caption{Ontology terms to specify the \sbolmult{roles:CD}{roles} property of a \sbol{Component}, organized by the type of \sbol{Component} to which they are intended to apply (see \ref{tbl:component_types}).}
+  \caption{Partial list of ontology terms to specify the \sbolmult{role:CD}{role} property of a \sbol{Component}, organized by the type of \sbol{Component} to which they are intended to apply (see \ref{tbl:component_types}).}
   \label{tbl:component_roles}
 \end{table}
 
+\subsubsection*{The \sbolheading{hasSequence} property}
+\label{sec:hasSequence}
+A \sbol{Component} MAY have one or more \sbol{hasSequence} properties, each of type \sbol{URI} that MUST reference a \sbol{Sequence} object (see \ref{sec:Sequence}).  These objects define the primary structure of the \sbol{Component}.
 
-\subparagraph{The \sbolheading{feature} property}
-\label{sec:feature}
+If a \sbol{Feature} of a \sbol{Component} refers to a \sbol{Location}, and this \sbol{Location} refers to a \sbol{Sequence}, then the \sbol{Component} MUST also include a \sbol{hasSequence} property that refers to this \sbol{Sequence}.
 
-The \sbol{feature} property MAY have one or more \sbol{Feature} properties. The set of relations between \sbol{Feature} and \sbol{Component} objects is strictly acyclic (see \ref{sec:Feature}).
+Many \sbol{Component} objects will have exactly one \sbol{hasSequence} property that refers to a \sbol{Sequence} object.  In this case, if its has a \sbolmult{type:CD}{type} from \ref{tbl:componentdefinition_types} and there is an \sbol{encoding} that is cross-listed with this term in \ref{tbl:sequence_encodings}, then the \sbol{Sequence} objects MUST have this encoding.
+This \sbol{Sequence} is implicitly the entire sequence for this \sbol{Component} (In other words, it is equivalent to a \sbol{SequenceFeature} with an \sbol{EntireSequence} \sbol{Location} that refers to this \sbol{Sequence}).
 
-While the \sbol{Component} class is analogous to a blueprint or specification sheet for a biological part, the \sbol{Feature} class represents the specific occurrence of a part within a design.
-Hence, this class allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{Component}). For example, the \sbol{Component} of a polycistronic gene could contain two \sbol{Feature} objects that refer to the same \sbol{Component} of a CDS.
+\subparagraph{The \sbolheading{hasFeature} property}
+\label{sec:hasFeature}
 
-The \sbol{feature} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{Feature} and \sbol{Component} objects.
-If a \sbol{Component} in such a hierarchy refers to a \sbol{Location} object, and there exist a \sbol{Component} objects lower in the hierarchy that refer to \sbol{Location} object that referes to the same \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Feature} objects in the hierarchy that are imposed by the \sbol{SequenceAnnotation} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
+A \sbol{Component} MAY have one or more \sbol{hasFeature} properties, each of type \sbol{URI} that MUST reference a \sbol{Feature} object (see \ref{sec:Feature}). The set of relations between \sbol{Feature} and \sbol{Component} objects MUST be strictly acyclic.
 
-A DNA \sbol{Component}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{Component} could contain a \sbol{Feature} that refers to a ``lower level''  \sbol{Component} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, a consistent \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta},'' or perhaps ``{\tt tgta}'' if the \sbol{Feature} is positioned by a \sbol{SequenceAnnotation} that contains a \sbol{Location}  with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
+While the \sbol{Component} class is analogous to a blueprint or specification sheet for a biological part or a system of interacting biological elements, the \sbol{Feature} class represents, among other things, the specific occurrence of a part or subsystem within a design.  For example, this mechanism allows a biological design to include multiple instances of a particular part (defined by reference to the same \sbol{Component}). For example, the \sbol{Component} of a polycistronic gene could contain two \sbol{SubComponent} objects that refer to the same \sbol{Component} of a CDS.  As another example, consider the \sbol{Component} for a network of two-input repressor devices in which the particular repressors have not been chosen yet. This \sbol{Component} could contain multiple \sbol{SubComponent} objects that refer to the same \sbol{Component} of an abstract two-input repressor device.
+% Just as a \sbol{Feature} represents an instance of a subsystem in the overall system represented by a \sbol{Component}, a \sbol{Feature} represents an instance of a structural entity (represented by a \sbol{Component}) in the system. This concept allows a \sbol{Component} to assert different interactions for separate copies of the same structural entity if needed. For example, a \sbol{Component} might contain multiple \sbol{Feature}  objects that refer to the same promoter \sbol{Component}, but assert different interactions for these promoter copies based on their separate positions in another \sbol{Component} that represents the structure of the entire system.
 
-While the \sbol{Component} class is analogous to a specification sheet for a system of interacting biological elements, the \sbol{Feature} class represents the occurrence of a particular subsystem within the system.
-Hence, this class allows a system design to include multiple instances of a subsystem, all defined by reference to the same \sbol{Component}.
-For example, consider the \sbol{Component} for a network of two-input repressor devices in which the particular repressors have not been chosen yet. This \sbol{Component} could contain multiple \sbol{Feature} objects that refer to the same \sbol{Component} of an abstract two-input repressor device.
+The \sbol{hasFeature} properties of \sbol{Component} objects can be used to construct a hierarchy of \sbol{SubComponent} and \sbol{Component} objects.  If a \sbol{Component} in such a hierarchy refers to a \sbol{Location} object, and there exists a \sbol{Component} object lower in the hierarchy that refers to a \sbol{Location} object that refers to the same \sbol{Sequence} with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Feature} objects in the hierarchy that are imposed by the \sbol{SubComponent}, \sbol{SequenceFeature}, or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.
 
-Just as a \sbol{Feature} represents an instance of a subsystem in the overall system represented by a  \sbol{Component}, a \sbol{Feature} represents an instance of a structural entity (represented by a \sbol{Component}) in the system. This concept allows a \sbol{Component} to assert different interactions for separate copies of the same structural entity if needed. For example, a \sbol{Component} might contain multiple \sbol{Feature}  objects that refer to the same promoter \sbol{Component}, but assert different interactions for these promoter copies based on their separate positions in another \sbol{Component} that represents the structure of the entire system.
+A DNA \sbol{Component}, for example, could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding} and an \sbol{elements} \external{String} of ``{\tt gattaca}.'' In turn, this \sbol{Component} could contain a \sbol{SubComponent} that refers to a ``lower level''  \sbol{Component} that also refers to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. Consequently, a consistent \sbol{elements} \external{String} of this ``lower level'' \sbol{Sequence} could be ``{\tt gatta},'' or perhaps ``{\tt tgta}'' if the \sbol{SubComponent} is positioned by a \sbol{Location} with an \sbol{orientation} of ``reverse complement'' (see \ref{sec:Location}).
 
-\todo{Do not delete commented out section. we may need part of it later.}
-%In addition, each \sbol{SubComponent} can  position a \sbol{Feature} of the \sbol{Component} at the region specified by its \sbol{Location} objects (see \ref{sec:Location}).
-%The \sbol{feature} property MUST NOT contain two or more \sbol{SequenceFeature} objects that refer to the same \sbol{Feature} in this way.
+\subparagraph{The \sbolheading{hasConstraint} property}
+\label{sec:hasConstraint}
 
-%Finally, as a best practice, if a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each of its \sbol{SequenceFeature} objects that contains a \sbol{Range} or \sbol{Cut} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.
-%For example, the \sbol{Component} of a eukaryotic gene could refer to a \sbol{Sequence} with an \external{IUPAC DNA} \sbol{encoding}. In order to specify the discontiguous region occupied by its CDS, this gene \sbol{Component} would need a \sbol{SequenceFeature} that contains one or more \sbol{Range} objects, each one specifying \sbol{start} and \sbol{end} positions that correspond to indices of the \sbol{elements} of its DNA \sbol{Sequence}.
+A \sbol{Component} MAY have one or more \sbol{hasConstraint} properties, each of type \sbol{URI} that MUST reference a \sbol{Constraint} object (see \ref{sec:Constraint}).  These objects describe, among other things, any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{Feature} objects contained by the \sbol{Component}.
+For example, the \sbol{Component} of a gene might specify that the position of its promoter \sbol{SubComponent} precedes that of its CDS \sbol{SubComponent}. This is particularly useful when a \sbol{Component} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{SubComponent} objects using \sbol{Location} objects.
 
-\subparagraph{The \sbolheading{constraint} property}
-\label{sec:constraint}
+\subparagraph{The \sbolheading{hasInteraction} property}\label{sec:hasInteraction}
 
-The \sbol{constraint} property is OPTIONAL and MAY contain a set of \sbol{Constraint} objects. 
-These objects describe any restrictions on the relative, sequence-based positions and/or orientations of the \sbol{Feature} objects contained by the \sbol{Component}.
-For example, the \sbol{Component} of a gene might specify that the position of its promoter \sbol{Feature} precedes that of its CDS \sbol{Feature}. This is particularly useful when a \sbol{Component} lacks a \sbol{Sequence} and therefore cannot specify the precise, sequence-based positions of its \sbol{Feature} objects using \sbol{SubComponent} objects using \sbol{Location} objects.
-
-\subparagraph{The \sbolheading{interactions} property}\label{sec:interactions}
-
-The \sbol{interactions} property is OPTIONAL and MAY specify a set of \sbol{Interaction} objects within the \sbol{Component}.
+A \sbol{Component} MAY have one or more \sbol{hasInteraction} properties, each of type \sbol{URI} that MUST reference an \sbol{Interaction} object (see \ref{sec:Interaction}).  
 
 The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a \sbol{Component} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
 Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{Feature} objects involved in the \sbol{Interaction}.
 
-\subparagraph{The \sbolheading{models} property}\label{sec:models}
-The \sbol{models} property is OPTIONAL and MAY specify a set of \sbol{URI} references to \sbol{Model} objects.
+\subparagraph{The \sbolheading{hasModel} property}\label{sec:hasModel}
+
+A \sbol{Component} MAY have one or more \sbol{hasModel} properties, each of type \sbol{URI} that MUST reference a \sbol{Model} object (see \ref{sec:Model}).  
 
 \sbol{Model} objects are placeholders that link \sbol{Component} objects to computational models of any format.
 A \sbol{Component} object can link to more than one \sbol{Model} since each might encode system behavior in a different way or at a different level of detail.
