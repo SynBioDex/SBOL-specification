@@ -25,4 +25,9 @@ The \sbol{format} property is OPTIONAL and MAY contain a \sbol{URI} that specifi
 The \sbol{size} property is OPTIONAL and MAY contain a long indicating the file size in bytes.
 
 \subparagraph{The \sbolheading{hash} property}\label{sec:hash}
-The \sbol{hash} property is OPTIONAL and MAY contain a SHA-1 hash of the file contents represented as a hexadecimal digest.
+The \sbol{hash} property is OPTIONAL and MAY contain a hash value for the file contents represented as a hexadecimal digest.
+
+\subparagraph{The \sbolheading{hashAlgorithm} property}\label{sec:hashAlgorithm}
+The \sbol{hash} property is OPTIONAL and MAY contain the name of the hash algorithm used to generate the value of the \sbol{hash} property.
+The value of this property SHOULD be a hash name string from the \href{https://www.iana.org/assignments/named-information/named-information.xhtml}{IANA Named Information Hash Algorithm Registry}, of which \texttt{sha3-256} is currently recommended.
+If the \sbol{hash} property is set, then \sbol{hashAlgorithm} MUST be set as well.
