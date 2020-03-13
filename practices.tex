@@ -9,7 +9,7 @@ To differentiate between major versions of SBOL, different namespaces are used. 
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
-Maintaining unique URIs for all SBOL objects can be a very challenging implementation task.  To reduce this burden, users of SBOL 3.x are encouraged to follow a few simple rules when constructing the URIs and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
+Maintaining unique URIs for all SBOL objects can be challenging.  To reduce this burden, users of SBOL 3.x are encouraged to follow a few simple rules when constructing the URIs and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
 
 Compliant URIs for \sbol{TopLevel} objects MUST conform to the following pattern:
 \begin{quotation} 
@@ -32,7 +32,7 @@ SBOL-compliant URIs greatly facilitate auto-construction of child objects with u
 All examples in this specification use compliant \sbol{URI}s.
 
 \subsection{Versioning SBOL Objects}
-SBOL 3.x does not specify an explicit versioning scheme. Rather it is left for experimentation across different tools. This allows version information to be included in the root (e.g., GitHub style: ``igem/HEAD/''), collection structure (e.g., ``promoters/constitutive/2/''), in tool-specific conventions on \sbol{displayId} (e.g., ``BBa\_J23101\_v2'') or in information outside of the \sbol{URI} (e.g., by attaching \sbol{prov:wasRevisionOf} properties).
+SBOL 3.x does not specify an explicit versioning scheme. Rather it is left for experimentation across different tools. This allows version information to be included in the root (e.g., GitHub style: ``igem/HEAD/''), collection structure (e.g., ``promoters/constitutive/2/''), in tool-specific conventions on \sbol{displayId} (e.g., ``BBa\_J23101\_v2'') or in information outside of the \sbol{URI} (e.g., by attaching \prov{wasRevisionOf} properties).
 
 \subsection{Annotations: Embedded Objects vs. External References}
 
@@ -43,8 +43,8 @@ two general methods that can be used:
 \item Store the information separately and annotate the SBOL document with \sbol{URI}s that point to it.
 \end{itemize}
 In theory, either method can be used in any case. (Note that a third case not
-discussed here is to use SBOL to annotate external objects with linking
-to SBOL documents, rather than annotate SBOL documents with links to external objects.)
+discussed here is to annotate external objects with links
+to SBOL documents, rather than annotating SBOL documents with links to external objects.)
 
 In practice, 
 embedding large amounts of non-SBOL data into SBOL documents is likely
@@ -64,7 +64,7 @@ pointed to by the \sbol{sequence} property of a
 \sbol{Component} is really a \sbol{Sequence}).
 For complete files, this validation can be carried out entirely locally. For files that are not complete, an implementation either needs to
 have a means of validating those external references (e.g., by
-retrieving them from various repositories), or it needs to mark them as
+retrieving them from a repository), or it needs to mark them as
 unverified and not depend on their correctness.
 
 \subsection{Recommended Ontologies for External Terms}
@@ -99,10 +99,10 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
 The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.
 
 \subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
-Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, "\texttt{2016-03-16T20:12:00Z}" specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time).
+Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, ``\texttt{2016-03-16T20:12:00Z}'' specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time).
 
 \subsection{Annotating Entities with Authorship information}\label{sec:Authorship}
-Authorship information should ideally be added to \sbol{TopLevel} entities, where possible. It is RECOMMENDED that the \texttt{creator} DCMI Metadata term SHOULD be used to annotate SBOL entities with authorship information. This property can be repeated for each author. The example below shows the use of this property for two authors and the values shown are free text \texttt{String} literals.
+Authorship information should ideally be added to \sbol{TopLevel} entities where possible. It is RECOMMENDED that the \texttt{creator} DCMI Metadata term SHOULD be used to annotate SBOL entities with authorship information. This property can be repeated for each author. The example below shows the use of this property for two authors and the values shown are free text \texttt{String} literals.
 
 \subsection{Host Context / Ontologies for Experiments}
 
@@ -115,12 +115,11 @@ Any \sbol{Component} can be interpreted as specifying a mixture of the material 
 \item SBO:0000361: amount of an entity pool (e.g., 200 uL M9 media)
 \end{itemize}
 
+Mixtures MAY be defined recursively, as mixtures of mixtures of mixtures, etc.
 
 \subsubsection{Media, Inducers, and Other Reagents}
 
-An ``atomic'' reagent, which is not expected to be divided further in designs, SHOULD be represented as a \linebreak \sbol{Component}. Examples: Arabinose, Kanamycin, Rainbow bead control
-
-A ``composite'' reagent, which might be defined as a mixture of other reagents, SHOULD be represented as a \sbol{Component} that defines it as a mixture of other reagents. This might be recursive, with mixtures of mixtures of mixtures, etc. Examples: M9 media, LB broth
+Reagents, whether ``atomic'' (e.g., rainbow bead control) or mixtures, should SHOULD be represented as a \sbol{Component}.
 
 The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{roles:MD}{role} property of the \sbol{SubComponent}. Examples include:
 \begin{itemize}
@@ -171,7 +170,7 @@ SBOL has been used extensively to represent designs in homogeneous systems, wher
 
 To represent multicellular systems using SBOL, it is first necessary to represent cells properly. 
 When doing so, it is important to be able to capture the following information: (i) taxonomy, (ii) interactions occurring within the cell, and (iii) components inside the cell (e.g. DNA Molecules). 
-The proposed approach described in this section, as shown in the example in \ref{uml:cell_representation}, is capable of capturing this information. 
+The approach proposed in this section is capable of capturing this information, as shown in the example in \ref{uml:cell_representation}. 
 It uses a \sbol{Component} to represent a system that contains the cell. 
 The cell is represented by a \sbol{SubComponent} inside the \sbol{Component}. 
 A separate \sbol{Component} is used to capture information about the species and strain of the cell in the design. 
