@@ -31,3 +31,47 @@ In particular:
 \end{figure*}
 
 \subsection{Mapping between SBOL 2 and SBOL 3}
+
+\begin{itemize}
+    \item SBOL 2.x \external{ComponentDefinition} objects map to SBOL 3.x \sbol{Component} objects.  The \sbol{type} property is mapped according to  \autoref{tbl:component_type_mapping}.
+    \item SBOL 2.x \external{ModuleDefinition} objects map to SBOL 3.x \sbol{Component} objects with a \sbol{type} of \texttt{SBO:0000241} (functional entity)
+    \item SBOL 2.x \external{Component}, \external{Module}, and \external{FunctionalComponent} objects map to SBOL 3.x \sbol{SubComponent} objects
+    \item SBOL 2.x \external{SequenceConstraint} objects map to SBOL 3.x \sbol{Constraint} objects
+    \item SBOL 2.x \external{MapsTo} objects with a value other than \external{merge} are converted to an SBOL 3.x \sbol{Constraint}. \todo{Jake: please can you provide more detail?}
+    \item SBOL 2.x \external{SequenceAnnotation} objects 
+\end{itemize}
+
+
+
+
+There is a bidirectional mapping from an Interface to a set of "access" and "direction" properties. It will only lose information for FunctionalComponents that have inputs and outputs that are "private", which should not generally happen (i.e., if it's an input or output, it should be part of the public interface).
+
+From SBOL 2 to SBOL 3:
+
+For converting from a ModuleDefinition, every FunctionalComponent with a "direction" property that is not "none" is listed in the Interface object (if there are no such, don't create an Interface). The mapping from direction to interface properties is: "in"-->"inputs", "out"-->"outputs", "inout" --> "nondirectional". Finally, every Component with "access"="public" and "direction"="none" is listed as "nondirectional" in the Interface.
+
+For converting from a ComponentDefinition, every Component with "access"="public" is listed as "nondirectional" in the Interface.
+
+
+
+
+
+
+
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{Component Type} & \textbf{URI for SBO Term} \\
+    \midrule
+      \url{http://www.biopax.org/release/biopax-level3.owl\#Dna} & \url{https://identifiers.org/SBO:0000251 (DNA)}\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#DnaRegion} & \url{https://identifiers.org/SBO:0000251} (DNA)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#Rna} & \url{https://identifiers.org/SBO:0000250} (RNA)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#RnaRegion} & \url{https://identifiers.org/SBO:0000250} (RNA)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#Protein} & \url{https://identifiers.org/SBO:0000252} (Protein)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#SmallMolecule} & \url{https://identifiers.org/SBO:0000247} (Simple Chemical)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#Complex} & \url{https://identifiers.org/SBO:0000253} (Non-covalent Complex)\\
+    \bottomrule
+  \end{edtable}
+  \caption{Mapping of SBOL2 ComponentDefinition types to SBOL3 Component types}
+ \label{tbl:component_type_mapping}
+\end{table}:
