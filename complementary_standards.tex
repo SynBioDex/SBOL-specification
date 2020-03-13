@@ -134,7 +134,7 @@ This example illustrates how the Prov ontology should be used to reference to li
 
 There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitive models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
 
-The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications. As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \sbol{Measure}, \sbol{Unit} and \sbol{Prefix}. A \sbol{Measure} links a numerical value to a \sbol{Unit}, which may or may not have a \sbol{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \sbol{Measure} is treated as a subclass of \sbol{Identified}, while \sbol{Unit} and \sbol{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \sbol{Unit} subclasses: \sbol{SingularUnit}, \sbol{CompoundUnit}, \sbol{UnitMultiplication}, \sbol{UnitDivision}, \sbol{UnitExponentiation}, and \sbol{PrefixedUnit}. Lastly, SBOL adopts the following \sbol{Prefix} subclasses from OM: \sbol{SIPrefix} and \sbol{BinaryPrefix}.
+The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications. As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \om{Measure}, \om{Unit} and \om{Prefix}. A \om{Measure} links a numerical value to a \om{Unit}, which may or may not have a \om{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \om{Measure} is treated as a subclass of \sbol{Identified}, while \om{Unit} and \om{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \om{Unit} subclasses: \om{SingularUnit}, \om{CompoundUnit}, \om{UnitMultiplication}, \om{UnitDivision}, \om{UnitExponentiation}, and \om{PrefixedUnit}. Lastly, SBOL adopts the following \om{Prefix} subclasses from OM: \om{SIPrefix} and \om{BinaryPrefix}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -147,23 +147,23 @@ The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-meas
 SBOL-compliant tools are allowed to read, write, and modify data belonging to OM classes other than those described here, but this specification does not provide any guidance for the interpretation or use of these data in the context of SBOL.
 
 \subsubsection{Measure}
-\label{sec:Measure}
+\label{sec:om:Measure}
 
-The purpose of the \sbol{Measure} class is to link a numerical value to a \sbol{Unit}. 
+The purpose of the \om{Measure} class is to link a numerical value to a \om{Unit}. 
 
 \subparagraph{The \sbolheading{hasNumericalValue} property}\label{sec:hasNumericalValue}
 The \sbol{hasNumericalValue} property is REQUIRED and MUST contain a single xsd:float.
 
 \subparagraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:Measure}
-The \sbolmult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Unit}. The OM provides \sbol{URI}s for many existing instances of the \sbol{Unit} class for reference (for example, \url{http://www.ontology-of-units-of-measure.org/resource/om-2/gramPerLitre}).
+The \sbolmult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \om{Unit}. The OM provides \sbol{URI}s for many existing instances of the \om{Unit} class for reference (for example, \url{http://www.ontology-of-units-of-measure.org/resource/om-2/gramPerLitre}).
 
 \subparagraph{The \sbolheading{types} property}\label{sec:types:Measure}
-The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set of \sbol{URI}s. It is RECOMMENDED that one of these \sbol{URI}s identify a term from the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{types:Measure}{types} property of the \sbol{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/biomodels.sbo/SBO:0000612}).
+The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set of \sbol{URI}s. It is RECOMMENDED that one of these \sbol{URI}s identify a term from the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{types:Measure}{types} property of the \om{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/biomodels.sbo/SBO:0000612}).
 
 \subsubsection{Unit}
-\label{sec:Unit}
+\label{sec:om:Unit}
 
-As adopted by SBOL, \sbol{Unit} is an abstract class that is extended by other classes to describe units of measure using a shared set of properties. 
+As adopted by SBOL, \om{Unit} is an abstract class that is extended by other classes to describe units of measure using a shared set of properties. 
 
 \subparagraph{The \sbolheading{symbol} property}\label{sec:symbol:Unit}
 The \sbolmult{symbol:Unit}{symbol} property is REQUIRED and MUST contain a \sbol{String}. This \sbol{String} is commonly used to abbreviate the unit of measure's name. For example, the unit of measure named ``gram per liter'' is commonly abbreviated using the \sbol{String} ``g/l''.
@@ -184,69 +184,69 @@ The \sbolmult{comment:Unit}{comment} property is OPTIONAL and MAY contain a \sbo
 The \sbolmult{longcomment:Unit}{longcomment} property is OPTIONAL and MAY contain a \sbol{String}. This \sbol{String} is a long description of the unit of measure and SHOULD be longer than any \sbol{String} contained by the \sbolmult{comment:Unit}{comment} property.
 
 \subsubsection{SingularUnit}
-\label{sec:SingularUnit}
+\label{sec:om:SingularUnit}
 
-The purpose of the \sbol{SingularUnit} class is to describe a unit of measure that is not explicitly represented as a combination of multiple units, but could be equivalent to such a representation. For example, a joule is considered to be a \sbol{SingularUnit}, but it is equivalent to the multiplication of a newton and a meter.  
+The purpose of the \om{SingularUnit} class is to describe a unit of measure that is not explicitly represented as a combination of multiple units, but could be equivalent to such a representation. For example, a joule is considered to be a \om{SingularUnit}, but it is equivalent to the multiplication of a newton and a meter.  
 
 \subparagraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:SingularUnit}
-The \sbolmult{hasUnit:SingularUnit}{hasUnit} is OPTIONAL and MAY contain a \sbol{URI}. This \sbol{URI} MUST refer to another \sbol{Unit}. The \sbolmult{hasUnit:SingularUnit}{hasUnit} propery can be used in conjunction with the \sbolmult{hasFactor:SingularUnit}{hasFactor} property to specify whether a \sbol{SingularUnit} is equivalent to another \sbol{Unit} multiplied by a factor. For example, an angstrom is equivalent to $10^{-10}$ meters.
+The \sbolmult{hasUnit:SingularUnit}{hasUnit} is OPTIONAL and MAY contain a \sbol{URI}. This \sbol{URI} MUST refer to another \om{Unit}. The \sbolmult{hasUnit:SingularUnit}{hasUnit} propery can be used in conjunction with the \sbolmult{hasFactor:SingularUnit}{hasFactor} property to specify whether a \om{SingularUnit} is equivalent to another \om{Unit} multiplied by a factor. For example, an angstrom is equivalent to $10^{-10}$ meters.
 
 \subparagraph{The \sbolheading{hasFactor} property}\label{sec:hasFactor:SingularUnit}
-The \sbolmult{hasFactor:SingularUnit}{hasFactor} property is OPTIONAL and MAY contain a xsd:float. If the \sbolmult{hasFactor:SingularUnit}{hasFactor} property of a \sbol{SingularUnit} is non-empty, then its \sbolmult{hasUnit:SingularUnit}{hasUnit} property SHOULD also be non-empty.
+The \sbolmult{hasFactor:SingularUnit}{hasFactor} property is OPTIONAL and MAY contain a xsd:float. If the \sbolmult{hasFactor:SingularUnit}{hasFactor} property of a \om{SingularUnit} is non-empty, then its \sbolmult{hasUnit:SingularUnit}{hasUnit} property SHOULD also be non-empty.
 
 \subsubsection{CompoundUnit}
-\label{sec:CompoundUnit}
+\label{sec:om:CompoundUnit}
 
-As adopted by SBOL, \sbol{CompoundUnit} is an abstract class that is extended by other classes to describe units of measure that can be represented as combinations of multiple other units of measure.
+As adopted by SBOL, \om{CompoundUnit} is an abstract class that is extended by other classes to describe units of measure that can be represented as combinations of multiple other units of measure.
 
 \subsubsection{UnitMultiplication}
-\label{sec:UnitMultiplication}
+\label{sec:om:UnitMultiplication}
 
-The purpose of the \sbol{UnitMultiplication} class is to describe a unit of measure that is the multiplication of two other units of measure. 
+The purpose of the \om{UnitMultiplication} class is to describe a unit of measure that is the multiplication of two other units of measure. 
 
 \subparagraph{The \sbolheading{hasTerm1} property}\label{sec:hasTerm1}
-The \sbol{hasTerm1} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}. This \sbol{Unit} is the first multiplication term.
+The \sbol{hasTerm1} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}. This \om{Unit} is the first multiplication term.
 
 \subparagraph{The \sbolheading{hasTerm2} property}\label{sec:hasTerm2}
-The \sbol{hasTerm2} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}. This \sbol{Unit} is the second multiplication term. It is okay if the \sbol{Unit} referred to by \sbol{hasTerm1} is the same as that referred to by \sbol{hasTerm2}.
+The \sbol{hasTerm2} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}. This \om{Unit} is the second multiplication term. It is okay if the \om{Unit} referred to by \sbol{hasTerm1} is the same as that referred to by \sbol{hasTerm2}.
 
 \subsubsection{UnitDivision}
-\label{sec:UnitDivision}
+\label{sec:om:UnitDivision}
 
-The purpose of the \sbol{UnitDivision} class is to describe a unit of measure that is the division of one unit of measure by another.
+The purpose of the \om{UnitDivision} class is to describe a unit of measure that is the division of one unit of measure by another.
 
 \subparagraph{The \sbolheading{hasNumerator} property}\label{sec:hasNumerator}
-The \sbol{hasNumerator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}.
+The \sbol{hasNumerator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}.
 
 \subparagraph{The \sbolheading{hasDenominator} property}\label{sec:hasDenominator}
-The \sbol{hasDenominator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}.
+The \sbol{hasDenominator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}.
 
 \subsubsection{UnitExponentiation}
-\label{sec:UnitExponentiation}
+\label{sec:om:UnitExponentiation}
 
-The purpose of the \sbol{UnitExponentiation} class is to describe a unit of measure that is raised to an integer power.
+The purpose of the \om{UnitExponentiation} class is to describe a unit of measure that is raised to an integer power.
 
 \subparagraph{The \sbolheading{hasBase} property}\label{sec:hasBase}
-The \sbol{hasBase} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}.
+The \sbol{hasBase} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}.
 
 \subparagraph{The \sbolheading{hasExponent} property}\label{sec:hasExponent}
 The \sbol{hasExponent} property is REQUIRED and MUST contain an \texttt{xsd:integer}.
 
 \subsubsection{PrefixedUnit}
-\label{sec:PrefixedUnit}
+\label{sec:om:PrefixedUnit}
 
-The purpose of the \sbol{PrefixedUnit} class is to describe a unit of measure that is the multiplication of another unit of measure and a factor represented by a standard prefix such as ``milli,'' ``centi,'' ``kilo,'' etc. 
+The purpose of the \om{PrefixedUnit} class is to describe a unit of measure that is the multiplication of another unit of measure and a factor represented by a standard prefix such as ``milli,'' ``centi,'' ``kilo,'' etc. 
 
 \subparagraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:PrefixedUnit}
-The \sbolmult{hasUnit:PrefixedUnit}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \sbol{Unit}. 
+The \sbolmult{hasUnit:PrefixedUnit}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}. 
 
 \subparagraph{The \sbolheading{hasPrefix} property}\label{sec:hasPrefix}
-The \sbol{hasPrefix} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \sbol{Prefix}.
+The \sbol{hasPrefix} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \om{Prefix}.
 
 \subsubsection{Prefix}
-\label{sec:Prefix}
+\label{sec:om:Prefix}
 
-As adopted by SBOL, \sbol{Prefix} is an abstract class that is extended by other classes to describe factors that are commonly represented by standard unit prefixes. For example, the factor $10^{-3}$ is represented by the standard unit prefix ``milli.'' 
+As adopted by SBOL, \om{Prefix} is an abstract class that is extended by other classes to describe factors that are commonly represented by standard unit prefixes. For example, the factor $10^{-3}$ is represented by the standard unit prefix ``milli.'' 
 
 \subparagraph{The \sbolheading{symbol} property}\label{sec:symbol:Prefix}
 The \sbolmult{symbol:Prefix}{symbol} property is REQUIRED and MUST contain a \sbol{String}. This \sbol{String} is commonly used to abbreviate the name of the unit prefix. For example, the \sbol{String} ``m'' is commonly used to abbreviate the name ``milli.''
@@ -270,20 +270,20 @@ The \sbolmult{longcomment:Prefix}{longcomment} property is OPTIONAL and MAY cont
 The \sbolmult{hasFactor:Prefix}{hasFactor} property is REQUIRED and MUST contain an xsd:float.
 
 \subsubsection{SIPrefix}
-\label{sec:SIPrefix}
+\label{sec:om:SIPrefix}
 
-The purpose of the \sbol{SIPrefix} class is to describe standard SI prefixes such as ``milli,'' ``centi,'' ``kilo,'' etc. 
+The purpose of the \om{SIPrefix} class is to describe standard SI prefixes such as ``milli,'' ``centi,'' ``kilo,'' etc. 
 
 
 \subsubsection{BinaryPrefix}
-\label{sec:BinaryPrefix}
+\label{sec:om:BinaryPrefix}
 
-The purpose of the \sbol{BinaryPrefix} class is to describe standard binary prefixes such as ``kibi,'' ``mebi,'' ``gibi,'' etc. These prefixes commonly precede units of information such as ``bit'' and ``byte.''
+The purpose of the \om{BinaryPrefix} class is to describe standard binary prefixes such as ``kibi,'' ``mebi,'' ``gibi,'' etc. These prefixes commonly precede units of information such as ``bit'' and ``byte.''
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\linewidth]{uml/media_example}
-\caption[]{Growth media recipe represented using instances of the \sbol{Measure} and \sbol{Unit} classes from the OM.}
+\caption[]{Growth media recipe represented using instances of the \om{Measure} and \om{Unit} classes from the OM.}
 \label{uml:media_example}
 \end{center}
 \end{figure}

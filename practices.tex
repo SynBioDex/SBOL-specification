@@ -108,7 +108,7 @@ Authorship information should ideally be added to \sbol{TopLevel} entities where
 
 \subsubsection{Mixtures via Components}
 
-Any \sbol{Component} can be interpreted as specifying a mixture of the material entity (SBO:0000240) \sbol{Feature}s that it includes.  The amount of each such instance included in the mixture SHOULD be specified by attaching a \sbol{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
+Any \sbol{Component} can be interpreted as specifying a mixture of the material entity (SBO:0000240) \sbol{Feature}s that it includes.  The amount of each such instance included in the mixture SHOULD be specified by attaching a \om{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
 \begin{itemize}
 \item SBO:0000540: fraction of an entity pool (e.g., 1/3 CHO cells, 2/3 HEK cells)
 \item SBO:0000472: molar concentration of an entity (e.g., 1 mM Arabinose)
@@ -146,15 +146,15 @@ A complete specification of a sample SHOULD be a \sbol{Component} that includes 
 \item A \sbol{SubComponent} instantiating each strain in the sample
 \item A \sbol{SubComponent} for the media or buffer
 \item A \sbol{SubComponent} for each additional reagent added to the media (e.g., inducers, antibiotics)
-\item \sbol{Measure}s on each of these specifying the amount in the sample
-\item \sbol{Measure}s on the \sbol{Component} for each environmental parameter (e.g., temperature, pH, culturing time)
+\item \om{Measure}s on each of these specifying the amount in the sample
+\item \om{Measure}s on the \sbol{Component} for each environmental parameter (e.g., temperature, pH, culturing time)
 \end{itemize}
 
 \subsubsection{Other Experimental Parameters}
 
 In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, the \texttt{hasMeasure} property of \sbol{Identified} can be used.  The \texttt{measure} of a \texttt{Component} provides context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \texttt{measure} of a material entity (SBO:0000240) \texttt{Feature} provides a measurement in context (e.g., the dosage of Arabinose in a sample).
 
-Values of these parameters SHOULD be specified by attaching a \sbol{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
+Values of these parameters SHOULD be specified by attaching a \om{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
 \begin{itemize}
 \item SBO:0000147: thermodynamic temperature (e.g., culturing at 27 C)
 \item SBO:0000332: half-life of an exponential decay (e.g., decay rate of a gRNA)
@@ -218,7 +218,7 @@ An example is shown in \ref{uml:multiple_cell_representation}.
 
 \subsubsection{Cell Ratios}
 
-The proportion of cell types present in a multicellular system can be captured using \sbol{Measure} on the representations of cells in the design.
+The proportion of cell types present in a multicellular system can be captured using \om{Measure} on the representations of cells in the design.
 As a best practice, the value of these measure classes is a percentage less than or equal to 100\%, representing the amount of a cell type present in the system compared to all other cell types present. 
 Therefore, the sum of all these values specified in the system will typically be equal to 100\%, though this may not be the case if the system is not completely defined. 
 An example is shown in \ref{uml:cell_ratios}.
