@@ -43,9 +43,9 @@ The \sbolmult{orientation:F}{orientation} property is OPTIONAL and has a data ty
 \paragraph{SubComponent}
 \label{sec:SubComponent}
 
-The \sbol{SubComponent} class is a subclass of the \sbol{Feature} class that can be used to specify structural hierarchy. 
-For example, the \sbol{Component} of a gene might contain four \sbol{SubComponent} objects: a promoter, RBS, CDS, and terminator. 
-In turn, the \sbol{Component} of the promoter \sbol{SubComponent} might contain \sbol{SubComponent} objects defined as various operator sites.
+The \sbol{SubComponent} class is a subclass of the \sbol{Feature} class that can be used to specify structural hierarchy.
+For example, the \sbol{Component} of a gene might contain four \sbol{SubComponent} objects: a promoter, RBS, CDS, and terminator, each linked to a \sbol{Component} that provides the complete definition.
+In turn, the \sbol{Component} of the promoter \sbol{SubComponent} might itself contain \sbol{SubComponent} objects defining various operator sites, etc.
 
 \subparagraph{The \sbolheading{roleIntegration} property}\label{sec:roleIntegration}
 
@@ -71,28 +71,37 @@ It is RECOMMENDED to specify \sbol{SubComponent} \sbolmult{role:F}{role} values 
 \subparagraph{The \sbolheading{instanceOf} property}
 \label{sec:instanceOf}
 
-The \sbol{instanceOf} property is a REQUIRED \sbol{URI} that refers to the \sbol{Component} of the \sbol{SubComponent}.
-As described in the previous section, this \sbol{Component} effectively provides information about the \sbolmult{type:CD}{type} and \sbolmult{role:CD}{role} of the \sbol{SubComponent}.
+The \sbol{instanceOf} property is a REQUIRED \sbol{URI} that refers to the \sbol{Component} providing the definition for this \sbol{SubComponent}.
+Among other things, as described in the previous section, this \sbol{Component} effectively provides information about the \sbolmult{type:CD}{type} and \sbolmult{role:CD}{role} of the \sbol{SubComponent}.
 
 The \sbol{instanceOf} property MUST NOT refer to the same \sbol{Component} as the one that contains the \sbol{SubComponent}.
 Furthermore, \sbol{SubComponent} objects MUST NOT form a cyclical chain of references via their \sbol{instanceOf} properties and the \sbol{Component} objects that contain them.
-For example, consider the \sbol{SubComponent} objects $A$ and $B$ and the \sbol{Component} objects $X$ and $Y$. The reference chain ``$X$ contains $A$, $A$ is defined by $Y$, $Y$ contains $B$, and $B$ is defined by $X$'' is cyclical.
+For example, consider the \sbol{SubComponent} objects $A$ and $B$ and the \sbol{Component} objects $X$ and $Y$. The reference chain ``$X$ has feature $A$, $A$ is an instance of $Y$, $Y$ has feature $B$, and $B$ is an instance of $X$'' is cyclical.
 
-\subparagraph{The \sbolheading{sourceLocation} property}\label{sec:sourceLocation}
-
-A \sbol{SubComponent} MAY have any number of \sbol{sourceLocation} properties, each of type \sbol{URI} that MUST refer to  \sbol{Location} objects that indicate which \sbol{elements} of a \sbol{Component}'s \sbol{Sequence} are to be included in the \sbol{Component}'s parent.
-The \sbol{sourceLocations} property allows for only a portion of a \sbol{Component}'s \sbol{Sequence} to be included, rather than its entirety.
-
-If there are no \sbol{sourceLocation} properties, then the whole \sbol{Sequence} is assumed to be included. Alternatively,
-if there is one or more \sbol{sourceLocation} properties, then the relationship between the original \sbol{Component}'s
-\sbol{Sequence} and the included \sbol{Sequence} is defined identically to the \sbol{locations}
-property on the \sbol{SequenceFeature} object.
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:SC}
 
-A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects. If \sbolmult{hasLocation:SC}{hasLocation} is missing, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined.
+A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects that indicate the location of the \sbol{sequence} from the \sbol{instanceOf} \sbol{Component} in a \sbol{sequence} of the parent \sbol{Component}.
 
-The \sbol{Location} record(s) specified by a \sbol{SubComponent} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbolmult{hasLocation:SF}{hasLocation}. Concretely, two \sbol{Location} records attached to the same \sbol{LocalSubComponent} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{LocalSubComponent}s may overlap.
+If any \sbolmult{hasLocation:SC}{hasLocation} is defined, then there MUST BE precisely one \sbol{sequence} in the \sbol{instanceOf} \sbol{Component}, as otherwise this relationship is ill-defined.
+
+If no \sbolmult{hasLocation:SC}{hasLocation} is defined, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined or involving types for which sequence relationships are not relevant (e.g., inclusion of a reaction sequence within a metabolic network).
+
+Allowing multiple \sbol{Location} objects on a single \sbol{SubComponent} is intended to enable representation of discontinuous regions (for example, a coding sequence encoded across a set of exons with interspersed introns).
+As such, the \sbol{Location} objects of a single \sbol{SubComponent} MUST NOT specify overlapping regions, since it is not clear what this would mean.
+There is no such concern with different objects, however, which can freely overlap in \sbol{Location} (for example, specifying overlapping linkers for sequence assembly).
+
+
+\subparagraph{The \sbolheading{sourceLocation} property}\label{sec:sourceLocation}
+
+The \sbol{sourceLocation} property allows for only a portion of a \sbol{Component}'s \sbol{Sequence} to be included, rather than its entirety.
+For example, when composing parts with certain assembly methods, some bases on the boundary may be removed or replaced.
+Another example is describing a deletion or replacement of a portion of a sequence.
+
+A \sbol{SubComponent} MAY have any number of \sbol{sourceLocation} properties, each of type \sbol{URI} that MUST refer to  \sbol{Location} objects that indicate which \sbol{elements} of the \sbol{instanceOf} \sbol{Component}'s \sbol{Sequence} are used in defining the parent of the \sbol{SubComponent}.
+
+If there are no \sbol{sourceLocation} properties, then the whole \sbol{Sequence} is assumed to be included. 
+
 
 \paragraph{ComponentReference}
 \label{sec:ComponentReference}
@@ -101,23 +110,32 @@ The \sbol{ComponentReference} class is a subclass of \sbol{Feature} that can be 
 
 \subparagraph{The \sbolheading{inChildOf} property}\label{sec:inChildOf}
 
-The \sbol{inChildOf} property is a REQUIRED \sbol{URI} that refers to a SubComponent. The \sbol{inChildOf} property must refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference} (i.e., as a \sbol{SubComponent} of \sbol{Component}, or an \sbol{inChildOf} of \sbol{ComponentReference}). If the \sbol{Feature} is a \sbol{SubComponent}, then it must be a child of the \sbol{SubComponent} pointed to by \sbol{inChildOf}.
+The \sbol{inChildOf} property is a REQUIRED \sbol{URI} that refers to a \sbol{SubComponent}. 
+The \sbol{inChildOf} property must refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference} (i.e., as a \sbol{SubComponent} of \sbol{Component}, or an \sbol{inChildOf} of \sbol{ComponentReference}). 
 
 \subparagraph{The \sbolheading{hasFeature} property}\label{sec:hasFeature:CR}
 
-The \sbolmult{hasFeature:CR}{hasFeature} property is an OPTIONAL \sbol{URI} that refers to a \sbol{Feature}.
+The \sbolmult{hasFeature:CR}{hasFeature} property is a REQUIRED \sbol{URI} that refers to a \sbol{Feature}.
+
+This can be used to either link to the \sbol{Feature} being referenced or to chain hierarchically through additional layers of \sbol{SubComponent}.
+If the \sbol{Feature} is a \sbol{ComponentReference}, then that \sbol{ComponentReference} MUST BE a child of the \sbol{ComponentReference} linking to it via \sbolmult{hasFeature:CR}{hasFeature}, and it acts as a hierarchical link in a chain of references.
+Otherwise, if the \sbol{hasFeature} refers to any other type of \sbol{Feature}, that feature MUST BE a child of the \sbol{SubComponent} pointed to by \sbol{inChildOf}.
+
+For example, \sbol{ComponentReference} R1 looking into a \sbol{SubComponent} for a plasmid might link with \sbol{hasFeature} to its own child \sbol{ComponentReference} R2, which in turn looks within the \sbol{Component} defining the plasmid to the plasmid's CDS \sbol{SubComponent}, in turn using \sbol{hasFeature} to reference a \sbol{SequenceFeature} within the \sbol{Component} that defines that CDS.
+
+
 
 \paragraph{LocalSubComponent}
 \label{sec:LocalSubComponent}
 
-The \sbol{LocalSubComponent} class a subclass of \sbol{Feature}. This class serves as a way to create an ``empty'' \sbol{Component} to serve as a placeholder in more complex \sbol{Component}s.
+The \sbol{LocalSubComponent} class is a subclass of \sbol{Feature}. 
+This class serves as a way to create a placeholder in more complex \sbol{Component}s, such as a variable to be filled in later or a composite that exists only within the context of the parent \sbol{Component}.
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:LSR}
 
 A \sbol{LocalSubComponent} MAY have any number of \sbolmult{hasLocation:LSR}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects. 
+These follow the same restrictions as for the \sbolmult{hasLocation:SC}{hasLocation} of a \sbol{SubComponent}, notably that the \sbol{Location}s of \sbolmult{hasLocation:LSR}{hasLocation} properties attached to the same \sbol{LocalSubComponent} MUST NOT overlap.
 
-The \sbol{Location} record(s) specified by a \sbol{LocalSubComponent} are subject to the same restrictions currently in place for \sbol{SequenceFeature} \sbolmult{hasLocation:SF}{hasLocation}.
-Concretely, two \sbol{Location} records attached to the same \sbol{LocalSubComponent} MUST NOT overlap in their range as it would not be clear what that means. The \sbol{Location} of two separate \sbol{LocalSubComponent}s may overlap.
 
 \subparagraph{The \sbolheading{type} property}\label{sec:type:LSC}
 
@@ -130,11 +148,14 @@ The \sbol{ExternallyDefined} class has been introduced so that external definiti
 
 \subparagraph{The \sbolheading{type} property}\label{sec:type:ED}
 
-The \sbolmult{type:ED}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ED}{type} property is identical to its use in \sbol{Component}
+The \sbolmult{type:ED}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ED}{type} property is identical to its use in \sbol{Component}.
 
 \subparagraph{The \sbolheading{definition} property}\label{sec:definition:ER}
 
-The \sbolmult{definition:ER}{definition} property is REQUIRED and is of type \sbol{URI} that links to a cononical definition external to SBOL.
+The \sbolmult{definition:ER}{definition} property is REQUIRED and is of type \sbol{URI} that links to a canonical definition external to SBOL.
+When possible, such definitions SHOULD use the recommended external resources in \ref{sec:recomm_ontologies}.
+For example, an \sbol{ExternallyDefined} simple chemical might link to ChEBI and a protein might link to UniProt.
+
 
 \paragraph{SequenceFeature}
 \label{sec:SequenceFeature}
@@ -144,7 +165,5 @@ The \sbol{SequenceFeature} class describes one or more regions of interest on th
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:SF}
 
 A \sbol{SequenceFeature} MAY have any number of \sbolmult{hasLocation:SF}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects. 
+These follow the same restrictions as for the \sbolmult{hasLocation:SC}{hasLocation} of a \sbol{SubComponent}, notably that the \sbol{Location}s of \sbolmult{hasLocation:SF}{hasLocation} properties attached to the same \sbol{SequenceFeature} MUST NOT overlap.
 
-Allowing multiple \sbol{Location} objects on a single \sbol{SequenceFeature} is intended to enable representation of discontinuous regions (for example, a \sbol{Feature} encoded across a set of exons with interspersed introns).
-As such, the \sbol{Location} objects of a single \sbol{SequenceFeature} SHOULD NOT specify overlapping regions, since it is not clear what this would mean.
-There is no such concern with different \sbol{SequenceFeature} objects, however, which can freely overlap in \sbol{Location} (for example, specifying overlapping linkers for sequence assembly).
