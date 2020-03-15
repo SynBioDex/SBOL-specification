@@ -33,104 +33,37 @@ In particular:
 \subsection{Mapping between SBOL 2 and SBOL 3}
 
 \ref{SBOL1TO2} depicts the mapping of SBOL 2.3 classes to SBOL 3.x classes, indicating corresponding classes/properties by color.
-SBOL 3 does not define any new features but streamlines the SBOL 2.3 Data Model.
-The highlights are:
+
 \begin{itemize}
-	
-	\item SBOL 2.3 \external{ComponentDefinition} and \external{ModuleDefinition} objects are merged and map to SBOL 3.x \sbol{Component} objects that contains properties and references from both SBOL 2.3 objects.
-	
-	\item SBOL 2.3 \external{ComponentInstance} and \external{SequenceAnnotation} objects are unified and maps to SBOL 3.x \sbol{Feature} objects.
-	
-	\begin{itemize}
-		
-		\item The derived class from SBOL 2.3 \external{Component} maps to SBOL 3.x \external{SubComponent}
-		\item The class from SBOL 2.3 \external{SequenceAnnotation} maps to the SBOL3.x derived class \external{SequenceFeature}.
-	\end{itemize}
-	
-	\item Due to the SBOL 2.3 \external{ModuleDefinition} being unified into SBOL3.x \external{Component} object the functionality to describe directional information is stored in the SBOL 3.x \external{Interface} object that is a property of the SBOL 3.x {Component} object.
-	
+    \item SBOL 2.x \external{ComponentDefinition} objects map to SBOL 3.x \sbol{Component} objects.  The \sbol{type} property is mapped according to  \ref{tbl:component_type_mapping}.
+    \item SBOL 2.x \external{ModuleDefinition} objects map to SBOL 3.x \sbol{Component} objects with a \sbol{type} of \texttt{SBO:0000241} (functional entity)
+    \item Every \external{FunctionalComponent} in an SBOL 2.x \external{ModuleDefinition} with a "direction" property that is not "none" is listed in the \sbol{Interface} of its SBOL 3.x \sbol{Component}. The mapping from direction to interface properties is: "in"-->"inputs", "out"-->"outputs", "inout" --> "nondirectional". Finally, every Component with "access"="public" and "direction"="none" is listed as "nondirectional" in the Interface.
+    \item Every \external{Component} in an SBOL 2.x \external{ComponentDefinition} with "access"="public" is listed as "nondirectional" in the \sbol{Interface} of its SBOL 3.x \sbol{Component}.
+    \item SBOL 2.x \external{Component}, \external{Module}, and \external{FunctionalComponent} objects map to SBOL 3.x \sbol{SubComponent} objects
+    \item SBOL 2.x \external{SequenceConstraint} objects map to SBOL 3.x \sbol{Constraint} objects
+    \item SBOL 2.x \external{MapsTo} objects with a value other than \external{merge} are converted to an SBOL 3.x \sbol{Constraint}. \todo{Jake: please can you provide more detail?}
+    \item SBOL 2.x \external{SequenceAnnotation} objects map to SBOL 3.x \sbol{SequenceFeature} objects if they do not have a \external{component}. If they do have a \external{component}, their locations are added to the corresponding SBOL3 \sbol{SubComponent}.
+    \item \external{Location} objects are assigned an \sbol{order} integer.  In the case of multiple locations, the order may be inferred, e.g. from the \external{start} and \external{end} properties of ranges.  However, such behaviour is tooling-specific.
 \end{itemize}
 
-\begin{table}[]
-	\begin{tabular}{|l|l|l|}
-		\hline
-		SBOL 2 Name & SBOL 3 Name & Description \\ 
-		\hline
-		
-		Identified & Identified & \begin{tabular}[c]{@{}l@{}}Removal of Version.\\ 
-			Addition of the OM Measure property.\end{tabular} \\
-		\hline
-		
-		TopLevel & TopLevel & Attachments property renamed to has Attachments. \\
-		\hline
-		
-		Sequence & Sequence & Unchanged. \\ 
-		\hline
-		
-		\begin{tabular}[c]{@{}l@{}}ComponentDefinition\\  ModuleDefinition\end{tabular} & Component & \begin{tabular}[c]{@{}l@{}}Merged ComponentDefinition and ModuleDefinition.\\ Renamed Component.\\ From ComponentDefinition Adopted:\\ types,\\ roles,\\ “hasSequences”, \\ “hasFeatures”,\\ “hasConstraints”\\ \\ From ModuleDefinition Adopted:\\ “hasInteraction”,\\ “hasInterface”,\\ “hasModel”\end{tabular} \\
-		\hline
-		
-		ComponentInstance & Feature & \begin{tabular}[c]{@{}l@{}}Renamed to Feature.\\ Component derived class renamed to SubComponent.\\ Addition of ComponentReference, LocalSubComponent, \\ ExternallyDefined and SequenceFeature derived classes.\end{tabular} \\
-		\hline
-		
-		MapsTo & \begin{tabular}[c]{@{}l@{}}Interface, \\ ComponentReference.\end{tabular} & \begin{tabular}[c]{@{}l@{}}Functionality implicitly moved to two new classes.\\ Interface handles directional data.\\ ComponentReference handles ……\end{tabular} \\
-		\hline
-		
-		SequenceAnnotation & SequenceFeature & \begin{tabular}[c]{@{}l@{}}Maps to derived class of Feature that is specially for \\ Annotation on Sequence.\end{tabular} \\
-		\hline
-		
-		Location & Location & \begin{tabular}[c]{@{}l@{}}Removed order property.Removed GenericLocation subclass.\\ Added EntireSequence subclass.\end{tabular} \\
-		\hline
-		
-		SequenceConstraint & Constraint & Renamed to Constraint.Expansion of possible values. \\
-		Model & Model & Unchanged. \\
-		\hline
-		
-		Module & SubComponent & \begin{tabular}[c]{@{}l@{}}Merged and mapped when ModuleDefinition is merged \\ into Component.\end{tabular} \\
-		\hline
-		
-		FunctionalComponent & SubComponent & Implicit merge when ModuleDefinition and Module are removed. \\
-		\hline
-		
-		Interaction & Interaction & Participations property renamed to hasParticipations. \\
-		\hline
-		
-		Participation & Participation & Unchanged. \\
-		\hline
-		
-		Collection & Collection & Unchanged \\
-		\hline
-		
-		CombinatorialDeriviation & CombinatorialDeriviation & \begin{tabular}[c]{@{}l@{}}Template now points to Component.\\ variableComponent property renamed to hasVariableComponent.\end{tabular} \\
-		\hline
-		
-		VariableComponent & VariableComponent & Unchanged \\
-		\hline
-		
-		Implementation & Implementation & Unchanged. \\
-		\hline
-		
-		Attachment & Attachment & Unchanged. \\
-		\hline
-		
-		ExperimentalData & ExperimentalData & Unchanged. \\
-		\hline
-		
-		Experiment & Experiment & Now a derived class of Collection. \\
-		\hline
-		
-		Annotation & Annotation & Unchanged. \\
-		\hline
-		
-		GenericTopLevel & TopLevel & Removed. \\
-		\hline
-		
-		Collection & Collection & Unchanged. \\
-		\hline
-		N/a & Namespace & Derived class of Collection.\\
+\begin{table}[ht]
+  \begin{edtable}{tabular}{ll}
+    \toprule
+    \textbf{SBOL 2.x Type} & \textbf{SBOL 3.x Type} \\
+    \midrule
+      \url{http://www.biopax.org/release/biopax-level3.owl\#Dna} & \url{https://identifiers.org/SBO:0000251 (DNA)}\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#DnaRegion} & \url{https://identifiers.org/SBO:0000251} (DNA)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#Rna} & \url{https://identifiers.org/SBO:0000250} (RNA)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#RnaRegion} & \url{https://identifiers.org/SBO:0000250} (RNA)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#Protein} & \url{https://identifiers.org/SBO:0000252} (Protein)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#SmallMolecule} & \url{https://identifiers.org/SBO:0000247} (Simple Chemical)\\
+      \url{http://www.biopax.org/release/biopax-level3.owl\#Complex} & \url{https://identifiers.org/SBO:0000253} (Non-covalent Complex)\\
+    \bottomrule
+  \end{edtable}
+  \caption{Mapping of SBOL2 ComponentDefinition types to SBOL3 Component types}
+ \label{tbl:component_type_mapping}
+\end{table}:
 
-	\end{tabular}
-\end{table}
 \begin{figure*}[h]
 	\begin{subfigure}{.5\textwidth}
 		\centering
@@ -145,3 +78,5 @@ The highlights are:
 	\end{subfigure}
 	\caption{\label{SBOL2TO3}The mapping from the SBOL 2.3 data model to the SBOL 3.x  data model, indicating corresponding classes/properties by color.}
 \end{figure*}
+
+
