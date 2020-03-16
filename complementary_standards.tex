@@ -19,7 +19,7 @@ These relationships are leveraged in SBOL tooling for describing multi-stage syn
 
 Synthetic biology workflows may involve multiple stages, multiple users, multiple organizations, and interdisciplinary collaborations. These workflows can be described using four core PROV-O classes: \texttt{Entity}, \texttt{Activity}, \texttt{Agent}, and \texttt{Plan}. Any SBOL \sbol{Identified} object can implicitly act as an instance of PROV-O's \texttt{Entity} class. Workflow histories (retrospective provenance) and workflow specifications (prospective provenance) can be described in SBOL using \prov{Activity} objects to link \sbol{Identified} objects into workflows. An \texttt{prov:Agent} (for example a software or a person) runs an \prov{Activity} according to a \texttt{prov:Plan} to generate new entities. Resources representing \prov{Agent}, \prov{Activity} and \prov{Plan} classes should be handled as \sbol{TopLevel}, whilst \prov{Usage} and \prov{Association} resources should be treated as child \sbol{Identified} objects within their parent \texttt{prov:Activity} objects.  
 
-A design-build-test-learn SBOL ontology has been adopted for use with PROV-O classes (see \ref{tbl:activity_types}). The terms \textit{design}, \textit{build}, \textit{test}, and \textit{learn} provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. These terms SHOULD BE used on the \sbol{sbol:type} property of the \prov{Activity} class. (Note that this property is a special property added by the SBOL specification, and is not part of the original PROV-O specification.) Additionally, these terms SHOULD BE used in the \sbolmult{roles:U}{hadRole} properties on \prov{Usage} to qualify how the referenced \prov{entity} is used by the parent \prov{Activity}. The validation rules in \ref{validation} place some logical constraints on the order in which different types of \prov{Activity} are chained into design-build-test-learn workflows. These rules additionally place constraints on the types of objects which may be used an inputs for a particular type of  \prov{Activity}. For example, a \textit{design} \prov{Usage} may be used as an input for either a \textit{design} or \textit{build} \prov{Activity} but MUST NOT be used as an input for a \textit{test} \prov{Activity}. An example of how these terms are used is provided in \ref{images:design-build-test-learn}. 
+A design-build-test-learn SBOL ontology has been adopted for use with PROV-O classes (see \ref{tbl:activity_types}). The terms \textit{design}, \textit{build}, \textit{test}, and \textit{learn} provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. These terms SHOULD BE used on the \sbolmult{types:Activity}{type} property of the \prov{Activity} class. (Note that this property is a special property added by the SBOL specification, and is not part of the original PROV-O specification.) Additionally, these terms SHOULD BE used in the \sbolmult{roles:U}{hadRole} properties on \prov{Usage} to qualify how the referenced \prov{entity} is used by the parent \prov{Activity}. The validation rules in \ref{validation} place some logical constraints on the order in which different types of \prov{Activity} are chained into design-build-test-learn workflows. These rules additionally place constraints on the types of objects which may be used an inputs for a particular type of  \prov{Activity}. For example, a \textit{design} \prov{Usage} may be used as an input for either a \textit{design} or \textit{build} \prov{Activity} but MUST NOT be used as an input for a \textit{test} \prov{Activity}. An example of how these terms are used is provided in \ref{images:design-build-test-learn}. 
 
 \begin{table}[ht]
 	\begin{edtable}{tabular}{llp{3.75in}}
@@ -55,16 +55,16 @@ A generated \texttt{Entity} is linked through a \texttt{prov:wasGeneratedBy} rel
 The \sbolmult{types:Activity}{type} property is an OPTIONAL set of \sbol{URI}s that explicitly specify the type of the provenance \prov{Activity} in more detail. If specified, it is RECOMMENDED that at least one \sbol{URI} of the \sbolmult{types:Activity}{type} property of an \prov{Activity} refers to a \sbol{URI} from \ref{tbl:activity_types}.
 
 \subparagraph{The \sbolheading{startedAtTime} property}\label{sec:prov:startedAtTime}
-The \prov{startedAtTime} property is OPTIONAL and contains a DateTime (see~\ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \sbol{endedAtTime} property is REQUIRED.
+The \prov{startedAtTime} property is OPTIONAL and contains a DateTime (see~\ref{sec:DateTime}) value, indicating when the activity started.  If this property is present, then the \prov{endedAtTime} property is REQUIRED.
 
 \subparagraph{The \sbolheading{endedAtTime} property}\label{sec:prov:endedAtTime}
 The \prov{endedAtTime} property is OPTIONAL and contains a DateTime (see~\ref{sec:DateTime}) value, indicating when the activity ended.
 
 \subparagraph{The \sbolheading{qualifiedAssociation} property}\label{sec:prov:Associations}
-The \prov{qualifiedAssociation} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \prov{Association} objects.
+The \prov{Associations} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \prov{Association} objects.
 
 \subparagraph{The \sbolheading{qualifiedUsage} property}\label{sec:prov:qualifiedUsage}
-The \prov{qualifiedUsage} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \sbol{Usage} objects.
+The \prov{qualifiedUsage} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to \prov{Usage} objects.
 
 \subparagraph{The \sbolheading{wasInformedBy} property}\label{sec:prov:wasInformedBy}
 The \prov{wasInformedBy} property is OPTIONAL and MAY contain a set of \sbol{URI}s that refers to other \prov{Activity} objects.
@@ -83,14 +83,14 @@ The \sbolmult{roles:U}{prov:hadRole} property is an OPTIONAL set of \sbol{URI}s 
 \label{sec:prov:Association}
 An \prov{Association} is linked to an \prov{Agent} through the \prov{agent} relationship. The \prov{Association} includes the \sbolmult{roles:A}{prov:hadRole} property to qualify the role of the \prov{Agent} in the \prov{Activity}.
 
-\subparagraph{The \sbolheading{agent} property}\label{sec:agent}
-The \prov{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \prov{Agent} object.
+\subparagraph{The \sbolheading{agent} property}\label{sec:prov:agent}
+The \prov{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \prov{agent} object.
 
 \subparagraph{The \sbolheading{hadRole} property}\label{sec:roles:A}
 The \sbolmult{roles:A}{prov:hadRole} property is an OPTIONAL set of \sbol{URI}s that refers to particular term(s) that describes the the role of the \prov{agent} in the parent \prov{Activity}. 
 
 \subparagraph{The \sbolheading{hadPlan} property}\label{sec:plan}
-The \prov{hadPlan} property is OPTIONAL and contains a \sbol{URI} that refers to a \prov{Plan}.
+The \sbolmult{hadPlan}{plan} property is OPTIONAL and contains a \sbol{URI} that refers to a \prov{Plan}.
 
 \subsubsection{Plan}
 \label{sec:prov:Plan}
