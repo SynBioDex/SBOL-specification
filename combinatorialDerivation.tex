@@ -16,12 +16,12 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 
 The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
-Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \sbol{SubComponent} objects that describe its substructure (referred to hereafter as template \sbol{SubComponent} objects), and its \sbol{constraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
+Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \sbol{SubComponent} objects that describe its substructure (referred to hereafter as template \sbol{SubComponent} objects), and its \sbol{hasConstraint} property MAY also contain one or more \sbol{Constraint} objects that constrain this substructure.
 
 When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \prov{wasDerivedFrom} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{member} property of a \sbol{Collection}, in which case the \prov{wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
 
-If the \sbolmult{types:CD}{type} property of the template \sbol{Component} contains one or more URIs, then the \sbolmult{types:CD}{type} property of any derived \sbol{Component} SHOULD also contain those URIs. 
-The same holds true for the \sbolmult{roles:CD}{role} properties of these \sbol{Component} objects.
+If the \sbolmult{type:CD}{type} property of the template \sbol{Component} contains one or more URIs, then the \sbolmult{type:CD}{type} property of any derived \sbol{Component} SHOULD also contain those URIs. 
+The same holds true for the \sbolmult{role:CD}{role} properties of these \sbol{Component} objects.
 
 \subparagraph{The \sbolheading{hasVariableComponent} property}\label{sec:hasVariableComponent}
 
@@ -38,7 +38,7 @@ The \sbol{instanceOf} properties of these \sbol{SubComponent} objects in the der
 
 
 Finally, all derived \sbol{SubComponent} objects MUST follow the \sbol{restriction} properties of any 
-\sbol{Constraint} objects that refer to their corresponding template \sbol{SubComponent}, and SHOULD have values of \sbol{role} that contain the same values as the values \sbol{role} in the template \sbol{SubComponent}.
+\sbol{Constraint} objects that refer to their corresponding template \sbol{SubComponent}, and SHOULD have values of \sbolmult{role:F}{role} that contain the same values as the values \sbolmult{role:F}{role} in the template \sbol{SubComponent}.
 
 
 \subparagraph{The \sbolheading{strategy} property}\label{sec:strategy}
@@ -60,7 +60,7 @@ The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:st
 \subsubsection{VariableComponent}
 \label{sec:VariableComponent}
 
-As described \sbolmult{sec:hasVariableComponent}{above}, the \sbol{VariableComponent} class specifies a variable and set of values that will replace one of the \sbol{SubComponent} objects in the \sbol{template} of a \sbol{CombinatorialDerivation}.
+As described \sbolmult{hasVariableComponent}{above}, the \sbol{VariableComponent} class specifies a variable and set of values that will replace one of the \sbol{SubComponent} objects in the \sbol{template} of a \sbol{CombinatorialDerivation}.
 The variable is specified by the \sbol{variable} property,
 and the set of values is defined by the union of \sbol{Component} objects referred to by the \sbol{variant}, \sbol{variantCollection}, and \sbol{variantDerivation} properties.
 

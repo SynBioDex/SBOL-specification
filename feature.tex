@@ -24,7 +24,7 @@ Likewise, for any feature that is a \sbol{SubComponent}, the \sbolmult{role:F}{r
 
 \subparagraph{The \sbolheading{orientation} property}
 \label{sec:orientation:F}
-The \sbolmult{orientation:F}{orientation} property is OPTIONAL and has a data type of \sbol{URI}. This can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation} \sbol{URI}s. If a \sbol{Feature} object has an \sbol{orientation}, then it MUST come from \ref{tbl:orientation_types}.
+The \sbolmult{orientation:F}{orientation} property is OPTIONAL and has a data type of \sbol{URI}. This can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation:F} \sbol{URI}s. If a \sbol{Feature} object has an \sbol{orientation:F}, then it MUST come from \ref{tbl:orientation_types}.
 
 
 \begin{table}[ht]
@@ -81,9 +81,9 @@ For example, consider the \sbol{SubComponent} objects $A$ and $B$ and the \sbol{
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:SC}
 
-A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects that indicate the location of the \sbol{sequence} from the \sbol{instanceOf} \sbol{Component} in a \sbol{sequence} of the parent \sbol{Component}.
+A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects that indicates the location of the \sbol{Sequence} from the \sbol{instanceOf} \sbol{Component} in a \sbol{Sequence} of the parent \sbol{Component}.
 
-If any \sbolmult{hasLocation:SC}{hasLocation} is defined, then there MUST BE precisely one \sbol{sequence} in the \sbol{instanceOf} \sbol{Component}, as otherwise this relationship is ill-defined.
+If any \sbolmult{hasLocation:SC}{hasLocation} is defined, then there MUST BE precisely one \sbol{Sequence} in the \sbol{instanceOf} \sbol{Component}, as otherwise this relationship is ill-defined.
 
 If no \sbolmult{hasLocation:SC}{hasLocation} is defined, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined or involving types for which sequence relationships are not relevant (e.g., inclusion of a reaction sequence within a metabolic network).
 

@@ -75,12 +75,12 @@ The functional hierarchy of the toggle switch is represented using
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\textwidth]{example_uml/toggle_4}
-\caption[]{Composite \sbol{Component} of the LacI/TetR toggle switch. This \sbol{Component} contains the \sbol{SubComponent} objects that instantiate LacI and TetR inverter \sbol{Component} objects. It also contains \sbol{SubComponent} objects that instantiate the \sbol{Component} objects for the LacI/TetR transcription factors and IPTG/aTc small molecules. These \sbol{SubComponent} objects each participate in a non-covalent binding \sbol{Interaction}. To complete the composition of the toggle switch, \sbol{MapsTo} objects are used to indicate that the output of the LacI inverter \sbol{Component} is identical to the input of the TetR inverter \sbol{Component} and vice versa.
-}
+\caption[]{Composite \sbol{Component} of the LacI/TetR toggle switch. This \sbol{Component} contains the \sbol{SubComponent} objects that instantiate LacI and TetR inverter \sbol{Component} objects. It also contains \sbol{SubComponent} objects that instantiate the \sbol{Component} objects for the LacI/TetR transcription factors and IPTG/aTc small molecules. These \sbol{SubComponent} objects each participate in a non-covalent binding \sbol{Interaction}. To complete the composition of the toggle switch, \sbol{MapsTo} objects are used to indicate that the output of the LacI inverter \sbol{Component} is identical to the input of the TetR inverter \sbol{Component} and vice versa.}
 \label{uml:ex_mod_def_compo}
 \end{center}
 \end{figure}
 
+\todo[inline]{revise figure 29! No MapsTos}
 
 % Each \sbol{Component} also contains the \sbol{SubComponent}s that participate in \sbol{Interaction}s and are defined by the same \sbol{Component}s as the parallel \sbol{SubComponent}s in the structural hierarchy of the toggle switch. Finally, \sbol{MapsTo} entities are used to refine which \sbol{SubComponent}s of the functional hierarchy are identical or map them to \sbol{SubComponent}s in the structural hierarchy.
 

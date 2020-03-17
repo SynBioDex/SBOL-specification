@@ -60,7 +60,7 @@ It is important to note that there is no guarantee that an RDF document
 contains valid SBOL. When SBOL objects are read from an RDF document,
  the program doing so SHOULD verify that all of the property
 values encoded therein have the correct data type (e.g., that the object
-pointed to by the \sbol{sequence} property of a
+pointed to by the \sbol{Sequence} property of a
 \sbol{Component} is really a \sbol{Sequence}).
 For complete files, this validation can be carried out entirely locally. For files that are not complete, an implementation either needs to
 have a means of validating those external references (e.g., by
@@ -70,7 +70,7 @@ unverified and not depend on their correctness.
 \subsection{Recommended Ontologies for External Terms}
 \label{sec:recomm_ontologies}
 
-External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{Component} \sbolmult{types:CD}{types}, such as DNA or protein, are described using Systems Biology Ontology (SBO) terms. Similarly, the roles of a DNA or RNA \sbol{Component} are described via Sequence Ontology (SO) terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
+External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{Component} \sbolmult{type:CD}{types}, such as DNA or protein, are described using Systems Biology Ontology (SBO) terms. Similarly, the roles of a DNA or RNA \sbol{Component} are described via Sequence Ontology (SO) terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{p{3cm}p{1.5cm}p{4.5cm}p{6cm}}
