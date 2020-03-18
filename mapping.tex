@@ -53,6 +53,7 @@ The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 \end{itemize}
 
 \begin{table}[ht]
+  {\scriptsize
   \begin{edtable}{tabular}{ll}
     \toprule
     \textbf{SBOL 2.x Type} & \textbf{SBOL 3.x Type} \\
@@ -66,19 +67,21 @@ The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
       \url{http://www.biopax.org/release/biopax-level3.owl\#Complex} & \url{https://identifiers.org/SBO:0000253} (Non-covalent Complex)\\
     \bottomrule
   \end{edtable}
+  }
   \caption{Mapping of SBOL2 ComponentDefinition types to SBOL3 Component types}
  \label{tbl:component_type_mapping}
 \end{table}:
 
 \begin{figure*}[h]
-	\begin{subfigure}{.5\textwidth}
+	\begin{subfigure}{\textwidth}
 		\centering
-		\includegraphics[width=\linewidth]{images/sbol_v2_to_v3_left_subfigure}  
+		\includegraphics[width=0.8\linewidth]{uml/sbol_v2_to_v3_left_subfigure}  
 		\caption{SBOL 2.3}
 		\label{fig:sub-first}
-	\end{subfigure}\begin{subfigure}{.5\textwidth}
+              \end{subfigure}\\
+              \begin{subfigure}{\textwidth}
 		\centering
-		\includegraphics[width=\linewidth]{images/sbol_v2_to_v3_right_subfigure}  
+		\includegraphics[width=0.8\linewidth]{uml/sbol_v2_to_v3_right_subfigure}  
 		\caption{SBOL 3.x}
 		\label{fig:sub-second}
 	\end{subfigure}
