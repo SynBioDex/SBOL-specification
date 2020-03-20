@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="14.2">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -223,7 +223,7 @@ hasSequence
 -input[0..*]: URI
 -output[0..*]: URI
 -nondirectional[0..*]:URI
-bg=orange</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -261,8 +261,8 @@ bg=light_gray</panel_attributes>
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-                                                   hasInteraction
-                                                   0..*</panel_attributes>
+                                  hasInteraction
+                                 0..*</panel_attributes>
     <additional_attributes>10.0;20.0;450.0;20.0;450.0;130.0</additional_attributes>
   </element>
   <element>
