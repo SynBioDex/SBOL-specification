@@ -10,17 +10,17 @@ SBOL 3 refines the data model to simplify the representation of common use cases
 \subsection{Mapping between SBOL 1 and SBOL 2}
 
 \ref{SBOL1TO2} depicts the mapping of SBOL 1.1 classes to SBOL 2.x classes, indicating corresponding classes/properties by color.
-The SBOL 2.x \sbol{Model} and \sbol{CompenentDefinition} classes have no SBOL 1.1 equivalent, and thus are not shown.
+The SBOL 2.x \external{Model} and \external{ModuleDefinition} classes have no SBOL 1.1 equivalent, and thus are not shown.
 The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 \begin{itemize}
-\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \sbol{Collection} objects that contain \sbol{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
-\item SBOL 1.1 \external{DnaComponent} objects maps to SBOL 2.x \sbol{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
-\item SBOL 1.1 \external{DnaSequence} objects maps to an SBOL 2.x \sbol{Sequence} objects with \external{IUPAC DNA} \sbol{encoding} properties.
+\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \external{Collection} objects that contain \external{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
+\item SBOL 1.1 \external{DnaComponent} objects map to SBOL 2.x \external{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
+\item SBOL 1.1 \external{DnaSequence} objects map to an SBOL 2.x \external{Sequence} objects with \external{IUPAC DNA} \external{encoding} properties.
 \item SBOL 1.1 \external{SequenceAnnotation} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.x\\
-\sbol{SequenceAnnotation} objects that contain \sbol{Range} objects.
-\item SBOL 1.1 \external{SequenceAnnotation} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.x \sbol{SequenceFeature} objects that contain \sbol{GenericLocation} objects.
-\item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.x \sbol{Component}, which represents the instantiation or usage of the appropriate \sbol{CompenentDefinition}.
-\item Each SBOL 1.1 \external{precedes} property maps to an SBOL 2.x \sbol{SequenceConstraint} that specifies a precedes \sbol{restriction} property.
+\external{SequenceAnnotation} objects that contain \external{Range} objects.
+\item SBOL 1.1 \external{SequenceAnnotation} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.x \external{SequenceFeature} objects that contain \external{GenericLocation} objects.
+\item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.x \external{Component}, which represents the instantiation or usage of the appropriate \external{CompenentDefinition}.
+\item Each SBOL 1.1 \external{precedes} property maps to an SBOL 2.x \external{SequenceConstraint} that specifies a precedes \external{restriction} property.
 \end{itemize}
 
 \begin{figure*}[h]
