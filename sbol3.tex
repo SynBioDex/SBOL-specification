@@ -63,9 +63,18 @@
 % Use prov when you are using a class borrowed from Prov-O, this will prepend the "prov:" prefix as well
 \newcommand{\prov}[1]{\texttt{\hyperref[sec:prov:#1]{prov:#1}}}
 
+% Use provmult for Prov-O fields that appear in multiple classes, for example
+% \sbolmult{hadRole:U}{hadRole}. This ensures the reference links to the correct
+% section.
+\newcommand{\provmult}[2]{\texttt{\hyperref[sec:prov:#1]{prov:#2}}}
+
 % Use om when you are using a class borrowed from Ontology of Units & Measures, this will prepend the "om:" prefix as well
 \newcommand{\om}[1]{\texttt{\hyperref[sec:om:#1]{om:#1}}}
 
+% Use provmult for OM fields that appear in multiple classes, for example
+% \sbolmult{hadUnit:M}{hadUnit}. This ensures the reference links to the correct
+% section.
+\newcommand{\ommult}[2]{\texttt{\hyperref[sec:om:#1]{om:#2}}}
 
 % Use sbolmult for SBOL fields that appear in multiple classes, for example
 % \sbolmult{types:CD}{types}. This ensures the reference links to the correct
