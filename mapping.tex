@@ -54,7 +54,7 @@ The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
     \item SBOL 2.x \external{SequenceConstraint} objects map to SBOL 3.x \sbol{Constraint} objects
     \item SBOL 2.x \external{MapsTo} objects are converted by transforming each \external{MapsTo} into two SBOL 3.x objects: \\ a \sbol{ComponentReference} and a \sbol{Constraint}.
       \begin{itemize}
-      \item For the \sbol{ComponentReference}, the \sbol{inChildOf} attribute of this \sbol{ComponentReference} attribute references the object that has the \external{MapsTo} as a child, and the \sbol{hasFeature} attribute references the object referred to by the \external{remote} attribute from the \external{MapsTo} object.
+      \item For the \sbol{ComponentReference}, the \sbol{inChildOf} attribute of this \sbol{ComponentReference} attribute references the object that has the \external{MapsTo} as a child, and the \sbol{hasFeature} attribute references the object referred by the \external{remote} attribute from the \external{MapsTo} object.
       \item The \sbol{Constraint} links this \sbol{ComponentReference} and the \sbol{SubComponent} referred to be the \external{local} attribute from the \external{MapsTo} object.  The property values of the \sbol{Constraint} depend on the value of the \external{refinement} value for the \external{MapsTo} object:
       	\begin{itemize}
 	\item If the refinement is \external{useRemote}, then the \sbol{restriction} is \external{replaces}, the \sbol{subject} is the \\ \sbol{ComponentReference} and the \sbol{object} is the \sbol{SubComponent}.
