@@ -16,7 +16,7 @@ Several methods are supported for connecting the SBOL data model with other type
 \item Finally, just as custom objects can be embedded in an  SBOL document, external documents can embed or refer to SBOL objects. Support for this last case is not explicitly provided in this specification. Rather, this case depends on the external non-SBOL system managing its relationship to SBOL and data serialized in RDF, and is included here for completeness.
 \end{itemize}
 
-Each \sbol{Identified} object MAY be annotated with application-specific properties, which MUST be labelled using RDF predicates outside of the SBOL namespace.  Additionally, application-specific types may be used in conjunction with the SBOL data model. These application-specific types MUST have two \sbol{rdf:type} properties: one type outside of the SBOL namespace AND an additional SBOL type of either:
+Each \sbol{Identified} object MAY be annotated with application-specific properties, which MUST be labelled using RDF predicates outside of the SBOL namespace.  Additionally, application-specific types may be used in conjunction with the SBOL data model. These application-specific types MUST have two \external{rdf:type} properties: one type outside of the SBOL namespace AND an additional SBOL type of either:
 
 \begin{itemize}
   \item \sbol{TopLevel}, if the object is to be considered an SBOL top level (i.e., not owned by another object)

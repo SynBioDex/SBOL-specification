@@ -157,8 +157,8 @@ The \sbol{hasNumericalValue} property is REQUIRED and MUST contain a single xsd:
 \subparagraph{The \sbolheading{hasUnit} property}\label{sec:hasUnit:Measure}
 The \sbolmult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \om{Unit}. The OM provides \sbol{URI}s for many existing instances of the \om{Unit} class for reference (for example, \url{http://www.ontology-of-units-of-measure.org/resource/om-2/gramPerLitre}).
 
-\subparagraph{The \sbolheading{types} property}\label{sec:types:Measure}
-The \sbolmult{types:Measure}{types} property is OPTIONAL and MAY contain a set of \sbol{URI}s. It is RECOMMENDED that one of these \sbol{URI}s identify a term from the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{types:Measure}{types} property of the \om{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/biomodels.sbo/SBO:0000612}).
+\subparagraph{The \sbolheading{type} property}\label{sec:type:Measure}
+The \sbolmult{type:Measure}{type} property is OPTIONAL and MAY contain a set of \sbol{URI}s. It is RECOMMENDED that one of these \sbol{URI}s identify a term from the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{type:Measure}{type} property of the \om{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/biomodels.sbo/SBO:0000612}).
 
 \subsubsection{Unit}
 \label{sec:om:Unit}

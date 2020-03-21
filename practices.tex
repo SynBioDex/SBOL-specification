@@ -4,7 +4,7 @@
 % -----------------------------------------------------------------------------
 \subsection{SBOL Versions}
 
-To differentiate between major versions of SBOL, different namespaces are used.  For example, SBOL3 has the namespace \url{http://sbols.org/v3#}, while SBOL2 has the namespace \url{http://sbols.org/v2#}.  These different versions of SBOL SHOULD NOT be semantically mixed. For example, an SBOL 3.x \sbol{SubComponent} SHOULD NOT refer to an SBOL 2.x \sbol{ComponentInstance}, and, likewise, an SBOL 2.x \sbol{ComponentInstance} SHOULD NOT refer to an SBOL 1.x \sbol{DnaComponent}.
+To differentiate between major versions of SBOL, different namespaces are used.  For example, SBOL3 has the namespace \url{http://sbols.org/v3#}, while SBOL2 has the namespace \url{http://sbols.org/v2#}.  These different versions of SBOL SHOULD NOT be semantically mixed. For example, an SBOL 3.x \sbol{SubComponent} SHOULD NOT refer to an SBOL 2.x \external{ComponentInstance}, and, likewise, an SBOL 2.x \external{ComponentInstance} SHOULD NOT refer to an SBOL 1.x \external{DnaComponent}.
 
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
@@ -32,14 +32,15 @@ SBOL-compliant URIs greatly facilitate auto-construction of child objects with u
 All examples in this specification use compliant \sbol{URI}s.
 
 \subsection{Versioning SBOL Objects}
-SBOL 3.x does not specify an explicit versioning scheme. Rather it is left for experimentation across different tools. This allows version information to be included in the root (e.g., GitHub style: ``igem/HEAD/''), collection structure (e.g., ``promoters/constitutive/2/''), in tool-specific conventions on \sbol{displayId} (e.g., ``BBa\_J23101\_v2'') or in information outside of the \sbol{URI} (e.g., by attaching \prov{wasRevisionOf} properties).
+
+SBOL 3.x does not specify an explicit versioning scheme. Rather it is left for experimentation across different tools. This allows version information to be included in the root (e.g., GitHub style: ``igem/HEAD/''), collection structure (e.g., ``promoters/constitutive/2/''), in tool-specific conventions on \sbol{displayId} (e.g., ``BBa\_J23101\_v2'') or in information outside of the \sbol{URI} (e.g., by attaching \external{prov:wasRevisionOf} properties).
 
 \subsection{Annotations: Embedded Objects vs. External References}
 
 When annotating an SBOL document with additional information, there are
 two general methods that can be used:
 \begin{itemize}
-\item Embed the information in the SBOL document using properties outside of the SBOL namespace
+\item Embed the information in the SBOL document using properties outside of the SBOL namespace.
 \item Store the information separately and annotate the SBOL document with \sbol{URI}s that point to it.
 \end{itemize}
 In theory, either method can be used in any case. (Note that a third case not
@@ -62,15 +63,14 @@ contains valid SBOL. When SBOL objects are read from an RDF document,
 values encoded therein have the correct data type (e.g., that the object
 pointed to by the \sbol{Sequence} property of a
 \sbol{Component} is really a \sbol{Sequence}).
-For complete files, this validation can be carried out entirely locally. For files that are not complete, an implementation either needs to
-have a means of validating those external references (e.g., by
+For complete files, this validation can be carried out entirely locally. For files that are not complete, an implementation either needs to have a means of validating those external references (e.g., by
 retrieving them from a repository), or it needs to mark them as
 unverified and not depend on their correctness.
 
 \subsection{Recommended Ontologies for External Terms}
 \label{sec:recomm_ontologies}
 
-External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{Component} \sbolmult{type:CD}{types}, such as DNA or protein, are described using Systems Biology Ontology (SBO) terms. Similarly, the roles of a DNA or RNA \sbol{Component} are described via Sequence Ontology (SO) terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
+External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{Component} \sbolmult{type:C}{type}s, such as DNA or protein, are described using Systems Biology Ontology (SBO) terms. Similarly, the \sbolmult{role:C}{role}s of a DNA or RNA \sbol{Component} are described via Sequence Ontology (SO) terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{p{3cm}p{1.5cm}p{4.5cm}p{6cm}}
@@ -99,16 +99,19 @@ External ontologies and controlled vocabularies are an integral part of SBOL. SB
 The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.
 
 \subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
-Entities in an SBOL document can be annotated with creation and modification date. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, ``\texttt{2016-03-16T20:12:00Z}'' specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time).
+
+Entities in an SBOL document can be annotated with creation and modification dates. It is RECOMMENDED that predicates, or properties, from DCMI Metadata Terms SHOULD be used to include date and time information. The \texttt{created} and \texttt{modified} terms SHOULD respectively be used to annotate SBOL entities with creation and modification dates. Date and time values SHOULD be expressed using the XML Schema \texttt{DateTime} datatype~\citep{Biron2004}. For example, ``\texttt{2016-03-16T20:12:00Z}'' specifies that the day is 16 March 2016 and the time is 20:12pm in UTC (Coordinated Universal Time).
 
 \subsection{Annotating Entities with Authorship information}\label{sec:Authorship}
-Authorship information should ideally be added to \sbol{TopLevel} entities where possible. It is RECOMMENDED that the \texttt{creator} DCMI Metadata term SHOULD be used to annotate SBOL entities with authorship information. This property can be repeated for each author. The example below shows the use of this property for two authors and the values shown are free text \texttt{String} literals.
+
+Authorship information should ideally be added to \sbol{TopLevel} entities where possible. It is RECOMMENDED that the \texttt{creator} DCMI Metadata term SHOULD be used to annotate SBOL entities with authorship information using free text. This property can be repeated for each author.
+%The example below shows the use of this property for two authors and the values shown are free text \texttt{String} literals.
 
 \subsection{Host Context / Ontologies for Experiments}
 
 \subsubsection{Mixtures via Components}
 
-Any \sbol{Component} can be interpreted as specifying a mixture of the material entity (SBO:0000240) \sbol{Feature}s that it includes.  The amount of each such instance included in the mixture SHOULD be specified by attaching a \om{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
+Any \sbol{Component} can be interpreted as specifying a mixture of the material entity (SBO:0000240) \sbol{Feature}s that it includes.  The amount of each such instance included in the mixture SHOULD be specified by attaching a \om{Measure} with a \sbolmult{type:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
 \begin{itemize}
 \item SBO:0000540: fraction of an entity pool (e.g., 1/3 CHO cells, 2/3 HEK cells)
 \item SBO:0000472: molar concentration of an entity (e.g., 1 mM Arabinose)
@@ -121,7 +124,7 @@ Mixtures MAY be defined recursively, as mixtures of mixtures of mixtures, etc.
 
 Reagents, whether ``atomic'' (e.g., rainbow bead control) or mixtures, should SHOULD be represented as a \sbol{Component}.
 
-The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{roles:MD}{role} property of the \sbol{SubComponent}. Examples include:
+The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{role:F}{role} property of the \sbol{SubComponent}. Examples include:
 \begin{itemize}
 \item NCIT:C64356: Positive Control
 \item NCIT:C48694: Cell
@@ -134,7 +137,7 @@ The roles of reagents may vary in context: for example, Arabinose may serve as a
 
 A cell strain SHOULD be represented as a \sbol{Component} containing at least:
 \begin{itemize}
-\item A \sbol{SubComponent} for the cell, which is RECOMMENDED to have \sbolmult{types:CD}{type} cell (GO:0005623) and \sbolmult{roles:MD}{role} physical compartment (SBO:0000290).
+\item A \sbol{SubComponent} for the cell, which is RECOMMENDED to have \sbolmult{type:C}{type} cell (GO:0005623) and \sbolmult{role:C}{role} physical compartment (SBO:0000290).
 \item A representation of its genetic material (genome, plasmids, etc.) as a collection of \sbol{SubComponent} instances.
 \item An \sbol{Interaction} of type \texttt{FunctionalCompartment} (SBO:0000289) with the cell participating as physical compartment (SBO: 0000290) and the genetic material participating as contained entity (SBO:0000664).
 \end{itemize}
@@ -152,9 +155,9 @@ A complete specification of a sample SHOULD be a \sbol{Component} that includes 
 
 \subsubsection{Other Experimental Parameters}
 
-In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, the \texttt{hasMeasure} property of \sbol{Identified} can be used.  The \texttt{measure} of a \texttt{Component} provides context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \texttt{measure} of a material entity (SBO:0000240) \texttt{Feature} provides a measurement in context (e.g., the dosage of Arabinose in a sample).
+In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, the \sbol{hasMeasure} property of \sbol{Identified} can be used.  The \sbol{hasMeasure} of a \sbol{Component} provides context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \sbol{hasMeasure} of a material entity (SBO:0000240) \sbol{Feature} provides a measurement in context (e.g., the dosage of Arabinose in a sample).
 
-Values of these parameters SHOULD be specified by attaching a \om{Measure} with a \sbolmult{types:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
+Values of these parameters SHOULD be specified by attaching a \om{Measure} with a \sbolmult{type:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
 \begin{itemize}
 \item SBO:0000147: thermodynamic temperature (e.g., culturing at 27 C)
 \item SBO:0000332: half-life of an exponential decay (e.g., decay rate of a gRNA)
@@ -174,17 +177,16 @@ The approach proposed in this section is capable of capturing this information, 
 It uses a \sbol{Component} to represent a system that contains the cell. 
 The cell is represented by a \sbol{SubComponent} inside the \sbol{Component}. 
 A separate \sbol{Component} is used to capture information about the species and strain of the cell in the design. 
-This \sbol{Component} has a \sbolmult{types:CD}{type} of ``cell'' from the Gene Ontology (GO:0005623), and a \sbolmult{roles:CD}{role} of ``physical compartment'' (SBO:0000290).
+This \sbol{Component} has a \sbolmult{type:C}{type} of ``cell'' from the Gene Ontology (GO:0005623), and a \sbolmult{role:C}{role} of ``physical compartment'' (SBO:0000290).
 Taxonomic information is captured by annotating the class instance with a URI for an entry in the NCBI Taxonomy Database. 
-The \sbol{Component} is used as the value of the \sbolmult{definition:CI}{instanceOf} property of the \sbol{SubComponent} that represents the cell in the design to specify information about its taxonomy. 
+The \sbol{Component} is used as the value of the \sbol{instanceOf} property of the \sbol{SubComponent} that represents the cell in the design to specify information about its taxonomy. 
 Other entities which are relevant to this aspect of the design are also captured using instances of the \sbol{SubComponent} class. 
 Interactions which occur in this system are captured using the \sbol{Interaction} and \sbol{Participation} classes. 
-Interactions which occur within the cell are specified by \sbol{Interaction} classes which contain the \sbol{SubComponent} instance representing the cell as a \sbol{participant} with a \sbolmult{roles:P}{role} of ``physical compartment.''
+Interactions which occur within the cell are specified by \sbol{Interaction} classes which contain the \sbol{SubComponent} instance representing the cell as a \sbol{participant} with a \sbolmult{role:P}{role} of ``physical compartment.''
 
 With this approach, an additional \sbol{Interaction} class instance could be used to define entities which are only present within the cell, i.e. they are not available to the rest of the system. 
-This interaction has a \sbolmult{types:I}{type} of ``containment'' (SBO:0000469), and has at least two participants. 
-One of these \sbol{participant}s is the cell, which has a \sbolmult{roles:P}{role} of ``physical compartment'', whilst the others are the contained entities, which have \sbolmult{roles:P}{roles} of ``contained''
-(SBO:0000064).
+This interaction has a \sbolmult{type:I}{type} of ``containment'' (SBO:0000469), and has at least two participants. 
+One of these \sbol{participant}s is the cell, which has a \sbolmult{role:P}{role} of ``physical compartment'', whilst the others are the contained entities, which have \sbolmult{role:P}{roles} of ``contained'' (SBO:0000064).
 
 \begin{figure}[ht]
 	\begin{center}
@@ -210,7 +212,7 @@ An example is shown in \ref{uml:multiple_cell_representation}.
 		\includegraphics[width=\textwidth]{uml/two_cell_representation}
 		\caption[]{Captured here is a design involving two cells which both interact with the small molecule ``Molecule A''. 
 		Designs for the sender and receiver systems are captured using constraint to show that each of these cells interacts with the Molecule A contained within it.
-		The overall multicellular system is represented by a \sbol{Component} with a \sbolmult{roles:C}{role} of ``functional compartment'', which is an SBO term.
+		The overall multicellular system is represented by a \sbol{Component} with a \sbolmult{role:C}{role} of ``functional compartment'', which is an SBO term.
 		The two systems are included in this multicellular design as \sbol{SubComponent}s, and the fact that Molecule A is shared between systems is indicated with a constraint.}
 		\label{uml:multiple_cell_representation}
 	\end{center}
