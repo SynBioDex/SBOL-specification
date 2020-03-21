@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="14.2">
   <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -94,7 +94,6 @@ bg=yellow</panel_attributes>
     <panel_attributes>Location
 --
 -orientation[0..1]:URI
--order[0..1]:Integer
 bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
@@ -509,7 +508,7 @@ local
     <coordinates>
       <x>324</x>
       <y>333</y>
-      <w>117</w>
+      <w>108</w>
       <h>135</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;

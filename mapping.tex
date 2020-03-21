@@ -10,17 +10,17 @@ SBOL 3 refines the data model to simplify the representation of common use cases
 \subsection{Mapping between SBOL 1 and SBOL 2}
 
 \ref{SBOL1TO2} depicts the mapping of SBOL 1.1 classes to SBOL 2.x classes, indicating corresponding classes/properties by color.
-The SBOL 2.x \sbol{Model} and \sbol{CompenentDefinition} classes have no SBOL 1.1 equivalent, and thus are not shown.
+The SBOL 2.x \external{Model} and \external{ModuleDefinition} classes have no SBOL 1.1 equivalent, and thus are not shown.
 The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 \begin{itemize}
-\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \sbol{Collection} objects that contain \sbol{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
-\item SBOL 1.1 \external{DnaComponent} objects maps to SBOL 2.x \sbol{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
-\item SBOL 1.1 \external{DnaSequence} objects maps to an SBOL 2.x \sbol{Sequence} objects with \external{IUPAC DNA} \sbol{encoding} properties.
+\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \external{Collection} objects that contain \external{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
+\item SBOL 1.1 \external{DnaComponent} objects map to SBOL 2.x \external{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
+\item SBOL 1.1 \external{DnaSequence} objects map to an SBOL 2.x \external{Sequence} objects with \external{IUPAC DNA} \external{encoding} properties.
 \item SBOL 1.1 \external{SequenceAnnotation} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.x\\
-\sbol{SequenceAnnotation} objects that contain \sbol{Range} objects.
-\item SBOL 1.1 \external{SequenceAnnotation} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.x \sbol{SequenceFeature} objects that contain \sbol{GenericLocation} objects.
-\item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.x \sbol{Component}, which represents the instantiation or usage of the appropriate \sbol{CompenentDefinition}.
-\item Each SBOL 1.1 \external{precedes} property maps to an SBOL 2.x \sbol{SequenceConstraint} that specifies a precedes \sbol{restriction} property.
+\external{SequenceAnnotation} objects that contain \external{Range} objects.
+\item SBOL 1.1 \external{SequenceAnnotation} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.x \external{SequenceFeature} objects that contain \external{GenericLocation} objects.
+\item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.x \external{Component}, which represents the instantiation or usage of the appropriate \external{CompenentDefinition}.
+\item Each SBOL 1.1 \external{precedes} property maps to an SBOL 2.x \external{SequenceConstraint} that specifies a precedes \external{restriction} property.
 \end{itemize}
 
 \begin{figure*}[h]
@@ -30,10 +30,19 @@ The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 \caption{\label{SBOL1TO2}The mapping from the SBOL 1.1 data model to the SBOL 2.x  data model, indicating corresponding classes/properties by color.}
 \end{figure*}
 
+
+
 \subsection{Mapping between SBOL 2 and SBOL 3}
 
-\ref{SBOL1TO2} depicts the mapping of SBOL 2.3 classes to SBOL 3.x classes, indicating corresponding classes/properties by color.   The SBOL 2.x \sbol{Attachment}, \sbol{CombinatorialDerivation}, \sbol{ExperimentalData}, \sbol{Experiment}, \sbol{Implementation}, \sbol{Model}, \sbol{Participation}, and \sbol{VariableComponent} classes are not shown, since they are essentially unchanged in SBOL 3.x.  The SBOL 3.x \sbol{Namespace} class has no SBOL 2.x equivalent, and thus is not shown.
-The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
+\ref{SBOL2TO3} depicts the mapping of SBOL 2.3 classes to SBOL 3.x classes, indicating corresponding classes/properties by color.   
+The SBOL 3.x \sbol{Namespace} class has no SBOL 2.x equivalent, and thus is not shown.
+The SBOL 2.x \sbol{Attachment}, \sbol{CombinatorialDerivation}, \sbol{ExperimentalData}, \sbol{Experiment}, \sbol{Implementation}, \sbol{Model}, \sbol{Participation}, and \\ \sbol{VariableComponent} classes are omitted or abstracted, since they are essentially unchanged in SBOL 3.x except for the following property renamings:
+\begin{itemize}
+\item In \sbol{VariableComponent}, the SBOL 2.x \external{operator} property maps to the SBOL 3.x \sbol{cardinality} property.
+\item In \sbol{Experiment}, the SBOL 2.x \external{experimentalData} property maps to the SBOL 3.x \sbol{member} property.
+\end{itemize}
+
+The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
 \begin{itemize}
     \item SBOL 2.x \external{ComponentDefinition} objects map to SBOL 3.x \sbol{Component} objects.  The \sbol{type} property is mapped according to  \ref{tbl:component_type_mapping}.
     \item SBOL 2.x \external{ModuleDefinition} objects map to SBOL 3.x \sbol{Component} objects with a \sbol{type} of \texttt{SBO:0000241} (functional entity)
@@ -43,14 +52,20 @@ The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
     \item SBOL 2.x \external{SequenceAnnotation} objects map to SBOL 3.x \sbol{SequenceFeature} objects if they do not have a \external{component}. If they do have a \external{component}, their locations are added to the corresponding SBOL3 \sbol{SubComponent}.
 %    \item \external{Location} objects are assigned an \sbol{order} integer.  In the case of multiple locations, the order may be inferred, e.g. from the \external{start} and \external{end} properties of ranges.  However, such behavior is tooling-specific.
     \item SBOL 2.x \external{SequenceConstraint} objects map to SBOL 3.x \sbol{Constraint} objects
-    \item SBOL 2.x \external{MapsTo} objects are converted as follows:
+    \item SBOL 2.x \external{MapsTo} objects are converted by transforming each \external{MapsTo} into two SBOL 3.x objects: \\ a \sbol{ComponentReference} and a \sbol{Constraint}.
       \begin{itemize}
-      \item If the \external{refinement} type is \external{useRemote}, then the \external{FunctionalComponent} referenced by the \external{local} attribute is replaced with a \sbol{ComponentReference} and any references to the \external{functionalComponent} are redirected to this \sbol{ComponentReference}.  The \sbol{inChildOf} attribute of this \sbol{ComponentReference} references the object that has this \external{MapsTo} as a child.  Finally, the \sbol{hasFeature} attribute of this \sbol{ComponentReference} takes the value of the \external{remote} attribute from the \external{MapsTo} object.  The \external{MapsTo} object is removed.
-        \item If the \external{refinement} type is \external{merge}, then the same conversion is applied.  The \external{merge}  \external{refinement} type was never well defined or used, so it has been removed from SBOL 3.x.
-        \item If the \external{refinement} type is \external{verifyIdentical} and the \external{definition} property of both the objects referred to by the \external{local} and \external{remote} attributes of the \external{MapsTo} objects are the same, then the same conversion procedure can be used as for \external{useRemote}.
-        \item If the \external{refinement} type is \external{useLocal}, then the \external{FunctionalComponent} referenced by the \external{local} attribute is replaced with a \sbol{SubComponent} and the \external{MapsTo} is replaced with a \sbol{ComponentReference}.  The \sbol{inChildOf} attribute of this \sbol{ComponentReference} references the object that has this \external{MapsTo} as a child.  The \sbol{hasFeature} attribute of this \sbol{ComponentReference} takes the value of the \external{remote} attribute from the \external{MapsTo} object.  Finally, a \sbol{Constraint} is added that has as the \sbol{subject} the new \sbol{SubComponent}, as the \sbol{object} the new \sbol{ComponentReference}, and the \sbol{restriction} type of \sbol{replaces}. 
+      \item For the \sbol{ComponentReference}, the \sbol{inChildOf} attribute of this \sbol{ComponentReference} attribute references the object that has the \external{MapsTo} as a child, and the \sbol{hasFeature} attribute references the object referred by the \external{remote} attribute from the \external{MapsTo} object.
+      \item The \sbol{Constraint} links this \sbol{ComponentReference} and the \sbol{SubComponent} referred to be the \external{local} attribute from the \external{MapsTo} object.  The property values of the \sbol{Constraint} depend on the value of the \external{refinement} value for the \external{MapsTo} object:
+      	\begin{itemize}
+	\item If the refinement is \external{useRemote}, then the \sbol{restriction} is \external{replaces}, the \sbol{subject} is the \\ \sbol{ComponentReference} and the \sbol{object} is the \sbol{SubComponent}.
+	\item If the refinement is \external{useLocal}, then the \sbol{restriction} is \external{replaces}, the \sbol{subject} is the \sbol{SubComponent} and the \sbol{object} is the \sbol{ComponentReference}.
+	\item If the refinement is \external{verifyIdentical}, then the \sbol{restriction} is \external{verifyIdentical}, the \sbol{subject} is the \sbol{ComponentReference} and the \sbol{object} is the \sbol{SubComponent}.
+	\item The \external{merge} \external{refinement} was never well defined and rarely if ever used, so it has been removed from SBOL 3.x.  If a \external{merge} is encountered, it SHOULD be handled as a \external{useRemote}.      
         \end{itemize}
+     \item As an OPTIONAL optimization, if the \sbol{SubComponent} referred to be the \external{local} property of the \external{MapsTo} is a ``placeholder'' with no significant content apart from its \sbol{MapsTo} relationships, then it may be eliminated, and all objects that pointed to it can point directly to the new \sbol{ComponentReference} instead. Likewise, any transitive pair of \sbol{Constraint} objects using the \sbol{SubComponent} as a bridge may be reduced to link the endpoints directly, replacing the \sbol{Constraint} that would otherwise link the \sbol{ComponentReference} to the \sbol{SubComponent}.
+     \end{itemize}
 \end{itemize}
+
 
 \begin{table}[ht]
   {\scriptsize
@@ -70,7 +85,8 @@ The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
   }
   \caption{Mapping of SBOL2 ComponentDefinition types to SBOL3 Component types}
  \label{tbl:component_type_mapping}
-\end{table}:
+\end{table}
+
 
 \begin{figure*}[h]
 	\begin{subfigure}{\textwidth}
@@ -87,5 +103,3 @@ The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 	\end{subfigure}
 	\caption{\label{SBOL2TO3}The mapping from the SBOL 2.3 data model to the SBOL 3.x  data model, indicating corresponding classes/properties by color.}
 \end{figure*}
-
-
