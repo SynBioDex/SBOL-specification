@@ -54,8 +54,8 @@ Finally, classes can inherit the properties of other classes. Inheritance relati
 \label{sec:nameconventions}
 
 SBOL classes are named using upper ``camel case,'' meaning that each word is capitalized and all words are run together without spaces, e.g., \sbol{Identified}, \sbol{SequenceFeature}.
-Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbol{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}). 
-SBOL properties are always given singular names irrespective of their cardinality, e.g., \sbol{role} is used rather than \sbol{roles} even though a component can have multiple roles.
+Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbolmult{role:C}{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}). 
+SBOL properties are always given singular names irrespective of their cardinality, e.g., \sbolmult{role:C}{role} is used rather than \sbolmult{role:C}{role} even though a component can have multiple roles.
 This is because each relation can potentially stand on its own, irrespective of the existence of others in the set.
 
 
@@ -80,8 +80,8 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
   
   \item The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object. 
 	Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively. 
-	For example, a \sbol{SequenceAnnotation} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \texttt{annotation1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1}. 
-	Similarly, the \texttt{loc1} \sbol{Location} child of the \texttt{annotation1} \sbol{SequenceAnnotation} object will have the URL \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1}.
+	For example, a \sbol{SequenceFeature} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \texttt{annotation1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1}. 
+	Similarly, the \texttt{loc1} \sbol{Location} child of the \texttt{annotation1} \sbol{SequenceFeature} object will have the URL \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1}.
   \end{itemize}
 
 
