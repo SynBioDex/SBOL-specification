@@ -54,7 +54,7 @@ The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
     \item SBOL 2.x \external{SequenceConstraint} objects map to SBOL 3.x \sbol{Constraint} objects
     \item SBOL 2.x \external{MapsTo} objects are converted by transforming each \external{MapsTo} into two SBOL 3.x objects: \\ a \sbol{ComponentReference} and a \sbol{Constraint}.
       \begin{itemize}
-      \item For the \sbol{ComponentReference}, the \sbol{inChildOf} attribute of this \sbol{ComponentReference} attribute references the object that has the \external{MapsTo} as a child, and the \sbol{hasFeature} attribute references the object referred to by the \external{remote} attribute from the \external{MapsTo} object.
+      \item For the \sbol{ComponentReference}, the \sbol{inChildOf} attribute of this \sbol{ComponentReference} attribute references the object that has the \external{MapsTo} as a child, and the \sbol{hasFeature} attribute references the object referred by the \external{remote} attribute from the \external{MapsTo} object.
       \item The \sbol{Constraint} links this \sbol{ComponentReference} and the \sbol{SubComponent} referred to be the \external{local} attribute from the \external{MapsTo} object.  The property values of the \sbol{Constraint} depend on the value of the \external{refinement} value for the \external{MapsTo} object:
       	\begin{itemize}
 	\item If the refinement is \external{useRemote}, then the \sbol{restriction} is \external{replaces}, the \sbol{subject} is the \\ \sbol{ComponentReference} and the \sbol{object} is the \sbol{SubComponent}.
@@ -62,7 +62,7 @@ The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
 	\item If the refinement is \external{verifyIdentical}, then the \sbol{restriction} is \external{verifyIdentical}, the \sbol{subject} is the \sbol{ComponentReference} and the \sbol{object} is the \sbol{SubComponent}.
 	\item The \external{merge} \external{refinement} was never well defined and rarely if ever used, so it has been removed from SBOL 3.x.  If a \external{merge} is encountered, it SHOULD be handled as a \external{useRemote}.      
         \end{itemize}
-     \item As an OPTIONAL optimization, if the \sbol{SubComponent} referred to be the \external{local} property of the \external{MapsTo} is a ``placeholder'' with no significant content apart from its \sbol{MapsTo} relationships, then it may be eliminated, all objects that pointed to it can point directly to the new \sbol{ComponentReference} instead, and all transitive constraints using it as a bridge reduced to link the endpoints directly. 
+     \item As an OPTIONAL optimization, if the \sbol{SubComponent} referred to be the \external{local} property of the \external{MapsTo} is a ``placeholder'' with no significant content apart from its \sbol{MapsTo} relationships, then it may be eliminated, and all objects that pointed to it can point directly to the new \sbol{ComponentReference} instead. Likewise, any transitive pair of \sbol{Constraint} objects using the \sbol{SubComponent} as a bridge may be reduced to link the endpoints directly, replacing the \sbol{Constraint} that would otherwise link the \sbol{ComponentReference} to the \sbol{SubComponent}.
      \end{itemize}
 \end{itemize}
 
