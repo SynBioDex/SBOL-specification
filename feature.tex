@@ -53,7 +53,7 @@ A \sbol{roleIntegration} specifies the relationship between a \sbol{SubComponent
 
 The \sbol{roleIntegration} property has a data type of \sbol{URI}. A \sbol{SubComponent} instance with zero \sbolmult{role:F}{role} properties MAY OPTIONALLY specify a \sbol{roleIntegration}. A \sbol{SubComponent} instance with one or more \sbolmult{role:F}{role} properties MUST specify a \sbol{roleIntegration} from \ref{tbl:component_roleIntegration}.
 If zero \sbol{SubComponent} \sbolmult{role:F}{role} properties are given and no \sbol{SubComponent} \sbol{roleIntegration} is given, then \url{http://sbols.org/v2\#mergeRoles} is assumed.
-It is RECOMMENDED to specify \sbol{SubComponent} \sbolmult{role:F}{role} values only if the result would differ from the set of \sbolmult{role:C}{role} values belonging to this \sbol{SubComponent}'s included \sbol{Component}.
+It is RECOMMENDED to specify \sbol{SubComponent} \sbolmult{role:F}{role} values only if the result would differ from the  \sbolmult{role:C}{role} values belonging to this \sbol{SubComponent}'s included \sbol{Component}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
@@ -106,7 +106,7 @@ If there are no \sbol{sourceLocation} properties, then the whole \sbol{Sequence}
 \paragraph{ComponentReference}
 \label{sec:ComponentReference}
 
-The \sbol{ComponentReference} class is a subclass of \sbol{Feature} that can be used to reference \sbol{Feature}s within \sbol{SubComponent}s. 
+The \sbol{ComponentReference} class is a subclass of \sbol{Feature} that can be used to reference \sbol{Feature}s within\\ \sbol{SubComponent}s. 
 
 \subparagraph{The \sbolheading{inChildOf} property}\label{sec:inChildOf}
 

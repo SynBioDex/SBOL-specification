@@ -4,7 +4,7 @@
 The \sbol{Component} class represents the structural and/or functional entities of a biological design. The primary usage of this class is to represent entities with designed sequences, such as DNA, RNA, and proteins, but it can also be used to represent any other entity that is part of a design, such as simple chemicals, molecular complexes, strains, samples, light, and abstract functional groupings of other entities.
 
 As shown in \ref{uml:component}, the \sbol{Component} class describes a design entity using the following properties: \sbolmult{type:C}{type}, \sbolmult{role:C}{role}, \sbolmult{hasSequence:C}{hasSequence}, \sbol{hasFeature}, \sbol{hasConstraint}, \sbol{hasInteraction}, \sbol{hasInterface}, and \sbol{hasModel}.  
-The \sbolmult{hasSequence:C}{hasSequence}, \sbol{hasFeature}, and \sbol{hasConstraint} properties are used to represent structural information, while the \sbol{hasInteraction}, \sbol{hasInterface}, and \sbol{hasModel} are used to represent functional information.
+The \sbolmult{hasSequence:C}{hasSequence}, \sbol{hasFeature}, and \sbol{hasConstraint} properties are used to represent structural information, while the\\ \sbol{hasInteraction}, \sbol{hasInterface}, and \sbol{hasModel} are used to represent functional information.
 
 \begin{figure}[ht]
 \begin{center}
@@ -147,7 +147,7 @@ For example, the \sbol{Component} of a gene might specify that the position of i
 
 A \sbol{Component} MAY have any number of \sbol{hasInteraction} properties, each of type \sbol{URI} that MUST reference an \sbol{Interaction} object (see \ref{sec:Interaction}).  
 
-The \sbol{Interaction} class provides an abstract, machine-readable representation of entity behavior within a \sbol{Component} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
+The \sbol{Interaction} class provides an abstract, machine-readable representation of behavior within a \sbol{Component} (whereas a more detailed model of the system might not be suited to machine reasoning, depending on its implementation).
 Each \sbol{Interaction} contains \sbol{Participation} objects that indicate the roles of the \sbol{Feature} objects involved in the \sbol{Interaction}.
 
 \subparagraph{The \sbolheading{hasInterface} property}\label{sec:hasInterface}
