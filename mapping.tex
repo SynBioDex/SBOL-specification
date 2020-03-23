@@ -13,8 +13,8 @@ SBOL 3 refines the data model to simplify the representation of common use cases
 The SBOL 2.x \external{Model} and \external{ModuleDefinition} classes have no SBOL 1.1 equivalent, and thus are not shown.
 The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 \begin{itemize}
-\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \external{Collection} objects that contain \external{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
-\item SBOL 1.1 \external{DnaComponent} objects map to SBOL 2.x \external{CompenentDefinition} objects with DNA \sbolmult{types:CD}{types} properties.
+\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \external{Collection} objects that contain \external{CompenentDefinition} objects with DNA \sbolmult{type:C}{type} properties.
+\item SBOL 1.1 \external{DnaComponent} objects map to SBOL 2.x \external{CompenentDefinition} objects with DNA \sbolmult{type:C}{type} properties.
 \item SBOL 1.1 \external{DnaSequence} objects map to an SBOL 2.x \external{Sequence} objects with \external{IUPAC DNA} \external{encoding} properties.
 \item SBOL 1.1 \external{SequenceAnnotation} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.x\\
 \external{SequenceAnnotation} objects that contain \external{Range} objects.
@@ -23,7 +23,7 @@ The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 \item Each SBOL 1.1 \external{precedes} property maps to an SBOL 2.x \external{SequenceConstraint} that specifies a precedes \external{restriction} property.
 \end{itemize}
 
-\begin{figure*}[h]
+\begin{figure*}[htp]
 \begin{center}
   \includegraphics[width=\textwidth]{images/sbol_v1_to_v2}
 \end{center}
@@ -45,8 +45,8 @@ The SBOL 2.x \sbol{Attachment}, \sbol{CombinatorialDerivation}, \sbol{Experiment
 
 The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
 \begin{itemize}
-    \item SBOL 2.x \external{ComponentDefinition} objects map to SBOL 3.x \sbol{Component} objects.  The \sbol{type} property is mapped according to  \ref{tbl:component_type_mapping}.
-    \item SBOL 2.x \external{ModuleDefinition} objects map to SBOL 3.x \sbol{Component} objects with a \sbol{type} of \texttt{SBO:0000241} (functional entity)
+    \item SBOL 2.x \external{ComponentDefinition} objects map to SBOL 3.x \sbol{Component} objects.  The \sbolmult{type:C}{type} property is mapped according to  \ref{tbl:component_type_mapping}.
+    \item SBOL 2.x \external{ModuleDefinition} objects map to SBOL 3.x \sbol{Component} objects with a \sbolmult{type:C}{type} of \texttt{SBO:0000241} (functional entity)
     \item Every \external{FunctionalComponent} in an SBOL 2.x \external{ModuleDefinition} with a "direction" property that is not "none" is listed in the \sbol{Interface} of its SBOL 3.x \sbol{Component}. The mapping from direction to interface properties is: "in"-->"inputs", "out"-->"outputs", "inout" --> "nondirectional". Finally, every Component with "access"="public" and "direction"="none" is listed as "nondirectional" in the Interface.
     \item Every \external{Component} in an SBOL 2.x \external{ComponentDefinition} with "access"="public" is listed as "nondirectional" in the \sbol{Interface} of its SBOL 3.x \sbol{Component}.
     \item SBOL 2.x \external{Component}, \external{Module}, and \external{FunctionalComponent} objects map to SBOL 3.x \sbol{SubComponent} objects
@@ -63,7 +63,7 @@ The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
 	\item If the refinement is \external{verifyIdentical}, then the \sbol{restriction} is \external{verifyIdentical}, the \sbol{subject} is the \sbol{ComponentReference} and the \sbol{object} is the \sbol{SubComponent}.
 	\item The \external{merge} \external{refinement} was never well defined and rarely if ever used, so it has been removed from SBOL 3.x.  If a \external{merge} is encountered, it SHOULD be handled as a \external{useRemote}.      
         \end{itemize}
-     \item As an OPTIONAL optimization, if the \sbol{SubComponent} referred to by the \external{local} property of the \external{MapsTo} is a ``placeholder'' with no significant content apart from its \sbol{MapsTo} relationships, then it may be eliminated, all objects that pointed to it can point directly to the new \sbol{ComponentReference} instead, and all transitive constraints using it as a bridge reduced to link the endpoints directly. 
+     \item As an OPTIONAL optimization, if the \sbol{SubComponent} referred to by the \external{local} property of the \external{MapsTo} is a ``placeholder'' with no significant content apart from its \external{MapsTo} relationships, then it may be eliminated, all objects that pointed to it can point directly to the new \sbol{ComponentReference} instead, and all transitive constraints using it as a bridge reduced to link the endpoints directly. 
      \end{itemize}
 \end{itemize}
 
@@ -82,7 +82,7 @@ The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
  \label{tbl:sequence_encoding_mapping}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[htp]
   {\scriptsize
   \begin{edtable}{tabular}{ll}
     \toprule
@@ -103,16 +103,16 @@ The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
 \end{table}
 
 
-\begin{figure*}[h]
+\begin{figure*}[htp]
 	\begin{subfigure}{\textwidth}
 		\centering
-		\includegraphics[width=0.8\linewidth]{uml/sbol_v2_to_v3_left_subfigure}  
+		\includegraphics[width=0.75\linewidth]{uml/sbol_v2_to_v3_left_subfigure}  
 		\caption{SBOL 2.3}
 		\label{fig:sub-first}
               \end{subfigure}\\
               \begin{subfigure}{\textwidth}
 		\centering
-		\includegraphics[width=0.8\linewidth]{uml/sbol_v2_to_v3_right_subfigure}  
+		\includegraphics[width=0.75\linewidth]{uml/sbol_v2_to_v3_right_subfigure}  
 		\caption{SBOL 3.x}
 		\label{fig:sub-second}
 	\end{subfigure}

@@ -86,12 +86,12 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
   	For example, a \sbol{Component} might have the URL~\path{https://synbiohub.org/public/igem/BBa_J23070}, where \texttt{namespace} is \path{https://synbiohub.org}, \texttt{local} is \path{public/igem}, and \texttt{displayId} is \path{BBa_J23070}.
  
   \item A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object (except for its controlling \sbol{Namespace}).
-  	For example, the \path{BBa_J23070_seq} \sbol{Sequence} object cannot have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq}, since the \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URL for the \path{BBa_J23070} \sbol{Component} object.
+  	For example, the \path{BBa_J23070_seq} \sbol{Sequence} object cannot have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq}, since the\\ \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URL for the \path{BBa_J23070} \sbol{Component} object.
   
   \item The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object. 
-	Multiple layers of child objects are allowed using the same \texttt{[parent]/[displayId]} pattern recursively. 
+	Multiple layers of child objects are allowed using the same\\ \texttt{[parent]/[displayId]} pattern recursively. 
 	For example, a \sbol{SequenceFeature} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \texttt{annotation1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1}. 
-	Similarly, the \texttt{loc1} \sbol{Location} child of the \texttt{annotation1} \sbol{SequenceFeature} object will have the URL \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1}.
+	Similarly, the \texttt{loc1} \sbol{Location} child of the \texttt{annotation1}\\ \sbol{SequenceFeature} object will have the URL\\ \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1}.
   \end{itemize}
 
 
