@@ -14,7 +14,7 @@ The \sbol{Feature} class, as shown in \ref{uml:subcomponent} is used to compose 
 \subparagraph{The \sbolheading{role} property}\label{sec:role:F}
 
 Each \sbol{Feature} can have zero or more \sbolmult{role:F}{role} property \sbol{URI}s describing the purpose or potential function of this \sbol{Feature} in the \textit{context} of its parent \sbol{Component}.
-If the \sbolmult{role:F}{role} for a \sbol{SubComponent} is left unspecified, then the \sbolmult{role:F}{role} is determined by the \sbolmult{role:C}{role} property of the parent \sbol{Component}. 
+If the \sbolmult{role:F}{role} for a \sbol{SubComponent} is left unspecified, then the \sbolmult{role:F}{role} is determined by the \sbolmult{role:C}{role} property of the \sbol{Component} that it is an \sbol{instanceOf}. 
 If provided, these \sbolmult{role:F}{role} property \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{Feature}'s function in any domain for which an ontology exists.
 A table of recommended ontology terms for \sbolmult{role:F}{role} is given in \ref{tbl:component_roles}.
 
@@ -24,8 +24,8 @@ Likewise, for any feature that is a \sbol{SubComponent}, the \sbolmult{role:F}{r
 
 \subparagraph{The \sbolheading{orientation} property}
 \label{sec:orientation:F}
-The \sbolmult{orientation:F}{orientation} property is OPTIONAL and has a data type of \sbol{URI}. This can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbol{orientation:F} \sbol{URI}s. If a \sbol{Feature} object has an \sbol{orientation:F}, then it MUST come from \ref{tbl:orientation_types}.
-
+The \sbolmult{orientation:F}{orientation} property is OPTIONAL and has a data type of \sbol{URI}. This can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbolmult{orientation:F}{orientation} \sbol{URI}s. If a \sbol{Feature} object has an \sbolmult{orientation:F}{orientation}, then it MUST come from \ref{tbl:orientation_types}.
+ 
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{3.75in}}
@@ -33,7 +33,7 @@ The \sbolmult{orientation:F}{orientation} property is OPTIONAL and has a data ty
     \textbf{Orientation URI} & \textbf{Description} \\
     \midrule
     \url{http://sbols.org/v2\#inline} & The region specified by this \sbol{Feature} or \sbol{Location} is on the \sbol{elements} of a \sbol{Sequence}. \\
-    \url{http://sbols.org/v2\#reverseComplement} & The region specified by this \sbol{Feature} or \sbol{Location} is on the reverse-complement translation of the \sbol{elements} of a \sbol{Sequence}. The exact nature of this translation depends on the \sbol{encoding} of the \sbol{Sequence}. \\
+    \url{http://sbols.org/v2\#reverseComplement} & The region specified by this \sbol{Feature} or \sbol{Location} is on the reverse-complement mapping of the \sbol{elements} of a \sbol{Sequence}. The exact nature of this mapping depends on the \sbol{encoding} of the \sbol{Sequence}. \\
     \bottomrule
   \end{edtable}
   \caption{REQUIRED \sbol{URI}s for the \sbolmult{orientation:F}{orientation} property}
@@ -85,7 +85,7 @@ A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocati
 
 If any \sbolmult{hasLocation:SC}{hasLocation} is defined, then there MUST BE precisely one \sbol{Sequence} in the \sbol{instanceOf} \sbol{Component}, as otherwise this relationship is ill-defined.
 
-If no \sbolmult{hasLocation:SC}{hasLocation} is defined, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined or involving types for which sequence relationships are not relevant (e.g., inclusion of a reaction sequence within a metabolic network).
+If no \sbolmult{hasLocation:SC}{hasLocation} is defined, this indicates a part / sub-part relationship for which sequence details have not (yet) been determined or involving types for which sequence relationships are not relevant (e.g., inclusion of a reaction chain within a larger metabolic network).
 
 Allowing multiple \sbol{Location} objects on a single \sbol{SubComponent} is intended to enable representation of discontinuous regions (for example, a coding sequence encoded across a set of exons with interspersed introns).
 As such, the \sbol{Location} objects of a single \sbol{SubComponent} MUST NOT specify overlapping regions, since it is not clear what this would mean.
@@ -98,7 +98,7 @@ The \sbol{sourceLocation} property allows for only a portion of a \sbol{Componen
 For example, when composing parts with certain assembly methods, some bases on the boundary may be removed or replaced.
 Another example is describing a deletion or replacement of a portion of a sequence.
 
-A \sbol{SubComponent} MAY have any number of \sbol{sourceLocation} properties, each of type \sbol{URI} that MUST refer to  \sbol{Location} objects that indicate which \sbol{elements} of the \sbol{instanceOf} \sbol{Component}'s \sbol{Sequence} are used in defining the parent of the \sbol{SubComponent}.
+A \sbol{SubComponent} MAY have any number of \sbol{sourceLocation} properties, each of type \sbol{URI}, that MUST refer to  \sbol{Location} objects that indicate which \sbol{elements} of the \sbol{instanceOf} \sbol{Component}'s \sbol{Sequence} are used in defining the parent of the \sbol{SubComponent}.
 
 If there are no \sbol{sourceLocation} properties, then the whole \sbol{Sequence} is assumed to be included. 
 
@@ -111,15 +111,22 @@ The \sbol{ComponentReference} class is a subclass of \sbol{Feature} that can be 
 \subparagraph{The \sbolheading{inChildOf} property}\label{sec:inChildOf}
 
 The \sbol{inChildOf} property is a REQUIRED \sbol{URI} that refers to a \sbol{SubComponent}. 
-The \sbol{inChildOf} property must refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference} (i.e., as a \sbol{SubComponent} of \sbol{Component}, or an \sbol{inChildOf} of \sbol{ComponentReference}). 
+The \sbol{inChildOf} property MUST refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference}.
+Specifically:
+\begin{itemize}
+\item If the parent of the \sbol{ComponentReference} is a \sbol{Component}, then \sbol{inChildOf} MUST be one of its \sbol{SubComponent}s.
+\item If the parent of the \sbol{ComponentReference} is another \sbol{ComponentReference}, then \sbol{inChildOf} MUST be a \sbol{SubComponent} of the \sbol{Component} linked as \sbol{instanceOf} the parent's \sbol{inChildOf} \sbol{SubComponent}.
+\end{itemize}
 
 \subparagraph{The \sbolheading{hasFeature} property}\label{sec:hasFeature:CR}
 
 The \sbolmult{hasFeature:CR}{hasFeature} property is a REQUIRED \sbol{URI} that refers to a \sbol{Feature}.
 
 This can be used to either link to the \sbol{Feature} being referenced or to chain hierarchically through additional layers of \sbol{SubComponent}.
-If the \sbol{Feature} is a \sbol{ComponentReference}, then that \sbol{ComponentReference} MUST BE a child of the \sbol{ComponentReference} linking to it via \sbolmult{hasFeature:CR}{hasFeature}, and it acts as a hierarchical link in a chain of references.
-Otherwise, if the \sbol{hasFeature} refers to any other type of \sbol{Feature}, that feature MUST BE a child of the \sbol{SubComponent} pointed to by \sbol{inChildOf}.
+\begin{itemize}
+\item If the \sbol{Feature} is a \sbol{ComponentReference}, then that \sbol{ComponentReference} acts as a hierarchical link in a chain of references, and MUST be either a child of the \sbol{ComponentReference} linking to it via \sbolmult{hasFeature:CR}{hasFeature} or a child of the \sbol{Component} linked as \sbol{instanceOf} the \sbol{ComponentReference}'s \sbol{inChildOf} \sbol{SubComponent}.
+\item Otherwise, if the \sbol{hasFeature} refers to any other type of \sbol{Feature}, that \sbol{Feature} MUST be a child of the \sbol{Component} linked as \sbol{instanceOf} the \sbol{ComponentReference}'s \sbol{inChildOf} \sbol{SubComponent}.
+\end{itemize}
 
 For example, \sbol{ComponentReference} R1 looking into a \sbol{SubComponent} for a plasmid might link with \sbol{hasFeature} to its own child \sbol{ComponentReference} R2, which in turn looks within the \sbol{Component} defining the plasmid to the plasmid's CDS \sbol{SubComponent}, in turn using \sbol{hasFeature} to reference a \sbol{SequenceFeature} within the \sbol{Component} that defines that CDS.
 
