@@ -81,7 +81,7 @@ For example, consider the \sbol{SubComponent} objects $A$ and $B$ and the \sbol{
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:SC}
 
-A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects that indicates the location of the \sbol{Sequence} from the \sbol{instanceOf} \sbol{Component} in a \sbol{Sequence} of the parent \sbol{Component}.
+A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocation} properties, each of type \sbol{URI}, that MUST refer to \sbol{Location} objects that indicates the location of the \sbol{Sequence} from the \sbol{instanceOf} \sbol{Component} in a \sbol{Sequence} of the parent \sbol{Component}.
 
 If any \sbolmult{hasLocation:SC}{hasLocation} is defined, then there MUST BE precisely one \sbol{Sequence} in the \sbol{instanceOf} \sbol{Component}, as otherwise this relationship is ill-defined.
 
@@ -140,7 +140,7 @@ This class serves as a way to create a placeholder in more complex \sbol{Compone
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:LSR}
 
-A \sbol{LocalSubComponent} MAY have any number of \sbolmult{hasLocation:LSR}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects. 
+A \sbol{LocalSubComponent} MAY have any number of \sbolmult{hasLocation:LSR}{hasLocation} properties, each of type \sbol{URI}, that MUST refer to \sbol{Location} objects. 
 These follow the same restrictions as for the \sbolmult{hasLocation:SC}{hasLocation} of a \sbol{SubComponent}, notably that the \sbol{Location}s of \sbolmult{hasLocation:LSR}{hasLocation} properties attached to the same \sbol{LocalSubComponent} MUST NOT overlap.
 
 
@@ -151,7 +151,7 @@ The \sbolmult{type:LSC}{type} property is REQUIRED and contains one or more \sbo
 \paragraph{ExternallyDefined}
 \label{sec:ExternallyDefined}
 
-The \sbol{ExternallyDefined} class has been introduced so that external definitions in databases like CHEBI or UniProt can be referenced.
+The \sbol{ExternallyDefined} class has been introduced so that external definitions in databases like ChEBI or UniProt can be referenced.
 
 \subparagraph{The \sbolheading{type} property}\label{sec:type:ED}
 
@@ -171,6 +171,6 @@ The \sbol{SequenceFeature} class describes one or more regions of interest on th
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:SF}
 
-A \sbol{SequenceFeature} MAY have any number of \sbolmult{hasLocation:SF}{hasLocation} properties, each of type \sbol{URI} that MUST refer to \sbol{Location} objects. 
+A \sbol{SequenceFeature} MAY have any number of \sbolmult{hasLocation:SF}{hasLocation} properties, each of type \sbol{URI}, that MUST refer to \sbol{Location} objects. 
 These follow the same restrictions as for the \sbolmult{hasLocation:SC}{hasLocation} of a \sbol{SubComponent}, notably that the \sbol{Location}s of \sbolmult{hasLocation:SF}{hasLocation} properties attached to the same \sbol{SequenceFeature} MUST NOT overlap.
 
