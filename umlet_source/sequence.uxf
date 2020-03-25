@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="14.2">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>290</x>
-      <y>280</y>
-      <w>140</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>*Sequence*
---
--elements[1] : String
--encoding[1] : URI
-
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Class</type>
+    <id>UMLClass</id>
     <coordinates>
       <x>300</x>
       <y>220</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>*/TopLevel/*</panel_attributes>
+    <panel_attributes>*TopLevel*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.baselet.element.old.element.Relation</type>
+    <id>Relation</id>
     <coordinates>
-      <x>330</x>
-      <y>220</y>
-      <w>50</w>
-      <h>80</h>
+      <x>350</x>
+      <y>240</y>
+      <w>30</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;60</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>280</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>*Sequence*
+--
+-elements[0..1] : String
+-encoding[0..1] : URI
+
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
