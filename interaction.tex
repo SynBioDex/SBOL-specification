@@ -16,7 +16,7 @@ Each \sbol{Interaction} includes \sbolmult{type:I}{type} properties that refer t
 
 \subparagraph{The \sbolheading{type} property}\label{sec:type:I}
 
-An \sbol{Interaction} is REQUIRED to have one or more \sbolmult{type:I}{type} properties, each of type \sbol{URI} that describes the behavior represented by an \sbol{Interaction}.
+An \sbol{Interaction} is REQUIRED to have one or more \sbolmult{type:I}{type} properties, each of type \sbol{URI}, that describes the behavior represented by an \sbol{Interaction}.
 
 Each \sbolmult{type:I}{type} property MUST identify terms from appropriate ontologies. 
 It is RECOMMENDED that exactly one \sbol{URI} specified by a \sbolmult{type:I}{type} property refer to a term from the occurring entity branch of the \href{http://www.ebi.ac.uk/sbo/main/}{Systems Biology Ontology (SBO)}.
@@ -44,6 +44,6 @@ If an \sbol{Interaction} is well described by one of the terms from \ref{tbl:int
 
 \subparagraph{The \sbolheading{hasParticipation} property}\label{sec:hasParticipation}
 
-An \sbol{Interaction} MAY have any number of \sbol{hasParticipation} properties, each of type \sbol{URI} that MUST reference a \sbol{Participation} object, each of which identifies the \sbolmult{role:P}{role} that its referenced \sbol{Feature} plays in the \sbol{Interaction}.
+An \sbol{Interaction} MAY have any number of \sbol{hasParticipation} properties, each of type \sbol{URI}, that MUST reference a \sbol{Participation} object, each of which identifies the \sbolmult{role:P}{role} that its referenced \sbol{Feature} plays in the \sbol{Interaction}.
 
 Even though an \sbol{Interaction} generally contains at least one \sbol{Participation}, the case of zero \sbol{Participation} objects is allowed because it is plausible that a designer might want to specify that an \sbol{Interaction} will exist, even if its \sbol{participant}s have not yet been determined.

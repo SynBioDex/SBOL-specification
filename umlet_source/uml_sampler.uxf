@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>441</x>
+      <y>144</y>
+      <w>261</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*Class*
+--
+-requiredProperty[1] : URI
+-optionalProperty[0..1] : URI
+-unboundedProperty[0..*] : URI
+-requiredUnboundedProperty[1..*] : URI
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>639</x>
+      <y>270</y>
+      <w>189</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+hasChildObject
+1</panel_attributes>
+    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>567</x>
+      <y>225</y>
+      <w>27</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>495</x>
+      <y>261</y>
+      <w>153</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>*SubClass*
+--
+-subProperty[1..*] : URI
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>207</x>
+      <y>279</y>
+      <w>126</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>*ReferencedObject*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>324</x>
+      <y>270</y>
+      <w>189</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+hasReferencedObject
+   0..*</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>279</y>
+      <w>126</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>*ChildObject*</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

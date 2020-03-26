@@ -26,7 +26,7 @@ The same holds true for the \sbolmult{role:C}{role} properties of these \sbol{Co
 \subparagraph{The \sbolheading{hasVariableComponent} property}\label{sec:hasVariableComponent}
 
 Each \sbol{VariableComponent} child of a \sbol{CombinatorialDerivation} defines the set of possible values for one of the variables in the \sbol{template}.
-A \sbol{CombinatorialDerivation} object can have zero or more \sbol{hasVariableComponent} properties, each of type \sbol{URI} specifying a \sbol{VariableComponent}. 
+A \sbol{CombinatorialDerivation} object can have zero or more \sbol{hasVariableComponent} properties, each of type \sbol{URI}, specifying a \sbol{VariableComponent}. 
 The set of  \sbol{hasVariableComponent} properties MUST NOT contain two or more \sbol{VariableComponent} objects that refer to the same template \sbol{SubComponent} via their \sbol{variable} properties (i.e., do not define the same variable twice).
 
 The \sbol{variable} properties of \sbol{VariableComponent} objects control which \sbol{SubComponent} objects in the \sbol{template} are modified in a derived \sbol{Component}.
@@ -34,11 +34,11 @@ If no \sbol{variable} property of one of these \sbol{VariableComponent} objects 
 and a \prov{wasDerivedFrom} property that refers to the template \sbol{SubComponent}.
 
 If a \sbol{SubComponent} in the \sbol{template} is referred to by some \sbol{variable} in a \sbol{VariableComponent}, then it is a variable and it SHOULD be replaced in the derived \sbol{Component} by a number of \sbol{SubComponent} objects constrained by the number specified by the \sbol{cardinality} property of the \sbol{VariableComponent} (see \ref{tbl:cardinality}).
-The \sbol{instanceOf} properties of these \sbol{SubComponent} objects in the derived \sbol{Component} MUST refer to a \sbol{Component} objects specified by a \sbol{variant}, contained within a \sbol{variantCollection}, or derived from a \sbol{variantDerivation} of the \sbol{VariableComponent}.
+Each \sbol{instanceOf} property of such a \sbol{SubComponent} object in the derived \sbol{Component} MUST refer to a \sbol{Component} object specified by a \sbol{variant}, contained within a \sbol{variantCollection}, or derived from a \sbol{variantDerivation} of the \sbol{VariableComponent}.
 
 
 Finally, all derived \sbol{SubComponent} objects MUST follow the \sbol{restriction} properties of any 
-\sbol{Constraint} objects that refer to their corresponding template \sbol{SubComponent}, and SHOULD have values of \sbolmult{role:F}{role} that contain the same values as the values \sbolmult{role:F}{role} in the template \sbol{SubComponent}.
+\sbol{Constraint} objects that refer to their corresponding template \sbol{SubComponent}, and SHOULD have values of \sbolmult{role:F}{role} that contain the same values as the \sbolmult{role:F}{role} in the template \sbol{SubComponent}.
 
 
 \subparagraph{The \sbolheading{strategy} property}\label{sec:strategy}
@@ -81,18 +81,18 @@ The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a
 
 \subparagraph{The \sbolheading{variant} property}\label{sec:variant}
 
-A \sbol{VariableComponent} object can have zero or more \sbol{variant} properties, each of type \sbol{URI} specifying a \sbol{Component} object. This property specifies individual \sbol{Component} objects to serve as options when deriving a new
+A \sbol{VariableComponent} object can have zero or more \sbol{variant} properties, each of type \sbol{URI}, specifying a \sbol{Component} object. This property specifies individual \sbol{Component} objects to serve as options when deriving a new
 \sbol{SubComponent} for the \sbol{variable} \sbol{SubComponent} from the \sbol{template}.
 
 \subparagraph{The \sbolheading{variantCollection} property}\label{sec:variantCollection}
 
-A \sbol{VariableComponent} object can have zero or more \sbol{variantCollection} properties, each of type \sbol{URI} specifying a \sbol{Collection} object.
+A \sbol{VariableComponent} object can have zero or more \sbol{variantCollection} properties, each of type \sbol{URI}, specifying a \sbol{Collection} object.
 Such a \sbol{Collection} MUST NOT contain any objects besides \sbol{Component} objects or \sbol{Collection} objects that themselves contain only \sbol{Component} or \sbol{Collection} objects.
 This property enables the specification of existing groups of \sbol{Component} objects to serve as options.
 
 \subparagraph{The \sbolheading{variantDerivation} property}\label{sec:variantDerivation}
 
-A \sbol{VariableComponent} object can have zero or more \sbol{variantDerivation} properties, each of type \sbol{URI} specifying a \sbol{CombinatorialDerivation} object. 
+A \sbol{VariableComponent} object can have zero or more \sbol{variantDerivation} properties, each of type \sbol{URI}, specifying a \sbol{CombinatorialDerivation} object. 
 This property enables the specification of \sbol{Component} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \sbol{SubComponent} for the \sbol{variable} \sbol{SubComponent} from the \sbol{template}. 
 The \sbol{variantDerivation} properties of a \sbol{VariableComponent} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \sbol{VariableComponent}. 
 Furthermore, such \sbol{VariableComponent} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivation} properties and the \sbol{CombinatorialDerivation} objects that contain them. 

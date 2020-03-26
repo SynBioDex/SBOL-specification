@@ -4,9 +4,9 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>300</x>
       <y>410</y>
-      <w>100</w>
+      <w>120</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>_Implementation_
@@ -16,9 +16,9 @@ bg=#ffff00</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>300</x>
       <y>630</y>
-      <w>100</w>
+      <w>120</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>_Experimental_
@@ -68,9 +68,25 @@ plan</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>410</x>
       <y>440</y>
       <w>220</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+ entity
+
+
+
+</panel_attributes>
+    <additional_attributes>160.0;70.0;160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>660</y>
+      <w>230</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
@@ -84,30 +100,14 @@ plan</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>660</y>
-      <w>230</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
- entity
-
-
-
-</panel_attributes>
-    <additional_attributes>180.0;70.0;180.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>400</x>
+      <x>410</x>
       <y>590</y>
-      <w>380</w>
+      <w>370</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
    wasGeneratedBy</panel_attributes>
-    <additional_attributes>250.0;10.0;250.0;60.0;10.0;60.0</additional_attributes>
+    <additional_attributes>240.0;10.0;240.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -125,21 +125,21 @@ plan</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>410</x>
       <y>810</y>
-      <w>380</w>
+      <w>370</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
   wasGeneratedBy</panel_attributes>
-    <additional_attributes>250.0;10.0;250.0;60.0;10.0;60.0</additional_attributes>
+    <additional_attributes>240.0;10.0;240.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>300</x>
       <y>850</y>
-      <w>100</w>
+      <w>120</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>_Model_
@@ -152,7 +152,7 @@ bg=red
     <coordinates>
       <x>350</x>
       <y>680</y>
-      <w>130</w>
+      <w>140</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
@@ -164,7 +164,7 @@ bg=red
     <coordinates>
       <x>350</x>
       <y>460</y>
-      <w>130</w>
+      <w>140</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
@@ -188,7 +188,7 @@ plan</panel_attributes>
     <coordinates>
       <x>350</x>
       <y>250</y>
-      <w>130</w>
+      <w>140</w>
       <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
@@ -198,20 +198,19 @@ plan</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>300</x>
       <y>200</y>
-      <w>100</w>
+      <w>120</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>_Module_
-_Definition_
+    <panel_attributes>_Component_
 bg=#92d050</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>410</x>
       <y>230</y>
       <w>250</w>
       <h>80</h>
@@ -221,7 +220,7 @@ bg=#92d050</panel_attributes>
 
 
 </panel_attributes>
-    <additional_attributes>200.0;60.0;200.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>190.0;60.0;190.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -240,14 +239,14 @@ bg=#92d050</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>410</x>
       <y>370</y>
-      <w>390</w>
+      <w>380</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
   wasGeneratedBy</panel_attributes>
-    <additional_attributes>260.0;10.0;260.0;60.0;10.0;60.0</additional_attributes>
+    <additional_attributes>250.0;10.0;250.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -387,9 +386,9 @@ agent</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>300</x>
       <y>0</y>
-      <w>100</w>
+      <w>120</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>_Model_
@@ -402,7 +401,7 @@ bg=red
     <coordinates>
       <x>350</x>
       <y>50</y>
-      <w>130</w>
+      <w>140</w>
       <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
@@ -441,14 +440,14 @@ roles: [learn]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>410</x>
       <y>170</y>
-      <w>390</w>
+      <w>380</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
   wasGeneratedBy</panel_attributes>
-    <additional_attributes>260.0;10.0;260.0;50.0;10.0;50.0</additional_attributes>
+    <additional_attributes>250.0;10.0;250.0;50.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -479,7 +478,7 @@ description: "software tool"</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>410</x>
       <y>20</y>
       <w>250</w>
       <h>90</h>
@@ -490,7 +489,7 @@ description: "software tool"</panel_attributes>
 
 
 </panel_attributes>
-    <additional_attributes>200.0;70.0;200.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>190.0;70.0;190.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>

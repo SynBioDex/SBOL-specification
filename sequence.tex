@@ -13,11 +13,15 @@ The purpose of the \sbol{Sequence} class is to represent the primary structure o
 
 \subparagraph{The \sbolheading{elements} property}
 \label{sec:elements}
-The \sbol{elements} property is a REQUIRED \sbol{String} of characters that represents the constituents of a biological or chemical molecule. For example, these characters could represent the nucleotide bases of a molecule of DNA, the amino acid residues of a protein, or the atoms and chemical bonds of a small molecule.
+The \sbol{elements} property is an OPTIONAL \sbol{String} of characters that represents the constituents of a biological or chemical molecule. 
+For example, these characters could represent the nucleotide bases of a molecule of DNA, the amino acid residues of a protein, or the atoms and chemical bonds of a small molecule.
+
+If the \sbol{elements} property is not set, then it means the particulars of this \sbol{Sequence} have not yet been determined.
 
 \subparagraph{The \sbolheading{encoding} property}
 \label{sec:encoding}
-The \sbol{encoding} property is REQUIRED and has a data type of \sbol{URI}. This property MUST indicate how the \sbol{elements} property of a \sbol{Sequence} are formed and interpreted.
+The \sbol{encoding} property has a data type of \sbol{URI}, and is OPTIONAL unless \sbol{elements} is set, in which case it is REQUIRED.
+This property MUST indicate how the \sbol{elements} property of a \sbol{Sequence} are formed and interpreted.
 
 For example, the \sbol{elements} property of a \sbol{Sequence} with an IUPAC DNA encoding property MUST contain characters that represent nucleotide bases, such as {\tt a}, {\tt t}, {\tt c}, and {\tt g}. The \sbol{elements} property of a \sbol{Sequence} with a Simplified Molecular-Input Line-Entry System (SMILES) encoding, on the other hand, MUST contain characters that represent atoms and chemical bonds, such as {\tt C}, {\tt N}, {\tt O}, and {\tt =}.
 
