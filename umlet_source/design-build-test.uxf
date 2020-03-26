@@ -284,7 +284,7 @@ description: "DNA assembly"</panel_attributes>
     </coordinates>
     <panel_attributes>_Usage_
 --
-roles: [test]
+role: [test]
 
 </panel_attributes>
     <additional_attributes/>
@@ -299,7 +299,7 @@ roles: [test]
     </coordinates>
     <panel_attributes>_Usage_
 --
-roles: [build]
+role: [build]
 
 </panel_attributes>
     <additional_attributes/>
@@ -314,7 +314,7 @@ roles: [build]
     </coordinates>
     <panel_attributes>_Usage_
 --
-roles: [design]
+role: [design]
 
 </panel_attributes>
     <additional_attributes/>
@@ -418,7 +418,7 @@ bg=red
     </coordinates>
     <panel_attributes>_Usage_
 --
-roles: [learn]
+role: [learn]
 
 </panel_attributes>
     <additional_attributes/>
@@ -501,7 +501,7 @@ description: "software tool"</panel_attributes>
     </coordinates>
     <panel_attributes>_Association_
 --
-roles: [design]
+role: [design]
 
 </panel_attributes>
     <additional_attributes/>
@@ -516,7 +516,7 @@ roles: [design]
     </coordinates>
     <panel_attributes>_Association_
 --
-roles: [build]
+role: [build]
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -530,7 +530,7 @@ roles: [build]
     </coordinates>
     <panel_attributes>_Association_
 --
-roles [test]
+role: [test]
 
 </panel_attributes>
     <additional_attributes/>
@@ -545,7 +545,7 @@ roles [test]
     </coordinates>
     <panel_attributes>_Association_
 --
-roles: [learn]
+role: [learn]
 
 </panel_attributes>
     <additional_attributes/>
