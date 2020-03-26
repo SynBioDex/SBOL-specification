@@ -12,7 +12,7 @@ As an example, consider an expression cassette, such as the one found in the pla
 The system is designed to visually indicate whether a gene has been inserted into the plasmid: 
 in the presence of IPTG, it expresses an enzyme that hydrolyses X-gal to form a blue product, but successful insertion disrupts the expression cassette and prevents the formation of this product. 
 Internally, it has a number of parts, including a promoter, the lac repressor binding site, and the lacZ coding sequence.
-These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional machinery and translational machinery that collectively cause the desired system-level behavior.
+These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional machinery, and translational machinery that collectively cause the desired system-level behavior.
 
 In SBOL 3, both the structural and functional aspects are described using a class called \sbol{Component}, as depicted in \ref{images:overview1}.  
 Namely, to represent structural aspects, a \sbol{Component} can include \sbol{Feature}s, some of which may be at some \sbol{Location} within a \sbol{Sequence}.  
@@ -56,7 +56,7 @@ The next sections provide complete definitions and details for all of these clas
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.85]{images/SBOL3-top-levels.pdf}
-\caption{Main classes of information represented by the SBOL 3 standard, and their relationships.  Blue boxes represent design classes, green boxes represent build classes, yellow boxes represent test classes, red boxes represent learn classes, and the gray boxes represent additional utility classes.  Each of these classes will be described in more detail below.}
+\caption{Main classes of information represented by the SBOL 3 standard, and their relationships.  Green boxes represent design classes, orange boxes represent build classes, purple boxes represent test classes, yellow boxes represent learn classes, and the gray boxes represent additional utility classes.  Each of these classes will be described in more detail below.}
 \label{images:overview2}
 \end{center}
 \end{figure}

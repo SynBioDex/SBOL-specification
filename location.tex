@@ -1,4 +1,3 @@
-
 \subsubsection{Location}
 \label{sec:Location}
 
@@ -19,10 +18,11 @@ The \sbolmult{orientation:L}{orientation} property is OPTIONAL and has a data ty
 \subparagraph{The \sbolheading{order} property}
 \label{sec:order}
 The \sbol{order} property is OPTIONAL and has a data type of \sbol{Integer}.  If there are multiple \sbol{Location} objects associated with a \sbol{Feature}, the \sbol{order} property is used to specify the order (in increasing value) in which the specified \sbol{Location}s are to be joined to form the sequence of the \sbol{Feature}.
+Note that order values MAY be non-sequential and non-positive, if desired.
 
 \subparagraph{The \sbolheading{hasSequence} property}
-\label{sec:hasSequence}
-The \sbol{hasSequence} property is REQUIRED and MUST contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
+\label{sec:hasSequence:L}
+The \sbolmult{hasSequence:L}{hasSequence} property is REQUIRED and MUST contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
 
 \paragraph{Range}
 \label{sec:Range}
