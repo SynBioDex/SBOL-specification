@@ -16,9 +16,12 @@ Compliant URIs for \sbol{TopLevel} objects MUST conform to the following pattern
 \refObj{namespace}/\refObj{collection\_structure}/\refObj{displayId}
 \end{quotation}
 
-The \refObj{namespace} token may further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \sbol{URI}s can be automatically decomposed with the aid of a \sbol{Namespace}. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
+The \refObj{namespace} token MAY further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \sbol{URI}s can be automatically decomposed with the aid of a \sbol{Namespace}. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
 
-For example, the SBOL-compliant \sbol{URI} can be decomposed as follows: \\ ``https://synbiohub.org/igem/2017\_distribution/promoters/constitutive/BBa\_J23101'' 
+Consider, for example, the SBOL-compliant \sbol{URI}:
+\begin{quote}``https://synbiohub.org/igem/2017\_distribution/promoters/constitutive/BBa\_J23101''\end{quote} 
+in \sbol{Namespace} ``https://synbiohub.org/igem/2017\_distribution''.
+This \sbol{URI} can be decomposed as follows:
 \begin{quote} 
 namespace: ``https://synbiohub.org/igem/2017\_distribution'' \linebreak
 domain: ``https://synbiohub.org'' \linebreak
@@ -27,7 +30,10 @@ collection: ``promoters/constitutive'' \linebreak
 displayId: ``BBa\_J23101'' \linebreak
 \end{quote}
 
-SBOL-compliant URIs greatly facilitate auto-construction of child objects with unique \sbol{URI}s. Child objects of \sbol{TopLevel} objects with compliant \sbol{URI}s MUST conform to the following pattern:\\ ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the URI of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. The \refObj{child\_type\_counter} of a new object will generally be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_uri}/SequenceAnnotation37''. Note that numbering is independent for each type, so a \sbol{Component} can have children ``SubComponent37'' and ``Constraint37''.
+SBOL-compliant URIs also facilitate auto-construction of child objects with unique \sbol{URI}s. 
+Child objects of \sbol{TopLevel} objects with compliant \sbol{URI}s MUST conform to the following pattern:\\ ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the URI of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. 
+The \refObj{child\_type\_counter} of a new object SHOULD be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_uri}/SequenceAnnotation37''). 
+Note that numbering is independent for each type, so a \sbol{Component} can have children ``SubComponent37'' and ``Constraint37''.
 
 All examples in this specification use compliant \sbol{URI}s.
 
@@ -70,25 +76,30 @@ unverified and not depend on their correctness.
 \subsection{Recommended Ontologies for External Terms}
 \label{sec:recomm_ontologies}
 
-External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. New SBOL specific terms are defined only when necessary. For example, \sbol{Component} \sbolmult{type:C}{type}s, such as DNA or protein, are described using Systems Biology Ontology (SBO) terms. Similarly, the \sbolmult{role:C}{role}s of a DNA or RNA \sbol{Component} are described via Sequence Ontology (SO) terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
+External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. 
+New SBOL-specific terms are defined only when necessary. 
+For example, \sbol{Component} \sbolmult{type:C}{type}s, such as DNA or protein, are described using Systems Biology Ontology (SBO) terms. Similarly, the \sbolmult{role:C}{role}s of a DNA or RNA \sbol{Component} are described via Sequence Ontology (SO) terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 
 \begin{table}[htp]
-  \begin{edtable}{tabular}{p{3cm}p{1.5cm}p{4.5cm}p{5cm}}
+  \begin{edtable}{tabular}{p{2cm}p{1.5cm}p{5cm}p{6cm}}
     \toprule
     \textbf{SBOL Entity} & \textbf{Property} & \textbf{Preferred External Resource}
     & \textbf{More Information} \\
     \midrule
-    \textbf{Component}  & types & SBO (physical entity branch)& \url{http://www.ebi.ac.uk/sbo/main/}\\
-                                  & types & SO (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
-    						   	  & roles & SO (\textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
-    						   	  & roles & CHEBI (\textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
-    						   	  & roles & UniProt (\textit{protein}) & \url{https://www.uniprot.org/}  \\   
-    \textbf{Interaction}	      & types & SBO (occurring entity branch) & 
+    \textbf{Component}  & type & SBO (physical entity branch)& \url{http://www.ebi.ac.uk/sbo/main/}\\
+                                  & type & SO (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
+    						   	  & role & SO (\textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
+    						   	  & role & CHEBI (\textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
+    						   	  & role & UniProt (\textit{protein}) & \url{https://www.uniprot.org/}  \\   
+    						   	  & role & NCIT (\textit{samples}) & \url{https://ncithesaurus.nci.nih.gov/}  \\   
+    \textbf{Interaction}	      & type & SBO (occurring entity branch) & 
     \url{http://www.ebi.ac.uk/sbo/main/} \\
-    \textbf{Participation}	      & roles & SBO (participant roles branch) &
+    \textbf{Participation}	      & role & SBO (participant roles branch) &
     \url{http://www.ebi.ac.uk/sbo/main/} \\
     \textbf{Model}	      		  & language & EDAM & \url{http://bioportal.bioontology.org/ontologies/EDAM}     \\
     				      		  & framework & SBO (modeling framework branch) &
+    \url{http://www.ebi.ac.uk/sbo/main/} \\
+    \textbf{om:Measure}	& type & SBO (systems description parameters) &
     \url{http://www.ebi.ac.uk/sbo/main/} \\
     \bottomrule
   \end{edtable}
@@ -122,7 +133,7 @@ Mixtures MAY be defined recursively, as mixtures of mixtures of mixtures, etc.
 
 \subsubsection{Media, Inducers, and Other Reagents}
 
-Reagents, whether ``atomic'' (e.g., rainbow bead control) or mixtures, SHOULD be represented as a \sbol{Component}.
+Each reagent, whether ``atomic'' (e.g., rainbow bead control) or mixture (e.g., M9 media), SHOULD be represented as a \sbol{Component}.
 
 The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{role:F}{role} property of the \sbol{SubComponent}. Examples include:
 \begin{itemize}
@@ -133,14 +144,9 @@ The roles of reagents may vary in context: for example, Arabinose may serve as a
 \item NCIT:C120268: Inducer
 \end{itemize}
 
-\subsubsection{Strains, Genomes, and Plasmids}
+For more information on representing cells, strains, plasmids, and genomes, see \ref{bp:cells}
 
-A cell strain SHOULD be represented as a \sbol{Component} containing at least:
-\begin{itemize}
-\item A \sbol{SubComponent} for the cell, which is RECOMMENDED to have \sbolmult{type:C}{type} cell (GO:0005623) and \sbolmult{role:C}{role} physical compartment (SBO:0000290).
-\item A representation of its genetic material (genome, plasmids, etc.) as a collection of \sbol{SubComponent} instances.
-\item An \sbol{Interaction} of type \texttt{FunctionalCompartment} (SBO:0000289) with the cell participating as physical compartment (SBO: 0000290) and the genetic material participating as contained entity (SBO:0000664).
-\end{itemize}
+\todo[inline]{Should we switch the GO term recommendation below to match the NCIT recommendation below?}
 
 \subsubsection{Samples}
 
@@ -169,24 +175,23 @@ Values of these parameters SHOULD be specified by attaching a \om{Measure} with 
 
 SBOL has been used extensively to represent designs in homogeneous systems, where the same design is implemented in every cell. However, in recent years there has been increasing interest in multicellular systems, where biological designs are split across multiple cells to optimize the system behavior and function. Therefore, there is a need to define a set of best practices so that multicellular systems can be captured using SBOL in a standard way.
 
-\subsubsection{Representing Cells}
+\subsubsection{Representing Cell Types}
+\label{bp:cells}
 
-To represent multicellular systems using SBOL, it is first necessary to represent cells properly. 
-When doing so, it is important to be able to capture the following information: (i) taxonomy, (ii) interactions occurring within the cell, and (iii) components inside the cell (e.g. DNA Molecules). 
-The approach proposed in this section is capable of capturing this information, as shown in the example in \ref{uml:cell_representation}. 
-It uses a \sbol{Component} to represent a system that contains the cell. 
-The cell is represented by a \sbol{SubComponent} inside the \sbol{Component}. 
-A separate \sbol{Component} is used to capture information about the species and strain of the cell in the design. 
+To represent multicellular systems using SBOL, it is first necessary to represent cells. 
+When doing so, it is important to be able to capture the following information: (i) taxonomy of the strain used, (ii) interactions occurring within cells of this type, and (iii) components inside the type of cell (e.g. genomes, plasmids). 
+The approach RECOMMENDED in this section is capable of capturing this information, as shown in the example in \ref{uml:cell_representation}. 
+It uses a \sbol{Component} to represent a system that contains cells of the given type.
+The cells themselves are represented by a \sbol{SubComponent} inside the \sbol{Component}, which is an \sbol{instanceOf} 
+a \sbol{Component} capturing information about the species and strain of the cell in the design. 
 This \sbol{Component} has a \sbolmult{type:C}{type} of ``cell'' from the Gene Ontology (GO:0005623), and a \sbolmult{role:C}{role} of ``physical compartment'' (SBO:0000290).
+\todo[inline]{What property are we actually recommending to use for the annotation?}
 Taxonomic information is captured by annotating the class instance with a URI for an entry in the NCBI Taxonomy Database. 
-The \sbol{Component} is used as the value of the \sbol{instanceOf} property of the \sbol{SubComponent} that represents the cell in the design to specify information about its taxonomy. 
-Other entities which are relevant to this aspect of the design are also captured using instances of the \sbol{SubComponent} class. 
-Interactions which occur in this system are captured using the \sbol{Interaction} and \sbol{Participation} classes. 
-Interactions which occur within the cell are specified by \sbol{Interaction} classes which contain the \sbol{SubComponent} instance representing the cell as a \sbol{participant} with a \sbolmult{role:P}{role} of ``physical compartment.''
 
-With this approach, an additional \sbol{Interaction} class instance could be used to define entities which are only present within the cell, i.e. they are not available to the rest of the system. 
-This interaction has a \sbolmult{type:I}{type} of ``containment'' (SBO:0000469), and has at least two participants. 
-One of these \sbol{participant}s is the cell, which has a \sbolmult{role:P}{role} of ``physical compartment'', whilst the others are the contained entities, which have \sbolmult{role:P}{roles} of ``contained'' (SBO:0000064).
+As usual, other entities besides the cell that are relevant to the design are also captured as \sbol{Feature}s.
+When these are contained within the cell, they are captured using a \sbol{Constraint} with restriction \texttt{contains} with the cell as \sbol{subject} and contained object as \sbol{object}.
+Interactions which occur in this system are captured using the \sbol{Interaction} and \sbol{Participation} classes. 
+Interactions which occur within the cell are specified by \sbol{Interaction} classes which contain the \sbol{SubComponent} instance representing the cell as a \sbol{participant} with a \sbolmult{role:P}{role} of ``physical compartment'' (SBO:0000290).
 
 \begin{figure}[htp]
 	\begin{center}
@@ -194,16 +199,16 @@ One of these \sbol{participant}s is the cell, which has a \sbolmult{role:P}{role
 		\caption[Repressenting a cell]{This is a proposed approach for capturing cell designs in SBOL. A \sbol{Component} annotated with a URI pointing to an entry in the NCBI Taxonomy Database is used to capture information about the cell's strain/species. 
 		The \sbol{Component} has a type of ``Cell'' from the Gene Ontology (GO), and a role of ``physical compartment''. 
 		Another \sbol{Component} is used to represent a system in which the cell is implemented. 
-		Entities, including the cell, are instantiated as \sbol{SubComponent}s, and process are captured using the \sbol{Interaction} class.
-		Process which are contained within the cell are represented by including the cell as a participant with a role of ``physical compartment''. }
+		Entities, including the cell, are instantiated as \sbol{SubComponent}s, and processes are captured using the \sbol{Interaction} class.
+		Processes that are contained within the cell are represented by including the cell as a participant with a role of ``physical compartment''. }
 		\label{uml:cell_representation}
 	\end{center}
 \end{figure}
 
-\subsubsection{Multiple Cells in a Single Design}
+\subsubsection{Multiple Cell Types in a Single Design}
 
-The same approach can be extended to represent systems with multiple cells, using one \sbol{Component} to represent the system for each cells.
-The multicellular system can then be represented as a \sbol{Component} that includes the system description for each strain of cell as a \sbol{SubComponent}.
+The same approach can be extended to represent systems with multiple types of cells.
+The multicellular system can be represented as a \sbol{Component} that includes each strain of cell as a \sbol{SubComponent} that is an \sbol{instanceOf} a \sbol{Component} defining its strain.
 Interactions and constraints, such as a molecule that both strains interact with, are implemented using \sbol{ComponentReference}s to link to the definitions within each cell system description.
 An example is shown in \ref{uml:multiple_cell_representation}.
 
