@@ -146,7 +146,7 @@ The roles of reagents may vary in context: for example, Arabinose may serve as a
 
 For more information on representing cells, strains, plasmids, and genomes, see \ref{bp:cells}
 
-\todo[inline]{Should we switch the GO term recommendation below to match the NCIT recommendation below?}
+%\todo[inline]{Should we switch the GO term recommendation below to match the NCIT recommendation below?}
 
 \subsubsection{Samples}
 
@@ -185,7 +185,7 @@ It uses a \sbol{Component} to represent a system that contains cells of the give
 The cells themselves are represented by a \sbol{SubComponent} inside the \sbol{Component}, which is an \sbol{instanceOf} 
 a \sbol{Component} capturing information about the species and strain of the cell in the design. 
 This \sbol{Component} has a \sbolmult{type:C}{type} of ``cell'' from the Gene Ontology (GO:0005623), and a \sbolmult{role:C}{role} of ``physical compartment'' (SBO:0000290).
-\todo[inline]{What property are we actually recommending to use for the annotation?}
+%\todo[inline]{What property are we actually recommending to use for the annotation?}
 Taxonomic information is captured by annotating the class instance with a URI for an entry in the NCBI Taxonomy Database. 
 
 As usual, other entities besides the cell that are relevant to the design are also captured as \sbol{Feature}s.
