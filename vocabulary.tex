@@ -21,11 +21,20 @@ In particular, the key words ``MUST'', ``MUST NOT'', ``REQUIRED'', ``SHALL'', ``
 \subsection{UML Diagram Conventions}
 \label{sec:umldiagrams}
 
-The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Each SBOL class can be instantiated by many SBOL objects. These objects MAY contain data that differ in content, but they MUST agree on the type and form of their data as dictated by their common class. Classes are represented in UML diagrams as rectangles labeled at the top with class names.
+The types of biological design data modeled by SBOL are commonly referred to as {\em classes}, especially when discussing the details of software implementation. Each SBOL class can be instantiated by many SBOL objects. These objects MAY contain data that differ in content, but they MUST agree on the type and form of their data as dictated by their common class. Classes are represented in UML diagrams as rectangles labeled at the top with class names (see Figure~\ref{fig:uml_sampler} for examples).
+
+\begin{figure}[ht]
+\begin{center}
+  \includegraphics[width=\textwidth]{uml/uml_sampler.pdf}
+\caption{Examples of UML diagram conventions used in this document}
+\label{fig:uml_sampler}
+\end{center}
+\end{figure}
 
 Classes can be connected to other classes by association properties, which are represented in UML diagrams as arrows. These arrows are labeled with data cardinalities in order to indicate how many values a given association property can possess (see below). The remaining (non-association) properties of a class are listed below its name. Each of the latter properties is labeled with its data type and cardinality.
 
-In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association. Open-faced diamonds indicate shared aggregation, in which the owner of the association property exists independently of its value.
+In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association. 
+Open-faced diamonds indicate shared aggregation, also known as a reference, in which the owner of the association property exists independently of its value.
 
 By contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which the value of the association property MUST NOT exist independently of its owner.
 In addition, in the SBOL data model, it is REQUIRED that the value of each composite aggregation property is a unique SBOL object (that is, not the value for more than one such property).
@@ -64,6 +73,7 @@ This is because each relation can potentially stand on its own, irrespective of 
 % -----------------------------------------------------------------------------
 
 \subsection{Uniform Resource Identifiers}
+\label{sec:URIstructure}
 
 As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the SBOL data model, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.  
 
