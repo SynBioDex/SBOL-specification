@@ -1,0 +1,161 @@
+
+\errorcontextlines=200
+
+%% \documentclass[finalspec]{sbmlpkgspec}
+\documentclass[draftspec]{sbmlpkgspec}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{todonotes}
+\usepackage[color]{changebar}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{subcaption}
+
+% Make changebars switchable to allow faster compilation:
+%\def\fullchangebars{} % comment this out to simplify changebars and speed up compilation
+
+% Macros just for this document:
+
+\newcommand{\sbmlpkg}{\texorpdfstring{%
+    \textls[-25]{\textsc{SBMLPkgSpec}}}{%
+    \textsc{SBMLPkgSpec}}\xspace}
+\newcommand{\sbmlpkghead}{\texorpdfstring{%
+    \textls[-50]{\textsc{SBMLPkgSpec}}}{%
+    \textsc{SBMLPkgSpec}}\xspace}
+\newcommand{\sbmlpkgfile}{\literalFont{sbmlpkgspec.cls}\xspace}
+\newcommand{\latex}{\LaTeX{}\xspace}
+\newcommand{\tex}{\TeX{}\xspace}
+\newcommand{\distURL}{http://sourceforge.net/projects/sbml/files/specifications/tex}
+\newcommand{\srcURL}{https://sbml.svn.sourceforge.net/svnroot/sbml/trunk/project/tex/sbmlpkgspec}
+\newcommand{\webURL}{http://sbml.org/Documents/Specifications/The_SBMLPkgSpec_LaTeX_class}
+\newcommand{\cmd}[1]{\literalFont{\textbackslash #1}}
+
+% Custom latex listing style, for use with the listings package.  The default
+% highlights far too many things, IMHO.  This keeps it simple and only adjusts
+% the appearance of comments within listings.
+
+\lstdefinelanguage{mylatex}{%
+  morekeywords={},%
+  sensitive,%
+  alsoother={0123456789$_},%$
+  morecomment=[l]\%%
+}[keywords,tex,comments]
+
+\lstdefinestyle{latex}{language=mylatex}
+
+
+%Command to format the listings containing SBOL RDF/XML serialization examples
+\newcommand{\lstsetsbol}{
+ \lstset{language=sbol,
+        tabsize=2
+ }
+}
+
+%Commands to format SBOL terms in the document
+
+% Use sbolheading when you are referencing an SBOL data model class/field in a
+% section heading.
+\newcommand{\sbolheading}[1]{\texttt{#1}}
+
+% Use sbol when you are referencing an SBOL data model class/field in text.
+\newcommand{\sbol}[1]{\texttt{\hyperref[sec:#1]{#1}}}
+
+% Use prov when you are using a class borrowed from Prov-O, this will prepend the "prov:" prefix as well
+\newcommand{\prov}[1]{\texttt{\hyperref[sec:prov:#1]{prov:#1}}}
+
+% Use provmult for Prov-O fields that appear in multiple classes, for example
+% \sbolmult{hadRole:U}{hadRole}. This ensures the reference links to the correct
+% section.
+\newcommand{\provmult}[2]{\texttt{\hyperref[sec:prov:#1]{prov:#2}}}
+
+% Use om when you are using a class borrowed from Ontology of Units & Measures, this will prepend the "om:" prefix as well
+\newcommand{\om}[1]{\texttt{\hyperref[sec:om:#1]{om:#1}}}
+
+% Use provmult for OM fields that appear in multiple classes, for example
+% \sbolmult{hadUnit:M}{hadUnit}. This ensures the reference links to the correct
+% section.
+\newcommand{\ommult}[2]{\texttt{\hyperref[sec:om:#1]{om:#2}}}
+
+% Use sbolmult for SBOL fields that appear in multiple classes, for example
+% \sbolmult{types:CD}{types}. This ensures the reference links to the correct
+% section.
+\newcommand{\sbolmult}[2]{\texttt{\hyperref[sec:#1]{#2}}}
+
+% Rarely used. Use refObj you want to put the field in angle brackets.
+\newcommand{\refObj}[1]{$\langle$#1$\rangle$}
+
+%Command to format external terms in the document
+\newcommand{\external}[1]{\texttt{#1}}
+
+% -----------------------------------------------------------------------------
+% Start of document
+% -----------------------------------------------------------------------------
+
+\begin{document}
+
+\packageTitle{\latex Class for SBML Package Specifications}		
+\packageVersion{Version 3.0}		
+\packageVersionDate{April 1, 2020}
+ 
+\title{
+  Synthetic Biology Open Language \texorpdfstring{\\[3pt]}{}\mbox{(SBOL) Version~3.0}}
+
+\author{{\bf Editors:}\hfil\\
+\begin{tabular}{l>{\hspace*{15pt}}r}
+Hasan Baig & \emph{University of Connecticut, USA}\\   
+Pedro Fontanarrosa & \emph{University of Utah, USA}\\   
+Vishwesh Kulkarni & \emph{University of Warwick, UK}\\ 
+James McLaughlin & \emph{Newcastle University, UK}\\
+Prashant Vaidyanathan & \emph{Microsoft Research, UK}\\ 
+\multicolumn{2}{c}{\href{mailto:editors@sbolstandard.org}{\sffamily editors@sbolstandard.org}}\\
+\\
+\multicolumn{2}{c}{ {\bf Chair:} } \\
+Chris Myers		& \emph{University of Utah, USA}\\
+\\
+\multicolumn{2}{c}{{\bf Additional authors:}} \\
+Bryan Bartley & \emph{Raytheon BBN, USA} \\
+Jacob Beal & \emph{Raytheon BBN Technologies, USA}\\ 
+Matthew Crowther & \emph{Newcastle University, UK} \\
+Thomas Gorochowski & \emph{University of Bristol, UK}\\
+Raik Gr\"unberg & \emph{KAUST, SA}\\
+Goksel Misirli & \emph{Keele University, UK}\\ 
+Ernst Oberortner & \emph{DOE Joint Genome Institute, USA}\\
+James Scott-Brown & \emph{University of Oxford, UK} \\
+Anil Wipat & \emph{Newcastle University, UK}\\
+\end{tabular}\\
+}
+
+\maketitlepage
+
+\maketableofcontents
+
+\input{purpose}
+
+\input{history}
+
+\input{overview}
+
+\input{vocabulary}
+
+\input{dataModel}
+
+\input{practices}
+
+% \input{examples_model}
+
+\input{serialization}
+
+\input{compliance}
+
+\input{mapping}
+
+\newpage
+\bibliography{sbol}
+
+\appendix
+
+\input{complementary_standards}
+
+% \input{apdx-validation}
+
+\end{document}

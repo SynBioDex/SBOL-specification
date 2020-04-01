@@ -5,63 +5,58 @@
 Synthetic biology designs can be described using:
 \begin{itemize}
 \item Structural terms, e.g., a set of annotated sequences or information about the chemical makeup of components.
-\item Functional terms, e.g., the way that components might interact with each other and the overall behavior of a design.
-\end{itemize}
-% Mike Bissell - FIXME. "The way" and "the..behavior" are not really "terms" or "descriptions," so the preceding sentence could really use some work.
-In broad strokes, the prior SBOL 1.1 standard focused on conveying physical, structural information, whereas SBOL 2 expands the scope to include functional aspects as well. 
-The physical information about a designed genetic construct includes the order of its constituents and their descriptions. Specifying the exact locations of these constituents and their sequences allow genetic constructs to be defined unambiguously and reused in other designs. SBOL 2 extends SBOL 1.1 in several ways: it extends physical descriptions to include entities beyond DNA sequences, and it supports functional descriptions of designs. 
-% Mike Bissell - Fixed what seemed to be missing words in the first half of the paragraph. Swapped in "supports" in place of "allows for". More consistent pluralization.
-
-As an example, consider the design of an expression cassette, such as the one found in the plasmid pUC18~\cite{L08752.1}. This device is designed to detect successful versus unsuccessful molecular cloning. 
-As an overall system, the device is designed to grow either blue-colored (unsuccessful) or white-colored (successful) colonies in the presence of IPTG and the chemical X-gal. Internally, the device has a number of parts, including a promoter, the lac repressor binding site, and the lacZ coding sequence. 
-These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional machinery and translational machinery that collectively cause the desired system-level behavior. 
-
-Knowledge of how such a device functions within the context of a host and how it might be adapted to new experimental applications has generally been passed on through working with fellow scientists or reading articles in papers and books. 
-But there has been no systematic way to communicate the integration of sequences with functional designs, so users typically have had to look in many different places to develop an understanding of a system.  
-The SBOL 2 standard allows designers to describe these functional characteristics and connect them to the physical parts and sequences that make up the design. 
-
-SBOL 2 includes two main classes that match the structural/functional distinction above:
-\begin{itemize}
-\item The \sbol{ComponentDefinition} object describes the physical aspects of the designed system, such as its DNA or RNA sequences, and the physical relationships among sub-components, as when one sequence contains another as a sub-sequence.
-\item The \sbol{ModuleDefinition} object describes interactions of the designed system, such as specific binding relationships and repression and activation relationships. 
+\item Functional terms, e.g., the way that components might interact with each other. 
 \end{itemize}
 
-\ref{images:overview1} shows a simplified view of these classes, as well as other helper classes in SBOL. To continue with the pUC18 example, the description would begin with a top-level \sbol{ModuleDefinition}.  
-The \sbol{ModuleDefinition} specifies the structural elements that make up the cassette by referencing a number of \sbol{ComponentDefinition} objects. These would include the DNA component for the promoter and the small molecule component for IPTG, for example.  
-The \sbol{ComponentDefinition} objects can be organized hierarchically.  
-For example, the plasmid \sbol{ComponentDefinition} might reference \sbol{ComponentDefinition}s for the promoter, coding sequence, etc.  
-Each \sbol{ComponentDefinition} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SequenceAnnotation} objects that identify the locations of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
-In order to specify functional information, the \sbol{ModuleDefinition} can specify \sbol{Interaction} objects that describe any qualitative relationships among components, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{ModuleDefinition} object can point to a \sbol{Model} object that provides a reference to a complete computational model using a language such as SBML  ~\cite{SBML}, CellML ~\cite{CellML}, MATLAB ~\cite{matlab}, etc.  Finally, all the of elements of the genetic design can be grouped together within a \sbol{Collection}.
+As an example, consider an expression cassette, such as the one found in the plasmid pUC18~\cite{L08752.1}.
+The system is designed to visually indicate whether a gene has been inserted into the plasmid: 
+in the presence of IPTG, it expresses an enzyme that hydrolyses X-gal to form a blue product, but successful insertion disrupts the expression cassette and prevents the formation of this product. 
+Internally, it has a number of parts, including a promoter, the lac repressor binding site, and the lacZ coding sequence.
+These parts have specific component-level interactions with IPTG and X-gal, as well as native host gene products, transcriptional machinery, and translational machinery that collectively cause the desired system-level behavior.
+
+In SBOL 3, both the structural and functional aspects are described using a class called \sbol{Component}, as depicted in \ref{images:overview1}.  
+Namely, to represent structural aspects, a \sbol{Component} can include \sbol{Feature}s, some of which may be at some \sbol{Location} within a \sbol{Sequence}.  
+A \sbol{Component} can also include \sbol{Constraint}s between these features.  
+To represent functional aspects, a \sbol{Component} can include \sbol{Interaction}s that can refer to relationships between participating \sbol{Feature}s.  
+Finally, a \sbol{Component} can have its behavior described using a \sbol{Model}.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.7]{images/OverviewFigforSpec-v7.png}
-\caption{Main classes of information represented by the SBOL standard, and their relationships.  Red boxes are classes from the SBOL 1.1 that focused on structure, whereas blue classes are some of the new classes that support the functional aspects of designs.}
+  \includegraphics[scale=0.85]{images/SBOL3-main-classes.pdf}
+\caption{The SBOL \sbol{Component} object and related objects.  
+	Solid arrows indicates ownership, whereas a dashed arrow represents a reference to an object of another class.  
+	Red boxes represent structural objects, while blue boxes represent functional objects.  
+	To represent structural aspects, a \sbol{Component} can include \sbol{Feature}s, which may refer to \sbol{Location}s within a \sbol{Sequence}. 
+	A \sbol{Component} can also include \sbol{Constraint}s between these features.  
+	To represent functional aspects, a \sbol{Component} can include \sbol{Interaction}s that can refer to relationships between participating \sbol{Feature}s.  
+	Finally, a \sbol{Component} can have its behavior described using a \sbol{Model}.}
 \label{images:overview1}
 \end{center}
 \end{figure}
 
-Whereas \ref{images:overview1} provides a broad overview of SBOL, \ref{images:overview2} provides a detailed, implementation-level overview of the class structure for the SBOL 2.x data model. This figure relies on the semantics of the \emph{Unified Modeling Language} (UML), which will be presented in more detail in the next section. \ref{images:overview2} distinguishes between \emph{top level} classes, in green, and other supporting classes (note that \ref{images:overview1} also includes all of the top level classes). In \ref{images:overview2}, dashed arcs represent ``refersTo'', whereas a solid arrow represents ownership. In UML, the meaning of ownership is that if a parent class is deleted, so are all of its owned children. Thus, a \sbol{Collection} does not own its
-\sbol{ComponentDefinition} objects, because these can stand on their own. All of the supporting classes (in orange) have to be owned by some top-level class, directly or indirectly. 
+To continue with the pUC18 example, the description would begin with a top-level \sbol{Component} that represents the entire system.  
+This \sbol{Component} specifies the structural elements that make up the cassette by referencing a number of \sbol{SubComponent} objects. These would include the DNA \sbol{SubComponent} for the promoter and the simple chemical
+\sbol{SubComponent} for IPTG, for example.  
+The \sbol{Component} objects can be organized hierarchically.  
+For example, the plasmid \sbol{Component} might reference \sbol{SubComponent}s for the promoter, coding sequence, etc.  
+Each \sbol{Component} object can also include the actual \sbol{Sequence} information (if available), as well as \sbol{SubComponent} objects that identify the \sbol{Location}s of the promoters, coding sequences, etc., on the \sbol{Sequence}.  
+In order to specify functional information, the \sbol{Component} can also specify \sbol{Interaction} objects that describe any qualitative relationships among \sbol{SubComponent} \sbol{Participation}s, such as how IPTG and X-gal interact with the gene products.  Finally, a \sbol{Component} object can point to a \sbol{Model} object that provides a reference to a complete computational model expressed in a language such as SBML~\cite{SBML}, CellML~\cite{CellML}, or MATLAB~\cite{matlab}.
 
-% Figure~\ref{images:overview2} provides a more detailed view the the class structure for the SBOL 2.0 data model.  The main, or \emph{top level} classes, are \sbol{Collection}, \sbol{ComponentDefinition}, sbol{Sequence}, \sbol{ModuleDefinition}, and \sbol{Model}.  The key distinction of these classes is that they can stand alone and be referenced by other top level objects (see the dashed arrows between the green boxes).  The purpose of these classes is described above.  Each of these classes is assisted in their purpose by several \emph{child} classes.  The key distinction of a child object is that it is owned by its parent object, and if that parent object is removed, so is the child object.  This ownership is indicated using the solid arrows in the figure.  For example, a \sbol{ComponentDefinition} owns its \sbol{SequenceAnnotation}s.  
+Whereas \ref{images:overview1} provides an overview of the classes used for describing designs within the SBOL 3 data model,  \ref{images:overview2} shows the rest of the classes used to describe the usage of a design within design-build-test-learn workflows in general.
+In particular, designs can be expressed using \sbol{CombinatorialDerivation}s, \sbol{Component}s, and \sbol{Sequence}s.
+These can describe not only genetic designs, but also designs for strains, multicellular systems, media, samples, etc.
+A \sbol{CombinatorialDerivation} allows one to specify a design pattern where individual \sbol{SubComponent}s can be selected from a set of variants.  
+The \sbol{Implementation} class is the build class, and it is used to represent physical artifacts like an actual sample of a plasmid.  
+The \sbol{Experiment} and \sbol{ExperimentalData} classes are the test classes, allowing description of a collection of data generated in an experiment.  
+The \sbol{Model} class, discussed earlier, associates learned information with a design.
+The \prov{Activity} class is taken from the provenance ontology (PROV-O), which is described in~\ref{sec:provenance}.  For example, a build \prov{Activity} describes how an \sbol{Implementation} is constructed using a \sbol{Component} description.  On the other hand, a test \prov{Activity} describes how an \sbol{Experiment} is conducted using an \sbol{Implementation} artifact.  The \sbol{Collection} class has members, which can be of any of these types or \sbol{Collection}s themselves.  
+Finally, all of these objects can refer to objects of the \sbol{Attachment} class, which are used to link out to external data (images, spreadsheets, textual documents, etc.). 
+The next sections provide complete definitions and details for all of these classes.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[scale=0.85]{images/OverviewFig2-v4.png}
-\caption{Main classes of information represented by the SBOL 2.x standard, and their relationships.  Green boxes are ``top level'' classes, while the other classes are in support of these classes. Solid arrows indicates ownership, whereas a dashed arrow indicates that one class refers to an object of another class.}
+\includegraphics[scale=0.85]{images/SBOL3-top-levels.pdf}
+\caption{Main classes of information represented by the SBOL 3 standard, and their relationships.  Green boxes represent design classes, orange boxes represent build classes, purple boxes represent test classes, yellow boxes represent learn classes, and the gray boxes represent additional utility classes.  Each of these classes will be described in more detail below.}
 \label{images:overview2}
 \end{center}
 \end{figure}
-
-\ref{images:overview2} additionally shows that when it is possible to incorporate a single object into multiple parents, we always incorporate that object by reference. We do not directly incorporate it by copy, because when an object is used many times, keeping many copies becomes spatially inefficient and difficult to maintain.
-Instead, each reference is handled by a pointer object. 
-Pointers refer from a parent to a child. There are three distinct pointer classes: \sbol{Component}, \sbol{Module}, and \sbol{FunctionalComponent}. A \sbol{Component} points from a \sbol{ComponentDefinition} to a child \sbol{ComponentDefinition}, incorporating it by reference into the parent structure. A \sbol{Module} points from a \sbol{ModuleDefinition} to a child \sbol{ModuleDefinition}, likewise incorporating the child by reference into the parent system. Similarly, a parent \sbol{ModuleDefinition} on the functional side of a model might incorporate a child \sbol{ComponentDefinition} from the model's physical side by means of a \sbol{FunctionalComponent} reference. These three pointer classes allow the efficient reuse of definitions in multiple locations.
-% Mike Bissell - I rewrote the first half of the paragraph that used to live here per Chris Myers's request. Please review my changes. (Also, could somebody please fix the right alignment?) Rationale: the old version did not have a single theme, and it obscured what is essentially a simple pattern. This edit prompted the insertion of extra verbiage re: the three "pointer classes" above, in section 5.2. I also eliminated two out of the three transitions using "finally" or "final," because only one item can come last.
-
-SBOL 2.x provides a few helper classes. \sbol{Location}  generalizes the positioning information from SBOL 1.1 to allow discontinuous ranges and cuts to be annotated.  \sbol{SequenceConstraint} generalizes the relative positioning information among \sbol{Component}s.  
-There are also \sbol{Participation}s, which allow \sbol{Interaction} objects to specify the roles of their participants while referencing the \sbol{FunctionalComponent}s, so that these can stand on their own.
-Additionally, there is the \sbol{MapsTo} class (not shown), which enables connections to be made between \sbol{Component}s and \sbol{FunctionalComponent}s across various levels of the design hierarchy.  The next section provides complete definitions and details for all of these classes.
-% Mike Bissell - Changed "at various levels" to "across various levels." Please confirm.
-
-There is one final, critical element of SBOL 2: its extension mechanism. This extension mechanism enables the storage of application specific information within an SBOL document. It is also intended to support the prototyping of data representations whose format is not yet a matter of consensus within the community. In particular, each SBOL entity can be annotated using the \emph{Resource Description Framework} (RDF). Moreover, application specific entities in the form of RDF documents can be included as \sbol{GenericTopLevel} entities. SBOL libraries make these annotations and entities available to tools as generic properties and objects that are preserved during subsequent read and write operations.
