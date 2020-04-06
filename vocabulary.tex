@@ -2,8 +2,8 @@
 \section{Conventions}
 % -----------------------------------------------------------------------------
 
-This section provides some preliminary information to aid in the understanding of the specification. 
-The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. This section reviews terminology conventions, the basics of UML diagrams, and our naming conventions. 
+This section provides some preliminary information to aid in the understanding of the specification.
+The SBOL data model is specified using Unified Modeling Language (UML) 2.0 diagrams \href{http://www.omg.org/spec/UML/2.0/}{(OMG 2005)}. This section reviews terminology conventions, the basics of UML diagrams, and our naming conventions.
 
 \subsection{Terminology Conventions}
 
@@ -33,7 +33,7 @@ The types of biological design data modeled by SBOL are commonly referred to as 
 
 Classes can be connected to other classes by association properties, which are represented in UML diagrams as arrows. These arrows are labeled with data cardinalities in order to indicate how many values a given association property can possess (see below). The remaining (non-association) properties of a class are listed below its name. Each of the latter properties is labeled with its data type and cardinality.
 
-In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association. 
+In the case of an association property, the class from which the arrow originates is the owner of the association property. A diamond at the origin of the arrow indicates the type of association.
 Open-faced diamonds indicate shared aggregation, also known as a reference, in which the owner of the association property exists independently of its value.
 
 By contrast, filled diamonds indicate composite aggregation, also known as a part-whole relationship, in which the value of the association property MUST NOT exist independently of its owner.
@@ -63,7 +63,7 @@ Finally, classes can inherit the properties of other classes. Inheritance relati
 \label{sec:nameconventions}
 
 SBOL classes are named using upper ``camel case,'' meaning that each word is capitalized and all words are run together without spaces, e.g., \sbol{Identified}, \sbol{SequenceFeature}.
-Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbolmult{role:C}{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}). 
+Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbolmult{role:C}{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}).
 SBOL properties are always given singular names irrespective of their cardinality, e.g., \sbolmult{role:C}{role} is used rather than \sbolmult{role:C}{role} even though a component can have multiple roles.
 This is because each relation can potentially stand on its own, irrespective of the existence of others in the set.
 
@@ -75,22 +75,22 @@ This is because each relation can potentially stand on its own, irrespective of 
 \subsection{Uniform Resource Identifiers}
 \label{sec:URIstructure}
 
-As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the SBOL data model, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.  
+As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the SBOL data model, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.
 
 Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
 
 \begin{itemize}
- 
+
  \item A \sbol{TopLevel} URL MUST use the following pattern:
-  \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \sbol{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path. 
+  \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \sbol{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path.
   	For example, a \sbol{Component} might have the URL~\path{https://synbiohub.org/public/igem/BBa_J23070}, where \texttt{namespace} is \path{https://synbiohub.org}, \texttt{local} is \path{public/igem}, and \texttt{displayId} is \path{BBa_J23070}.
- 
+
   \item A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object (except for its controlling \sbol{Namespace}).
   	For example, the \path{BBa_J23070_seq} \sbol{Sequence} object cannot have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq}, since the\\ \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URL for the \path{BBa_J23070} \sbol{Component} object.
-  
-  \item The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object. 
-	Multiple layers of child objects are allowed using the same\\ \texttt{[parent]/[displayId]} pattern recursively. 
-	For example, a \sbol{SequenceFeature} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \texttt{annotation1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1}. 
+
+  \item The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object.
+	Multiple layers of child objects are allowed using the same\\ \texttt{[parent]/[displayId]} pattern recursively.
+	For example, a \sbol{SequenceFeature} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \texttt{annotation1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1}.
 	Similarly, the \texttt{loc1} \sbol{Location} child of the \texttt{annotation1}\\ \sbol{SequenceFeature} object will have the URL\\ \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1}.
   \end{itemize}
 
