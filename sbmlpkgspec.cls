@@ -395,8 +395,8 @@ Package Specification Style]
 \renewcommand{\baselinestretch}{\normalbaselinestretch}
 
 % Set the table of contents depth
-
-\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
 
 % Title page macros.  Severly hacked from originals in LaTeX's article.cls.
 
@@ -548,6 +548,11 @@ Package Specification Style]
   \fi
   \vfill
   \centerline{\includegraphics[width=1.0in]{\SBMLbadge}}
+  \vfill
+  \begin{small}
+  Copyright (C) all authors listed on the front page of this document.\\
+  This work is made available under the \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International Public License}.
+  \end{small}
   \clearpage
   \endgroup
   \setcounter{footnote}{0}%
@@ -683,18 +688,22 @@ Package Specification Style]
   {1.2ex}{\clearpage\thispagestyle{footeronly}%
     \hspace*{-24.25pt}\color{sbmlgray}{\rule[1.8em]{6.84in}{0.6em}}\color{normaltextcolor}%
     \hspace*{-6.84in}\color{sbmlgray}{\rule[-0.8em]{6.84in}{0.1em}}\color{normaltextcolor}%
-    \noindent\normalfont\LARGE\bfseries\sffamily\hspace*{-6.84in}}}
+    \noindent\normalfont\huge\bfseries\sffamily\hspace*{-6.84in}}}
 
 \renewcommand{\subsection}{\@startsection%
   {subsection}{2}{0pt}{-1.25ex \@plus 2ex \@minus -.2ex}%
-  {0.1ex}{\Large\bfseries\sffamily}}
+  {0.1ex}{\LARGE\bfseries\sffamily}}
 
 \renewcommand{\subsubsection}{\@startsection%
   {subsubsection}{3}{0pt}{-1ex \@plus 2ex \@minus -.2ex}%
-  {0.4ex}{\large\bfseries\sffamily\slshape}}
+  {0.4ex}{\Large\bfseries\sffamily\slshape}}
 
 \renewcommand{\paragraph}{\@startsection%
   {paragraph}{4}{0pt}{-0.75ex \@plus 2ex \@minus -.2ex}%
+  {0.4ex}{\large\bfseries\sffamily\slshape}}
+  
+\renewcommand{\subparagraph}{\@startsection%
+  {subparagraph}{5}{0pt}{-0.75ex \@plus 2ex \@minus -.2ex}%
   {0.4ex}{\normalsize\bfseries\sffamily\slshape}}
 
 % The References heading needs to be fixed up to account for shift
@@ -953,7 +962,7 @@ Package Specification Style]
 
 \newcommand{\notice}{\marginpar{\hspace*{34pt}\raisebox{-0.5ex}{\color{black}\Large\ding{43}}}}
 \newcommand{\version}[1]{\marginpar{\hspace*{34pt}\raisebox{-3.0ex}{\color{blue}\small #1}}}
-\newcommand{\warning}{\marginpar{\hspace*{34pt}{\color{red}\large\danger}}}
+%\newcommand{\warning}{\marginpar{\hspace*{34pt}{\color{red}\large\danger}}}
 
 % Margin notes.
 %

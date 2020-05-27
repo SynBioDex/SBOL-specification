@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <help_text>// Uncomment the following lines to change the fontsize and font:
+// fontsize=14
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>357</y>
+      <w>245</w>
+      <h>371</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+fg=#B27300</panel_attributes>
+    <additional_attributes>330.0;490.0;330.0;510.0;10.0;510.0;10.0;10.0;290.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>357</y>
+      <w>245</w>
+      <h>371</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;490.0;10.0;510.0;330.0;510.0;330.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>469</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>511</x>
+      <y>469</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>644</y>
+      <w>154</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Molecule A
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>294</x>
+      <y>644</y>
+      <w>154</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Cell 1
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>518</y>
+      <w>343</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Sender System
+role: functional compartment [SBO:0000289]
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>812</x>
+      <y>644</y>
+      <w>154</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Cell 2
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>651</x>
+      <y>644</y>
+      <w>154</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Molecule A
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>693</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>742</y>
+      <w>133</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Molecule A
+type: Small Molecule
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>875</x>
+      <y>693</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>749</x>
+      <y>742</y>
+      <w>224</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Organism 2
+type: cell [GO:0005623]
+role: physical compartment [SBO:0000290]
+organism: NCBI URI
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>742</y>
+      <w>224</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Organism 1
+type: cell [GO:0005623]
+role: physical compartment [SBO:0000290]
+organism: NCBI URI
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>308</x>
+      <y>350</y>
+      <w>105</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>halign=center
+componentInstance
+lw=0
+fg=#B27300</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>266</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*Constraint*
+--
+...
+restriction: verifyIdentical</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>427</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Sender System</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>665</x>
+      <y>427</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*SubComponent*
+--
+...
+name: Receiver System</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>336</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*ComponentReference*
+--
+...
+name: Molecule A in Cell 1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>665</x>
+      <y>336</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*ComponentReference*
+--
+...
+name: Molecule A in Cell 2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>210</y>
+      <w>420</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Multicellular System
+role: functional compartment [SBO:0000289]
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>378</y>
+      <w>63</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+inChildOf
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>287</y>
+      <w>56</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+subject
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>378</y>
+      <w>63</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+inChildOf
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>693</x>
+      <y>287</y>
+      <w>84</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+object
+fg=#B27300</panel_attributes>
+    <additional_attributes>60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>847</x>
+      <y>350</y>
+      <w>105</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>halign=center
+componentInstance
+lw=0
+fg=#B27300</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>385</x>
+      <y>574</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*Constraint*
+--
+...
+restriction: contains</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>595</y>
+      <w>56</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+subject
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>595</y>
+      <w>84</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+object
+fg=#B27300</panel_attributes>
+    <additional_attributes>60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>637</x>
+      <y>518</y>
+      <w>343</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>*Component*
+--
+...
+name: Receiver System
+role: functional compartment [SBO:0000289]
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>742</x>
+      <y>574</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*Constraint*
+--
+...
+restriction: contains</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>875</x>
+      <y>595</y>
+      <w>91</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+subject
+fg=#B27300</panel_attributes>
+    <additional_attributes>60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>595</y>
+      <w>56</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+object
+fg=#B27300</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>693</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>665</x>
+      <y>693</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+
+instanceOf
+fg=red</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
