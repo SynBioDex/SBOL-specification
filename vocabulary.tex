@@ -94,6 +94,18 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
 	Similarly, the \texttt{loc1} \sbol{Location} child of the \texttt{annotation1}\\ \sbol{SequenceFeature} object will have the URL\\ \path{https://synbiohub.org/public/igem/BBa_J23070/annotation1/loc1}.
   \end{itemize}
 
+\subsection{SBOL URIs}
+
+The SBOL namespace, which is \url{http://sbols.org/v3\#}, is used to indicate which entities and properties in an SBOL document are defined by SBOL. 
+For example, the URI of the type \sbol{Component} is \url{http://sbols.org/v3\#Component}. 
+This convention is assumed throughout the specification.
+The SBOL namespace MUST NOT be used for any entities or properties not defined in this specification.  
+
+Other namespaces are also used by SBOL, however.
+Where possible, we have re-used predicates from widely-used terminologies (such as Dublin Core~\cite{dcmi2012}) to expose as much of the data as practical to such standard RDF tooling.
+Similarly, existing biological ontologies are used where applicable for specifying types, roles, etc.
+Likewise, Section~\ref{sec:complementaryStandards} details complementary standards that are RECOMMENDED for use in combination with SBOL.
+
 
 \subsection{Primitive Data Types}
 \label{sec:datatypes}
