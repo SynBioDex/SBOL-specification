@@ -4,7 +4,7 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>370</x>
+      <x>350</x>
       <y>210</y>
       <w>110</w>
       <h>30</h>
@@ -15,7 +15,7 @@
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>390</x>
+      <x>370</x>
       <y>210</y>
       <w>50</w>
       <h>80</h>
@@ -26,18 +26,18 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>620</x>
+      <x>140</x>
       <y>290</y>
-      <w>120</w>
+      <w>90</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>*SubComponent*</panel_attributes>
+    <panel_attributes>*Feature*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
+      <x>470</x>
       <y>310</y>
       <w>140</w>
       <h>100</h>
@@ -52,7 +52,7 @@ variantDerivation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>440</x>
+      <x>420</x>
       <y>390</y>
       <w>190</w>
       <h>30</h>
@@ -63,7 +63,7 @@ variantDerivation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
+      <x>340</x>
       <y>470</y>
       <w>120</w>
       <h>30</h>
@@ -74,7 +74,7 @@ variantDerivation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
+      <x>270</x>
       <y>390</y>
       <w>120</w>
       <h>30</h>
@@ -85,7 +85,7 @@ variantDerivation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
+      <x>390</x>
       <y>310</y>
       <w>140</w>
       <h>180</h>
@@ -106,7 +106,7 @@ variantCollection
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
+      <x>320</x>
       <y>310</y>
       <w>70</w>
       <h>100</h>
@@ -121,29 +121,55 @@ variant
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>500</x>
+      <x>220</x>
       <y>280</y>
-      <w>140</w>
+      <w>120</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 variable
 1
 </panel_attributes>
-    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>340</x>
+      <x>320</x>
       <y>270</y>
       <w>170</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>*VariableComponent*
+    <panel_attributes>*VariableFeature*
 --
 -cardinality[1] : URI
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>290</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*om:Measure*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>280</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+
+variantMeasure
+0..*
+</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
   </element>
 </diagram>
