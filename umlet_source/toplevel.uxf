@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="14.2">
   <zoom_level>11</zoom_level>
   <element>
     <type>com.baselet.element.old.element.Class</type>
@@ -41,8 +41,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>231</x>
-      <y>308</y>
+      <x>242</x>
+      <y>352</y>
       <w>99</w>
       <h>33</h>
     </coordinates>
@@ -55,8 +55,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>231</x>
-      <y>396</y>
+      <x>242</x>
+      <y>440</y>
       <w>66</w>
       <h>33</h>
     </coordinates>
@@ -69,8 +69,8 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>231</x>
-      <y>352</y>
+      <x>242</x>
+      <y>396</y>
       <w>121</w>
       <h>33</h>
     </coordinates>
@@ -82,7 +82,7 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>429</x>
+      <x>550</x>
       <y>528</y>
       <w>231</w>
       <h>33</h>
@@ -96,7 +96,7 @@
     <coordinates>
       <x>682</x>
       <y>231</y>
-      <w>341</w>
+      <w>352</w>
       <h>121</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
@@ -119,18 +119,7 @@ hasAttachment
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>297</x>
-      <y>231</y>
-      <w>153</w>
-      <h>109</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>132;33;132;88;33;88</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>319</x>
+      <x>308</x>
       <y>231</y>
       <w>153</w>
       <h>153</h>
@@ -141,40 +130,51 @@ hasAttachment
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>264</x>
+      <x>330</x>
       <y>231</y>
-      <w>230</w>
+      <w>153</w>
       <h>197</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>209;33;209;88;209;176;33;176</additional_attributes>
+    <additional_attributes>132;33;132;176;33;176</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>341</x>
+      <x>275</x>
       <y>231</y>
-      <w>175</w>
+      <w>230</w>
       <h>241</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>154;33;154;220;33;220</additional_attributes>
+    <additional_attributes>209;33;209;88;209;220;33;220</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>352</x>
       <y>231</y>
-      <w>186</w>
+      <w>175</w>
       <h>285</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>165;33;165;187;165;264;33;264</additional_attributes>
+    <additional_attributes>154;33;154;264;33;264</additional_attributes>
   </element>
   <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
-      <x>517</x>
+      <x>495</x>
+      <y>231</y>
+      <w>54</w>
+      <h>318</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>33;33;33;187;33;297;33;264</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>528</x>
       <y>231</y>
       <w>54</w>
       <h>318</h>
@@ -240,8 +240,8 @@ hasAttachment
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>231</x>
-      <y>484</y>
+      <x>385</x>
+      <y>528</y>
       <w>154</w>
       <h>33</h>
     </coordinates>
@@ -266,8 +266,8 @@ hasAttachment
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>231</x>
-      <y>440</y>
+      <x>242</x>
+      <y>484</y>
       <w>143</w>
       <h>33</h>
     </coordinates>
@@ -310,5 +310,43 @@ hasAttachment
     <panel_attributes>*prov:Activity*
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>242</x>
+      <y>297</y>
+      <w>99</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>*Namespace*
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>187</x>
+      <y>231</y>
+      <w>242</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+hasNamespace
+1</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0;10.0;80.0;50.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>308</x>
+      <y>231</y>
+      <w>131</w>
+      <h>109</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110;33;110;88;33;88</additional_attributes>
   </element>
 </diagram>
