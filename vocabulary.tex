@@ -64,8 +64,13 @@ Finally, classes can inherit the properties of other classes. Inheritance relati
 
 SBOL classes are named using upper ``camel case,'' meaning that each word is capitalized and all words are run together without spaces, e.g., \sbol{Identified}, \sbol{SequenceFeature}.
 Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbolmult{role:C}{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}).
+
 SBOL properties are always given singular names irrespective of their cardinality, e.g., \sbolmult{role:C}{role} is used rather than \sbolmult{role:C}{role} even though a component can have multiple roles.
 This is because each relation can potentially stand on its own, irrespective of the existence of others in the set.
+
+Two conventions are used for property names, {\tt name} and {\tt hasName}.  
+When a property is pointing to a class using the same name, it uses the {\tt hasName} convention (e.g., the \sbol{Component} class uses \sbol{hasFeature} to point to a \sbol{Feature} object).
+When the property uses a different name than the class of the object it points to, it uses the {\tt name} convention instead (e.g., the \sbol{Constraint} class uses \sbol{subject} to point to a \sbol{Feature} object).
 
 
 % -----------------------------------------------------------------------------
