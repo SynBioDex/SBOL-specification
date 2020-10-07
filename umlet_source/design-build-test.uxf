@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>357</x>
-      <y>322</y>
+      <x>210</x>
+      <y>329</y>
       <w>84</w>
       <h>42</h>
     </coordinates>
@@ -16,8 +16,8 @@ bg=#ffff00</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>357</x>
-      <y>476</y>
+      <x>210</x>
+      <y>483</y>
       <w>84</w>
       <h>42</h>
     </coordinates>
@@ -29,9 +29,9 @@ bg=#ffc000</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>364</y>
-      <w>217</w>
+      <x>357</x>
+      <y>371</y>
+      <w>231</w>
       <h>98</h>
     </coordinates>
     <panel_attributes>_prov:Activity_
@@ -43,20 +43,20 @@ rdf:type : [test]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>399</y>
+      <x>567</x>
+      <y>406</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-   hasPlan</panel_attributes>
+   hadPlan</panel_attributes>
     <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>371</y>
+      <x>651</x>
+      <y>378</y>
       <w>63</w>
       <h>49</h>
     </coordinates>
@@ -68,21 +68,21 @@ rdf:type : [test]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>455</y>
-      <w>266</w>
+      <x>287</x>
+      <y>462</y>
+      <w>287</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
    wasGeneratedBy</panel_attributes>
-    <additional_attributes>240.0;10.0;240.0;40.0;10.0;40.0</additional_attributes>
+    <additional_attributes>270.0;10.0;270.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>518</y>
-      <w>217</w>
+      <x>357</x>
+      <y>525</y>
+      <w>231</w>
       <h>98</h>
     </coordinates>
     <panel_attributes>_prov:Activity_
@@ -93,20 +93,20 @@ rdf:type : [learn] </panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>609</y>
-      <w>259</w>
+      <x>287</x>
+      <y>616</y>
+      <w>287</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
   wasGeneratedBy</panel_attributes>
-    <additional_attributes>240.0;10.0;240.0;40.0;10.0;40.0</additional_attributes>
+    <additional_attributes>270.0;10.0;270.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>357</x>
-      <y>630</y>
+      <x>210</x>
+      <y>637</y>
       <w>84</w>
       <h>42</h>
     </coordinates>
@@ -118,9 +118,9 @@ bg=red
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>392</x>
-      <y>511</y>
-      <w>98</w>
+      <x>245</x>
+      <y>518</y>
+      <w>105</w>
       <h>133</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
@@ -131,9 +131,9 @@ bg=red
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>392</x>
-      <y>357</y>
-      <w>98</w>
+      <x>245</x>
+      <y>364</y>
+      <w>105</w>
       <h>133</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
@@ -144,21 +144,21 @@ bg=red
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>546</y>
+      <x>567</x>
+      <y>553</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-     hasPlan</panel_attributes>
+     hadPlan</panel_attributes>
     <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>392</x>
-      <y>203</y>
-      <w>98</w>
+      <x>245</x>
+      <y>210</y>
+      <w>105</w>
       <h>133</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
@@ -169,8 +169,8 @@ bg=red
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>357</x>
-      <y>168</y>
+      <x>210</x>
+      <y>175</y>
       <w>84</w>
       <h>42</h>
     </coordinates>
@@ -181,9 +181,9 @@ bg=#92d050</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>210</y>
-      <w>217</w>
+      <x>357</x>
+      <y>217</y>
+      <w>231</w>
       <h>98</h>
     </coordinates>
     <panel_attributes>_prov:Activity_
@@ -195,32 +195,32 @@ rdf:type : [build]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>301</y>
-      <w>266</w>
+      <x>287</x>
+      <y>308</y>
+      <w>287</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
   wasGeneratedBy</panel_attributes>
-    <additional_attributes>250.0;10.0;250.0;40.0;10.0;40.0</additional_attributes>
+    <additional_attributes>270.0;10.0;270.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>245</y>
+      <x>567</x>
+      <y>252</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-   hasPlan</panel_attributes>
+   hadPlan</panel_attributes>
     <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>217</y>
+      <x>651</x>
+      <y>224</y>
       <w>182</w>
       <h>49</h>
     </coordinates>
@@ -233,14 +233,14 @@ description: "DNA assembly"</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>518</x>
-      <y>553</y>
-      <w>91</w>
+      <x>371</x>
+      <y>560</y>
+      <w>98</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>_Usage_
 --
-role: [test]
+hadRole: [test]
 
 </panel_attributes>
     <additional_attributes/>
@@ -248,14 +248,14 @@ role: [test]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>518</x>
-      <y>399</y>
-      <w>91</w>
+      <x>371</x>
+      <y>406</y>
+      <w>98</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>_Usage_
 --
-role: [build]
+hadRole: [build]
 
 </panel_attributes>
     <additional_attributes/>
@@ -263,14 +263,14 @@ role: [build]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>525</x>
-      <y>245</y>
-      <w>84</w>
+      <x>378</x>
+      <y>252</y>
+      <w>91</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>_Usage_
 --
-role: [design]
+hadRole: [design]
 
 </panel_attributes>
     <additional_attributes/>
@@ -278,20 +278,20 @@ role: [design]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>280</y>
+      <x>567</x>
+      <y>287</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-     hasAgent</panel_attributes>
+     agent</panel_attributes>
     <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>280</y>
+      <x>651</x>
+      <y>287</y>
       <w>182</w>
       <h>56</h>
     </coordinates>
@@ -305,20 +305,20 @@ description: "lab technician"</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>434</y>
+      <x>567</x>
+      <y>441</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-     hasAgent</panel_attributes>
+     agent</panel_attributes>
     <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>434</y>
+      <x>651</x>
+      <y>441</y>
       <w>182</w>
       <h>49</h>
     </coordinates>
@@ -330,20 +330,20 @@ description: "Tecan plate reader"</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>588</y>
+      <x>567</x>
+      <y>595</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-    hasAgent</panel_attributes>
+    agent</panel_attributes>
     <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>357</x>
-      <y>21</y>
+      <x>210</x>
+      <y>28</y>
       <w>84</w>
       <h>42</h>
     </coordinates>
@@ -355,9 +355,9 @@ bg=red
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>392</x>
-      <y>56</y>
-      <w>98</w>
+      <x>245</x>
+      <y>63</y>
+      <w>105</w>
       <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
@@ -368,14 +368,14 @@ bg=red
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>525</x>
-      <y>91</y>
-      <w>84</w>
+      <x>378</x>
+      <y>98</y>
+      <w>91</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>_Usage_
 --
-role: [learn]
+hadRole: [learn]
 
 </panel_attributes>
     <additional_attributes/>
@@ -383,9 +383,9 @@ role: [learn]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>56</y>
-      <w>217</w>
+      <x>357</x>
+      <y>63</y>
+      <w>231</w>
       <h>98</h>
     </coordinates>
     <panel_attributes>_prov:Activity_
@@ -397,32 +397,32 @@ rdf:type : [design]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>147</y>
-      <w>266</w>
+      <x>287</x>
+      <y>154</y>
+      <w>287</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
   wasGeneratedBy</panel_attributes>
-    <additional_attributes>250.0;10.0;250.0;40.0;10.0;40.0</additional_attributes>
+    <additional_attributes>270.0;10.0;270.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>119</y>
+      <x>567</x>
+      <y>126</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-     hasAgent</panel_attributes>
+     agent</panel_attributes>
     <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>126</y>
+      <x>651</x>
+      <y>133</y>
       <w>182</w>
       <h>49</h>
     </coordinates>
@@ -435,8 +435,8 @@ description: "software tool"</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
-      <y>56</y>
+      <x>273</x>
+      <y>63</y>
       <w>119</w>
       <h>91</h>
     </coordinates>
@@ -451,14 +451,14 @@ description: "software tool"</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>91</y>
-      <w>84</w>
+      <x>483</x>
+      <y>98</y>
+      <w>91</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>_Association_
 --
-role: [design]
+hadRole: [design]
 
 </panel_attributes>
     <additional_attributes/>
@@ -466,28 +466,28 @@ role: [design]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>245</y>
-      <w>84</w>
+      <x>483</x>
+      <y>252</y>
+      <w>91</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>_Association_
 --
-role: [build]
+hadRole: [build]
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>399</y>
-      <w>84</w>
+      <x>483</x>
+      <y>406</y>
+      <w>91</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>_Association_
 --
-role: [test]
+hadRole: [test]
 
 </panel_attributes>
     <additional_attributes/>
@@ -495,14 +495,14 @@ role: [test]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>553</y>
-      <w>84</w>
+      <x>483</x>
+      <y>560</y>
+      <w>91</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>_Association_
 --
-role: [learn]
+hadRole: [learn]
 
 </panel_attributes>
     <additional_attributes/>
@@ -510,33 +510,33 @@ role: [learn]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>931</x>
-      <y>371</y>
+      <x>805</x>
+      <y>378</y>
       <w>161</w>
       <h>49</h>
     </coordinates>
     <panel_attributes>_Attachment_
 --
-source: &lt;file:protocol.mdx&gt;</panel_attributes>
+source: [file:protocol.mdx]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>91</y>
+      <x>567</x>
+      <y>98</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-   hasPlan</panel_attributes>
+   hadPlan</panel_attributes>
     <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>63</y>
+      <x>651</x>
+      <y>70</y>
       <w>182</w>
       <h>49</h>
     </coordinates>
@@ -549,23 +549,23 @@ description:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>931</x>
-      <y>518</y>
+      <x>805</x>
+      <y>525</y>
       <w>161</w>
       <h>49</h>
     </coordinates>
     <panel_attributes>_Attachment_
 --
-source: "optimize.py"
-format: &lt;Python 2.7&gt;
+source: [optimize.py]
+format: [Python 2.7]
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>833</x>
-      <y>399</y>
+      <x>707</x>
+      <y>406</y>
       <w>112</w>
       <h>28</h>
     </coordinates>
@@ -576,8 +576,8 @@ hasAttachment</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>581</y>
+      <x>651</x>
+      <y>588</y>
       <w>182</w>
       <h>56</h>
     </coordinates>
@@ -591,8 +591,8 @@ description: "Research Fellow"</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
-      <y>518</y>
+      <x>651</x>
+      <y>525</y>
       <w>63</w>
       <h>49</h>
     </coordinates>
@@ -604,8 +604,8 @@ description: "Research Fellow"</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>833</x>
-      <y>546</y>
+      <x>707</x>
+      <y>553</y>
       <w>112</w>
       <h>28</h>
     </coordinates>
@@ -616,8 +616,8 @@ hasAttachment</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
-      <y>203</y>
+      <x>273</x>
+      <y>210</y>
       <w>119</w>
       <h>98</h>
     </coordinates>
@@ -632,8 +632,8 @@ hasAttachment</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>413</x>
-      <y>357</y>
+      <x>266</x>
+      <y>364</y>
       <w>119</w>
       <h>98</h>
     </coordinates>
@@ -648,8 +648,8 @@ hasAttachment</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>413</x>
-      <y>511</y>
+      <x>266</x>
+      <y>518</y>
       <w>119</w>
       <h>98</h>
     </coordinates>
