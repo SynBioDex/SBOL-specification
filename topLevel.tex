@@ -15,12 +15,12 @@ Each of these classes is described in more detail below, except for the classes 
 \end{center}
 \end{figure}
 
-\subparagraph{The hasNamespace property}
+\threezeroone{\subparagraph{The hasNamespace property}
 \label{sec:hasNamespace}
 A \sbol{TopLevel} object MUST have precisely one \sbol{hasNamespace} property, pointing to the \sbol{Namespace} object that defines the namespace portion of URLs for this object and any child objects.
 If the URI for the \sbol{TopLevel} object is a URL, then the URI of the \sbol{Namespace} MUST prefix match that URL.
 
-Note that the requirement for a \sbol{hasNamespace} property holds even for objects with URIs that are not URLs, in order to allow them to be copied into datastores that use URLs.  In this case, however, there is no prefix requirement.
+Note that the requirement for a \sbol{hasNamespace} property holds even for objects with URIs that are not URLs, in order to allow them to be copied into datastores that use URLs.  In this case, however, there is no prefix requirement.}
 
 
 \subparagraph{The hasAttachment property}
