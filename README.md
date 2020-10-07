@@ -8,7 +8,11 @@ Members of the SBOL Development Community may use the issue tracker to flag prob
 
 Before writing text for a non-trivial change, please have it approved by discussion as an Issue and/or SEP.
 
-Proposed changes should be made in either a branch or a separate fork on GitHub.  To do this, follow standard git branching or forking procedure.  
+Proposed changes should be marked with the appropriate version
+macros. The LaTeX command `\threezeroone` has been provided for this
+purpose. See examples in the LaTeX source for proper usage.
+
+Proposed changes should be made in either a branch or a separate fork on GitHub.  To do this, follow standard git branching or forking procedure.
 
 Here is an example of git commands to achieve this:
 
