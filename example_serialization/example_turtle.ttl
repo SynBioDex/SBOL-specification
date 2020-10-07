@@ -1,18 +1,13 @@
 
 @prefix sbol: <http://sbols.org/v3#> .
 @base <http://example.com#> .
+@prefix : <http://example.com#> .
 
-<#pLac> a sbol:Component ;
+:pLac a sbol:Component ;
     sbol:name "pLac" ;
     sbol:description "lactose inducible promoter" ;
-    sbol:sequence <#sequence> .
+    sbol:sequence :sequence .
 
-<#sequence> a sbol:Sequence ;
-    sbol:encoding <http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html> ;
-    sbol:elements """caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacga
-caggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccagg
-ctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacaca""" .
-
-
-
-
+:sequence a sbol:Sequence ;
+    sbol:encoding <http://sbols.org/v3#iupacNucleicAcid> ;
+    sbol:elements "caatacgcaaaccgcctctccccgcgc" .

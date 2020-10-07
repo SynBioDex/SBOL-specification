@@ -10,5 +10,3 @@ clean:
 	rm -f *.pdf
 
 .PHONY: clean all
-
-
