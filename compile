@@ -3,11 +3,12 @@
 echo "compile document like this:
   compile sbol3
 "
+VERSION=sbol3
 
-pdflatex $1
-bibtex $1
-pdflatex $1
+pdflatex "${VERSION}"
+bibtex "${VERSION}"
+pdflatex "${VERSION}"
 echo ""
 echo "============FINAL LATEX RUN==========="
 echo ""
-pdflatex $1
+pdflatex "${VERSION}"
