@@ -40,10 +40,10 @@ The action is defined by the file [`.github/workflows/main.yml`](./.github/workf
 
 To build, run these commands and check the output for errors. If there are errors, resolve them and re-run the failed build step before proceeding.
 
-    pdflatex sbol2
-    bibtex sbol2
-    pdflatex sbol2
-    pdflatex sbol2
+    pdflatex sbol3
+    bibtex sbol3
+    pdflatex sbol3
+    pdflatex sbol3
 
 Note that pdflatex is run several times. Each successive pass mows down unresolved references from the previous passes. For example, the extra pdflatex commands set references correctly after bibtex completes. You don’t need to do this in every build unless the bibliography has changed.  For development purposes, you may just need to run pdflatex once.
 
