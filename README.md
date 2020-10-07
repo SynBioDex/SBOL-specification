@@ -12,13 +12,20 @@ Proposed changes should be made in either a branch or a separate fork on GitHub.
 
 Here is an example of git commands to achieve this:
 
-    git clone https://github.com/SynBioDex/SBOL-specification.git
-    git pull origin master — MAKE SURE NO ONE HAS MADE ANYMORE CHANGES
-    git checkout -b <newBranch> — CREATE NEW BRANCH
-    MAKE YOUR EDITS
-    git add <filesYouChanged>
-    git commit
-    git push origin <newBranch>
+```shell
+git clone https://github.com/SynBioDex/SBOL-specification.git
+cd SBOL-specification
+
+# Make sure no one has made anymore changes
+git pull origin master
+# Create new branch
+git checkout -b <newBranch>
+
+# Make your edits
+git add <filesYouChanged>
+git commit
+git push origin <newBranch>
+```
 
 When you are ready for your changes to be reviewed for incorporation, create a pull request.
 If you need help on pull requests see: https://help.github.com/articles/about-pull-requests/
