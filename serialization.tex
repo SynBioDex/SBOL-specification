@@ -11,12 +11,12 @@ Finally, it ought to be relatively simple to write a new software implementation
 To meet these goals, SBOL builds upon the Resource Description Framework (RDF).  RDF is an abstract language for describing conceptual graph-oriented data models, and therefore does not mandate any specific serialization format.  Instead, a number of different serialization formats are provided as separate specifications, such as RDF/XML, N-Triples, JSON-LD, and Turtle.  These serialization formats are widely supported by RDF libraries such as rdflib for Python and Apache Jena for Java.   For example, a simple SBOL definition of pLac can be serialized in RDF/XML as follows:
 
 \vspace{3mm}
-\includegraphics{example_serialization/example_rdfxml.pdf}
+\threezeroone{\includegraphics{example_serialization/example_rdfxml.pdf}}
 
 Alternatively, the same example can be serialized in Turtle as follows:
 
 \vspace{3mm}
-\includegraphics{example_serialization/example_turtle.pdf}
+\threezeroone{\includegraphics{example_serialization/example_turtle.pdf}}
 
 \threezeroone{All SBOL libraries SHOULD support at least RDF/XML, N-Triples, JSON-LD, and Turtle.
 Other SBOL tools SHOULD support at least one of these four formats.}

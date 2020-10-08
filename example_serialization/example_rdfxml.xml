@@ -6,9 +6,7 @@
     <sbol:sequence rdf:resource="http://example.com#sequence"/>
   </sbol:Component>
   <sbol:Sequence rdf:about="http://example.com#sequence">
-    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
-    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacga
-caggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccagg
-ctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacaca</sbol:elements>
+    <sbol:encoding rdf:resource="http://sbols.org/v3#iupacNucleicAcid"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgc</sbol:elements>
   </sbol:Sequence>
 </rdf:RDF>

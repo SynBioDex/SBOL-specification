@@ -126,18 +126,20 @@ Likewise, Section~\ref{sec:complementaryStandards} details complementary standar
 \label{sec:literal}
 
 When SBOL uses simple ``primitive'' data types such as \sbol{String}s or \sbol{Integer}s, these are defined as the following specific formal types:
-\begin{itemize}
-\item \sbol{String}: \url{http://www.w3.org/TR/xmlschema11-2/#string}\\
+\threezeroone{
+  \begin{itemize}
+\item \sbol{String}: \url{http://www.w3.org/2001/XMLSchema\#string}\\
   {\em Example: ``LacI coding sequence''}
-\item \sbol{Integer}: \url{http://www.w3.org/TR/xmlschema11-2/#integer}\\
+\item \sbol{Integer}: \url{http://www.w3.org/2001/XMLSchema\#integer}\\
   {\em Example: 3}
-\item \sbol{Long}: \url{http://www.w3.org/TR/xmlschema11-2/#long}\\
+\item \sbol{Long}: \url{http://www.w3.org/2001/XMLSchema\#long}\\
   {\em Example: 9223372036854775806}
-\item \sbol{Double}: \url{http://www.w3.org/TR/xmlschema11-2/#double}\\
+\item \sbol{Double}: \url{http://www.w3.org/2001/XMLSchema\#double}\\
   {\em Example: 3.14159}
-\item \sbol{Boolean}: \url{http://www.w3.org/TR/xmlschema11-2/#boolean}\\
+\item \sbol{Boolean}: \url{http://www.w3.org/2001/XMLSchema\#boolean}\\
   {\em Example: \external{true}}
 \end{itemize}
+}
 The term \sbol{literal} is used to denote an object that can be any of the five types listed above.
 
 In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}). It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
