@@ -68,9 +68,9 @@ Properties, on the other hand, are named using lower camel case, meaning that th
 SBOL properties are always given singular names irrespective of their cardinality, e.g., \sbolmult{role:C}{role} is used rather than \sbolmult{role:C}{role} even though a component can have multiple roles.
 This is because each relation can potentially stand on its own, irrespective of the existence of others in the set.
 
-Two conventions are used for property names, {\tt name} and {\tt hasName}.  
+\threezeroone{Two conventions are used for property names, {\tt name} and {\tt hasName}.  
 When a property is pointing to a class using the same name, it uses the {\tt hasName} convention (e.g., the \sbol{Component} class uses \sbol{hasFeature} to point to a \sbol{Feature} object).
-When the property uses a different name than the class of the object it points to, it uses the {\tt name} convention instead (e.g., the \sbol{Constraint} class uses \sbol{subject} to point to a \sbol{Feature} object).
+When the property uses a different name than the class of the object it points to, it uses the {\tt name} convention instead (e.g., the \sbol{Constraint} class uses \sbol{subject} to point to a \sbol{Feature} object).}
 
 
 % -----------------------------------------------------------------------------
@@ -91,15 +91,15 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
   
   	For example, a \sbol{Component} might have the URL~\path{https://synbiohub.org/public/igem/BBa_J23070}, where \texttt{namespace} is \path{https://synbiohub.org}, \texttt{local} is \path{public/igem}, and \texttt{displayId} is \path{BBa_J23070}.
 
-  \item A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object (except for a \sbol{Namespace} object, which instead MUST be the prefix of all objects for which it is the namespace).
+  \item A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object (except for \threezeroone{\st{its controlling}} \threezeroone{a \sbol{Namespace} object, which instead MUST be the prefix of all objects for which it is the namespace).}
   
   	For example, the \path{BBa_J23070_seq} \sbol{Sequence} object cannot have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq}, since the \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URL for the \path{BBa_J23070} \sbol{Component} object.
 
   \item The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object.
 	Multiple layers of child objects are allowed using the same\\ \texttt{[parent]/[displayId]} pattern recursively.
 	
-	For example, a \sbol{SequenceFeature} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \texttt{SequenceFeature1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1}.
-	Similarly, if the \texttt{SequenceFeature1} object has a \sbol{Location} child object with a \sbol{displayId} of \texttt{Location1}, then that object will have the URL\\ \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1/Location1}.
+	For example, a \sbol{SequenceFeature} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \threezeroone{\st{annotation1}} \texttt{SequenceFeature1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1}.
+	Similarly, \threezeroone{\st{the loc1 Location child of the annotation1 SequenceFeature object will have the URL}} \threezeroone{if the \texttt{SequenceFeature1} object has a \sbol{Location} child object with a \sbol{displayId} of \texttt{Location1}, then that object will have the URL\\ \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1/Location1}.}
   \end{itemize}
 
 \threezeroone{\subsection{SBOL URIs}
