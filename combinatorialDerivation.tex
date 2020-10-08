@@ -16,7 +16,7 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 
 The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
-Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \threezeroone{\st{SubComponent objects that describe its substructure (referred to hereafter as template SubComponent objects), and its hasConstraint property MAY also contain one or more Constraint objects that constrain this substructure}} \sbol{Feature} objects that describe its substructure (referred to hereafter as template \sbol{Feature} objects), and its other properties MAY also describe other aspects of the template that will not change based on the values that ay be varied.
+Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \threezeroone{\st{SubComponent objects that describe its substructure (referred to hereafter as template SubComponent objects), and its hasConstraint property MAY also contain one or more Constraint objects that constrain this substructure}} \threezeroone{\sbol{Feature} objects that describe its substructure (referred to hereafter as template \sbol{Feature} objects), and its other properties MAY also describe other aspects of the template that will not change based on the values that ay be varied.}
 
 When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \prov{wasDerivedFrom} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{member} property of a \sbol{Collection}, in which case the \prov{wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
 
@@ -90,24 +90,24 @@ Note that because a \sbol{om:Measure} is not a \sbol{TopLevel}, the vlaues of \s
 
 \subparagraph{The \sbolheading{variant} property}\label{sec:variant}
 
-A \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} object can have zero or more \sbol{variant} properties, each of type \sbol{URI}, specifying a \sbol{Component} object. This property specifies individual \sbol{Component} objects to serve as options when deriving a new \threezeroone{\st{SubComponent}} \sbol{Feature} for the \sbol{variable} threezeroone{\st{SubComponent}} \sbol{Feature} from the \sbol{template}.
+A \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} object can have zero or more \sbol{variant} properties, each of type \sbol{URI}, specifying a \sbol{Component} object. This property specifies individual \sbol{Component} objects to serve as options when deriving a new \threezeroone{\st{SubComponent}} \sbol{Feature} for the \sbol{variable} \threezeroone{\st{SubComponent}} \sbol{Feature} from the \sbol{template}.
 
 \subparagraph{The \sbolheading{variantCollection} property}\label{sec:variantCollection}
 
-A \sbol{VariableFeature} object can have zero or more \sbol{variantCollection} properties, each of type \sbol{URI}, specifying a \sbol{Collection} object.
+A \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} object can have zero or more \sbol{variantCollection} properties, each of type \sbol{URI}, specifying a \sbol{Collection} object.
 Such a \sbol{Collection} MUST NOT contain any objects besides \sbol{Component} objects or \sbol{Collection} objects that themselves contain only \sbol{Component} or \sbol{Collection} objects.
 This property enables the specification of existing groups of \sbol{Component} objects to serve as options.
 
 \subparagraph{The \sbolheading{variantDerivation} property}\label{sec:variantDerivation}
 
-A \sbol{VariableFeature} object can have zero or more \sbol{variantDerivation} properties, each of type \sbol{URI}, specifying a \sbol{CombinatorialDerivation} object. 
-This property enables the specification of \sbol{Component} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \sbol{Feature} for the \sbol{variable} \sbol{Feature} from the \sbol{template}. 
-The \sbol{variantDerivation} properties of a \sbol{VariableFeature} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \sbol{VariableFeature}. 
-Furthermore, such \sbol{VariableFeature} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivation} properties and the \sbol{CombinatorialDerivation} objects that contain them. 
+A \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} object can have zero or more \sbol{variantDerivation} properties, each of type \sbol{URI}, specifying a \sbol{CombinatorialDerivation} object. 
+This property enables the specification of \sbol{Component} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \threezeroone{\st{SubComponent}} \sbol{Feature} for the \sbol{variable} \threezeroone{\st{SubComponent}} \sbol{Feature} from the \sbol{template}. 
+The \sbol{variantDerivation} properties of a \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \threezeroone{\st{VariableComponent}} \sbol{VariableFeature}. 
+Furthermore, such \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivation} properties and the \sbol{CombinatorialDerivation} objects that contain them. 
 
 \subparagraph{The \sbolheading{cardinality} property}\label{sec:cardinality}
 
-The \sbol{cardinality} property is REQUIRED and has type of URI. This property specifies how many \sbol{Feature} objects SHOULD be derived from the template \sbol{Feature} during the derivation of a new \sbol{Component}. The URI value of this property MUST come from the URIs provided in~\ref{tbl:cardinality}.
+The \sbol{cardinality} property is REQUIRED and has type of URI. This property specifies how many \threezeroone{\st{SubComponent}} \sbol{Feature} objects SHOULD be derived from the template \threezeroone{\st{SubComponent}} \sbol{Feature} during the derivation of a new \sbol{Component}. The URI value of this property MUST come from the URIs provided in~\ref{tbl:cardinality}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
