@@ -130,23 +130,20 @@ This can be used to either link to the \sbol{Feature} being referenced or to cha
 
 For example, \sbol{ComponentReference} R1 looking into a \sbol{SubComponent} for a plasmid might link with \sbol{hasFeature} to its own child \sbol{ComponentReference} R2, which in turn looks within the \sbol{Component} defining the plasmid to the plasmid's CDS \sbol{SubComponent}, in turn using \sbol{hasFeature} to reference a \sbol{SequenceFeature} within the \sbol{Component} that defines that CDS.
 
-
-
 \paragraph{LocalSubComponent}
 \label{sec:LocalSubComponent}
 
 The \sbol{LocalSubComponent} class is a subclass of \sbol{Feature}. 
 This class serves as a way to create a placeholder in more complex \sbol{Component}s, such as a variable to be filled in later or a composite that exists only within the context of the parent \sbol{Component}.
 
-\subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:LSR}
-
-A \sbol{LocalSubComponent} MAY have any number of \sbolmult{hasLocation:LSR}{hasLocation} properties, each of type \sbol{URI}, that MUST refer to \sbol{Location} objects. 
-These follow the same restrictions as for the \sbolmult{hasLocation:SC}{hasLocation} of a \sbol{SubComponent}, notably that the \sbol{Location}s of \sbolmult{hasLocation:LSR}{hasLocation} properties attached to the same \sbol{LocalSubComponent} MUST NOT overlap.
-
-
 \subparagraph{The \sbolheading{type} property}\label{sec:type:LSC}
 
 The \sbolmult{type:LSC}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:LSC}{type} property is identical to its use in \sbol{Component}.
+
+\subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:LSC}
+
+A \sbol{LocalSubComponent} MAY have any number of \sbolmult{hasLocation:LSC}{hasLocation} properties, each of type \sbol{URI}, that MUST refer to \sbol{Location} objects. 
+These follow the same restrictions as for the \sbolmult{hasLocation:SC}{hasLocation} of a \sbol{SubComponent}, notably that the \sbol{Location}s of \sbolmult{hasLocation:LSC}{hasLocation} properties attached to the same \sbol{LocalSubComponent} MUST NOT overlap.
 
 \paragraph{ExternallyDefined}
 \label{sec:ExternallyDefined}
@@ -157,12 +154,11 @@ The \sbol{ExternallyDefined} class has been introduced so that external definiti
 
 The \sbolmult{type:ED}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ED}{type} property is identical to its use in \sbol{Component}.
 
-\subparagraph{The \sbolheading{definition} property}\label{sec:definition:ER}
+\subparagraph{The \sbolheading{definition} property}\label{sec:definition:ED}
 
-The \sbolmult{definition:ER}{definition} property is REQUIRED and is of type \sbol{URI} that links to a canonical definition external to SBOL.
+The \sbolmult{definition:ED}{definition} property is REQUIRED and is of type \sbol{URI} that links to a canonical definition external to SBOL.
 When possible, such definitions SHOULD use the recommended external resources in \ref{sec:recomm_ontologies}.
 For example, an \sbol{ExternallyDefined} simple chemical might link to ChEBI and a protein might link to UniProt.
-
 
 \paragraph{SequenceFeature}
 \label{sec:SequenceFeature}

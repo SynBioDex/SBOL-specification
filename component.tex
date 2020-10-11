@@ -17,7 +17,7 @@ The \sbolmult{hasSequence:C}{hasSequence}, \sbol{hasFeature}, and \sbol{hasConst
 \subparagraph{The \sbolheading{type} property}
 \label{sec:type:C}
 
-A \sbol{Component} is REQUIRED to have one or more \sbolmult{type:C}{type} properties, each of type \sbol{URI} specifying the category of biochemical or physical entity (for example DNA, protein, or simple chemical) that a \sbol{Component} object abstracts
+A \sbol{Component} MUST have one or more \sbolmult{type:C}{type} properties, each of type \sbol{URI} specifying the category of biochemical or physical entity (for example DNA, protein, or simple chemical) that a \sbol{Component} object abstracts
 for the purpose of engineering design. For DNA or RNA entities, additional \sbolmult{type:C}{type} properties MAY be used to describe nucleic acid topology (circular / linear) and strandedness (double- or single-stranded).
 
 The \sbolmult{type:C}{type} properties of every \sbol{Component} MUST include one or more \sbol{URI}s that MUST identify terms from appropriate ontologies, such as the physical entity representation branch of the Systems Biology Ontology~\cite{SBO} or the ontology of Chemical Entities of Biological Interest (ChEBI)~\cite{chebi}.  
