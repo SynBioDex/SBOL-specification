@@ -78,38 +78,205 @@ Reference: \sec{sec:sbolURIs}}
 \printValid{An object MUST have no more than one \external{rdfType} property in the \uri{http://sbols.org/v3\#} namespace.\\
 Reference: \sec{sec:sbolTypes}}
 
+\printValid{An object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those listed for its type or parent types in \ref{t:allowed_properties}.\\
+Reference: \sec{sec:sbolURIs}}
+ 
+\printValid{An object MUST have a number of instances of a property that matches the cardinality restriction listed for that object type and property in \ref{t:property_cardinality_type}.\\ 
+Reference: \sec{sec:umldiagrams}}
+
+\printValid{An object's property values MUST have the type listed for the object type and property in \ref{t:property_cardinality_type}.\\
+Reference: \sec{sec:datatypes}}
+
+\printValid{Each property of type \sbol{URI} that is listed in \ref{t:reference_type} MUST refer to an object of the type listed (child objects).\\
+Reference: \sec{sec:datatypes}}
+
+\printComplete{Each property of type \sbol{URI} that is listed in \ref{t:reference_type} MUST refer to an object of the type listed (\sbol{TopLevel} objects).\\
+Reference: \sec{sec:datatypes}}
+
+
+\begin{table}
+\begin{tabular}{|ccp{2.5in}c|}
+\hline
+Class & Parent & Properties & Reference \\
+\hline
+\sbol{Identified} 	& none 			& \sbol{displayId}, \sbol{name}, \sbol{description}, \sbol{hasMeasure} & \sec{sec:Identified} \\
+\sbol{TopLevel}		& \sbol{Identified} 	& \sbol{hasNamespace}, \sbol{hasAttachment} & \sec{sec:TopLevel} \\
+\sbol{Namespace} 	& \sbol{TopLevel} 	&	& \sec{sec:Namespace} \\
+\sbol{Sequence} 	& \sbol{TopLevel} 	& \sbol{elements}, \sbol{encoding} & \sec{sec:Sequence} \\
+\sbol{Component} 	& \sbol{TopLevel} 	& \sbolmult{type:C}{type}, \sbolmult{role:C}{role}, \sbolmult{hasSequence:C}{hasSequence}, \sbol{hasFeature}, \sbol{hasInteraction},  \sbol{hasConstraint}, \sbol{hasModel}, \sbol{hasInterface} & \sec{sec:Component} \\
+\sbol{Feature} 		& \sbol{Identified} 	& \sbolmult{role:F}{role}, \sbolmult{orientation:F}{orientation} & \sec{sec:Feature} \\
+\sbol{SubComponent} & \sbol{Feature} 	& \sbol{roleIntegration}, \sbol{instanceOf}, \sbol{sourceLocation}, \sbolmult{hasLocation:SC}{hasLocation} & \sec{sec:SubComponent} \\
+\sbol{ComponentReference} &\sbol{Feature} & \sbol{inChildOf}, \sbol{hasFeature} & \sec{sec:ComponentReference} \\
+\sbol{LocalSubComponent} & \sbol{Feature} & \sbolmult{type:LSC}{type}, \sbolmult{hasLocation:LSC}{hasLocation} & \sec{sec:LocalSubComponent} \\
+\sbol{ExternallyDefined} & \sbol{Feature}	& \sbolmult{type:ED}{type}, \sbolmult{definition:ED}{definition} & \sec{sec:ExternallyDefined} \\
+\sbol{SequenceFeature} & \sbol{Feature}	& \sbolmult{hasLocation:SF}{hasLocation} & \sec{sec:SequenceFeature} \\
+\sbol{Location}		& \sbol{Identified} 	& \sbolmult{orientation:L}{orientation} and \sbol{order} & \sec{sec:Location} \\
+\sbol{Range} 		& \sbol{Location} 	& \sbol{start}, \sbol{end} & \sec{sec:Range} \\
+\sbol{Cut} 			& \sbol{Location} 	& \sbol{at} & \sec{sec:Cut} \\
+\sbol{EntireSequence} & \sbol{Location} 	& 	& \sec{sec:EntireSequence} \\
+\sbol{Constraint} 	& \sbol{Identified} 	& \sbol{subject}, \sbol{object}, \sbol{restriction} & \sec{sec:Constraint} \\
+\sbol{Interaction} 	& \sbol{Identified} 	& \sbolmult{type:I}{type}, \sbol{hasParticipation} & \sec{sec:Interaction} \\
+\sbol{Participation} 	& \sbol{Identified} 	& \sbolmult{role:P}{role}, \sbol{participant} & \sec{sec:Participation} \\
+\sbol{Interface} 		& \sbol{Identified} 	& \sbol{input}, \sbol{output}, \sbol{nondirectional} & \sec{sec:Interface} \\
+\sbol{CombinatorialDerivation} & \sbol{TopLevel} & \sbol{template}, \sbol{strategy}, \sbol{hasVariableFeature} & \sec{sec:CombinatorialDerivation} \\
+\sbol{VariableFeature} & \sbol{Identified} 	& \sbol{variable}, \sbol{variant}, \sbol{variantCollection}, \sbol{variantDerivation}, \sbol{variantMeasure} & \sec{sec:VariableFeature} \\
+\sbol{Implementation} & \sbol{TopLevel} 	& \sbol{built} & \sec{sec:Implementation} \\
+\sbol{ExperimentalData} & \sbol{TopLevel} &	& \sec{sec:ExperimentalData} \\
+\sbol{Model} 		& \sbol{TopLevel} 	& \sbolmult{source:M}{source}, \sbol{language}, \sbol{framework} & \sec{sec:Model} \\
+\sbol{Collection} 	& \sbol{TopLevel} 	& \sbol{member} & \sec{sec:Collection} \\
+\sbol{Experiment} 	& \sbol{Collection} 	&	& \sec{sec:Experiment} \\
+\sbol{Attachment}	& \sbol{TopLevel} 	& \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, \sbol{hash}, \sbol{hashAlgorithm} & \sec{sec:Attachment} \\
+\hline
+\end{tabular}
+\caption{Allowed object properties in the \uri{http://sbols.org/v3\#} namespace.}
+\label{t:allowed_properties}
+\end{table}
+
+\begin{small}
+\begin{longtable}{|ccccc|}
+\caption{Cardinality constraints on object properties.\label{t:property_cardinality_type}}\\
+\hline
+Class & Property & Cardinality & Reference & Type\\
+\hline
+\endfirsthead
+\multicolumn{5}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+Class & Property & Cardinality & Reference & Type\\
+\hline
+\endhead
+\hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\sbol{Identified} 		& \sbol{displayId} 		& OPTIONAL 				& \sbol{String} 	& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{displayId} 		& REQUIRED, ONE			& \sbol{URI} 	& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{name} 			& OPTIONAL				& \sbol{String}	& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{description} 		& OPTIONAL 				& \sbol{String}	& \sec{sec:Identified}\\
+\sbol{Identified} 		& \prov{wasDerivedFrom}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Identified}\\
+\sbol{Identified} 		& \prov{wasGeneratedBy} & UNBOUNDED			& \sbol{URI}	& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{hasMeasure} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Identified}\\
+\sbol{TopLevel} 		& \sbol{hasNamespace} 	& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:TopLevel}\\
+\sbol{TopLevel} 		& \sbol{hasAttachment} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:TopLevel}\\
+\sbol{Sequence}		& \sbol{elements} 		& OPTIONAL 				& \sbol{String}	& \sec{sec:Sequence}\\
+\sbol{Sequence}		& \sbol{encoding} 		& OPTIONAL 				& \sbol{URI}	& \sec{sec:Sequence}\\
+\sbol{Component}		& \sbolmult{type:C}{type}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& \sec{sec:Component}\\
+\sbol{Component}		& \sbolmult{role:C}{role} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component}\\
+\sbol{Component}		& \sbolmult{hasSequence:C}{hasSequence} & UNBOUNDED & \sbol{URI} & \sec{sec:Component}\\
+\sbol{Component}		& \sbol{hasFeature} 		& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasInteraction} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasConstraint} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasInterface}		& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component} \\
+\sbol{Component} 		& \sbol{hasModel} 		& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component}\\
+\sbol{Feature} 			& \sbolmult{role:F}{role} 	& UNBOUNDED 			& \sbol{URI}	& \sec{sec:Feature}\\
+\sbol{Feature}			& \sbolmult{orientation:F}{orientation} & OPTIONAL		& \sbol{URI} 	& \sec{sec:Feature}\\
+\sbol{SubComponent}	& \sbol{roleIntegration}	& OPTIONAL				& \sbol{URI}	& \sec{sec:SubComponent}\\
+\sbol{SubComponent}	& \sbol{instanceOf} 		& REQUIRED, ONE 			& \sbol{URI}	& \sec{sec:SubComponent}\\
+\sbol{SubComponent} 	& \sbolmult{hasLocation:SC}{hasLocation} & UNBOUNDED & \sbol{URI}	& \sec{sec:SubComponent}\\
+\sbol{SubComponent}	& \sbol{sourceLocation} 	& UNBOUNDED 			& \sbol{URI}	& \sec{sec:SubComponent}\\
+\sbol{ComponentReference} & \sbol{inChildOf} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:ComponentReference}\\
+\sbol{ComponentReference} & \sbol{hasFeature} 	& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:ComponentReference}\\
+\sbol{LocalSubComponent} & \sbolmult{type:LSC}{type} & REQUIRED, UNBOUNDED & \sbol{URI}	& \sec{sec:LocalSubComponent}\\
+\sbol{LocalSubComponent} & \sbolmult{hasLocation:LSC}{hasLocation} & UNBOUNDED & \sbol{URI} & \sec{sec:LocalSubComponent}\\
+\sbol{ExternallyDefined}	& \sbolmult{type:LSC}{type}	&REQUIRED, UNBOUNDED	& \sbol{URI} & \sec{sec:ExternallyDefined}\\
+\sbol{ExternallyDefined}	& \sbolmult{definition:ED}{definition} & REQUIRED, ONE	& \sbol{URI}	& \sec{sec:ExternallyDefined}\\
+\sbol{SequenceFeature} 	& \sbolmult{hasLocation:SF}{hasLocation} & UNBOUNDED & \sbol{URI}	& \sec{sec:SequenceFeature}\\
+\sbol{Location}			& \sbolmult{orientation:L}{orientation} & OPTIONAL 		& \sbol{URI} 	& \sec{sec:Location}\\
+\sbol{Location}			& \sbol{order} 			& OPTIONAL 				& \sbol{Integer} & \sec{sec:Location}\\
+\sbol{Location} 			& \sbolmult{hasSequence:L}{hasSequence} & REQUIRED, ONE & \sbol{URI} & \sec{sec:Location}\\
+\sbol{Range}			& \sbol{start} 			& REQUIRED, ONE			& \sbol{Integer} & \sec{sec:Range}\\
+\sbol{Range}			& \sbol{end} 			& REQUIRED, ONE			& \sbol{Integer} & \sec{sec:Range}\\
+\sbol{Cut}				& \sbol{at} 			& REQUIRED, ONE			& \sbol{Integer} & \sec{sec:Cut}\\
+\sbol{Constraint}		& \sbol{subject} 		& REQUIRED, ONE 			& \sbol{URI} 	& \sec{sec:Constraint}\\
+\sbol{Constraint}		& \sbol{object} 			& REQUIRED, ONE 			& \sbol{URI} 	& \sec{sec:Constraint}\\
+\sbol{Constraint}		& \sbol{restriction}		& REQUIRED, ONE			& \sbol{URI} 	& \sec{sec:Constraint}\\
+\sbol{Interaction} 		& \sbolmult{type:I}{type}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& \sec{sec:Interaction}\\
+\sbol{Interaction} 		& \sbol{hasParticipation} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Interaction}\\
+\sbol{Participation}		& \sbol{participant} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:Participation}\\
+\sbol{Participation} 		& \sbolmult{role:P}{role}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& \sec{sec:Participation}\\
+\sbol{Interface} 			& \sbol{input}			& UNBOUNDED			& \sbol{URI}	& \sec{sec:Interface}\\
+\sbol{Interface} 			& \sbol{output}			& UNBOUNDED			& \sbol{URI}	& \sec{sec:Interface}\\
+\sbol{Interface} 			& \sbol{nondirectional}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Interface}\\
+\sbol{CombinatorialDerivation} & \sbol{strategy} 	& OPTIONAL 				& \sbol{URI}	& \sec{sec:CombinatorialDerivation}\\
+\sbol{CombinatorialDerivation} & \sbol{template} 	& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:CombinatorialDerivation}\\
+\sbol{CombinatorialDerivation} & \sbol{hasVariableFeature} & UNBOUNDED		& \sbol{URI}	& \sec{sec:CombinatorialDerivation}\\
+\sbol{VariableFeature} 	& \sbol{cardinality} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variable} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variant} 			& UNBOUNDED			& \sbol{URI}	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variantCollection}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variantDerivation}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:VariableFeature}\\
+\sbol{Implementation} 	& \sbol{built}			& OPTIONAL				& \sbol{URI}	& \sec{sec:Implementation}\\
+\sbol{Model} 			& \sbolmult{source:M}{source} & REQUIRED, ONE		& \sbol{URI}	& \sec{sec:Model}\\
+\sbol{Model} 			& \sbol{language} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:Model}\\
+\sbol{Model} 			& \sbol{framework} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:Model}\\
+\sbol{Collection} 		& \sbol{member} 		& UNBOUNDED			& \sbol{URI}	& \sec{sec:Collection}\\
+\sbol{Attachment} 		& \sbolmult{source:A}{source} & REQUIRED, ONE		& \sbol{URI}	& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{format}  		& OPTIONAL				& \sbol{URI}	& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{size}	  		& OPTIONAL				& \sbol{Long}	& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{hash}  			& OPTIONAL				& \sbol{String}	& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{hashAlgorithm}  	& OPTIONAL				& \sbol{String}	& \sec{sec:Attachment}\\
+\hline
+\end{longtable}
+\end{small}
+
+\begin{table}
+\begin{tabular}{|cccc|}
+\hline
+Class & Property & Type & Reference \\
+\hline
+\sbol{Identified}			& \prov{wasGeneratedBy}		& \prov{Activity} 		& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{hasMeasure} 		& \om{Measure}		& \sec{sec:Identified}\\
+\sbol{TopLevel} 		& \sbol{hasNamespace} 		& \sbol{Namespace} 		& \sec{sec:TopLevel}\\
+\sbol{TopLevel}			& \sbol{hasAttachment}		& \sbol{Attachment} 		& \sec{sec:TopLevel}\\
+\sbol{Component}		& \sbolmult{hasSequence:C}{hasSequence} & \sbol{Sequence} & \sec{sec:Component}\\
+\sbol{Component}		& \sbol{hasFeature} 			& \sbol{Feature} 		& \sec{sec:Component}\\
+\sbol{Component} 		& \sbol{hasInteraction} 		& \sbol{Interaction} 		& \sec{sec:Component}\\
+\sbol{Component} 		& \sbol{hasConstraint}		& \sbol{Constraint} 		& \sec{sec:Component}\\
+\sbol{Component} 		& \sbol{hasInterface} 		& \sbol{Interface}		& \sec{sec:Component}\\
+\sbol{Component}		& \sbol{hasModel} 			& \sbol{Model} 			& \sec{sec:Component}\\
+\sbol{SubComponent}	& \sbol{instanceOf}			& \sbol{Component}		& \sec{sec:SubComponent}\\
+\sbol{SubComponent} 	& \sbolmult{hasLocation:SC}{hasLocation} & \sbol{Location} & \sec{sec:SubComponent}\\
+\sbol{SubComponent}	& \sbol{sourceLocation} 		& \sbol{Location} 		& \sec{sec:SubComponent}\\
+\sbol{ComponentReference} & \sbol{inChildOf} 			& \sbol{SubComponent}	& \sec{sec:ComponentReference}\\
+\sbol{ComponentReference} & \sbol{hasFeature} 		& \sbol{Feature}		& \sec{sec:ComponentReference}\\
+\sbol{LocalSubComponent} & \sbolmult{hasLocation:LSC}{hasLocation} & \sbol{Location} & \sec{sec:LocalSubComponent}\\
+\sbol{SequenceFeature}	& \sbolmult{hasLocation:SF}{hasLocation} & \sbol{Location} & \sec{sec:SequenceFeature}\\
+\sbol{Location}			& \sbolmult{hasSequence:L}{hasSequence} & \sbol{Sequence} & \sec{sec:Location}\\
+\sbol{Constraint}		& \sbol{subject} 			& \sbol{Feature} 		& \sec{sec:Constraint}\\
+\sbol{Constraint}		& \sbol{object} 				& \sbol{Feature} 		& \sec{sec:Constraint}\\
+\sbol{Interaction} 		& \sbol{hasParticipation}		& \sbol{Participant}		& \sec{sec:Interaction}\\
+\sbol{Participation} 		& \sbol{participant}			& \sbol{Feature}		& \sec{sec:Participation}\\
+\sbol{Interface}			& \sbol{input} 				& \sbol{Feature} 		& \sec{sec:Interface}\\
+\sbol{Interface}			& \sbol{output} 				& \sbol{Feature} 		& \sec{sec:Interface}\\
+\sbol{Interface}			& \sbol{nondirectional}		& \sbol{Feature} 		& \sec{sec:Interface}\\
+\sbol{CombinatorialDerivation} & \sbol{template} 		& \sbol{Component}		& \sec{sec:CombinatorialDerivation}\\
+\sbol{CombinatorialDerivation} & \sbol{hasVariableFeature} & \sbol{VariableFeature}	& \sec{sec:CombinatorialDerivation}\\
+\sbol{VariableFeature}	& \sbol{variable} 			& \sbol{Feature} 		& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature}	& \sbol{variant} 				& \sbol{Component} 		& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature}	& \sbol{variantCollection} 		& \sbol{Collection} 		& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature}	& \sbol{variantDerivation} 		& \sbol{CombinatorialDerivation} & \sec{sec:VariableFeature}\\
+\sbol{Implementation}	& \sbol{built} 				& \sbol{Component}		& \sec{sec:Implementation}\\
+\sbol{Collection} 		& \sbol{member} 			& \sbol{TopLevel} 		& \sec{sec:Collection}\\
+\sbol{Experiment}		& \sbol{member}			& \sbol{ExperimentalData} & \sec{sec:Experiment}\\
+\hline
+\end{tabular}
+\caption{Types of objects referred to by URI properties.}
+\label{t:reference_type}
+\end{table}
+
+
 \subsubsection*{Rules for the \class{Identified} class} 
 \setcounter{sbolCtr}{10201}
 
-\printValid{An \sbol{Identified} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than the following: \sbol{displayId}, \sbol{name}, \sbol{description}, and \sbol{hasMeasure}.\\
- Reference: \sec{sec:Identified}}
-
-\printValid{The \sbol{displayId} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:Identified}}
-
 \printValid{The \sbol{displayId} property, if specified, MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.\\ Reference: \sec{sec:Identified}}
-
-\printValid{The \sbol{displayId} property of an \sbol{Identified} object whose \sbol{URI} is a URL is REQUIRED.  \\ Reference: \sec{sec:Identified}}
-
-\printValid{The \sbol{name} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String}.  \\ Reference: \sec{sec:Identified}}
-
-\printValid{The \sbol{description} property of an \sbol{Identified} object is OPTIONAL and MAY contain a \sbol{String}.  \\ Reference: \sec{sec:Identified}}
-
-\printValid{An \sbol{Identified} object MAY have zero or more \prov{wasDerivedFrom} properties, each of type \sbol{URI}.  \\ Reference: \sec{sec:Identified}}
 
 \printValid{An \sbol{Identified} object MUST NOT refer to itself via its own \prov{wasDerivedFrom} property.\\ Reference: \sec{sec:Identified}}
 
 \printComplete{An \sbol{Identified} object MUST NOT form a cyclical chain of references via its \prov{wasDerivedFrom} property and those of other \sbol{Identified} objects. \\ Reference: \sec{sec:Identified}}
 
-\printValid{An \sbol{Identified} object MAY have zero or more \prov{wasGeneratedBy} properties, each of type \sbol{URI}.  \\ Reference: \sec{sec:Identified}}
-
-\printComplete{Each \sbol{URI} referred to by a \prov{wasGeneratedBy} property of an \sbol{Identified} object MUST refer to an \prov{Activity} object.\\ Reference: \sec{sec:Identified}}
-
 \printComplete{Provenance history formed by \prov{wasGeneratedBy} properties of \sbol{Identified} objects and\\
 \prov{entity} references in \prov{Usage} objects MUST NOT form circular reference chains.
 \\ Reference: \sec{sec:Identified}}
-
-\printValid{An \sbol{Identified} object MAY have zero or more \sbol{hasMeasure} properties, each of which refers to a \om{Measure} object. \\ 
-Reference: \sec{sec:Identified}}
 
 \todo[inline]{Brian: I need you to check all the DBTL rules in Prov}
 
@@ -128,37 +295,16 @@ Reference: \sec{sec:provenance}}
 \subsubsection*{Rules for the \class{TopLevel} class} 
 \setcounter{sbolCtr}{10301}
 
-\printValid{A \sbol{TopLevel} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Identified} class and the following: \sbol{hasNamespace} and \sbol{hasAttachment}.\\
- Reference: \sec{sec:TopLevel}}
-
-\printValid{A \sbol{TopLevel} object MUST have precisely one \sbol{hasNamespace} property of type \sbol{URI}.  \\ Reference: \sec{sec:TopLevel}}
-
-\printComplete{The \sbol{URI} referred to by the \sbol{hasNamespace} property of a \sbol{TopLevel} object MUST refer to a \sbol{Namespace} object.\\ Reference: \sec{sec:TopLevel}}
-
 \printValid{If the URI for the \sbol{TopLevel} object is a URL, then the URI of the \sbol{Namespace} MUST prefix match that URL.  \\ Reference: \sec{sec:TopLevel}}
-
-\printValid{A \sbol{TopLevel} object MAY have zero or more \sbol{hasAttachment} properties, each of type \sbol{URI}.  \\ Reference: \sec{sec:TopLevel}}
-
-\printComplete{Each \sbol{URI} referred to by a \sbol{hasAttachment} property of a \sbol{TopLevel} object MUST refer to an \sbol{Attachment} object.\\ Reference: \sec{sec:TopLevel}}
 
 \subsubsection*{Rules for the \class{Namespace} class} 
 \setcounter{sbolCtr}{10401}
-
-\printValid{A \sbol{Namespace} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class.\\
-Reference: \sec{sec:Namespace}}
 
 \printValid{The \sbol{hasNamespace} property of a \sbol{Namespace} object MUST contain its own \sbol{URI}.  \\
 Reference: \sec{sec:Namespace}}
 
 \subsubsection*{Rules for the \class{Sequence} class} 
 \setcounter{sbolCtr}{10501}
-
-\printValid{A \sbol{Sequence} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class and the following: \sbol{elements} and \sbol{encoding}.\\
- Reference: \sec{sec:Sequence}}
-
-\printValid{The \sbol{elements} property of a \sbol{Sequence} is OPTIONAL and SHOULD contain a \sbol{String}.\\ Reference: \sec{sec:Sequence}}
-
-\printValid{The \sbol{encoding} property of \sbol{Sequence} is OPTIONAL and SHOULD contain a \sbol{URI}.\\ Reference: \sec{sec:Sequence}}
 
 \printValid{If the \sbol{elements} property is set, then the \sbol{encoding} property of \sbol{Sequence} MUST be provided.\\ Reference: \sec{sec:Sequence}}
 
@@ -177,11 +323,6 @@ Reference: \sec{sec:Namespace}}
 \todo[inline]{Add: If a Component has a SequenceAnnotation that refers to Sequence X, then either the Component or one of its SubComponents must also have a SequenceAnnotation that gives Sequence X an EntireComponent Location.}
 
 \todo[inline]{Add: If a SubComponent has a Location that refers to Sequence X, then the either the SubComponent or its parent Component must also have a SequenceAnnotation that gives Sequence X an EntireComponent Location.}
-
-\printValid{A \sbol{Component} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class and the following: \sbolmult{type:C}{type}, \sbolmult{role:C}{role}, \sbolmult{hasSequence:C}{hasSequence}, \sbol{hasFeature}, \sbol{hasInteraction},  \sbol{hasConstraint}, \sbol{hasModel}, and \sbol{hasInterface}.\\
- Reference: \sec{sec:Component}}
-
-\printValid{A \sbol{Component} MUST have one or more \sbolmult{type:C}{type}  properties, each of type \sbol{URI}.\\ Reference: \sec{sec:Component}}
 
 \printValid{A \sbol{Component} MUST NOT have more than one \sbol{URI} from \ref{tbl:component_types}.\\ Reference: \sec{sec:Component}}
 
@@ -203,8 +344,6 @@ Reference: \sec{sec:Component}}
 
 \printWarning{Each \sbolmult{role:C}{role} property of a \sbol{Component} MUST refer to an ontology term that is consistent with its \sbolmult{type:C}{type} property.\\ Reference: \sec{sec:Component}}
 
-\printValid{A \sbol{Component} object MAY have zero or more \sbolmult{role:C}{role} properties, each of type \sbol{URI}.  \\ Reference: \sec{sec:Component}}
-
 \printWarning{Each \sbolmult{role:C}{role} property of a \sbol{Component} MUST refer to an ontology term that clarifies the potential function of the \sbol{Component} in a biochemical or physical context.\\ Reference: \sec{sec:Component}}
 
 \printWarning{A \sbolmult{role:C}{role} property of a \sbol{Component} MUST contain a \sbol{URI} from \ref{tbl:component_roles} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:Component}}
@@ -216,10 +355,6 @@ A \sbolmult{role:C}{role} property of a \sbol{Component} SHOULD NOT contain a \s
 \printModeling{If multiple \sbolmult{type:C}{type} properties of a \sbol{Component} contains the DNA or RNA type \sbol{URI}, then its \sbolmult{type:C}{role} property SHOULD contain exactly one \sbol{URI} that refers to a term from the sequence feature branch of the SO.\\ 
 Reference: \sec{sec:Component}}
 
-\printValid{A \sbol{Component} MAY have zero or more \sbolmult{hasSequence:C}{hasSequence} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:Component}}
-
-\printComplete{Each \sbolmult{hasSequence:C}{hasSequence} property of a \sbol{Component} MUST refer to a \sbol{Sequence} object.\\ Reference: \sec{sec:Component}}
-
 \printWarning{The \sbol{Sequence} objects referred to by the \sbolmult{hasSequence:C}{hasSequence} properties of a \sbol{Component} MUST be consistent with each other, such that well-defined mappings exist between their \sbol{elements} properties in accordance with their \sbol{encoding} properties.\\ Reference: \sec{sec:Component}}
 
 \printWarning{A \sbolmult{hasSequence:C}{hasSequence} property of a \sbol{Component} MUST NOT refer to \sbol{Sequence} objects with conflicting \sbol{encoding} properties.\\ Reference: \sec{sec:Component}}
@@ -229,86 +364,42 @@ Reference: \sec{sec:Component}}
 
 \printModeling{If a \sbol{Component} has more than one \sbolmult{hasSequence:C}{hasSequence} property that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths.\\ Reference: \sec{sec:Component}}
 
-\printValid{A \sbol{Component} MAY have zero or more \sbol{hasFeature} properties, each of which refers to a \sbol{Feature} object.\\ Reference: \sec{sec:Component}}
-
 %% QUESTION: do we still need this one
 %  \printModeling{If a \sbol{Component} in a \sbol{Component}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceFeature} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.\\ Reference: \sec{sec:Component}}
 
 %% QUESTION: do we still need this one
 % \printModeling{If the \sbol{sequences} property of a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceFeature} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceFeatures} property of the \sbol{Component} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.\\ Reference: \sec{sec:Component}}
 
-\printValid{A \sbol{Component} MAY have zero or more \sbol{hasInteraction} properties, each of which refers to an \sbol{Interaction} object.\\ Reference: \sec{sec:Component}}
-
-\printValid{A \sbol{Component} MAY have zero or more \sbol{hasConstraint} properties, each of which refers to a \sbol{Constraint} object.\\ Reference: \sec{sec:Component}}
-
-\printValid{A \sbol{Component} MAY have zero or more \sbol{hasInterface} properties, each of which refers to an \sbol{Interface} object.\\ Reference: \sec{sec:Component}}
-
-\printValid{An \sbol{Component} object MAY have zero or more \sbol{hasModel} properties, each of type \sbol{URI}.  \\ Reference: \sec{sec:Component}}
-
-\printComplete{Each \sbol{URI} referred to by a \sbol{hasModel} property of a \sbol{Component} object MUST refer to an \sbol{Model} object.\\ Reference: \sec{sec:Component}}
-
 \subsubsection*{Rules for the \class{Feature} class}
 \setcounter{sbolCtr}{10701}
-
-\printValid{A \sbol{Feature} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Identified} class and the following: \sbolmult{role:F}{role} and \sbolmult{orientation:F}{orientation}.\\
-Reference: \sec{sec:Feature}}
-
-\printValid{A \sbol{Feature} MAY have zero or more \sbolmult{role:F}{role} properties, each of type \sbol{URI}.\\
-Reference: \sec{sec:Feature}}
 
 \printWarning{Each \sbolmult{role:F}{role} property of a \sbol{Feature} MUST refer to a resource that clarifies the intended function of the \sbol{Feature}.\\
 Reference: \sec{sec:Feature}}
 
-\printValid{The \sbolmult{orientation:F}{orientation} property of a \sbol{Feature} is OPTIONAL and MAY contain a \sbol{URI} from \ref{tbl:orientation_types}.
-\\ Reference: \sec{sec:Feature}}
+\printValid{If a \sbol{Feature} has an \sbolmult{orientation:F}{orientation} property, its \sbol{URI} MUST be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Feature}}
 
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{10801}
 
-\printValid{A \sbol{SubComponent} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Feature} class and the following: \sbol{roleIntegration}, \sbol{instanceOf}, \sbol{sourceLocation}, and \sbolmult{hasLocation:SC}{hasLocation}.\\
-Reference: \sec{sec:SubComponent}}
-
-\printValid{The \sbol{roleIntegration} property of a \sbol{SubComponent}, if provided, MUST contain a \sbol{URI} from \ref{tbl:component_roleIntegration}.
+\printValid{If a \sbol{SubComponent} has an \sbol{roleIntegration} property, its \sbol{URI} MUST be drawn from \ref{tbl:component_roleIntegration}.
 \\ Reference: \sec{sec:SubComponent}}
 
-\printValid{The \sbol{roleIntegration} property of a \sbol{SubComponent} is REQUIRED, if the \sbol{SubComponent} has one or more \sbolmult{role:F}{role} properties.
+\printValid{The \sbol{roleIntegration} property of a \sbol{SubComponent} is REQUIRED if the \sbol{SubComponent} has one or more \sbolmult{role:F}{role} properties.
 \\ Reference: \sec{sec:SubComponent}}
-
-\printValid{The \sbol{instanceOf} property of a \sbol{SubComponent} is REQUIRED and MUST contain a \sbol{URI}. \\ Reference: \sec{sec:SubComponent}}
-
-\printComplete{The \sbol{URI} contained by the \sbol{instanceOf} property of a \sbol{SubComponent} MUST refer to a \sbol{Component}.\\ Reference: \sec{sec:SubComponent}}
 
 \printValid{The \sbol{instanceOf} property of a \sbol{SubComponent} MUST NOT refer to the same \sbol{Component} as the one that contains the \sbol{SubComponent}.\\ Reference: \sec{sec:SubComponent}}
 
 \printComplete{\sbol{SubComponent} objects MUST NOT form circular reference chains via their \sbol{instanceOf} properties and the \sbol{Component} objects that contain them.\\ Reference: \sec{sec:SubComponent}}
 
-\printValid{A \sbol{SubComponent} MAY have any number \sbolmult{hasLocation:SC}{hasLocation} properties, which refer to a \sbol{Location} objects.\\ Reference: \sec{sec:SubComponent}}
-
 \printValid{The set of \sbol{Location} objects referred to by the \sbolmult{hasLocation:SC}{hasLocation} properties of a single \sbol{SubComponent} MUST NOT specify overlapping regions.\\ Reference: \sec{sec:SubComponent}}
-
-\printValid{A \sbol{SubComponent} MAY have any number of \sbol{sourceLocation} properties, which refer to\sbol{Location} objects.\\ Reference: \sec{sec:SubComponent}}
 
 \subsubsection*{Rules for the \class{ComponentReference} class} 
 \setcounter{sbolCtr}{10901}
 
-\printValid{A \sbol{ComponentReference} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Feature} class and the following: \sbol{inChildOf} and \sbol{hasFeature}. \\
-Reference: \sec{sec:ComponentReference}}
-
-\printValid{The \sbol{inChildOf} property of a \sbol{ComponentReference} is REQUIRED and MUST contain a \sbol{URI}. \\ Reference: \sec{sec:ComponentReference}}
-
-\printComplete{The \sbol{URI} contained by the \sbol{inChildOf} property of \sbol{ComponentReference} MUST refer to a \sbol{SubComponent}.\\ Reference: \sec{sec:ComponentReference}}
-
-\printValid{The \sbol{hasFeature} property of a \sbol{ComponentReference} is REQUIRED and MUST contain a \sbol{URI}. \\ Reference: \sec{sec:ComponentReference}}
-
-\printComplete{The \sbol{URI} contained by the \sbol{hasFeature} property of \sbol{ComponentReference} MUST refer to a \sbol{Feature}.\\ Reference: \sec{sec:ComponentReference}}
+\todo[inline]{Need to add the restriction about the Component relationships of the two properties}
 
 \subsubsection*{Rules for the \class{LocalSubComponent} class} 
 \setcounter{sbolCtr}{11001}
-
-\printValid{A \sbol{LocalSubComponent} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Feature} class and the following: \sbolmult{type:LSC}{type} and \sbolmult{hasLocation:LSC}{hasLocation}.\\
-Reference: \sec{sec:LocalSubComponent}}
-
-\printValid{A \sbol{LocalSubComponent} MUST have one or more \sbolmult{type:LSC}{type}  properties, each of type \sbol{URI}.\\ Reference: \sec{sec:LocalSubComponent}}
 
 \printValid{A \sbol{LocalSubComponent} MUST NOT have more than one \sbol{URI} from \ref{tbl:component_types}.\\ Reference: \sec{sec:LocalSubComponent}}
 
@@ -328,17 +419,10 @@ Reference: \sec{sec:LocalSubComponent}}
 \printModeling{A \sbol{LocalSubComponent} SHOULD NOT have a \sbolmult{type:C}{type} property that refers to a term from the topology attribute or strand attribute branches of the SO unless it also has a  \sbolmult{type:C}{type} property with the DNA or RNA type \sbol{URI} listed in \ref{tbl:component_types}.
 Reference: \sec{sec:LocalSubComponent}}
 
-\printValid{A \sbol{LocalSubComponent} MAY have any number of \sbolmult{hasLocation:LSC}{hasLocation} properties, which refer to a \sbol{Location} objects.\\ Reference: \sec{sec:LocalSubComponent}}
-
 \printValid{The set of \sbol{Location} objects referred to by the \sbolmult{hasLocation:LSC}{hasLocation} properties of a single \sbol{LocalSubComponent} MUST NOT specify overlapping regions.\\ Reference: \sec{sec:LocalSubComponent}}
 
 \subsubsection*{Rules for the \class{ExternallyDefined} class} 
 \setcounter{sbolCtr}{11101}
-
-\printValid{A \sbol{ExternallyDefined} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Feature} class and the following: \sbolmult{type:ED}{type} and \sbolmult{definition:ED}{definition}.\\
-Reference: \sec{sec:ExternallyDefined}}
-
-\printValid{A \sbol{ExternallyDefined} MUST have one or more \sbolmult{type:LSC}{type}  properties, each of type \sbol{URI}.\\ Reference: \sec{sec:ExternallyDefined}}
 
 \printValid{A \sbol{ExternallyDefined} MUST NOT have more than one \sbol{URI} from \ref{tbl:component_types}.\\ Reference: \sec{sec:ExternallyDefined}}
 
@@ -358,78 +442,45 @@ Reference: \sec{sec:ExternallyDefined}}
 \printModeling{A \sbol{ExternallyDefined} SHOULD NOT have a \sbolmult{type:C}{type} property that refers to a term from the topology attribute or strand attribute branches of the SO unless it also has a  \sbolmult{type:C}{type} property with the DNA or RNA type \sbol{URI} listed in \ref{tbl:component_types}.
 Reference: \sec{sec:ExternallyDefined}}
 
-\printValid{The \sbolmult{definition:ED}{definition} property of an \sbol{ExternallyDefined} is REQUIRED and MUST contain a \sbol{URI}. \\ Reference: \sec{sec:ExternallyDefined}}
-
 \printWarning{The \sbol{URI} contained by the \sbolmult{definition:ED}{definition} property of a \sbol{ExternallyDefined} SHOULD refer to an external resource in Section~\ref{sec:recomm_ontologies} when the object is defined in one of these resources.\\ Reference: \sec{sec:ExternallyDefined}}
 
 \subsubsection*{Rules for the \class{SequenceFeature} class} 
 \setcounter{sbolCtr}{11201}
-
-\printValid{A \sbol{SequenceFeature} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Feature} class and the following: \sbolmult{hasLocation:SF}{hasLocation}.\\
-Reference: \sec{sec:SequenceFeature}}
-
-\printValid{A \sbol{SequenceFeature} MAY have any number of \sbolmult{hasLocation:SF}{hasLocation} properties, which refer to a \sbol{Location} objects.\\ Reference: \sec{sec:SequenceFeature}}
 
 \printValid{The set of \sbol{Location} objects referred to by the \sbolmult{hasLocation:SF}{hasLocation} properties of a single \sbol{SequenceFeature} MUST NOT specify overlapping regions.\\ Reference: \sec{sec:SequenceFeature}}
 
 \subsubsection*{Rules for the \class{Location} class} 
 \setcounter{sbolCtr}{11301}
 
-\printValid{A \sbol{Location} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Identified} class and the following: \sbolmult{orientation:L}{orientation} and \sbol{order}.\\
-Reference: \sec{sec:Location}}
-
-\printValid{The \sbolmult{orientation:L}{orientation} property of a \sbol{Location} is OPTIONAL and MAY contain a \sbol{URI} from \ref{tbl:orientation_types}.
-\\ Reference: \sec{sec:Location}}
-
-\printValid{The \sbol{order} property of a \sbol{Location} is OPTIONAL and MAY contain an \sbol{Integer}.
-\\ Reference: \sec{sec:Location}}
-
-\printComplete{The \sbolmult{hasSequence:L}{hasSequence} property of a \sbol{Location} is REQUIRED, and it MUST contain the URI of a \sbol{Sequence} object.\\
-Reference: \sec{sec:Location}}
+\printValid{If a \sbol{Location} has an \sbolmult{orientation:L}{orientation} property, its \sbol{URI} MUST be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Location}}
 
 \subsubsection*{Rules for the \class{Range} class} 
 \setcounter{sbolCtr}{11401}
 
-\printValid{A \sbol{Range} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Location} class and the following: \sbol{start} and \sbol{end}.\\
-Reference: \sec{sec:Range}}
+\printValid{The value of the \sbol{start} property of a \sbol{Range} MUST be greater than zero.\\ Reference: \sec{sec:Range}}
 
-\printValid{The \sbol{start} property of a \sbol{Range} is REQUIRED and MUST contain an \sbol{Integer} greater than zero.\\ Reference: \sec{sec:Range}}
-
-\printValid{The \sbol{end} property of a \sbol{Range} is REQUIRED and MUST contain an \sbol{Integer} greater than zero.\\ Reference: \sec{sec:Range}}
+\printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than zero.\\ Reference: \sec{sec:Range}}
 
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property.\\ Reference: \sec{sec:Range}}
 
 \subsubsection*{Rules for the \class{Cut} class} 
 \setcounter{sbolCtr}{11501}
 
-\printValid{A \sbol{Cut} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Location} class and the following: \sbol{at}.\\
-Reference: \sec{sec:Cut}}
-
-\printValid{The \sbol{at} property of a \sbol{Cut} is REQUIRED and MUST contain an \sbol{Integer} greater than or equal to zero.  \\ Reference: \sec{sec:Cut}}
+\printValid{The value of the \sbol{at} property of a \sbol{Cut} MUST be greater than or equal to zero.\\ Reference: \sec{sec:Cut}}
 
 \subsubsection*{Rules for the \class{EntireSequence} class} 
 \setcounter{sbolCtr}{11601}
 
-\printValid{A \sbol{EntireSequence} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Location} class.\\
-Reference: \sec{sec:EntireSequence}}
-
 \subsubsection*{Rules for the \class{Constraint} class} 
 \setcounter{sbolCtr}{11701}
 
-\printValid{A \sbol{Constraint} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Identified} class and the following: \sbol{subject}, \sbol{object}, and \sbol{restriction}.\\
-Reference: \sec{sec:Constraint}}
-
-\printValid{The \sbol{subject} property of a \sbol{Constraint} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{Feature}.\\ Reference: \sec{sec:Constraint}}
-
 \printValid{The \sbol{Feature} referenced by the \sbol{subject} property of a \sbol{Constraint} MUST be contained by the \sbol{Component} that contains the \sbol{Constraint}.\\ Reference: \sec{sec:Constraint}}
-
-\printValid{The \sbol{object} property of a \sbol{Constraint} is REQUIRED and MUST contain a \sbol{URI} reference to a \sbol{Feature}.\\ Reference: \sec{sec:Constraint}}
 
 \printValid{The \sbol{Feature} referenced by the \sbol{object} property of a \sbol{Constraint} MUST be contained by the \sbol{Component} that contains the \sbol{Constraint}.\\ Reference: \sec{sec:Constraint}}
 
 \printValid{The \sbol{object} property of a \sbol{Constraint} MUST NOT refer to the same \sbol{SubComponent} as the \sbol{subject} property of the \sbol{Constraint}.\\ Reference: \sec{sec:Constraint}}
 
-\printValid{The \sbol{restriction} property of a \sbol{Constraint} is REQUIRED and MUST contain a \sbol{URI} from \ref{tbl:restriction_types_identity}, \ref{tbl:restriction_types_topology}, or \ref{tbl:restriction_types_sequence}.
+\printValid{The value of the \sbol{restriction} property of a \sbol{Constraint} MUST be drawn from \ref{tbl:restriction_types_identity}, \ref{tbl:restriction_types_topology}, or \ref{tbl:restriction_types_sequence}.
 \\ Reference: \sec{sec:Constraint}}
 
 % \printWarning{The \sbol{URI} contained by the \sbol{restriction} property of a \sbol{SequenceConstraint} MUST indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{SubComponent} objects referred to by the \sbol{subject} and \sbol{object} properties of the \sbol{SequenceConstraint}.
@@ -461,18 +512,11 @@ Reference: \sec{sec:Constraint}}
 \subsubsection*{Rules for the \class{Interaction} class} 
 \setcounter{sbolCtr}{11801}
 
-\printValid{An \sbol{Interaction} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Identified} class and the following: \sbolmult{type:I}{type} and \sbol{hasParticipation}.\\
-Reference: \sec{sec:Interaction}}
-
-\printValid{An \sbol{Interaction} is REQUIRED to have one or more \sbolmult{type:I}{type} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:Interaction}}
-
 \printWarning{Each \sbolmult{type:I}{type} property of an \sbol{Interaction} MUST refer to an ontology term that describes the behavior represented by the \sbol{Interaction}.\\ Reference: \sec{sec:Interaction}}
 
 \printWarning{All \sbolmult{type:I}{type} properties of an \sbol{Interaction} MUST refer to non-conflicting ontology terms.\\ Reference: \sec{sec:Interaction}}
 
 \printModeling{Exactly one \sbolmult{type:I}{type} property of an \sbol{Interaction} SHOULD refer to a term from the occurring entity relationship branch of the SBO.\\ Reference: \sec{sec:Interaction}}
-
-\printValid{An \sbol{Interaction} MAY have any number of \sbol{hasParticipation} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:Interaction}}
 
 \printModeling{If the \sbol{hasParticipation} properties of an \sbol{Interaction} refer to one or more \sbol{Participation} objects, and one of the  \sbolmult{type:I}{type} properties of this \sbol{Interaction} comes from \ref{tbl:interaction_types}, then the \sbol{Participation} objects SHOULD have a \sbolmult{role:P}{role} from the set of \sbolmult{role:P}{role} properties that is cross-listed with this type in \ref{tbl:participant_roles}.\\ 
 Reference: \sec{sec:Interaction}}
@@ -480,14 +524,7 @@ Reference: \sec{sec:Interaction}}
 \subsubsection*{Rules for the \class{Participation} class} 
 \setcounter{sbolCtr}{11901}
 
-\printValid{A \sbol{Participation} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Identified} class and the following: \sbolmult{role:P}{role} and \sbol{participant}.\\
-Reference: \sec{sec:Participation}}
-
-\printValid{The \sbol{participant} property of a \sbol{Participation} is REQUIRED and MUST contain a \sbol{URI}. \\ Reference: \sec{sec:Participation}}
-
-\printValid{The \sbol{URI} contained by the \sbol{participant} property of a \sbol{Participation} MUST refer to a \sbol{Feature} that is contained by the \sbol{Component} that contains the \sbol{Interaction} which contains the \sbol{Participation}.\\ Reference: \sec{sec:Participation}}
-
-\printValid{A \sbol{Participation} is REQUIRED to have one or more \sbolmult{role:P}{role} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:Participation}}
+\printValid{The \sbol{Feature} referenced by the \sbol{participant} property of a \sbol{Participation} MUST be contained by the \sbol{Component} that contains the \sbol{Interaction} which contains the \sbol{Participation}.\\ Reference: \sec{sec:Participation}}
 
 \printWarning{Each \sbolmult{role:P}{role} property of a \sbol{Participation} MUST refer to an ontology term that describes the behavior represented by the \sbol{Participation}.\\ Reference: \sec{sec:Participation}}
 
@@ -495,45 +532,24 @@ Reference: \sec{sec:Participation}}
 
 \printModeling{Exactly one role in the set of \sbolmult{role:P}{role} properties SHOULD be a \sbol{URI} from the participant role branch of the SBO (see \ref{tbl:participant_roles}).\\ Reference: \sec{sec:Participation}}
 
+
 \subsubsection*{Rules for the \class{Interface} class} 
 \setcounter{sbolCtr}{12001}
 
-\printValid{An \sbol{Interface} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Identified} class and the following: \sbol{input}, \sbol{output}, and \sbol{nondirectional}.\\
-Reference: \sec{sec:Interface}}
+\printValid{The \sbol{Feature} referenced by the \sbol{input} property of an \sbol{Interface} MUST be contained by the \sbol{Component} that contains the \sbol{Interface}.\\ Reference: \sec{sec:Interface}}
 
-\printValid{An \sbol{Interface} MAY have any number of \sbol{input} properties, each of type \sbol{URI}. \\ Reference: \sec{sec:Interface}}
+\printValid{The \sbol{Feature} referenced by the \sbol{output} property of an \sbol{Interface} MUST be contained by the \sbol{Component} that contains the \sbol{Interface}.\\ Reference: \sec{sec:Interface}}
 
-\printValid{Each \sbol{input} property of an \sbol{Interface} MUST refer to a \sbol{Feature} that is contained by the \sbol{Component} that contains the \sbol{Interface}.\\ Reference: \sec{sec:Interface}}
+\printValid{The \sbol{Feature} referenced by the \sbol{nondirectional} property of an \sbol{Interface} MUST be contained by the \sbol{Component} that contains the \sbol{Interface}.\\ Reference: \sec{sec:Interface}}
 
-\printValid{An \sbol{Interface} MAY have any number of \sbol{output} properties, each of type \sbol{URI}. \\ Reference: \sec{sec:Interface}}
-
-\printValid{Each \sbol{output} property of an \sbol{Interface} MUST refer to a \sbol{Feature} that is contained by the \sbol{Component} that contains the \sbol{Interface}.\\ Reference: \sec{sec:Interface}}
-
-\printValid{An \sbol{Interface} MAY have any number of \sbol{nondirectional} properties, each of type \sbol{URI}. \\ Reference: \sec{sec:Interface}}
-
-\printValid{Each \sbol{nondirectional} property of an \sbol{Interface} MUST refer to a \sbol{Feature} that is contained by the \sbol{Component} that contains the \sbol{Interface}.\\ Reference: \sec{sec:Interface}}
 
 \subsubsection*{Rules for the \class{CombinatorialDerivation} class} 
 \setcounter{sbolCtr}{12101}
-
-\printValid{A \sbol{CombinatorialDerivation} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class and the following: \sbol{template}, \sbol{strategy}, and  \sbol{hasVariableFeature}.\\
- Reference: \sec{sec:CombinatorialDerivation}}
-
-\printValid{The \sbol{strategy} property is OPTIONAL and has a data type of \sbol{URI}.\\ Reference: \sec{sec:CombinatorialDerivation}}
 
 \printValid{The \sbol{strategy} property of a \sbol{CombinatorialDerivation}, if specified, MUST contain a \sbol{URI} from \ref{tbl:strategy}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
 \printValid{If the \sbol{strategy} property of a \sbol{CombinatorialDerivation} contains the \sbol{URI}~\url{http://sbols.org/v3\#enumerate}, then its \sbol{hasVariableFeature} property MUST NOT contain a\\ \sbol{VariableFeature} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v3\#zeroOrMore} or the \sbol{URI}~\url{http://sbols.org/v3\#oneOrMore}.
-\\ Reference: \sec{sec:CombinatorialDerivation}}
-
-\printValid{The \sbol{template} property of a \sbol{CombinatorialDerivation} is REQUIRED and MUST contain a \sbol{URI}.
-\\ Reference: \sec{sec:CombinatorialDerivation}}
-
-\printComplete{The URI contained by the \sbol{template} property of a \sbol{CombinatorialDerivation} MUST refer to a \sbol{Component}.
-\\ Reference: \sec{sec:CombinatorialDerivation}}
-
-\printValid{A \sbol{CombinatorialDerivation} MAY have any number of  \sbol{hasVariableFeature} properties, each of which MUST refer to a  \sbol{VariableFeature} object.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
 \printValid{A \sbol{CombinatorialDerivation} MUST NOT contain two or more \sbol{hasVariableFeature} properties that refer to \sbol{VariableFeature} objects with a \sbol{variable} property that contain the same \sbol{URI}.
@@ -569,41 +585,14 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{role:C}{role} properti
 \subsubsection*{Rules for the \class{VariableFeature} class} 
 \setcounter{sbolCtr}{12201}
 
-\printValid{An \sbol{VariableFeature} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Identified} class and the following: \sbol{variable}, \sbol{variant}, \sbol{variantCollection}, \sbol{variantDerivation}, and \sbol{variantMeasure}.\\
-Reference: \sec{sec:VariableFeature}}
-
-\printValid{The \sbol{cardinality} property of a \sbol{VariableFeature} is REQUIRED and MUST contain a \sbol{URI}.
-\\ Reference: \sec{sec:VariableFeature}}
-
 \printValid{The \sbol{URI} contained by the \sbol{cardinality} property of a \sbol{VariableFeature} MUST come from 
 \ref{tbl:cardinality}.
 \\ Reference: \sec{sec:VariableFeature}}
 
-\printValid{The \sbol{variable} property of a \sbol{VariableFeature} is REQUIRED and MUST contain a \sbol{URI}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printComplete{The \sbol{URI} contained by the \sbol{variable} property of a \sbol{VariableFeature} MUST refer to a \sbol{Feature} referred to by a \sbol{hasFeature} property of the template \sbol{Component} of the \sbol{CombinatorialDerivation} that contains the \sbol{VariableFeature}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printValid{A \sbol{VariableFeature} MAY have any number of \sbol{variant} properties, each of type \sbol{URI}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printComplete{The \sbol{URI}s contained by the \sbol{variant} properties of a \sbol{VariableFeature} MUST refer to \sbol{Component} objects.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printValid{A \sbol{VariableFeature} MAY have any number of  \sbol{variantCollection} properties, each of type \sbol{URI}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printComplete{The \sbol{URI}s contained by the \sbol{variantCollection} properties of a \sbol{VariableFeature} MUST refer to \sbol{Collection} objects.
+\printComplete{The \sbol{Feature} referenced by the \sbol{variable} property of a \sbol{VariableFeature} MUST be contained by the template \sbol{Component} of the \sbol{CombinatorialDerivation} that contains the \sbol{VariableFeature}.
 \\ Reference: \sec{sec:VariableFeature}}
 
 \printComplete{The \sbol{member} properties of a \sbol{Collection} that is referred to by the \sbol{variantCollection} property of a \sbol{VariableFeature} MUST refer only to \sbol{Component} objects or to \sbol{Collection} objects that themselves contain only \sbol{Component} or \sbol{Collection} objects.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printValid{A \sbol{VariableFeature} MAY have any number of \sbol{variantDerivation} properties, each of type \sbol{URI}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printComplete{The \sbol{URI}s contained by the \sbol{variantDerivation} properties of a \sbol{VariableFeature} MUST refer to \sbol{CombinatorialDerivation} objects.
 \\ Reference: \sec{sec:VariableFeature}}
 
 \printComplete{\sbol{VariableFeature} objects MUST NOT form circular reference chains via their \sbol{variantDerivation} properties and parent \sbol{CombinatorialDerivation} objects.
@@ -648,38 +637,19 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 \subsubsection*{Rules for the \class{Implementation} class} 
 \setcounter{sbolCtr}{12301}
 
-\printValid{An \sbol{Implementation} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class and the following: \sbol{built}.\\
- Reference: \sec{sec:Implementation}}
-
-\printValid{The \sbol{built} property of an \sbol{Implementation} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:Implementation}}
-
-\printComplete{The \sbol{built} property \sbol{URI}, if specified, MUST refer to a \sbol{Component}.\\ Reference: \sec{sec:Implementation}}
-
 \subsubsection*{Rules for the \class{ExperimentalData} class} 
 \setcounter{sbolCtr}{12401}
-
-\printValid{An \sbol{ExperimentalData} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class.\\
- Reference: \sec{sec:ExperimentalData}}
 
 \subsubsection*{Rules for the \class{Model} class} 
 \setcounter{sbolCtr}{12501}
 
-\printValid{An \sbol{Model} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class and the following: \sbolmult{source:M}{source}, \sbol{language}, and \sbol{framework}.\\
- Reference: \sec{sec:Model}}
-
-\printValid{The \sbolmult{source:M}{source} property of a \sbol{Model} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
-
 \printWarning{The \sbol{URI} contained by the \sbolmult{source:M}{source} property of a \sbol{Model} MUST specify the location of the model's source file.\\ Reference: \sec{sec:Model}}
-
-\printValid{The \sbol{language} property of a \sbol{Model} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
 
 \printWarning{The \sbol{URI} contained by the \sbol{language} property of a \sbol{Model} MUST specify the language in which the model is encoded.\\ Reference: \sec{sec:Model}}
 
 \printWarning{The \sbol{language} property of a \sbol{Model} MUST contain a \sbol{URI} from \ref{tbl:model_types} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:Model}}
 
 \printModeling{The \sbol{language} property of a \sbol{Model} SHOULD contain a \sbol{URI} that refers to a term from the EDAM ontology.\\ Reference: \sec{sec:Model}}
-
-\printValid{The \sbol{framework} property of a \sbol{Model} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Model}}
 
 \printWarning{The \sbol{URI} contained by the \sbol{framework} property of a \sbol{Model} MUST specify the modeling framework of the model.\\ Reference: \sec{sec:Model}}
 
@@ -690,46 +660,25 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 \subsubsection*{Rules for the \class{Collection} class} 
 \setcounter{sbolCtr}{12601}
 
-\printValid{An \sbol{Collection} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class and the following: \sbol{member}.\\
- Reference: \sec{sec:Collection}}
-
-\printValid{A \sbol{Collection} MAY have any number of \sbol{member} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:Collection}}
-
-\printComplete{Each \sbol{member} property of a \sbol{Collection} MUST reference a \sbol{TopLevel} object.\\ Reference: \sec{sec:Collection}}
-
 \subsubsection*{Rules for the \class{Experiment} class} 
 \setcounter{sbolCtr}{12701}
-
-\printValid{An \sbol{Experiment} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{Collection} class.\\
- Reference: \sec{sec:Experiment}}
-
-\printValid{A \sbol{Experiment} MAY have any number of \sbol{member} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:Experiment}}
-
-\printComplete{Each \sbol{member} property of a \sbol{Experiment} MUST reference a \sbol{ExperimentalData} object.\\ Reference: \sec{sec:Experiment}}
 
 \subsubsection*{Rules for the \class{Attachment} class} 
 \setcounter{sbolCtr}{12801}
 
-\printValid{An \sbol{Attachment} object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those allowed by the \sbol{TopLevel} class and the following: \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, \sbol{hash}, and \sbol{hashAlgorithm}.\\
- Reference: \sec{sec:Attachment}}
-
-\printValid{The \sbolmult{source:A}{source} property of an \sbol{Attachment} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
-
 \printWarning{The \sbolmult{source:A}{source} property of an \sbol{Attachment} MUST specify the location of the model's source file.\\ Reference: \sec{sec:Attachment}}
-
-\printValid{The \sbol{format} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:Attachment}}
 
 \printWarning{The \sbol{URI} contained by the \sbol{format} property of an \sbol{Attachment} MUST specify the file type of the attachment.\\ Reference: \sec{sec:Attachment}}
 
 \printModeling{The \sbol{format} property of an \sbol{Attachment} SHOULD contain a \sbol{URI} that refers to a term from the EDAM ontology.\\ Reference: \sec{sec:Attachment}}
 
-\printValid{The \sbol{size} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{Long} indicating a file size in bytes.\\ Reference: \sec{sec:Attachment}}
+\printWarning{The \sbol{size} property, if specified, MUST indicate file size in bytes.\\ Reference: \sec{sec:Attachment}}
 
-\printValid{The \sbol{hash} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{String} hash value for the file contents represented as a hexadecimal digest.\\ Reference: \sec{sec:Attachment}}
+\printWarning{The \sbol{hash} property, if specified, MUST be a hash value for the file contents represented as a hexadecimal digest.\\ Reference: \sec{sec:Attachment}}
 
-\printValid{The \sbol{hashAlgorithm} property of an \sbol{Attachment} is OPTIONAL and MAY contain a \sbol{String} name of a hash algorithm used to generate the value of the \sbol{hash} property.\\ Reference: \sec{sec:Attachment}}
+\printWarning{The \sbol{hashAlgorithm}, if specified, MUST be the name of a hash algorithm used to generate the value of the \sbol{hash} property.\\ Reference: \sec{sec:Attachment}}
 
-\printValid{The \sbol{hashAlgorithm} property of an \sbol{Attachment} SHOULD be a hash name \sbol{String} from the \href{https://www.iana.org/assignments/named-information/named-information.xhtml}{IANA Named Information Hash Algorithm Registry}, of which \texttt{sha3-256} is currently RECOMMENDED.\\ Reference: \sec{sec:Attachment}}
+\printModeling{The \sbol{hashAlgorithm} property of an \sbol{Attachment} SHOULD be a hash name \sbol{String} from the \href{https://www.iana.org/assignments/named-information/named-information.xhtml}{IANA Named Information Hash Algorithm Registry}, of which \texttt{sha3-256} is currently RECOMMENDED.\\ Reference: \sec{sec:Attachment}}
 
 \printValid{If the \sbol{hash} property is set, then the \sbol{hashAlgorithm} MUST be set as well.\\ Reference: \sec{sec:Attachment}}
 
