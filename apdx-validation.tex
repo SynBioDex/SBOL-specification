@@ -386,6 +386,7 @@ Reference: \sec{sec:Feature}}
 \todo[inline]{Should we swap these custom orientation types to use the  SO direction attribute instead? \url{http://www.sequenceontology.org/browser/current_release/term/SO:0001029}}
 \printValid{If a \sbol{Feature} has an \sbolmult{orientation:F}{orientation} property, its \sbol{URI} MUST be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Feature}}
 
+\todo[inline]{Should we add that orientation SHOULD be used precisely for features of type DNA in components of type DNA?}
 
 \subsubsection*{Rules for the \class{SubComponent} class} 
 \setcounter{sbolCtr}{10801}
@@ -402,11 +403,23 @@ Reference: \sec{sec:Feature}}
 
 \printValid{The set of \sbol{Location} objects referred to by the \sbolmult{hasLocation:SC}{hasLocation} properties of a single \sbol{SubComponent} MUST NOT specify overlapping regions.\\ Reference: \sec{sec:SubComponent}}
 
+% Note: it is intentional that sourceLocation properties MAY have overlapping regions.
 
 \subsubsection*{Rules for the \class{ComponentReference} class} 
 \setcounter{sbolCtr}{10901}
 
-\todo[inline]{Need to add the restriction about the Component relationships of the two properties}
+\printValid{If a \sbol{ComponentReference} object is a child of a \sbol{Component}, then its \sbol{inChildOf} property MUST be a \sbol{SubComponent} of its parent.
+\\ Reference: \sec{sec:ComponentReference}}
+
+\printValid{If a \sbol{ComponentReference} object is a child of another \sbol{ComponentReference}, then its \sbol{inChildOf} property MUST be a \sbol{SubComponent} of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the parent's \sbol{inChildOf} property.
+\\ Reference: \sec{sec:ComponentReference}}
+
+\printValid{If the \sbol{hasFeature} property of a \sbol{ComponentReference} refers to another \sbol{ComponentReference}, then the second \sbol{ComponentReference} MUST be either a child of the first \sbol{ComponentReference} or a child of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the \sbol{inChildOf} property of the first \sbol{ComponentReference}.
+\\ Reference: \sec{sec:ComponentReference}}
+
+\printValid{If the \sbol{hasFeature} property of a \sbol{ComponentReference} refers to a \sbol{Feature} of any other type besides \sbol{ComponentReference}, then that \sbol{Feature} MUST be a child of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the \sbol{inChildOf} property of the first \sbol{ComponentReference}.
+\\ Reference: \sec{sec:ComponentReference}}
+
 
 
 \subsubsection*{Rules for the \class{LocalSubComponent} class} 
