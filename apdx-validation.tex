@@ -344,7 +344,7 @@ Reference: \sec{sec:Namespace}}
 
 \printWarning{The \sbol{encoding} property of a \sbol{Sequence} MUST contain a \sbol{URI} from \ref{tbl:sequence_encodings} if it is well-described by this \sbol{URI}.\\ Reference: \sec{sec:Sequence}}
 
-%% QUESTION: include?
+\todo[inline]{QUESTION: include?}
 \printModeling{The \sbol{encoding} property of a \sbol{Sequence} SHOULD contain a \sbol{URI} from \ref{tbl:sequence_encodings}.\\ Reference: \sec{sec:Sequence}}
 
 
@@ -396,12 +396,13 @@ Reference: \sec{sec:Component}}
 \todo[inline]{How does this hold for a two-plasmid system?  Do we not put the sequences in hasSequence or do we violate this rule?}
 \printModeling{If a \sbol{Component} has more than one \sbolmult{hasSequence:C}{hasSequence} property that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths.\\ Reference: \sec{sec:Component}}
 
-%% QUESTION: do we still need this one
-%  \printModeling{If a \sbol{Component} in a \sbol{Component}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceFeature} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.\\ Reference: \sec{sec:Component}}
+\todo[inline]{QUESTION: do we still need this one:
+%\printModeling{If a \sbol{Component} in a \sbol{Component}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceFeature} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.\\ Reference: \sec{sec:Component}}
+}
 
-%% QUESTION: do we still need this one
-% \printModeling{If the \sbol{sequences} property of a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceFeature} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceFeatures} property of the \sbol{Component} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.\\ Reference: \sec{sec:Component}}
-
+\todo[inline]{QUESTION: do we still need this one:
+%\printModeling{If the \sbol{sequences} property of a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceFeature} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceFeatures} property of the \sbol{Component} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.\\ Reference: \sec{sec:Component}}
+}
 
 \subsubsection*{Rules for the \class{Feature} class}
 \setcounter{sbolCtr}{10701}
@@ -547,31 +548,9 @@ Reference: \sec{sec:ExternallyDefined}}
 \printModeling{The value of the \sbol{restriction} property of a \sbol{Constraint} SHOULD be drawn from \ref{tbl:restriction_types_identity}, \ref{tbl:restriction_types_topology}, or \ref{tbl:restriction_types_sequence}.
 \\ Reference: \sec{sec:Constraint}}
 
-% \printWarning{The \sbol{URI} contained by the \sbol{restriction} property of a \sbol{SequenceConstraint} MUST indicate the type of structural restriction on the relative, sequence-based positions or orientations of the \sbol{SubComponent} objects referred to by the \sbol{subject} and \sbol{object} properties of the \sbol{SequenceConstraint}.
-% \\ Reference: \sec{sec:SequenceConstraint}}
+\printComplete{If the \sbol{restriction} property of a \sbol{Constraint} is drawn from \ref{tbl:restriction_types_identity}, then the \sbol{Feature} objects referred to by the \sbol{subject} and \sbol{object} properties MUST comply with the relation specified in \ref{tbl:restriction_types_identity}.}
 
-\todo[inline]{Figure out how far we want to go with constraints; if we add a rule for every constraint, then that's about 20 rules.}
-
-\printComplete{If the \sbol{restriction} property of a \sbol{Constraint} contains the \sbol{URI}~\url{http://sbols.org/v3\#precedes}, then the position of the \sbol{Feature} referred to by the \sbol{subject} property of the \sbol{Constraint} MUST precede that of the \sbol{Feature} referred to by its \sbol{object} property.
-\\ Reference: \sec{sec:Constraint}}
-
-\printComplete{If the \sbol{restriction} property of a \sbol{Constraint} contains the \sbol{URI}~\url{http://sbols.org/v3\#sameOrientationAs}, then the orientation of the \sbol{Feature} referred to by the \sbol{subject} property of the \sbol{Constraint} MUST be the same as that of the \sbol{Feature} referred to by its \sbol{object} property.
-\\ Reference: \sec{sec:Constraint}}
-
-\printComplete{If the \sbol{restriction} property of a \sbol{Constraint} contains the \sbol{URI}~\url{http://sbols.org/v3\#oppositeOrientationAs}, then the orientation of the \sbol{Feature} referred to by the \sbol{subject} property of the \sbol{Constraint} MUST be opposite that of the \sbol{Feature} referred to by its \sbol{object} property.
-\\ Reference: \sec{sec:Constraint}}
-
-% \printModeling{The \sbol{URI} contained by the \sbol{restriction} property SHOULD come from \ref{tbl:restriction_types}.
-%\\ Reference: \sec{sec:SequenceConstraint}}
-
-\printValid{If the \sbol{restriction} property of a \sbol{Constraint} contains the \sbol{URI}~\url{http://sbols.org/v3\#differentFrom}, then the \sbol{instanceOf} property of the \sbol{subject} \sbol{SubComponent} of the \sbol{Constraint} MUST NOT refer to the the same \sbol{URI} as the \sbol{instanceOf} property of the \sbol{object} \sbol{SubComponent} of the \sbol{Constraint}.
-\\ Reference: \sec{sec:Constraint}}
-
-\printComplete{If the \sbol{restriction} property of a \sbol{Constraint} contains the \sbol{URI}~\url{http://sbols.org/v3\#differentFrom}, then the \sbol{instanceOf} property of the \sbol{subject} \sbol{SubComponent} of the \sbol{Constraint} MUST NOT refer to the same object as the \sbol{instanceOf} property of the \sbol{object} \sbol{SubComponent} of the \sbol{Constraint}.
-\\ Reference: \sec{sec:Constraint}}
-
-\printComplete{If the \sbol{restriction} property of a \sbol{Constraint} contains the \sbol{URI}~\url{http://sbols.org/v3\#differentFrom}, then the \sbol{instanceOf} property of the \sbol{subject} \sbol{SubComponent} of the \sbol{Constraint} MUST NOT refer to the same object as the \sbol{instanceOf} property of the \sbol{object} \sbol{SubComponent} of the \sbol{Constraint}.
-\\ Reference: \sec{sec:Constraint}}
+\printComplete{If the \sbol{restriction} property of a \sbol{Constraint} is drawn from \ref{tbl:restriction_types_sequence} and if the \sbol{Feature} objects referred to by the \sbol{subject} and \sbol{object} properties both have \sbolmult{hasLocation:SC}{hasLocation} properties with \sbol{Location} objects whose \sbolmult{hasSequence:L}{hasSequence} property refers to the same \sbol{Sequence}, then the positions of the referred \sbol{Location} objects MUST comply with the relation specified in \ref{tbl:restriction_types_sequence}.}
 
 
 \subsubsection*{Rules for the \class{Interaction} class} 
