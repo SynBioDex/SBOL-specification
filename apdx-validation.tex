@@ -88,17 +88,31 @@ Reference: \sec{sec:umldiagrams}}
 \printValid{An object's property values MUST have the type listed for the object type and property in \ref{t:property_cardinality_type}.\\
 Reference: \sec{sec:datatypes}}
 
-\printValid{Each property of type \sbol{URI} that is listed in \ref{t:reference_type} MUST refer to an object of the type listed (child objects).\\
+\printValid{Each property of type \sbol{URI} that is listed with a reference type in \ref{t:property_cardinality_type} MUST refer to an object of the type listed (child objects).\\
 Reference: \sec{sec:datatypes}}
 
-\printComplete{Each property of type \sbol{URI} that is listed in \ref{t:reference_type} MUST refer to an object of the type listed (\sbol{TopLevel} objects).\\
+\printComplete{Each property of type \sbol{URI} that is listed with a reference type in \ref{t:property_cardinality_type} MUST refer to an object of the type listed (\sbol{TopLevel} objects).\\
 Reference: \sec{sec:datatypes}}
 
 
-\begin{table}
-\begin{tabular}{|ccp{2.5in}c|}
+\begin{scriptsize}
+\setlength{\tabcolsep}{1pt}
+\begin{longtable}{|ccp{3.4in}c|}
+\caption{Allowed object properties in the \uri{http://sbols.org/v3\#} namespace.\label{t:allowed_properties}}\\
 \hline
-Class & Parent & Properties & Reference \\
+Class & Parent & SBOL Properties & Reference \\
+\hline
+\endfirsthead
+\multicolumn{4}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+Class & Parent & SBOL Properties & Reference \\
+\hline
+\endhead
+\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
 \hline
 \sbol{Identified} 	& none 			& \sbol{displayId}, \sbol{name}, \sbol{description}, \sbol{hasMeasure} & \sec{sec:Identified} \\
 \sbol{TopLevel}		& \sbol{Identified} 	& \sbol{hasNamespace}, \sbol{hasAttachment} & \sec{sec:TopLevel} \\
@@ -127,145 +141,151 @@ Class & Parent & Properties & Reference \\
 \sbol{Collection} 	& \sbol{TopLevel} 	& \sbol{member} & \sec{sec:Collection} \\
 \sbol{Experiment} 	& \sbol{Collection} 	&	& \sec{sec:Experiment} \\
 \sbol{Attachment}	& \sbol{TopLevel} 	& \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, \sbol{hash}, \sbol{hashAlgorithm} & \sec{sec:Attachment} \\
+\prov{Activity}		& \sbol{TopLevel}	&	& \sec{sec:prov:Activity}\\
+\prov{Usage}		& \sbol{Identified}	&	& \sec{sec:prov:Usage}\\
+\prov{Association}	& \sbol{Identified} 	&	& \sec{sec:prov:Association}\\
+\prov{Plan}		& \sbol{TopLevel}	&	& \sec{sec:prov:Plan}\\
+\prov{Agent}		& \sbol{TopLevel}	&	& \sec{sec:prov:Agent}\\
+\om{Measure}		& \sbol{Identified}	& \sbolmult{type:Measure}{type} & \sec{sec:om:Measure}\\
+\om{Unit}			& \sbol{TopLevel}	& 	& \sec{sec:om:Unit}\\
+\om{SingularUnit}	& \om{Unit}		& 	& \sec{sec:om:SingularUnit}\\
+\om{CompoundUnit}	& \om{Unit}		& 	& \sec{sec:om:CompoundUnit}\\
+\om{UnitMultiplication} & \om{CompoundUnit} & & \sec{sec:om:UnitMultiplication}\\
+\om{UnitDivision} 	& \om{CompoundUnit} & & \sec{sec:om:UnitDivision}\\
+\om{UnitExponentiation} & \om{CompoundUnit} & & \sec{sec:om:UnitExponentiation}\\
+\om{PrefixedUnit}	& \om{Unit}		& 	& \sec{sec:om:PrefixedUnit}\\
+\om{Prefix}		& \sbol{TopLevel}	& 	& \sec{sec:om:Prefix}\\
+\om{SIPrefix}		& \om{Prefix}		& 	& \sec{sec:om:SIPrefix}\\
+\om{BinaryPrefix}	& \om{Prefix}		& 	& \sec{sec:om:BinaryPrefix}\\
 \hline
-\end{tabular}
-\caption{Allowed object properties in the \uri{http://sbols.org/v3\#} namespace.}
-\label{t:allowed_properties}
-\end{table}
+\end{longtable}
+\end{scriptsize}
 
-\begin{small}
-\begin{longtable}{|ccccc|}
-\caption{Cardinality constraints on object properties.\label{t:property_cardinality_type}}\\
+\begin{scriptsize}
+\setlength{\tabcolsep}{1pt}
+\begin{longtable}{|cccccc|}
+\caption{Cardinality constraints on object properties, their types, and types of referred objects.\label{t:property_cardinality_type}}\\
 \hline
-Class & Property & Cardinality & Reference & Type\\
+Class & Property & Cardinality & Type & Referred Type & Reference\\
 \hline
 \endfirsthead
-\multicolumn{5}{c}%
+\multicolumn{6}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \hline
-Class & Property & Cardinality & Reference & Type\\
+Class & Property & Cardinality & Type & Referred Type & Reference\\
 \hline
 \endhead
-\hline \multicolumn{5}{r}{\textit{Continued on next page}} \\
+\hline \multicolumn{6}{r}{\textit{Continued on next page}} \\
 \endfoot
 \hline
 \endlastfoot
-\sbol{Identified} 		& \sbol{displayId} 		& OPTIONAL 				& \sbol{String} 	& \sec{sec:Identified}\\
-\sbol{Identified} 		& \sbol{name} 			& OPTIONAL				& \sbol{String}	& \sec{sec:Identified}\\
-\sbol{Identified} 		& \sbol{description} 		& OPTIONAL 				& \sbol{String}	& \sec{sec:Identified}\\
-\sbol{Identified} 		& \prov{wasDerivedFrom}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Identified}\\
-\sbol{Identified} 		& \prov{wasGeneratedBy} & UNBOUNDED			& \sbol{URI}	& \sec{sec:Identified}\\
-\sbol{Identified} 		& \sbol{hasMeasure} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Identified}\\
-\sbol{TopLevel} 		& \sbol{hasNamespace} 	& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:TopLevel}\\
-\sbol{TopLevel} 		& \sbol{hasAttachment} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:TopLevel}\\
-\sbol{Sequence}		& \sbol{elements} 		& OPTIONAL 				& \sbol{String}	& \sec{sec:Sequence}\\
-\sbol{Sequence}		& \sbol{encoding} 		& OPTIONAL 				& \sbol{URI}	& \sec{sec:Sequence}\\
-\sbol{Component}		& \sbolmult{type:C}{type}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& \sec{sec:Component}\\
-\sbol{Component}		& \sbolmult{role:C}{role} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component}\\
-\sbol{Component}		& \sbolmult{hasSequence:C}{hasSequence} & UNBOUNDED & \sbol{URI} & \sec{sec:Component}\\
-\sbol{Component}		& \sbol{hasFeature} 		& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component} \\
-\sbol{Component}		& \sbol{hasInteraction} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component} \\
-\sbol{Component}		& \sbol{hasConstraint} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component} \\
-\sbol{Component}		& \sbol{hasInterface}		& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component} \\
-\sbol{Component} 		& \sbol{hasModel} 		& UNBOUNDED			& \sbol{URI}	& \sec{sec:Component}\\
-\sbol{Feature} 			& \sbolmult{role:F}{role} 	& UNBOUNDED 			& \sbol{URI}	& \sec{sec:Feature}\\
-\sbol{Feature}			& \sbolmult{orientation:F}{orientation} & OPTIONAL		& \sbol{URI} 	& \sec{sec:Feature}\\
-\sbol{SubComponent}	& \sbol{roleIntegration}	& OPTIONAL				& \sbol{URI}	& \sec{sec:SubComponent}\\
-\sbol{SubComponent}	& \sbol{instanceOf} 		& REQUIRED, ONE 			& \sbol{URI}	& \sec{sec:SubComponent}\\
-\sbol{SubComponent} 	& \sbolmult{hasLocation:SC}{hasLocation} & UNBOUNDED & \sbol{URI}	& \sec{sec:SubComponent}\\
-\sbol{SubComponent}	& \sbol{sourceLocation} 	& UNBOUNDED 			& \sbol{URI}	& \sec{sec:SubComponent}\\
-\sbol{ComponentReference} & \sbol{inChildOf} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:ComponentReference}\\
-\sbol{ComponentReference} & \sbol{hasFeature} 	& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:ComponentReference}\\
-\sbol{LocalSubComponent} & \sbolmult{type:LSC}{type} & REQUIRED, UNBOUNDED & \sbol{URI}	& \sec{sec:LocalSubComponent}\\
-\sbol{LocalSubComponent} & \sbolmult{hasLocation:LSC}{hasLocation} & UNBOUNDED & \sbol{URI} & \sec{sec:LocalSubComponent}\\
-\sbol{ExternallyDefined}	& \sbolmult{type:ED}{type}	&REQUIRED, UNBOUNDED	& \sbol{URI} & \sec{sec:ExternallyDefined}\\
-\sbol{ExternallyDefined}	& \sbolmult{definition:ED}{definition} & REQUIRED, ONE	& \sbol{URI}	& \sec{sec:ExternallyDefined}\\
-\sbol{SequenceFeature} 	& \sbolmult{hasLocation:SF}{hasLocation} & REQUIRED,UNBOUNDED & \sbol{URI} & \sec{sec:SequenceFeature}\\
-\sbol{Location}			& \sbolmult{orientation:L}{orientation} & OPTIONAL 		& \sbol{URI} 	& \sec{sec:Location}\\
-\sbol{Location}			& \sbol{order} 			& OPTIONAL 				& \sbol{Integer} & \sec{sec:Location}\\
-\sbol{Location} 			& \sbolmult{hasSequence:L}{hasSequence} & REQUIRED, ONE & \sbol{URI} & \sec{sec:Location}\\
-\sbol{Range}			& \sbol{start} 			& REQUIRED, ONE			& \sbol{Integer} & \sec{sec:Range}\\
-\sbol{Range}			& \sbol{end} 			& REQUIRED, ONE			& \sbol{Integer} & \sec{sec:Range}\\
-\sbol{Cut}				& \sbol{at} 			& REQUIRED, ONE			& \sbol{Integer} & \sec{sec:Cut}\\
-\sbol{Constraint}		& \sbol{subject} 		& REQUIRED, ONE 			& \sbol{URI} 	& \sec{sec:Constraint}\\
-\sbol{Constraint}		& \sbol{object} 			& REQUIRED, ONE 			& \sbol{URI} 	& \sec{sec:Constraint}\\
-\sbol{Constraint}		& \sbol{restriction}		& REQUIRED, ONE			& \sbol{URI} 	& \sec{sec:Constraint}\\
-\sbol{Interaction} 		& \sbolmult{type:I}{type}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& \sec{sec:Interaction}\\
-\sbol{Interaction} 		& \sbol{hasParticipation} 	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Interaction}\\
-\sbol{Participation}		& \sbol{participant} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:Participation}\\
-\sbol{Participation} 		& \sbolmult{role:P}{role}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& \sec{sec:Participation}\\
-\sbol{Interface} 			& \sbol{input}			& UNBOUNDED			& \sbol{URI}	& \sec{sec:Interface}\\
-\sbol{Interface} 			& \sbol{output}			& UNBOUNDED			& \sbol{URI}	& \sec{sec:Interface}\\
-\sbol{Interface} 			& \sbol{nondirectional}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:Interface}\\
-\sbol{CombinatorialDerivation} & \sbol{strategy} 	& OPTIONAL 				& \sbol{URI}	& \sec{sec:CombinatorialDerivation}\\
-\sbol{CombinatorialDerivation} & \sbol{template} 	& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:CombinatorialDerivation}\\
-\sbol{CombinatorialDerivation} & \sbol{hasVariableFeature} & UNBOUNDED		& \sbol{URI}	& \sec{sec:CombinatorialDerivation}\\
-\sbol{VariableFeature} 	& \sbol{cardinality} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variable} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variant} 			& UNBOUNDED			& \sbol{URI}	& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variantCollection}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variantDerivation}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variantMeasure}	& UNBOUNDED			& \sbol{URI}	& \sec{sec:VariableFeature}\\
-\sbol{Implementation} 	& \sbol{built}			& OPTIONAL				& \sbol{URI}	& \sec{sec:Implementation}\\
-\sbol{Model} 			& \sbolmult{source:M}{source} & REQUIRED, ONE		& \sbol{URI}	& \sec{sec:Model}\\
-\sbol{Model} 			& \sbol{language} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:Model}\\
-\sbol{Model} 			& \sbol{framework} 		& REQUIRED, ONE			& \sbol{URI}	& \sec{sec:Model}\\
-\sbol{Collection} 		& \sbol{member} 		& UNBOUNDED			& \sbol{URI}	& \sec{sec:Collection}\\
-\sbol{Attachment} 		& \sbolmult{source:A}{source} & REQUIRED, ONE		& \sbol{URI}	& \sec{sec:Attachment}\\
-\sbol{Attachment} 		& \sbol{format}  		& OPTIONAL				& \sbol{URI}	& \sec{sec:Attachment}\\
-\sbol{Attachment} 		& \sbol{size}	  		& OPTIONAL				& \sbol{Long}	& \sec{sec:Attachment}\\
-\sbol{Attachment} 		& \sbol{hash}  			& OPTIONAL				& \sbol{String}	& \sec{sec:Attachment}\\
-\sbol{Attachment} 		& \sbol{hashAlgorithm}  	& OPTIONAL				& \sbol{String}	& \sec{sec:Attachment}\\
+\sbol{Identified} 		& \sbol{displayId} 		& OPTIONAL 				& \sbol{String} 	& ---				& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{name} 			& OPTIONAL				& \sbol{String}	& ---				& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{description} 		& OPTIONAL 				& \sbol{String}	& ---				& \sec{sec:Identified}\\
+\sbol{Identified} 		& \prov{wasDerivedFrom}	& UNBOUNDED			& \sbol{URI}	& ---				& \sec{sec:Identified}\\
+\sbol{Identified} 		& \prov{wasGeneratedBy} & UNBOUNDED			& \sbol{URI}	& \prov{Activity}		& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{hasMeasure} 	& UNBOUNDED			& \sbol{URI}	& \om{Measure}	& \sec{sec:Identified}\\
+\sbol{TopLevel} 		& \sbol{hasNamespace} 	& REQUIRED, ONE			& \sbol{URI}	& \sbol{Namespace} 	& \sec{sec:TopLevel}\\
+\sbol{TopLevel} 		& \sbol{hasAttachment} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Attachment}	& \sec{sec:TopLevel}\\
+\sbol{Sequence}		& \sbol{elements} 		& OPTIONAL 				& \sbol{String}	& ---				& \sec{sec:Sequence}\\
+\sbol{Sequence}		& \sbol{encoding} 		& OPTIONAL 				& \sbol{URI}	& ---				& \sec{sec:Sequence}\\
+\sbol{Component}		& \sbolmult{type:C}{type}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& ---				& \sec{sec:Component}\\
+\sbol{Component}		& \sbolmult{role:C}{role} 	& UNBOUNDED			& \sbol{URI}	& ---				& \sec{sec:Component}\\
+\sbol{Component}		& \sbolmult{hasSequence:C}{hasSequence} & UNBOUNDED & \sbol{URI} & \sbol{Sequence}	& \sec{sec:Component}\\
+\sbol{Component}		& \sbol{hasFeature} 		& UNBOUNDED			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasInteraction} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Interaction} 	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasConstraint} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Constraint} 	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasInterface}		& UNBOUNDED			& \sbol{URI}	& \sbol{Interface}	& \sec{sec:Component} \\
+\sbol{Component} 		& \sbol{hasModel} 		& UNBOUNDED			& \sbol{URI}	& \sbol{Model}		& \sec{sec:Component}\\
+\sbol{Feature} 			& \sbolmult{role:F}{role} 	& UNBOUNDED 			& \sbol{URI}	& ---				& \sec{sec:Feature}\\
+\sbol{Feature}			& \sbolmult{orientation:F}{orientation} & OPTIONAL		& \sbol{URI} 	& ---				& \sec{sec:Feature}\\
+\sbol{SubComponent}	& \sbol{roleIntegration}	& OPTIONAL				& \sbol{URI}	& ---				& \sec{sec:SubComponent}\\
+\sbol{SubComponent}	& \sbol{instanceOf} 		& REQUIRED, ONE 			& \sbol{URI}	& \sbol{Component}	& \sec{sec:SubComponent}\\
+\sbol{SubComponent} 	& \sbolmult{hasLocation:SC}{hasLocation} & UNBOUNDED & \sbol{URI}	& \sbol{Location} 	& \sec{sec:SubComponent}\\
+\sbol{SubComponent}	& \sbol{sourceLocation} 	& UNBOUNDED 			& \sbol{URI}	& \sbol{Location} 	& \sec{sec:SubComponent}\\
+\sbol{ComponentReference} & \sbol{inChildOf} 		& REQUIRED, ONE			& \sbol{URI}	& \sbol{SubComponent} & \sec{sec:ComponentReference}\\
+\sbol{ComponentReference} & \sbol{hasFeature} 	& REQUIRED, ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:ComponentReference}\\
+\sbol{LocalSubComponent} & \sbolmult{type:LSC}{type} & REQUIRED, UNBOUNDED & \sbol{URI}	& ---				& \sec{sec:LocalSubComponent}\\
+\sbol{LocalSubComponent} & \sbolmult{hasLocation:LSC}{hasLocation} & UNBOUNDED & \sbol{URI} & \sbol{Location}	& \sec{sec:LocalSubComponent}\\
+\sbol{ExternallyDefined}	& \sbolmult{type:ED}{type}	&REQUIRED, UNBOUNDED	& \sbol{URI} & ---			& \sec{sec:ExternallyDefined}\\
+\sbol{ExternallyDefined}	& \sbolmult{definition:ED}{definition} & REQUIRED, ONE	& \sbol{URI}	& ---				& \sec{sec:ExternallyDefined}\\
+\sbol{SequenceFeature} 	& \sbolmult{hasLocation:SF}{hasLocation} & REQUIRED,UNBOUNDED & \sbol{URI} &  \sbol{Location} & \sec{sec:SequenceFeature}\\
+\sbol{Location}			& \sbolmult{orientation:L}{orientation} & OPTIONAL 		& \sbol{URI} 	& ---				& \sec{sec:Location}\\
+\sbol{Location}			& \sbol{order} 			& OPTIONAL 				& \sbol{Integer} & ---				& \sec{sec:Location}\\
+\sbol{Location} 			& \sbolmult{hasSequence:L}{hasSequence} & REQUIRED, ONE & \sbol{URI} & \sbol{Sequence} & \sec{sec:Location}\\
+\sbol{Range}			& \sbol{start} 			& REQUIRED, ONE			& \sbol{Integer} & ---				& \sec{sec:Range}\\
+\sbol{Range}			& \sbol{end} 			& REQUIRED, ONE			& \sbol{Integer} & ---				& \sec{sec:Range}\\
+\sbol{Cut}				& \sbol{at} 			& REQUIRED, ONE			& \sbol{Integer} & ---				& \sec{sec:Cut}\\
+\sbol{Constraint}		& \sbol{subject} 		& REQUIRED, ONE 			& \sbol{URI} 	& \sbol{Feature}	& \sec{sec:Constraint}\\
+\sbol{Constraint}		& \sbol{object} 			& REQUIRED, ONE 			& \sbol{URI} 	& \sbol{Feature} 	& \sec{sec:Constraint}\\
+\sbol{Constraint}		& \sbol{restriction}		& REQUIRED, ONE			& \sbol{URI} 	& ---				& \sec{sec:Constraint}\\
+\sbol{Interaction} 		& \sbolmult{type:I}{type}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& ---				& \sec{sec:Interaction}\\
+\sbol{Interaction} 		& \sbol{hasParticipation} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Participation}	 & \sec{sec:Interaction}\\
+\sbol{Participation}		& \sbol{participant} 		& REQUIRED, ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:Participation}\\
+\sbol{Participation} 		& \sbolmult{role:P}{role}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& ---				& \sec{sec:Participation}\\
+\sbol{Interface} 			& \sbol{input}			& UNBOUNDED			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
+\sbol{Interface} 			& \sbol{output}			& UNBOUNDED			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
+\sbol{Interface} 			& \sbol{nondirectional}	& UNBOUNDED			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
+\sbol{CombinatorialDerivation} & \sbol{strategy} 	& OPTIONAL 				& \sbol{URI}	& ---				& \sec{sec:CombinatorialDerivation}\\
+\sbol{CombinatorialDerivation} & \sbol{template} 	& REQUIRED, ONE			& \sbol{URI}	& \sbol{Component}	& \sec{sec:CombinatorialDerivation}\\
+\sbol{CombinatorialDerivation} & \sbol{hasVariableFeature} & UNBOUNDED		& \sbol{URI}	& \sbol{VariableFeature} & \sec{sec:CombinatorialDerivation}\\
+\sbol{VariableFeature} 	& \sbol{cardinality} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variable} 		& REQUIRED, ONE			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variant} 			& UNBOUNDED			& \sbol{URI}	& \sbol{Component} 	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variantCollection}	& UNBOUNDED			& \sbol{URI}	& \sbol{Collection}	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variantDerivation}	& UNBOUNDED			& \sbol{URI}	& \sbol{CombinatorialDerivation} & \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variantMeasure}	& UNBOUNDED			& \sbol{URI}	& \om{Measure}	& \sec{sec:VariableFeature}\\
+\sbol{Implementation} 	& \sbol{built}			& OPTIONAL				& \sbol{URI}	& \sbol{Component}	& \sec{sec:Implementation}\\
+\sbol{Model} 			& \sbolmult{source:M}{source} & REQUIRED, ONE		& \sbol{URI}	& ---				& \sec{sec:Model}\\
+\sbol{Model} 			& \sbol{language} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:Model}\\
+\sbol{Model} 			& \sbol{framework} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:Model}\\
+\sbol{Collection} 		& \sbol{member} 		& UNBOUNDED			& \sbol{URI}	& \sbol{TopLevel}	& \sec{sec:Collection}\\
+\sbol{Experiment} 		& \sbol{member} 		& UNBOUNDED			& \sbol{URI}	& \sbol{ExperimentalData}	 & \sec{sec:Collection}\\
+\sbol{Attachment} 		& \sbolmult{source:A}{source} & REQUIRED, ONE		& \sbol{URI}	& ---				& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{format}  		& OPTIONAL				& \sbol{URI}	& ---				& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{size}	  		& OPTIONAL				& \sbol{Long}	& ---				& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{hash}  			& OPTIONAL				& \sbol{String}	& ---				& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{hashAlgorithm}  	& OPTIONAL				& \sbol{String}	& ---				& \sec{sec:Attachment}\\
+\prov{Activity}			& \sbolmult{type:Activity}{type} & UNBOUNDED		& \sbol{URI}	& ---				& \sec{sec:prov:Activity}\\
+\prov{Activity}			& \prov{startedAtTime} 	& OPTIONAL				& \sbol{DateTime} & ---			& \sec{sec:prov:Activity}\\
+\prov{Activity}			& \prov{endedAtTime} 	& OPTIONAL				& \sbol{DateTime} & ---			& \sec{sec:prov:Activity}\\
+\prov{Activity} 			& \prov{qualifiedAssociation} & UNBOUNDED			& \sbol{URI}	& \prov{Association} 	& \sec{sec:prov:Activity}\\
+\prov{Activity}			& \prov{qualifiedUsage}	& UNBOUNDED			& \sbol{URI}	& \prov{Usage}		& \sec{sec:prov:Activity}\\
+\prov{Activity}			& \prov{wasInformedBy}	& UNBOUNDED			& \sbol{URI}	& \prov{Activity}		& \sec{sec:prov:Activity}\\
+ \prov{Usage}			& \prov{entity} 			& REQUIRED 				& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
+\prov{Usage} 			& \provmult{hadRole:U}{hadRole} & UNBOUNDED 		& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
+\prov{Association} 		& \provmult{hadRole:A}{hadRole} & UNBOUNDED 		& \sbol{URI}	& ---				& \sec{sec:prov:Association}\\
+\prov{Association} 		& \prov{hadPlan} 		& OPTIONAL				& \sbol{URI}	& \prov{Plan}		& \sec{sec:prov:Association}\\
+\prov{Association}		& \prov{agent} 			& REQUIRED				& \sbol{URI}	& \prov{Agent} 		& \sec{sec:prov:Association}\\
+\om{Measure} 			& \om{hasNumericalValue} & REQUIRED 				& xsd:float		& ---				& \sec{sec:om:Measure}\\
+\om{Measure} 			& \ommult{hasUnit:Measure}{hasUnit} & REQUIRED 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:Measure}\\
+\om{Measure}			& \sbolmult{type:Measure}{type} & UNBOUNDED		& \sbol{URI}	& ---				& \sec{sec:om:Measure}\\
+\om{Unit}				& \ommult{symbol:Unit}{symbol} & REQUIRED 			& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
+\om{Unit} 				& \ommult{alternativeSymbols:Unit}{alternativeSymbols} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Unit}\\
+\om{Unit}				& \ommult{label:Unit}{label} & REQUIRED 			& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
+\om{Unit}				& \ommult{alternativeLabels:Unit}{alternativeLabels} & UNBOUNDED & \sbol{String} & ---		& \sec{sec:om:Unit}\\
+\om{Unit} 				& \ommult{comment:Unit}{comment} & OPTIONAL		& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
+\om{Unit}				& \ommult{longcomment:Unit}{longcomment} & OPTIONAL & \sbol{String} & ---				& \sec{sec:om:Unit}\\
+\om{SingularUnit}		& \ommult{hasUnit:SingularUnit}{hasUnit} & OPTIONAL 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:SingularUnit}\\
+\om{SingularUnit} 		& \ommult{hasFactor:SingularUnit}{hasFactor} & OPTIONAL & xsd:float	& ---				& \sec{sec:om:SingularUnit}\\
+\om{UnitMultiplication} 	& \om{hasTerm1} 		& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
+\om{UnitMultiplication} 	& \om{hasTerm2} 		& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
+\om{UnitDivision} 		& \om{hasNumerator} 	& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
+\om{UnitDivision} 		& \om{hasDenominator} 	& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
+\om{UnitExponentiation} 	& \om{hasBase} 		& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitExponentiation}\\
+\om{UnitExponentiation} 	& \om{hasExponent}		& REQUIRED 				& xsd:integer	& ---				& \sec{sec:om:UnitExponentiation}\\
+\om{PrefixedUnit}		& \ommult{hasUnit:PrefixedUnit}{hasUnit} & REQUIRED 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:PrefixedUnit}\\
+\om{PrefixedUnit} 		& \om{hasPrefix} 		& REQUIRED 				& \sbol{URI}	& \om{Prefix}		& \sec{sec:om:PrefixedUnit}\\
+\om{Prefix} 			& \ommult{symbol:Prefix}{symbol} & REQUIRED 		& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
+\om{Prefix} 			& \ommult{alternativeSymbols:Prefix}{alternativeSymbol} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{label:Prefix}{label} & REQUIRED 			& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{alternativeLabels:Prefix}{alternativeLabels} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{comment:Prefix}{comment} & OPTIONAL		& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{longcomment:Prefix}{longcomment} & OPTIONAL & \sbol{String} & ---			& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{hasFactor:Prefix}{hasFactor} & REQUIRED 	& xsd:float		& ---				& \sec{sec:om:Prefix}\\
 \hline
 \end{longtable}
-\end{small}
-
-\begin{table}
-\begin{tabular}{|cccc|}
-\hline
-Class & Property & Type & Reference \\
-\hline
-\sbol{Identified}			& \prov{wasGeneratedBy}		& \prov{Activity} 		& \sec{sec:Identified}\\
-\sbol{Identified} 		& \sbol{hasMeasure} 		& \om{Measure}		& \sec{sec:Identified}\\
-\sbol{TopLevel} 		& \sbol{hasNamespace} 		& \sbol{Namespace} 		& \sec{sec:TopLevel}\\
-\sbol{TopLevel}			& \sbol{hasAttachment}		& \sbol{Attachment} 		& \sec{sec:TopLevel}\\
-\sbol{Component}		& \sbolmult{hasSequence:C}{hasSequence} & \sbol{Sequence} & \sec{sec:Component}\\
-\sbol{Component}		& \sbol{hasFeature} 			& \sbol{Feature} 		& \sec{sec:Component}\\
-\sbol{Component} 		& \sbol{hasInteraction} 		& \sbol{Interaction} 		& \sec{sec:Component}\\
-\sbol{Component} 		& \sbol{hasConstraint}		& \sbol{Constraint} 		& \sec{sec:Component}\\
-\sbol{Component} 		& \sbol{hasInterface} 		& \sbol{Interface}		& \sec{sec:Component}\\
-\sbol{Component}		& \sbol{hasModel} 			& \sbol{Model} 			& \sec{sec:Component}\\
-\sbol{SubComponent}	& \sbol{instanceOf}			& \sbol{Component}		& \sec{sec:SubComponent}\\
-\sbol{SubComponent} 	& \sbolmult{hasLocation:SC}{hasLocation} & \sbol{Location} & \sec{sec:SubComponent}\\
-\sbol{SubComponent}	& \sbol{sourceLocation} 		& \sbol{Location} 		& \sec{sec:SubComponent}\\
-\sbol{ComponentReference} & \sbol{inChildOf} 			& \sbol{SubComponent}	& \sec{sec:ComponentReference}\\
-\sbol{ComponentReference} & \sbol{hasFeature} 		& \sbol{Feature}		& \sec{sec:ComponentReference}\\
-\sbol{LocalSubComponent} & \sbolmult{hasLocation:LSC}{hasLocation} & \sbol{Location} & \sec{sec:LocalSubComponent}\\
-\sbol{SequenceFeature}	& \sbolmult{hasLocation:SF}{hasLocation} & \sbol{Location} & \sec{sec:SequenceFeature}\\
-\sbol{Location}			& \sbolmult{hasSequence:L}{hasSequence} & \sbol{Sequence} & \sec{sec:Location}\\
-\sbol{Constraint}		& \sbol{subject} 			& \sbol{Feature} 		& \sec{sec:Constraint}\\
-\sbol{Constraint}		& \sbol{object} 				& \sbol{Feature} 		& \sec{sec:Constraint}\\
-\sbol{Interaction} 		& \sbol{hasParticipation}		& \sbol{Participation}		& \sec{sec:Interaction}\\
-\sbol{Participation} 		& \sbol{participant}			& \sbol{Feature}		& \sec{sec:Participation}\\
-\sbol{Interface}			& \sbol{input} 				& \sbol{Feature} 		& \sec{sec:Interface}\\
-\sbol{Interface}			& \sbol{output} 				& \sbol{Feature} 		& \sec{sec:Interface}\\
-\sbol{Interface}			& \sbol{nondirectional}		& \sbol{Feature} 		& \sec{sec:Interface}\\
-\sbol{CombinatorialDerivation} & \sbol{template} 		& \sbol{Component}		& \sec{sec:CombinatorialDerivation}\\
-\sbol{CombinatorialDerivation} & \sbol{hasVariableFeature} & \sbol{VariableFeature}	& \sec{sec:CombinatorialDerivation}\\
-\sbol{VariableFeature}	& \sbol{variable} 			& \sbol{Feature} 		& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature}	& \sbol{variant} 				& \sbol{Component} 		& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature}	& \sbol{variantCollection} 		& \sbol{Collection} 		& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature}	& \sbol{variantDerivation} 		& \sbol{CombinatorialDerivation} & \sec{sec:VariableFeature}\\
-\sbol{VariableFeature}	& \sbol{variantMeasure} 		& \om{Measure} & \sec{sec:VariableFeature}\\
-\sbol{Implementation}	& \sbol{built} 				& \sbol{Component}		& \sec{sec:Implementation}\\
-\sbol{Collection} 		& \sbol{member} 			& \sbol{TopLevel} 		& \sec{sec:Collection}\\
-\sbol{Experiment}		& \sbol{member}			& \sbol{ExperimentalData} & \sec{sec:Experiment}\\
-\hline
-\end{tabular}
-\caption{Types of objects referred to by URI properties.}
-\label{t:reference_type}
-\end{table}
-
+\end{scriptsize}
 
 \subsubsection*{Rules for the \class{Identified} class} 
 \setcounter{sbolCtr}{10201}
@@ -733,25 +753,11 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 
 \printValid{If the \sbol{hash} property is set, then the \sbol{hashAlgorithm} MUST be set as well.\\ Reference: \sec{sec:Attachment}}
 
-\subsubsection*{Rules for the \class{Activity} class} 
+\subsubsection*{Rules for the \class{prov:Activity} class} 
 \setcounter{sbolCtr}{12901}
   
 %% QUESTION: not sure we should limit things outside the sbol namespace
 % \printValid{An \sbol{Activity} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbolmult{types:Activity}{types}, \sbol{startedAtTime}, \sbol{endedAtTime}, \sbol{wasInformedBys}, \sbol{usages}, and \sbol{associations}.\\ Reference: \sec{sec:Activity}}
-
-\printValid{An \prov{Activity} may have any number of  \sbolmult{type:Activity}{type} properties, each of type \sbol{URI}.  \\ Reference: \sec{sec:prov:Activity}}
-
-\printValid{The \prov{startedAtTime} property of an \prov{Activity} object is OPTIONAL and MAY contain a \sbol{DateTime}.  \\ Reference: \sec{sec:prov:Activity}}
-
-\printValid{The \prov{endedAtTime} property of an \prov{Activity} object is OPTIONAL and MAY contain a \sbol{DateTime}.  \\ Reference: \sec{sec:prov:Activity}}
-
-\printValid{An \prov{Activity} MAY have any number of \prov{qualifiedAssociation} properties, each of which refers to an \prov{Association} object.\\ Reference: \sec{sec:prov:Activity}}
-
-\printValid{An \prov{Activity} MAY have any number of \prov{qualifiedUsage} properties, each of which refers to a \prov{Usage} object.\\ Reference: \sec{sec:prov:Activity}}
-
-\printValid{An \prov{Activity} MAY have any number of \prov{wasInformedBy} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:prov:Activity}}
-
-\printComplete{Each \prov{wasInformedBy} property of an \prov{Activity} MUST refer to an \prov{Activity} object.\\ Reference: \sec{sec:prov:Activity}}
 
 \todo[inline]{Brian: I need you to check all the DBTL rules in Prov}
 
@@ -772,14 +778,9 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 
 \printModeling{If an \prov{Activity} has a \sbolmult{type:Activity}{type} property with a value of ~\url{http://sbols.org/v3\#learn} and also contains an \prov{Association}, then that \prov{Association} MUST have a  \provmult{hadRole:A}{hadRole} property with a  value of ~\url{http://sbols.org/v3\#learn}. \\ Reference: \sec{sec:prov:Activity}}
 
-\subsubsection*{Rules for the \class{Usage} class} 
+\subsubsection*{Rules for the \class{prov:Usage} class} 
 \setcounter{sbolCtr}{13001}
 
-% \printValid{An \sbol{Usage} MUST NOT have properties other than the following: \sbol{displayId},\\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations},  \sbol{entity}, and \sbolmult{roles:U}{roles}.\\ Reference: \sec{sec:prov:Usage}}
-
-\printValid{The \prov{entity} property of a \prov{Usage} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:prov:Usage}}
-
-\printValid{A \prov{Usage} MAY have any number of \provmult{hadRole:U}{hadRole} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:prov:Usage}}
 
 \printModeling{A \prov{Usage} that has a \provmult{hadRole:U}{hadRole} property that contains the \sbol{URI}~\url{http://sbols.org/v3\#design} SHOULD refer to a \sbol{TopLevel} other than \sbol{Implementation}.\\ Reference: \sec{sec:prov:Usage}}
 
@@ -789,61 +790,26 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 
 \printModeling{A \prov{Usage} that has a \provmult{hadRole:U}{hadRole} property that contains the \sbol{URI}~\url{http://sbols.org/v3\#learn} \\ SHOULD NOT refer to an \sbol{Implementation}.\\ Reference: \sec{sec:prov:Usage}}
 
-\subsubsection*{Rules for the \class{Association} class} 
+\subsubsection*{Rules for the \class{prov:Association} class} 
 \setcounter{sbolCtr}{13101}
 
-% \printValid{An \sbol{Association} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations},  \sbolmult{roles:A}{roles}, \sbol{plan}, and \sbol{agent}.\\ Reference: \sec{sec:prov:Association}}
 
-\printValid{An \prov{Association} MAY hava any number of \provmult{hadRole:A}{hadRole} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:prov:Association}}
-
-\printValid{The \prov{hadPlan} property of an \prov{Association} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:prov:Association}}
-
-\printComplete{The \sbol{URI} contained by the \prov{hadPlan} property MUST refer to a \prov{Plan} object.\\ Reference: \sec{sec:prov:Association}}
-
-\printValid{The \prov{agent} property of an \prov{Association} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:prov:Association}}
-
-\printComplete{The \sbol{URI} contained by the \prov{agent} property MUST refer to an \prov{Agent} object.\\ Reference: \sec{sec:prov:Association}}
-
-\subsubsection*{Rules for the \class{Plan} class} 
+\subsubsection*{Rules for the \class{prov:Plan} class} 
 \setcounter{sbolCtr}{13201}
 
-% \printValid{A \sbol{Plan} MUST NOT have properties other than the following: \sbol{displayId},\\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:Plan}}
 
-\subsubsection*{Rules for the \class{Agent} class} 
+\subsubsection*{Rules for the \class{prov:Agent} class} 
 \setcounter{sbolCtr}{13301}
 
-% \printValid{An \sbol{Agent} MUST NOT have properties other than the following: \sbol{displayId},\\ \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, and \sbol{annotations}.\\ Reference: \sec{sec:Agent}}
 
-\subsubsection*{Rules for the \class{Measure} class} 
+\subsubsection*{Rules for the \class{om:Measure} class} 
 \setcounter{sbolCtr}{13401}
-
-% \printValid{A \om{Measure} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{hasNumericalValue}, \sbolmult{hasUnit:Measure}{hasUnit}, and \sbolmult{types:Measure}{types}.\\ Reference: \sec{sec:om:Measure}}
-
-\printValid{The \om{hasNumericalValue} property of a \om{Measure} is REQUIRED and MUST contain an xsd:float.\\ Reference: \sec{sec:om:Measure}}
-
-\printValid{The \ommult{hasUnit:Measure}{hasUnit} property of a \om{Measure} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:om:Measure}}
-
-\printValid{A \om{Measure} MAY have any number of \sbolmult{type:Measure}{type} properties, each of type \sbol{URI}.\\ Reference: \sec{sec:om:Measure}}
 
 \printModeling{If a \om{Measure} includes a \sbolmult{type:Measure}{type} property, then exactly one of the \sbol{URI}s that this property contains SHOULD refer to a term from the systems description parameter branch of the SBO.\\ Reference: \sec{sec:om:Measure}}
 
-\printComplete{The \sbol{URI} contained by the \ommult{hasUnit:Measure}{hasUnit} property of a \om{Measure} MUST refer to a \om{Unit}.
-\\ Reference: \sec{sec:om:Measure}}
 
-\subsubsection*{Rules for the \class{Unit} class} 
+\subsubsection*{Rules for the \class{om:Unit} class} 
 \setcounter{sbolCtr}{13501}
-
-\printValid{The \ommult{symbol:Unit}{symbol} property of a \om{Unit} is REQUIRED and MUST contain a \sbol{String}.\\ Reference: \sec{sec:om:Unit}}
-
-\printValid{A \om{Unit} MAY have any number of \ommult{alternativeSymbols:Unit}{alternativeSymbols} properties, each of type \sbol{String}.\\ Reference: \sec{sec:om:Unit}}
-
-\printValid{The \ommult{label:Unit}{label} property of a \om{Unit} is REQUIRED and MUST contain a \sbol{String}.\\ Reference: \sec{sec:om:Unit}}
-
-\printValid{A \om{Unit} MAY have any number of \ommult{alternativeLabels:Unit}{alternativeLabels} properties, each of type \sbol{String}.\\ Reference: \sec{sec:om:Unit}}
-
-\printValid{A \om{Unit} MAY have any number of \ommult{comment:Unit}{comment} properties, each of type \sbol{String}.\\ Reference: \sec{sec:om:Unit}}
-
-\printValid{A \om{Unit} MAY have any number of  \ommult{longcomment:Unit}{longcomment} properties, each of type \sbol{String}.\\ Reference: \sec{sec:om:Unit}}
 
 \printModeling{If both of the \sbol{name} property and \ommult{label:Unit}{label} properties of a \om{Unit} are non-empty, then they SHOULD contain identical \sbol{String}s.\\ Reference: \sec{sec:om:Unit}}
 
@@ -851,117 +817,51 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 
 \printModeling{If both of the \ommult{comment:Unit}{comment} property and \ommult{longcomment:Unit}{longcomment} properties of a \om{Unit} are non-empty, then the \sbol{String} contained by the \ommult{longcomment:Unit}{longcomment} property SHOULD be longer than the \sbol{String} contained by the \ommult{comment:Unit}{comment} property.\\ Reference: \sec{sec:om:Unit}}
 
-\subsubsection*{Rules for the \class{SingularUnit} class} 
+\todo[inline]{complete: also, must not be a circular reference chain}
+
+
+\subsubsection*{Rules for the \class{om:SingularUnit} class} 
 \setcounter{sbolCtr}{13601}
-
-% \printValid{A \om{SingularUnit} MUST NOT have properties other than the following: \sbol{displayId}, \prov{wasDerivedFrom}, \sbol{wasGeneratedBys}, \sbol{name}, \sbol{description}, \sbol{annotations}, \sbol{attachments}, \sbolmult{symbol:Unit}{symbol}, \sbolmult{alternativeSymbols:Unit}{alternativeSymbols}, \sbolmult{label:Unit}{label}, \sbolmult{alternativeLabels:Unit}{alternativeLabels}, \sbolmult{comment:Unit}{comment}, \sbolmult{longcomment:Unit}{longcomment}, \sbolmult{hasUnit:SingularUnit}{hasUnit}, and \sbolmult{hasFactor:SingularUnit}{hasFactor}.\\ Reference: \sec{sec:om:SingularUnit}}
-
-\printValid{The \ommult{hasUnit:SingularUnit}{hasUnit} property of a \om{SingularUnit} is OPTIONAL and MAY contain a \sbol{URI}.\\ Reference: \sec{sec:om:SingularUnit}}
-
-\printValid{The \ommult{hasFactor:SingularUnit}{hasFactor} property of a \om{SingularUnit} is OPTIONAL and MAY contain an xsd:float.\\ Reference: \sec{sec:om:SingularUnit}}
 
 \printValid{Any \sbol{URI} contained by the \ommult{hasUnit:SingularUnit}{hasUnit} property of a \om{SingularUnit} MUST NOT be identical to the \sbol{URI} contained of the \om{SingularUnit}.\\ Reference: \sec{sec:om:SingularUnit}}
 
 \printModeling{If the \ommult{hasFactor:SingularUnit}{hasFactor} property of a \om{SingularUnit} is non-empty, then its \ommult{hasUnit:SingularUnit}{hasUnit} property SHOULD also be non-empty.\\ Reference: \sec{sec:om:SingularUnit}}
 
-\printComplete{The \sbol{URI} contained by the \ommult{hasUnit:SingularUnit}{hasUnit} property of a \om{SingularUnit} MUST refer to a \om{Unit}.
-\\ Reference: \sec{sec:om:SingularUnit}}
 
-\subsubsection*{Rules for the \class{CompoundUnit} class} 
+\subsubsection*{Rules for the \class{om:CompoundUnit} class} 
 \setcounter{sbolCtr}{13701}
 
-\printValid{A \om{CompoundUnit} object MUST NOT have properties in the \url{http://www.ontology-of-units-of-measure.org/resource/om-2} namespace other than those allowed by the \om{Unit} class.\\
- Reference: \sec{sec:om:CompoundUnit}}
 
-\subsubsection*{Rules for the \class{UnitMultiplication} class} 
+\subsubsection*{Rules for the \class{om:UnitMultiplication} class} 
 \setcounter{sbolCtr}{13801}
-
-\printValid{A \om{UnitMultiplication} object MUST NOT have properties in the \url{http://www.ontology-of-units-of-measure.org/resource/om-2} namespace other than those allowed by the \om{CompoundUnit} class and the following: \om{hasTerm1} and \om{hasTerm2}.\\
- Reference: \sec{sec:om:UnitMultiplication}}
-
-\printValid{The \om{hasTerm1} property of a \om{UnitMultiplication} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:om:UnitMultiplication}}
-
-\printValid{The \om{hasTerm2} property of a \om{UnitMultiplication} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:om:UnitMultiplication}}
 
 \printValid{The \sbol{URI} contained by the \om{hasTerm1} property of a \om{UnitMultiplication} MUST NOT be identical to the \sbol{URI} of the \om{UnitMultiplication}.\\ Reference: \sec{sec:om:UnitMultiplication}}
 
 \printValid{The \sbol{URI} contained by the \om{hasTerm2} property of a \om{UnitMultiplication} MUST NOT be identical to the \sbol{URI} of the \om{UnitMultiplication}.\\ Reference: \sec{sec:om:UnitMultiplication}}
 
-\printComplete{The \sbol{URI} contained by the \om{hasTerm1} property of a \om{UnitMultiplication} MUST refer to a \om{Unit}.
-\\ Reference: \sec{sec:om:UnitMultiplication}}
 
-\printComplete{The \sbol{URI} contained by the \om{hasTerm2} property of a \om{UnitMultiplication} MUST refer to a \om{Unit}.
-\\ Reference: \sec{sec:om:UnitMultiplication}}
-
-\subsubsection*{Rules for the \class{UnitDivision} class} 
+\subsubsection*{Rules for the \class{om:UnitDivision} class} 
 \setcounter{sbolCtr}{13901}
-
-\printValid{A \om{UnitDivision} object MUST NOT have properties in the \url{http://www.ontology-of-units-of-measure.org/resource/om-2} namespace other than those allowed by the \om{CompoundUnit} class and the following: \om{hasNumerator} and \om{hasDenominator}.\\
- Reference: \sec{sec:om:UnitDivision}}
-
-\printValid{The \om{hasNumerator} property of a \om{UnitDivision} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:om:UnitDivision}}
-
-\printValid{The \om{hasDenominator} property of a \om{UnitDivision} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:om:UnitDivision}}
 
 \printValid{The \sbol{URI} contained by the \om{hasNumerator} property of a \om{UnitDivision} MUST NOT be identical to the \sbol{URI} of the \om{UnitDivision}.\\ Reference: \sec{sec:om:UnitDivision}}
 
 \printValid{The \sbol{URI} contained by the \om{hasDenominator} property of a \om{UnitDivision} MUST NOT be identical to the \sbol{URI} of the \om{UnitDivision}.\\ Reference: \sec{sec:om:UnitDivision}}
 
-\printComplete{The \sbol{URI} contained by the \om{hasNumerator} property of a \om{UnitDivision} MUST refer to a \om{Unit}.
-\\ Reference: \sec{sec:om:UnitDivision}}
 
-\printComplete{The \sbol{URI} contained by the \om{hasDenominator} property of a \om{UnitDivision} MUST refer to a \om{Unit}.
-\\ Reference: \sec{sec:om:UnitDivision}}
-
-\subsubsection*{Rules for the \class{UnitExponentiation} class} 
+\subsubsection*{Rules for the \class{om:UnitExponentiation} class} 
 \setcounter{sbolCtr}{14001}
-
-\printValid{A \om{UnitDivision} object MUST NOT have properties in the \url{http://www.ontology-of-units-of-measure.org/resource/om-2} namespace other than those allowed by the \om{CompoundUnit} class and the following: \om{hasBase} and \om{hasExponent}.\\
- Reference: \sec{sec:om:UnitDivision}}
-
-\printValid{The \om{hasBase} property of a \om{UnitExponentiation} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:om:UnitExponentiation}}
-
-\printValid{The \om{hasExponent} property of a \om{UnitExponentiation} is REQUIRED and MUST contain an xsd:integer.\\ Reference: \sec{sec:om:UnitExponentiation}}
 
 \printValid{The \sbol{URI} contained by the \om{hasBase} property of a \om{UnitExponentiation} MUST NOT be identical to the \sbol{URI} of the \om{UnitExponentiation}.\\ Reference: \sec{sec:om:UnitExponentiation}}
 
-\printComplete{The \sbol{URI} contained by the \om{hasBase} property of a \om{UnitExponentiation} MUST refer to a \om{Unit}.
-\\ Reference: \sec{sec:om:UnitExponentiation}}
 
-\subsubsection*{Rules for the \class{PrefixedUnit} class} 
+\subsubsection*{Rules for the \class{om:PrefixedUnit} class} 
 \setcounter{sbolCtr}{14101}
-
-\printValid{A \om{PrefixedUnit} object MUST NOT have properties in the \url{http://www.ontology-of-units-of-measure.org/resource/om-2} namespace other than those allowed by the \om{Unit} class and the following: \ommult{hasUnit:PrefixedUnit}{hasUnit} and \om{hasPrefix}.\\
- Reference: \sec{sec:om:PrefixedUnit}}
-
-\printValid{The \ommult{hasUnit:PrefixedUnit}{hasUnit} property of a \om{PrefixedUnit} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:om:PrefixedUnit}}
-
-\printValid{The \om{hasPrefix} property of a \om{PrefixedUnit} is REQUIRED and MUST contain a \sbol{URI}.\\ Reference: \sec{sec:om:PrefixedUnit}}
 
 \printValid{The \sbol{URI} contained by the \ommult{hasUnit:PrefixedUnit}{hasUnit} property of a \om{PrefixedUnit} MUST NOT be identical to the \sbol{URI} of the \om{PrefixedUnit}.\\ Reference: \sec{sec:om:PrefixedUnit}}
 
-\printComplete{The \sbol{URI} contained by the \ommult{hasUnit:PrefixedUnit}{hasUnit} property of a \om{PrefixedUnit} MUST refer to a \om{Unit}.
-\\ Reference: \sec{sec:om:PrefixedUnit}}
 
-\printComplete{The \sbol{URI} contained by the \om{hasPrefix} property of a \om{PrefixedUnit} MUST refer to a \om{Prefix}.
-\\ Reference: \sec{sec:om:PrefixedUnit}}
-
-\subsubsection*{Rules for the \class{Prefix} class} 
+\subsubsection*{Rules for the \class{om:Prefix} class} 
 \setcounter{sbolCtr}{14201}
-
-\printValid{The \ommult{symbol:Prefix}{symbol} property of a \om{Prefix} is REQUIRED and MUST contain a \sbol{String}.\\ Reference: \sec{sec:om:Prefix}}
-
-\printValid{A \om{Prefix} MAY have any number of  \ommult{alternativeSymbols:Prefix}{alternativeSymbol} properties, each of type of \sbol{String}.\\ Reference: \sec{sec:om:Prefix}}
-
-\printValid{The \ommult{label:Prefix}{label} property of a \om{Prefix} is REQUIRED and MUST contain a \sbol{String}.\\ Reference: \sec{sec:om:Prefix}}
-
-\printValid{A \om{Prefix} MAY have any number of  \ommult{alternativeLabels:Prefix}{alternativeLabels} properties, each of type \sbol{String}.\\ Reference: \sec{sec:om:Prefix}}
-
-\printValid{The \ommult{comment:Prefix}{comment} property of a \om{Prefix} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:om:Prefix}}
-
-\printValid{The \ommult{longcomment:Prefix}{longcomment} property of a \om{Prefix} is OPTIONAL and MAY contain a \sbol{String}.\\ Reference: \sec{sec:om:Prefix}}
-
-\printValid{The \ommult{hasFactor:Prefix}{hasFactor} property of a \om{Prefix} is REQUIRED and MUST contain an xsd:float.\\ Reference: \sec{sec:om:Prefix}}
 
 \printModeling{If both of the \sbol{name} property and \ommult{label:Prefix}{label} properties of a \om{Prefix} are non-empty, then they SHOULD contain identical \sbol{String}s.\\ Reference: \sec{sec:om:Prefix}}
 
@@ -969,16 +869,12 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 
 \printModeling{If both of the \ommult{comment:Prefix}{comment} property and \ommult{longcomment:Prefix}{longcomment} properties of a \om{Prefix} are non-empty, then the \sbol{String} contained by the \ommult{longcomment:Prefix}{longcomment} property SHOULD be longer than the \sbol{String} contained by the \ommult{comment:Prefix}{comment} property.\\ Reference: \sec{sec:om:Prefix}}
 
-\subsubsection*{Rules for the \class{SIPrefix} class} 
+
+\subsubsection*{Rules for the \class{om:SIPrefix} class} 
 \setcounter{sbolCtr}{14301}
 
-\printValid{A \om{SIPrefix} object MUST NOT have properties in the \url{http://www.ontology-of-units-of-measure.org/resource/om-2} namespace other than those allowed by the \om{Prefix} class. \\
- Reference: \sec{sec:om:SIPrefix}}
-
-\subsubsection*{Rules for the \class{BinaryPrefix} class} 
+\subsubsection*{Rules for the \class{om:BinaryPrefix} class} 
 \setcounter{sbolCtr}{14401}
 
-\printValid{A \om{BinaryPrefix} object MUST NOT have properties in the \url{http://www.ontology-of-units-of-measure.org/resource/om-2} namespace other than those allowed by the \om{Prefix} class. \\
- Reference: \sec{sec:om:BinaryPrefix}}
 
 
