@@ -70,7 +70,7 @@ Reference: \sec{sec:URIstructure}}
   \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \sbol{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path.\\ 
 Reference: \sec{sec:URIstructure}}
 
-\printValid{A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object (except for \threezeroone{\st{its controlling}} \threezeroone{a \sbol{Namespace} object, which instead MUST be the prefix of all objects for which it is the namespace).}\\ 
+\printValid{A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object.}\\ 
 Reference: \sec{sec:URIstructure}}
 
 \printValid{The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object.
@@ -137,7 +137,6 @@ Class & Parent & SBOL Properties & Reference \\
 \sbol{LocalSubComponent} & \sbol{Feature} & \sbolmult{type:LSC}{type}, \sbolmult{hasLocation:LSC}{hasLocation} & \sec{sec:LocalSubComponent} \\
 \sbol{Location}		& \sbol{Identified} 	& \sbolmult{orientation:L}{orientation}, \sbol{order}, \sbolmult{hasSequence:L}{hasSequence} & \sec{sec:Location} \\
 \sbol{Model} 		& \sbol{TopLevel} 	& \sbolmult{source:M}{source}, \sbol{language}, \sbol{framework} & \sec{sec:Model} \\
-\sbol{Namespace} 	& \sbol{TopLevel} 	&	& \sec{sec:Namespace} \\
 \sbol{Participation} 	& \sbol{Identified} 	& \sbolmult{role:P}{role}, \sbol{participant} & \sec{sec:Participation} \\
 \sbol{Range} 		& \sbol{Location} 	& \sbol{start}, \sbol{end} & \sec{sec:Range} \\
 \sbol{SequenceFeature} & \sbol{Feature}	& \sbolmult{hasLocation:SF}{hasLocation} & \sec{sec:SequenceFeature} \\
@@ -245,7 +244,7 @@ Class & Property & Cardinality & Type & Referred Type & Reference\\
 \sbol{SubComponent}	& \sbol{sourceLocation} 	& UNBOUNDED 			& \sbol{URI}	& \sbol{Location} 	& \sec{sec:SubComponent}\\
 \sbol{SubComponent} 	& \sbolmult{hasLocation:SC}{hasLocation} & UNBOUNDED & \sbol{URI}	& \sbol{Location} 	& \sec{sec:SubComponent}\\
 \sbol{TopLevel} 		& \sbol{hasAttachment} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Attachment}	& \sec{sec:TopLevel}\\
-\sbol{TopLevel} 		& \sbol{hasNamespace} 	& REQUIRED, ONE			& \sbol{URI}	& \sbol{Namespace} 	& \sec{sec:TopLevel}\\
+\sbol{TopLevel} 		& \sbol{hasNamespace} 	& REQUIRED, ONE			& \sbol{URI}	& ---			 	& \sec{sec:TopLevel}\\
 \sbol{VariableFeature} 	& \sbol{cardinality} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:VariableFeature}\\
 \sbol{VariableFeature} 	& \sbol{variable} 		& REQUIRED, ONE			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:VariableFeature}\\
 \sbol{VariableFeature} 	& \sbol{variantCollection}	& UNBOUNDED			& \sbol{URI}	& \sbol{Collection}	& \sec{sec:VariableFeature}\\
@@ -324,13 +323,7 @@ Reference: \sec{sec:provenance}}
 \subsubsection*{Rules for the \class{TopLevel} class} 
 \setcounter{sbolCtr}{10301}
 
-\printValid{If the URI for the \sbol{TopLevel} object is a URL, then the URI of the \sbol{Namespace} MUST prefix match that URL.  \\ Reference: \sec{sec:TopLevel}}
-
-\subsubsection*{Rules for the \class{Namespace} class} 
-\setcounter{sbolCtr}{10401}
-
-\printValid{The \sbol{hasNamespace} property of a \sbol{Namespace} object MUST contain its own \sbol{URI}.  \\
-Reference: \sec{sec:Namespace}}
+\printValid{If the URI for the \sbol{TopLevel} object is a URL, then the URI of the \sbol{hasNamespace} property MUST prefix match that URL.  \\ Reference: \sec{sec:TopLevel}}
 
 
 \subsubsection*{Rules for the \class{Sequence} class} 
