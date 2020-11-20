@@ -19,7 +19,7 @@ These relationships are leveraged in SBOL tooling for describing multi-stage syn
 
 Synthetic biology workflows may involve multiple stages, multiple users, multiple organizations, and interdisciplinary collaborations. These workflows can be described using four core PROV-O classes: \prov{Entity}, \\ \prov{Activity}, \prov{Agent}, and \prov{Plan}. Any SBOL \sbol{Identified} object can implicitly act as an instance of PROV-O's \prov{Entity} class. Workflow histories (retrospective provenance) and workflow specifications (prospective provenance) can be described in SBOL using \prov{Activity} objects to link \sbol{Identified} objects into workflows. An \prov{Agent} (for example a software or a person) runs an \prov{Activity} according to a \prov{Plan} to generate new entities. Resources representing \prov{Agent}, \prov{Activity} and \prov{Plan} classes should be handled as \sbol{TopLevel}, whilst \prov{Usage} and \prov{Association} resources should be treated as child \sbol{Identified} objects within their parent \prov{Activity} objects.  
 
-A design-build-test-learn SBOL ontology has been adopted for use with PROV-O classes (see \ref{tbl:activity_types}). The terms \textit{design}, \textit{build}, \textit{test}, and \textit{learn} provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. These terms SHOULD BE used on the \sbolmult{type:Activity}{type} property of the \prov{Activity} class. (Note that this property is a special property added by the SBOL specification, and is not part of the original PROV-O specification.) Additionally, these terms SHOULD BE used in the \provmult{hadRole:U}{hadRole} properties on \prov{Usage} to qualify how the referenced \prov{entity} is used by the parent \prov{Activity}. Logical constraints are placed on the order in which different types of \prov{Activity}s are chained into design-build-test-learn workflows. These rules additionally place constraints on the types of objects that may be used as inputs for a particular type of \prov{Activity}. For example, a \textit{design} \prov{Usage} may be used as an input for either a \textit{design} or \textit{build} \prov{Activity} but MUST NOT be used as an input for a \textit{test} \prov{Activity}. An example of how these terms are used is provided in \ref{images:design-build-test-learn}. 
+A design-build-test-learn SBOL ontology has been adopted for use with PROV-O classes (see \ref{tbl:activity_types}). The terms \textit{design}, \textit{build}, \textit{test}, and \textit{learn} provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. These terms SHOULD BE used on the \sbolmult{type:Activity}{type} property of the \prov{Activity} class. (Note that this property is a special property added by the SBOL specification, and is not part of the original PROV-O specification.) Additionally, these terms SHOULD BE used in the \provmult{hadRole:U}{hadRole} properties on \prov{Usage} to qualify how the referenced \prov{entity} is used by the parent \prov{Activity}. 
 
 \begin{table}[ht]
 	\begin{edtable}{tabular}{llp{3.5in}}
@@ -35,6 +35,25 @@ A design-build-test-learn SBOL ontology has been adopted for use with PROV-O cla
 	\caption{Synthetic biology workflow ontology}
 	\label{tbl:activity_types}
 \end{table}
+
+Logical constraints are placed on the order in which different types of \prov{Activity}s are chained into design-build-test-learn workflows. These rules additionally place constraints on the types of objects that may be used as inputs for a particular type of \prov{Activity}. For example, a \textit{design} \prov{Usage} may be used as an input for either a \textit{design} or \textit{build} \prov{Activity} but SHOULD NOT be used as an input for a \textit{test} \prov{Activity}. An example of how these terms are used is provided in \ref{images:design-build-test-learn}. 
+The ordering of stages and constraints on referred object type are given in \ref{tbl:dbtl_stages}.
+
+\begin{table}[ht]
+\begin{tabular}{lll}
+\toprule
+\textbf{Stage} & \textbf{Preceding Stage} & \textbf{Referred Object Type} \\
+\midrule
+\url{http://sbols.org/v3\#design}	& \url{http://sbols.org/v3\#learn}		& \sbol{TopLevel} other than \sbol{Implementation} \\
+\url{http://sbols.org/v3\#build}	& \url{http://sbols.org/v3\#design}	& \sbol{Implementation} \\
+\url{http://sbols.org/v3\#test}	& \url{http://sbols.org/v3\#build}		& \sbol{ExperimentalData} \\
+\url{http://sbols.org/v3\#learn}	& \url{http://sbols.org/v3\#test}		& \sbol{Identified} other than \sbol{Implementation} \\
+\bottomrule
+\end{tabular}
+\caption{Ordering of design-build-test-learn stages, and the types of objects RECOMMENDED to be associated with them.}
+\label{tbl:dbtl_stages}
+\end{table}
+
 
 In addition to the design-build-test-learn terms, users may also wish to include more specific terms to specify how SBOL objects are used in-house in their own recipes, protocols, or computational analyses. In fact, it is expected that the SBOL workflow ontology will be expanded over time, as users experiment with and develop their own custom ontologies. For now, however, it is RECOMMENDED that SBOL tools also include the high-level terms in \ref{tbl:activity_types} to support data exchange across interdisciplinary boundaries.
 
@@ -134,7 +153,7 @@ Using a computational tool, a new Design (\sbol{Component}) is composed from bio
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=\linewidth]{uml/design-build-test}
+\includegraphics[width=0.75\linewidth]{uml/design-build-test}
 \caption[]{An example data structure representing an idealized workflow for model-based design.}
 \label{images:design-build-test-learn}
 \end{center}

@@ -70,7 +70,7 @@ Reference: \sec{sec:URIstructure}}
   \texttt{[namespace]/[local]/[displayId]},  where \texttt{namespace} and \sbol{displayId} are required fragments, and the \texttt{local} fragment is an optional relative path.\\ 
 Reference: \sec{sec:URIstructure}}
 
-\printValid{A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object.}\\ 
+\printValid{A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object.\\ 
 Reference: \sec{sec:URIstructure}}
 
 \printValid{The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object.
@@ -307,17 +307,7 @@ Class & Property & Cardinality & Type & Referred Type & Reference\\
 \prov{entity} references in \prov{Usage} objects MUST NOT form circular reference chains.
 \\ Reference: \sec{sec:Identified}}
 
-\printModeling{An \sbol{Identified} object with a \prov{wasGeneratedBy} property referring to an \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property with value \url{http://sbols.org/v3\#design} SHOULD be a \sbol{TopLevel} object other than \sbol{Implementation}.\\
-Reference: \sec{sec:provenance}}
-
-\printModeling{An \sbol{Identified} object with a \prov{wasGeneratedBy} property referring to an \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property with value \url{http://sbols.org/v3\#build} SHOULD be an \sbol{Implementation}.\\ 
-Reference: \sec{sec:provenance}}
-
-\printModeling{An \sbol{Identified} object with a \prov{wasGeneratedBy} property referring to an \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property with value \url{http://sbols.org/v3\#test} SHOULD be an \sbol{ExperimentalData}.\\ 
-Reference: \sec{sec:provenance}}
-
-\printModeling{An \sbol{Identified} object with a \prov{wasGeneratedBy} property referring to an \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property with value \url{http://sbols.org/v3\#learn} SHOULD not be an \sbol{Implementation}.\\
-Reference: \sec{sec:provenance}}
+\printModeling{An \sbol{Identified} object with a \prov{wasGeneratedBy} property referring to an \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property with a value from \ref{tbl:activity_types} should be of the corresponding type in \ref{tbl:dbtl_stages}.\\ Reference: \sec{sec:provenance}}
 
 
 \subsubsection*{Rules for the \class{TopLevel} class} 
@@ -740,17 +730,8 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 
 \subsubsection*{Rules for the \class{prov:Activity} class} 
 \setcounter{sbolCtr}{12901}
-  
-\todo[inline]{Consider compacting PROV rules here, in Usage, and in Identified with a table.}
 
-\printModeling{An \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property that contains the \sbol{URI}\\
-\url{http://sbols.org/v3\#design} SHOULD NOT have child \prov{Usage} objects that have \provmult{hadRole:U}{hadRole} properties that contain the \sbol{URI}s~\url{http://sbols.org/v3\#build} or~\url{http://sbols.org/v3\#test}.\\ Reference: \sec{sec:prov:Activity}}
-
-\printModeling{An \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property that contains the \sbol{URI}~\url{http://sbols.org/v3\#build} SHOULD NOT have child \prov{Usage} objects that have \provmult{hadRole:U}{hadRole} properties that contain the \sbol{URI}s~\url{http://sbols.org/v3\#test} or~\url{http://sbols.org/v3\#learn}.\\ Reference: \sec{sec:prov:Activity}}
-
-\printModeling{An \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property that contains the \sbol{URI}~\url{http://sbols.org/32\#test} SHOULD NOT have child \prov{Usage} objects that have \provmult{hadRole:U}{hadRole} properties that contain the \sbol{URI}s~\url{http://sbols.org/v3\#design} or~\url{http://sbols.org/v3\#learn}.\\ Reference: \sec{sec:prov:Activity}}
-
-\printModeling{An \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property that contains the \sbol{URI}~\url{http://sbols.org/v3\#learn} SHOULD NOT have child \prov{Usage} objects that have \provmult{hadRole:U}{hadRole} properties that contain the \sbol{URI}s~\url{http://sbols.org/v3\#design} or~\url{http://sbols.org/v3\#build}.\\ Reference: \sec{sec:prov:Activity}}
+\printModeling{An \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property from \ref{tbl:activity_types} SHOULD NOT have child \prov{Usage} objects that have \provmult{hadRole:U}{hadRole} properties from \ref{tbl:activity_types} other than the same \sbol{URI} or the \sbol{URI} of the preceding stage given in \ref{tbl:dbtl_stages}.\\ Reference: \sec{sec:prov:Activity}}
 
 \printModeling{If an \prov{Activity} has a \sbolmult{type:Activity}{type} property with a value from \ref{tbl:activity_types}, then every child \prov{Association} SHOULD have a \provmult{hadRole:A}{hadRole} property with the same value. \\ Reference: \sec{sec:prov:Activity}}
 
@@ -758,14 +739,8 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 \subsubsection*{Rules for the \class{prov:Usage} class} 
 \setcounter{sbolCtr}{13001}
 
+\printModeling{If a \prov{Usage} has a \provmult{hadRole:U}{hadRole} property with a value from \ref{tbl:activity_types}, then its \prov{entity} property SHOULD refer to an object of the corresponding type in \ref{tbl:dbtl_stages}.\\ Reference: \sec{sec:prov:Usage}}
 
-\printModeling{A \prov{Usage} that has a \provmult{hadRole:U}{hadRole} property with value \url{http://sbols.org/v3\#design} SHOULD refer to a \sbol{TopLevel} other than \sbol{Implementation}.\\ Reference: \sec{sec:prov:Usage}}
-
-\printModeling{A \prov{Usage} that has a \provmult{hadRole:U}{hadRole} property with value \url{http://sbols.org/v3\#build} SHOULD refer to an \sbol{Implementation}.\\ Reference: \sec{sec:prov:Usage}}
-
-\printModeling{A \prov{Usage} that has a \provmult{hadRole:U}{hadRole} property with value \url{http://sbols.org/v3\#test} SHOULD refer to an \sbol{ExperimentalData}.\\ Reference: \sec{sec:prov:Usage}}
-
-\printModeling{A \prov{Usage} that has a \provmult{hadRole:U}{hadRole} property with value \url{http://sbols.org/v3\#learn} SHOULD NOT refer to an \sbol{Implementation}.\\ Reference: \sec{sec:prov:Usage}}
 
 %\subsubsection*{Rules for the \class{prov:Association} class} 
 %\setcounter{sbolCtr}{13101}
