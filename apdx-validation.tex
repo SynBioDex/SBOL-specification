@@ -51,14 +51,14 @@ Not \notice all classes have validation rules specific to that class.
 For classes whose validation is covered by the rules for all SBOL objects, the type is not explicitly listed below.
 A range in the validation rules numbers, however, has been reserved in case of future need.
 
-\todo[inline]{This \token{sbol:x} format doesn't get used anywhere below that I can find; remove this paragraph?}
-For \notice convenience and brevity, we use the shorthand
-``\token{sbol:x}'' to stand for an attribute or element name \token{x}
-in the namespace for the SBOL specification, using
-the namespace prefix \token{sbol}.  In reality, the prefix string can be different from the literal ``\token{sbol}'' used here (and indeed, it can be any valid XML namespace prefix that the software
-chooses).  We use ``\token{sbol:x}'' because it is shorter than to
-write a full explanation everywhere we refer to an attribute or element
-in the SBOL specification namespace.
+%% This \token{sbol:x} format doesn't get used anywhere, so it is removed for now.
+%For \notice convenience and brevity, we use the shorthand
+%``\token{sbol:x}'' to stand for an attribute or element name \token{x}
+%in the namespace for the SBOL specification, using
+%the namespace prefix \token{sbol}.  In reality, the prefix string can be different from the literal ``\token{sbol}'' used here (and indeed, it can be any valid XML namespace prefix that the software
+%chooses).  We use ``\token{sbol:x}'' because it is shorter than to
+%write a full explanation everywhere we refer to an attribute or element
+%in the SBOL specification namespace.
 
 \subsubsection*{Rules for SBOL Objects}
 \setcounter{sbolCtr}{10101} 
@@ -333,10 +333,6 @@ Class & Property & Cardinality & Type & Referred Type & Reference\\
 \subsubsection*{Rules for the \class{Component} class}
 \setcounter{sbolCtr}{10601}
 
-\todo[inline]{Add: If a Component has a SequenceAnnotation that refers to Sequence X, then either the Component or one of its SubComponents must also have a SequenceAnnotation that gives Sequence X an EntireComponent Location.}
-
-\todo[inline]{Add: If a SubComponent has a Location that refers to Sequence X, then the either the SubComponent or its parent Component must also have a SequenceAnnotation that gives Sequence X an EntireComponent Location.}
-
 \printValid{The set of \sbolmult{type:C}{type} properties of a \sbol{Component} MUST NOT have more than one \sbol{URI} from \ref{tbl:component_types}.\\ Reference: \sec{sec:Component}}
 
 \printWarning{Each \sbolmult{type:C}{type} property of a \sbol{Component} MUST refer to an ontology term that describes the category of biochemical or physical entity that is represented by the \sbol{Component}.\\ Reference: \sec{sec:Component}}
@@ -375,16 +371,12 @@ Reference: \sec{sec:Component}}
 \printComplete{If a \sbolmult{hasSequence:C}{hasSequence} property of a \sbol{Component} refers to a \sbol{Sequence} object, and one of the  \sbolmult{type:C}{type} properties of this \sbol{Component} comes from \ref{tbl:component_types}, then one of the \sbol{Sequence} objects MUST have the \sbol{encoding} that is cross-listed with this type in \ref{tbl:sequence_encodings}.\\ 
 Reference: \sec{sec:Component}}
 
-\todo[inline]{How does this hold for a two-plasmid system?  Do we not put the sequences in hasSequence or do we violate this rule?}
 \printModeling{If a \sbol{Component} has more than one \sbolmult{hasSequence:C}{hasSequence} property that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} of these \sbol{Sequence} objects SHOULD have equal lengths.\\ Reference: \sec{sec:Component}}
 
-\todo[inline]{QUESTION: do we still need this one:
+% QUESTION: do we still need this one:
+% Answer: I believe that it is unworkably complex, as the "restrictions on the positions" bit may end up requiring solving an NP-complete problem to check. 
 %\printModeling{If a \sbol{Component} in a \sbol{Component}-\sbol{Component} hierarchy refers to one or more \sbol{Sequence} objects, and there exist \sbol{Component} objects lower in the hierarchy that refer to \sbol{Sequence} objects with the same \sbol{encoding}, then the \sbol{elements} properties of these \sbol{Sequence} objects SHOULD be consistent with each other, such that well-defined mappings exist from the ``lower level'' \sbol{elements} to the ``higher level'' \sbol{elements} in accordance with their shared \sbol{encoding} properties. This mapping is also subject to any restrictions on the positions of the \sbol{Component} objects in the hierarchy that are imposed by the \sbol{SequenceFeature} or \sbol{SequenceConstraint} objects contained by the \sbol{Component} objects in the hierarchy.\\ Reference: \sec{sec:Component}}
-}
 
-\todo[inline]{QUESTION: do we still need this one:
-%\printModeling{If the \sbol{sequences} property of a \sbol{Component} refers to a \sbol{Sequence} with an \external{IUPAC} \sbol{encoding} from \ref{tbl:sequence_encodings}, then each \sbol{SequenceFeature} that includes a \sbol{Range} and/or \sbol{Cut} in the \sbol{sequenceFeatures} property of the \sbol{Component} SHOULD specify a region on the \sbol{elements} of this \sbol{Sequence}.\\ Reference: \sec{sec:Component}}
-}
 
 \subsubsection*{Rules for the \class{Feature} class}
 \setcounter{sbolCtr}{10701}
@@ -499,19 +491,22 @@ Reference: \sec{sec:ExternallyDefined}}
 
 \printValid{If a \sbol{Location} has an \sbolmult{orientation:L}{orientation} property, its \sbol{URI} MUST be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Location}}
 
+\printValid{For every \sbol{Location} that is not an \sbol{EntireSequence}, the value of its \sbolmult{hasSequence:L}{hasSequence} property MUST also be the value of some \sbolmult{hasSequence:L}{hasSequence} property of an \sbol{EntireSequence} that is also a child of the same \sbol{Component}.\\ Reference: \sec{sec:Location}}
+
+
 \subsubsection*{Rules for the \class{Range} class} 
 \setcounter{sbolCtr}{11401}
 
-\printValid{The value of the \sbol{start} property of a \sbol{Range} MUST be greater than zero.\\ Reference: \sec{sec:Range}}
+\printValid{The value of the \sbol{start} property of a \sbol{Range} MUST be greater than zero and less than or equal to the length of the \sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Range}}
 
-\printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than zero.\\ Reference: \sec{sec:Range}}
+\printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than zero and less than or equal to the length of the \sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Range}}
 
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property.\\ Reference: \sec{sec:Range}}
 
 \subsubsection*{Rules for the \class{Cut} class} 
 \setcounter{sbolCtr}{11501}
 
-\printValid{The value of the \sbol{at} property of a \sbol{Cut} MUST be greater than or equal to zero.\\ Reference: \sec{sec:Cut}}
+\printValid{The value of the \sbol{at} property of a \sbol{Cut} MUST be greater than or equal to zero and less than or equal to the length of the \sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Cut}}
 
 
 %\subsubsection*{Rules for the \class{EntireSequence} class} 
