@@ -137,7 +137,7 @@ Class & Parent & SBOL Properties & Reference \\
 \sbol{LocalSubComponent} & \sbol{Feature} & \sbolmult{type:LSC}{type}, \sbolmult{hasLocation:LSC}{hasLocation} & \sec{sec:LocalSubComponent} \\
 \sbol{Location}		& \sbol{Identified} 	& \sbolmult{orientation:L}{orientation}, \sbol{order}, \sbolmult{hasSequence:L}{hasSequence} & \sec{sec:Location} \\
 \sbol{Model} 		& \sbol{TopLevel} 	& \sbolmult{source:M}{source}, \sbol{language}, \sbol{framework} & \sec{sec:Model} \\
-\sbol{Participation} 	& \sbol{Identified} 	& \sbolmult{role:P}{role}, \sbol{participant} & \sec{sec:Participation} \\
+\sbol{Participation} 	& \sbol{Identified} 	& \sbolmult{role:P}{role}, \sbol{participant}, \sbol{higherOrderParticipant} & \sec{sec:Participation} \\
 \sbol{Range} 		& \sbol{Location} 	& \sbol{start}, \sbol{end} & \sec{sec:Range} \\
 \sbol{SequenceFeature} & \sbol{Feature}	& \sbolmult{hasLocation:SF}{hasLocation} & \sec{sec:SequenceFeature} \\
 \sbol{Sequence} 	& \sbol{TopLevel} 	& \sbol{elements}, \sbol{encoding} & \sec{sec:Sequence} \\
@@ -232,7 +232,8 @@ Class & Property & Cardinality & Type & Referred Type & Reference\\
 \sbol{Model} 			& \sbolmult{source:M}{source} & REQUIRED, ONE		& \sbol{URI}	& ---				& \sec{sec:Model}\\
 \sbol{Model} 			& \sbol{framework} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:Model}\\
 \sbol{Model} 			& \sbol{language} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:Model}\\
-\sbol{Participation}		& \sbol{participant} 		& REQUIRED, ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:Participation}\\
+\sbol{Participation}		& \sbol{participant} 		& OPTIONAL, ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:Participation}\\
+\sbol{Participation}		& \sbol{higherOrderParticipant}	& OPTIONAL, ONE		& \sbol{URI}	& \sbol{Interaction}	& \sec{sec:Participation}\\
 \sbol{Participation} 		& \sbolmult{role:P}{role}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& ---				& \sec{sec:Participation}\\
 \sbol{Range}			& \sbol{end} 			& REQUIRED, ONE			& \sbol{Integer} & ---				& \sec{sec:Range}\\
 \sbol{Range}			& \sbol{start} 			& REQUIRED, ONE			& \sbol{Integer} & ---				& \sec{sec:Range}\\
@@ -546,7 +547,11 @@ Reference: \sec{sec:Interaction}}
 \subsubsection*{Rules for the \class{Participation} class} 
 \setcounter{sbolCtr}{11901}
 
+\printValid{A \sbol{Participation} MUST contain precisely one \sbol{participant} or \sbol{higherOrderParticipant} property.\\ Reference: \sec{sec:Participation}}
+
 \printValid{The \sbol{Feature} referenced by the \sbol{participant} property of a \sbol{Participation} MUST be contained by the \sbol{Component} that contains the \sbol{Interaction} that contains the \sbol{Participation}.\\ Reference: \sec{sec:Participation}}
+
+\printValid{The \sbol{Interaction} referenced by the \sbol{higherOrderParticipant} property of a \sbol{Participation} MUST be contained by the \sbol{Component} that contains the \sbol{Interaction} that contains the \sbol{Participation}.\\ Reference: \sec{sec:Participation}}
 
 \printWarning{Each \sbolmult{role:P}{role} property of a \sbol{Participation} MUST refer to an ontology term that describes the behavior represented by the \sbol{Participation}.\\ Reference: \sec{sec:Participation}}
 
