@@ -3,6 +3,7 @@
 
 Each \sbol{Participation} (see \ref{uml:participation}) represents how a particular \sbol{Feature} behaves in its parent \sbol{Interaction}.
 
+\threezeroone{
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.6]{uml/participation}
@@ -10,6 +11,7 @@ Each \sbol{Participation} (see \ref{uml:participation}) represents how a particu
 \label{uml:participation}
 \end{center}
 \end{figure}
+}
 
 \subparagraph{The \sbolheading{role} property}\label{sec:role:P}
 
@@ -46,5 +48,14 @@ If a \sbol{Participation} is well described by one of the terms from \ref{tbl:pa
 
 \subparagraph{The \sbolheading{participant} property}\label{sec:participant}
 
-The \sbol{participant} property MUST specify precisely one \sbol{Feature} object that plays the designated role in its parent \sbol{Interaction} object.
+The \sbol{participant} property \threezeroone{indicates a} \sbol{Feature} object that plays the designated role in its parent \sbol{Interaction} object.
+%
+\threezeroone{
+Precisely one value MUST be specified for precisely one of \sbol{participant}  or \sbol{higherOrderParticipant}.
 
+\subparagraph{The \sbolheading{higherOrderParticipant} property}\label{sec:higherOrderParticipant}
+
+The \sbol{higherOrderParticipant} property indicates an \sbol{Interaction} object that plays the designated role in its parent \sbol{Interaction} object.
+%
+Precisely one value MUST be specified for precisely one of \sbol{participant}  or \sbol{higherOrderParticipant}.
+}
