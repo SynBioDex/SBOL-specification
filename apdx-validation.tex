@@ -259,36 +259,36 @@ Class & Property & Cardinality & Type & Referred Type & Reference\\
 \prov{Activity}			& \prov{wasInformedBy}	& UNBOUNDED			& \sbol{URI}	& \prov{Activity}		& \sec{sec:prov:Activity}\\
 \prov{Activity}			& \sbolmult{type:Activity}{type} & UNBOUNDED		& \sbol{URI}	& ---				& \sec{sec:prov:Activity}\\
 \prov{Activity} 			& \prov{qualifiedAssociation} & UNBOUNDED			& \sbol{URI}	& \prov{Association} 	& \sec{sec:prov:Activity}\\
-\prov{Association}		& \prov{agent} 			& REQUIRED				& \sbol{URI}	& \prov{Agent} 		& \sec{sec:prov:Association}\\
+\prov{Association}		& \prov{agent} 			& REQUIRED, ONE			& \sbol{URI}	& \prov{Agent} 		& \sec{sec:prov:Association}\\
 \prov{Association} 		& \provmult{hadRole:A}{hadRole} & UNBOUNDED 		& \sbol{URI}	& ---				& \sec{sec:prov:Association}\\
 \prov{Association} 		& \prov{hadPlan} 		& OPTIONAL				& \sbol{URI}	& \prov{Plan}		& \sec{sec:prov:Association}\\
-\prov{Usage}			& \prov{entity} 			& REQUIRED 				& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
+\prov{Usage}			& \prov{entity} 			& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
 \prov{Usage} 			& \provmult{hadRole:U}{hadRole} & UNBOUNDED 		& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
 \hline
 \om{Measure}			& \sbolmult{type:Measure}{type} & UNBOUNDED		& \sbol{URI}	& ---				& \sec{sec:om:Measure}\\
-\om{Measure} 			& \ommult{hasUnit:Measure}{hasUnit} & REQUIRED 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:Measure}\\
-\om{Measure} 			& \om{hasNumericalValue} & REQUIRED 				& xsd:float		& ---				& \sec{sec:om:Measure}\\
-\om{PrefixedUnit}		& \ommult{hasUnit:PrefixedUnit}{hasUnit} & REQUIRED 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:PrefixedUnit}\\
-\om{PrefixedUnit} 		& \om{hasPrefix} 		& REQUIRED 				& \sbol{URI}	& \om{Prefix}		& \sec{sec:om:PrefixedUnit}\\
+\om{Measure} 			& \ommult{hasUnit:Measure}{hasUnit} & REQUIRED, ONE & \sbol{URI}	& \om{Unit}		& \sec{sec:om:Measure}\\
+\om{Measure} 			& \om{hasNumericalValue} & REQUIRED, ONE			& xsd:float		& ---				& \sec{sec:om:Measure}\\
+\om{PrefixedUnit}		& \ommult{hasUnit:PrefixedUnit}{hasUnit} & REQUIRED, ONE 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:PrefixedUnit}\\
+\om{PrefixedUnit} 		& \om{hasPrefix} 		& REQUIRED, ONE			& \sbol{URI}	& \om{Prefix}		& \sec{sec:om:PrefixedUnit}\\
 \om{Prefix}			& \ommult{alternativeLabels:Prefix}{alternativeLabels} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Prefix}\\
 \om{Prefix}			& \ommult{comment:Prefix}{comment} & OPTIONAL		& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
-\om{Prefix}			& \ommult{hasFactor:Prefix}{hasFactor} & REQUIRED 	& xsd:float		& ---				& \sec{sec:om:Prefix}\\
-\om{Prefix}			& \ommult{label:Prefix}{label} & REQUIRED 			& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{hasFactor:Prefix}{hasFactor} & REQUIRED, ONE & xsd:float		& ---				& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{label:Prefix}{label} & REQUIRED, ONE		& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
 \om{Prefix}			& \ommult{longcomment:Prefix}{longcomment} & OPTIONAL & \sbol{String} & ---			& \sec{sec:om:Prefix}\\
 \om{Prefix} 			& \ommult{alternativeSymbols:Prefix}{alternativeSymbol} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Prefix}\\
-\om{Prefix} 			& \ommult{symbol:Prefix}{symbol} & REQUIRED 		& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
+\om{Prefix} 			& \ommult{symbol:Prefix}{symbol} & REQUIRED, ONE	& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
 \om{SingularUnit}		& \ommult{hasUnit:SingularUnit}{hasUnit} & OPTIONAL 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:SingularUnit}\\
 \om{SingularUnit} 		& \ommult{hasFactor:SingularUnit}{hasFactor} & OPTIONAL & xsd:float	& ---				& \sec{sec:om:SingularUnit}\\
-\om{UnitDivision} 		& \om{hasDenominator} 	& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
-\om{UnitDivision} 		& \om{hasNumerator} 	& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
-\om{UnitExponentiation} 	& \om{hasBase} 		& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitExponentiation}\\
-\om{UnitExponentiation} 	& \om{hasExponent}		& REQUIRED 				& xsd:integer	& ---				& \sec{sec:om:UnitExponentiation}\\
-\om{UnitMultiplication} 	& \om{hasTerm1} 		& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
-\om{UnitMultiplication} 	& \om{hasTerm2} 		& REQUIRED 				& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
+\om{UnitDivision} 		& \om{hasDenominator} 	& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
+\om{UnitDivision} 		& \om{hasNumerator} 	& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
+\om{UnitExponentiation} 	& \om{hasBase} 		& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitExponentiation}\\
+\om{UnitExponentiation} 	& \om{hasExponent}		& REQUIRED, ONE			& xsd:integer	& ---				& \sec{sec:om:UnitExponentiation}\\
+\om{UnitMultiplication} 	& \om{hasTerm1} 		& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
+\om{UnitMultiplication} 	& \om{hasTerm2} 		& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
 \om{Unit}				& \ommult{alternativeLabels:Unit}{alternativeLabels} & UNBOUNDED & \sbol{String} & ---		& \sec{sec:om:Unit}\\
-\om{Unit}				& \ommult{label:Unit}{label} & REQUIRED 			& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
+\om{Unit}				& \ommult{label:Unit}{label} & REQUIRED, ONE		& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
 \om{Unit}				& \ommult{longcomment:Unit}{longcomment} & OPTIONAL & \sbol{String} & ---				& \sec{sec:om:Unit}\\
-\om{Unit}				& \ommult{symbol:Unit}{symbol} & REQUIRED 			& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
+\om{Unit}				& \ommult{symbol:Unit}{symbol} & REQUIRED, ONE	& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
 \om{Unit} 				& \ommult{alternativeSymbols:Unit}{alternativeSymbols} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Unit}\\
 \om{Unit} 				& \ommult{comment:Unit}{comment} & OPTIONAL		& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
 \hline
