@@ -731,7 +731,7 @@ a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collectio
 \subsubsection*{Rules for the \class{prov:Activity} class} 
 \setcounter{sbolCtr}{12901}
 
-\printModeling{An \prov{Activity} with a child \prov{Association} that has a \provmult{hadRole:A}{hadRole} property from \ref{tbl:activity_types} SHOULD NOT have child \prov{Usage} objects that have \provmult{hadRole:U}{hadRole} properties from \ref{tbl:activity_types} other than the same \sbol{URI} or the \sbol{URI} of the preceding stage given in \ref{tbl:dbtl_stages}.\\ Reference: \sec{sec:prov:Activity}}
+\printModeling{An \prov{Activity} with a \sbol{type} from \ref{tbl:activity_types} SHOULD NOT have child \prov{Usage} objects that have \provmult{hadRole:U}{hadRole} properties from \ref{tbl:activity_types} other than the same \sbol{URI} or the \sbol{URI} of the preceding stage given in \ref{tbl:dbtl_stages}.\\ Reference: \sec{sec:prov:Activity}}
 
 \printModeling{If an \prov{Activity} has a \sbolmult{type:Activity}{type} property with a value from \ref{tbl:activity_types}, then every child \prov{Association} SHOULD have a \provmult{hadRole:A}{hadRole} property with the same value. \\ Reference: \sec{sec:prov:Activity}}
 
