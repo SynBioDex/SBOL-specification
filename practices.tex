@@ -16,11 +16,11 @@ Compliant URIs for \sbol{TopLevel} objects MUST conform to the following pattern
 \refObj{namespace}/\refObj{collection\_structure}/\refObj{displayId}
 \end{quotation}
 
-The \refObj{namespace} token MAY further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \sbol{URI}s can be automatically decomposed with the aid of a \sbol{Namespace}. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
+The \refObj{namespace} token MAY further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \sbol{URI}s can be automatically decomposed with the aid of a \sbol{TopLevel} object's \sbol{hasNamespace} property. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
 
 Consider, for example, the SBOL-compliant \sbol{URI}:
 \begin{quote}``https://synbiohub.org/igem/2017\_distribution/promoters/constitutive/BBa\_J23101''\end{quote} 
-in \sbol{Namespace} ``https://synbiohub.org/igem/2017\_distribution''.
+for a \sbol{Component} with a \sbol{hasNamespace} value ``https://synbiohub.org/igem/2017\_distribution''.
 This \sbol{URI} can be decomposed as follows:
 \begin{quote} 
 namespace: ``https://synbiohub.org/igem/2017\_distribution'' \linebreak
@@ -90,6 +90,7 @@ For example, \sbol{Component} \sbolmult{type:C}{type}s, such as DNA or protein, 
                                   & type & SO (nucleic acid topology)& \url{http://www.sequenceontology.org}\\
     						   	  & role & SO (\textit{DNA} or \textit{RNA}) & \url{http://www.sequenceontology.org}   \\
     						   	  & role & CHEBI (\textit{small molecule}) & \url{https://www.ebi.ac.uk/chebi/}   \\
+							  & role & PubChem (\textit{small molecule}) & \url{https://pubchem.ncbi.nlm.nih.gov/} \\
     						   	  & role & UniProt (\textit{protein}) & \url{https://www.uniprot.org/}  \\   
     						   	  & role & NCIT (\textit{samples}) & \url{https://ncithesaurus.nci.nih.gov/}  \\   
     \textbf{Interaction}	      & type & SBO (occurring entity branch) & 

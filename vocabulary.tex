@@ -14,7 +14,7 @@ In particular, the key words ``MUST'', ``MUST NOT'', ``REQUIRED'', ``SHALL'', ``
 \item The words ``MUST'', ``REQUIRED'', or ``SHALL'' mean that the item is an absolute requirement.
 \item The phrases ``MUST NOT'' or ``SHALL NOT'' mean that the item is an absolute prohibition.
 \item The word ``SHOULD'' or the adjective ``RECOMMENDED'' mean that there might exist valid reasons in particular circumstances to ignore a particular item, but the full implications need to be understood and carefully weighed before choosing a different course.
-\item The phrases ``SHOULD NOT'' or ``NOT RECOMMENDED'' mean that there might exist valid reasons in particular circumstances when the particular behavior is acceptable or even useful, but the full implications needs to be understood and the case carefully weighed before implementing any behavior described with this label.
+\item The phrases ``SHOULD NOT'' or ``NOT RECOMMENDED'' mean that there might exist valid reasons in particular circumstances when the particular behavior is acceptable or even useful, but the full implications need to be understood and the case carefully weighed before implementing any behavior described with this label.
 \item The word ``MAY'' or the adjective ``OPTIONAL'' mean that an item is truly optional.
 \end{itemize}
 
@@ -91,7 +91,7 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
   
   	For example, a \sbol{Component} might have the URL~\path{https://synbiohub.org/public/igem/BBa_J23070}, where \texttt{namespace} is \path{https://synbiohub.org}, \texttt{local} is \path{public/igem}, and \texttt{displayId} is \path{BBa_J23070}.
 
-  \item A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object (except for \threezeroone{\st{its controlling}} \threezeroone{a \sbol{Namespace} object, which instead MUST be the prefix of all objects for which it is the namespace).}
+  \item A \sbol{TopLevel} object's URL MUST NOT be included as prefix for any other \sbol{TopLevel} object.
   
   	For example, the \path{BBa_J23070_seq} \sbol{Sequence} object cannot have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/BBa_J23070_seq}, since the \path{https://synbiohub.org/public/igem/BBa_J23070} prefix is already used as a URL for the \path{BBa_J23070} \sbol{Component} object.
 
