@@ -583,32 +583,75 @@ Reference: \sec{sec:Interaction}}
 \printValid{A \sbol{CombinatorialDerivation} MUST NOT contain two or more \sbol{hasVariableFeature} properties that refer to \sbol{VariableFeature} objects with a \sbol{variable} property that contain the same \sbol{URI}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\todo[inline]{Nic: I need you to check these rules}
-
-\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a\\
-\sbol{CombinatorialDerivation} and the template \sbol{Component} of the\\
-\sbol{CombinatorialDerivation} contains \sbol{Constraint} objects, then any \sbol{Feature}\\
-contained by the first \sbol{Component} that has a \prov{wasDerivedFrom} property that refers to the \sbol{subject} or \sbol{object} \sbol{Feature} of any of the \sbol{Constraint} objects MUST adhere to the \sbol{restriction} properties of these \sbol{Constraint} objects.
+\printModeling{A \sbol{CombinatorialDerivation}'s template \sbol{Component} SHOULD contain one or more \sbol{hasFeature} properties.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printModeling{The \sbol{Feature} properties of the template \sbol{Component} of a \sbol{CombinatorialDerivation} SHOULD contain one or more \sbol{Feature} objects.
+% This one isn't true: it's only true for collections that are created as part of the derivation process.
+%\printModeling{If the \sbol{member} properties of a \sbol{Collection} refers only to objects with \prov{wasDerivedFrom} properties that refer to a \sbol{CombinatorialDerivation}, then the \prov{wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to the \sbol{CombinatorialDerivation}.
+%\\ Reference: \sec{sec:CombinatorialDerivation}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Derivation tracking
+
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then the \prov{wasDerivedFrom} properties of each child \sbol{Feature} of the \sbol{Component} should refer to a \sbol{Feature} in the template \sbol{Component} of the \sbol{CombinatorialDerivation}
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Collection} refers to a \sbol{CombinatorialDerivation}, then the \prov{wasDerivedFrom} properties of the objects that are referred to by its \sbol{member} properties SHOULD also refer to the \sbol{CombinatorialDerivation}.
+\\ Reference: \sec{sec:CombinatorialDerivation}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Consistency with template
+
+% derived type matches template type
 \printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then the \sbolmult{type:C}{type} properties of this \sbol{Component} 
 SHOULD contain all \sbol{URI}s contained by the \sbolmult{type:C}{type} properties of the template
 \sbol{Component} of the \sbol{CombinatorialDerivation}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
+% derived role matches template role
 \printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then the \sbolmult{role:C}{role} properties of this \sbol{Component} 
 SHOULD contain all \sbol{URI}s contained by the \sbolmult{role:C}{role} properties of the template
-\sbol{Component} of the \sbol{CombinatorialDerivation}.
+\sbol{Component} of the \sbol{CombinatorialDerivation}. 
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printModeling{If the \sbol{member} properties of a \sbol{Collection} refers only to objects with \prov{wasDerivedFrom} properties that refer to a \sbol{CombinatorialDerivation}, then the \prov{wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to the \sbol{CombinatorialDerivation}.
+% static features have identical properties
+\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then for any \sbol{Feature} in the \sbol{Component} with a \prov{wasDerivedFrom} property referring to a static \sbol{Feature} in the template \sbol{Component} of the \sbol{CombinatorialDerivation}, that derived \sbol{Feature} MUST have properties identical to those of the static \sbol{Feature}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
 
-\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Collection} refers to a \sbol{CombinatorialDerivation}, then the \prov{wasDerivedFrom} properties of the objects that are referred to by its \sbol{member} properties SHOULD also refer to the \sbol{CombinatorialDerivation}.
+% static features map one to one
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then each static \sbol{Feature} in the template \sbol{Component} SHOULD be referred to by a\\ \prov{wasDerivedFrom} property from exactly one \sbol{Feature} in the derived \sbol{Component}.
 \\ Reference: \sec{sec:CombinatorialDerivation}}
+
+% variable features are replaced by a corresponding cardinality
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then each variable \sbol{Feature} in the template \sbol{Component} SHOULD be referred to by a\\ \prov{wasDerivedFrom} property from a number of \sbol{Feature} objects in the derived \sbol{Component} that is compatible with the \sbol{cardinality} property of the corresponding \sbol{VariableFeature}.
+\\ Reference: \sec{sec:CombinatorialDerivation}}
+
+% variable features derivatives come from VariableFeature values
+\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then for any \sbol{SubComponent} in the \sbol{Component} with a \prov{wasDerivedFrom} property referring to a variable \sbol{Feature} in the template \sbol{Component} of the \sbol{CombinatorialDerivation}, that derived \sbol{SubComponent} MUST have an \sbol{instanceOf} property that refers to a \sbol{Component} specified by the corresponding  \sbol{VariableFeature}. 
+In particular, that \sbol{Component} must be a value of the \sbol{variant} property, 
+a \sbol{member} or recursive \sbol{member} of a \sbol{Collection} that is a value of the \sbol{variantCollection} property, 
+or a \sbol{Component} with a \prov{wasDerivedFrom} property that refers to a
+\sbol{CombinatorialDerivation} specified by a \sbol{variantDerivation} property of the \sbol{VariableFeature}.
+\\ Reference: \sec{sec:CombinatorialDerivation}}
+
+% derived features follow template constraints
+\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a
+\sbol{CombinatorialDerivation} and the template \sbol{Component} of the
+\sbol{CombinatorialDerivation} contains \sbol{Constraint} objects, then for any \sbol{Feature}
+contained by the \sbol{Component} that has a \prov{wasDerivedFrom} property that refers to the \sbol{subject} or \sbol{object} \sbol{Feature} of any of the template \sbol{Constraint} objects, that feature MUST adhere to the \sbol{restriction} properties of the template \sbol{Constraint} objects.
+\\ Reference: \sec{sec:CombinatorialDerivation}}
+
+% derived feature role matches template feature role
+\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then for any \sbol{Feature} in the \sbol{Component} with a \prov{wasDerivedFrom} property referring to a variable \sbol{Feature} in the template \sbol{Component} of the \sbol{CombinatorialDerivation}, 
+then the \sbolmult{role:F}{role} properties of that \sbol{Feature} SHOULD contain all \sbol{URI}s contained by the \sbolmult{role:F}{role} properties of the template \sbol{Feature}.
+\\ Reference: \sec{sec:CombinatorialDerivation}}
+
+% derived feature type matches template feature type
+\printModeling{Let the type-determining referent of a \sbol{Feature} be the \sbol{Feature} itself for a \sbol{LocalSubComponent} or \sbol{ExternallyDefined}, the \sbol{Component} referred by the \sbol{instanceOf} property of a \sbol{SubComponent} and the type-determining referent of the \sbol{Feature} referred to be a \sbol{ComponentReference}.\\
+If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation}, then for any \sbol{Feature} in the \sbol{Component} with a \prov{wasDerivedFrom} property referring to a variable \sbol{Feature} in the template \sbol{Component} of the \sbol{CombinatorialDerivation}, 
+then the \sbolmult{type:C}{type} properties of the \sbol{Feature}'s type-determining referent SHOULD contain all \sbol{URI}s contained by the \sbolmult{type:C}{type} properties of the template \sbol{Feature}'s type-determining referent.
+\\ Reference: \sec{sec:CombinatorialDerivation}}
+
 
 
 \subsubsection*{Rules for the \class{VariableFeature} class} 
@@ -627,41 +670,6 @@ SHOULD contain all \sbol{URI}s contained by the \sbolmult{role:C}{role} properti
 \printComplete{\sbol{VariableFeature} objects MUST NOT form circular reference chains via their \sbol{variantDerivation} properties and parent \sbol{CombinatorialDerivation} objects.
 \\ Reference: \sec{sec:VariableFeature}}
 
-\todo[inline]{This wasDerivedFrom rule is overly strong, and needs to be weakened to match the algorithm in the definition.  Probably all the other wasDerivedFrom rules too.}
-
-\todo[inline]{These need to be carefully looked at and likely have many errors.}
-
-\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{Feature} in the \sbol{template} \sbol{Component} of a \sbol{CombinatorialDerivation}, and the second \sbol{Feature} is referred to by the \sbol{variable} property of any \sbol{VariableFeature} in the 
-\sbol{CombinatorialDerivation}, then the \sbol{instanceOf} property of the first \sbol{Feature} MUST refer to a \sbol{Feature} specified by a \sbol{variant} property,
-a \sbol{Component} that is one of the \sbol{member} objects of a \sbol{Collection} specified by a \sbol{variantCollection} property, or a \sbol{Component} with a \prov{wasDerivedFrom} property that refers to a\\
-\sbol{CombinatorialDerivation} specified by a \sbol{variantDerivation} property of the \sbol{VariableFeature}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printComplete{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{SubComponent} in the \sbol{template} \sbol{Component} of a \sbol{CombinatorialDerivation}, and the second \sbol{SubComponent} is not referred to by the \sbol{variable} property of any \sbol{Feature} in the
-\sbol{CombinatorialDerivation}, then the \sbol{instanceOf} property of the first \sbol{SubComponent} MUST refer to the same \sbol{SubComponent} as the \sbol{instanceOf} property of the second \sbol{SubComponent}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation} and the \prov{wasDerivedFrom} property of a \sbol{SubComponent} contained by the \sbol{SubComponent} refers to a \sbol{SubComponent} contained by the template \sbol{SubComponent} of the \sbol{CombinatorialDerivation}, then the \sbolmult{role:C}{role} properties of the first \sbol{SubComponent} SHOULD contain all \sbol{URI}s contained by the \sbolmult{role:C}{role} property of the second \sbol{SubComponent}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a
-\sbol{VariableFeature} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v3\#zeroOrOne}, then the \sbol{SubComponent} properties of the \sbol{Component} SHOULD NOT contain more than one \sbol{SubComponent} with a \prov{wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableFeature}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a
-\sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a
-\sbol{VariableFeature} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v3\#one}, then the \sbol{SubComponent} properties of the \sbol{Component} SHOULD contain exactly one \sbol{SubComponent} with a
-\prov{wasDerivedFrom} property that refers to the same
-\sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableFeature}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a
-\sbol{CombinatorialDerivation} and the \sbol{CombinatorialDerivation} contains a \sbol{VariableFeature} with an \sbol{cardinality} property that contains the \sbol{URI}~\url{http://sbols.org/v3\#oneOrMore}, then the \sbol{SubComponent} properties of the \sbol{Component} SHOULD contain at least one \sbol{SubComponent} with a\\
-\prov{wasDerivedFrom} property that refers to the same \sbol{SubComponent} as the \sbol{variable} property of the \sbol{VariableFeature}.
-\\ Reference: \sec{sec:VariableFeature}}
-
-\printModeling{If the \prov{wasDerivedFrom} property of a \sbol{Component} refers to a \sbol{CombinatorialDerivation} and the template \sbol{Component} of the \sbol{CombinatorialDerivation} contains a \sbol{SubComponent} that is not referred to by the \sbol{variable} property of any \sbol{VariableFeature} contained by the \sbol{CombinatorialDerivation}, then the first \sbol{SubComponent} SHOULD contain exactly one \sbol{SubComponent} with a \prov{wasDerivedFrom} property that refers to the \sbol{SubComponent} in the template \sbol{SubComponent}.
-\\ Reference: \sec{sec:VariableFeature}}
 
 \subsubsection*{Rules for the \class{Implementation} class} 
 \setcounter{sbolCtr}{12301}
