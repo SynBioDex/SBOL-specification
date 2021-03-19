@@ -22,7 +22,8 @@ following symbols next to the rule numbers:
 %(Mnemonic intention behind the choice of symbol:  ``This MUST be checked.'')
 
 \item[\hspace*{6.5pt}\rSymbol\rsp] A \rSymbolName indicates a weak
-  REQUIRED condition for SBOL conformance. While this rule MUST be followed, there are conditions under which it cannot be checked by a machine. 
+  REQUIRED condition for SBOL conformance. While this rule MUST be followed, there are conditions under which it can only be partially checked by a machine (e.g., due to references to data that is not accessible or data with an ambiguous format). 
+  Rules of this type SHOULD be checked insofar as is possible given the information available in a SBOL document.
 % (Mnemonic intention behind the choice of symbol: ``Usually requires a complete document.'')
 
 \item[\hspace*{6.5pt}\mSymbol\msp] A \mSymbolName indicates a 
