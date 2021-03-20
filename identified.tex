@@ -39,7 +39,8 @@ The \sbol{description} property is OPTIONAL and has a data type of \sbol{String}
 \label{sec:prov:wasDerivedFrom}
 An \sbol{Identified} object can have zero or more \prov{wasDerivedFrom} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace (Reference: \ref{sec:provenance}).
 
- An SBOL object with this property refers to one or more SBOL objects or non-SBOL resources from which this object was derived. An SBOL object MUST NOT refer to itself via its own \prov{wasDerivedFrom} property or form a cyclical chain of references via its \prov{wasDerivedFrom} property and those of other SBOL objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
+An \sbol{Identified} object with this property refers to one or more non-SBOL resources or SBOL \sbol{Identified} objects from which this object was derived. 
+ An \sbol{Identified} object MUST NOT refer to itself via its own \prov{wasDerivedFrom} property or form a cyclical chain of references via its \prov{wasDerivedFrom} property and those of other \sbol{Identified} objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
 
 \subparagraph{The \sbolheading{prov:wasGeneratedBy} property}
 \label{sec:prov:wasGeneratedBy}
