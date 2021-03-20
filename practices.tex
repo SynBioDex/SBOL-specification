@@ -126,7 +126,7 @@ Authorship information should ideally be added to \sbol{TopLevel} entities where
 Any \sbol{Component} can be interpreted as specifying a mixture of the material entity (SBO:0000240) \sbol{Feature}s that it includes.  The amount of each such instance included in the mixture SHOULD be specified by attaching a \om{Measure} with a \sbolmult{type:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
 \begin{itemize}
 \item SBO:0000540: fraction of an entity pool (e.g., 1/3 CHO cells, 2/3 HEK cells)
-\item SBO:0000472: molar concentration of an entity (e.g., 1 mM Arabinose)
+\item SBO:0000472: molar concentration of an entity (e.g., 1 mM arabinose)
 \item SBO:0000361: amount of an entity pool (e.g., 200 uL M9 media)
 \end{itemize}
 
@@ -134,9 +134,10 @@ Mixtures MAY be defined recursively, as mixtures of mixtures of mixtures, etc.
 
 \subsubsection{Media, Inducers, and Other Reagents}
 
-Each reagent, whether ``atomic'' (e.g., rainbow bead control) or mixture (e.g., M9 media), SHOULD be represented as a \sbol{Component}.
+Each reagent, whether ``atomic'' (e.g., rainbow bead control) or mixture (e.g., M9 media), SHOULD be represented as a \sbol{Component} and/or as a \sbol{Feature} of a \sbol{Component} in which the reagent is used.
+For example, a custom media mixture might be defined as a \sbol{Component} and used as a \sbol{SubComponent}, while a commercially supplied reagent might be used as an \sbol{ExternallyDefined} feature linking to its PubChem identifiers.
 
-The roles of reagents may vary in context: for example, Arabinose may serve as an inducer or as a media carbon source. As such, role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{role:F}{role} property of the \sbol{SubComponent}. Examples include:
+The roles of reagents may vary in context: for example, arabinose may serve as an inducer or as a media carbon source. As such, contextual role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{role:F}{role} property of the \sbol{Feature}. Examples include:
 \begin{itemize}
 \item NCIT:C64356: Positive Control
 \item NCIT:C48694: Cell
@@ -153,16 +154,16 @@ For more information on representing cells, strains, plasmids, and genomes, see 
 
 A complete specification of a sample SHOULD be a \sbol{Component} that includes at least:
 \begin{itemize}
-\item A \sbol{SubComponent} instantiating each strain in the sample
-\item A \sbol{SubComponent} for the media or buffer
-\item A \sbol{SubComponent} for each additional reagent added to the media (e.g., inducers, antibiotics)
+\item A \sbol{Feature} instantiating each strain in the sample
+\item A \sbol{Feature} for the media or buffer
+\item A \sbol{Feature} for each additional reagent added to the media (e.g., inducers, antibiotics)
 \item \om{Measure}s on each of these specifying the amount in the sample
 \item \om{Measure}s on the \sbol{Component} for each environmental parameter (e.g., temperature, pH, culturing time)
 \end{itemize}
 
 \subsubsection{Other Experimental Parameters}
 
-In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, the \sbol{hasMeasure} property of \sbol{Identified} can be used.  The \sbol{hasMeasure} of a \sbol{Component} provides context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \sbol{hasMeasure} of a material entity (SBO:0000240) \sbol{Feature} provides a measurement in context (e.g., the dosage of Arabinose in a sample).
+In order to deal with parameters associated with the context in general but not specific instances, e.g., temperature, pH, total sample volume, the \sbol{hasMeasure} property of \sbol{Identified} can be used.  The \sbol{hasMeasure} of a \sbol{Component} provides context-free information (e.g., the pH of M9 media, the GC-content of a GFP coding sequence), while the \sbol{hasMeasure} of a material entity (SBO:0000240) \sbol{Feature} provides a measurement in context (e.g., the dosage of arabinose in a sample).
 
 Values of these parameters SHOULD be specified by attaching a \om{Measure} with a \sbolmult{type:Measure}{type} set to the appropriate SBO term. The SBO terms that are RECOMMENDED as appropriate are members of the Systems Description Parameter (SBO:0000545) branch of SBO. Examples include:
 \begin{itemize}
@@ -183,7 +184,7 @@ To represent multicellular systems using SBOL, it is first necessary to represen
 When doing so, it is important to be able to capture the following information: (i) taxonomy of the strain used, (ii) interactions occurring within cells of this type, and (iii) components inside the type of cell (e.g. genomes, plasmids). 
 The approach RECOMMENDED in this section is capable of capturing this information, as shown in the example in \ref{uml:cell_representation}. 
 It uses a \sbol{Component} to represent a system that contains cells of the given type.
-The cells themselves are represented by a \sbol{SubComponent} inside the \sbol{Component}, which is an \sbol{instanceOf} 
+The cells themselves are represented by a \sbol{Feature} inside the \sbol{Component}, in this case a \sbol{SubComponent} that is an \sbol{instanceOf} 
 a \sbol{Component} capturing information about the species and strain of the cell in the design. 
 This \sbol{Component} has a \sbolmult{type:C}{type} of ``cell'' from the Gene Ontology (GO:0005623), and a \sbolmult{role:C}{role} of ``physical compartment'' (SBO:0000290).
 %\todo[inline]{What property are we actually recommending to use for the annotation?}
@@ -192,7 +193,7 @@ Taxonomic information is captured by annotating the class instance with a URI fo
 As usual, other entities besides the cell that are relevant to the design are also captured as \sbol{Feature}s.
 When these are contained within the cell, they are captured using a \sbol{Constraint} with restriction \texttt{contains} with the cell as \sbol{subject} and contained object as \sbol{object}.
 Interactions which occur in this system are captured using the \sbol{Interaction} and \sbol{Participation} classes. 
-Interactions which occur within the cell are specified by \sbol{Interaction} classes which contain the \sbol{SubComponent} instance representing the cell as a \sbol{participant} with a \sbolmult{role:P}{role} of ``physical compartment'' (SBO:0000290).
+Interactions which occur within the cell are specified by \sbol{Interaction} classes which contain the \sbol{Feature} instance representing the cell as a \sbol{participant} with a \sbolmult{role:P}{role} of ``physical compartment'' (SBO:0000290).
 
 \begin{figure}[htp]
 	\begin{center}
@@ -200,7 +201,7 @@ Interactions which occur within the cell are specified by \sbol{Interaction} cla
 		\caption[Repressenting a cell]{This is a proposed approach for capturing cell designs in SBOL. A \sbol{Component} annotated with a URI pointing to an entry in the NCBI Taxonomy Database is used to capture information about the cell's strain/species. 
 		The \sbol{Component} has a type of ``Cell'' from the Gene Ontology (GO), and a role of ``physical compartment''. 
 		Another \sbol{Component} is used to represent a system in which the cell is implemented. 
-		Entities, including the cell, are instantiated as \sbol{SubComponent}s, and processes are captured using the \sbol{Interaction} class.
+		Entities, including the cell, are instantiated as \sbol{Feature}s, and processes are captured using the \sbol{Interaction} class.
 		Processes that are contained within the cell are represented by including the cell as a participant with a role of ``physical compartment''. }
 		\label{uml:cell_representation}
 	\end{center}
@@ -209,7 +210,7 @@ Interactions which occur within the cell are specified by \sbol{Interaction} cla
 \subsubsection{Multiple Cell Types in a Single Design}
 
 The same approach can be extended to represent systems with multiple types of cells.
-The multicellular system can be represented as a \sbol{Component} that includes each strain of cell as a \sbol{SubComponent} that is an \sbol{instanceOf} a \sbol{Component} defining its strain.
+The multicellular system can be represented as a \sbol{Component} that includes each strain of cell as a \sbol{Feature}, in this example a \sbol{SubComponent} that is an \sbol{instanceOf} a \sbol{Component} defining its strain.
 Interactions and constraints, such as a molecule that both strains interact with, are implemented using \sbol{ComponentReference}s to link to the definitions within each cell system description.
 An example is shown in \ref{uml:multiple_cell_representation}.
 
@@ -219,7 +220,7 @@ An example is shown in \ref{uml:multiple_cell_representation}.
 		\caption[]{Captured here is a design involving two cells which both interact with the small molecule ``Molecule A''. 
 		Designs for the sender and receiver systems are captured using constraint to show that each of these cells interacts with the Molecule A contained within it.
 		The overall multicellular system is represented by a \sbol{Component} with a \sbolmult{role:C}{role} of ``functional compartment'', which is an SBO term.
-		The two systems are included in this multicellular design as \sbol{SubComponent}s, and the fact that Molecule A is shared between systems is indicated with a constraint.}
+		The two systems are included in this multicellular design as \sbol{Feature}s, and the fact that Molecule A is shared between systems is indicated with a constraint.}
 		\label{uml:multiple_cell_representation}
 	\end{center}
 \end{figure}
