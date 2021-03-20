@@ -2,45 +2,68 @@
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>200</x>
-      <y>190</y>
-      <w>250</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>*Identified*
---
--displayId[0..1] : String
--name[0..1] : String
--description[0..1] : String
--prov:wasDerivedFrom[0..*] : URI
--prov:wasGeneratedBy[0..*] : URI
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>230</y>
-      <w>160</w>
+      <x>570</x>
+      <y>250</y>
+      <w>220</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
 hasMeasure
 0..*</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>580</x>
-      <y>240</y>
+      <x>770</x>
+      <y>260</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>*om:Measure*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>300</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*prov:Activity*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>290</y>
+      <w>220</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+prov:wasGeneratedBy
+0..*</panel_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>230</y>
+      <w>250</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>/*Identified*/
+--
+-displayId[0..1] : String
+-name[0..1] : String
+-description[0..1] : String
+-prov:wasDerivedFrom[0..*] : URI
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
