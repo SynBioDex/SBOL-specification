@@ -165,6 +165,11 @@ by assigning PROV-O classes to SBOL \sbol{Identified} or \sbol{TopLevel} types p
 %
 As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \om{Measure}, \om{Unit} and \om{Prefix}. A \om{Measure} links a numerical value to a \om{Unit}, which may or may not have a \om{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \om{Measure} is treated as a subclass of \sbol{Identified}, while \om{Unit} and \om{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \om{Unit} subclasses: \om{SingularUnit}, \om{CompoundUnit}, \om{UnitMultiplication}, \om{UnitDivision}, \om{UnitExponentiation}, and \om{PrefixedUnit}. Lastly, SBOL adopts the following \om{Prefix} subclasses from OM: \om{SIPrefix} and \om{BinaryPrefix}.
 
+OM also provides a large number of predefined \om{Unit} instances, so in most cases there is no need to create anything other than \om{Measure} objects that refer to pre-existing instances.
+This can simplify the comparison and interpretation of units, so for this reason, a pre-existing \om{Unit} instance SHOULD be used whenever one is applicable.
+If a unit does not already exist in the ontology, however, then the \om{Unit} subclasses MAY be used to create new units.
+
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\linewidth]{uml/om}
