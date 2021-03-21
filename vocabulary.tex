@@ -41,19 +41,17 @@ In addition, in the SBOL data model, it is REQUIRED that the value of each compo
 Note that in all cases, composite aggregation is used in such a way that there SHOULD NOT be duplication of such objects.
 Such objects are also commonly referred to as ``child'' objects, and their owning objects as ``parent'' objects.
 
-All SBOL properties are labeled with one of several restrictions on data cardinality. These are:
+All SBOL properties are labeled with one of several restrictions on data cardinality. These are defined, per RDF, as:
 
 \begin{itemize}
 
-\item $1$ - REQUIRED, one: there MUST be exactly one value for this property.
+\item $1$ - EXACTLY ONE: the property is REQUIRED, and there MUST be exactly one value for this property.
 
-\item $0 \ldots 1$ - OPTIONAL: there MAY be a single value for this property, or it MAY be absent.
+\item $0 \ldots 1$ - ZERO OR ONE: the property is optional, such that there MAY be a single value for this property, or it MAY be absent.
 
-\item $0 \ldots *$ - unbounded: there MAY be any number of values for this property, including none.
+\item $0 \ldots *$ - ZERO OR MORE: the property is unbounded, such that there MAY be any number of values for this property, including none.
 
-\item $1 \ldots *$ - REQUIRED, unbounded: there MAY be any number of values for this property, as long as there is at least one.
-
-\item $n \ldots *$ - at least: there MUST be at least $n$ values for this property.
+\item $1 \ldots *$ - ONE OR MORE: the property is REQUIRED, such that there MAY be any number of values for this property, as long as there is at least one.
 
 \end{itemize}
 
