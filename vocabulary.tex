@@ -145,10 +145,15 @@ The term \sbol{literal} is used to denote an object that can be any of the five 
 
 In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}). It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
 
-\threezeroone{\subsection{SBOL Types}
-  \label{sec:sbolTypes}
+\subsection{SBOL Types}
+\label{sec:sbolTypes}
 
-All SBOL objects are given the most specific \external{rdfType} in the SBOL 3 namespace (\uri{http://sbols.org/v3\#}) that defines the type of the object.  Namely, an object MUST have no more than one \external{rdfType} property in the \uri{http://sbols.org/v3\#} namespace.
+All SBOL objects are given the most specific \external{rdfType} in the SBOL 3 namespace (\uri{http://sbols.org/v3\#}) that defines the type of the object.
+Likewise, properties in the SBOL 3 namespace should only be used by objects with an SBOL 3 \external{rdfType}.
 
-For example, an object cannot have both the \external{rdfType} of \sbol{Collection} and \sbol{Component}.  Also, a \sbol{SubComponent} would have this \external{rdfType} and not also include \external{rdfType}s for classes that it inherits from, such as \sbol{Feature} and \sbol{Identified}.
-}
+SBOL does not use multiple inheritance: all SBOL classes are disjoint except with respect to their abstract parent classes.
+Accordingly, an object MUST NOT be given two \external{rdfType} properties referring to disjoint classes in the SBOL 3 namespace.
+An object MAY have redundant \external{rdfType} properties for its parent types, but this is NOT RECOMMENDED.
+
+For example, an object cannot have both the \external{rdfType} of \sbol{Collection} and \sbol{Component}.  
+A \sbol{Component} could also have an \external{rdfType} for \sbol{TopLevel} and \sbol{Identified}, but this is discouraged.

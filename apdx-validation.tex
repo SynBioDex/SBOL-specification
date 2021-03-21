@@ -81,7 +81,10 @@ Reference: \sec{sec:URIstructure}}
 \printValid{The SBOL namespace MUST NOT be used for any entities or properties not defined in this specification.\\  
 Reference: \sec{sec:sbolURIs}}
 
-\printValid{An object MUST have no more than one \external{rdfType} property in the \uri{http://sbols.org/v3\#} namespace.\\
+\printValid{An object MUST NOT have \external{rdfType} properties in the \uri{http://sbols.org/v3\#} namespace that refer to disjoint classes.\\
+Reference: \sec{sec:sbolTypes}}
+
+\printModeling{An object SHOULD have no more than one \external{rdfType} property in the \uri{http://sbols.org/v3\#} namespace.\\
 Reference: \sec{sec:sbolTypes}}
 
 \printModeling{If an object has a property in the \uri{http://sbols.org/v3\#} namespace (e.g., \texttt{sbol:displayId}, then it SHOULD also have an \external{rdfType} property in that namespace.\\
