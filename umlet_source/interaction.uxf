@@ -44,17 +44,6 @@ hasParticipation
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>200</x>
-      <y>310</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>/*Identified*/</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
       <x>460</x>
       <y>390</y>
       <w>120</w>
@@ -66,6 +55,17 @@ hasParticipation
 
 
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>310</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*Identified*</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
