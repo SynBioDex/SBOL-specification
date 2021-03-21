@@ -74,7 +74,7 @@ When the property uses a different name than the class of the object it points t
 
 
 % -----------------------------------------------------------------------------
-\section{Identifiers and Primitive Types}
+\section{Identifiers and Types}
 % -----------------------------------------------------------------------------
 
 \subsection{Uniform Resource Identifiers}
@@ -143,3 +143,43 @@ When SBOL uses simple ``primitive'' data types such as \sbol{String}s or \sbol{I
 The term \sbol{literal} is used to denote an object that can be any of the five types listed above.
 
 In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}). It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
+
+
+\subsection{Object Closure and Document Composition}
+
+In RDF, there is no requirement that all of the information about an object be stored in one location.  
+Instead, there is a ``open world'' assumption that additional triples describing the object may be acquired at any time.
+Documents are allowed to be fragmented and composed in an arbitrary manner, down to their underlying atomic triples, with no consideration for object structure.
+
+This limits the ability to reason about properties of objects and validate the correctness of a model.
+For example, it would not be possible to validate that an \sbol{Identified} object has no more than one value for its \sbol{displayId} property, because it would not be possible to determine whether some other document somewhere in the world holds a second value for the property.
+
+SBOL addresses this by adding an object closure assumption that allows stronger reasoning about individual objects and their children.
+For any given SBOL document, if the document contains an \external{rdfType} statement regarding an \sbol{Identified} object $X$, then it is assumed that the document also contains all other property statements about object $X$ as well. 
+This enables strong validation rules, since any statement of the form ``$X$ {\it predicate} $Y$'' that is not present can be assumed to be false.
+For example, if a document has one value for an object's \sbol{displayId}, then it is valid to conclude that there are no other \sbol{displayId} values, and thus its "zero or one" cardinality requirement is satisfied.
+
+We further assume that any document containing an object also contains all of its child objects.
+In other words, the fundamental unit of SBOL documents is the \sbol{TopLevel} object, and any document containing a \sbol{TopLevel} also contains the complete set of information necessary to describe that \sbol{TopLevel}---but not necessarily any other \sbol{TopLevel} objects that it refers to.
+For example, a document containing a \sbol{Component} describing a plasmid is guaranteed to contain every \sbol{Feature} of the plasmid as well as every \sbol{Interaction} and \sbol{Constraint} that relates those features, but the document might not contain the \sbol{Sequence} for the plasmid or the definitions for the \sbol{Component} objects linked from its \sbol{SubComponent} parts.
+
+An SBOL document thus cleaves naturally along the boundaries of \sbol{TopLevel} objects, implying the following set of rules of fragmentation and composition of documents:
+\begin{itemize}
+\item Any subset of \sbol{TopLevel} objects in a valid SBOL document is also a valid SBOL document.
+\item Any disjoint set of \sbol{TopLevel} objects from different SBOL documents MAY be composed to form a new SBOL document. The result is not guaranteed to be valid, however, since the composition may expose problems due to the relationships between \sbol{TopLevel} objects from different documents.
+\item If two \sbol{TopLevel} objects in different SBOL documents have the same identity and all other properties are equal as well, then they MAY be treated as identical and freely merged. 
+\item  If two \sbol{TopLevel} objects in different SBOL documents have the same identity but different property values, then they MUST be considered different (possibly conflicting) versions, and any merger managed through some version control process.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
