@@ -84,6 +84,9 @@ Reference: \sec{sec:sbolURIs}}
 \printValid{An object MUST have no more than one \external{rdfType} property in the \uri{http://sbols.org/v3\#} namespace.\\
 Reference: \sec{sec:sbolTypes}}
 
+\printModeling{If an object has a property in the \uri{http://sbols.org/v3\#} namespace (e.g., \texttt{sbol:displayId}, then it SHOULD also have an \external{rdfType} property in that namespace.\\
+Reference: \sec{sec:sbolTypes}}
+
 \printValid{An object MUST NOT have properties in the \uri{http://sbols.org/v3\#} namespace other than those listed for its type or parent types in \ref{t:allowed_properties}.\\
 Reference: \sec{sec:sbolURIs}}
  
@@ -98,6 +101,7 @@ Reference: \sec{sec:datatypes}}
 
 \printComplete{Each property of type \sbol{URI} that is listed with a reference type in \ref{t:property_cardinality_type} MUST refer to an object of the type listed (\sbol{TopLevel} objects).\\
 Reference: \sec{sec:datatypes}}
+
 
 
 \begin{scriptsize}
