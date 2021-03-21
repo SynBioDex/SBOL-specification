@@ -102,9 +102,13 @@ Reference: \sec{sec:datatypes}}
 \printValid{Each property of type \sbol{URI} that is listed with a reference type in \ref{t:property_cardinality_type} MUST refer to an object of the type listed (child objects).\\
 Reference: \sec{sec:datatypes}}
 
-\printComplete{Each property of type \sbol{URI} that is listed with a reference type in \ref{t:property_cardinality_type} MUST refer to an object of the type listed (\sbol{TopLevel} objects).\\
+% This is true for both TopLevel and child objects. It can always be checked for child objects, but for TopLevel only those accessible
+\printComplete{Each property of type \sbol{URI} that is listed with a reference type in \ref{t:property_cardinality_type} MUST refer to an object of the type listed.\\ 
 Reference: \sec{sec:datatypes}}
 
+% references should be accessible, if possible
+\printModeling{Each property of type \sbol{URI} that is listed with a \sbol{TopLevel} reference type in \ref{t:property_cardinality_type} SHOULD be able to be dereferenced to obtain an SBOL object.\\
+Reference: \sec{sec:datatypes}}
 
 
 \begin{scriptsize}
