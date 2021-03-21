@@ -196,113 +196,113 @@ Class & Property & Cardinality & Type & Referred Type & Reference\\
 \endfoot
 \hline
 \endlastfoot
-\sbol{Attachment} 		& \sbolmult{source:A}{source} & REQUIRED, ONE		& \sbol{URI}	& ---				& \sec{sec:Attachment}\\
-\sbol{Attachment} 		& \sbol{format}  		& OPTIONAL				& \sbol{URI}	& ---				& \sec{sec:Attachment}\\
-\sbol{Attachment} 		& \sbol{hashAlgorithm}  	& OPTIONAL				& \sbol{String}	& ---				& \sec{sec:Attachment}\\
-\sbol{Attachment} 		& \sbol{hash}  			& OPTIONAL				& \sbol{String}	& ---				& \sec{sec:Attachment}\\
-\sbol{Attachment} 		& \sbol{size}	  		& OPTIONAL				& \sbol{Long}	& ---				& \sec{sec:Attachment}\\
-\sbol{Collection} 		& \sbol{member} 		& UNBOUNDED			& \sbol{URI}	& \sbol{TopLevel}	& \sec{sec:Collection}\\
-\sbol{CombinatorialDerivation} & \sbol{hasVariableFeature} & UNBOUNDED		& \sbol{URI}	& \sbol{VariableFeature} & \sec{sec:CombinatorialDerivation}\\
-\sbol{CombinatorialDerivation} & \sbol{strategy} 	& OPTIONAL 				& \sbol{URI}	& ---				& \sec{sec:CombinatorialDerivation}\\
-\sbol{CombinatorialDerivation} & \sbol{template} 	& REQUIRED, ONE			& \sbol{URI}	& \sbol{Component}	& \sec{sec:CombinatorialDerivation}\\
-\sbol{ComponentReference} & \sbol{hasFeature} 	& REQUIRED, ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:ComponentReference}\\
-\sbol{ComponentReference} & \sbol{inChildOf} 		& REQUIRED, ONE			& \sbol{URI}	& \sbol{SubComponent} & \sec{sec:ComponentReference}\\
-\sbol{Component}		& \sbolmult{hasSequence:C}{hasSequence} & UNBOUNDED & \sbol{URI} & \sbol{Sequence}	& \sec{sec:Component}\\
-\sbol{Component}		& \sbolmult{role:C}{role} 	& UNBOUNDED			& \sbol{URI}	& ---				& \sec{sec:Component}\\
-\sbol{Component}		& \sbolmult{type:C}{type}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& ---				& \sec{sec:Component}\\
-\sbol{Component}		& \sbol{hasConstraint} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Constraint} 	& \sec{sec:Component} \\
-\sbol{Component}		& \sbol{hasFeature} 		& UNBOUNDED			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:Component} \\
-\sbol{Component}		& \sbol{hasInteraction} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Interaction} 	& \sec{sec:Component} \\
-\sbol{Component}		& \sbol{hasInterface}		& UNBOUNDED			& \sbol{URI}	& \sbol{Interface}	& \sec{sec:Component} \\
-\sbol{Component} 		& \sbol{hasModel} 		& UNBOUNDED			& \sbol{URI}	& \sbol{Model}		& \sec{sec:Component}\\
-\sbol{Constraint}		& \sbol{object} 			& REQUIRED, ONE 			& \sbol{URI} 	& \sbol{Feature} 	& \sec{sec:Constraint}\\
-\sbol{Constraint}		& \sbol{restriction}		& REQUIRED, ONE			& \sbol{URI} 	& ---				& \sec{sec:Constraint}\\
-\sbol{Constraint}		& \sbol{subject} 		& REQUIRED, ONE 			& \sbol{URI} 	& \sbol{Feature}	& \sec{sec:Constraint}\\
-\sbol{Cut}				& \sbol{at} 			& REQUIRED, ONE			& \sbol{Integer} & ---				& \sec{sec:Cut}\\
-\sbol{Experiment} 		& \sbol{member} 		& UNBOUNDED			& \sbol{URI}	& \sbol{ExperimentalData}	 & \sec{sec:Collection}\\
-\sbol{ExternallyDefined}	& \sbolmult{definition:ED}{definition} & REQUIRED, ONE	& \sbol{URI}	& ---				& \sec{sec:ExternallyDefined}\\
-\sbol{ExternallyDefined}	& \sbolmult{type:ED}{type}	&REQUIRED, UNBOUNDED	& \sbol{URI} & ---			& \sec{sec:ExternallyDefined}\\
-\sbol{Feature}			& \sbolmult{orientation:F}{orientation} & OPTIONAL		& \sbol{URI} 	& ---				& \sec{sec:Feature}\\
-\sbol{Feature} 			& \sbolmult{role:F}{role} 	& UNBOUNDED 			& \sbol{URI}	& ---				& \sec{sec:Feature}\\
-\sbol{Identified} 		& \prov{wasDerivedFrom}	& UNBOUNDED			& \sbol{URI}	& ---				& \sec{sec:Identified}\\
-\sbol{Identified} 		& \prov{wasGeneratedBy} & UNBOUNDED			& \sbol{URI}	& \prov{Activity}		& \sec{sec:Identified}\\
-\sbol{Identified} 		& \sbol{description} 		& OPTIONAL 				& \sbol{String}	& ---				& \sec{sec:Identified}\\
-\sbol{Identified} 		& \sbol{displayId} 		& OPTIONAL 				& \sbol{String} 	& ---				& \sec{sec:Identified}\\
-\sbol{Identified} 		& \sbol{hasMeasure} 	& UNBOUNDED			& \sbol{URI}	& \om{Measure}	& \sec{sec:Identified}\\
-\sbol{Identified} 		& \sbol{name} 			& OPTIONAL				& \sbol{String}	& ---				& \sec{sec:Identified}\\
-\sbol{Implementation} 	& \sbol{built}			& OPTIONAL				& \sbol{URI}	& \sbol{Component}	& \sec{sec:Implementation}\\
-\sbol{Interaction} 		& \sbolmult{type:I}{type}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& ---				& \sec{sec:Interaction}\\
-\sbol{Interaction} 		& \sbol{hasParticipation} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Participation}	 & \sec{sec:Interaction}\\
-\sbol{Interface} 			& \sbol{input}			& UNBOUNDED			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
-\sbol{Interface} 			& \sbol{nondirectional}	& UNBOUNDED			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
-\sbol{Interface} 			& \sbol{output}			& UNBOUNDED			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
-\sbol{LocalSubComponent} & \sbolmult{hasLocation:LSC}{hasLocation} & UNBOUNDED & \sbol{URI} & \sbol{Location}	& \sec{sec:LocalSubComponent}\\
-\sbol{LocalSubComponent} & \sbolmult{type:LSC}{type} & REQUIRED, UNBOUNDED & \sbol{URI}	& ---				& \sec{sec:LocalSubComponent}\\
-\sbol{Location}			& \sbolmult{orientation:L}{orientation} & OPTIONAL 		& \sbol{URI} 	& ---				& \sec{sec:Location}\\
-\sbol{Location}			& \sbol{order} 			& OPTIONAL 				& \sbol{Integer} & ---				& \sec{sec:Location}\\
-\sbol{Location} 			& \sbolmult{hasSequence:L}{hasSequence} & REQUIRED, ONE & \sbol{URI} & \sbol{Sequence} & \sec{sec:Location}\\
-\sbol{Model} 			& \sbolmult{source:M}{source} & REQUIRED, ONE		& \sbol{URI}	& ---				& \sec{sec:Model}\\
-\sbol{Model} 			& \sbol{framework} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:Model}\\
-\sbol{Model} 			& \sbol{language} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:Model}\\
-\sbol{Participation}		& \sbol{participant} 		& OPTIONAL, ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:Participation}\\
-\sbol{Participation}		& \sbol{higherOrderParticipant}	& OPTIONAL, ONE		& \sbol{URI}	& \sbol{Interaction}	& \sec{sec:Participation}\\
-\sbol{Participation} 		& \sbolmult{role:P}{role}	& REQUIRED, UNBOUNDED	& \sbol{URI}	& ---				& \sec{sec:Participation}\\
-\sbol{Range}			& \sbol{end} 			& REQUIRED, ONE			& \sbol{Integer} & ---				& \sec{sec:Range}\\
-\sbol{Range}			& \sbol{start} 			& REQUIRED, ONE			& \sbol{Integer} & ---				& \sec{sec:Range}\\
-\sbol{SequenceFeature} 	& \sbolmult{hasLocation:SF}{hasLocation} & REQUIRED,UNBOUNDED & \sbol{URI} &  \sbol{Location} & \sec{sec:SequenceFeature}\\
-\sbol{Sequence}		& \sbol{elements} 		& OPTIONAL 				& \sbol{String}	& ---				& \sec{sec:Sequence}\\
-\sbol{Sequence}		& \sbol{encoding} 		& OPTIONAL 				& \sbol{URI}	& ---				& \sec{sec:Sequence}\\
-\sbol{SubComponent}	& \sbol{instanceOf} 		& REQUIRED, ONE 			& \sbol{URI}	& \sbol{Component}	& \sec{sec:SubComponent}\\
-\sbol{SubComponent}	& \sbol{roleIntegration}	& OPTIONAL				& \sbol{URI}	& ---				& \sec{sec:SubComponent}\\
-\sbol{SubComponent}	& \sbol{sourceLocation} 	& UNBOUNDED 			& \sbol{URI}	& \sbol{Location} 	& \sec{sec:SubComponent}\\
-\sbol{SubComponent} 	& \sbolmult{hasLocation:SC}{hasLocation} & UNBOUNDED & \sbol{URI}	& \sbol{Location} 	& \sec{sec:SubComponent}\\
-\sbol{TopLevel} 		& \sbol{hasAttachment} 	& UNBOUNDED			& \sbol{URI}	& \sbol{Attachment}	& \sec{sec:TopLevel}\\
-\sbol{TopLevel} 		& \sbol{hasNamespace} 	& REQUIRED, ONE			& \sbol{URI}	& ---			 	& \sec{sec:TopLevel}\\
-\sbol{VariableFeature} 	& \sbol{cardinality} 		& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variable} 		& REQUIRED, ONE			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variantCollection}	& UNBOUNDED			& \sbol{URI}	& \sbol{Collection}	& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variantDerivation}	& UNBOUNDED			& \sbol{URI}	& \sbol{CombinatorialDerivation} & \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variantMeasure}	& UNBOUNDED			& \sbol{URI}	& \om{Measure}	& \sec{sec:VariableFeature}\\
-\sbol{VariableFeature} 	& \sbol{variant} 			& UNBOUNDED			& \sbol{URI}	& \sbol{Component} 	& \sec{sec:VariableFeature}\\
+\sbol{Attachment} 		& \sbolmult{source:A}{source} & EXACTLY ONE		& \sbol{URI}	& ---				& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{format}  		& ZERO OR ONE			& \sbol{URI}	& ---				& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{hashAlgorithm}  	& ZERO OR ONE			& \sbol{String}	& ---				& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{hash}  			& ZERO OR ONE			& \sbol{String}	& ---				& \sec{sec:Attachment}\\
+\sbol{Attachment} 		& \sbol{size}	  		& ZERO OR ONE			& \sbol{Long}	& ---				& \sec{sec:Attachment}\\
+\sbol{Collection} 		& \sbol{member} 		& ZERO OR MORE			& \sbol{URI}	& \sbol{TopLevel}	& \sec{sec:Collection}\\
+\sbol{CombinatorialDerivation} & \sbol{hasVariableFeature} & ZERO OR MORE	& \sbol{URI}	& \sbol{VariableFeature} & \sec{sec:CombinatorialDerivation}\\
+\sbol{CombinatorialDerivation} & \sbol{strategy} 	& ZERO OR ONE 			& \sbol{URI}	& ---				& \sec{sec:CombinatorialDerivation}\\
+\sbol{CombinatorialDerivation} & \sbol{template} 	& EXACTLY ONE			& \sbol{URI}	& \sbol{Component}	& \sec{sec:CombinatorialDerivation}\\
+\sbol{ComponentReference} & \sbol{hasFeature} 	& EXACTLY ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:ComponentReference}\\
+\sbol{ComponentReference} & \sbol{inChildOf} 		& EXACTLY ONE			& \sbol{URI}	& \sbol{SubComponent} & \sec{sec:ComponentReference}\\
+\sbol{Component}		& \sbolmult{hasSequence:C}{hasSequence} & ZERO OR MORE & \sbol{URI} & \sbol{Sequence} & \sec{sec:Component}\\
+\sbol{Component}		& \sbolmult{role:C}{role} 	& ZERO OR MORE			& \sbol{URI}	& ---				& \sec{sec:Component}\\
+\sbol{Component}		& \sbolmult{type:C}{type}	& ONE OR MORE			& \sbol{URI}	& ---				& \sec{sec:Component}\\
+\sbol{Component}		& \sbol{hasConstraint} 	& ZERO OR MORE			& \sbol{URI}	& \sbol{Constraint} 	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasFeature} 		& ZERO OR MORE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasInteraction} 	& ZERO OR MORE			& \sbol{URI}	& \sbol{Interaction} 	& \sec{sec:Component} \\
+\sbol{Component}		& \sbol{hasInterface}		& ZERO OR MORE			& \sbol{URI}	& \sbol{Interface}	& \sec{sec:Component} \\
+\sbol{Component} 		& \sbol{hasModel} 		& ZERO OR MORE			& \sbol{URI}	& \sbol{Model}		& \sec{sec:Component}\\
+\sbol{Constraint}		& \sbol{object} 			& EXACTLY ONE 			& \sbol{URI} 	& \sbol{Feature} 	& \sec{sec:Constraint}\\
+\sbol{Constraint}		& \sbol{restriction}		& EXACTLY ONE			& \sbol{URI} 	& ---				& \sec{sec:Constraint}\\
+\sbol{Constraint}		& \sbol{subject} 		& EXACTLY ONE 			& \sbol{URI} 	& \sbol{Feature}	& \sec{sec:Constraint}\\
+\sbol{Cut}				& \sbol{at} 			& EXACTLY ONE			& \sbol{Integer} & ---				& \sec{sec:Cut}\\
+\sbol{Experiment} 		& \sbol{member} 		& ZERO OR MORE			& \sbol{URI}	& \sbol{ExperimentalData}	 & \sec{sec:Collection}\\
+\sbol{ExternallyDefined}	& \sbolmult{definition:ED}{definition} & EXACTLY ONE	& \sbol{URI}	& ---				& \sec{sec:ExternallyDefined}\\
+\sbol{ExternallyDefined}	& \sbolmult{type:ED}{type} &ONE OR MORE			& \sbol{URI} 	& ---				& \sec{sec:ExternallyDefined}\\
+\sbol{Feature}			& \sbolmult{orientation:F}{orientation} & ZERO OR ONE	& \sbol{URI} 	& ---				& \sec{sec:Feature}\\
+\sbol{Feature} 			& \sbolmult{role:F}{role} 	& ZERO OR MORE 			& \sbol{URI}	& ---				& \sec{sec:Feature}\\
+\sbol{Identified} 		& \prov{wasDerivedFrom}	& ZERO OR MORE			& \sbol{URI}	& ---				& \sec{sec:Identified}\\
+\sbol{Identified} 		& \prov{wasGeneratedBy} & ZERO OR MORE			& \sbol{URI}	& \prov{Activity}		& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{description} 		& ZERO OR ONE 			& \sbol{String}	& ---				& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{displayId} 		& ZERO OR ONE 			& \sbol{String} 	& ---				& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{hasMeasure} 	& ZERO OR MORE			& \sbol{URI}	& \om{Measure}	& \sec{sec:Identified}\\
+\sbol{Identified} 		& \sbol{name} 			& ZERO OR ONE			& \sbol{String}	& ---				& \sec{sec:Identified}\\
+\sbol{Implementation} 	& \sbol{built}			& ZERO OR ONE			& \sbol{URI}	& \sbol{Component}	& \sec{sec:Implementation}\\
+\sbol{Interaction} 		& \sbolmult{type:I}{type}	& ONE OR MORE			& \sbol{URI}	& ---				& \sec{sec:Interaction}\\
+\sbol{Interaction} 		& \sbol{hasParticipation} 	& ZERO OR MORE			& \sbol{URI}	& \sbol{Participation}	 & \sec{sec:Interaction}\\
+\sbol{Interface} 			& \sbol{input}			& ZERO OR MORE			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
+\sbol{Interface} 			& \sbol{nondirectional}	& ZERO OR MORE			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
+\sbol{Interface} 			& \sbol{output}			& ZERO OR MORE			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:Interface}\\
+\sbol{LocalSubComponent} & \sbolmult{hasLocation:LSC}{hasLocation} & ZERO OR MORE & \sbol{URI} & \sbol{Location} & \sec{sec:LocalSubComponent}\\
+\sbol{LocalSubComponent} & \sbolmult{type:LSC}{type} & ONE OR MORE 		& \sbol{URI}	& ---				& \sec{sec:LocalSubComponent}\\
+\sbol{Location}			& \sbolmult{orientation:L}{orientation} & ZERO OR ONE 	& \sbol{URI} 	& ---				& \sec{sec:Location}\\
+\sbol{Location}			& \sbol{order} 			& ZERO OR ONE 			& \sbol{Integer} & ---				& \sec{sec:Location}\\
+\sbol{Location} 			& \sbolmult{hasSequence:L}{hasSequence} & EXACTLY ONE & \sbol{URI} & \sbol{Sequence} & \sec{sec:Location}\\
+\sbol{Model} 			& \sbolmult{source:M}{source} & EXACTLY ONE		& \sbol{URI}	& ---				& \sec{sec:Model}\\
+\sbol{Model} 			& \sbol{framework} 		& EXACTLY ONE			& \sbol{URI}	& ---				& \sec{sec:Model}\\
+\sbol{Model} 			& \sbol{language} 		& EXACTLY ONE			& \sbol{URI}	& ---				& \sec{sec:Model}\\
+\sbol{Participation}		& \sbol{participant} 		& ZERO OR ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:Participation}\\
+\sbol{Participation}		& \sbol{higherOrderParticipant}	& ZERO OR ONE		& \sbol{URI}	& \sbol{Interaction}	& \sec{sec:Participation}\\
+\sbol{Participation} 		& \sbolmult{role:P}{role}	& ONE OR MORE			& \sbol{URI}	& ---				& \sec{sec:Participation}\\
+\sbol{Range}			& \sbol{end} 			& EXACTLY ONE			& \sbol{Integer} & ---				& \sec{sec:Range}\\
+\sbol{Range}			& \sbol{start} 			& EXACTLY ONE			& \sbol{Integer} & ---				& \sec{sec:Range}\\
+\sbol{SequenceFeature} 	& \sbolmult{hasLocation:SF}{hasLocation} & ONE OR MORE & \sbol{URI} & \sbol{Location} 	& \sec{sec:SequenceFeature}\\
+\sbol{Sequence}		& \sbol{elements} 		& ZERO OR ONE 			& \sbol{String}	& ---				& \sec{sec:Sequence}\\
+\sbol{Sequence}		& \sbol{encoding} 		& ZERO OR ONE 			& \sbol{URI}	& ---				& \sec{sec:Sequence}\\
+\sbol{SubComponent}	& \sbol{instanceOf} 		& EXACTLY ONE 			& \sbol{URI}	& \sbol{Component}	& \sec{sec:SubComponent}\\
+\sbol{SubComponent}	& \sbol{roleIntegration}	& ZERO OR ONE			& \sbol{URI}	& ---				& \sec{sec:SubComponent}\\
+\sbol{SubComponent}	& \sbol{sourceLocation} 	& ZERO OR MORE 			& \sbol{URI}	& \sbol{Location} 	& \sec{sec:SubComponent}\\
+\sbol{SubComponent} 	& \sbolmult{hasLocation:SC}{hasLocation} & ZERO OR MORE & \sbol{URI} & \sbol{Location} 	& \sec{sec:SubComponent}\\
+\sbol{TopLevel} 		& \sbol{hasAttachment} 	& ZERO OR MORE			& \sbol{URI}	& \sbol{Attachment}	& \sec{sec:TopLevel}\\
+\sbol{TopLevel} 		& \sbol{hasNamespace} 	& EXACTLY ONE			& \sbol{URI}	& ---			 	& \sec{sec:TopLevel}\\
+\sbol{VariableFeature} 	& \sbol{cardinality} 		& EXACTLY ONE			& \sbol{URI}	& ---				& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variable} 		& EXACTLY ONE			& \sbol{URI}	& \sbol{Feature} 	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variantCollection}	& ZERO OR MORE			& \sbol{URI}	& \sbol{Collection}	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variantDerivation}	& ZERO OR MORE			& \sbol{URI}	& \sbol{CombinatorialDerivation} & \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variantMeasure}	& ZERO OR MORE			& \sbol{URI}	& \om{Measure}	& \sec{sec:VariableFeature}\\
+\sbol{VariableFeature} 	& \sbol{variant} 			& ZERO OR MORE			& \sbol{URI}	& \sbol{Component} 	& \sec{sec:VariableFeature}\\
 \hline
-\prov{Activity}			& \prov{endedAtTime} 	& OPTIONAL				& \sbol{DateTime} & ---			& \sec{sec:prov:Activity}\\
-\prov{Activity}			& \prov{qualifiedUsage}	& UNBOUNDED			& \sbol{URI}	& \prov{Usage}		& \sec{sec:prov:Activity}\\
-\prov{Activity}			& \prov{startedAtTime} 	& OPTIONAL				& \sbol{DateTime} & ---			& \sec{sec:prov:Activity}\\
-\prov{Activity}			& \prov{wasInformedBy}	& UNBOUNDED			& \sbol{URI}	& \prov{Activity}		& \sec{sec:prov:Activity}\\
-\prov{Activity}			& \sbolmult{type:Activity}{type} & UNBOUNDED		& \sbol{URI}	& ---				& \sec{sec:prov:Activity}\\
-\prov{Activity} 			& \prov{qualifiedAssociation} & UNBOUNDED			& \sbol{URI}	& \prov{Association} 	& \sec{sec:prov:Activity}\\
-\prov{Association}		& \prov{agent} 			& REQUIRED, ONE			& \sbol{URI}	& \prov{Agent} 		& \sec{sec:prov:Association}\\
-\prov{Association} 		& \provmult{hadRole:A}{hadRole} & UNBOUNDED 		& \sbol{URI}	& ---				& \sec{sec:prov:Association}\\
-\prov{Association} 		& \prov{hadPlan} 		& OPTIONAL				& \sbol{URI}	& \prov{Plan}		& \sec{sec:prov:Association}\\
-\prov{Usage}			& \prov{entity} 			& REQUIRED, ONE			& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
-\prov{Usage} 			& \provmult{hadRole:U}{hadRole} & UNBOUNDED 		& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
+\prov{Activity}			& \prov{endedAtTime} 	& ZERO OR ONE			& \sbol{DateTime} & ---			& \sec{sec:prov:Activity}\\
+\prov{Activity}			& \prov{qualifiedUsage}	& ZERO OR MORE			& \sbol{URI}	& \prov{Usage}		& \sec{sec:prov:Activity}\\
+\prov{Activity}			& \prov{startedAtTime} 	& ZERO OR ONE			& \sbol{DateTime} & ---			& \sec{sec:prov:Activity}\\
+\prov{Activity}			& \prov{wasInformedBy}	& ZERO OR MORE			& \sbol{URI}	& \prov{Activity}		& \sec{sec:prov:Activity}\\
+\prov{Activity}			& \sbolmult{type:Activity}{type} & ZERO OR MORE		& \sbol{URI}	& ---				& \sec{sec:prov:Activity}\\
+\prov{Activity} 			& \prov{qualifiedAssociation} & ZERO OR MORE		& \sbol{URI}	& \prov{Association} 	& \sec{sec:prov:Activity}\\
+\prov{Association}		& \prov{agent} 			& EXACTLY ONE			& \sbol{URI}	& \prov{Agent} 		& \sec{sec:prov:Association}\\
+\prov{Association} 		& \provmult{hadRole:A}{hadRole} & ZERO OR MORE 	& \sbol{URI}	& ---				& \sec{sec:prov:Association}\\
+\prov{Association} 		& \prov{hadPlan} 		& ZERO OR ONE			& \sbol{URI}	& \prov{Plan}		& \sec{sec:prov:Association}\\
+\prov{Usage}			& \prov{entity} 			& EXACTLY ONE			& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
+\prov{Usage} 			& \provmult{hadRole:U}{hadRole} & ZERO OR MORE 	& \sbol{URI}	& ---				& \sec{sec:prov:Usage}\\
 \hline
-\om{Measure}			& \sbolmult{type:Measure}{type} & UNBOUNDED		& \sbol{URI}	& ---				& \sec{sec:om:Measure}\\
-\om{Measure} 			& \ommult{hasUnit:Measure}{hasUnit} & REQUIRED, ONE & \sbol{URI}	& \om{Unit}		& \sec{sec:om:Measure}\\
-\om{Measure} 			& \om{hasNumericalValue} & REQUIRED, ONE			& xsd:float		& ---				& \sec{sec:om:Measure}\\
-\om{PrefixedUnit}		& \ommult{hasUnit:PrefixedUnit}{hasUnit} & REQUIRED, ONE 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:PrefixedUnit}\\
-\om{PrefixedUnit} 		& \om{hasPrefix} 		& REQUIRED, ONE			& \sbol{URI}	& \om{Prefix}		& \sec{sec:om:PrefixedUnit}\\
-\om{Prefix}			& \ommult{alternativeLabels:Prefix}{alternativeLabels} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Prefix}\\
-\om{Prefix}			& \ommult{comment:Prefix}{comment} & OPTIONAL		& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
-\om{Prefix}			& \ommult{hasFactor:Prefix}{hasFactor} & REQUIRED, ONE & xsd:float		& ---				& \sec{sec:om:Prefix}\\
-\om{Prefix}			& \ommult{label:Prefix}{label} & REQUIRED, ONE		& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
-\om{Prefix}			& \ommult{longcomment:Prefix}{longcomment} & OPTIONAL & \sbol{String} & ---			& \sec{sec:om:Prefix}\\
-\om{Prefix} 			& \ommult{alternativeSymbols:Prefix}{alternativeSymbol} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Prefix}\\
-\om{Prefix} 			& \ommult{symbol:Prefix}{symbol} & REQUIRED, ONE	& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
-\om{SingularUnit}		& \ommult{hasUnit:SingularUnit}{hasUnit} & OPTIONAL 	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:SingularUnit}\\
-\om{SingularUnit} 		& \ommult{hasFactor:SingularUnit}{hasFactor} & OPTIONAL & xsd:float	& ---				& \sec{sec:om:SingularUnit}\\
-\om{UnitDivision} 		& \om{hasDenominator} 	& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
-\om{UnitDivision} 		& \om{hasNumerator} 	& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
-\om{UnitExponentiation} 	& \om{hasBase} 		& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitExponentiation}\\
-\om{UnitExponentiation} 	& \om{hasExponent}		& REQUIRED, ONE			& xsd:integer	& ---				& \sec{sec:om:UnitExponentiation}\\
-\om{UnitMultiplication} 	& \om{hasTerm1} 		& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
-\om{UnitMultiplication} 	& \om{hasTerm2} 		& REQUIRED, ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
-\om{Unit}				& \ommult{alternativeLabels:Unit}{alternativeLabels} & UNBOUNDED & \sbol{String} & ---		& \sec{sec:om:Unit}\\
-\om{Unit}				& \ommult{label:Unit}{label} & REQUIRED, ONE		& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
-\om{Unit}				& \ommult{longcomment:Unit}{longcomment} & OPTIONAL & \sbol{String} & ---				& \sec{sec:om:Unit}\\
-\om{Unit}				& \ommult{symbol:Unit}{symbol} & REQUIRED, ONE	& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
-\om{Unit} 				& \ommult{alternativeSymbols:Unit}{alternativeSymbols} & UNBOUNDED & \sbol{String} & ---	& \sec{sec:om:Unit}\\
-\om{Unit} 				& \ommult{comment:Unit}{comment} & OPTIONAL		& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
+\om{Measure}			& \sbolmult{type:Measure}{type} & ZERO OR MORE		& \sbol{URI}	& ---				& \sec{sec:om:Measure}\\
+\om{Measure} 			& \ommult{hasUnit:Measure}{hasUnit} & EXACTLY ONE	& \sbol{URI}	& \om{Unit}		& \sec{sec:om:Measure}\\
+\om{Measure} 			& \om{hasNumericalValue} & EXACTLY ONE			& xsd:float		& ---				& \sec{sec:om:Measure}\\
+\om{PrefixedUnit}		& \ommult{hasUnit:PrefixedUnit}{hasUnit} & EXACTLY ONE  & \sbol{URI}	& \om{Unit}		& \sec{sec:om:PrefixedUnit}\\
+\om{PrefixedUnit} 		& \om{hasPrefix} 		& EXACTLY ONE			& \sbol{URI}	& \om{Prefix}		& \sec{sec:om:PrefixedUnit}\\
+\om{Prefix}			& \ommult{alternativeLabels:Prefix}{alternativeLabels} & ZERO OR MORE & \sbol{String} & ---	& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{comment:Prefix}{comment} & ZERO OR ONE		& \sbol{String}	& ---			& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{hasFactor:Prefix}{hasFactor} & EXACTLY ONE & xsd:float		& ---			& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{label:Prefix}{label} & EXACTLY ONE		& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
+\om{Prefix}			& \ommult{longcomment:Prefix}{longcomment} & ZERO OR ONE & \sbol{String} & ---		& \sec{sec:om:Prefix}\\
+\om{Prefix} 			& \ommult{alternativeSymbols:Prefix}{alternativeSymbol} & ZERO OR MORE & \sbol{String} & --- & \sec{sec:om:Prefix}\\
+\om{Prefix} 			& \ommult{symbol:Prefix}{symbol} & EXACTLY ONE	& \sbol{String}	& ---				& \sec{sec:om:Prefix}\\
+\om{SingularUnit}		& \ommult{hasUnit:SingularUnit}{hasUnit} & ZERO OR ONE & \sbol{URI}	& \om{Unit}		& \sec{sec:om:SingularUnit}\\
+\om{SingularUnit} 		& \ommult{hasFactor:SingularUnit}{hasFactor} & ZERO OR ONE & xsd:float	& ---			& \sec{sec:om:SingularUnit}\\
+\om{UnitDivision} 		& \om{hasDenominator} 	& EXACTLY ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
+\om{UnitDivision} 		& \om{hasNumerator} 	& EXACTLY ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitDivision}\\
+\om{UnitExponentiation} 	& \om{hasBase} 		& EXACTLY ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitExponentiation}\\
+\om{UnitExponentiation} 	& \om{hasExponent}		& EXACTLY ONE			& xsd:integer	& ---				& \sec{sec:om:UnitExponentiation}\\
+\om{UnitMultiplication} 	& \om{hasTerm1} 		& EXACTLY ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
+\om{UnitMultiplication} 	& \om{hasTerm2} 		& EXACTLY ONE			& \sbol{URI}	& \om{Unit}		& \sec{sec:om:UnitMultiplication}\\
+\om{Unit}				& \ommult{alternativeLabels:Unit}{alternativeLabels} & ZERO OR MORE & \sbol{String} & ---	& \sec{sec:om:Unit}\\
+\om{Unit}				& \ommult{label:Unit}{label} & EXACTLY ONE			& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
+\om{Unit}				& \ommult{longcomment:Unit}{longcomment} & ZERO OR ONE & \sbol{String} & ---			& \sec{sec:om:Unit}\\
+\om{Unit}				& \ommult{symbol:Unit}{symbol} & EXACTLY ONE		& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
+\om{Unit} 				& \ommult{alternativeSymbols:Unit}{alternativeSymbols} & ZERO OR MORE & \sbol{String} & --- & \sec{sec:om:Unit}\\
+\om{Unit} 				& \ommult{comment:Unit}{comment} & ZERO OR ONE	& \sbol{String}	& ---				& \sec{sec:om:Unit}\\
 \hline
 \end{longtable}
 \end{scriptsize}
