@@ -413,6 +413,12 @@ Reference: \sec{sec:Feature}}
 
 \printValid{The set of \sbol{Location} objects referred to by the \sbolmult{hasLocation:SC}{hasLocation} properties of a single \sbol{SubComponent} MUST NOT specify overlapping regions.\\ Reference: \sec{sec:SubComponent}}
 
+\printValid{If a \sbol{SubComponent} object has at least one \sbolmult{hasLocation:SC}{hasLocation} and \sbol{sourceLocation} properties, then the sum of the lengths of the \sbol{Location} objects referred to by the \sbolmult{hasLocation:SC}{hasLocation} properties MUST equal the sum of the lengths of the \sbol{Location} objects referred to by the \sbol{sourceLocation} properties.\\
+Reference: \sec{sec:SubComponent}}
+
+\printComplete{If a \sbol{SubComponent} object has at least one \sbolmult{hasLocation:SC}{hasLocation} and zero \sbol{sourceLocation} properties, and the \sbol{Component} linked by its \sbol{instanceOf} has precisely one \sbolmult{hasSequence:C}{hasSequence} property whose \sbol{Sequence} has a value for its \sbol{elements} property, then the sum of the lengths of the \sbol{Location} objects referred to by the \sbolmult{hasLocation:SC}{hasLocation} properties MUST equal the length of the \sbol{elements} value of the \sbol{Sequence}.\\
+Reference: \sec{sec:SubComponent}}
+
 % Note: it is intentional that sourceLocation properties MAY have overlapping regions.
 
 \subsubsection*{Rules for the \class{ComponentReference} class} 
@@ -500,22 +506,23 @@ Reference: \sec{sec:ExternallyDefined}}
 
 \printValid{If a \sbol{Location} has an \sbolmult{orientation:L}{orientation} property, its \sbol{URI} MUST be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Location}}
 
-\printValid{For every \sbol{Location} that is not an \sbol{EntireSequence}, the value of its \sbolmult{hasSequence:L}{hasSequence} property MUST also be the value of some \sbolmult{hasSequence:L}{hasSequence} property of an \sbol{EntireSequence} that is also a child of the same \sbol{Component}.\\ Reference: \sec{sec:Location}}
+\printValid{For every \sbol{Location} that is not an \sbol{EntireSequence} and that is the value of a \sbolmult{hasLocation:SC}{hasLocation} property of a \sbol{Feature}, the value of its \sbolmult{hasSequence:L}{hasSequence} property MUST also either be a value of the \sbolmult{hasSequence:L}{hasSequence} property of the parent \sbol{Component} or else be the value of some \sbolmult{hasSequence:L}{hasSequence} property of an \sbol{EntireSequence} that is also a child of the same \sbol{Component}.\\ Reference: \sec{sec:Location}}
 
+\printComplete{For every \sbol{Location} that is not an \sbol{EntireSequence} and that is the value of a \sbol{sourceLocation} property of a \sbol{SubComponent}, the value of its \sbolmult{hasSequence:L}{hasSequence} property MUST also either be a value of the \sbolmult{hasSequence:L}{hasSequence} property of the \sbol{Component} linked by its parent's \sbol{instanceOf} property or else be the value of some \sbolmult{hasSequence:L}{hasSequence} property of an \sbol{EntireSequence} that is also a child of the same  \sbol{Component} linked by \sbol{instanceOf}.\\ Reference: \sec{sec:Location}}
 
 \subsubsection*{Rules for the \class{Range} class} 
 \setcounter{sbolCtr}{11401}
 
-\printValid{The value of the \sbol{start} property of a \sbol{Range} MUST be greater than zero and less than or equal to the length of the \sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Range}}
+\printValid{The value of the \sbol{start} property of a \sbol{Range} MUST be greater than zero and less than or equal to the length of the \sbol{elements} value of the \sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Range}}
 
-\printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than zero and less than or equal to the length of the \sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Range}}
+\printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than zero and less than or equal to the length of the \sbol{elements} value of the\sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Range}}
 
 \printValid{The value of the \sbol{end} property of a \sbol{Range} MUST be greater than or equal to the value of its \sbol{start} property.\\ Reference: \sec{sec:Range}}
 
 \subsubsection*{Rules for the \class{Cut} class} 
 \setcounter{sbolCtr}{11501}
 
-\printValid{The value of the \sbol{at} property of a \sbol{Cut} MUST be greater than or equal to zero and less than or equal to the length of the \sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Cut}}
+\printValid{The value of the \sbol{at} property of a \sbol{Cut} MUST be greater than or equal to zero and less than or equal to the length of the \sbol{elements} value of the \sbol{Sequence} referred to by its \sbolmult{hasSequence:L}{hasSequence} property.\\ Reference: \sec{sec:Cut}}
 
 
 %\subsubsection*{Rules for the \class{EntireSequence} class} 
