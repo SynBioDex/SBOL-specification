@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -9,7 +9,7 @@
       <w>250</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>/Identified/
+    <panel_attributes>*Identified*
 --
 - prov:wasDerivedFrom [0..*] : URI</panel_attributes>
     <additional_attributes/>
@@ -22,7 +22,7 @@
       <w>120</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>/TopLevel/
+    <panel_attributes>*TopLevel*
 </panel_attributes>
     <additional_attributes/>
   </element>

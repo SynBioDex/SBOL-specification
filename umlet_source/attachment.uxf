@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>540</y>
+      <x>490</x>
+      <y>260</y>
       <w>200</w>
       <h>110</h>
     </coordinates>
@@ -22,20 +22,20 @@ hashAlgorithm[0..1]: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
-      <y>480</y>
+      <x>540</x>
+      <y>200</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>*/TopLevel/*
+    <panel_attributes>*TopLevel*
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>500</y>
+      <x>580</x>
+      <y>220</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -45,8 +45,8 @@ hashAlgorithm[0..1]: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>480</y>
+      <x>400</x>
+      <y>200</y>
       <w>160</w>
       <h>120</h>
     </coordinates>

@@ -55,7 +55,8 @@ All SBOL properties are labeled with one of several restrictions on data cardina
 
 \end{itemize}
 
-Finally, classes can inherit the properties of other classes. Inheritance relationships are represented in UML diagrams as open-faced, triangular arrows that point from the inheriting class to the inherited class. Some classes in the SBOL data model cannot be instantiated as objects and exist only to group common properties for inheritance. These classes have italicized names and are known as abstract classes.
+Finally, classes can inherit the properties of other classes. Inheritance relationships are represented in UML diagrams as open-faced, triangular arrows that point from the inheriting class to the inherited class. Some classes in the SBOL data model cannot be instantiated as objects and exist only to group common properties for inheritance.
+These classes are known as abstract classes and are noted as such in their descriptions.
 
 \subsection{Naming and Typographic Conventions}
 \label{sec:nameconventions}
@@ -66,13 +67,13 @@ Properties, on the other hand, are named using lower camel case, meaning that th
 SBOL properties are always given singular names irrespective of their cardinality, e.g., \sbolmult{role:C}{role} is used rather than \sbolmult{role:C}{role} even though a component can have multiple roles.
 This is because each relation can potentially stand on its own, irrespective of the existence of others in the set.
 
-\threezeroone{Two conventions are used for property names, {\tt name} and {\tt hasName}.  
+Two conventions are used for property names, {\tt name} and {\tt hasName}.  
 When a property is pointing to a class using the same name, it uses the {\tt hasName} convention (e.g., the \sbol{Component} class uses \sbol{hasFeature} to point to a \sbol{Feature} object).
-When the property uses a different name than the class of the object it points to, it uses the {\tt name} convention instead (e.g., the \sbol{Constraint} class uses \sbol{subject} to point to a \sbol{Feature} object).}
+When the property uses a different name than the class of the object it points to, it uses the {\tt name} convention instead (e.g., the \sbol{Constraint} class uses \sbol{subject} to point to a \sbol{Feature} object).
 
 
 % -----------------------------------------------------------------------------
-\section{Identifiers and Primitive Types}
+\section{Identifiers and Types}
 % -----------------------------------------------------------------------------
 
 \subsection{Uniform Resource Identifiers}
@@ -96,11 +97,15 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
   \item The URL of any child or nested object MUST use the following pattern:\texttt{[parent]/[displayId]}, where \texttt{parent} is the URL of its parent object.
 	Multiple layers of child objects are allowed using the same\\ \texttt{[parent]/[displayId]} pattern recursively.
 	
-	For example, a \sbol{SequenceFeature} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \threezeroone{\st{annotation1}} \texttt{SequenceFeature1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1}.
-	Similarly, \threezeroone{\st{the loc1 Location child of the annotation1 SequenceFeature object will have the URL}} \threezeroone{if the \texttt{SequenceFeature1} object has a \sbol{Location} child object with a \sbol{displayId} of \texttt{Location1}, then that object will have the URL\\ \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1/Location1}.}
+	For example, a \sbol{SequenceFeature} object owned by the \path{BBa_J23070} \sbol{Component} and having a \sbol{displayId} of \texttt{SequenceFeature1} will have a URL of \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1}.
+	Similarly, if the \texttt{SequenceFeature1} object has a \sbol{Location} child object with a \sbol{displayId} of \texttt{Location1}, then that object will have the URL \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1/Location1}.
   \end{itemize}
 
+<<<<<<< HEAD
 \threezeroone{\subsection{SBOL URIs}
+=======
+\subsection{SBOL URIs}
+>>>>>>> master
   \label{sec:sbolURIs}
   
 The SBOL namespace, which is \url{http://sbols.org/v3\#}, is used to indicate which entities and properties in an SBOL document are defined by SBOL. 
@@ -111,7 +116,7 @@ The SBOL namespace MUST NOT be used for any entities or properties not defined i
 Other namespaces are also used by SBOL, however.
 Where possible, we have re-used predicates from widely-used terminologies (such as Dublin Core~\cite{dcmi2012}) to expose as much of the data as practical to such standard RDF tooling.
 Similarly, existing biological ontologies are used where applicable for specifying types, roles, etc.
-Likewise, Section~\ref{sec:complementaryStandards} details complementary standards that are RECOMMENDED for use in combination with SBOL.}
+Likewise, Section~\ref{sec:complementaryStandards} details complementary standards that are RECOMMENDED for use in combination with SBOL.
 
 
 \subsection{Primitive Data Types}
@@ -125,23 +130,22 @@ Likewise, Section~\ref{sec:complementaryStandards} details complementary standar
 \label{sec:literal}
 
 When SBOL uses simple ``primitive'' data types such as \sbol{String}s or \sbol{Integer}s, these are defined as the following specific formal types:
-\threezeroone{
   \begin{itemize}
-\item \sbol{String}: \url{http://www.w3.org/2001/XMLSchema\#string}\\
+\item \sbol{String}: \href{http://www.w3.org/2001/XMLSchema}{http://www.w3.org/2001/XMLSchema\#string}\\
   {\em Example: ``LacI coding sequence''}
-\item \sbol{Integer}: \url{http://www.w3.org/2001/XMLSchema\#integer}\\
+\item \sbol{Integer}: \href{http://www.w3.org/2001/XMLSchema}{http://www.w3.org/2001/XMLSchema\#integer}\\
   {\em Example: 3}
-\item \sbol{Long}: \url{http://www.w3.org/2001/XMLSchema\#long}\\
+\item \sbol{Long}: \href{http://www.w3.org/2001/XMLSchema}{http://www.w3.org/2001/XMLSchema\#long}\\
   {\em Example: 9223372036854775806}
-\item \sbol{Double}: \url{http://www.w3.org/2001/XMLSchema\#double}\\
+\item \sbol{Double}: \href{http://www.w3.org/2001/XMLSchema}{http://www.w3.org/2001/XMLSchema\#double}\\
   {\em Example: 3.14159}
-\item \sbol{Boolean}: \url{http://www.w3.org/2001/XMLSchema\#boolean}\\
+\item \sbol{Boolean}: \href{http://www.w3.org/2001/XMLSchema}{http://www.w3.org/2001/XMLSchema\#boolean}\\
   {\em Example: \external{true}}
 \end{itemize}
-}
 The term \sbol{literal} is used to denote an object that can be any of the five types listed above.
 
 In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}). It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
+
 
 \subsection{SBOL Types}
 \label{sec:sbolTypes}
@@ -155,3 +159,44 @@ An object MAY have redundant \external{rdfType} properties for its parent types,
 
 For example, an object cannot have both the \external{rdfType} of \sbol{Collection} and \sbol{Component}.  
 A \sbol{Component} could also have an \external{rdfType} for \sbol{TopLevel} and \sbol{Identified}, but this is discouraged.
+
+
+\subsection{Object Closure and Document Composition}
+
+In RDF, there is no requirement that all of the information about an object be stored in one location.  
+Instead, there is a ``open world'' assumption that additional triples describing the object may be acquired at any time.
+Documents are allowed to be fragmented and composed in an arbitrary manner, down to their underlying atomic triples, with no consideration for object structure.
+
+This limits the ability to reason about properties of objects and validate the correctness of a model.
+For example, it would not be possible to validate that an \sbol{Identified} object has no more than one value for its \sbol{displayId} property, because it would not be possible to determine whether some other document somewhere in the world holds a second value for the property.
+
+SBOL addresses this by adding an object closure assumption that allows stronger reasoning about individual objects and their children.
+For any given SBOL document, if the document contains an \external{rdfType} statement regarding an \sbol{Identified} object $X$, then it is assumed that the document also contains all other property statements about object $X$ as well. 
+This enables strong validation rules, since any statement of the form ``$X$ {\it predicate} $Y$'' that is not present can be assumed to be false.
+For example, if a document has one value for an object's \sbol{displayId}, then it is valid to conclude that there are no other \sbol{displayId} values, and thus its "zero or one" cardinality requirement is satisfied.
+
+We further assume that any document containing an object also contains all of its child objects.
+In other words, the fundamental unit of SBOL documents is the \sbol{TopLevel} object, and any document containing a \sbol{TopLevel} also contains the complete set of information necessary to describe that \sbol{TopLevel}---but not necessarily any other \sbol{TopLevel} objects that it refers to.
+For example, a document containing a \sbol{Component} describing a plasmid is guaranteed to contain every \sbol{Feature} of the plasmid as well as every \sbol{Interaction} and \sbol{Constraint} that relates those features, but the document might not contain the \sbol{Sequence} for the plasmid or the definitions for the \sbol{Component} objects linked from its \sbol{SubComponent} parts.
+
+An SBOL document thus cleaves naturally along the boundaries of \sbol{TopLevel} objects, implying the following set of rules of fragmentation and composition of documents:
+\begin{itemize}
+\item Any subset of \sbol{TopLevel} objects in a valid SBOL document is also a valid SBOL document.
+\item Any disjoint set of \sbol{TopLevel} objects from different SBOL documents MAY be composed to form a new SBOL document. The result is not guaranteed to be valid, however, since the composition may expose problems due to the relationships between \sbol{TopLevel} objects from different documents.
+\item If two \sbol{TopLevel} objects in different SBOL documents have the same identity and all other properties are equal as well, then they MAY be treated as identical and freely merged. 
+\item  If two \sbol{TopLevel} objects in different SBOL documents have the same identity but different property values, then they MUST be considered different (possibly conflicting) versions, and any merger managed through some version control process.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> master

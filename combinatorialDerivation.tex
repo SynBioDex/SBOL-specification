@@ -2,7 +2,7 @@
 \label{sec:CombinatorialDerivation}
 
 The purpose of the \sbol{CombinatorialDerivation} class is to specify combinatorial biological designs without having to specify every possible design variant. For example, a \sbol{CombinatorialDerivation} can be used to specify a library of reporter gene variants that include different promoters and RBSs without having to specify a \sbol{Component} for every possible combination of promoter, RBS, and CDS in the library. \sbol{Component} objects that realize a \sbol{CombinatorialDerivation} can be derived in accordance with the class properties \sbol{template}, \\
-\threezeroone{\st{hasVariableComponent}} \threezeroone{\sbol{hasVariableFeature}}, and \sbol{strategy} (see \ref{uml:combinatorial_derivation}).
+\sbol{hasVariableFeature}, and \sbol{strategy} (see \ref{uml:combinatorial_derivation}).
 
 \begin{figure}[ht]
 \begin{center}
@@ -16,15 +16,15 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 
 The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
-Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \threezeroone{\st{SubComponent objects that describe its substructure (referred to hereafter as template SubComponent objects), and its hasConstraint property MAY also contain one or more Constraint objects that constrain this substructure}} \threezeroone{\sbol{Feature} objects that will serve as the variables whose values are set during derivation (referred to hereafter as template \sbol{Feature} objects).
-Its other property values describe aspects of the template that will not change based on the values that may be varied.}
+Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \sbol{Feature} objects that will serve as the variables whose values are set during derivation (referred to hereafter as template \sbol{Feature} objects).
+Its other property values describe aspects of the template that will not change based on the values that may be varied.
 
-\threezeroone{\st{The hasVariableComponent property}}
-\threezeroone{\subparagraph{The \sbolheading{hasVariableFeature} property}}\label{sec:hasVariableFeature}
+\subparagraph{The \sbolheading{hasVariableFeature} property}
+\label{sec:hasVariableFeature}
 
-Each \threezeroone{\st{VariableComponent}} \threezeroone{\sbol{VariableFeature}} child of a \sbol{CombinatorialDerivation} defines the set of possible values for one of the variables in the \sbol{template}.
-A \sbol{CombinatorialDerivation} object can have zero or more \threezeroone{\st{hasVariableComponent}} \sbol{hasVariableFeature} properties, each of type \sbol{URI}, specifying a \threezeroone{\st{hasVariableComponent}} \sbol{VariableFeature}. 
-The set of \threezeroone{\st{hasVariableComponent}} \sbol{hasVariableFeature} properties MUST NOT contain two or more \threezeroone{\st{variableComponent}} \sbol{VariableFeature} objects that refer to the same template \threezeroone{\st{SubComponent}} \sbol{Feature} via their \sbol{variable} properties (i.e., do not define the same variable twice).
+Each \sbol{VariableFeature} child of a \sbol{CombinatorialDerivation} defines the set of possible values for one of the variables in the \sbol{template}.
+A \sbol{CombinatorialDerivation} object can have zero or more \sbol{hasVariableFeature} properties, each of type \sbol{URI}, specifying a \sbol{VariableFeature}. 
+The set of \sbol{hasVariableFeature} properties MUST NOT contain two or more \sbol{VariableFeature} objects that refer to the same template \\sbol{Feature} via their \sbol{variable} properties (i.e., do not define the same variable twice).
 
 The \sbol{variable} properties of \sbol{VariableFeature} objects determined which \sbol{Feature} objects in the \sbol{template} are modified in a derived \sbol{Component}, and which ones will not be changed.
 In particular, we will refer to a \sbol{Feature} in the template \sbol{Component} that is referred to by some \sbol{variable} property as a variable \sbol{Feature}, and one that is not referred to by any as a static \sbol{Feature}.
@@ -74,14 +74,14 @@ SHOULD contain the same values as the \sbolmult{type:C}{type} property did in th
 \subsubsection{VariableFeature}
 \label{sec:VariableFeature}
 
-As described \sbolmult{hasVariableFeature}{above}, the \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} class specifies a variable and set of values that will replace one of the \threezeroone{\st{SubComponent}} \sbol{Feature} objects in the \sbol{template} of a \sbol{CombinatorialDerivation}.
+As described \sbolmult{hasVariableFeature}{above}, the \sbol{VariableFeature} class specifies a variable and set of values that will replace one of the \sbol{Feature} objects in the \sbol{template} of a \sbol{CombinatorialDerivation}.
 The variable is specified by the \sbol{variable} property,
 and the set of values is defined by the union of \sbol{Component} objects referred to by the \sbol{variant}, \sbol{variantCollection}, and \sbol{variantDerivation} properties.
 
 Note that this union is intended to be a set and not a multi-set.
 For example, if the \sbol{variant} property contains a \sbol{Component} $A$ and the \sbol{variantCollection} property has a \sbol{Collection} containing both \sbol{Component} $A$ and  \sbol{Component} $B$, then $A$ SHOULD NOT be selected twice during enumeration, and it SHOULD NOT be selected twice as much as $B$ during sampling.
 
-\threezeroone{Given a set of values linked from a \sbol{VariableFeature}, it SHOULD be the case that all value are of type \sbol{om:Measure} or else all values are of type \sbol{Feature}. At present, it is explicitly left undefined how derivation of new components ought to handle mixtures of \sbol{om:Measure} and \sbol{Feature} values.}
+Given a set of values linked from a \sbol{VariableFeature}, it SHOULD be the case that all value are of type \sbol{om:Measure} or else all values are of type \sbol{Feature}. At present, it is explicitly left undefined how derivation of new components ought to handle mixtures of \sbol{om:Measure} and \sbol{Feature} values.
 
 \begin{figure}[ht]
 \begin{center}
@@ -93,34 +93,34 @@ For example, if the \sbol{variant} property contains a \sbol{Component} $A$ and 
 
 \subparagraph{The \sbolheading{variable} property}\label{sec:variable}
 
-The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \threezeroone{\st{SubComponent}} \sbol{Feature} in the \sbol{template} \sbol{Component} referred to by this \threezeroone{\st{VariableComponent's}} \sbol{VariableFeature}'s parent \sbol{CombinatorialDerivation}
+The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \sbol{Feature} in the \sbol{template} \sbol{Component} referred to by this \sbol{VariableFeature}'s parent \sbol{CombinatorialDerivation}
 
-\threezeroone{\subparagraph{The \sbolheading{variantMeasure} property}\label{sec:variantMeasure}
+\subparagraph{The \sbolheading{variantMeasure} property}\label{sec:variantMeasure}
 
-A \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} object can have zero or more \sbol{variantMeasure} properties, each of type \sbol{URI}, specifying a \sbol{om:Measure} object. This property specifies numerical values that are options to be applied to the \sbol{variable} \threezeroone{\st{SubComponent}} \sbol{Feature} from the \sbol{template} when deriving a new \sbol{Component}.
+A \sbol{VariableFeature} object can have zero or more \sbol{variantMeasure} properties, each of type \sbol{URI}, specifying a \sbol{om:Measure} object. This property specifies numerical values that are options to be applied to the \sbol{variable} \sbol{Feature} from the \sbol{template} when deriving a new \sbol{Component}.
 
-Note that because a \sbol{om:Measure} is not a \sbol{TopLevel}, the vlaues of \sbol{variantMeasure} must be child objects of the \sbol{VariableFeature}.}
+Note that because a \sbol{om:Measure} is not a \sbol{TopLevel}, the vlaues of \sbol{variantMeasure} must be child objects of the \sbol{VariableFeature}.
 
 \subparagraph{The \sbolheading{variant} property}\label{sec:variant}
 
-A \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} object can have zero or more \sbol{variant} properties, each of type \sbol{URI}, specifying a \sbol{Component} object. This property specifies individual \sbol{Component} objects to serve as options when deriving a new \threezeroone{\st{SubComponent}} \sbol{Feature} for the \sbol{variable} \threezeroone{\st{SubComponent}} \sbol{Feature} from the \sbol{template}.
+A \sbol{VariableFeature} object can have zero or more \sbol{variant} properties, each of type \sbol{URI}, specifying a \sbol{Component} object. This property specifies individual \sbol{Component} objects to serve as options when deriving a new \sbol{Feature} for the \sbol{variable} \sbol{Feature} from the \sbol{template}.
 
 \subparagraph{The \sbolheading{variantCollection} property}\label{sec:variantCollection}
 
-A \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} object can have zero or more \sbol{variantCollection} properties, each of type \sbol{URI}, specifying a \sbol{Collection} object.
+A \sbol{VariableFeature} object can have zero or more \sbol{variantCollection} properties, each of type \sbol{URI}, specifying a \sbol{Collection} object.
 Such a \sbol{Collection} MUST NOT contain any objects besides \sbol{Component} objects or \sbol{Collection} objects that themselves contain only \sbol{Component} or \sbol{Collection} objects.
 This property enables the specification of existing groups of \sbol{Component} objects to serve as options.
 
 \subparagraph{The \sbolheading{variantDerivation} property}\label{sec:variantDerivation}
 
-A \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} object can have zero or more \sbol{variantDerivation} properties, each of type \sbol{URI}, specifying a \sbol{CombinatorialDerivation} object. 
-This property enables the specification of \sbol{Component} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \threezeroone{\st{SubComponent}} \sbol{Feature} for the \sbol{variable} \threezeroone{\st{SubComponent}} \sbol{Feature} from the \sbol{template}. 
-The \sbol{variantDerivation} properties of a \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \threezeroone{\st{VariableComponent}} \sbol{VariableFeature}. 
-Furthermore, such \threezeroone{\st{VariableComponent}} \sbol{VariableFeature} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivation} properties and the \sbol{CombinatorialDerivation} objects that contain them. 
+A \sbol{VariableFeature} object can have zero or more \sbol{variantDerivation} properties, each of type \sbol{URI}, specifying a \sbol{CombinatorialDerivation} object. 
+This property enables the specification of \sbol{Component} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \sbol{Feature} for the \sbol{variable} \sbol{Feature} from the \sbol{template}. 
+The \sbol{variantDerivation} properties of a \sbol{VariableFeature} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \sbol{VariableFeature}. 
+Furthermore, such \sbol{VariableFeature} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivation} properties and the \sbol{CombinatorialDerivation} objects that contain them. 
 
 \subparagraph{The \sbolheading{cardinality} property}\label{sec:cardinality}
 
-The \sbol{cardinality} property is REQUIRED and has type of URI. This property specifies how many \threezeroone{\st{SubComponent}} \sbol{Feature} objects SHOULD be derived from the template \threezeroone{\st{SubComponent}} \sbol{Feature} during the derivation of a new \sbol{Component}. The URI value of this property MUST come from the URIs provided in~\ref{tbl:cardinality}.
+The \sbol{cardinality} property is REQUIRED and has type of URI. This property specifies how many \sbol{Feature} objects SHOULD be derived from the template \sbol{Feature} during the derivation of a new \sbol{Component}. The URI value of this property MUST come from the URIs provided in~\ref{tbl:cardinality}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
