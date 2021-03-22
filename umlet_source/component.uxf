@@ -18,17 +18,6 @@
     <additional_attributes/>
   </element>
   <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>620</x>
-      <y>280</y>
-      <w>110</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>*/TopLevel/*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>640</x>
@@ -55,7 +44,7 @@
     <coordinates>
       <x>710</x>
       <y>400</y>
-      <w>110</w>
+      <w>120</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
@@ -153,7 +142,7 @@ hasSequence
     <coordinates>
       <x>590</x>
       <y>400</y>
-      <w>120</w>
+      <w>130</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
@@ -181,6 +170,17 @@ hasInteraction
       <h>30</h>
     </coordinates>
     <panel_attributes>*Interaction*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>280</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*TopLevel*</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
