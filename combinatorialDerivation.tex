@@ -16,12 +16,8 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 
 The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
-Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \sbol{Feature} objects that describe its substructure (referred to hereafter as template \sbol{Feature} objects), and its other properties MAY also describe other aspects of the template that will not change based on the values that ay be varied.
-
-When a \sbol{Component} is derived in accordance with a \sbol{CombinatorialDerivation}, the \prov{wasDerivedFrom} property of the derived \sbol{Component} SHOULD refer to the \sbol{CombinatorialDerivation}. When multiple \sbol{Component} objects are derived in accordance with the same \sbol{CombinatorialDerivation}, they MAY be referred to by the \sbol{member} property of a \sbol{Collection}, in which case the \prov{wasDerivedFrom} property of the \sbol{Collection} SHOULD also refer to this \sbol{CombinatorialDerivation}.
-
-If the \sbolmult{type:C}{type} property of the template \sbol{Component} contains one or more URIs, then the \sbolmult{type:C}{type} property of any derived \sbol{Component} SHOULD also contain those URIs. 
-The same holds true for the \sbolmult{role:C}{role} properties of these \sbol{Component} objects.
+Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \sbol{Feature} objects that will serve as the variables whose values are set during derivation (referred to hereafter as template \sbol{Feature} objects).
+Its other property values describe aspects of the template that will not change based on the values that may be varied.
 
 \subparagraph{The \sbolheading{hasVariableFeature} property}
 \label{sec:hasVariableFeature}
@@ -30,17 +26,8 @@ Each \sbol{VariableFeature} child of a \sbol{CombinatorialDerivation} defines th
 A \sbol{CombinatorialDerivation} object can have zero or more \sbol{hasVariableFeature} properties, each of type \sbol{URI}, specifying a \sbol{VariableFeature}. 
 The set of \sbol{hasVariableFeature} properties MUST NOT contain two or more \sbol{VariableFeature} objects that refer to the same template \\sbol{Feature} via their \sbol{variable} properties (i.e., do not define the same variable twice).
 
-The \sbol{variable} properties of \sbol{VariableFeature} objects control which \sbol{Feature} objects in the \sbol{template} are modified in a derived \sbol{Component}.
-If no \sbol{variable} property of one of these \sbol{VariableFeature} objects refers to a template \sbol{Feature}, then it is not a variable and the derived object SHOULD have a \sbol{Feature} with identical properties
-and a \prov{wasDerivedFrom} property that refers to the template \sbol{Feature}.
-
-If a \sbol{Feature} in the \sbol{template} is referred to by some \sbol{variable} in a \sbol{VariableFeature}, then it is a variable and it SHOULD be replaced in the derived \sbol{Component} by a number of \sbol{Feature} objects constrained by the number specified by the \sbol{cardinality} property of the \sbol{VariableFeature} (see \ref{tbl:cardinality}).
-Each property of such a \sbol{Feature} object in the derived \sbol{Component} MUST be derived from the values of the  associated \sbol{VariableFeature}.
-
-
-Finally, all derived \sbol{Feature} objects MUST follow the \sbol{restriction} properties of any 
-\sbol{Constraint} objects that refer to their corresponding template \sbol{Feature}, and SHOULD have values of \sbolmult{role:F}{role} that contain the same values as the \sbolmult{role:F}{role} in the template \sbol{Feature}.
-
+The \sbol{variable} properties of \sbol{VariableFeature} objects determined which \sbol{Feature} objects in the \sbol{template} are modified in a derived \sbol{Component}, and which ones will not be changed.
+In particular, we will refer to a \sbol{Feature} in the template \sbol{Component} that is referred to by some \sbol{variable} property as a variable \sbol{Feature}, and one that is not referred to by any as a static \sbol{Feature}.
 
 \subparagraph{The \sbolheading{strategy} property}\label{sec:strategy}
 The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URIs. If the \sbol{strategy} property is not empty, then it MUST contain a URI from \ref{tbl:strategy}. This property recommends how many \sbol{Component} objects SHOULD be derived from the template \sbol{Component}.
@@ -57,6 +44,32 @@ The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:st
   \caption{REQUIRED \sbol{URI}s for the \sbol{strategy} property.}
   \label{tbl:strategy}
 \end{table}
+
+\subparagraph{Executing a derivation}
+
+When a \sbol{CombinatorialDerivation} is evaluated to produce a set of derived \sbol{Component} objects, the relationship between the two SHOULD be recorded by means of \prov{wasDerivedFrom} properties. 
+In particular:
+\begin{itemize}
+\item Any derived \sbol{Component} SHOULD have a \prov{wasDerivedFrom} property that refers to the \sbol{CombinatorialDerivation}. 
+\item Any \sbol{Feature} in a derived \sbol{Component} SHOULD have a \prov{wasDerivedFrom} property that refers to its corresponding \sbol{Feature} in the template \sbol{Component}.
+\item Any \sbol{Collection} produced by the derivation process and containing only derived \sbol{Component} objects SHOULD also have a \prov{wasDerivedFrom} property that refers to the \sbol{CombinatorialDerivation}.
+\end{itemize}
+
+All derived objects MUST be consistent with the specification provided in the \sbol{CombinatorialDerivation}.
+In particular:
+\begin{itemize}
+\item Every value of the \sbolmult{type:C}{type} and \sbolmult{role:C}{role} properties of the template \sbol{Component} SHOULD be contained in the values of the corresponding properties in each derived \sbol{Component}.
+\item Any static \sbol{Feature} in the template \sbol{Component} SHOULD correspond to a \sbol{Feature} with identical properties in each derived \sbol{Component}.
+\item Any variable \sbol{Feature} in the template \sbol{Component} SHOULD be replaced in each derived \sbol{Component} by a number of \sbol{Feature} objects constrained by the number specified by the \sbol{cardinality} property of the \sbol{VariableFeature} (see \ref{tbl:cardinality}).
+\item Each property of a \sbol{Feature} object in the derived \sbol{Component} that replaces a variable \sbol{Feature} in the template \sbol{Component} MUST be derived from the values of the associated \sbol{VariableFeature}. 
+\item All derived \sbol{Feature} object MUST follow the \sbol{restriction} properties of any \sbol{Constraint} objects that refer to their corresponding template \sbol{Feature}. This will typically be used to rule out illegal combinations of variable values.
+\item The \sbolmult{role:F}{role} property of a derived \sbol{Feature} SHOULD contain the same values as the \sbolmult{role:F}{role} property did in the template \sbol{Feature}. 
+\item The \sbolmult{type:C}{type} property of a derived \sbol{Feature} or its type-determining referent 
+(\sbol{instanceOf} for \sbol{SubComponent}, or that determined for the \sbol{Feature} referred to by a \sbol{ComponentReference})
+SHOULD contain the same values as the \sbolmult{type:C}{type} property did in the template \sbol{Feature} or its type-determining referent.
+\end{itemize}
+
+
 
 \subsubsection{VariableFeature}
 \label{sec:VariableFeature}

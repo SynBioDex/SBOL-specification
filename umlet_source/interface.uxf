@@ -4,23 +4,21 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>340</x>
-      <y>340</y>
+      <x>200</x>
+      <y>330</y>
       <w>180</w>
-      <h>80</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>*Interface*
 --
-input[0..*]: URI
-output[0..*]: URI
-nondirectional[0..*]: URI</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>280</y>
+      <x>240</x>
+      <y>240</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -30,12 +28,84 @@ nondirectional[0..*]: URI</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
-      <y>300</y>
+      <x>280</x>
+      <y>260</y>
       <w>30</w>
-      <h>60</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>360</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*Feature*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>460</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*Feature*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>360</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*Feature*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>350</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+output
+0..*</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>90</x>
+      <y>350</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+input
+0..*</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>380</y>
+      <w>130</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+nondirectional
+0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
 </diagram>

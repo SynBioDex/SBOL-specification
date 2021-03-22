@@ -41,19 +41,17 @@ In addition, in the SBOL data model, it is REQUIRED that the value of each compo
 Note that in all cases, composite aggregation is used in such a way that there SHOULD NOT be duplication of such objects.
 Such objects are also commonly referred to as ``child'' objects, and their owning objects as ``parent'' objects.
 
-All SBOL properties are labeled with one of several restrictions on data cardinality. These are:
+All SBOL properties are labeled with one of several restrictions on data cardinality. These are defined, per RDF, as:
 
 \begin{itemize}
 
-\item $1$ - REQUIRED, one: there MUST be exactly one value for this property.
+\item $1$ - EXACTLY ONE: the property is REQUIRED, and there MUST be exactly one value for this property.
 
-\item $0 \ldots 1$ - OPTIONAL: there MAY be a single value for this property, or it MAY be absent.
+\item $0 \ldots 1$ - ZERO OR ONE: the property is optional, such that there MAY be a single value for this property, or it MAY be absent.
 
-\item $0 \ldots *$ - unbounded: there MAY be any number of values for this property, including none.
+\item $0 \ldots *$ - ZERO OR MORE: the property is unbounded, such that there MAY be any number of values for this property, including none.
 
-\item $1 \ldots *$ - REQUIRED, unbounded: there MAY be any number of values for this property, as long as there is at least one.
-
-\item $n \ldots *$ - at least: there MUST be at least $n$ values for this property.
+\item $1 \ldots *$ - ONE OR MORE: the property is REQUIRED, such that there MAY be any number of values for this property, as long as there is at least one.
 
 \end{itemize}
 
@@ -103,7 +101,11 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
 	Similarly, if the \texttt{SequenceFeature1} object has a \sbol{Location} child object with a \sbol{displayId} of \texttt{Location1}, then that object will have the URL \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1/Location1}.
   \end{itemize}
 
+<<<<<<< HEAD
+\threezeroone{\subsection{SBOL URIs}
+=======
 \subsection{SBOL URIs}
+>>>>>>> master
   \label{sec:sbolURIs}
   
 The SBOL namespace, which is \url{http://sbols.org/v3\#}, is used to indicate which entities and properties in an SBOL document are defined by SBOL. 
@@ -145,6 +147,20 @@ The term \sbol{literal} is used to denote an object that can be any of the five 
 In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}). It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
 
 
+\subsection{SBOL Types}
+\label{sec:sbolTypes}
+
+All SBOL objects are given the most specific \external{rdfType} in the SBOL 3 namespace (\uri{http://sbols.org/v3\#}) that defines the type of the object.
+Likewise, properties in the SBOL 3 namespace should only be used by objects with an SBOL 3 \external{rdfType}.
+
+SBOL does not use multiple inheritance: all SBOL classes are disjoint except with respect to their abstract parent classes.
+Accordingly, an object MUST NOT be given two \external{rdfType} properties referring to disjoint classes in the SBOL 3 namespace.
+An object MAY have redundant \external{rdfType} properties for its parent types, but this is NOT RECOMMENDED.
+
+For example, an object cannot have both the \external{rdfType} of \sbol{Collection} and \sbol{Component}.  
+A \sbol{Component} could also have an \external{rdfType} for \sbol{TopLevel} and \sbol{Identified}, but this is discouraged.
+
+
 \subsection{Object Closure and Document Composition}
 
 In RDF, there is no requirement that all of the information about an object be stored in one location.  
@@ -183,3 +199,4 @@ An SBOL document thus cleaves naturally along the boundaries of \sbol{TopLevel} 
 
 
 
+>>>>>>> master

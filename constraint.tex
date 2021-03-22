@@ -32,9 +32,9 @@ The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI
     \textbf{Restriction URI} & \textbf{Description} \\
     \midrule
     % identity relations
-	\url{http://sbols.org/v3#verifyIdentical}  & The \sbol{subject} and \sbol{object}, after tracing through any layers of \sbol{ComponentReference}, MUST both refer to \sbol{SubComponent} objects with the same \sbol{instanceOf} value or both refer to \sbol{ExternallyDefined} objects with the same \sbolmult{definition:ER}{definition}.
+	\url{http://sbols.org/v3#verifyIdentical}  & The \sbol{subject} and \sbol{object}, after tracing through any layers of \sbol{ComponentReference}, MUST both refer to \sbol{SubComponent} objects with the same \sbol{instanceOf} value or both refer to \sbol{ExternallyDefined} objects with the same \sbolmult{definition:ED}{definition}.
 	\emph{Example: a promoter included via two different subsystems must be the identical.} \\
-	\url{http://sbols.org/v3\#differentFrom} & The \sbol{subject} and \sbol{object}, after tracing through any layers of \sbol{ComponentReference}, MUST NOT both refer to \sbol{SubComponent} objects with the same \sbol{instanceOf} value or both refer to \sbol{ExternallyDefined} objects with the same \sbolmult{definition:ER}{definition}.
+	\url{http://sbols.org/v3\#differentFrom} & The \sbol{subject} and \sbol{object}, after tracing through any layers of \sbol{ComponentReference}, MUST NOT both refer to \sbol{SubComponent} objects with the same \sbol{instanceOf} value or both refer to \sbol{ExternallyDefined} objects with the same \sbolmult{definition:ED}{definition}.
 	\emph{Example: two fluorescent reporters must be different.}\\
 	\url{http://sbols.org/v3#replaces} &	In the context of the parent object of the \sbol{Constraint}, information about the \sbol{subject} should be used in place of all instances of the \sbol{object}. \emph{Example: the J23101 promoter replaces a generic promoter.} \\
     
