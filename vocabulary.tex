@@ -183,7 +183,7 @@ An SBOL document thus cleaves naturally along the boundaries of \sbol{TopLevel} 
 \begin{itemize}
 \item Any subset of \sbol{TopLevel} objects in a valid SBOL document is also a valid SBOL document.
 \item Any disjoint set of \sbol{TopLevel} objects from different SBOL documents MAY be composed to form a new SBOL document. The result is not guaranteed to be valid, however, since the composition may expose problems due to the relationships between \sbol{TopLevel} objects from different documents.
-\item If two \sbol{TopLevel} objects in different SBOL documents have the same identity and all other properties are equal as well, then they MAY be treated as identical and freely merged. 
+\item If two \sbol{TopLevel} objects in different SBOL documents have the same identity and and both they and their child objects contain equivalent sets of property assertions, then they MAY be treated as identical and freely merged. 
 \item  If two \sbol{TopLevel} objects in different SBOL documents have the same identity but different property values, then they MUST be considered different (possibly conflicting) versions, and any merger managed through some version control process.
 \end{itemize}
 
