@@ -106,7 +106,10 @@ The \sbol{URI} value of this property SHOULD come from the RECOMMENDED \sbol{URI
 	\emph{Example: a promoter starts an expression cassette.} \\
     \bottomrule
   \end{edtable}
-  \caption{RECOMMENDED \sbol{URI}s for expressing sequential relations with the \sbol{restriction} property.}
+  \caption{RECOMMENDED \sbol{URI}s for expressing sequential relations with the \sbol{restriction} property. 
+  Note that these relations are only well-defined when the \sbol{subject} and \sbol{object} can be located on the same \sbol{Sequence} (though this may be something that is inferred rather than known {\it a priori}).
+  In interpreting these relations, it is important to remember that for \sbol{Range} objects, the \sbol{start} and \sbol{end} indices refer to whole bases/residues such that a \sbol{Range} with \sbol{end} equal to 9 \external{meets}  a \sbol{Range} with \sbol{start} equal to 10, while it \external{strictlyPrecedes} a \sbol{Cut} with \sbol{at} equal to 10.
+}
   \label{tbl:restriction_types_sequence}
 \end{table}
 

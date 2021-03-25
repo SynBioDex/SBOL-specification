@@ -16,6 +16,10 @@ The \sbol{Location} class (as shown in \ref{uml:location}) is used to represent 
 \label{sec:orientation:L}
 The \sbolmult{orientation:L}{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}. \ref{tbl:orientation_types} provides a list of REQUIRED \sbolmult{orientation:L}{orientation} \sbol{URI}s. If a \sbol{Location} object has an \sbolmult{orientation:L}{orientation}, then it MUST come from \ref{tbl:orientation_types}.
 
+As is typical practice in biology, any change in orientation is applied after indices are interpreted.
+Thus, for example, in a DNA \sbol{Sequence} with \sbol{elements} {\tt AAAAACCCCCTTTTTGGGGGTTTTTGGGGG}, 
+indices 1-6 with a reverse orientation will select {\tt AAAAAC}, which would then be reverse complemented to obtain {\tt GTTTTT}.
+
 \subparagraph{The \sbolheading{order} property}
 \label{sec:order}
 The \sbol{order} property is OPTIONAL and has a data type of \sbol{Integer}.  If there are multiple \sbol{Location} objects associated with a \sbol{Feature}, the \sbol{order} property is used to specify the order (in increasing value) in which the specified \sbol{Location}s are to be joined to form the sequence of the \sbol{Feature}.
