@@ -119,17 +119,17 @@ Specifically:
 \item If the parent of the \sbol{ComponentReference} is another \sbol{ComponentReference}, then \sbol{inChildOf} MUST be a \sbol{SubComponent} of the \sbol{Component} linked as \sbol{instanceOf} the parent's \sbol{inChildOf} \sbol{SubComponent}.
 \end{itemize}
 
-\subparagraph{The \sbolheading{hasFeature} property}\label{sec:hasFeature:CR}
+\subparagraph{The \sbolheading{refersTo} property}\label{sec:refersTo}
 
-The \sbolmult{hasFeature:CR}{hasFeature} property is a REQUIRED \sbol{URI} that refers to a \sbol{Feature}.
+The \sbol{refersTo} property is a REQUIRED \sbol{URI} that refers to a \sbol{Feature}.
 
 This can be used to either link to the \sbol{Feature} being referenced or to chain hierarchically through additional layers of \sbol{SubComponent}.
 \begin{itemize}
-\item If the \sbol{Feature} is a \sbol{ComponentReference}, then that \sbol{ComponentReference} acts as a hierarchical link in a chain of references, and MUST be either a child of the \sbol{ComponentReference} linking to it via \sbolmult{hasFeature:CR}{hasFeature} or a child of the \sbol{Component} linked as \sbol{instanceOf} the \sbol{ComponentReference}'s \sbol{inChildOf} \sbol{SubComponent}.
-\item Otherwise, if the \sbol{hasFeature} refers to any other type of \sbol{Feature}, that \sbol{Feature} MUST be a child of the \sbol{Component} linked as \sbol{instanceOf} the \sbol{ComponentReference}'s \sbol{inChildOf} \sbol{SubComponent}.
+\item If the \sbol{Feature} is a \sbol{ComponentReference}, then that \sbol{ComponentReference} acts as a hierarchical link in a chain of references, and MUST be either a child of the \sbol{ComponentReference} linking to it via \sbol{refersTo} or a child of the \sbol{Component} linked as \sbol{instanceOf} the \sbol{ComponentReference}'s \sbol{inChildOf} \sbol{SubComponent}.
+\item Otherwise, if the \sbol{refersTo} refers to any other type of \sbol{Feature}, that \sbol{Feature} MUST be a child of the \sbol{Component} linked as \sbol{instanceOf} the \sbol{ComponentReference}'s \sbol{inChildOf} \sbol{SubComponent}.
 \end{itemize}
 
-For example, \sbol{ComponentReference} R1 looking into a \sbol{SubComponent} for a plasmid might link with \sbol{hasFeature} to its own child \sbol{ComponentReference} R2, which in turn looks within the \sbol{Component} defining the plasmid to the plasmid's CDS \sbol{SubComponent}, in turn using \sbol{hasFeature} to reference a \sbol{SequenceFeature} within the \sbol{Component} that defines that CDS.
+For example, \sbol{ComponentReference} R1 looking into a \sbol{SubComponent} for a plasmid might link with \sbol{refersTo} to its own child \sbol{ComponentReference} R2, which in turn looks within the \sbol{Component} defining the plasmid to the plasmid's CDS \sbol{SubComponent}, in turn using \sbol{refersTo} to reference a \sbol{SequenceFeature} within the \sbol{Component} that defines that CDS.
 
 \paragraph{LocalSubComponent}
 \label{sec:LocalSubComponent}

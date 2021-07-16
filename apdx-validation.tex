@@ -133,7 +133,7 @@ Class & Parent & SBOL Properties & Reference \\
 \sbol{Attachment}	& \sbol{TopLevel} 	& \sbolmult{source:A}{source}, \sbol{format}, \sbol{size}, \sbol{hash}, \sbol{hashAlgorithm} & \sec{sec:Attachment} \\
 \sbol{Collection} 	& \sbol{TopLevel} 	& \sbol{member} & \sec{sec:Collection} \\
 \sbol{CombinatorialDerivation} & \sbol{TopLevel} & \sbol{template}, \sbol{strategy}, \sbol{hasVariableFeature} & \sec{sec:CombinatorialDerivation} \\
-\sbol{ComponentReference} &\sbol{Feature} & \sbol{inChildOf}, \sbol{hasFeature} & \sec{sec:ComponentReference} \\
+\sbol{ComponentReference} &\sbol{Feature} & \sbol{inChildOf}, \sbol{refersTo} & \sec{sec:ComponentReference} \\
 \sbol{Component} 	& \sbol{TopLevel} 	& \sbolmult{type:C}{type}, \sbolmult{role:C}{role}, \sbolmult{hasSequence:C}{hasSequence}, \sbol{hasFeature}, \sbol{hasInteraction},  \sbol{hasConstraint}, \sbol{hasModel}, \sbol{hasInterface} & \sec{sec:Component} \\
 \sbol{Constraint} 	& \sbol{Identified} 	& \sbol{subject}, \sbol{object}, \sbol{restriction} & \sec{sec:Constraint} \\
 \sbol{Cut} 			& \sbol{Location} 	& \sbol{at} & \sec{sec:Cut} \\
@@ -205,7 +205,7 @@ Class & Property & Cardinality & Type & Referred Type & Reference\\
 \sbol{CombinatorialDerivation} & \sbol{hasVariableFeature} & ZERO OR MORE	& \sbol{URI}	& \sbol{VariableFeature} & \sec{sec:CombinatorialDerivation}\\
 \sbol{CombinatorialDerivation} & \sbol{strategy} 	& ZERO OR ONE 			& \sbol{URI}	& ---				& \sec{sec:CombinatorialDerivation}\\
 \sbol{CombinatorialDerivation} & \sbol{template} 	& EXACTLY ONE			& \sbol{URI}	& \sbol{Component}	& \sec{sec:CombinatorialDerivation}\\
-\sbol{ComponentReference} & \sbol{hasFeature} 	& EXACTLY ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:ComponentReference}\\
+\sbol{ComponentReference} & \sbol{refersTo} 		& EXACTLY ONE			& \sbol{URI}	& \sbol{Feature}	& \sec{sec:ComponentReference}\\
 \sbol{ComponentReference} & \sbol{inChildOf} 		& EXACTLY ONE			& \sbol{URI}	& \sbol{SubComponent} & \sec{sec:ComponentReference}\\
 \sbol{Component}		& \sbolmult{hasSequence:C}{hasSequence} & ZERO OR MORE & \sbol{URI} & \sbol{Sequence} & \sec{sec:Component}\\
 \sbol{Component}		& \sbolmult{role:C}{role} 	& ZERO OR MORE			& \sbol{URI}	& ---				& \sec{sec:Component}\\
@@ -433,10 +433,10 @@ Reference: \sec{sec:SubComponent}}
 \printValid{If a \sbol{ComponentReference} object is a child of another \sbol{ComponentReference}, then its \sbol{inChildOf} property MUST be a \sbol{SubComponent} of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the parent's \sbol{inChildOf} property.
 \\ Reference: \sec{sec:ComponentReference}}
 
-\printValid{If the \sbol{hasFeature} property of a \sbol{ComponentReference} refers to another \sbol{ComponentReference}, then the second \sbol{ComponentReference} MUST be either a child of the first \sbol{ComponentReference} or a child of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the \sbol{inChildOf} property of the first \sbol{ComponentReference}.
+\printValid{If the \sbol{refersTo} property of a \sbol{ComponentReference} refers to another \sbol{ComponentReference}, then the second \sbol{ComponentReference} MUST be either a child of the first \sbol{ComponentReference} or a child of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the \sbol{inChildOf} property of the first \sbol{ComponentReference}.
 \\ Reference: \sec{sec:ComponentReference}}
 
-\printValid{If the \sbol{hasFeature} property of a \sbol{ComponentReference} refers to a \sbol{Feature} of any other type besides \sbol{ComponentReference}, then that \sbol{Feature} MUST be a child of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the \sbol{inChildOf} property of the first \sbol{ComponentReference}.
+\printValid{If the \sbol{refersTo} property of a \sbol{ComponentReference} refers to a \sbol{Feature} of any other type besides \sbol{ComponentReference}, then that \sbol{Feature} MUST be a child of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the \sbol{inChildOf} property of the first \sbol{ComponentReference}.
 \\ Reference: \sec{sec:ComponentReference}}
 
 
