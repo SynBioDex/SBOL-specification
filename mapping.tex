@@ -44,7 +44,8 @@ The SBOL 2.x \sbol{Attachment}, \sbol{CombinatorialDerivation}, \sbol{Experiment
 \item In \external{VariableComponent}, the \sbol{variantMeasure} property has been added, which does not exist in SBOL 2.x.
 \item In \sbol{Experiment}, the SBOL 2.x \external{experimentalData} property maps to the SBOL 3.x \sbol{member} property.
 \item In \sbol{Location}, the SBOL 2.x \external{sequence} property maps to an SBOL 3.x \sbolmult{hasSequence:L}{hasSequence} property. 
-If there \external{sequence} property was not set, then the \sbolmult{hasSequence:L}{hasSequence} property is set to one of the values of the \external{sequences} property of the \external{ComponentDefinition} that contained the SBOL 2.x \sbol{Location}
+If there \external{sequence} property was not set, then the \sbolmult{hasSequence:L}{hasSequence} property is set to one of the values of the \external{sequences} property of the \external{ComponentDefinition} that contained the SBOL 2.x \sbol{Location}.
+If there is more than one value for \external{sequences}, behavior is left deliberately unspecified, and is allowed to be considered an error condition.
 \end{itemize}
 
 The mapping from SBOL 2.x to SBOL 3.x proceeds as follows:
