@@ -2,7 +2,7 @@
 \label{sec:Identified}
 
 All SBOL-defined classes are directly or indirectly derived from the \sbol{Identified}  abstract class.
-This inheritance means that all SBOL objects are uniquely identified using \sbol{URI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
+This inheritance means that all SBOL objects are uniquely identified using \sbol{IRI}s that uniquely refer to these objects within an SBOL document or at locations on the World Wide Web.
 
 As shown in \ref{uml:identified}, the \sbol{Identified} class includes the following properties: \sbol{displayId},  \sbol{name}, \sbol{description}, \prov{wasDerivedFrom}, and \prov{wasGeneratedBy}. 
 
@@ -16,18 +16,18 @@ As shown in \ref{uml:identified}, the \sbol{Identified} class includes the follo
   
 \subparagraph{The \sbolheading{displayId} property}
 \label{sec:displayId}
-The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between a URI and the \sbol{name} property that is machine-readable, but more human-readable than the full URI of an object.
+The \sbol{displayId} property is an OPTIONAL identifier with a data type of \sbol{String}. This property is intended to be an intermediate between a IRI and the \sbol{name} property that is machine-readable, but more human-readable than the full IRI of an object.
 
 If the \sbol{displayId} property is used, then its \sbol{String} value MUST be composed of only alphanumeric or underscore characters and MUST NOT begin with a digit.
 
-Note that for objects whose URI is a URL, the requirements on URL structure in \ref{sec:URIstructure} imply that the \sbol{displayId} MUST be set.
+Note that for objects whose IRI is a URL, the requirements on URL structure in \ref{sec:IRIstructure} imply that the \sbol{displayId} MUST be set.
 
 \subparagraph{The \sbolheading{name} property}
 \label{sec:name}
 
 The \sbol{name} property is OPTIONAL and has a data type of \sbol{String}. This property is intended to be displayed to a human when visualizing an \sbol{Identified} object.
 
-If an \sbol{Identified} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or URI.
+If an \sbol{Identified} object lacks a name, then software tools SHOULD instead display the object's \sbol{displayId} or IRI.
 It is RECOMMENDED that software tools give users the ability to switch perspectives between \sbol{name} properties that are human-readable and \sbol{displayId} properties that are less human-readable, but are more likely to be unique.
 
 \subparagraph{The \sbolheading{description} property}
@@ -37,14 +37,14 @@ The \sbol{description} property is OPTIONAL and has a data type of \sbol{String}
 
 \subparagraph{The \sbolheading{prov:wasDerivedFrom} property}
 \label{sec:prov:wasDerivedFrom}
-An \sbol{Identified} object MAY have zero or more \prov{wasDerivedFrom} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace (Reference: \ref{sec:provenance}).
+An \sbol{Identified} object MAY have zero or more \prov{wasDerivedFrom} properties, each of type IRI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace (Reference: \ref{sec:provenance}).
 
 An \sbol{Identified} object with this property refers to one or more non-SBOL resources or SBOL \sbol{Identified} objects from which this object was derived. 
  An \sbol{Identified} object MUST NOT refer to itself via its own \prov{wasDerivedFrom} property or form a cyclical chain of references via its \prov{wasDerivedFrom} property and those of other \sbol{Identified} objects. For example, the reference chain ``$A$ was derived from $B$ and $B$ was derived from $A$'' is cyclical.
 
 \subparagraph{The \sbolheading{prov:wasGeneratedBy} property}
 \label{sec:prov:wasGeneratedBy}
-An \sbol{Identified} object MAY have zero or more \prov{wasGeneratedBy} properties, each of type URI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace (Reference: \ref{sec:provenance}).
+An \sbol{Identified} object MAY have zero or more \prov{wasGeneratedBy} properties, each of type IRI. This property is defined by the PROV-O ontology and is located in the \url{https://www.w3.org/ns/prov#} namespace (Reference: \ref{sec:provenance}).
 
 An \sbol{Identified} object with this property refers to one or more \prov{Activity} objects that describe how this object was generated.
 Provenance history formed by \prov{wasGeneratedBy} properties of \sbol{Identified} objects and entity references in \prov{Usage} objects MUST NOT form circular reference chains.

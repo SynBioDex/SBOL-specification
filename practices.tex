@@ -9,19 +9,19 @@ To differentiate between major versions of SBOL, different namespaces are used. 
 \subsection{Compliant SBOL Objects}
 \label{sec:compliant}
 
-Maintaining unique URIs for all SBOL objects can be challenging.  To reduce this burden, users of SBOL 3.x are encouraged to follow a few simple rules when constructing the URIs and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
+Maintaining unique IRIs for all SBOL objects can be challenging.  To reduce this burden, users of SBOL 3.x are encouraged to follow a few simple rules when constructing URLs and related properties for SBOL objects.  When these rules are followed in constructing an SBOL object, we say that this object is \emph{compliant}. These rules are as follows:
 
-Compliant URIs for \sbol{TopLevel} objects MUST conform to the following pattern:
+Compliant URLs for \sbol{TopLevel} objects MUST conform to the following pattern:
 \begin{quotation} 
 \refObj{namespace}/\refObj{collection\_structure}/\refObj{displayId}
 \end{quotation}
 
-The \refObj{namespace} token MAY further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \sbol{URI}s can be automatically decomposed with the aid of a \sbol{TopLevel} object's \sbol{hasNamespace} property. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
+The \refObj{namespace} token MAY further decompose into \refObj{domain}/\refObj{root} tokens. The \refObj{root} and \refObj{collection\_structure} tokens may optionally be omitted; alternatively, they may consist of an arbitrary number of delimiter-separated layers. Note that this pattern means that SBOL-compliant \sbol{URL}s can be automatically decomposed with the aid of a \sbol{TopLevel} object's \sbol{hasNamespace} property. SBOL-compliant objects can be easily remapped into new namespaces by changing only the \refObj{namespace}.
 
-Consider, for example, the SBOL-compliant \sbol{URI}:
+Consider, for example, the SBOL-compliant \sbol{URL}:
 \begin{quote}``https://synbiohub.org/igem/2017\_distribution/promoters/constitutive/BBa\_J23101''\end{quote} 
 for a \sbol{Component} with a \sbol{hasNamespace} value ``https://synbiohub.org/igem/2017\_distribution''.
-This \sbol{URI} can be decomposed as follows:
+This \sbol{URL} can be decomposed as follows:
 \begin{quote} 
 namespace: ``https://synbiohub.org/igem/2017\_distribution'' \linebreak
 domain: ``https://synbiohub.org'' \linebreak
@@ -30,16 +30,16 @@ collection: ``promoters/constitutive'' \linebreak
 displayId: ``BBa\_J23101'' \linebreak
 \end{quote}
 
-SBOL-compliant URIs also facilitate auto-construction of child objects with unique \sbol{URI}s. 
-Child objects of \sbol{TopLevel} objects with compliant \sbol{URI}s MUST conform to the following pattern:\\ ``\refObj{parent\_uri}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_uri} refers to the URI of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. 
-The \refObj{child\_type\_counter} of a new object SHOULD be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_uri}/SequenceAnnotation37''). 
+SBOL-compliant URLs also facilitate auto-construction of child objects with unique \sbol{URL}s. 
+Child objects of \sbol{TopLevel} objects with compliant \sbol{URL}s MUST conform to the following pattern:\\ ``\refObj{parent\_url}/\refObj{child\_type}\refObj{child\_type\_counter}'' where the \refObj{parent\_url} refers to the URL of the parent object, the \refObj{child\_type} refers to the SBOL class of the child object, and \refObj{child\_type\_counter} is a unique index for the child object. 
+The \refObj{child\_type\_counter} of a new object SHOULD be calculated at time of object creation as 1 + the maximum \refObj{child\_type\_counter} for each \refObj{child\_type} object in the parent (e.g., ``\refObj{parent\_url}/SequenceAnnotation37''). 
 Note that numbering is independent for each type, so a \sbol{Component} can have children ``SubComponent37'' and ``Constraint37''.
 
-All examples in this specification use compliant \sbol{URI}s.
+All examples in this specification use compliant \sbol{URL}s.
 
 \subsection{Versioning SBOL Objects}
 
-SBOL 3.x does not specify an explicit versioning scheme. Rather it is left for experimentation across different tools. This allows version information to be included in the root (e.g., GitHub style: ``igem/HEAD/''), collection structure (e.g., ``promoters/constitutive/2/''), in tool-specific conventions on \sbol{displayId} (e.g., ``BBa\_J23101\_v2'') or in information outside of the \sbol{URI} (e.g., by attaching \external{prov:wasRevisionOf} properties).
+SBOL 3.x does not specify an explicit versioning scheme. Rather it is left for experimentation across different tools. This allows version information to be included in the root (e.g., GitHub style: ``igem/HEAD/''), collection structure (e.g., ``promoters/constitutive/2/''), in tool-specific conventions on \sbol{displayId} (e.g., ``BBa\_J23101\_v2'') or in information outside of the \sbol{IRI} (e.g., by attaching \external{prov:wasRevisionOf} properties).
 
 \subsection{Annotations: Embedded Objects vs. External References}
 
@@ -47,7 +47,7 @@ When annotating an SBOL document with additional information, there are
 two general methods that can be used:
 \begin{itemize}
 \item Embed the information in the SBOL document using properties outside of the SBOL namespace.
-\item Store the information separately and annotate the SBOL document with \sbol{URI}s that point to it.
+\item Store the information separately and annotate the SBOL document with \sbol{IRI}s that point to it.
 \end{itemize}
 In theory, either method can be used in any case. (Note that a third case not
 discussed here is to annotate external objects with links
@@ -56,7 +56,7 @@ to SBOL documents, rather than annotating SBOL documents with links to external 
 In practice, 
 embedding large amounts of non-SBOL data into SBOL documents is likely
 to cause problems for people and software tools trying to manage and
-exchange such documents.  Therefore, it is RECOMMENDED that small amounts of information (e.g., design notes or preferred graphical layout) be embedded in the SBOL model, while large amounts of information (e.g., the contents of the scientific publication from which a model was derived or flow cytometry data that characterizes performance) be linked with URIs pointing to external resources.  The boundary between ``small'' and ``large'' is left deliberately vague, recognizing that it will likely depend on the particulars of a given SBOL application.
+exchange such documents.  Therefore, it is RECOMMENDED that small amounts of information (e.g., design notes or preferred graphical layout) be embedded in the SBOL model, while large amounts of information (e.g., the contents of the scientific publication from which a model was derived or flow cytometry data that characterizes performance) be linked with IRIs pointing to external resources.  The boundary between ``small'' and ``large'' is left deliberately vague, recognizing that it will likely depend on the particulars of a given SBOL application.
 
 \subsection{Completeness and Validation}
 
@@ -76,7 +76,7 @@ unverified and not depend on their correctness.
 \subsection{Recommended Ontologies for External Terms}
 \label{sec:recomm_ontologies}
 
-External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{URI}s to access existing biological information through these resources. 
+External ontologies and controlled vocabularies are an integral part of SBOL. SBOL uses \sbol{IRI}s (typically \sbol{URL}s to access existing biological information through these resources. 
 New SBOL-specific terms are defined only when necessary. 
 For example, \sbol{Component} \sbolmult{type:C}{type}s, such as DNA or protein, are described using Systems Biology Ontology (SBO) terms. Similarly, the \sbolmult{role:C}{role}s of a DNA or RNA \sbol{Component} are described via Sequence Ontology (SO) terms. Although RECOMMENDED ontologies have been indicated in relevant sections where possible, other resources providing similar terms can also be used. A summary of these external sources can be found in \ref{tbl:preferred_external_resources}.
 
@@ -108,7 +108,7 @@ For example, \sbol{Component} \sbolmult{type:C}{type}s, such as DNA or protein, 
   \label{tbl:preferred_external_resources}
 \end{table}
 
-The URIs for ontological terms SHOULD come from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URIs to be represented as compliant QNames.  SBOL software may convert between these forms as required.
+The IRIs for ontological terms SHOULD be URLs from identifiers.org.  However, it is acceptable to use terms from purl.org as an alternative, for example when RDF tooling requires URLs to be represented as compliant QNames.  SBOL software may convert between these forms as required.
 
 \subsection{Annotating Entities with Date \& Time}\label{sec:DateTime}
 
@@ -188,7 +188,7 @@ The cells themselves are represented by a \sbol{Feature} inside the \sbol{Compon
 a \sbol{Component} capturing information about the species and strain of the cell in the design. 
 This \sbol{Component} has a \sbolmult{type:C}{type} of ``cell'' from the Gene Ontology (GO:0005623), and a \sbolmult{role:C}{role} of ``physical compartment'' (SBO:0000290).
 %\todo[inline]{What property are we actually recommending to use for the annotation?}
-Taxonomic information is captured by annotating the class instance with a URI for an entry in the NCBI Taxonomy Database. 
+Taxonomic information is captured by annotating the class instance with a IRI for an entry in the NCBI Taxonomy Database. 
 
 As usual, other entities besides the cell that are relevant to the design are also captured as \sbol{Feature}s.
 When these are contained within the cell, they are captured using a \sbol{Constraint} with restriction \texttt{contains} with the cell as \sbol{subject} and contained object as \sbol{object}.
@@ -198,7 +198,7 @@ Interactions which occur within the cell are specified by \sbol{Interaction} cla
 \begin{figure}[htp]
 	\begin{center}
 		\includegraphics[width=\textwidth]{uml/cell_representation}
-		\caption[Repressenting a cell]{This is a proposed approach for capturing cell designs in SBOL. A \sbol{Component} annotated with a URI pointing to an entry in the NCBI Taxonomy Database is used to capture information about the cell's strain/species. 
+		\caption[Repressenting a cell]{This is a proposed approach for capturing cell designs in SBOL. A \sbol{Component} annotated with a IRI pointing to an entry in the NCBI Taxonomy Database is used to capture information about the cell's strain/species. 
 		The \sbol{Component} has a type of ``Cell'' from the Gene Ontology (GO), and a role of ``physical compartment''. 
 		Another \sbol{Component} is used to represent a system in which the cell is implemented. 
 		Entities, including the cell, are instantiated as \sbol{Feature}s, and processes are captured using the \sbol{Interaction} class.

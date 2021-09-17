@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -23,8 +23,8 @@ bg=pink</panel_attributes>
     </coordinates>
     <panel_attributes>Component
 --
--type[1..*]:URI
--role[0..*]:URI
+-type[1..*]:IRI
+-role[0..*]:IRI
 
 bg=orange</panel_attributes>
     <additional_attributes/>
@@ -39,7 +39,7 @@ bg=orange</panel_attributes>
     </coordinates>
     <panel_attributes>Constraint
 --
--restriction[1]:URI
+-restriction[1]:IRI
 
 bg=cyan</panel_attributes>
     <additional_attributes/>
@@ -54,8 +54,8 @@ bg=cyan</panel_attributes>
     </coordinates>
     <panel_attributes>Feature	
 --
--role[0..*]:URI
--orientation [0..1]:URI
+-role[0..*]:IRI
+-orientation [0..1]:IRI
 bg=green</panel_attributes>
     <additional_attributes/>
   </element>
@@ -81,7 +81,7 @@ bg=yellow</panel_attributes>
     </coordinates>
     <panel_attributes>Location
 --
--orientation[0..1]:URI
+-orientation[0..1]:IRI
 -order[0..1]:Integer
 bg=blue</panel_attributes>
     <additional_attributes/>
@@ -215,14 +215,14 @@ hasSequence
     <coordinates>
       <x>600</x>
       <y>30</y>
-      <w>160</w>
+      <w>180</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>Interface
 --
--input[0..*]: URI
--output[0..*]: URI
--nondirectional[0..*]:URI
+-input[0..*]: IRI
+-output[0..*]: IRI
+-nondirectional[0..*]:IRI
 bg=green</panel_attributes>
     <additional_attributes/>
   </element>

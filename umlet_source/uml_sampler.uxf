@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -11,10 +11,10 @@
     </coordinates>
     <panel_attributes>*Class*
 --
--requiredProperty[1] : URI
--optionalProperty[0..1] : URI
--unboundedProperty[0..*] : URI
--requiredUnboundedProperty[1..*] : URI
+-requiredProperty[1] : IRI
+-optionalProperty[0..1] : IRI
+-unboundedProperty[0..*] : IRI
+-requiredUnboundedProperty[1..*] : IRI
 
 </panel_attributes>
     <additional_attributes/>
@@ -53,7 +53,7 @@ hasChildObject
     </coordinates>
     <panel_attributes>*SubClass*
 --
--subProperty[1..*] : URI
+-subProperty[1..*] : IRI
 </panel_attributes>
     <additional_attributes/>
   </element>

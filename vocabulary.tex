@@ -76,12 +76,14 @@ When the property uses a different name than the class of the object it points t
 \section{Identifiers and Types}
 % -----------------------------------------------------------------------------
 
-\subsection{Uniform Resource Identifiers}
-\label{sec:URIstructure}
+\subsection{Internationalized Resource Identifiers}
+\label{sec:IRIstructure}
+\label{sec:identity}
 
-As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the SBOL data model, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.
+As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by an Internationalized Resource Identifier (IRI), such as a URL or UUID.  
+In the SBOL data model, the value of an association property MUST be a \sbol{IRI} or set of \sbol{IRI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's IRI MUST be globally unique among all other \sbol{Identified} object IRIs. It is also highly RECOMMENDED that the \sbol{IRI} structure follows the recommended best practices for compliant \sbol{IRI}s specified in \ref{sec:compliant}.
 
-Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
+Whenever a \sbol{TopLevel} object's IRI is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
 
 \begin{itemize}
 
@@ -101,11 +103,11 @@ Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the convention
 	Similarly, if the \texttt{SequenceFeature1} object has a \sbol{Location} child object with a \sbol{displayId} of \texttt{Location1}, then that object will have the URL \path{https://synbiohub.org/public/igem/BBa_J23070/SequenceFeature1/Location1}.
   \end{itemize}
 
-\subsection{SBOL URIs}
-  \label{sec:sbolURIs}
+\subsection{SBOL URLs}
+  \label{sec:sbolURLs}
   
 The SBOL namespace, which is \url{http://sbols.org/v3\#}, is used to indicate which entities and properties in an SBOL document are defined by SBOL. 
-For example, the URI of the type \sbol{Component} is \url{http://sbols.org/v3\#Component}. 
+For example, the URL of the type \sbol{Component} is \url{http://sbols.org/v3\#Component}. 
 This convention is assumed throughout the specification.
 The SBOL namespace MUST NOT be used for any entities or properties not defined in this specification.  
 
@@ -122,7 +124,8 @@ Likewise, Section~\ref{sec:complementaryStandards} details complementary standar
 \label{sec:Long}
 \label{sec:Double}
 \label{sec:Boolean}
-\label{sec:URI}
+\label{sec:IRI}
+\label{sec:URL}
 \label{sec:literal}
 
 When SBOL uses simple ``primitive'' data types such as \sbol{String}s or \sbol{Integer}s, these are defined as the following specific formal types:
@@ -140,7 +143,9 @@ When SBOL uses simple ``primitive'' data types such as \sbol{String}s or \sbol{I
 \end{itemize}
 The term \sbol{literal} is used to denote an object that can be any of the five types listed above.
 
-In addition to the simple types listed above, SBOL also uses objects with types \emph{Uniform Resource Identifier} (\sbol{URI}). It is important to realize that in RDF, a \sbol{URI} might or might not be a resolvable URL (web address).  A \sbol{URI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
+In addition to the simple types listed above, SBOL also uses objects with types \emph{Internationalized Resource Identifier} (\sbol{IRI}). 
+It is important to realize that in RDF, a \sbol{IRI} might or might not be a resolvable URL (web address).  
+A \sbol{IRI} is always a globally unique identifier within a structured namespace.  In some cases, that name is also a reference to (or within) a document, and in some cases that document can also be retrieved (e.g., using a web browser).
 
 
 \subsection{SBOL Types}

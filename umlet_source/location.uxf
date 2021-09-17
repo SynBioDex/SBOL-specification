@@ -2,21 +2,6 @@
 <diagram program="umlet" version="14.3.0">
   <zoom_level>14</zoom_level>
   <element>
-    <type>com.baselet.element.old.element.Class</type>
-    <coordinates>
-      <x>350</x>
-      <y>224</y>
-      <w>238</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>*Location*
---
--orientation[0..1] : URI
--order[0..1] : Integer
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>168</x>
@@ -139,5 +124,20 @@
 hasSequence
   1</panel_attributes>
     <additional_attributes>42;70;252;70</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>224</y>
+      <w>238</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>*Location*
+--
+-orientation[0..1] : IRI
+-order[0..1] : Integer
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

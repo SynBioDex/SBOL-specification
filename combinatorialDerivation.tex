@@ -14,7 +14,7 @@ The purpose of the \sbol{CombinatorialDerivation} class is to specify combinator
 
 \subparagraph{The \sbolheading{template} property}\label{sec:template}
 
-The \sbol{template} property is REQUIRED and MUST contain a URI that refers to a \sbol{Component}. 
+The \sbol{template} property is REQUIRED and MUST contain a IRI that refers to a \sbol{Component}. 
 This \sbol{Component} is expected to serve as a template for the derivation of new \sbol{Component} objects. 
 Consequently, its \sbol{hasFeature} properties SHOULD contain one or more \sbol{Feature} objects that will serve as the variables whose values are set during derivation (referred to hereafter as template \sbol{Feature} objects).
 Its other property values describe aspects of the template that will not change based on the values that may be varied.
@@ -23,25 +23,25 @@ Its other property values describe aspects of the template that will not change 
 \label{sec:hasVariableFeature}
 
 Each \sbol{VariableFeature} child of a \sbol{CombinatorialDerivation} defines the set of possible values for one of the variables in the \sbol{template}.
-A \sbol{CombinatorialDerivation} object can have zero or more \sbol{hasVariableFeature} properties, each of type \sbol{URI}, specifying a \sbol{VariableFeature}. 
+A \sbol{CombinatorialDerivation} object can have zero or more \sbol{hasVariableFeature} properties, each of type \sbol{IRI}, specifying a \sbol{VariableFeature}. 
 The set of \sbol{hasVariableFeature} properties MUST NOT contain two or more \sbol{VariableFeature} objects that refer to the same template \\sbol{Feature} via their \sbol{variable} properties (i.e., do not define the same variable twice).
 
 The \sbol{variable} properties of \sbol{VariableFeature} objects determined which \sbol{Feature} objects in the \sbol{template} are modified in a derived \sbol{Component}, and which ones will not be changed.
 In particular, we will refer to a \sbol{Feature} in the template \sbol{Component} that is referred to by some \sbol{variable} property as a variable \sbol{Feature}, and one that is not referred to by any as a static \sbol{Feature}.
 
 \subparagraph{The \sbolheading{strategy} property}\label{sec:strategy}
-The \sbol{strategy} property is OPTIONAL and has a data type of URI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URIs. If the \sbol{strategy} property is not empty, then it MUST contain a URI from \ref{tbl:strategy}. This property recommends how many \sbol{Component} objects SHOULD be derived from the template \sbol{Component}.
+The \sbol{strategy} property is OPTIONAL and has a data type of IRI. \ref{tbl:strategy} provides a list of REQUIRED \sbol{strategy} URLs. If the \sbol{strategy} property is not empty, then it MUST contain a URL from \ref{tbl:strategy}. This property recommends how many \sbol{Component} objects SHOULD be derived from the template \sbol{Component}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
-    \textbf{Strategy URI} & \textbf{Description} \\
+    \textbf{Strategy URL} & \textbf{Description} \\
     \midrule
     \url{http://sbols.org/v3#enumerate}  &  Derivation SHOULD produce all possible \sbol{Component} objects specified by the \sbol{CombinatorialDerivation}. \\
         \url{http://sbols.org/v3#sample}  & Derivation SHOULD produce a subset of possible \sbol{Component} objects specified by \sbol{CombinatorialDerivation}. The manner in which this subset is chosen is left unspecified. \\
     \bottomrule
   \end{edtable}
-  \caption{REQUIRED \sbol{URI}s for the \sbol{strategy} property.}
+  \caption{REQUIRED \sbol{URL}s for the \sbol{strategy} property.}
   \label{tbl:strategy}
 \end{table}
 
@@ -93,39 +93,39 @@ Given a set of values linked from a \sbol{VariableFeature}, it SHOULD be the cas
 
 \subparagraph{The \sbolheading{variable} property}\label{sec:variable}
 
-The \sbol{variable} property is REQUIRED and MUST contain a URI that refers to a template \sbol{Feature} in the \sbol{template} \sbol{Component} referred to by this \sbol{VariableFeature}'s parent \sbol{CombinatorialDerivation}
+The \sbol{variable} property is REQUIRED and MUST contain a IRI that refers to a template \sbol{Feature} in the \sbol{template} \sbol{Component} referred to by this \sbol{VariableFeature}'s parent \sbol{CombinatorialDerivation}
 
 \subparagraph{The \sbolheading{variantMeasure} property}\label{sec:variantMeasure}
 
-A \sbol{VariableFeature} object can have zero or more \sbol{variantMeasure} properties, each of type \sbol{URI}, specifying a \sbol{om:Measure} object. This property specifies numerical values that are options to be applied to the \sbol{variable} \sbol{Feature} from the \sbol{template} when deriving a new \sbol{Component}.
+A \sbol{VariableFeature} object can have zero or more \sbol{variantMeasure} properties, each of type \sbol{IRI}, specifying a \sbol{om:Measure} object. This property specifies numerical values that are options to be applied to the \sbol{variable} \sbol{Feature} from the \sbol{template} when deriving a new \sbol{Component}.
 
 Note that because a \sbol{om:Measure} is not a \sbol{TopLevel}, the vlaues of \sbol{variantMeasure} must be child objects of the \sbol{VariableFeature}.
 
 \subparagraph{The \sbolheading{variant} property}\label{sec:variant}
 
-A \sbol{VariableFeature} object can have zero or more \sbol{variant} properties, each of type \sbol{URI}, specifying a \sbol{Component} object. This property specifies individual \sbol{Component} objects to serve as options when deriving a new \sbol{Feature} for the \sbol{variable} \sbol{Feature} from the \sbol{template}.
+A \sbol{VariableFeature} object can have zero or more \sbol{variant} properties, each of type \sbol{IRI}, specifying a \sbol{Component} object. This property specifies individual \sbol{Component} objects to serve as options when deriving a new \sbol{Feature} for the \sbol{variable} \sbol{Feature} from the \sbol{template}.
 
 \subparagraph{The \sbolheading{variantCollection} property}\label{sec:variantCollection}
 
-A \sbol{VariableFeature} object can have zero or more \sbol{variantCollection} properties, each of type \sbol{URI}, specifying a \sbol{Collection} object.
+A \sbol{VariableFeature} object can have zero or more \sbol{variantCollection} properties, each of type \sbol{IRI}, specifying a \sbol{Collection} object.
 Such a \sbol{Collection} MUST NOT contain any objects besides \sbol{Component} objects or \sbol{Collection} objects that themselves contain only \sbol{Component} or \sbol{Collection} objects.
 This property enables the specification of existing groups of \sbol{Component} objects to serve as options.
 
 \subparagraph{The \sbolheading{variantDerivation} property}\label{sec:variantDerivation}
 
-A \sbol{VariableFeature} object can have zero or more \sbol{variantDerivation} properties, each of type \sbol{URI}, specifying a \sbol{CombinatorialDerivation} object. 
+A \sbol{VariableFeature} object can have zero or more \sbol{variantDerivation} properties, each of type \sbol{IRI}, specifying a \sbol{CombinatorialDerivation} object. 
 This property enables the specification of \sbol{Component} objects derived in accordance with another \sbol{CombinatorialDerivation} to serve as options when deriving a new \sbol{Feature} for the \sbol{variable} \sbol{Feature} from the \sbol{template}. 
 The \sbol{variantDerivation} properties of a \sbol{VariableFeature} MUST NOT refer to the \sbol{CombinatorialDerivation} that contains this \sbol{VariableFeature}. 
 Furthermore, such \sbol{VariableFeature} objects MUST NOT form a cyclical chain of references via their \sbol{variantDerivation} properties and the \sbol{CombinatorialDerivation} objects that contain them. 
 
 \subparagraph{The \sbolheading{cardinality} property}\label{sec:cardinality}
 
-The \sbol{cardinality} property is REQUIRED and has type of URI. This property specifies how many \sbol{Feature} objects SHOULD be derived from the template \sbol{Feature} during the derivation of a new \sbol{Component}. The URI value of this property MUST come from the URIs provided in~\ref{tbl:cardinality}.
+The \sbol{cardinality} property is REQUIRED and has type of IRI. This property specifies how many \sbol{Feature} objects SHOULD be derived from the template \sbol{Feature} during the derivation of a new \sbol{Component}. The value of this property MUST come from the URLs provided in~\ref{tbl:cardinality}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
-    \textbf{Cardinality URI} & \textbf{Description} \\
+    \textbf{Cardinality URL} & \textbf{Description} \\
     \midrule
     \url{http://sbols.org/v3#zeroOrOne} & No more than one \sbol{Feature} in the derived \sbol{Component} SHOULD have a \prov{wasDerivedFrom} property that refers to the template \sbol{Feature}. \\
         \url{http://sbols.org/v3#one} & Exactly one \sbol{Feature} in the derived \sbol{Component} SHOULD have a \prov{wasDerivedFrom} property that refers to the template \sbol{Feature}. \\
@@ -133,7 +133,7 @@ The \sbol{cardinality} property is REQUIRED and has type of URI. This property s
 \url{http://sbols.org/v3#oneOrMore} & At least one \sbol{Feature} in the derived \sbol{Component} SHOULD have a \prov{wasDerivedFrom} property that refers to the template \sbol{Feature}. \\
     \bottomrule
   \end{edtable}
-  \caption{REQUIRED \sbol{URI}s for the \sbol{cardinality} property.}
+  \caption{REQUIRED \sbol{URL}s for the \sbol{cardinality} property.}
   \label{tbl:cardinality}
 \end{table}
 

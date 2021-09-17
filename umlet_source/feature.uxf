@@ -72,8 +72,8 @@ instanceOf
     </coordinates>
     <panel_attributes>*Feature*
 --
--role[0..*] : URI
--orientation[0..1] : URI
+-role[0..*] : IRI
+-orientation[0..1] : IRI
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -98,8 +98,8 @@ instanceOf
     </coordinates>
     <panel_attributes>*ExternallyDefined*
 --
--type[1..*] : URI
--definition[1] : URI</panel_attributes>
+-type[1..*] : IRI
+-definition[1] : IRI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -145,7 +145,7 @@ instanceOf
     </coordinates>
     <panel_attributes>*SubComponent*
 --
--roleIntegration[0..1] : URI
+-roleIntegration[0..1] : IRI
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -218,7 +218,7 @@ hasFeature
     </coordinates>
     <panel_attributes>*LocalSubComponent*
 --
--type[1..*] : URI
+-type[1..*] : IRI
 </panel_attributes>
     <additional_attributes/>
   </element>
