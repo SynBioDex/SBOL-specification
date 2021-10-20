@@ -2,9 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [ SBOL3 ]
+    branches: [ master ]
   pull_request:
-    branches: [ SBOL3 ]
+    branches: [ master ]
+  release:
+    types: [ created ]
 
 jobs:
   build_latex:
@@ -26,5 +28,13 @@ jobs:
         with:
           name: PDF
           path: output
+          
+      - if: github.event_name == 'release'
+        name: Upload PDF as release artifact
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: output/sbol3.pdf
 
 
