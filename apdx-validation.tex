@@ -397,7 +397,7 @@ Reference: \sec{sec:Component}}
 \printWarning{Each \sbolmult{role:F}{role} property of a \sbol{Feature} MUST refer to a resource that clarifies the intended function of the \sbol{Feature}.\\
 Reference: \sec{sec:Feature}}
 
-\printValid{If a \sbol{Feature} has an \sbolmult{orientation:F}{orientation} property, its \sbol{URI} SHOULD be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Feature}}
+\printModeling{If a \sbol{Feature} has an \sbolmult{orientation:F}{orientation} property, its \sbol{URI} SHOULD be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Feature}}
 
 %\todo[inline]{Should we add that orientation SHOULD be used precisely for features of type DNA in components of type DNA?}
 
@@ -507,7 +507,7 @@ Reference: \sec{sec:ExternallyDefined}}
 \subsubsection*{Rules for the \class{Location} class} 
 \setcounter{sbolCtr}{11301}
 
-\printValid{If a \sbol{Location} has an \sbolmult{orientation:L}{orientation} property, its \sbol{URI} SHOULD be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Location}}
+\printModeling{If a \sbol{Location} has an \sbolmult{orientation:L}{orientation} property, its \sbol{URI} SHOULD be drawn from \ref{tbl:orientation_types}.\\ Reference: \sec{sec:Location}}
 
 \printValid{For every \sbol{Location} that is not an \sbol{EntireSequence} and that is the value of a \sbolmult{hasLocation:SC}{hasLocation} property of a \sbol{Feature}, the value of its \sbolmult{hasSequence:L}{hasSequence} property MUST also either be a value of the \sbolmult{hasSequence:L}{hasSequence} property of the parent \sbol{Component} or else be the value of some \sbolmult{hasSequence:L}{hasSequence} property of an \sbol{EntireSequence} that is also a child of the same \sbol{Component}.\\ Reference: \sec{sec:Location}}
 
