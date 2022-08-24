@@ -81,7 +81,9 @@ When the property uses a different name than the class of the object it points t
 
 As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by a Uniform Resource Identifier (URI).  In the SBOL data model, the value of an association property MUST be a \sbol{URI} or set of \sbol{URI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's URI MUST be globally unique among all other \sbol{Identified} object URIs. It is also highly RECOMMENDED that the \sbol{URI} structure follows the recommended best practices for compliant \sbol{URI}s specified in \ref{sec:compliant}.
 
-Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
+Note that, because identities are \sbol{URI}s, both \sbol{URI}s and URI prefixes MUST be compared under the rules for \sbol{URI} equality. This means, for example, that namespaces \path{https://synbiohub.org/}, \path{https://synbiohub.org}, and \path{https://synbiohub.org:443/} are all equal.
+
+Whenever a \sbol{TopLevel} object's \sbol{URI} is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
 
 \begin{itemize}
 
