@@ -140,9 +140,9 @@ For example, a custom media mixture might be defined as a \sbol{Component} and u
 The roles of reagents may vary in context: for example, arabinose may serve as an inducer or as a media carbon source. As such, contextual role SHOULD be indicated by an NCI Thesaurus (NCIT) term in a \sbolmult{role:F}{role} property of the \sbol{Feature}. Examples include:
 \begin{itemize}
 \item NCIT:C64356: Positive Control
-\item NCIT:C48694: Cell
-\item NCIT:C85504: Media
-\item NCIT:C14419: Strain
+\item NCIT:C12508: Cell
+\item NCIT:C85504: Growth Medium
+\item NCIT:C14419: Organism Strain
 \item NCIT:C120268: Inducer
 \end{itemize}
 
@@ -186,7 +186,7 @@ The approach RECOMMENDED in this section is capable of capturing this informatio
 It uses a \sbol{Component} to represent a system that contains cells of the given type.
 The cells themselves are represented by a \sbol{Feature} inside the \sbol{Component}, in this case a \sbol{SubComponent} that is an \sbol{instanceOf} 
 a \sbol{Component} capturing information about the species and strain of the cell in the design. 
-This \sbol{Component} has a \sbolmult{type:C}{type} of ``cell'' from the Gene Ontology (GO:0005623), and a \sbolmult{role:C}{role} of ``physical compartment'' (SBO:0000290).
+This \sbol{Component} has a \sbolmult{type:C}{type} of ``cell'' from the Cell Ontology (CL:0000000), and a \sbolmult{role:C}{role} of ``physical compartment'' (SBO:0000290).
 %\todo[inline]{What property are we actually recommending to use for the annotation?}
 Taxonomic information is captured by annotating the class instance with a IRI for an entry in the NCBI Taxonomy Database. 
 

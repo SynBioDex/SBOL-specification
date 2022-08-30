@@ -1,77 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
-  <zoom_level>9</zoom_level>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>288</x>
-      <y>414</y>
-      <w>126</w>
-      <h>81</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>Relation</id><coordinates><x>320</x><y>460</y><w>120</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
 hasLocation
-   0..*</panel_attributes>
-    <additional_attributes>40.0;10.0;40.0;70.0;10.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>171</x>
-      <y>414</y>
-      <w>117</w>
-      <h>81</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+   0..*</panel_attributes><additional_attributes>40;10;40;70;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>190</x><y>460</y><w>110</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
 sourceLocation
-   0..*</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0;40.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>207</x>
-      <y>468</y>
-      <w>90</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>*Location*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>0</x>
-      <y>450</y>
-      <w>153</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>*Component*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>63</x>
-      <y>387</y>
-      <w>117</w>
-      <h>81</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+   0..*</panel_attributes><additional_attributes>10;10;10;70;40;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>230</x><y>520</y><w>100</w><h>30</h></coordinates><panel_attributes>*Location*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>500</y><w>170</w><h>30</h></coordinates><panel_attributes>*Component*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>70</x><y>430</y><w>130</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 instanceOf
-1</panel_attributes>
-    <additional_attributes>110.0;20.0;10.0;20.0;10.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>495</x>
-      <y>270</y>
-      <w>153</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>*Feature*
+1</panel_attributes><additional_attributes>110;20;10;20;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>300</y><w>170</w><h>60</h></coordinates><panel_attributes>*Feature*
 --
+<<<<<<< HEAD
 -role[0..*] : IRI
 -orientation[0..1] : IRI
 </panel_attributes>
@@ -169,55 +104,23 @@ instanceOf
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-inChildOf
-1</panel_attributes>
-    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>414</x>
-      <y>378</y>
-      <w>153</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>*ComponentReference*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>414</x>
-      <y>306</y>
-      <w>99</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-hasFeature
-    1</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0;90.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>594</x>
-      <y>315</y>
-      <w>27</w>
-      <h>171</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>513</x>
-      <y>468</y>
-      <w>153</w>
-      <h>45</h>
-    </coordinates>
-    <panel_attributes>*LocalSubComponent*
+=======
+-role[0..*] : URI
+-orientation[0..1] : URI
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>590</x><y>230</y><w>100</w><h>30</h></coordinates><panel_attributes>*Identified*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>420</y><w>170</w><h>60</h></coordinates><panel_attributes>*ExternallyDefined*
 --
+-type[1..*] : URI
+-definition[1] : URI</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>250</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>320</y><w>300</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>280;10;10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>710</x><y>330</y><w>90</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10;70;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>420</y><w>200</w><h>50</h></coordinates><panel_attributes>*SubComponent*
+--
+-roleIntegration[0..1] : URI
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>350</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>420</y><w>110</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+>>>>>>> master
+inChildOf
+1</panel_attributes><additional_attributes>90;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>460</x><y>420</y><w>170</w><h>30</h></coordinates><panel_attributes>*ComponentReference*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>340</y><w>110</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+refersTo
+    1</panel_attributes><additional_attributes>10;80;10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>350</y><w>30</w><h>190</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;170</additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>520</y><w>170</w><h>50</h></coordinates><panel_attributes>*LocalSubComponent*
+--
+<<<<<<< HEAD
 -type[1..*] : IRI
 </panel_attributes>
     <additional_attributes/>
@@ -231,67 +134,13 @@ hasFeature
       <h>27</h>
     </coordinates>
     <panel_attributes>*SequenceFeature*
+=======
+-type[1..*] : URI
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>820</x><y>520</y><w>170</w><h>30</h></coordinates><panel_attributes>*SequenceFeature*
+>>>>>>> master
 
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>738</x>
-      <y>540</y>
-      <w>90</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>*Location*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>819</x>
-      <y>486</y>
-      <w>135</w>
-      <h>81</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>820</x><y>600</y><w>100</w><h>30</h></coordinates><panel_attributes>*Location*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>910</x><y>540</y><w>130</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
   hasLocation
-   1..*</panel_attributes>
-    <additional_attributes>40.0;10.0;40.0;70.0;10.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>639</x>
-      <y>279</y>
-      <w>198</w>
-      <h>207</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;200.0;10.0;200.0;210.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>513</x>
-      <y>540</y>
-      <w>90</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>*Location*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>594</x>
-      <y>504</y>
-      <w>135</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+   1..*</panel_attributes><additional_attributes>40;10;40;70;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>710</x><y>310</y><w>220</w><h>230</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;200;10;200;210</additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>600</y><w>100</w><h>30</h></coordinates><panel_attributes>*Location*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>560</y><w>130</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
   hasLocation
-   0..*</panel_attributes>
-    <additional_attributes>40.0;10.0;40.0;50.0;10.0;50.0</additional_attributes>
-  </element>
-</diagram>
+   0..*</panel_attributes><additional_attributes>40;10;40;50;10;50</additional_attributes></element></diagram>
