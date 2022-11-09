@@ -83,9 +83,7 @@ When the property uses a different name than the class of the object it points t
 As SBOL is built upon the Resource Description Framework (RDF), all class instances are identified by an Internationalized Resource Identifier (IRI), such as a URL or UUID.  
 In the SBOL data model, the value of an association property MUST be a \sbol{IRI} or set of \sbol{IRI}s that refer to SBOL objects belonging to the class at the tip of the arrow.  Every \sbol{Identified} object's IRI MUST be globally unique among all other \sbol{Identified} object IRIs. It is also highly RECOMMENDED that the \sbol{IRI} structure follows the recommended best practices for compliant \sbol{IRI}s specified in \ref{sec:compliant}.
 
-Note that, because identities are \sbol{IRI}s, both \sbol{IRI}s and IRI prefixes MUST be compared under the rules for \sbol{IRI} equality. This means, for example, that namespaces \path{https://synbiohub.org/}, \path{https://synbiohub.org}, and \path{https://synbiohub.org:443/} are all equal.
-
-Whenever a \sbol{TopLevel} object's \sbol{IRI} is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
+Whenever a \sbol{TopLevel} object's URI is a URL (e.g., following the conventions of HTTP(S) rather than a UUID), its structure MUST comply with the following rules:
 
 \begin{itemize}
 
