@@ -13,21 +13,21 @@ Note that this means that the object receives both an \external{rdf:type} for th
 
 The PROV-O ontology (\url{https://www.w3.org/ns/prov#}) defines a complementary data model that is leveraged by SBOL to describe provenance. Provenance is central to a range of workflow management, quality control, and attribution tasks within the Synthetic Biology design process. Tracking attribution and derivation of one resource from another is paramount for managing intellectual property purposes. Source designs are often modified in systematic ways to generate derived designs, for example, by applying codon optimization or systematically removing all of a class of restriction enzyme sites.  Documenting the transformation used, and any associated parameters, makes this explicit and potentially allows the process to be reproduced systematically. If a design has been used within other designs, and is later found to be defective, it is paramount that all uses of it, including uses of edited versions of the design, can be identified, and ideally replaced with a non-defective alternative. When importing data from external sources, it is important not only to attribute the original source (for example, GenBank), but also the tool used to perform the import, as this may have made arbitrary choices as to how to represent the source knowledge as SBOL. All these activities have in common that it is necessary to track what resource, and what transformation process was applied by whom to derive an SBOL design.
 
-This section describes a minimal subset of PROV-O terms and classes that may be used by SBOL tools to support representation of provenance\footnote{We thank Dr Paolo Missier from the School of Computing Science, Newcastle University for discussions regarding the use of PROV-O.}, 
+This section describes a minimal subset of PROV-O terms and classes that may be used by SBOL tools to support representation of provenance\footnote{We thank Dr Paolo Missier from the School of Computing Science, Newcastle University for discussions regarding the use of PROV-O.},
 and how it has been adapted for use with SBOL by assigning PROV-O classes to SBOL \sbol{Identified} or \sbol{TopLevel} types per  Section~\ref{sec:Annotations}.
 %
  Although the full-set of PROV-O terms can be used in SBOL documents, a subset of PROV-O is adopted as a best practice. It is advised that SBOL tools should at least understand this subset, defined in \ref{uml:provenance}. Providers of provenance information are free to make use of more of PROV-O than is described here. It is acceptable for tools that understand more than this subset to use as much as they are able. Tools that only understand this subset must treat any additional data as annotations. Tools that are not aware of SBOL provenance at all MUST maintain and provide access to this information as annotations. This specification does not state what the newly added properties must point to. As long as they are resources that are consistent with the PROV-O property domains, they are legal. For example, a \sbol{Component} may be derived from another \sbol{Component}, but it would probably not make sense for it to be derived from a \sbol{Collection}.
 
-The most basic and general type of provenance relationship can be represented using the \prov{wasDerivedFrom} property. This relationship describes derivation of an SBOL entity from another. 
+The most basic and general type of provenance relationship can be represented using the \prov{wasDerivedFrom} property. This relationship describes derivation of an SBOL entity from another.
 Any \sbol{Identified} object may be annotated with this property. More specific provenance relationships can also be defined using PROV-O, such as \prov{wasGeneratedBy}. Generation of a new object is defined by the W3C PROV-O specification as follows:
 \begin{quote}
 	...the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
 \end{quote}
 These relationships are leveraged in SBOL tooling for describing multi-stage synthetic biology workflows.
 
-Synthetic biology workflows may involve multiple stages, multiple users, multiple organizations, and interdisciplinary collaborations. These workflows can be described using four core PROV-O classes: \prov{Entity}, \\ \prov{Activity}, \prov{Agent}, and \prov{Plan}. Any SBOL \sbol{Identified} object can implicitly act as an instance of PROV-O's \prov{Entity} class. Workflow histories (retrospective provenance) and workflow specifications (prospective provenance) can be described in SBOL using \prov{Activity} objects to link \sbol{Identified} objects into workflows. An \prov{Agent} (for example a software or a person) runs an \prov{Activity} according to a \prov{Plan} to generate new entities. Resources representing \prov{Agent}, \prov{Activity} and \prov{Plan} classes should be handled as \sbol{TopLevel}, whilst \prov{Usage} and \prov{Association} resources should be treated as child \sbol{Identified} objects within their parent \prov{Activity} objects.  
+Synthetic biology workflows may involve multiple stages, multiple users, multiple organizations, and interdisciplinary collaborations. These workflows can be described using four core PROV-O classes: \prov{Entity}, \\ \prov{Activity}, \prov{Agent}, and \prov{Plan}. Any SBOL \sbol{Identified} object can implicitly act as an instance of PROV-O's \prov{Entity} class. Workflow histories (retrospective provenance) and workflow specifications (prospective provenance) can be described in SBOL using \prov{Activity} objects to link \sbol{Identified} objects into workflows. An \prov{Agent} (for example a software or a person) runs an \prov{Activity} according to a \prov{Plan} to generate new entities. Resources representing \prov{Agent}, \prov{Activity} and \prov{Plan} classes should be handled as \sbol{TopLevel}, whilst \prov{Usage} and \prov{Association} resources should be treated as child \sbol{Identified} objects within their parent \prov{Activity} objects.
 
-A design-build-test-learn SBOL ontology has been adopted for use with PROV-O classes (see \ref{tbl:activity_types}). The terms \textit{design}, \textit{build}, \textit{test}, and \textit{learn} provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. These terms SHOULD BE used on the \sbolmult{type:Activity}{type} property of the \prov{Activity} class. (Note that this property is a special property added by the SBOL specification, and is not part of the original PROV-O specification.) Additionally, these terms SHOULD BE used in the \provmult{hadRole:U}{hadRole} properties on \prov{Usage} to qualify how the referenced \prov{entity} is used by the parent \prov{Activity}. 
+A design-build-test-learn SBOL ontology has been adopted for use with PROV-O classes (see \ref{tbl:activity_types}). The terms \textit{design}, \textit{build}, \textit{test}, and \textit{learn} provide a high level workflow abstraction that allows tool-builders to quickly search for and isolate provenance histories relevant to their domain, while keeping track of the flow of data between different users working in different domains of synthetic biology. These terms SHOULD BE used on the \sbolmult{type:Activity}{type} property of the \prov{Activity} class. (Note that this property is a special property added by the SBOL specification, and is not part of the original PROV-O specification.) Additionally, these terms SHOULD BE used in the \provmult{hadRole:U}{hadRole} properties on \prov{Usage} to qualify how the referenced \prov{entity} is used by the parent \prov{Activity}.
 
 \begin{table}[ht]
 	\begin{edtable}{tabular}{llp{3.5in}}
@@ -44,7 +44,7 @@ A design-build-test-learn SBOL ontology has been adopted for use with PROV-O cla
 	\label{tbl:activity_types}
 \end{table}
 
-Logical constraints are placed on the order in which different types of \prov{Activity}s are chained into design-build-test-learn workflows. These rules additionally place constraints on the types of objects that may be used as inputs for a particular type of \prov{Activity}. For example, a \textit{design} \prov{Usage} may be used as an input for either a \textit{design} or \textit{build} \prov{Activity} but SHOULD NOT be used as an input for a \textit{test} \prov{Activity}. An example of how these terms are used is provided in \ref{images:design-build-test-learn}. 
+Logical constraints are placed on the order in which different types of \prov{Activity}s are chained into design-build-test-learn workflows. These rules additionally place constraints on the types of objects that may be used as inputs for a particular type of \prov{Activity}. For example, a \textit{design} \prov{Usage} may be used as an input for either a \textit{design} or \textit{build} \prov{Activity} but SHOULD NOT be used as an input for a \textit{test} \prov{Activity}. An example of how these terms are used is provided in \ref{images:design-build-test-learn}.
 The ordering of stages and constraints on referred object type are given in \ref{tbl:dbtl_stages}.
 
 \begin{table}[ht]
@@ -135,29 +135,29 @@ The \prov{hadPlan} property is OPTIONAL and contains a \sbol{IRI} that refers to
 \subsubsection{prov:Plan}
 \label{sec:prov:Plan}
 
- The \prov{Plan} entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \prov{Agent} is used in a particular \prov{Activity}. 
+ The \prov{Plan} entity can be used as a place holder to describe the steps (for example scripts or lab protocols) taken when an \prov{Agent} is used in a particular \prov{Activity}.
 
 \subsubsection{prov:Agent}
 \label{sec:prov:Agent}
 
-Examples of agents are a person, organization, or software tool. 
+Examples of agents are a person, organization, or software tool.
 These agents should be annotated with additional information, such as software version, needed to be able to run the same \prov{Activity} again.
 
 \subparagraph{Example - Codon optimization}
 
-Codon optimization is an example of where provenance properties can be applied. 
+Codon optimization is an example of where provenance properties can be applied.
 The relationship between an original CDS and the codon-optimized version could simply be represented using the \prov{wasDerivedFrom} predicate, in a light-weight form. With more comprehensive use of the PROV ontology, the codon optimization can be represented as an \prov{Activity}. This \prov{Activity} can then include additional information, such as the \prov{Agent} responsible (in this case, codon-optimizing software), and additional parameters.
 
 \subparagraph{Example - Deriving strains}
 
-Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \textit{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology. 
+Bacterial strains are often derived from other strains through modifications such as gene knockouts or mutations. For example, the \textit{Bacillus subtilis} 168 strain was derived from the NCIMB3610 strain in the 1940s through x-radiation. \textit{B. subtilis} 168 is a laboratory strain and has several advantages as a model organism in synthetic biology.
 The relationship between the original strain and the 168 strain can be represented using the \prov{wasDerivedFrom} predicate or, more comprehensively, with an \prov{Activity} describing the protocols used.
 
 \subparagraph{Example - Design-build-test-learn Workflow}
 
 \ref{images:design-build-test-learn} illustrates one complete iteration through a design-build-test-learn cycle.
-The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device. 
-Using a computational tool, a new Design (\sbol{Component}) is composed from biological parts, which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction. 
+The workflow begins with a \sbol{Model} which describes the hypothesized behavior of a biological device.
+Using a computational tool, a new Design (\sbol{Component}) is composed from biological parts, which links back to its \sbol{Model}. A genetic construct is then produced in the laboratory via an assembly protocol, and this biological sample is represented by a Build (\sbol{Implementation}). Once constructed, the Build is then characterized in the laboratory using an automated measurement protocol on a Tecan plate reader, thus generating Test data (represented by an \sbol{ExperimentalData}). Finally, a new \sbol{Model} is derived from these data using a fitting algorithm implemented in the Python programming language. The final \sbol{Model} may not match the beginning \sbol{Model}, as the observed behavior may not match the prediction.
 
 \begin{figure}[ht]
 \begin{center}
@@ -178,9 +178,9 @@ In particular, each derived design links with \prov{wasDerivedFrom} to the \sbol
 \subsection{Adding Measures/Parameters with OM}
 \label{sec:parameters}
 
-There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitive models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
+There are at least two well-established cases for including measures/parameters and their associated units in SBOL design specifications. These use cases are the specification of genetic circuit designs and their associated parameters (such as rates of transcription) and the specification of environmental conditions for biological system designs (such as growth media concentrations and temperatures). In the first use case, parameters are necessary to enable the generation of quantitative models of circuit behavior from circuit design specifications. In the second use case, measures are necessary to define experimental conditions and enable the analysis of system behavior or characterization with respect to environmental context.
 
-The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications, 
+The Ontology of Units of Measure (OM) (\url{http://www.ontology-of-units-of-measure.org/resource/om-2}) already defines a data model for representing measures and their associated units. Here, a subset of OM is adopted by SBOL to describe these concepts for biological design specifications,
 by assigning PROV-O classes to SBOL \sbol{Identified} or \sbol{TopLevel} types per  Section~\ref{sec:Annotations}.
 %
 As shown in \ref{uml:om}, SBOL leverages three of the base classes defined by the OM: \om{Measure}, \om{Unit} and \om{Prefix}. A \om{Measure} links a numerical value to a \om{Unit}, which may or may not have a \om{Prefix} (e.g. centi, milli, micro, etc.). As these classes are adopted by SBOL, \om{Measure} is treated as a subclass of \sbol{Identified}, while \om{Unit} and \om{Prefix} are treated as subclasses of \sbol{TopLevel}. In addition, SBOL adopts the following OM \om{Unit} subclasses: \om{SingularUnit}, \om{CompoundUnit}, \om{UnitMultiplication}, \om{UnitDivision}, \om{UnitExponentiation}, and \om{PrefixedUnit}. Lastly, SBOL adopts the following \om{Prefix} subclasses from OM: \om{SIPrefix} and \om{BinaryPrefix}.
@@ -202,7 +202,7 @@ SBOL-compliant tools are allowed to read, write, and modify data belonging to OM
 
 \subsubsection{om:Measure} \label{sec:om:Measure}
 
-The purpose of the \om{Measure} class is to link a numerical value to a \om{Unit}. 
+The purpose of the \om{Measure} class is to link a numerical value to a \om{Unit}.
 
 \subparagraph{The \sbolheading{om:hasNumericalValue} property}\label{sec:om:hasNumericalValue}
 The \om{hasNumericalValue} property is REQUIRED and MUST contain a single xsd:float.
@@ -218,7 +218,7 @@ A \om{Measure} MAY have one or more \sbolmult{type:Measure}{type} properties, ea
 \subsubsection{om:Unit}
 \label{sec:om:Unit}
 
-As adopted by SBOL, \om{Unit} is an abstract class that is extended by other classes to describe units of measure using a shared set of properties. 
+As adopted by SBOL, \om{Unit} is an abstract class that is extended by other classes to describe units of measure using a shared set of properties.
 
 \subparagraph{The \sbolheading{om:symbol} property}\label{sec:om:symbol:Unit}
 The \ommult{symbol:Unit}{symbol} property is REQUIRED and MUST contain a \sbol{String}. This \sbol{String} is commonly used to abbreviate the unit of measure's name. For example, the unit of measure named ``gram per liter'' is commonly abbreviated using the \sbol{String} ``g/l''.
@@ -241,7 +241,7 @@ The \ommult{longcomment:Unit}{longcomment} property is OPTIONAL and MAY contain 
 \subsubsection{om:SingularUnit}
 \label{sec:om:SingularUnit}
 
-The purpose of the \om{SingularUnit} class is to describe a unit of measure that is not explicitly represented as a combination of multiple units, but could be equivalent to such a representation. For example, a joule is considered to be a \om{SingularUnit}, but it is equivalent to the multiplication of a newton and a meter.  
+The purpose of the \om{SingularUnit} class is to describe a unit of measure that is not explicitly represented as a combination of multiple units, but could be equivalent to such a representation. For example, a joule is considered to be a \om{SingularUnit}, but it is equivalent to the multiplication of a newton and a meter.
 
 \subparagraph{The \sbolheading{om:hasUnit} property}\label{sec:om:hasUnit:SingularUnit}
 The \ommult{hasUnit:SingularUnit}{hasUnit} is OPTIONAL and MAY contain a \sbol{IRI}. This \sbol{IRI} MUST refer to another \om{Unit}. The \ommult{hasUnit:SingularUnit}{hasUnit} propery can be used in conjunction with the \ommult{hasFactor:SingularUnit}{hasFactor} property to specify whether a \om{SingularUnit} is equivalent to another \om{Unit} multiplied by a factor. For example, an angstrom is equivalent to $10^{-10}$ meters.
@@ -257,7 +257,7 @@ As adopted by SBOL, \om{CompoundUnit} is an abstract class that is extended by o
 \subsubsection{om:UnitMultiplication}
 \label{sec:om:UnitMultiplication}
 
-The purpose of the \om{UnitMultiplication} class is to describe a unit of measure that is the multiplication of two other units of measure. 
+The purpose of the \om{UnitMultiplication} class is to describe a unit of measure that is the multiplication of two other units of measure.
 
 \subparagraph{The \sbolheading{om:hasTerm1} property}\label{sec:om:hasTerm1}
 The \om{hasTerm1} property is REQUIRED and MUST contain a \sbol{IRI} that refers to another \om{Unit}. This \om{Unit} is the first multiplication term.
@@ -290,7 +290,7 @@ The \om{hasExponent} property is REQUIRED and MUST contain an \texttt{xsd:intege
 \subsubsection{om:PrefixedUnit}
 \label{sec:om:PrefixedUnit}
 
-The purpose of the \om{PrefixedUnit} class is to describe a unit of measure that is the multiplication of another unit of measure and a factor represented by a standard prefix such as ``milli,'' ``centi,'' ``kilo,'' etc. 
+The purpose of the \om{PrefixedUnit} class is to describe a unit of measure that is the multiplication of another unit of measure and a factor represented by a standard prefix such as ``milli,'' ``centi,'' ``kilo,'' etc.
 
 \subparagraph{The \sbolheading{om:hasUnit} property}\label{sec:om:hasUnit:PrefixedUnit}
 The \ommult{hasUnit:PrefixedUnit}{hasUnit} property is REQUIRED and MUST contain a \sbol{IRI} that refers to another \om{Unit}. 
@@ -301,7 +301,7 @@ The \om{hasPrefix} property is REQUIRED and MUST contain a \sbol{IRI} that refer
 \subsubsection{om:Prefix}
 \label{sec:om:Prefix}
 
-As adopted by SBOL, \om{Prefix} is an abstract class that is extended by other classes to describe factors that are commonly represented by standard unit prefixes. For example, the factor $10^{-3}$ is represented by the standard unit prefix ``milli.'' 
+As adopted by SBOL, \om{Prefix} is an abstract class that is extended by other classes to describe factors that are commonly represented by standard unit prefixes. For example, the factor $10^{-3}$ is represented by the standard unit prefix ``milli.''
 
 \subparagraph{The \sbolheading{om:symbol} property}\label{sec:om:symbol:Prefix}
 The \ommult{symbol:Prefix}{symbol} property is REQUIRED and MUST contain a \sbol{String}. This \sbol{String} is commonly used to abbreviate the name of the unit prefix. For example, the \sbol{String} ``m'' is commonly used to abbreviate the name ``milli.''
@@ -327,7 +327,7 @@ The \ommult{hasFactor:Prefix}{hasFactor} property is REQUIRED and MUST contain a
 \subsubsection{om:SIPrefix}
 \label{sec:om:SIPrefix}
 
-The purpose of the \om{SIPrefix} class is to describe standard SI prefixes such as ``milli,'' ``centi,'' ``kilo,'' etc. 
+The purpose of the \om{SIPrefix} class is to describe standard SI prefixes such as ``milli,'' ``centi,'' ``kilo,'' etc.
 
 \subsubsection{om:BinaryPrefix}
 \label{sec:om:BinaryPrefix}

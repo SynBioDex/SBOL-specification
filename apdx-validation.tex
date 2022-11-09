@@ -352,7 +352,7 @@ Class & Property & Cardinality & Type & Referred Type & Reference\\
 
 \printWarning{A \sbol{Component} MUST have a \sbolmult{type:C}{type} property from \ref{tbl:component_types} if it is well-described by this \sbol{URL}.\\ Reference: \sec{sec:Component}}
 
-\printModeling{A \sbol{Component} SHOULD have a \sbolmult{type:C}{type} property from \ref{tbl:component_types}.\\ Reference: \sec{sec:Component}}
+\printModeling{A \sbol{Component} SHOULD have a \sbolmult{type:C}{type} property that uses the physical entity representation branch of the Systems Biology Ontology.\\ Reference: \sec{sec:Component}}
 
 \printWarning{All \sbolmult{type:C}{type} properties of a \sbol{Component} MUST refer to non-conflicting ontology terms.\\ Reference: \sec{sec:Component}}
 
@@ -430,7 +430,7 @@ Reference: \sec{sec:SubComponent}}
 \printValid{If a \sbol{ComponentReference} object is a child of a \sbol{Component}, then its \sbol{inChildOf} property MUST be a \sbol{SubComponent} of its parent.
 \\ Reference: \sec{sec:ComponentReference}}
 
-\printValid{If a \sbol{ComponentReference} object is a child of another \sbol{ComponentReference}, then its \sbol{inChildOf} property MUST be a \sbol{SubComponent} of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the parent's \sbol{inChildOf} property.
+\printValid{If a \sbol{ComponentReference} object is a child of another \sbol{ComponentReference}, via the \sbol{refersTo} property, then its \sbol{inChildOf} property MUST be a \sbol{SubComponent} of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the parent's \sbol{inChildOf} property.
 \\ Reference: \sec{sec:ComponentReference}}
 
 \printValid{If the \sbol{refersTo} property of a \sbol{ComponentReference} refers to another \sbol{ComponentReference}, then the second \sbol{ComponentReference} MUST be either a child of the first \sbol{ComponentReference} or a child of the \sbol{Component} referred to by the \sbol{instanceOf} property of the \sbol{SubComponent} referred to by the \sbol{inChildOf} property of the first \sbol{ComponentReference}.
