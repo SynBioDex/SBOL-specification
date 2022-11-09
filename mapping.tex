@@ -34,6 +34,16 @@ The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 
 \subsection{Mapping between SBOL 2 and SBOL 3}
 
+The base classes of \sbol{Identified} and \sbol{TopLevel} vary in the following ways between SBOL 2.x and SBOL 3.x:
+\begin{itemize}
+\item SBOL 3.x uses IRIs while SBOL 2.x uses URIs, which are a strict subset of IRIs. 
+In practice, however, many existing SBOL 2 tools actually provide support for IRIs and not just URIs.
+Accordingly, conversion from SBOL 3.x to SBOL 2.x SHOULD map all IRIs to URIs and conversion from SBOL 2.x to SBOL 3.x MAY convert escaped unicode characters into non-escaped characters in an IRI.
+\item The SBOL 2.x \sbol{Identified} property \external{persistentIdentity} maps to the SBOL 3.x \sbol{identity} property. The \external{version} property does not exist in SBOL 3.x, but SHOULD be retained through conversion to support conversion back to SBOL 2.x. 
+\item When SBOL 3.x \sbol{Identified} object is converted to SBOL 2.x, if its \sbol{identity} is a URL, then the \sbol{identity} of the SBOL 2.x object SHOULD be constructed as \texttt{[SBOL3 identity]/[SBOL2 version]}. If the object does not have an SBOL2 \external{version} property, then its \external{version} SHOULD default to 1.
+\item The SBOL 3.x \sbol{TopLevel} property \sbol{hasNamespace} does not exist in SBOL 2, and cannot be inferred from an SBOL 2 URI. When converting from SBOL 3.x to SBOL 2.x, the \sbol{hasNamespace} property SHOULD be retained to support conversion back to SBOL 3.x.
+\end{itemize}
+
 \ref{SBOL2TO3} depicts the mapping of SBOL 2.3 classes to SBOL 3.x classes, indicating corresponding classes/properties by color.   
 The SBOL 2.x \sbol{Attachment}, \sbol{CombinatorialDerivation}, \sbol{ExperimentalData}, \sbol{Experiment}, \sbol{Implementation}, \sbol{Model}, \sbol{Participation}, \\
 \sbol{Sequence}, and \sbol{VariableFeature} classes are omitted or abstracted, since they are essentially unchanged in SBOL 3.x except for the following minor changes:

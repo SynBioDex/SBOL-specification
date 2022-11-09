@@ -11,7 +11,7 @@
     </coordinates>
     <panel_attributes>*Identified*
 --
-- prov:wasDerivedFrom [0..*] : URI</panel_attributes>
+- prov:wasDerivedFrom [0..*] : IRI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -47,7 +47,7 @@
     </coordinates>
     <panel_attributes>*prov:Activity*
 --
-- type [0..*]: URI
+- type [0..*]: IRI
 - prov:startedAtTime [0..1]: DateTime
 - prov:endedAtTime [0..1]: DateTime</panel_attributes>
     <additional_attributes/>
@@ -88,7 +88,7 @@ prov:wasGeneratedBy
     </coordinates>
     <panel_attributes>*prov:Association*
 --
-- prov:hadRole [0..*]: URI</panel_attributes>
+- prov:hadRole [0..*]: IRI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -125,8 +125,8 @@ prov:agent
     </coordinates>
     <panel_attributes>*prov:Usage*
 --
-- prov:entity [1]: URI
-- prov:hadRole [0..*]: URI</panel_attributes>
+- prov:entity [1]: IRI
+- prov:hadRole [0..*]: IRI</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

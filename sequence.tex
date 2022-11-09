@@ -22,22 +22,22 @@ If the \sbol{elements} property is not set, then it means the particulars of thi
 \subparagraph{The \sbolheading{encoding} property}
 \label{sec:encoding}
 
-The \sbol{encoding} property has a data type of \sbol{URI}, and is OPTIONAL unless \sbol{elements} is set, in which case it is REQUIRED.
+The \sbol{encoding} property has a data type of \sbol{IRI}, and is OPTIONAL unless \sbol{elements} is set, in which case it is REQUIRED.
 This property MUST indicate how the \sbol{elements} property of a \sbol{Sequence} are formed and interpreted.
-The \sbol{encoding} property SHOULD respectively contain a \sbol{URI} identifying from the textual format (\url{https://identifiers.org/edam:format_2330}) branch of the EDAM ontology.
+The \sbol{encoding} property SHOULD respectively contain a \sbol{IRI} identifying from the textual format (\url{https://identifiers.org/edam:format_2330}) branch of the EDAM ontology.
 
 For example, the \sbol{elements} property of a \sbol{Sequence} with an IUPAC DNA encoding property MUST contain characters that represent nucleotide bases, such as {\tt a}, {\tt t}, {\tt c}, and {\tt g}. The \sbol{elements} property of a \sbol{Sequence} with a Simplified Molecular-Input Line-Entry System (SMILES) encoding, on the other hand, MUST contain characters that represent atoms and chemical bonds, such as {\tt C}, {\tt N}, {\tt O}, and {\tt =}.
 
-\ref{tbl:sequence_encodings} contains a partial list of possible \sbol{URI} values for the \sbol{encoding} property. 
+\ref{tbl:sequence_encodings} contains a partial list of possible \sbol{IRI} values for the \sbol{encoding} property. 
 These terms are organized by the type of \sbol{Component} (see \ref{tbl:component_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}. 
-It is RECOMMENDED that the encoding property of a Sequence contains a URI from \ref{tbl:sequence_encodings}. 
-When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \sbol{URI}s in \ref{tbl:sequence_encodings}, it MUST contain that \sbol{URI}.
+It is RECOMMENDED that the encoding property of a Sequence contains a IRI from \ref{tbl:sequence_encodings}. 
+When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \sbol{IRI}s in \ref{tbl:sequence_encodings}, it MUST contain that \sbol{IRI}.
 
 %A Summary of letters for nucleic acids and aminoacids
 \begin{table}[ht]
   \begin{edtable}{tabular}{lll}
     \toprule
-     \textbf{Encoding} & \textbf{URI} & \textbf{Component Type} \\
+     \textbf{Encoding} & \textbf{URL} & \textbf{Component Type} \\
     \midrule
      IUPAC DNA, RNA & \url{https://identifiers.org/edam:format_1207} & DNA, RNA \\
     IUPAC Protein & \url{https://identifiers.org/edam:format_1208} & Protein\\
@@ -45,6 +45,6 @@ When the \sbol{encoding} of a \sbol{Sequence} is well described by one of the \s
    SMILES & \url{https://identifiers.org/edam:format_1196} & Simple Chemical \\
     \bottomrule
   \end{edtable}
-  \caption{\sbol{URI}s for specifying the \sbol{encoding} property of a \sbol{Sequence}, organized by the type of \sbol{Component} (see \ref{tbl:component_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}.}
+  \caption{\sbol{URL}s for specifying the \sbol{encoding} property of a \sbol{Sequence}, organized by the type of \sbol{Component} (see \ref{tbl:component_types}) that typically refer to a \sbol{Sequence} with such an \sbol{encoding}.}
   \label{tbl:sequence_encodings}
 \end{table}

@@ -14,9 +14,8 @@ The \sbol{Location} class (as shown in \ref{uml:location}) is used to represent 
 
 \subparagraph{The \sbolheading{orientation} property}
 \label{sec:orientation:L}
-The \sbolmult{orientation:L}{orientation} property is OPTIONAL and has a data type of \sbol{URI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}.
+The \sbolmult{orientation:L}{orientation} property is OPTIONAL and has a data type of \sbol{IRI}. All subclasses of \sbol{Location} share this property, which can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}.
 If a \sbol{Location} object has an \sbolmult{orientation:F}{orientation}, then it is RECOMMENDED that it come from \ref{tbl:orientation_types}; for reasons of backwards compatability it MAY instead come from \ref{tbl:orientation_types_alternative}.
-
 
 As is typical practice in biology, any change in orientation is applied after indices are interpreted.
 Thus, for example, in a DNA \sbol{Sequence} with \sbol{elements} {\tt AAAAACCCCCTTTTTGGGGGTTTTTGGGGG}, 
@@ -29,7 +28,7 @@ Note that order values MAY be non-sequential and non-positive, if desired.
 
 \subparagraph{The \sbolheading{hasSequence} property}
 \label{sec:hasSequence:L}
-The \sbolmult{hasSequence:L}{hasSequence} property is REQUIRED and MUST contain the \sbol{URI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
+The \sbolmult{hasSequence:L}{hasSequence} property is REQUIRED and MUST contain the \sbol{IRI} of a \sbol{Sequence} object. All subclasses of \sbol{Location} share this property, which indicates which \sbol{Sequence} object referenced by the containing \sbol{Component} is referenced by the \sbol{Location}.
 
 \paragraph{Range}
 \label{sec:Range}

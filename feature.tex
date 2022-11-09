@@ -14,30 +14,30 @@ The \sbol{Feature} class, as shown in \ref{uml:subcomponent} is used to compose 
 
 \subparagraph{The \sbolheading{role} property}\label{sec:role:F}
 
-Each \sbol{Feature} can have zero or more \sbolmult{role:F}{role} property \sbol{URI}s describing the purpose or potential function of this \sbol{Feature} in the \textit{context} of its parent \sbol{Component}.
+Each \sbol{Feature} can have zero or more \sbolmult{role:F}{role} property \sbol{IRI}s describing the purpose or potential function of this \sbol{Feature} in the \textit{context} of its parent \sbol{Component}.
 If the \sbolmult{role:F}{role} for a \sbol{SubComponent} is left unspecified, then the \sbolmult{role:F}{role} is determined by the \sbolmult{role:C}{role} property of the \sbol{Component} that it is an \sbol{instanceOf}. 
-If provided, these \sbolmult{role:F}{role} property \sbol{URI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{Feature}'s function in any domain for which an ontology exists.
+If provided, these \sbolmult{role:F}{role} property \sbol{IRI}s MUST identify terms from appropriate ontologies. Roles are not restricted to describing biological function; they may annotate a \sbol{Feature}'s function in any domain for which an ontology exists.
 A table of recommended ontology terms for \sbolmult{role:F}{role} is given in \ref{tbl:component_roles}.
 
-It is RECOMMENDED that these \sbolmult{role:F}{role} property \sbol{URI}s identify terms that are compatible with the \sbolmult{type:C}{type} properties of the \sbol{Feature}'s parent \sbol{Component}.
+It is RECOMMENDED that these \sbolmult{role:F}{role} property \sbol{IRI}s identify terms that are compatible with the \sbolmult{type:C}{type} properties of the \sbol{Feature}'s parent \sbol{Component}.
 For example, a \sbolmult{role:F}{role} of a \sbol{Feature} which belongs to a \sbol{Component} of type DNA might refer to terms from the Sequence Ontology. 
 Likewise, for any feature that is a \sbol{SubComponent}, the \sbolmult{role:F}{role} SHOULD be compatible with the \sbolmult{type:C}{type} of the \sbol{Component} that it links to through its \sbol{instanceOf} property.
 
 \subparagraph{The \sbolheading{orientation} property}
 \label{sec:orientation:F}
-The \sbolmult{orientation:F}{orientation} property is OPTIONAL and has a data type of \sbol{URI}. This can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}.
+The \sbolmult{orientation:F}{orientation} property is OPTIONAL and has a data type of \sbol{IRI}. This can be used to indicate how any associated double-stranded \sbol{Feature} is oriented on the \sbol{elements} of a \sbol{Sequence} from their parent \sbol{Component}.
 If a \sbol{Feature} object has an \sbolmult{orientation:F}{orientation}, then it is RECOMMENDED that it come from \ref{tbl:orientation_types}; for reasons of backwards compatability it MAY instead come from \ref{tbl:orientation_types_alternative}.
- 
+
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{3.75in}}
     \toprule
-    \textbf{Orientation URI} & \textbf{Description} \\
+    \textbf{Orientation URL} & \textbf{Description} \\
     \midrule
     \url{https://identifiers.org/SO:0001030} & The region specified by this \sbol{Feature} or \sbol{Location} is on the \sbol{elements} of a \sbol{Sequence}. \\
     \url{https://identifiers.org/SO:0001031} & The region specified by this \sbol{Feature} or \sbol{Location} is on the reverse-complement mapping of the \sbol{elements} of a \sbol{Sequence}. The exact nature of this mapping depends on the \sbol{encoding} of the \sbol{Sequence}. \\
     \bottomrule
   \end{edtable}
-  \caption{RECOMMENDED \sbol{URI}s for the \sbolmult{orientation:F}{orientation} property}
+  \caption{RECOMMENDED \sbol{URL}s for the \sbolmult{orientation:F}{orientation} property}
   \label{tbl:orientation_types}
 \end{table}
 
@@ -46,13 +46,13 @@ If a \sbol{Feature} object has an \sbolmult{orientation:F}{orientation}, then it
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{3.75in}}
     \toprule
-    \textbf{Orientation URI} & \textbf{Description} \\
+    \textbf{Orientation URL} & \textbf{Description} \\
     \midrule
     \url{http://sbols.org/v3\#inline} & The region specified by this \sbol{Feature} or \sbol{Location} is on the \sbol{elements} of a \sbol{Sequence}. \\
     \url{http://sbols.org/v3\#reverseComplement} & The region specified by this \sbol{Feature} or \sbol{Location} is on the reverse-complement mapping of the \sbol{elements} of a \sbol{Sequence}. The exact nature of this mapping depends on the \sbol{encoding} of the \sbol{Sequence}. \\
     \bottomrule
   \end{edtable}
-  \caption{Permitted alternative \sbol{URI}s for the \sbolmult{orientation:F}{orientation} property. The URIS listed in \ref{tbl:orientation_types} are preferred and SHOULD be used instead where possible.}
+  \caption{Permitted alternative \sbol{URL}s for the \sbolmult{orientation:F}{orientation} property. The URLs listed in \ref{tbl:orientation_types} are preferred and SHOULD be used instead where possible.}
   \label{tbl:orientation_types_alternative}
 \end{table}
 
@@ -67,14 +67,14 @@ In turn, the \sbol{Component} of the promoter \sbol{SubComponent} might itself c
 
 A \sbol{roleIntegration} specifies the relationship between a \sbol{SubComponent} instance's own set of \sbolmult{role:F}{role} properties and the set of \sbolmult{role:C}{role} properties on the included \sbol{Component}.
 
-The \sbol{roleIntegration} property has a data type of \sbol{URI}. A \sbol{SubComponent} instance with zero \sbolmult{role:F}{role} properties MAY OPTIONALLY specify a \sbol{roleIntegration}. A \sbol{SubComponent} instance with one or more \sbolmult{role:F}{role} properties MUST specify a \sbol{roleIntegration} from \ref{tbl:component_roleIntegration}.
+The \sbol{roleIntegration} property has a data type of \sbol{IRI}. A \sbol{SubComponent} instance with zero \sbolmult{role:F}{role} properties MAY OPTIONALLY specify a \sbol{roleIntegration}. A \sbol{SubComponent} instance with one or more \sbolmult{role:F}{role} properties MUST specify a \sbol{roleIntegration} from \ref{tbl:component_roleIntegration}.
 If zero \sbol{SubComponent} \sbolmult{role:F}{role} properties are given and no \sbol{SubComponent} \sbol{roleIntegration} is given, then \url{http://sbols.org/v3\#mergeRoles} is assumed.
 It is RECOMMENDED to specify \sbol{SubComponent} \sbolmult{role:F}{role} values only if the result would differ from the  \sbolmult{role:C}{role} values belonging to this \sbol{SubComponent}'s included \sbol{Component}.
 
 \begin{table}[ht]
   \begin{edtable}{tabular}{lp{4in}}
     \toprule
-    \textbf{roleIntegration URI} & \textbf{Description} \\
+    \textbf{roleIntegration URL} & \textbf{Description} \\
     \midrule
     \url{http://sbols.org/v3\#overrideRoles} & In the context of this \sbol{SubComponent}, ignore any \sbolmult{role:C}{role} given for the included \sbol{Component}. Instead use only the set of zero or more \sbolmult{role:F}{role} properties given for this \sbol{SubComponent}. \\
     \url{http://sbols.org/v3\#mergeRoles} & Use the union of the two sets: both the set of zero or more \sbolmult{role:F}{role} properties given for this \sbol{SubComponent} as well as the set of zero or more \sbolmult{role:C}{role} properties given for the included \sbol{Component}. \\
@@ -87,7 +87,7 @@ It is RECOMMENDED to specify \sbol{SubComponent} \sbolmult{role:F}{role} values 
 \subparagraph{The \sbolheading{instanceOf} property}
 \label{sec:instanceOf}
 
-The \sbol{instanceOf} property is a REQUIRED \sbol{URI} that refers to the \sbol{Component} providing the definition for this \sbol{SubComponent}.
+The \sbol{instanceOf} property is a REQUIRED \sbol{IRI} that refers to the \sbol{Component} providing the definition for this \sbol{SubComponent}.
 Among other things, as described in the previous section, this \sbol{Component} effectively provides information about the \sbolmult{type:C}{type} and \sbolmult{role:C}{role} of the \sbol{SubComponent}.
 
 The \sbol{instanceOf} property MUST NOT refer to the same \sbol{Component} as the one that contains the \sbol{SubComponent}.
@@ -97,7 +97,7 @@ For example, consider the \sbol{SubComponent} objects $A$ and $B$ and the \sbol{
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:SC}
 
-A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocation} properties, each of type \sbol{URI}, that MUST refer to \sbol{Location} objects that indicates the location of the \sbol{Sequence} from the \sbol{instanceOf} \sbol{Component} in a \sbol{Sequence} of the parent \sbol{Component}.
+A \sbol{SubComponent} MAY have any number of \sbolmult{hasLocation:SC}{hasLocation} properties, each of type \sbol{IRI}, that MUST refer to \sbol{Location} objects that indicates the location of the \sbol{Sequence} from the \sbol{instanceOf} \sbol{Component} in a \sbol{Sequence} of the parent \sbol{Component}.
 
 If any \sbolmult{hasLocation:SC}{hasLocation} is defined, then there MUST BE precisely one \sbol{Sequence} in the \sbol{instanceOf} \sbol{Component}, as otherwise this relationship is ill-defined.
 
@@ -114,7 +114,7 @@ The \sbol{sourceLocation} property allows for only a portion of a \sbol{Componen
 For example, when composing parts with certain assembly methods, some bases on the boundary may be removed or replaced.
 Another example is describing a deletion or replacement of a portion of a sequence.
 
-A \sbol{SubComponent} MAY have any number of \sbol{sourceLocation} properties, each of type \sbol{URI}, that MUST refer to  \sbol{Location} objects that indicate which \sbol{elements} of the \sbol{instanceOf} \sbol{Component}'s \sbol{Sequence} are used in defining the parent of the \sbol{SubComponent}.
+A \sbol{SubComponent} MAY have any number of \sbol{sourceLocation} properties, each of type \sbol{IRI}, that MUST refer to  \sbol{Location} objects that indicate which \sbol{elements} of the \sbol{instanceOf} \sbol{Component}'s \sbol{Sequence} are used in defining the parent of the \sbol{SubComponent}.
 
 If there are no \sbol{sourceLocation} properties, then the whole \sbol{Sequence} is assumed to be included. 
 
@@ -126,7 +126,7 @@ The \sbol{ComponentReference} class is a subclass of \sbol{Feature} that can be 
 
 \subparagraph{The \sbolheading{inChildOf} property}\label{sec:inChildOf}
 
-The \sbol{inChildOf} property is a REQUIRED \sbol{URI} that refers to a \sbol{SubComponent}. 
+The \sbol{inChildOf} property is a REQUIRED \sbol{IRI} that refers to a \sbol{SubComponent}. 
 The \sbol{inChildOf} property MUST refer to a \sbol{SubComponent} pointed directly to by the parent of the \sbol{ComponentReference}.
 Specifically:
 \begin{itemize}
@@ -136,7 +136,7 @@ Specifically:
 
 \subparagraph{The \sbolheading{refersTo} property}\label{sec:refersTo}
 
-The \sbol{refersTo} property is a REQUIRED \sbol{URI} that refers to a \sbol{Feature}.
+The \sbol{refersTo} property is a REQUIRED \sbol{IRI} that refers to a \sbol{Feature}.
 
 This can be used to either link to the \sbol{Feature} being referenced or to chain hierarchically through additional layers of \sbol{SubComponent}.
 \begin{itemize}
@@ -154,11 +154,11 @@ This class serves as a way to create a placeholder in more complex \sbol{Compone
 
 \subparagraph{The \sbolheading{type} property}\label{sec:type:LSC}
 
-The \sbolmult{type:LSC}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:LSC}{type} property is identical to its use in \sbol{Component}.
+The \sbolmult{type:LSC}{type} property is REQUIRED and contains one or more \sbol{IRI}s. The \sbolmult{type:LSC}{type} property is identical to its use in \sbol{Component}.
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:LSC}
 
-A \sbol{LocalSubComponent} MAY have any number of \sbolmult{hasLocation:LSC}{hasLocation} properties, each of type \sbol{URI}, that MUST refer to \sbol{Location} objects. 
+A \sbol{LocalSubComponent} MAY have any number of \sbolmult{hasLocation:LSC}{hasLocation} properties, each of type \sbol{IRI}, that MUST refer to \sbol{Location} objects. 
 These follow the same restrictions as for the \sbolmult{hasLocation:SC}{hasLocation} of a \sbol{SubComponent}, notably that the \sbol{Location}s of \sbolmult{hasLocation:LSC}{hasLocation} properties attached to the same \sbol{LocalSubComponent} MUST NOT overlap.
 
 \paragraph{ExternallyDefined}
@@ -168,11 +168,11 @@ The \sbol{ExternallyDefined} class has been introduced so that external definiti
 
 \subparagraph{The \sbolheading{type} property}\label{sec:type:ED}
 
-The \sbolmult{type:ED}{type} property is REQUIRED and contains one or more \sbol{URI}s. The \sbolmult{type:ED}{type} property is identical to its use in \sbol{Component}.
+The \sbolmult{type:ED}{type} property is REQUIRED and contains one or more \sbol{IRI}s. The \sbolmult{type:ED}{type} property is identical to its use in \sbol{Component}.
 
 \subparagraph{The \sbolheading{definition} property}\label{sec:definition:ED}
 
-The \sbolmult{definition:ED}{definition} property is REQUIRED and is of type \sbol{URI} that links to a canonical definition external to SBOL.
+The \sbolmult{definition:ED}{definition} property is REQUIRED and is of type \sbol{IRI} that links to a canonical definition external to SBOL.
 When possible, such definitions SHOULD use the recommended external resources in \ref{sec:recomm_ontologies}.
 For example, an \sbol{ExternallyDefined} simple chemical might link to ChEBI and a protein might link to UniProt.
 
@@ -183,6 +183,6 @@ The \sbol{SequenceFeature} class describes one or more regions of interest on th
 
 \subparagraph{The \sbolheading{hasLocation} property}\label{sec:hasLocation:SF}
 
-The \sbolmult{hasLocation:SF}{hasLocation} is REQUIRED and contains one or more \sbol{URI}s, which MUST refer to \sbol{Location} objects. 
+The \sbolmult{hasLocation:SF}{hasLocation} is REQUIRED and contains one or more \sbol{IRI}s, which MUST refer to \sbol{Location} objects. 
 These follow the same restrictions as for the \sbolmult{hasLocation:SC}{hasLocation} of a \sbol{SubComponent}, notably that the \sbol{Location}s of \sbolmult{hasLocation:SF}{hasLocation} properties attached to the same \sbol{SequenceFeature} MUST NOT overlap.
 

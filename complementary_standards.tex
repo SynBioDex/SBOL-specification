@@ -32,7 +32,7 @@ A design-build-test-learn SBOL ontology has been adopted for use with PROV-O cla
 \begin{table}[ht]
 	\begin{edtable}{tabular}{llp{3.5in}}
 		\toprule
-		\textbf{Activity Type} & \textbf{URI}  & \textbf{Description}\\
+		\textbf{Activity Type} & \textbf{URL}  & \textbf{Description}\\
 		\midrule
 		Design  & \url{http://sbols.org/v3\#design}  & Design describes the process by which a conceptual representation of an engineer's imagined and intended design for a biological system is created or derived.\\
 		Build  & \url{http://sbols.org/v3\#build}  & Build describes the process by which a biological construct, sample, or clone is implemented in the laboratory.\\
@@ -80,7 +80,7 @@ A generated \prov{Entity} is linked through a \prov{wasGeneratedBy} relationship
 
 \subparagraph{The \sbolheading{type} property}\label{sec:type:Activity}
 
-An \prov{Activity} MAY have one or more \sbolmult{type:Activity}{type} properties, each of type \sbol{URI} that explicitly specifies the type of the provenance \prov{Activity} in more detail.  If specified, it is RECOMMENDED that at least one \sbolmult{type:Activity}{type} property refers to a \sbol{URI} from \ref{tbl:activity_types}.
+An \prov{Activity} MAY have one or more \sbolmult{type:Activity}{type} properties, each of type \sbol{IRI} that explicitly specifies the type of the provenance \prov{Activity} in more detail.  If specified, it is RECOMMENDED that at least one \sbolmult{type:Activity}{type} property refers to a \sbol{URL} from \ref{tbl:activity_types}.
 
 \subparagraph{The \sbolheading{prov:startedAtTime} property}\label{sec:prov:startedAtTime}
 
@@ -92,28 +92,28 @@ The \prov{endedAtTime} property is OPTIONAL and contains a DateTime (see~\ref{se
 
 \subparagraph{The \sbolheading{prov:qualifiedAssociation} property}\label{sec:prov:qualifiedAssociation}
 
-An \prov{Activity} MAY have one or more \prov{qualifiedAssociation} properties, each of type \sbol{URI} that refers to an \prov{Association} object.
+An \prov{Activity} MAY have one or more \prov{qualifiedAssociation} properties, each of type \sbol{IRI} that refers to an \prov{Association} object.
 
 \subparagraph{The \sbolheading{prov:qualifiedUsage} property}\label{sec:prov:qualifiedUsage}
 
-An \prov{Activity} MAY have one or more \prov{qualifiedUsage} properties, each of type \sbol{URI} that refers to an \prov{Usage} object.
+An \prov{Activity} MAY have one or more \prov{qualifiedUsage} properties, each of type \sbol{IRI} that refers to an \prov{Usage} object.
 
 \subparagraph{The \sbolheading{prov:wasInformedBy} property}\label{sec:prov:wasInformedBy}
 
-An \prov{Activity} MAY have one or more \prov{wasInformedBy} properties, each of type \sbol{URI} that refers to another \prov{Activity} object.
+An \prov{Activity} MAY have one or more \prov{wasInformedBy} properties, each of type \sbol{IRI} that refers to another \prov{Activity} object.
 
 \subsubsection{prov:Usage}
 \label{sec:prov:Usage}
 
-How different entities are used in an \prov{Activity} is specified with the \prov{Usage} class, which is linked from an \prov{Activity} through the \prov{Usage} relationship. A \prov{Usage} is then linked to an \prov{Entity} through the \prov{entity} property \sbol{URI} and the \provmult{hadRole:U}{hadRole} property species how the \prov{Entity} is used.  When the \prov{wasDerivedFrom} property is used together with the full provenance described here, the entity pointed at by the \prov{wasDerivedFrom} property MUST be included in a \prov{Usage}.
+How different entities are used in an \prov{Activity} is specified with the \prov{Usage} class, which is linked from an \prov{Activity} through the \prov{Usage} relationship. A \prov{Usage} is then linked to an \prov{Entity} through the \prov{entity} property \sbol{IRI} and the \provmult{hadRole:U}{hadRole} property species how the \prov{Entity} is used.  When the \prov{wasDerivedFrom} property is used together with the full provenance described here, the entity pointed at by the \prov{wasDerivedFrom} property MUST be included in a \prov{Usage}.
 
 \subparagraph{The \sbolheading{prov:entity} property}\label{sec:prov:entity}
 
-The \prov{entity} property is REQUIRED and MUST contain a \sbol{URI} which MAY refer to an \sbol{Identified} object.
+The \prov{entity} property is REQUIRED and MUST contain a \sbol{IRI} which MAY refer to an \sbol{Identified} object.
 
 \subparagraph{The \sbolheading{prov:hadRole} property}\label{sec:prov:hadRole:U}
 
-An \prov{Usage} MAY have one or more \provmult{hadRole:U}{hadRole} properties, each of type \sbol{URI} that refers to particular term(s) describing the usage of an \prov{Entity} referenced by the \prov{entity} property. Recommended terms that are defined in \ref{tbl:activity_types} can be used to indicate how the referenced \prov{Entity} is being used in this \prov{Activity}.
+An \prov{Usage} MAY have one or more \provmult{hadRole:U}{hadRole} properties, each of type \sbol{IRI} that refers to particular term(s) describing the usage of an \prov{Entity} referenced by the \prov{entity} property. Recommended terms that are defined in \ref{tbl:activity_types} can be used to indicate how the referenced \prov{Entity} is being used in this \prov{Activity}.
 
 \subsubsection{prov:Association}
 \label{sec:prov:Association}
@@ -122,15 +122,15 @@ An \prov{Association} is linked to an \prov{Agent} through the \prov{agent} rela
 
 \subparagraph{The \sbolheading{prov:agent} property}\label{sec:prov:agent}
 
-The \prov{agent} property is REQUIRED and MUST contain a \sbol{URI} that refers to an \prov{Agent} object.
+The \prov{agent} property is REQUIRED and MUST contain a \sbol{IRI} that refers to an \prov{Agent} object.
 
 \subparagraph{The \sbolheading{prov:hadRole} property}\label{sec:prov:hadRole:A}
 
-An \prov{Association} MAY have one or more \provmult{hadRole:A}{hadRole} properties, each of type \sbol{URI} that refers to particular term(s) that describes the role of the \prov{Agent} in the parent \prov{Activity}.
+An \prov{Association} MAY have one or more \provmult{hadRole:A}{hadRole} properties, each of type \sbol{IRI} that refers to particular term(s) that describes the role of the \prov{Agent} in the parent \prov{Activity}. 
 
 \subparagraph{The \sbolheading{prov:hadPlan} property}\label{sec:prov:hadPlan}
 
-The \prov{hadPlan} property is OPTIONAL and contains a \sbol{URI} that refers to a \prov{Plan}.
+The \prov{hadPlan} property is OPTIONAL and contains a \sbol{IRI} that refers to a \prov{Plan}.
 
 \subsubsection{prov:Plan}
 \label{sec:prov:Plan}
@@ -208,11 +208,11 @@ The purpose of the \om{Measure} class is to link a numerical value to a \om{Unit
 The \om{hasNumericalValue} property is REQUIRED and MUST contain a single xsd:float.
 
 \subparagraph{The \sbolheading{om:hasUnit} property}\label{sec:om:hasUnit:Measure}
-The \ommult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \om{Unit}. The OM provides \sbol{URI}s for many existing instances of the \om{Unit} class for reference (for example,\\ \url{http://www.ontology-of-units-of-measure.org/resource/om-2/gramPerLitre}).
+The \ommult{hasUnit:Measure}{hasUnit} property is REQUIRED and MUST contain a \sbol{IRI} that refers to a \om{Unit}. The OM provides \sbol{IRI}s for many existing instances of the \om{Unit} class for reference (for example,\\ \url{http://www.ontology-of-units-of-measure.org/resource/om-2/gramPerLitre}).
 
 \subparagraph{The \sbolheading{type} property}\label{sec:type:Measure}
 
-A \om{Measure} MAY have one or more \sbolmult{type:Measure}{type} properties, each is of type \sbol{URI}. It is RECOMMENDED that one of these \sbol{URI}s identify a term from the Systems Description Parameter branch of the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{type:Measure}{type} property of the \om{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters
+A \om{Measure} MAY have one or more \sbolmult{type:Measure}{type} properties, each is of type \sbol{IRI}. It is RECOMMENDED that one of these \sbol{IRI}s identify a term from the Systems Description Parameter branch of the Systems Biology Ontology (SBO) (\url{http://www.ebi.ac.uk/sbo/main/}). This \sbolmult{type:Measure}{type} property of the \om{Measure} class is not specified in the OM and is added by SBOL to describe different types of parameters 
 (for example, rate of reaction is identified by the SBO term \url{http://identifiers.org/SBO:0000612}).
 
 \subsubsection{om:Unit}
@@ -244,7 +244,7 @@ The \ommult{longcomment:Unit}{longcomment} property is OPTIONAL and MAY contain 
 The purpose of the \om{SingularUnit} class is to describe a unit of measure that is not explicitly represented as a combination of multiple units, but could be equivalent to such a representation. For example, a joule is considered to be a \om{SingularUnit}, but it is equivalent to the multiplication of a newton and a meter.
 
 \subparagraph{The \sbolheading{om:hasUnit} property}\label{sec:om:hasUnit:SingularUnit}
-The \ommult{hasUnit:SingularUnit}{hasUnit} is OPTIONAL and MAY contain a \sbol{URI}. This \sbol{URI} MUST refer to another \om{Unit}. The \ommult{hasUnit:SingularUnit}{hasUnit} propery can be used in conjunction with the \ommult{hasFactor:SingularUnit}{hasFactor} property to specify whether a \om{SingularUnit} is equivalent to another \om{Unit} multiplied by a factor. For example, an angstrom is equivalent to $10^{-10}$ meters.
+The \ommult{hasUnit:SingularUnit}{hasUnit} is OPTIONAL and MAY contain a \sbol{IRI}. This \sbol{IRI} MUST refer to another \om{Unit}. The \ommult{hasUnit:SingularUnit}{hasUnit} propery can be used in conjunction with the \ommult{hasFactor:SingularUnit}{hasFactor} property to specify whether a \om{SingularUnit} is equivalent to another \om{Unit} multiplied by a factor. For example, an angstrom is equivalent to $10^{-10}$ meters.
 
 \subparagraph{The \sbolheading{om:hasFactor} property}\label{sec:om:hasFactor:SingularUnit}
 The \ommult{hasFactor:SingularUnit}{hasFactor} property is OPTIONAL and MAY contain a xsd:float. If the \ommult{hasFactor:SingularUnit}{hasFactor} property of a \om{SingularUnit} is non-empty, then its \ommult{hasUnit:SingularUnit}{hasUnit} property SHOULD also be non-empty.
@@ -260,10 +260,10 @@ As adopted by SBOL, \om{CompoundUnit} is an abstract class that is extended by o
 The purpose of the \om{UnitMultiplication} class is to describe a unit of measure that is the multiplication of two other units of measure.
 
 \subparagraph{The \sbolheading{om:hasTerm1} property}\label{sec:om:hasTerm1}
-The \om{hasTerm1} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}. This \om{Unit} is the first multiplication term.
+The \om{hasTerm1} property is REQUIRED and MUST contain a \sbol{IRI} that refers to another \om{Unit}. This \om{Unit} is the first multiplication term.
 
 \subparagraph{The \sbolheading{om:hasTerm2} property}\label{sec:om:hasTerm2}
-The \om{hasTerm2} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}. This \om{Unit} is the second multiplication term. It is okay if the \om{Unit} referred to by \om{hasTerm1} is the same as that referred to by \om{hasTerm2}.
+The \om{hasTerm2} property is REQUIRED and MUST contain a \sbol{IRI} that refers to another \om{Unit}. This \om{Unit} is the second multiplication term. It is okay if the \om{Unit} referred to by \om{hasTerm1} is the same as that referred to by \om{hasTerm2}.
 
 \subsubsection{om:UnitDivision}
 \label{sec:om:UnitDivision}
@@ -271,10 +271,10 @@ The \om{hasTerm2} property is REQUIRED and MUST contain a \sbol{URI} that refers
 The purpose of the \om{UnitDivision} class is to describe a unit of measure that is the division of one unit of measure by another.
 
 \subparagraph{The \sbolheading{om:hasNumerator} property}\label{sec:om:hasNumerator}
-The \om{hasNumerator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}.
+The \om{hasNumerator} property is REQUIRED and MUST contain a \sbol{IRI} that refers to another \om{Unit}.
 
 \subparagraph{The \sbolheading{om:hasDenominator} property}\label{sec:om:hasDenominator}
-The \om{hasDenominator} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}.
+The \om{hasDenominator} property is REQUIRED and MUST contain a \sbol{IRI} that refers to another \om{Unit}.
 
 \subsubsection{om:UnitExponentiation}
 \label{sec:om:UnitExponentiation}
@@ -282,7 +282,7 @@ The \om{hasDenominator} property is REQUIRED and MUST contain a \sbol{URI} that 
 The purpose of the \om{UnitExponentiation} class is to describe a unit of measure that is raised to an integer power.
 
 \subparagraph{The \sbolheading{om:hasBase} property}\label{sec:om:hasBase}
-The \om{hasBase} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}.
+The \om{hasBase} property is REQUIRED and MUST contain a \sbol{IRI} that refers to another \om{Unit}.
 
 \subparagraph{The \sbolheading{om:hasExponent} property}\label{sec:om:hasExponent}
 The \om{hasExponent} property is REQUIRED and MUST contain an \texttt{xsd:integer}.
@@ -293,10 +293,10 @@ The \om{hasExponent} property is REQUIRED and MUST contain an \texttt{xsd:intege
 The purpose of the \om{PrefixedUnit} class is to describe a unit of measure that is the multiplication of another unit of measure and a factor represented by a standard prefix such as ``milli,'' ``centi,'' ``kilo,'' etc.
 
 \subparagraph{The \sbolheading{om:hasUnit} property}\label{sec:om:hasUnit:PrefixedUnit}
-The \ommult{hasUnit:PrefixedUnit}{hasUnit} property is REQUIRED and MUST contain a \sbol{URI} that refers to another \om{Unit}.
+The \ommult{hasUnit:PrefixedUnit}{hasUnit} property is REQUIRED and MUST contain a \sbol{IRI} that refers to another \om{Unit}. 
 
 \subparagraph{The \sbolheading{om:hasPrefix} property}\label{sec:om:hasPrefix}
-The \om{hasPrefix} property is REQUIRED and MUST contain a \sbol{URI} that refers to a \om{Prefix}.
+The \om{hasPrefix} property is REQUIRED and MUST contain a \sbol{IRI} that refers to a \om{Prefix}.
 
 \subsubsection{om:Prefix}
 \label{sec:om:Prefix}
