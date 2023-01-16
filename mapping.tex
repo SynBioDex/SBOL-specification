@@ -13,13 +13,13 @@ SBOL 3 refines the SBOL 2 data model to simplify the representation of common us
 The SBOL 2.x \external{Model} and \external{ModuleDefinition} classes have no SBOL 1.1 equivalent, and thus are not shown.
 The mapping from SBOL 1.1 to SBOL 2.x proceeds as follows:
 \begin{itemize}
-\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \external{Collection} objects that contain \external{CompenentDefinition} objects with DNA \sbolmult{type:C}{type} properties.
-\item SBOL 1.1 \external{DnaComponent} objects map to SBOL 2.x \external{CompenentDefinition} objects with DNA \sbolmult{type:C}{type} properties.
+\item SBOL 1.1 \external{Collection} objects containing \external{DnaComponent} objects map to SBOL 2.x \external{Collection} objects that contain \external{ComponentDefinition} objects with DNA \sbolmult{type:C}{type} properties.
+\item SBOL 1.1 \external{DnaComponent} objects map to SBOL 2.x \external{ComponentDefinition} objects with DNA \sbolmult{type:C}{type} properties.
 \item SBOL 1.1 \external{DnaSequence} objects map to an SBOL 2.x \external{Sequence} objects with \external{IUPAC DNA} \external{encoding} properties.
 \item SBOL 1.1 \external{SequenceAnnotation} objects with \external{bioStart} and \external{bioEnd} properties map to SBOL 2.x\\
 \external{SequenceAnnotation} objects that contain \external{Range} objects.
 \item SBOL 1.1 \external{SequenceAnnotation} objects that lack \external{bioStart} and \external{bioEnd} properties map to an SBOL 2.x \external{SequenceFeature} objects that contain \external{GenericLocation} objects.
-\item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.x \external{Component}, which represents the instantiation or usage of the appropriate \external{CompenentDefinition}.
+\item Each SBOL 1.1 \external{SequenceAnnotation} also maps to an SBOL 2.x \external{Component}, which represents the instantiation or usage of the appropriate \external{ComponentDefinition}.
 \item Each SBOL 1.1 \external{precedes} property maps to an SBOL 2.x \external{SequenceConstraint} that specifies a \external{precedes} \external{restriction} property.
 \end{itemize}
 
