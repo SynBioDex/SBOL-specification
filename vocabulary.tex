@@ -64,7 +64,7 @@ These classes are known as abstract classes and are noted as such in their descr
 SBOL classes are named using upper ``camel case,'' meaning that each word is capitalized and all words are run together without spaces, e.g., \sbol{Identified}, \sbol{SequenceFeature}.
 Properties, on the other hand, are named using lower camel case, meaning that they begin lowercase (e.g., \sbolmult{role:C}{role}) but if they consist of multiple words, all words after the first begin with an uppercase letter (e.g., \sbol{roleIntegration}).
 
-SBOL properties are always given singular names irrespective of their cardinality, e.g., \sbolmult{role:C}{role} is used rather than \sbolmult{role:C}{roles} even though a component can have multiple roles.
+SBOL properties are always given singular names irrespective of their cardinality, e.g., \sbolmult{role:C}{role} is used rather than \sbolmult{roles:C}{roles} even though a component can have multiple roles.
 This is because each relation can potentially stand on its own, irrespective of the existence of others in the set.
 
 Two conventions are used for property names, {\tt name} and {\tt hasName}.
@@ -184,6 +184,6 @@ An SBOL document thus cleaves naturally along the boundaries of \sbol{TopLevel} 
 \begin{itemize}
 \item Any subset of \sbol{TopLevel} objects in a valid SBOL document is also a valid SBOL document.
 \item Any disjoint set of \sbol{TopLevel} objects from different SBOL documents MAY be composed to form a new SBOL document. The result is not guaranteed to be valid, however, since the composition may expose problems due to the relationships between \sbol{TopLevel} objects from different documents.
-\item If two \sbol{TopLevel} objects in different SBOL documents have the same identity and and both they and their child objects contain equivalent sets of property assertions, then they MAY be treated as identical and freely merged.
+\item If two \sbol{TopLevel} objects in different SBOL documents have the same identity and both they and their child objects contain equivalent sets of property assertions, then they MAY be treated as identical and freely merged.
 \item  If two \sbol{TopLevel} objects in different SBOL documents have the same identity but different property values, then they MUST be considered different (possibly conflicting) versions, and any merger managed through some version control process.
 \end{itemize}
